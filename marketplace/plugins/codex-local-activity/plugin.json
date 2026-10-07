@@ -1,0 +1,18 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "codex-local-activity",
+  "version": "0.1.0",
+  "description": "Query bounded local activity counts and source health without conversation content.",
+  "author": {
+    "name": "gaze9999"
+  },
+  "repository": "https://github.com/gaze9999/codex-toolkit",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "本機活動觀察",
+        "shortDescription": "Query bounded local activity counts and source health without conversation content."
+      }
+    }
+  }
+}

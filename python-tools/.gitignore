@@ -1,0 +1,52 @@
+# Python bytecode and tool caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+/tiktoken-cache/
+node_modules/
+# Preserve ignored files left by earlier GUI builds without restoring that code
+/src/gui/
+/setup/runtime/
+/.build-inputs/
+/.workbench-ui/
+
+# Test and coverage output
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+coverage/
+test-results/
+playwright-report/
+.playwright-cli/
+blob-report/
+junit*.xml
+.textlintcache
+
+# Build, package, and temporary output
+build/
+dist/
+*.egg-info/
+*.tmp
+*.temp
+*.bak
+*.log
+
+# Local tool output and recovery bundles
+.bundle/
+.gui/
+.work-artifact-cleaner/
+/.process-audit/
+
+# Local configuration and virtual environments
+.env
+.venv/
+.venv-*/
+venv/
+
+# Local project agent instructions

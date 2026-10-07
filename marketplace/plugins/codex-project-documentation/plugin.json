@@ -1,0 +1,18 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "codex-project-documentation",
+  "version": "0.1.1",
+  "description": "Maintain repository README and licensing documents with separate evidence and authorization boundaries.",
+  "author": {
+    "name": "gaze9999"
+  },
+  "repository": "https://github.com/gaze9999/codex-toolkit",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "專案文件維護",
+        "shortDescription": "Maintain README and licensing files with verified project evidence."
+      }
+    }
+  }
+}

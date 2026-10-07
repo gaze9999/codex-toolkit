@@ -1,0 +1,6 @@
+interface:
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon.png"
+  display_name: "Task Guide (v0.4.14)"
+  short_description: "Create task guides, stable IDs and concise history records"
+  default_prompt: "Use $task-guide to inspect this project and its sources, then create a concise Chinese task guide with stable work-item IDs, headings ordered by importance and applicable minute-precision history records."

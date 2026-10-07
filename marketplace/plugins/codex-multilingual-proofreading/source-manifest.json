@@ -1,0 +1,74 @@
+{
+  "plugin": "codex-multilingual-proofreading",
+  "version": "0.1.1",
+  "files": {
+    "plugin.json": {
+      "source": "plugins/multilingual-proofreading/plugin.json",
+      "sha256": "03c2a627183fca805a78b466ab0ad1bd36360dd07c830eb665622b6c9479a090"
+    },
+    "skills/multilingual-proofreading/agents/openai.yaml": {
+      "source": "skills/multilingual-proofreading/agents/openai.yaml",
+      "sha256": "ade3eaee6b762b00c466a2c978c3bd4b67facf4a53bab4d1ad2a53f58f12d35e"
+    },
+    "skills/multilingual-proofreading/assets/icon-small.png": {
+      "source": "skills/multilingual-proofreading/assets/icon-small.png",
+      "sha256": "996c08fb346447da7f0361e40f336292620d5070a786aaea3287508d049c3a23"
+    },
+    "skills/multilingual-proofreading/assets/icon-small.svg": {
+      "source": "skills/multilingual-proofreading/assets/icon-small.svg",
+      "sha256": "0bc949cda379fe9e811310547beca64579a683d442ec56415d1b29d4ec5d38c6"
+    },
+    "skills/multilingual-proofreading/assets/icon.png": {
+      "source": "skills/multilingual-proofreading/assets/icon.png",
+      "sha256": "c787f3ec7d54644a544deaae167b53fb2cd64f401a2edc229bc24c26aa35cd9b"
+    },
+    "skills/multilingual-proofreading/assets/icon.svg": {
+      "source": "skills/multilingual-proofreading/assets/icon.svg",
+      "sha256": "0bc949cda379fe9e811310547beca64579a683d442ec56415d1b29d4ec5d38c6"
+    },
+    "skills/multilingual-proofreading/SKILL.md": {
+      "source": "skills/multilingual-proofreading/SKILL.md",
+      "sha256": "40c810d505563593f8f0317a929c94a37c322fe30570d6b6d47cfdf3baa826fb"
+    },
+    "resources/proofreading/en/cspell.json": {
+      "source": "mcp/tools/proofreading/en/cspell.json",
+      "sha256": "4f8ffc4fb7cdf3e64c13d01dc482adac2112572953c1fa6e70e5ac8087b39c43"
+    },
+    "resources/proofreading/ja/.textlintrc.json": {
+      "source": "mcp/tools/proofreading/ja/.textlintrc.json",
+      "sha256": "0997720fb4d377ed2186f4b2a2aeefdc632d9717e204bb9a3ce66c16a82465db"
+    },
+    "resources/proofreading/textlint-mcp.cjs": {
+      "source": "mcp/tools/proofreading/textlint-mcp.cjs",
+      "sha256": "1778caf37b40c38c7de01690522d9938b0c0993a6c5a3279b55cab9fdc024548"
+    },
+    "resources/proofreading/zh-tw/.textlintrc.cjs": {
+      "source": "mcp/tools/proofreading/zh-tw/.textlintrc.cjs",
+      "sha256": "77bda249e00c337ef1d43dee288869d064c9050fffe2127b6640a7af0db7d887"
+    },
+    "resources/proofreading/zh-tw/protected-copy.cjs": {
+      "source": "mcp/tools/proofreading/zh-tw/protected-copy.cjs",
+      "sha256": "095e38366ceb0d4422224a0f519cbb33f08caa2c42883aac54708748fa156b6b"
+    },
+    "resources/proofreading/zh-tw/taiwan-style.cjs": {
+      "source": "mcp/tools/proofreading/zh-tw/taiwan-style.cjs",
+      "sha256": "bf831f978e3225eb1a329ba9621e4f7c27d8dac0d974220963e1cf109b592837"
+    },
+    "resources/proofreading/zh-tw/terms.yml": {
+      "source": "mcp/tools/proofreading/zh-tw/terms.yml",
+      "sha256": "66182bfb7f4363fccd943d7512f36bd8d0019edb8f0c33d044c89cf611174f78"
+    },
+    "LICENSE": {
+      "source": "LICENSE",
+      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a"
+    }
+  },
+  "runtime_profiles": [
+    "textlint",
+    "cspell"
+  ],
+  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
+  "producer": "codex-toolkit.marketplace.v1",
+  "source_state": "canonical-file-hashes",
+  "license": "MIT"
+}

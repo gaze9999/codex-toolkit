@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">ComfyUI Workflow icon</title>
+  <desc id="desc">Connected workflow nodes producing an image</desc>
+  <rect width="128" height="128" rx="28" fill="#F8D6C9"/>
+<path d="M43 38h15v25h18M43 91h15V67h18" fill="none" stroke="#C87970" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="15" y="23" width="31" height="30" rx="7" fill="#70474F" stroke="#C87970" stroke-width="4"/>
+<rect x="15" y="76" width="31" height="30" rx="7" fill="#70474F" stroke="#E6A078" stroke-width="4"/>
+<path d="M24 34h13m-13 8h8M24 87h13m-13 8h8" stroke="#FFF5EB" stroke-width="3" stroke-linecap="round"/>
+<rect x="74" y="38" width="40" height="52" rx="8" fill="#FFF5EB"/>
+<circle cx="100" cy="53" r="5" fill="#E6A078"/>
+<path d="M79 80l11-15 9 10 7-9 3 14z" fill="#C87970"/>
+<circle cx="58" cy="65" r="5" fill="#C87970"/>
+</svg>

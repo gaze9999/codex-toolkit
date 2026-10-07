@@ -1,0 +1,12 @@
+{
+  "version": "0.2",
+  "language": "en,en_US,en_GB",
+  "useGitignore": true,
+  "words": [
+    "API", "MCP", "Codex", "Context7", "Serena", "textlint", "CSpell",
+    "TypeScript", "JavaScript", "Markdown", "OAuth", "ECharts", "Playwright"
+  ],
+  "ignoreRegExpList": [
+    "/https?:\\/\\/\\S+/g"
+  ]
+}

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Task Routing icon</title>
+  <desc id="desc">One task branching into three bounded execution paths</desc>
+  <rect width="512" height="512" rx="112" fill="#F8D6C9"/>
+<g transform="scale(4)">
+<path d="M43 64h22M65 64V28h20M65 64h20M65 64v36h20" fill="none" stroke="#C87970" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M78 21l7 7-7 7m0 22 7 7-7 7m0 22 7 7-7 7" fill="none" stroke="#C87970" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="30" cy="64" r="15" fill="#E6A078"/>
+<circle cx="30" cy="64" r="6" fill="#70474F"/>
+<rect x="88" y="17" width="23" height="23" rx="6" fill="#FFF5EB"/>
+<rect x="88" y="53" width="23" height="23" rx="6" fill="#C87970"/>
+<rect x="88" y="89" width="23" height="23" rx="6" fill="#FFF5EB"/>
+</g>
+</svg>

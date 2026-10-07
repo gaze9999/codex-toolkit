@@ -1,0 +1,9 @@
+interface:
+  display_name: "Agent Governance (v0.4.15)"
+  short_description: "Simplify agent governance and clarify role boundaries"
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon.png"
+  default_prompt: "Use $agent-governance to create or revise this project's agent rules. Read my project material, use the bundled starter templates when useful, keep persistent guidance concise, and verify the resulting layers and roles."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon.png"
+  display_name: "Research and Learning Synthesis (v0.4.12)"
+  short_description: "Connect research evidence with focused learning goals"
+  default_prompt: "Use $research-learning-synthesis to compare original evidence, identify useful knowledge gaps and suggest a small prerequisite path."

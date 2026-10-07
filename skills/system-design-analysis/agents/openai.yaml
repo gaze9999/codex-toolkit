@@ -1,0 +1,6 @@
+interface:
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon.png"
+  display_name: "System Design and Analysis (v0.4.12)"
+  short_description: "Analyze system boundaries and design trade-offs"
+  default_prompt: "Use $system-design-analysis to map the requirements, data owners and failure paths, then compare viable design options with explicit assumptions."

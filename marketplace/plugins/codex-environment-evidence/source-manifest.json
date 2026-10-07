@@ -1,0 +1,73 @@
+{
+  "plugin": "codex-environment-evidence",
+  "version": "0.1.0",
+  "files": {
+    "plugin.json": {
+      "source": "plugins/environment-evidence/plugin.json",
+      "sha256": "13205bd530c9a3f95c52f419aa592801847cded7afddfb20091fa941de9edf04"
+    },
+    "skills/environment-consistency-check/agents/openai.yaml": {
+      "source": "skills/environment-consistency-check/agents/openai.yaml",
+      "sha256": "97d7eafb8ada15fb726859219826111ab5eb957bb167052b6ff3aa5779ca9e9e"
+    },
+    "skills/environment-consistency-check/assets/icon-small.png": {
+      "source": "skills/environment-consistency-check/assets/icon-small.png",
+      "sha256": "408ba6310ae8dba02bfef7355bc1328303f98fd3dfdb141339e6bf609c6c89b0"
+    },
+    "skills/environment-consistency-check/assets/icon-small.svg": {
+      "source": "skills/environment-consistency-check/assets/icon-small.svg",
+      "sha256": "baed568e193812a3820d93a688173bbe6f1528fe5b5a957af0105316ae7e13c2"
+    },
+    "skills/environment-consistency-check/assets/icon.png": {
+      "source": "skills/environment-consistency-check/assets/icon.png",
+      "sha256": "67bde72171d183d240da3fd711470fde754039cfcca2c5f25ffb4aefd72d9654"
+    },
+    "skills/environment-consistency-check/assets/icon.svg": {
+      "source": "skills/environment-consistency-check/assets/icon.svg",
+      "sha256": "baed568e193812a3820d93a688173bbe6f1528fe5b5a957af0105316ae7e13c2"
+    },
+    "skills/environment-consistency-check/SKILL.md": {
+      "source": "skills/environment-consistency-check/SKILL.md",
+      "sha256": "5c5a5e1ed7cf6a614006ab0a3c3b90948b581804a53593949b4de68c7f49ff7e"
+    },
+    "skills/validation-evidence-review/agents/openai.yaml": {
+      "source": "skills/validation-evidence-review/agents/openai.yaml",
+      "sha256": "0e5390db1a644a1c9993d2946987234b4ba97450f04f996d10ef08716ff63b30"
+    },
+    "skills/validation-evidence-review/assets/icon-small.png": {
+      "source": "skills/validation-evidence-review/assets/icon-small.png",
+      "sha256": "afcbf2e66ba656bb0b5787500d379a303dc908b2e61a4500b49e8133778c14b5"
+    },
+    "skills/validation-evidence-review/assets/icon-small.svg": {
+      "source": "skills/validation-evidence-review/assets/icon-small.svg",
+      "sha256": "72e91f46b9ad45b3447a50201b9f2fbf44c30a5807aa2a31c9647feedb032b89"
+    },
+    "skills/validation-evidence-review/assets/icon.png": {
+      "source": "skills/validation-evidence-review/assets/icon.png",
+      "sha256": "2026e7bdb78cc1af37bb72316b9d8eda9fa5594d698e990246a7e9d4d305b359"
+    },
+    "skills/validation-evidence-review/assets/icon.svg": {
+      "source": "skills/validation-evidence-review/assets/icon.svg",
+      "sha256": "72e91f46b9ad45b3447a50201b9f2fbf44c30a5807aa2a31c9647feedb032b89"
+    },
+    "skills/validation-evidence-review/references/validity.md": {
+      "source": "skills/validation-evidence-review/references/validity.md",
+      "sha256": "b6e9257f0cbd8924a2da71996cd19733265c79804580feab3aac28c36f312e1c"
+    },
+    "skills/validation-evidence-review/SKILL.md": {
+      "source": "skills/validation-evidence-review/SKILL.md",
+      "sha256": "754e91ec3f0ab99262a318c6fe69a4bc8782ba7334275b29a779c29c0256c465"
+    },
+    "LICENSE": {
+      "source": "LICENSE",
+      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a"
+    }
+  },
+  "runtime_profiles": [
+    "workspace-inspection"
+  ],
+  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
+  "producer": "codex-toolkit.marketplace.v1",
+  "source_state": "canonical-file-hashes",
+  "license": "MIT"
+}

@@ -1,0 +1,31 @@
+{
+  "plugin": "codex-packaging-acceptance",
+  "version": "0.1.0",
+  "files": {
+    "plugin.json": {
+      "source": "plugins/packaging-acceptance/plugin.json",
+      "sha256": "0f96386bd1b495f2d6e4d2f1a9f500a21f1520882fa48e6270d5ead9d46426ed"
+    },
+    "skills/packaging-acceptance/agents/openai.yaml": {
+      "source": "skills/packaging-acceptance/agents/openai.yaml",
+      "sha256": "3b9aef8253b915303d721da91cca418910d4fb2cfc73275ae137a6b7140cef95"
+    },
+    "skills/packaging-acceptance/references/acceptance.md": {
+      "source": "skills/packaging-acceptance/references/acceptance.md",
+      "sha256": "9f298cbbbda25fea6a9fa7f1630ecb91f6ed1552c06a5692926dba57a3259691"
+    },
+    "skills/packaging-acceptance/SKILL.md": {
+      "source": "skills/packaging-acceptance/SKILL.md",
+      "sha256": "1026a0cb8c124e935c03cdb518544e20d12a7666747b5f1634459584727627d4"
+    },
+    "LICENSE": {
+      "source": "LICENSE",
+      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a"
+    }
+  },
+  "runtime_profiles": [],
+  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
+  "producer": "codex-toolkit.marketplace.v1",
+  "source_state": "canonical-file-hashes",
+  "license": "MIT"
+}

@@ -1,0 +1,145 @@
+{
+  "plugin": "codex-documents-specifications",
+  "version": "0.1.2",
+  "files": {
+    "plugin.json": {
+      "source": "plugins/documents-specifications/plugin.json",
+      "sha256": "5a62246af2e2688bc864ba4be8748bede6e1e441977006889ecb9b45ec64472d"
+    },
+    "skills/context-brief/agents/openai.yaml": {
+      "source": "skills/context-brief/agents/openai.yaml",
+      "sha256": "89899f134c73ac5a5fdd7362faa8a923641e6740ca1989e2bec6d74d606207eb"
+    },
+    "skills/context-brief/assets/icon-small.png": {
+      "source": "skills/context-brief/assets/icon-small.png",
+      "sha256": "18ff326439e1d0c576ce4cc7f6510a7577821ecc4f4d5a733263fea4ae939b8e"
+    },
+    "skills/context-brief/assets/icon-small.svg": {
+      "source": "skills/context-brief/assets/icon-small.svg",
+      "sha256": "180c50a8e49f89ec6c034b2d0448cd51219384e97a0135299ff35cde661d37cf"
+    },
+    "skills/context-brief/assets/icon.png": {
+      "source": "skills/context-brief/assets/icon.png",
+      "sha256": "cc8edc6a3de6c0e58de6a918a08e942d8fcdfd25a4360d6826ef9199a37b82a2"
+    },
+    "skills/context-brief/assets/icon.svg": {
+      "source": "skills/context-brief/assets/icon.svg",
+      "sha256": "85a0dee726a896bdf2380688a13405acbc2405f081f18d50feb365bde0661f16"
+    },
+    "skills/context-brief/requirements.txt": {
+      "source": "skills/context-brief/requirements.txt",
+      "sha256": "77acdc19bb5411688108ee6f482b3d5dc548653090c208ec9d5e319155f0f649"
+    },
+    "skills/context-brief/scripts/extract_source_text.py": {
+      "source": "skills/context-brief/scripts/extract_source_text.py",
+      "sha256": "2137ec442bca20e4da5b8b36bf49c5853920fb7f2a30ec0d8d8fe67b91fe716c"
+    },
+    "skills/context-brief/scripts/ocr_fallback.py": {
+      "source": "skills/context-brief/scripts/ocr_fallback.py",
+      "sha256": "af896dcf0ba16ed9a53c602764d17e1e6d52ec7a0bda2f3dc223a53678c0c41f"
+    },
+    "skills/context-brief/scripts/validate_context_brief.py": {
+      "source": "skills/context-brief/scripts/validate_context_brief.py",
+      "sha256": "5ad26def4afb187587f67ea3354f80c3931a76067933d92df5ed11ceaa9c15fa"
+    },
+    "skills/context-brief/SKILL.md": {
+      "source": "skills/context-brief/SKILL.md",
+      "sha256": "0d14ad382ae3165b1459896db5d222197bcb1c281eb13a901ab5f6d4e6637e99"
+    },
+    "skills/document-source-matching/agents/openai.yaml": {
+      "source": "skills/document-source-matching/agents/openai.yaml",
+      "sha256": "e60e5809e7fdcbeba8f083ff3b7aaa85657efee3c24f559366770805471e91df"
+    },
+    "skills/document-source-matching/assets/icon-small.png": {
+      "source": "skills/document-source-matching/assets/icon-small.png",
+      "sha256": "4fd2599b24052b083a1b44e57bea9cdea41472a116a4060169e10c86c2985396"
+    },
+    "skills/document-source-matching/assets/icon-small.svg": {
+      "source": "skills/document-source-matching/assets/icon-small.svg",
+      "sha256": "c9309e8873f24a6cbf6a08663b4c486aa55c77470044a3357519941666ca1d0e"
+    },
+    "skills/document-source-matching/assets/icon.png": {
+      "source": "skills/document-source-matching/assets/icon.png",
+      "sha256": "89e2c748116189eee91498b7c69d320d6ad64981e2cfa19fd83e5d2c87f3a915"
+    },
+    "skills/document-source-matching/assets/icon.svg": {
+      "source": "skills/document-source-matching/assets/icon.svg",
+      "sha256": "c9309e8873f24a6cbf6a08663b4c486aa55c77470044a3357519941666ca1d0e"
+    },
+    "skills/document-source-matching/SKILL.md": {
+      "source": "skills/document-source-matching/SKILL.md",
+      "sha256": "e74258ffa330207714843a53b331422ea184d8dab87bacdd000592a12575f98e"
+    },
+    "skills/doc-updater/agents/openai.yaml": {
+      "source": "skills/doc-updater/agents/openai.yaml",
+      "sha256": "efd5f1949e89f94687b4dec0aaee89637eb3bc03a8cfee4b6659ca5cd01e95c7"
+    },
+    "skills/doc-updater/assets/icon-small.png": {
+      "source": "skills/doc-updater/assets/icon-small.png",
+      "sha256": "2c44570d85bc97fee8229166c0a2f4604456d501d6f257d916d0f87673f26f06"
+    },
+    "skills/doc-updater/assets/icon-small.svg": {
+      "source": "skills/doc-updater/assets/icon-small.svg",
+      "sha256": "6d93ba2b47da11d00fa19fee3b4ac018b8cdb48c9ff1be662d1036cb35475e75"
+    },
+    "skills/doc-updater/assets/icon.png": {
+      "source": "skills/doc-updater/assets/icon.png",
+      "sha256": "581cdccf67f3b0b8f03e8b2aa22b52f40113ea086e27b2457d1b40e6c8c90aeb"
+    },
+    "skills/doc-updater/assets/icon.svg": {
+      "source": "skills/doc-updater/assets/icon.svg",
+      "sha256": "154aa7ea113f70fcb816f527ddc81afb1db2dcdc891992c9339771659b5bf742"
+    },
+    "skills/doc-updater/references/doc-update-rules.md": {
+      "source": "skills/doc-updater/references/doc-update-rules.md",
+      "sha256": "16d46ea7d55a202471e82f82325b5546ee09db6c04f524aecbc2a704feb9d6f0"
+    },
+    "skills/doc-updater/references/notion-sync-reader-writer-contract.md": {
+      "source": "skills/doc-updater/references/notion-sync-reader-writer-contract.md",
+      "sha256": "86c64a849e81230d0260ca47c0e772901d0b455c65883425982f7eb85ecdd464"
+    },
+    "skills/doc-updater/references/presentation.md": {
+      "source": "skills/doc-updater/references/presentation.md",
+      "sha256": "89d18d0213692a561e8d0ef68681752ba7936089cf27e672405978996fbee048"
+    },
+    "skills/doc-updater/scripts/inspect_markdown_sync_target.py": {
+      "source": "skills/doc-updater/scripts/inspect_markdown_sync_target.py",
+      "sha256": "adea7651a9a88a9d71f07e7f0dbfdc211fb445df76ada33816f0af034509ebef"
+    },
+    "skills/doc-updater/scripts/inspect_notion_sync_target.py": {
+      "source": "skills/doc-updater/scripts/inspect_notion_sync_target.py",
+      "sha256": "a50d0c21aa9bc0367afcf970517c2af4c1ae2fd24f74e5de434c0134f4454d65"
+    },
+    "skills/doc-updater/scripts/scan_changed_files.py": {
+      "source": "skills/doc-updater/scripts/scan_changed_files.py",
+      "sha256": "7a01542ee416ffcaeccccfa35aa80bfc9846815703434be43f08ee60ed7cfc32"
+    },
+    "skills/doc-updater/scripts/write_markdown_sync_target.py": {
+      "source": "skills/doc-updater/scripts/write_markdown_sync_target.py",
+      "sha256": "8b1b4b9a9fd810cbfa3ee32ffb32146f20246f86274b6ef76ba3fafd52e3fb00"
+    },
+    "skills/doc-updater/SKILL.md": {
+      "source": "skills/doc-updater/SKILL.md",
+      "sha256": "8c0a2b46a5d3e775aafa1a180e3d74577919353664019dd1ffcca95a3fafd579"
+    },
+    "skills/local-document-processing/agents/openai.yaml": {
+      "source": "skills/local-document-processing/agents/openai.yaml",
+      "sha256": "e9911931490af720c2d89aa7ed2083b50d4e944ec6095571f554931dcaedd967"
+    },
+    "skills/local-document-processing/SKILL.md": {
+      "source": "skills/local-document-processing/SKILL.md",
+      "sha256": "f7c8f64c4079f7ff6a79fa0e93d50d3945451c3ff13f36c123405a173a81ca3b"
+    },
+    "LICENSE": {
+      "source": "LICENSE",
+      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a"
+    }
+  },
+  "runtime_profiles": [
+    "local-documents"
+  ],
+  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
+  "producer": "codex-toolkit.marketplace.v1",
+  "source_state": "canonical-file-hashes",
+  "license": "MIT"
+}

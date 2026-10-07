@@ -1,0 +1,6 @@
+interface:
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon.png"
+  display_name: "Validation Evidence Review (v0.4.13)"
+  short_description: "Review recorded checks, baselines, and missing coverage"
+  default_prompt: "Use $validation-evidence-review to summarize the available validation evidence and identify remaining gaps."

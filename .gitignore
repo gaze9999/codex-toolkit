@@ -1,0 +1,90 @@
+# Share only the portable release workflow; keep other local automation private
+/.github/*
+!/.github/workflows/
+/.github/workflows/*
+!/.github/workflows/cli-release.yml
+!/.github/workflows/plugin-release.yml
+!/.github/workflows/python-tools-release.yml
+!/.github/workflows/check.yml
+/.codex/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Dependencies / generated output
+node_modules/
+dist/
+build/
+coverage/
+.cache/
+.tmp/
+tmp/
+temp/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS metadata
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+Desktop.ini
+
+# Editors / IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+*.egg-info/
+
+# Local tests and validation artifacts
+/tests/
+test-results/
+test-reports/
+playwright-report/
+blob-report/
+.playwright/
+.playwright-cli/
+.nyc_output/
+*.lcov
+coverage.xml
+junit.xml
+
+# Archives / temporary release packages
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.whl
+
+# Local working files
+*.tmp
+*.temp
+
+# Generated local Desktop settings fragment
+/desktop-settings.local.toml

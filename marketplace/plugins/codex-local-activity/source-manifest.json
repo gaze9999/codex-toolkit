@@ -1,0 +1,31 @@
+{
+  "plugin": "codex-local-activity",
+  "version": "0.1.0",
+  "files": {
+    "plugin.json": {
+      "source": "plugins/local-activity/plugin.json",
+      "sha256": "2c3bb0db82367ed06bbc7e909afe224638678f658d879c714e38e29c790a68ad"
+    },
+    "skills/local-activity-query/agents/openai.yaml": {
+      "source": "skills/local-activity-query/agents/openai.yaml",
+      "sha256": "fe3e45b7de9eac7f003439b9d5ba2e6f47c5f474cb4e346d9846ea03d26e6070"
+    },
+    "skills/local-activity-query/scripts/activity_summary.py": {
+      "source": "skills/local-activity-query/scripts/activity_summary.py",
+      "sha256": "3b857100c9f5c7a45bd194694b350ddc1a4a1e9533c4b447ced9ee34cdaaa967"
+    },
+    "skills/local-activity-query/SKILL.md": {
+      "source": "skills/local-activity-query/SKILL.md",
+      "sha256": "a2b66fde9b5b789210c9dbf65958bcf74b3815ee07d6dd41caf47c559919416d"
+    },
+    "LICENSE": {
+      "source": "LICENSE",
+      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a"
+    }
+  },
+  "runtime_profiles": [],
+  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
+  "producer": "codex-toolkit.marketplace.v1",
+  "source_state": "canonical-file-hashes",
+  "license": "MIT"
+}

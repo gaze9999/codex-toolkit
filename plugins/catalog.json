@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "bundles": [
+    {
+      "id": "packaging-acceptance",
+      "batch": "0",
+      "status": "ready",
+      "skills": [
+        "packaging-acceptance"
+      ],
+      "runtime_profiles": [],
+      "resources": []
+    },
+    {
+      "id": "jev-evaluation",
+      "batch": "1A",
+      "status": "ready",
+      "skills": [
+        "jev-evaluation"
+      ],
+      "runtime_profiles": [
+        "jev"
+      ],
+      "resources": []
+    },
+    {
+      "id": "documents-specifications",
+      "batch": "1B",
+      "status": "ready",
+      "skills": [
+        "context-brief",
+        "document-source-matching",
+        "doc-updater",
+        "local-document-processing"
+      ],
+      "runtime_profiles": [
+        "local-documents"
+      ],
+      "resources": []
+    },
+    {
+      "id": "environment-evidence",
+      "batch": "1B",
+      "status": "ready",
+      "skills": [
+        "environment-consistency-check",
+        "validation-evidence-review"
+      ],
+      "runtime_profiles": [
+        "workspace-inspection"
+      ],
+      "resources": []
+    },
+    {
+      "id": "frontend-engineering",
+      "batch": "1C",
+      "status": "ready",
+      "skills": [
+        "angular-development",
+        "angular-member-order",
+        "react-development",
+        "vue-development",
+        "ui-ux-design",
+        "playwright-cli"
+      ],
+      "runtime_profiles": [
+        "playwright",
+        "serena",
+        "edge-devtools"
+      ],
+      "resources": []
+    },
+    {
+      "id": "agent-workflow",
+      "batch": "2",
+      "status": "ready",
+      "skills": [
+        "agent-governance",
+        "coding-prompt",
+        "task-routing",
+        "task-guide"
+      ],
+      "runtime_profiles": [],
+      "resources": []
+    },
+    {
+      "id": "multilingual-proofreading",
+      "batch": "2",
+      "status": "ready",
+      "skills": [
+        "multilingual-proofreading"
+      ],
+      "runtime_profiles": [
+        "textlint",
+        "cspell"
+      ],
+      "resources": [
+        {
+          "source": "mcp/tools/proofreading",
+          "target": "resources/proofreading"
+        }
+      ]
+    },
+    {
+      "id": "local-activity",
+      "batch": "3",
+      "status": "ready",
+      "skills": [
+        "local-activity-query"
+      ],
+      "runtime_profiles": [],
+      "resources": []
+    },
+    {
+      "id": "project-documentation",
+      "batch": "4",
+      "status": "ready",
+      "skills": [
+        "readme-maintainer",
+        "license-maintainer"
+      ],
+      "runtime_profiles": [],
+      "resources": []
+    }
+  ],
+  "management": "Codex /plugins",
+  "guide": "docs/plugins.md"
+}

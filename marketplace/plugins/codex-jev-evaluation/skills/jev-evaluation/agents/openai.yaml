@@ -1,0 +1,6 @@
+interface:
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon.png"
+  display_name: "Jev Evaluation (v0.4.13)"
+  short_description: "Rank context candidates with optional Jev evaluation"
+  default_prompt: "Use $jev-evaluation after local retrieval when reading order or an explicit finite rubric needs semantic comparison; send only approved content and report actual use while Main retains required context and acceptance."

@@ -1,0 +1,10 @@
+{
+  "timestamp": "2026-10-01 10:05",
+  "title": "完成查詢欄位驗證",
+  "commit": "abcdef1234",
+  "repository": "example",
+  "uncommitted": true,
+  "summary": "此為虛構格式示範; commit 已完成 UI-07 欄位格式檢核與錯誤提示; 未提交部分新增 UI-08 條件連動待辦; 現況表保留原列並將 UI-07 畫線",
+  "checks": ["示範: 欄位格式 focused Test 通過; 正式 API 未驗證"],
+  "open_items": ["UI-08 條件連動, API-03 mapping 核對"]
+}

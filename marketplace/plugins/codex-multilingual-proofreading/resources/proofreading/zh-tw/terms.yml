@@ -1,0 +1,1249 @@
+version: 1
+# Scope and source IDs: docs/tools/proofreading.md, reviewed 2026-10-05
+# Apply to authored prose; specification/UI copy needs explicit change authorization.
+# protected-copy.cjs preserves HTML and declared literal UI/specification text.
+rules:
+
+  # Authored delivery prose; retain literal source material and identifiers
+  - expected: 關卡
+    patterns:
+    - 关卡
+    specs:
+    - from: 可信关卡與處理人資料
+      to: 可信關卡與處理人資料
+  - expected: 來源
+    patterns:
+    - 来源
+    specs:
+    - from: 来源 ZIP
+      to: 來源 ZIP
+  - expected: 沒有
+    patterns:
+    - 没有
+    specs:
+    - from: 本回合没有重跑測試
+      to: 本回合沒有重跑測試
+  - expected: 歷史
+    patterns:
+    - 历史
+    specs:
+    - from: 历史成果
+      to: 歷史成果
+
+  # Established computing terms. Sources: mdn, android-security, dotnet, dependencies
+  - expected: 軟體
+    patterns:
+    - 軟件
+    - 软件
+    specs:
+    - from: 軟件
+      to: 軟體
+    - from: 软件
+      to: 軟體
+  - expected: 硬碟
+    patterns:
+    - 硬盤
+    - 硬盘
+    specs:
+    - from: 硬盤
+      to: 硬碟
+    - from: 硬盘
+      to: 硬碟
+  - expected: 滑鼠
+    patterns:
+    - 鼠標
+    - 鼠标
+    specs:
+    - from: 鼠標
+      to: 滑鼠
+    - from: 鼠标
+      to: 滑鼠
+  - expected: 印表機
+    patterns:
+    - 打印機
+    - 打印机
+    specs:
+    - from: 打印機
+      to: 印表機
+    - from: 打印机
+      to: 印表機
+  - expected: 記憶體
+    patterns:
+    - 內存
+    - 内存
+    specs:
+    - from: 內存
+      to: 記憶體
+    - from: 内存
+      to: 記憶體
+  - expected: 資料夾
+    patterns:
+    - 文件夾
+    - 文件夹
+    specs:
+    - from: 文件夾
+      to: 資料夾
+    - from: 文件夹
+      to: 資料夾
+  - expected: 資料庫
+    patterns:
+    - 數據庫
+    - 数据库
+    specs:
+    - from: 數據庫
+      to: 資料庫
+    - from: 数据库
+      to: 資料庫
+  - expected: 網路
+    patterns:
+    - 網絡
+    - 网络
+    specs:
+    - from: 網絡
+      to: 網路
+    - from: 网络
+      to: 網路
+  - expected: 伺服器
+    patterns:
+    - 服務器
+    - 服务器
+    specs:
+    - from: 服務器
+      to: 伺服器
+    - from: 服务器
+      to: 伺服器
+  - expected: 原始碼
+    patterns:
+    - 源代碼
+    - 源代码
+    - 源碼
+    - 源码
+    specs:
+    - from: 源代碼
+      to: 原始碼
+    - from: 源代码
+      to: 原始碼
+    - from: 源碼
+      to: 原始碼
+    - from: 源码
+      to: 原始碼
+  - expected: 除錯
+    patterns:
+    - 調試
+    - 调试
+    specs:
+    - from: 調試
+      to: 除錯
+    - from: 调试
+      to: 除錯
+  - expected: 非同步
+    patterns:
+    - 異步
+    - 异步
+    specs:
+    - from: 異步
+      to: 非同步
+    - from: 异步
+      to: 非同步
+  - expected: 執行緒
+    patterns:
+    - 線程
+    - 线程
+    specs:
+    - from: 線程
+      to: 執行緒
+    - from: 线程
+      to: 執行緒
+  - expected: 相依套件
+    patterns:
+    - 依賴套件
+    - 依赖套件
+    - 依賴包
+    - 依赖包
+    specs:
+    - from: 依賴套件
+      to: 相依套件
+    - from: 依赖套件
+      to: 相依套件
+    - from: 依賴包
+      to: 相依套件
+    - from: 依赖包
+      to: 相依套件
+  - expected: 環境變數
+    patterns:
+    - 環境變量
+    - 环境变量
+    specs:
+    - from: 環境變量
+      to: 環境變數
+    - from: 环境变量
+      to: 環境變數
+  - expected: 資料格式
+    patterns:
+    - 數據格式
+    - 数据格式
+    specs:
+    - from: 數據格式
+      to: 資料格式
+    - from: 数据格式
+      to: 資料格式
+  - expected: 資料來源
+    patterns:
+    - 數據來源
+    - 数据来源
+    - 數據源
+    - 数据源
+    specs:
+    - from: 數據來源
+      to: 資料來源
+    - from: 数据来源
+      to: 資料來源
+    - from: 數據源
+      to: 資料來源
+    - from: 数据源
+      to: 資料來源
+  - expected: 儲存空間
+    patterns:
+    - 存儲空間
+    - 存储空间
+    specs:
+    - from: 存儲空間
+      to: 儲存空間
+    - from: 存储空间
+      to: 儲存空間
+  - expected: 呼叫端
+    patterns:
+    - 調用端
+    - 调用端
+    - 調用方
+    - 调用方
+    specs:
+    - from: 調用端
+      to: 呼叫端
+    - from: 调用端
+      to: 呼叫端
+    - from: 調用方
+      to: 呼叫端
+    - from: 调用方
+      to: 呼叫端
+
+  # Data structures and values. Sources: mdn-array, mdn-cache, android-security, bitarray, naer-queue
+  - expected: 雜湊函式
+    patterns:
+    - 哈希函數
+    - 哈希函数
+    - 散列函數
+    - 雜湊函數
+    specs:
+    - from: 哈希函數
+      to: 雜湊函式
+    - from: 哈希函数
+      to: 雜湊函式
+    - from: 散列函數
+      to: 雜湊函式
+    - from: 雜湊函數
+      to: 雜湊函式
+  - expected: 快取
+    patterns:
+    - 緩存
+    - 缓存
+    specs:
+    - from: 緩存
+      to: 快取
+    - from: 缓存
+      to: 快取
+  - expected: 緩衝區
+    patterns:
+    - 緩沖區
+    - 缓冲区
+    specs:
+    - from: 緩沖區
+      to: 緩衝區
+    - from: 缓冲区
+      to: 緩衝區
+  - expected: 雜湊
+    patterns:
+    - 哈希
+    specs:
+    - from: 哈希
+      to: 雜湊
+  - expected: 陣列
+    patterns:
+    - 數組
+    - 数组
+    specs:
+    - from: 數組
+      to: 陣列
+    - from: 数组
+      to: 陣列
+  - expected: 字串
+    patterns:
+    - 字符串
+    specs:
+    - from: 字符串
+      to: 字串
+  - expected: 位元組
+    pattern: /(?<!文)字[節节](?![點点])/g
+    specs:
+    - from: 字節
+      to: 位元組
+    - from: 字节
+      to: 位元組
+    - from: 文字節點
+      to: 文字節點
+    - from: 文字節錄
+      to: 文字節錄
+  - expected: 正規表示式
+    patterns:
+    - 正則表達式
+    - 正则表达式
+    specs:
+    - from: 正則表達式
+      to: 正規表示式
+    - from: 正则表达式
+      to: 正規表示式
+  - expected: 堆疊
+    patterns:
+    - 堆棧
+    - 堆栈
+    specs:
+    - from: 堆棧
+      to: 堆疊
+    - from: 堆栈
+      to: 堆疊
+  - expected: 布林$1
+    pattern: /(?:布爾|布尔)(值|型別|運算)/g
+    specs:
+    - from: 布爾值
+      to: 布林值
+    - from: 布爾型別
+      to: 布林型別
+    - from: 布爾戰爭
+      to: 布爾戰爭
+  - expected: 布林型別
+    patterns:
+    - 布爾類型
+    - 布尔类型
+    specs:
+    - from: 布爾類型
+      to: 布林型別
+    - from: 布尔类型
+      to: 布林型別
+  - expected: 字元$1
+    pattern: /字符(編碼|集|長度)/g
+    specs:
+    - from: 字符編碼
+      to: 字元編碼
+    - from: 字符集
+      to: 字元集
+    - from: 漢字符號
+      to: 漢字符號
+  - expected: 字元編碼
+    patterns:
+    - 字符编码
+    specs:
+    - from: 字符编码
+      to: 字元編碼
+  - expected: 字元長度
+    patterns:
+    - 字符长度
+    specs:
+    - from: 字符长度
+      to: 字元長度
+  - expected: 雜湊$1
+    pattern: /散列(值|表|函式|函數|演算法)/g
+    specs:
+    - from: 散列值
+      to: 雜湊值
+    - from: 散列表
+      to: 雜湊表
+    - from: 散列分布
+      to: 散列分布
+  - expected: $1佇列
+    pattern: /((?:事件|訊息|消息|任務|工作|請求|请求|FIFO|MQ)[ \t]*)(?:隊列|队列)/gi
+    specs:
+    - from: 事件隊列
+      to: 事件佇列
+    - from: MQ 队列
+      to: MQ 佇列
+    - from: 隊列行進
+      to: 隊列行進
+  - expected: $1序列化
+    pattern: /(反?)(?:串行化)/g
+    specs:
+    - from: 串行化
+      to: 序列化
+    - from: 反串行化
+      to: 反序列化
+    - from: 串行傳輸
+      to: 串行傳輸
+
+  # Software meaning only. Sources: moe-default, moe-information, naer-message, mdn-callback, dotnet
+  - expected: 預設$1
+    pattern: /(?:默認|默认)(值|設定|選項|行為|路徑|版本|參數|語言|模式)/g
+    prh: default 使用預設, 默許或承認的默認依原意保留
+    specs:
+    - from: 默認值
+      to: 預設值
+    - from: 默認模式
+      to: 預設模式
+    - from: 他不回答也不表示默認
+      to: 他不回答也不表示默認
+  - expected: 預設設定
+    patterns:
+    - 默認設置
+    - 默认設置
+    specs:
+    - from: 默認設置
+      to: 預設設定
+    - from: 默认設置
+      to: 預設設定
+  - expected: 預設設定
+    patterns:
+    - 默認设置
+    - 默认设置
+    specs:
+    - from: 默認设置
+      to: 預設設定
+    - from: 默认设置
+      to: 預設設定
+  - expected: 預設選項
+    patterns:
+    - 默認选项
+    - 默认选项
+    specs:
+    - from: 默認选项
+      to: 預設選項
+    - from: 默认选项
+      to: 預設選項
+  - expected: 預設行為
+    patterns:
+    - 默認行为
+    - 默认行为
+    specs:
+    - from: 默認行为
+      to: 預設行為
+    - from: 默认行为
+      to: 預設行為
+  - expected: 預設路徑
+    patterns:
+    - 默認路径
+    - 默认路径
+    specs:
+    - from: 默認路径
+      to: 預設路徑
+    - from: 默认路径
+      to: 預設路徑
+  - expected: 預設參數
+    patterns:
+    - 默認参数
+    - 默认参数
+    specs:
+    - from: 默認参数
+      to: 預設參數
+    - from: 默认参数
+      to: 預設參數
+  - expected: 預設語言
+    patterns:
+    - 默認语言
+    - 默认语言
+    specs:
+    - from: 默認语言
+      to: 預設語言
+    - from: 默认语言
+      to: 預設語言
+  - expected: $1預設
+    pattern: /((?:工具|軟體|程式|CLI|MCP)[ \t]*)(?:默認|默认)(?!設置|设置|选项|行为|路径|参数|语言)/gi
+    specs:
+    - from: MCP 默認使用本機環境
+      to: MCP 預設使用本機環境
+    - from: 默認這項決定
+      to: 默認這項決定
+  - expected: $1訊息
+    pattern: /((?:錯誤|警告|例外|提示|通知)(?:的)?)信息/g
+    prh: message 使用訊息, information 使用資訊, 一般音訊或消息需人工判斷
+    specs:
+    - from: 錯誤信息
+      to: 錯誤訊息
+    - from: 提示的信息
+      to: 提示的訊息
+    - from: 久未聽聞他的信息
+      to: 久未聽聞他的信息
+  - expected: $1資訊
+    pattern: /((?:版本|環境|帳號|個人|套件|連線)(?:的)?)信息/g
+    specs:
+    - from: 版本信息
+      to: 版本資訊
+    - from: 連線的信息
+      to: 連線的資訊
+    - from: 同學的信息
+      to: 同學的信息
+  - expected: 使用者$1
+    pattern: /(?:用戶|用户)(帳號|名稱|設定|介面|權限|登入)/g
+    prh: user 使用使用者, client 的用戶端及電信訂戶用語保留
+    specs:
+    - from: 用戶權限
+      to: 使用者權限
+    - from: 用戶名稱
+      to: 使用者名稱
+    - from: 用戶端連線
+      to: 用戶端連線
+    - from: 電信用戶
+      to: 電信用戶
+  - expected: 使用者名稱
+    pattern: /(?:用戶名|用户名)(?!稱|称)/g
+    specs:
+    - from: 用戶名
+      to: 使用者名稱
+    - from: 用户名
+      to: 使用者名稱
+    - from: 用戶名稱
+      to: 用戶名稱
+  - expected: 使用者帳號
+    patterns:
+    - 用戶賬號
+    - 用户账号
+    specs:
+    - from: 用戶賬號
+      to: 使用者帳號
+    - from: 用户账号
+      to: 使用者帳號
+  - expected: 使用者登入
+    patterns:
+    - 用户登录
+    specs:
+    - from: 用户登录
+      to: 使用者登入
+  - expected: 使用者介面
+    patterns:
+    - 用戶界面
+    - 用户界面
+    specs:
+    - from: 用戶界面
+      to: 使用者介面
+    - from: 用户界面
+      to: 使用者介面
+  - expected: $1使用者
+    pattern: /((?:網站|軟體|應用程式|平台)(?:的)?[ \t]*)(?:用戶|用户)(?!端|名|界面|賬號|账号|登录)/g
+    specs:
+    - from: 網站用戶
+      to: 網站使用者
+    - from: 平台的用戶
+      to: 平台的使用者
+    - from: 網站用戶端
+      to: 網站用戶端
+    - from: 用戶端
+      to: 用戶端
+  - expected: 回呼函式
+    patterns:
+    - 回調函數
+    - 回调函数
+    - 回呼函數
+    specs:
+    - from: 回調函數
+      to: 回呼函式
+    - from: 回调函数
+      to: 回呼函式
+    - from: 回呼函數
+      to: 回呼函式
+  - expected: 回呼$1
+    pattern: /(?:回調|回调)(函式|方法|事件|網址|URL|地獄)/gi
+    specs:
+    - from: 回調函式
+      to: 回呼函式
+    - from: 回調事件
+      to: 回呼事件
+    - from: 股價回調
+      to: 股價回調
+  - expected: $1回呼
+    pattern: /((?:非同步|異步|异步|同步|API|JavaScript|Python)[ \t]*)(?:回調|回调)(?!函數|函数)/gi
+    specs:
+    - from: 非同步回調
+      to: 非同步回呼
+    - from: API 回調
+      to: API 回呼
+    - from: 利率回調
+      to: 利率回調
+  - expected: 資料匯出
+    patterns:
+    - 數據導出
+    - 数据导出
+    specs:
+    - from: 數據導出
+      to: 資料匯出
+    - from: 数据导出
+      to: 資料匯出
+  - expected: $1匯出
+    pattern: /((?:資料|檔案|文件|報表|CSV|JSON|XLSX|PDF|Excel)[ \t]*)(?:導出|导出)/gi
+    specs:
+    - from: CSV 導出
+      to: CSV 匯出
+    - from: 報表導出
+      to: 報表匯出
+    - from: 導出公式
+      to: 導出公式
+  - expected: 匯出$1
+    pattern: /(?:導出|导出)([ \t]*(?:CSV|JSON|XLSX|PDF|Excel|檔案|報表|資料))/gi
+    specs:
+    - from: 導出 JSON
+      to: 匯出 JSON
+    - from: 導出報表
+      to: 匯出報表
+    - from: 由公理導出定理
+      to: 由公理導出定理
+  - expected: $1匯入
+    pattern: /((?:資料|檔案|CSV|JSON|XLSX|Excel)[ \t]*)(?:導入|导入)/gi
+    specs:
+    - from: CSV 導入
+      to: CSV 匯入
+    - from: 導入新工具
+      to: 導入新工具
+  - expected: 匯入$1
+    pattern: /(?:導入|导入)([ \t]*(?:CSV|JSON|XLSX|Excel|檔案|資料))/gi
+    specs:
+    - from: 導入CSV
+      to: 匯入CSV
+    - from: 導入新制度
+      to: 導入新制度
+  - expected: $1介面
+    pattern: /((?:API|SDK|CLI|UI|Web|軟體|程式|使用者|用戶|用户)(?:的)?[ \t]*)(?:接口|界面)/gi
+    specs:
+    - from: API 接口
+      to: API 介面
+    - from: 使用者界面
+      to: 使用者介面
+    - from: 水管接口
+      to: 水管接口
+    - from: 地層界面
+      to: 地層界面
+  - expected: 介面$1
+    pattern: /接口(規格|定義|文件|型別|相容性)/g
+    specs:
+    - from: 接口規格
+      to: 介面規格
+    - from: 管線接口
+      to: 管線接口
+  - expected: $1元件
+    pattern: /((?:UI|Web|軟體|網頁|前端)(?:的)?[ \t]*)(?:組件|组件)/gi
+    specs:
+    - from: UI 組件
+      to: UI 元件
+    - from: 軟體組件
+      to: 軟體元件
+    - from: 機械組件
+      to: 機械組件
+    - from: 硬體組件
+      to: 硬體組件
+  - expected: $1相容
+    pattern: /((?:API|SDK|軟體|套件|瀏覽器|版本|向前|向後)[ \t]*)兼容/gi
+    specs:
+    - from: 版本兼容
+      to: 版本相容
+    - from: 向後兼容
+      to: 向後相容
+    - from: 兼容並蓄
+      to: 兼容並蓄
+  - expected: 相容性
+    patterns:
+    - 兼容性
+    specs:
+    - from: 兼容性
+      to: 相容性
+  - expected: $1載入
+    pattern: /((?:頁面|網頁|模組|套件|檔案|資料|模型|資源|程式)[ \t]*)(?:加載|加载)/g
+    specs:
+    - from: 模型加載
+      to: 模型載入
+    - from: 資源加載
+      to: 資源載入
+    - from: 加載重量
+      to: 加載重量
+  - expected: 載入$1
+    pattern: /(?:加載|加载)([ \t]*(?:頁面|網頁|模組|套件|檔案|資料|模型|資源|程式))/g
+    specs:
+    - from: 加載模組
+      to: 載入模組
+    - from: 橋梁加載試驗
+      to: 橋梁加載試驗
+  - expected: 呼叫$1
+    pattern: /(?:調用|调用)([ \t]*(?:API|MCP|SDK|函式|函數|方法|服務|工具))/gi
+    specs:
+    - from: 調用 API
+      to: 呼叫 API
+    - from: 調用方法
+      to: 呼叫方法
+    - from: 調用兵力
+      to: 調用兵力
+  - expected: $1呼叫
+    pattern: /((?:API|MCP|SDK|函式|方法|工具)[ \t]*)(?:調用|调用)(?!端|方)/gi
+    specs:
+    - from: API調用
+      to: API呼叫
+    - from: API調用端
+      to: API調用端
+    - from: 調用資金
+      to: 調用資金
+
+  # Integration and settings. Sources: user preference, dependencies, gateway-plugin
+  - expected: $1串接
+    pattern: /((?:API|MCP|CLI|SDK|Skills?|軟體工具|軟體服務|軟體系統|軟體模組|軟體元件|服務)(?:[ \t]*(?:之間的|之間|的))?[ \t]*)接線(?!圖)/gi
+    prh: 軟體整合採串接, 未確認語境的工具或元件接線需人工複核
+    specs:
+    - from: MCP 接線
+      to: MCP 串接
+    - from: API接線
+      to: API串接
+    - from: 軟體工具的接線
+      to: 軟體工具的串接
+    - from: 服務之間的接線
+      to: 服務之間的串接
+    - from: 硬體元件接線
+      to: 硬體元件接線
+    - from: 控制系統接線
+      to: 控制系統接線
+    - from: 工具接線圖
+      to: 工具接線圖
+    - from: 曲線の接線
+      to: 曲線の接線
+  - expected: $1設定
+    pattern: /((?:工具|服務|軟體|程式|專案|MCP|CLI|API|SDK|Runtime)(?:[ \t]*的)?[ \t]*)配置(?![ \t]*(?:文件|檔案|檔|資源|人力|記憶體|空間|位址))/gi
+    prh: configuration 依設定或組態語境選用, allocate 的資源配置保留
+    specs:
+    - from: MCP 配置
+      to: MCP 設定
+    - from: 專案配置
+      to: 專案設定
+    - from: 硬體配置
+      to: 硬體配置
+    - from: 程式配置記憶體
+      to: 程式配置記憶體
+    - from: 程式配置 記憶體
+      to: 程式配置 記憶體
+  - expected: 設定檔
+    patterns:
+    - 配置文件
+    - 配置檔案
+    - 配置檔
+    specs:
+    - from: 配置文件
+      to: 設定檔
+    - from: 配置檔案
+      to: 設定檔
+    - from: 配置檔
+      to: 設定檔
+  - expected: 設定$1
+    pattern: /設置(值|選項|參數|檔案)/g
+    specs:
+    - from: 設置參數
+      to: 設定參數
+    - from: 設置路障
+      to: 設置路障
+  - expected: $1支援
+    pattern: /((?:工具|服務|系統|軟體|程式|套件|瀏覽器|MCP|CLI|API|SDK|Runtime)[ \t]*)支持/gi
+    specs:
+    - from: 工具支持 JSON
+      to: 工具支援 JSON
+    - from: 支持這個決定
+      to: 支持這個決定
+  - expected: $1品質
+    pattern: /((?:軟體|程式碼|文件|圖像|影像)(?:的)?)(?:質量|质量)/g
+    specs:
+    - from: 文件質量
+      to: 文件品質
+    - from: 物體質量
+      to: 物體質量
+    - from: 輸出質量為一公斤
+      to: 輸出質量為一公斤
+  - expected: $1相依關係
+    pattern: /((?:套件|模組|專案|軟體)(?:的)?[ \t]*)(?:依賴關係|依赖关系)/g
+    specs:
+    - from: 套件依賴關係
+      to: 套件相依關係
+    - from: 人際依賴關係
+      to: 人際依賴關係
+  - expected: 相依性$1
+    pattern: /依賴(注入|反轉|解析|衝突)/g
+    specs:
+    - from: 依賴注入
+      to: 相依性注入
+    - from: 依賴解析
+      to: 相依性解析
+    - from: 依賴家人
+      to: 依賴家人
+  - expected: 套件
+    patterns:
+    - 軟體包
+    - 软件包
+    specs:
+    - from: 軟體包
+      to: 套件
+    - from: 软件包
+      to: 套件
+  - expected: 外掛
+    patterns:
+    - 插件
+    prh: plugin 採外掛, extension 與 add-in 保留其產品用語
+    specs:
+    - from: 插件
+      to: 外掛
+    - from: 擴充套件
+      to: 擴充套件
+    - from: 增益集
+      to: 增益集
+  - expected: 自訂
+    patterns:
+    - 自定義
+    - 自定义
+    specs:
+    - from: 自定義
+      to: 自訂
+    - from: 自定义
+      to: 自訂
+
+  # Programming versus mathematics or general prose. Sources: mdn-array, mdn-async, dotnet
+  - expected: $1物件
+    pattern: /((?:JSON|JavaScript|TypeScript|Python|程式)[ \t]*)(?:對象|对象)/gi
+    specs:
+    - from: JSON 對象
+      to: JSON 物件
+    - from: 程式對象
+      to: 程式物件
+    - from: 服務對象
+      to: 服務對象
+    - from: 資料對象的研究
+      to: 資料對象的研究
+  - expected: 物件導向
+    patterns:
+    - 面向對象
+    - 面向对象
+    specs:
+    - from: 面向對象
+      to: 物件導向
+    - from: 面向对象
+      to: 物件導向
+  - expected: 程式碼審查
+    patterns:
+    - 代碼審查
+    - 代码审查
+    specs:
+    - from: 代碼審查
+      to: 程式碼審查
+    - from: 代码审查
+      to: 程式碼審查
+    - from: 交易代碼
+      to: 交易代碼
+  - expected: 程式碼重構
+    patterns:
+    - 代碼重構
+    - 代码重构
+    specs:
+    - from: 代碼重構
+      to: 程式碼重構
+    - from: 代码重构
+      to: 程式碼重構
+    - from: 交易代碼
+      to: 交易代碼
+  - expected: 程式碼範例
+    patterns:
+    - 代碼範例
+    - 代码范例
+    specs:
+    - from: 代碼範例
+      to: 程式碼範例
+    - from: 代码范例
+      to: 程式碼範例
+    - from: 交易代碼
+      to: 交易代碼
+  - expected: 程式碼片段
+    patterns:
+    - 代碼片段
+    - 代码片段
+    specs:
+    - from: 代碼片段
+      to: 程式碼片段
+    - from: 代码片段
+      to: 程式碼片段
+    - from: 交易代碼
+      to: 交易代碼
+  - expected: 程式碼分析
+    patterns:
+    - 代碼分析
+    - 代码分析
+    specs:
+    - from: 代碼分析
+      to: 程式碼分析
+    - from: 代码分析
+      to: 程式碼分析
+    - from: 交易代碼
+      to: 交易代碼
+  - expected: 程式碼格式化
+    patterns:
+    - 代碼格式化
+    - 代码格式化
+    specs:
+    - from: 代碼格式化
+      to: 程式碼格式化
+    - from: 代码格式化
+      to: 程式碼格式化
+    - from: 交易代碼
+      to: 交易代碼
+  - expected: 撰寫程式碼
+    patterns:
+    - 撰寫代碼
+    - 編寫代碼
+    - 编写代码
+    specs:
+    - from: 撰寫代碼
+      to: 撰寫程式碼
+    - from: 編寫代碼
+      to: 撰寫程式碼
+    - from: 编写代码
+      to: 撰寫程式碼
+  - expected: $1函式
+    pattern: /((?:JavaScript|TypeScript|Python|C\+\+|C#|匿名|箭頭|回呼)[ \t]*)(?:函數|函数)/gi
+    specs:
+    - from: Python 函數
+      to: Python 函式
+    - from: 箭頭函數
+      to: 箭頭函式
+    - from: 數學函數
+      to: 數學函數
+    - from: 三角函數
+      to: 三角函數
+  - expected: $1型別
+    pattern: /((?:資料|變數|參數|回傳值|參考|值|JSON)[ \t]*)(?:類型|类型)/gi
+    specs:
+    - from: 資料類型
+      to: 資料型別
+    - from: JSON 類型
+      to: JSON 型別
+    - from: 案件類型
+      to: 案件類型
+    - from: 工作類型
+      to: 工作類型
+  - expected: 資料型別
+    patterns:
+    - 數據類型
+    - 数据类型
+    specs:
+    - from: 數據類型
+      to: 資料型別
+    - from: 数据类型
+      to: 資料型別
+  - expected: $1資料
+    pattern: /((?:API|JSON|測試|輸入|輸出)[ \t]*)(?:數據|数据)(?!庫|库|源|來源|来源|格式|結構|结构|類型|类型)/gi
+    specs:
+    - from: API 數據
+      to: API 資料
+    - from: 測試數據
+      to: 測試資料
+    - from: 觀測數據
+      to: 觀測數據
+  - expected: 資料結構
+    patterns:
+    - 數據結構
+    - 数据结构
+    specs:
+    - from: 數據結構
+      to: 資料結構
+    - from: 数据结构
+      to: 資料結構
+  - expected: $1演算法
+    pattern: /((?:排序|搜尋|雜湊|加密)[ \t]*)算法/g
+    specs:
+    - from: 排序算法
+      to: 排序演算法
+    - from: 稅額算法
+      to: 稅額算法
+  - expected: $1迴圈
+    pattern: /((?:for|while|程式|事件)[ \t]*)循環/gi
+    specs:
+    - from: for 循環
+      to: for 迴圈
+    - from: 程式循環
+      to: 程式迴圈
+    - from: 血液循環
+      to: 血液循環
+  - expected: 處理程序$1
+    pattern: /進程(ID|識別碼|管理|間通訊)/g
+    specs:
+    - from: 進程ID
+      to: 處理程序ID
+    - from: 進程間通訊
+      to: 處理程序間通訊
+    - from: 專案進程
+      to: 專案進程
+  - expected: 子處理程序
+    patterns:
+    - 子進程
+    - 子进程
+    specs:
+    - from: 子進程
+      to: 子處理程序
+    - from: 子进程
+      to: 子處理程序
+    - from: 程序
+      to: 程序
+    - from: 行程
+      to: 行程
+  - expected: 背景處理程序
+    patterns:
+    - 後台進程
+    - 后台进程
+    specs:
+    - from: 後台進程
+      to: 背景處理程序
+    - from: 后台进程
+      to: 背景處理程序
+  - expected: $1執行
+    pattern: /((?:程式|腳本|CLI|MCP)[ \t]*)運行/gi
+    specs:
+    - from: 程式運行
+      to: 程式執行
+    - from: 天體運行
+      to: 天體運行
+  - expected: 建置$1
+    pattern: /構建(輸出|流程|產物|指令|工具)/g
+    specs:
+    - from: 構建產物
+      to: 建置產物
+    - from: 構建輸出
+      to: 建置輸出
+    - from: 構建社會
+      to: 構建社會
+
+  # Files, CLI and diagnostics. Sources: boot-events, command-line, excel-data, android-security
+  - expected: 檔案$1
+    pattern: /文件(路徑|副檔名|大小|系統|雜湊)/g
+    specs:
+    - from: 文件路徑
+      to: 檔案路徑
+    - from: 文件系統
+      to: 檔案系統
+    - from: 來源文件
+      to: 來源文件
+    - from: 正式文件名稱
+      to: 正式文件名稱
+  - expected: 本機$1
+    pattern: /本地(執行|安裝|電腦|檔案|路徑|伺服器|環境|磁碟|開發|測試|工具|MCP|CLI)/gi
+    specs:
+    - from: 本地環境
+      to: 本機環境
+    - from: 本地MCP
+      to: 本機MCP
+    - from: 本地居民
+      to: 本地居民
+    - from: 本地化
+      to: 本地化
+  - expected: $1記錄
+    pattern: /((?:程式|系統|應用程式|錯誤|除錯|執行)[ \t]*)日誌(?!檔|文件)/g
+    specs:
+    - from: 系統日誌
+      to: 系統記錄
+    - from: 除錯日誌
+      to: 除錯記錄
+    - from: 旅行日誌
+      to: 旅行日誌
+  - expected: 記錄檔
+    patterns:
+    - 日誌文件
+    - 日誌檔案
+    - 日誌檔
+    specs:
+    - from: 日誌文件
+      to: 記錄檔
+    - from: 日誌檔案
+      to: 記錄檔
+    - from: 日誌檔
+      to: 記錄檔
+  - expected: 命令列
+    pattern: /命令行(?!動|动)/g
+    specs:
+    - from: 命令行工具
+      to: 命令列工具
+    - from: 命令行動小組出發
+      to: 命令行動小組出發
+  - expected: $1終端機
+    pattern: /((?:開啟|啟動|關閉|重新開啟|PowerShell|CLI)[ \t]*)終端(?!機|機使用者|用戶|使用者|設備|裝置)/gi
+    specs:
+    - from: 開啟終端
+      to: 開啟終端機
+    - from: CLI 終端
+      to: CLI 終端機
+    - from: 終端使用者
+      to: 終端使用者
+    - from: 開啟終端機
+      to: 開啟終端機
+  - expected: $1唯讀
+    pattern: /((?:檔案|API|MCP|目錄|磁碟)(?:的)?[ \t]*)只讀/gi
+    specs:
+    - from: MCP 只讀
+      to: MCP 唯讀
+    - from: 檔案只讀
+      to: 檔案唯讀
+    - from: 只讀了三本書
+      to: 只讀了三本書
+  - expected: 唯讀$1
+    pattern: /只讀(模式|權限|屬性|檔案|API|MCP)/gi
+    specs:
+    - from: 只讀模式
+      to: 唯讀模式
+    - from: 只讀API
+      to: 唯讀API
+    - from: 只讀小說
+      to: 只讀小說
+  - expected: $1存取
+    pattern: /((?:檔案|資料庫|資源|API)[ \t]*)訪問/gi
+    specs:
+    - from: API 訪問
+      to: API 存取
+    - from: 檔案訪問
+      to: 檔案存取
+    - from: 人物訪問
+      to: 人物訪問
+  - expected: 存取權限
+    patterns:
+    - 訪問權限
+    - 访问权限
+    specs:
+    - from: 訪問權限
+      to: 存取權限
+    - from: 访问权限
+      to: 存取權限
+  - expected: $1逾時
+    pattern: /((?:連線|請求|API|HTTP|執行|等待)[ \t]*)超時/gi
+    specs:
+    - from: 連線超時
+      to: 連線逾時
+    - from: API 超時
+      to: API 逾時
+    - from: 加班超時
+      to: 加班超時
+  - expected: $1重新整理
+    pattern: /((?:網頁|頁面|資料|快取)[ \t]*)刷新/g
+    specs:
+    - from: 頁面刷新
+      to: 頁面重新整理
+    - from: 資料刷新
+      to: 資料重新整理
+    - from: 刷新紀錄
+      to: 刷新紀錄
+  - expected: 重新整理$1
+    pattern: /刷新([ \t]*(?:網頁|頁面|資料|快取))/g
+    specs:
+    - from: 刷新頁面
+      to: 重新整理頁面
+    - from: 刷新世界紀錄
+      to: 刷新世界紀錄
+  - expected: 欄位
+    patterns:
+    - 字段
+    specs:
+    - from: 字段
+      to: 欄位
+  - expected: 儲存格
+    patterns:
+    - 單元格
+    - 单元格
+    specs:
+    - from: 單元格
+      to: 儲存格
+    - from: 单元格
+      to: 儲存格
+
+  # Network and media meanings. Sources: mdn, microsoft-ports, cisco-video
+  - expected: $1通訊協定
+    pattern: /((?:HTTP|HTTPS|TCP|UDP|DNS|SMTP|FTP|網路)[ \t]*)協議/gi
+    specs:
+    - from: HTTP 協議
+      to: HTTP 通訊協定
+    - from: 租賃協議
+      to: 租賃協議
+  - expected: 通訊協定
+    patterns:
+    - 通訊協議
+    - 通信協議
+    specs:
+    - from: 通訊協議
+      to: 通訊協定
+    - from: 通信協議
+      to: 通訊協定
+  - expected: $1通訊埠
+    pattern: /((?:TCP|UDP|HTTP|HTTPS|網路)[ \t]*)端口/gi
+    specs:
+    - from: TCP 端口
+      to: TCP 通訊埠
+    - from: USB 連接埠
+      to: USB 連接埠
+    - from: 連接埠
+      to: 連接埠
+  - expected: $1位址
+    pattern: /((?:IP|IPv4|IPv6|MAC|記憶體)[ \t]*)地址/gi
+    specs:
+    - from: IP 地址
+      to: IP 位址
+    - from: 記憶體地址
+      to: 記憶體位址
+    - from: 電子郵件地址
+      to: 電子郵件地址
+    - from: 居住地址
+      to: 居住地址
+  - expected: $1網域名稱
+    pattern: /((?:DNS|網站|網路)[ \t]*)域名/gi
+    specs:
+    - from: DNS 域名
+      to: DNS 網域名稱
+    - from: 名稱
+      to: 名稱
+  - expected: 視訊會議
+    patterns:
+    - 視頻会议
+    - 视频会议
+    specs:
+    - from: 視頻会议
+      to: 視訊會議
+    - from: 视频会议
+      to: 視訊會議
+  - expected: 影片檔案
+    patterns:
+    - 視頻文件
+    - 视频文件
+    specs:
+    - from: 視頻文件
+      to: 影片檔案
+    - from: 视频文件
+      to: 影片檔案
+  - expected: 視訊$1
+    pattern: /(?:視頻|视频)(通話|會議|串流|訊號)/g
+    specs:
+    - from: 視頻通話
+      to: 視訊通話
+    - from: 視頻會議
+      to: 視訊會議
+  - expected: 影片$1
+    pattern: /(?:視頻|视频)(檔案|剪輯|教學|播放|下載)/g
+    prh: 一般 video 依影片或視訊語意選用, 未限定語境時人工複核
+    specs:
+    - from: 視頻檔案
+      to: 影片檔案
+    - from: 視頻剪輯
+      to: 影片剪輯
+    - from: 視頻訊號
+      to: 視頻訊號
+
+  # Repository and technical specification preferences. Source: user preference
+  - expected: $1儲存庫
+    pattern: /((?:GitHub|GitLab|Git|程式碼)[ \t]*)(?:倉庫|仓库)/gi
+    specs:
+    - from: Git 倉庫
+      to: Git 儲存庫
+    - from: 實體倉庫
+      to: 實體倉庫
+  - expected: $1規格
+    pattern: /((?:API|介面|欄位)[ \t]*)契約/g
+    prh: 依使用者技術寫作偏好採對應規格名稱, 正式名稱及 contract 特定語意須人工複核
+    specs:
+    - from: API 契約
+      to: API 規格
+    - from: 法律契約
+      to: 法律契約
