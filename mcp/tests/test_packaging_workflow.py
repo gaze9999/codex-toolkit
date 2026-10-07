@@ -31,7 +31,7 @@ class PackagingChecks(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
-        self.root = Path(self.temporary.name) / "source"
+        self.root = Path(self.temporary.name).resolve() / "source"
         self.root.mkdir()
         self.write("skills/example/SKILL.md", "---\nname: example\ndescription: Example workflow\n---\nRun example\n")
         self.write("mcp/tools/development-tools.requirements.json", '{"tools":{}}')
@@ -49,6 +49,16 @@ class PackagingChecks(unittest.TestCase):
 
     def packages(self):
         return plugins.prepare(self.root)[0]
+
+    def test_source_root_alias_preserves_relative_provenance(self):
+        (self.root / "child").mkdir()
+        alias = self.root / "child" / ".."
+        files, manifest = plugins.prepare(alias)[0]["example"]
+        self.assertEqual(manifest["files"]["plugin.json"]["source"], "plugins/example/plugin.json")
+        self.assertIn("skills/example/SKILL.md", files)
+        product = packaging.products(alias, ["skills"])[0]
+        files, provenance = packaging.source_payload(alias, product)
+        self.assertEqual(provenance["example/SKILL.md"]["source"], "skills/example/SKILL.md")
 
     def test_selected_roots_exclude_local_tests_and_caches(self):
         self.write("skills/example/tests/test_private.py", "private fixture")
@@ -73,7 +83,7 @@ class PackagingChecks(unittest.TestCase):
                 plugin_catalog.safe_source(self.root, "skills/example/SKILL.md")
 
     def test_source_drift_is_rejected_before_promoting_plugin_output(self):
-        output = Path(self.temporary.name) / "drifted"
+        output = Path(self.temporary.name).resolve() / "drifted"
         packages = self.packages()
         self.write("skills/example/SKILL.md", "changed since preparation")
         with patch.object(plugins, "snapshot_identity", return_value={"source_revision":"a"*40, "source_state":"working-tree"}):
@@ -204,7 +214,7 @@ class PackagingChecks(unittest.TestCase):
             packaging.plan(self.root)
 
     def test_plugin_archives_are_reproducible_and_verified(self):
-        first, second = Path(self.temporary.name) / "one", Path(self.temporary.name) / "two"
+        first, second = Path(self.temporary.name).resolve() / "one", Path(self.temporary.name).resolve() / "two"
         with patch.object(plugins, "snapshot_identity", return_value={"source_revision":"a"*40, "source_state":"working-tree"}):
             packages = self.packages()
             plugins.write_release(self.root, first, packages, development=True)
@@ -216,7 +226,7 @@ class PackagingChecks(unittest.TestCase):
                 plugins.verify_release(self.root, first, packages, development=True)
 
     def test_failed_verification_does_not_promote_partial_output(self):
-        output = Path(self.temporary.name) / "failed"
+        output = Path(self.temporary.name).resolve() / "failed"
         with patch.object(plugins, "snapshot_identity", return_value={"source_revision":"a"*40, "source_state":"working-tree"}), patch.object(plugins, "verify_release", side_effect=ValueError("readback failed")):
             with self.assertRaises(ValueError):
                 plugins.write_release(self.root, output, self.packages(), development=True)
@@ -224,7 +234,7 @@ class PackagingChecks(unittest.TestCase):
         self.assertEqual({path.name for path in output.parent.iterdir()}, {"source"})
 
     def test_source_build_preserves_inputs_and_output_ownership(self):
-        output = Path(self.temporary.name) / "built"
+        output = Path(self.temporary.name).resolve() / "built"
         before = (self.root / "skills/example/SKILL.md").read_bytes()
         with patch.object(packaging, "source_identity", return_value={"base_revision":"a"*40, "source_state":"working-tree"}):
             packaging.build(self.root, None, "1.2.3", output)
@@ -251,7 +261,7 @@ class PackagingChecks(unittest.TestCase):
                 packaging.source_identity(self.root, True)
 
     def test_installer_resources_include_new_toolkit_and_protected_boundaries(self):
-        destination = Path(self.temporary.name) / "installer"
+        destination = Path(self.temporary.name).resolve() / "installer"
         mcp_packages.copy_installer_resources(ROOT, destination)
         for source in ("tooling/package.py", "tooling/evaluate.py", "tooling/products.json", "evals/routing.json", "evals/benchmark.json", "docs/operating-model.md", "mcp/scripts/prepare_release.py"):
             self.assertEqual((destination / source).read_bytes(), (ROOT / source).read_bytes())
@@ -263,7 +273,7 @@ class EvaluationChecks(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
-        self.path = Path(self.temporary.name) / "runs.jsonl"
+        self.path = Path(self.temporary.name).resolve() / "runs.jsonl"
 
     def records(self, rows):
         self.path.write_text("\n".join(json.dumps(row) for row in rows), encoding="utf-8")

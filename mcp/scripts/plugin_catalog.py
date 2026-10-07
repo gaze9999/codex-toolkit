@@ -26,6 +26,7 @@ def safe_source(root: Path, relative: str) -> Path:
 
 
 def source_files(root: Path, relative: str):
+    root = root.resolve()
     folder = safe_source(root, relative)
     if not folder.exists():
         raise ValueError("Missing plugin source: " + relative)
@@ -95,6 +96,7 @@ def load_catalog(root: Path) -> list[dict]:
 
 
 def payload(root: Path, bundle: dict) -> tuple[dict[str, bytes], dict]:
+    root = root.resolve()
     files, sources = {}, {}
 
     def add(source: Path, target: str):

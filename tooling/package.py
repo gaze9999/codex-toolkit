@@ -52,6 +52,7 @@ def products(root: Path, selected: list[str] | None) -> list[dict]:
 
 
 def source_payload(root: Path, product: dict) -> tuple[dict[str, bytes], dict]:
+    root = root.resolve()
     files, provenance, targets = {}, {}, set()
     for source in product["sources"]:
         for path, _relative in source_files(root, source):
