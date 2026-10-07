@@ -3,7 +3,7 @@ name: context-brief
 description: Turn explicitly supplied implementation specifications into reusable Codex Markdown context briefs. Use for implementation context, not ordinary summaries, document conversion, task guides or current-progress handoffs.
 metadata:
   short-description: Create concise, traceable coding context briefs
-  version: "0.4.13"
+  version: "0.4.14"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -37,6 +37,7 @@ Use the appropriate workflow instead for generic document conversion, ordinary s
 - Preserve names, paths, fields, enums, status codes, validation, security and permissions, errors, constraints, examples, and acceptance criteria.
 - Compress marketing copy, repeated background, and implementation-irrelevant narrative. Do not turn gaps, conflicts, OCR text, historical progress, or current implementation behavior into confirmed contracts. Treat them as evidence unless a governing source or explicit user decision establishes the contract.
 - Retaining secrets, credentials, private tokens, or unnecessary personal data requires an explicit user request and implementation need. Preserve only the minimum source detail required for implementation.
+- For conflicting or versioned inputs, compare document revisions, extract source hashes, relevant code history/diffs and confirmed decisions. Present verified revisions chronologically with timezone/version and dirty state where relevant, leaving unknown times explicit. Keep source revision time separate from brief verification time and preserve original precision; record unresolved differences without making the newest input authoritative by timestamp alone.
 - Preserve source boundaries across multiple inputs. For large material, extract only task-relevant sections.
 - Check authored prose with available textlint or an equivalent language checker, then review meaning and Taiwan terminology manually. Preserve source quotes, legal text, code, identifiers and English/Japanese conventions. Report unavailable, failed or unchecked coverage. Sensitive content may skip tool processing and temporary files; review it manually and report the exception.
 

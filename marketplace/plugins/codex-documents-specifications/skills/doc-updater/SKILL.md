@@ -3,7 +3,7 @@ name: doc-updater
 description: Update, align or synchronize identified existing documentation when explicitly requested and supported by verifiable implementation-change evidence. Use for maintaining current docs, not source extraction, new reports or substantial README redesign.
 metadata:
   short-description: Minimize documentation updates from implementation evidence
-  version: "0.4.14"
+  version: "0.4.15"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -26,6 +26,7 @@ When evidence or a target is missing, request only the information needed for co
 
 - Treat diffs and changed files as direct evidence of implementation changes, not proof of runtime success, deployment or acceptance. Tie verification claims to the checked source state and actual results. When only a user summary exists, mark resulting claims `summary-based`.
 - Preserve the target document's authority: a governing specification or confirmed decision is not rewritten to match conflicting code. Record that conflict; update independent implementation/status sections within scope without turning observed behavior into an approved requirement.
+- For conflicting specifications and code, compare relevant Git history/diffs, document revisions and extract source hashes. Order multiple inputs by verified revision/change time, with timezone, version/branch/commit and dirty state; keep unknown dates separate. Traceable differences may include source time and verification time separately, using `yyyy-mm-dd hh:mm` when supported by the evidence and retaining date-only precision. Newer timestamps do not override governing specifications or confirmed decisions; preserve unresolved conflicts instead of rewriting requirements.
 - Update only documents affected by public APIs, user-visible behavior, installation or configuration, deployment, migrations, compatibility, or established architecture descriptions. Internal refactors without behavior change normally do not require updates.
 - Check changed prose with available textlint or an equivalent language checker, then review meaning and Taiwan terminology manually. Preserve source quotes, legal text, code, identifiers and English/Japanese conventions. Report unavailable, failed or unchecked coverage. Sensitive content may skip tool processing and temporary files; review it manually and report the exception. Keep checks within changed sections.
 - Read only the necessary diff and target sections, then make the smallest supported change. Recheck the target before replacement when concurrent changes are possible; retain unrelated edits and unresolved items. Do not promote internal details to public guarantees or add secrets or unnecessary personal data.

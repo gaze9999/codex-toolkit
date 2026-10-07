@@ -34,6 +34,8 @@ Keep the effective outcome and scope stable by default. Expand reading, changes 
 
 Links need a purpose or loading trigger. Do not turn documentation folders into universal required reading. Read referenced attachments/tasks before relying on them, retain source/version pointers and distinguish extracts, originals and historical observations. Avoid unrelated repository scans or unrequested extraction work.
 
+For specification/code conflicts, record a bounded timeline of verified document revisions and relevant Git history/diffs, original-source hashes and confirmed decisions. Retain timezone, source/version/branch/commit and dirty state; mark unknown times and preserve source precision. Difference records may separate source revision/change time from verification time (`yyyy-mm-dd hh:mm` when known). File modification, download and extraction times are auxiliary; distinguish which source is newer from which governs each topic. Keep unresolved conflicts explicit without authorizing requirement or application changes.
+
 ## Git delivery
 
 Editing, staging, committing, pushing, tagging and releasing are separate stages governed by actual authorization. Preserve the established user/project meaning of `cpr`; do not assume every repository has a release process.

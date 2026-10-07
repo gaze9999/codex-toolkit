@@ -13,15 +13,15 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "cfbd1f9f4a84a56319b28edf914af65ec3f7ef3c38ed71ac0ecba9817ab39bb6",
+      "sha256": "22e678aba5f0866550686260191f9981d4c2d2cb8f88e77df452b6875ccf2cc3",
       "source": "plugins/documents-specifications/plugin.json"
     },
     "skills/context-brief/SKILL.md": {
-      "sha256": "90cea61e01955b3e173851e19b6e63c58d75084bda19895c7d1b8eb6eb0edcba",
+      "sha256": "4489c6134c9cffda984f297e26ceb60af9c856cdffad1e723aaf65daa2994214",
       "source": "skills/context-brief/SKILL.md"
     },
     "skills/context-brief/agents/openai.yaml": {
-      "sha256": "7797cc02b54f0e21673db1314cfbd5ee0d43c95dd5916386abd65d9b34a91fbe",
+      "sha256": "04d947ec626b574ac304fdea7602735270b3b8e704358451a83dd6484a3c110f",
       "source": "skills/context-brief/agents/openai.yaml"
     },
     "skills/context-brief/assets/icon-small.png": {
@@ -57,11 +57,11 @@
       "source": "skills/context-brief/scripts/validate_context_brief.py"
     },
     "skills/doc-updater/SKILL.md": {
-      "sha256": "8c0a2b46a5d3e775aafa1a180e3d74577919353664019dd1ffcca95a3fafd579",
+      "sha256": "bd0873b1ff4c346af022b6c2e2e6abdd67da040e9b7d13126ded03861bc03017",
       "source": "skills/doc-updater/SKILL.md"
     },
     "skills/doc-updater/agents/openai.yaml": {
-      "sha256": "efd5f1949e89f94687b4dec0aaee89637eb3bc03a8cfee4b6659ca5cd01e95c7",
+      "sha256": "10acd913dae56a651437febf18e21ccda36653de79b3b22f57ec3a316db6278e",
       "source": "skills/doc-updater/agents/openai.yaml"
     },
     "skills/doc-updater/assets/icon-small.png": {
@@ -109,11 +109,11 @@
       "source": "skills/doc-updater/scripts/write_markdown_sync_target.py"
     },
     "skills/document-source-matching/SKILL.md": {
-      "sha256": "073e37f0ead6623bf17b84f203db34f527a4f917304a72c9b42fda9c31dbee9a",
+      "sha256": "4da14cb2302aca9a5f164a9f3dd8e7ba4ee69bbb59c4648cd283da6e39f11cd8",
       "source": "skills/document-source-matching/SKILL.md"
     },
     "skills/document-source-matching/agents/openai.yaml": {
-      "sha256": "13127f83b6351c1b6e839e170d7cabac3c2c417182e9b9d7ce1af91c07b03710",
+      "sha256": "240610794fda625726170fc12fa65bf58d7e72602cb4350e2c1dac2adc702377",
       "source": "skills/document-source-matching/agents/openai.yaml"
     },
     "skills/document-source-matching/assets/icon-small.png": {
@@ -150,5 +150,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.1.1",
-  "version": "0.1.4"
+  "version": "0.1.5"
 }
