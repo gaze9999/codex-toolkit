@@ -32,31 +32,31 @@
     },
     "resources/proofreading/en/cspell.json": {
       "source": "mcp/tools/proofreading/en/cspell.json",
-      "sha256": "4f8ffc4fb7cdf3e64c13d01dc482adac2112572953c1fa6e70e5ac8087b39c43"
+      "sha256": "0fd9d50aa1c00b37e06c93005e6d356695005c8eb983c6d7c1a0fb86525e726b"
     },
     "resources/proofreading/ja/.textlintrc.json": {
       "source": "mcp/tools/proofreading/ja/.textlintrc.json",
-      "sha256": "0997720fb4d377ed2186f4b2a2aeefdc632d9717e204bb9a3ce66c16a82465db"
+      "sha256": "531cba62da36d1aed90e0b6e73a09055e518e5fe0abf824bb9a1b2911438e285"
     },
     "resources/proofreading/textlint-mcp.cjs": {
       "source": "mcp/tools/proofreading/textlint-mcp.cjs",
-      "sha256": "1778caf37b40c38c7de01690522d9938b0c0993a6c5a3279b55cab9fdc024548"
+      "sha256": "824f4e808d0463f9583e23c41ec23d7a1caa23d631a7b86477350c241e1980da"
     },
     "resources/proofreading/zh-tw/.textlintrc.cjs": {
       "source": "mcp/tools/proofreading/zh-tw/.textlintrc.cjs",
-      "sha256": "77bda249e00c337ef1d43dee288869d064c9050fffe2127b6640a7af0db7d887"
+      "sha256": "a2166e629d72de1904c7f2e212114c2839e77081bfa104913fe05e784f71e140"
     },
     "resources/proofreading/zh-tw/protected-copy.cjs": {
       "source": "mcp/tools/proofreading/zh-tw/protected-copy.cjs",
-      "sha256": "095e38366ceb0d4422224a0f519cbb33f08caa2c42883aac54708748fa156b6b"
+      "sha256": "937d5ea0154024f7d8604a9dac677af81dfb001c1fcc0a9f4774978c5e6fc8a0"
     },
     "resources/proofreading/zh-tw/taiwan-style.cjs": {
       "source": "mcp/tools/proofreading/zh-tw/taiwan-style.cjs",
-      "sha256": "bf831f978e3225eb1a329ba9621e4f7c27d8dac0d974220963e1cf109b592837"
+      "sha256": "d033b0f4d955ebd4d40abc2d12dd45f98da2164e393e8784c1525c4ce99e93ac"
     },
     "resources/proofreading/zh-tw/terms.yml": {
       "source": "mcp/tools/proofreading/zh-tw/terms.yml",
-      "sha256": "66182bfb7f4363fccd943d7512f36bd8d0019edb8f0c33d044c89cf611174f78"
+      "sha256": "1853e1104bb1f082b216dda91373baa5dbfaa35f58e967e774358db0cbc737eb"
     },
     "LICENSE": {
       "source": "LICENSE",
