@@ -20,23 +20,23 @@
 .\launch-cli.cmd mcp edge-devtools
 ```
 
-Agents / Skills 清單使用確切名稱選取項目, Global 安裝與 Skills 同步保留預覽、衝突檢查及備份, Skills 的 `--apply` 需確認, 自動執行可在選定項目已獲授權時加 `--yes`. `agents desktop` 產生合併片段, 依[治理設定](../agents.md)處理既有 config.toml. Plugins 清單呈現來源批次、可用性與本機設定, 指定 ID 可預覽版本、來源映射與 hash, 安裝與帳戶連接使用 Codex 官方入口, 詳見 [Plugins](../plugins.md)
+Agents / Skills 清單使用確切名稱選取項目, Global 安裝與 Skills 同步保留預覽、衝突檢查及備份, Skills 的 `--apply` 需確認, 自動執行可在選定項目已獲授權時加 `--yes`. `agents desktop` 產生合併片段, 依[工作規範設定](../agents.md)處理既有 config.toml. Plugins 清單呈現來源批次、可用性與本機設定, 指定 ID 可預覽版本、來源映射與 hash, 安裝與帳戶連接使用 Codex 官方入口, 詳見 [Plugins](../plugins.md)
 
 既有 `tool`、`bootstrap`、`check`、`update`、`uninstall`、`desktop`、`audit` 仍可使用, 原平台實作位於 `mcp/scripts/launch/`, 說明使用 `ACTION --help`
 
 ## 本機 MCP 安裝與獨立部署
 
-`codex-setup` 是 MCP 原始碼與安裝工具的維護來源, 不是固定的部署位置, Local Documents 以兩個 wheel 部署, 使用者不需要 clone `codex-setup` 或 `my-py-tools`
+`codex-toolkit` 維護公開 MCP 與安裝工具, Local Documents 以核心及 server 兩個 wheel 部署, 安裝後使用不依賴儲存庫 checkout
 
 | 元件 | 原始碼 | 部署方式 |
 | --- | --- | --- |
-| `my-py-document-core` | `my-py-tools` | 安裝 versioned wheel, 公開 API 為 `my_py_document_core`, 目前 API 1 |
+| `my-py-document-core` | 本 repo `python-tools/` | 安裝 versioned wheel, 公開 API 為 `my_py_document_core`, 目前 API 1 |
 | `codex-local-documents-mcp` | 本 repo `mcp/mcp_servers/local_documents/` | 安裝 server wheel, 使用模組或 console command 啟動 |
-| `my-py-workspace-core` | `my-py-tools` | 安裝 versioned wheel, 公開 API 為 `my_py_workspace_core`, 目前 API 1 |
+| `my-py-workspace-core` | 本 repo `python-tools/` | 安裝 versioned wheel, 公開 API 為 `my_py_workspace_core`, 目前 API 1 |
 | `codex-workspace-inspection-mcp` | 本 repo `mcp/mcp_servers/workspace_inspection/` | 唯讀查詢驗證證據與環境差異 |
 | Jev | 本 repo `skills/jev-evaluation/` | `codex-jev-mcp` wheel 與相容 Skill installer, 可獨立部署 |
 
-核心 wheel 從同一份 CLI 原始碼建置 namespaced package, 不複製另一份核心到本 repo, MCP runtime 使用已安裝的套件, 不修改 `sys.path` 來匯入另一個 working tree, 不保留 CLI repo 路徑
+核心 wheel 從同一份 CLI 原始碼建置 namespaced package, MCP 不另維護一份核心, MCP runtime 使用已安裝的套件, 不修改 `sys.path` 來匯入另一個 working tree, 不保留 CLI repo 路徑
 
 ## Baseline 快速安裝
 
@@ -110,7 +110,7 @@ python mcp/scripts/install_mcp.py local_documents --runtime /absolute/document-r
 
 ## 建置與版本
 
-核心建置方式見 `my-py-tools/docs/python-document-core.md`, 本 repo 的 server wheel 可在具備 setuptools/wheel 的 Python 環境建置:
+核心建置方式見 [核心建置指引](../../python-tools/docs/python-document-core.md), 本 repo 的 server wheel 可在具備 setuptools/wheel 的 Python 環境建置:
 
 ```text
 python -m pip wheel --no-deps --no-build-isolation --wheel-dir /absolute/wheels .
@@ -157,7 +157,7 @@ python mcp/scripts/install_mcp.py jev --help
 
 ## Baseline MCP 與本機監看安裝
 
-統一入口以 `mcp/mcp_servers/presets/baseline.json` 為準, 管理 server 清單, wheel 版本, tool 清單與選用項目, `codex-setup` 是維護來源, 安裝後 runtime 不依賴 checkout 路徑
+統一入口以 `mcp/mcp_servers/presets/baseline.json` 為準, 管理 server 清單, wheel 版本, tool 清單與選用項目, `codex-toolkit` 是公開維護來源, 安裝後 runtime 不依賴 checkout 路徑
 
 ## 使用者操作
 
@@ -237,7 +237,7 @@ CLI 與 MCP 使用同一份 `skills/jev-evaluation/scripts/jev.py`, wheel 以 `c
 
 ## 獨立監看 repo
 
-`local-activity-monitor` 維護本機網頁與 Jev / Codex collectors, 不維護 API client 或 Skill, Jev metadata writer 保留在 `codex-setup`, 文件核心保留在 `my-py-tools`
+`local-activity-monitor` 維護本機網頁與 Jev / Codex collectors, 不維護 API client 或 Skill, Jev metadata writer 位於本 repo 的 `skills/jev-evaluation/`, 文件核心位於 `python-tools/`
 
 監看工具安裝後, 使用 `local-activity-monitor --enable-jev --configure-only` 明確啟用本機紀錄, 以 `--codex --open` 啟動頁面, 預設 `http://127.0.0.1:8787/`, 關閉終端機或 Ctrl+C 停止, `--disable-jev --configure-only` 停用紀錄並保留歷史
 

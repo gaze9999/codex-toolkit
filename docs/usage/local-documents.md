@@ -176,4 +176,4 @@ Tool: `update_markdown`
 
 Markdown 預覽也需要目標在 write root, MCP 的 preview 或 write 參數都不代表可自行放寬範圍, 此工具不執行 Notion 同步, Git 歷史操作或程式編譯
 
-原有 `my-py-tools` 文件與 Markdown CLI 可繼續使用, 原 `python -m mcp_tools.*` 已移除, MCP 的啟動與驗證改由 `codex-setup` 管理
+文件與 Markdown CLI 已合併至本 repo 的 `python-tools/`, 原 `python -m mcp_tools.*` 已移除, MCP 的啟動與驗證由本 repo 的 `mcp/` 管理

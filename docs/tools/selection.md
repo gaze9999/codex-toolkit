@@ -19,7 +19,7 @@
 | Git 狀態, diff 與文字搜尋 | `git`, `rg`, 指定 repo 的工作區與遠端差異 | 多 client 需要同一個受限唯讀介面, 或沒有 shell | 保留原生 CLI, 搜尋不足才查支援目標語言的 symbol / references |
 | GitHub PR / CI | `gh` 可讀 PR diff, JSON 欄位與失敗 log, 批次查詢與腳本可重現 | client 已有 OAuth connector, 需要官方 toolsets / read-only 模式, 或 CLI 權限不可用 | 優先既有 `gh` 或官方 GitHub MCP / connector, 不自製重複的 PR server |
 | 大量 Test / Build 輸出 | RTK 明確 CLI prefix 或 `pipe`, 保存原始 log 與原命令 exit code | agent 需要結構化呼叫既有文字 / 核准 log 的受限 adapter | RTK CLI 與本 setup adapter 共用同一 binary, 預設不用 hooks |
-| 文件轉 Markdown / OCR | 已安裝文件核心的 CLI 做單次 / 批次擷取, 明確來源與輸出位置 | 多 client 反覆查文件與章節, 需要 server 的 root / hash 檢查 | 沿用 my-py-tools 與 Local Documents 共用核心, 不重做轉換引擎 |
+| 文件轉 Markdown / OCR | 已安裝文件核心的 CLI 做單次 / 批次擷取, 明確來源與輸出位置 | 多 client 反覆查文件與章節, 需要 server 的 root / hash 檢查 | 沿用 python-tools 與 Local Documents 共用核心, 不重做轉換引擎 |
 | 抽出版定位, Markdown 檢查與安全更新 | 明確路徑 / hash, batch check, diff / preview / 限定更新範圍 | 有效的 structured tools 能減少反覆解析, 且維持同一權限與 hash 前置條件 | [Local Documents](../usage/local-documents.md), [來源比對 Skill](../../skills/document-source-matching/SKILL.md) |
 | Skills / 環境差異 | repo audit, 版本與 hash 比對, 預覽與備份後同步 | 跨 client 反覆盤點, Workspace Inspection 提供已設定 roots 的受限唯讀查詢 | [Environment Consistency Check](../../skills/environment-consistency-check/SKILL.md), 未設定 roots 的 MCP 保留 pending 狀態 |
 | 驗證證據彙整 | 讀既有 JSON / log, 核對 commit / baseline 與未涵蓋項目 | 多 client 反覆查同一份 evidence index | [Validation Evidence Review](../../skills/validation-evidence-review/SKILL.md), 不因查紀錄而重跑測試 |
