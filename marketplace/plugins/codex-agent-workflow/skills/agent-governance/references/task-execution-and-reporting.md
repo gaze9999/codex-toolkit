@@ -196,3 +196,6 @@ Language conventions, authorization and `cpr` behavior are maintained user/proje
 Version selection, commit/push, Tag, draft, publication, asset upload and post-publication download verification are separate states. Report the actual completed stage and remaining required gates. A community practice or version bump does not expand publication authorization; preserve user-defined CP/CPR boundaries and repository-specific delivery policy.
 
 At consequential semantic checkpoints, assess optional evaluation after local evidence filtering: contradictory summaries, ambiguous requirement/source mappings, evidence reading order or candidate comparison under an explicit finite criterion. Require a specific unresolved question, sufficient approved input and a result that can change the next action. Keep mandatory evidence, permissions, source authority, architecture and acceptance with Main; skip rule-determined or settled questions and retain unknowns. Load the available evaluation Skill for its actual data and execution boundaries, not as a routine preflight.
+
+
+For suspected sensitive-data exposure, read [sensitive-data removal](sensitive-data-removal.md) before planning cleanup. Distinguish credential containment, rewritten history, remote state and unresolved copies, without printing secrets or treating CP/CPR as rewrite authorization.

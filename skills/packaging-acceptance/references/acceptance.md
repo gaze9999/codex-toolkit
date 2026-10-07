@@ -6,6 +6,12 @@
 - Check manifest schema, stable package identity, independent component versions, dependency locks, hashes and reference closure. Include required scripts/references/assets, exclude caches, credentials and unrelated installed state. Plugin Skills have one source owner; identify directly installed copies before enabling the corresponding Plugin.
 - Distinguish an internal build catalog from host marketplace metadata. New portable Plugins use root plugin.json and optional mcp.json. Resolve current host/schema support before using a compatibility overlay or platform-specific hook.
 
+## Sensitive distribution inputs
+
+For changed distribution inputs, inspect actual mapped files and, when available within authorized checks, ZIP/wheel/Plugin contents: secrets, credential files, local config, logs, fixtures and examples. Report inspected scope and scanner limits; a pattern scan does not prove absence of all sensitive data. Do not build artifacts merely for this check when packaging is excluded.
+
+Suspected exposure blocks affected publication. Follow the [GitHub procedure](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository). Credential rotation, history cleanup and replacement of distributed artifacts are distinct stages; changing the current payload does not erase old distributed copies. Cleanup and repository-setting changes require separate authorization.
+
 ## Minimal checks
 
 When local packaging is excluded, inspect manifests, referenced inputs, syntax and dependency boundaries without building an EXE, wheel, ZIP or staged package tree. Memory-only payload inspection can verify source mappings; it does not prove that an archive installs or a launcher works.

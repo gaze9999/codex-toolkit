@@ -42,3 +42,15 @@ Use this reference when reorganizing agent instructions for a repository or movi
 ## Portable outcome
 
 A reusable governance setup should leave project facts in the project and only the restructuring method in the portable Skill. On another computer, rediscover the repository and tool configuration, then apply this method instead of copying framework versions, paths, role names, models, or commands from the previous project.
+
+## Project-local visibility and Git storage
+
+Apply when creating or maintaining project-local agent files. Resolve the actual remote repository visibility and current tracked state; directory names, package `private` fields and cached assumptions are not visibility evidence. Do not query unrelated repositories.
+
+- Public: keep newly created local `AGENTS.md`/override files, roles and project agent guides out of version control by default. Use the repository-local exclude file resolved by `git rev-parse --git-path info/exclude`; preserve its existing entries. Add only actual owned paths, including applicable nested instructions. A shared `.gitignore` policy requires that project's explicit choice, not a default edit of public source.
+- Private: reviewed portable project guidance may be versioned by default. Secrets, credentials, personal absolute paths, machine state and unapproved company/customer content remain excluded. Permission to create guidance does not authorize staging, commits or remote publication.
+- Unknown visibility or no remote: retain the files locally and exclude them within the initialized repository until visibility is confirmed. For a directory without Git, report the local-only state and ensure the policy is applied before its first publication.
+- Existing tracked files: ignore does not stop tracking. Preserve approved shared instructions; identify tracked local/private content requiring a user decision. Do not automatically use `git rm --cached`, delete files, rewrite history or change visibility. Sensitive content already published needs separately authorized remediation.
+- Explicitly requested public neutral templates, reusable Skill/Plugin assets or shared contributor guidance may remain tracked. This is a deliberate distribution exception, not permission to publish personal project instructions. Do not blanket-ignore `.codex/`, `skills/`, plugin payloads or all documentation.
+
+Verify exact exclusions with `git check-ignore -v` for untracked local paths and separately inspect `git ls-files`/status for tracked paths. For an illustrative newly created root instruction plus dedicated role/guide folders, patterns can include `/AGENTS.md`, `/.codex/agents/` and `/.codex/agent-guidance/`; replace them with the actual owned paths and add nested instruction paths only when present. Do not copy an example as a full repository policy. Validate ignored instructions by direct readback and distinguish local availability from synchronized/loaded client state.

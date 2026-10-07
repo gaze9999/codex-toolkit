@@ -13,15 +13,15 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "75274bc5d2a919eef0606c4fcc1955a707a198972d7794b5234ecd3434e59e6b",
+      "sha256": "f318a3d683b6376d8b9ee51d3e4ea7179b91a1a6ead895a699c9350921b07673",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
-      "sha256": "b355799d46aa60b3da295ca1b9e0c3144444b8b872de936bb9635aeebc0167eb",
+      "sha256": "afa5005565f6562e77ee4ae769ef62174d23cc6691b843bc42d8121d1586781a",
       "source": "skills/agent-governance/SKILL.md"
     },
     "skills/agent-governance/agents/openai.yaml": {
-      "sha256": "85d39d022b6f926a49d73eb4ea85f60e05878065eb5846d982516a9c1469a416",
+      "sha256": "593494f77146a04d58b90d3f0d3b76731b783c3a2d38448b1e14dd702dbd94aa",
       "source": "skills/agent-governance/agents/openai.yaml"
     },
     "skills/agent-governance/assets/icon-small.png": {
@@ -41,7 +41,7 @@
       "source": "skills/agent-governance/assets/icon.svg"
     },
     "skills/agent-governance/assets/project-starter/README.md": {
-      "sha256": "9dff4d96a6020ba9f36b2ce2d8571ba2d5d6d7cca6e11ae8828c987497f44470",
+      "sha256": "34494fdda9ec287df6c30f44ad41bf91d16a3217b688eef0e4742ed0afbd5619",
       "source": "skills/agent-governance/assets/project-starter/README.md"
     },
     "skills/agent-governance/assets/project-starter/examples/host-and-custom-elements/.codex/agent-guidance/records.md": {
@@ -64,6 +64,10 @@
       "sha256": "17b78d4e0d1313e790982661c89d2435fb8b039e3bc1b6cb9ef4e6df1aa05b0d",
       "source": "skills/agent-governance/assets/project-starter/root/.codex/agent-guidance/tasks.md"
     },
+    "skills/agent-governance/assets/project-starter/root/.codex/agents/evaluation_reviewer.toml": {
+      "sha256": "c1926f6a40e7a6cc54c2df5b6c5ca928388ad3ae328e165595ca7d24be8c6665",
+      "source": "skills/agent-governance/assets/project-starter/root/.codex/agents/evaluation_reviewer.toml"
+    },
     "skills/agent-governance/assets/project-starter/root/.codex/agents/game_balance_reviewer.toml": {
       "sha256": "c75d5031b89169ae94018b826fb3705bad3214e6e0ac3d18033e7a17775c43eb",
       "source": "skills/agent-governance/assets/project-starter/root/.codex/agents/game_balance_reviewer.toml"
@@ -80,12 +84,20 @@
       "sha256": "ab9cdd46d2d39c9dff575a813d103beb082d06002c0b8feabc3f8657023e14a6",
       "source": "skills/agent-governance/assets/project-starter/root/.codex/agents/project_worker.toml"
     },
+    "skills/agent-governance/assets/project-starter/root/.codex/agents/release_reviewer.toml": {
+      "sha256": "4665c72840a63a05ce0798ec84e0f0992b82ad9381f097f8ddfcbe35bd5a7160",
+      "source": "skills/agent-governance/assets/project-starter/root/.codex/agents/release_reviewer.toml"
+    },
+    "skills/agent-governance/assets/project-starter/root/.codex/agents/test_worker.toml": {
+      "sha256": "f7fbde74079d3d0ca83064d4b693e9a82ad43b95700ffc9b8cb841e6e1409c87",
+      "source": "skills/agent-governance/assets/project-starter/root/.codex/agents/test_worker.toml"
+    },
     "skills/agent-governance/assets/project-starter/root/AGENTS.md": {
       "sha256": "1f88b1afd857018866b5e63959d5f830ed3d6a299352511bf93eeaba132da418",
       "source": "skills/agent-governance/assets/project-starter/root/AGENTS.md"
     },
     "skills/agent-governance/references/component-authoring.md": {
-      "sha256": "c81c02c0bcecc1dc4802c786af816b995c89b1177afc954e0a33f87d51bc534e",
+      "sha256": "394552e3bfc44b72a22e6f7fb608d56a12d963ce6ec35cddc92db9b10e68b555",
       "source": "skills/agent-governance/references/component-authoring.md"
     },
     "skills/agent-governance/references/context-continuity.md": {
@@ -97,15 +109,23 @@
       "source": "skills/agent-governance/references/delegation-routing.md"
     },
     "skills/agent-governance/references/instruction-layering.md": {
-      "sha256": "a2dbd741e30dfd3461050194963bb6b30f20dcf8e8866ad563a45035215dbea5",
+      "sha256": "4bd04455e140bbe2ef2fdc60865d5faf309958bad110ebc5fa9eb521f5ddadd6",
       "source": "skills/agent-governance/references/instruction-layering.md"
     },
     "skills/agent-governance/references/maintenance-acceptance.md": {
       "sha256": "8e1e25b2b645e991dadc3b28b64d5ef87307ddead440d5d0ae4c0ec6efe66125",
       "source": "skills/agent-governance/references/maintenance-acceptance.md"
     },
+    "skills/agent-governance/references/project-environment-routing.md": {
+      "sha256": "5b169064200c2f85f1e489e965cd2476580a6841863a1aae5d793d19caaf885c",
+      "source": "skills/agent-governance/references/project-environment-routing.md"
+    },
+    "skills/agent-governance/references/sensitive-data-removal.md": {
+      "sha256": "58ed83d6c63c07511477b6fe65e4b480ebf0128cc535ae5800c9591272e2bbc4",
+      "source": "skills/agent-governance/references/sensitive-data-removal.md"
+    },
     "skills/agent-governance/references/task-execution-and-reporting.md": {
-      "sha256": "85c7d67c76bcf0d587464ca23841b12a83aca7b778729b19ae4b7087b6f5982c",
+      "sha256": "e8506ab63d1d07dabb8b2f978c8404843c02362f15ff36379e472661148a3f06",
       "source": "skills/agent-governance/references/task-execution-and-reporting.md"
     },
     "skills/coding-prompt/SKILL.md": {
@@ -236,5 +256,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.1.1",
-  "version": "0.1.6"
+  "version": "0.1.9"
 }
