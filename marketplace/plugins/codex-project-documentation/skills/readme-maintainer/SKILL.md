@@ -2,7 +2,7 @@
 name: readme-maintainer
 description: Create or substantially restructure a repository README from verified project evidence. Use for README-focused work, not routine documentation sync, license decisions or downloadable reports.
 metadata:
-  version: "0.4.14"
+  version: "0.4.15"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -47,3 +47,5 @@ For section order, first-use teaching, compact examples, optional screenshots/di
 - Check headings, links, referenced paths, examples, configuration keys, and commands against repository state. Run safe existing commands only when needed and authorized.
 - Confirm that the README does not promise unimplemented behavior or tests that were not run. Clearly label optional, planned, or unverified material.
 - Return the changed README, or findings for a read-only audit, and a concise note of evidence used, actual checks, and any command, demo, deployment, badge, screenshot, or compatibility claim that remains unverified.
+
+For release-related README work, read [release readiness](references/release-readiness.md). Check documented installation against the distributed version, not only the checkout; preserve canonical license links and material limitations without expanding into a repository-wide release audit.

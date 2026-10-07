@@ -148,3 +148,30 @@ Persistent telemetry remains off unless the user explicitly enables it through t
 The shared client reads `$CODEX_HOME/monitoring/jev-monitor.json` or `~/.codex/monitoring/jev-monitor.json`. It records only completed-operation timestamps, operation/source, sanitized model/status/reason, known provider tokens, latency and individual HTTP-attempt body sizes/status. No query, rubric, state, candidate, answer, credential, header, private source path or raw error is stored. Unknown usage is null; HTTP error bodies are not read for telemetry. Any recording failure leaves the original result/exception unchanged.
 
 New CLI and MCP code must be installed; reload an already-running MCP process. This is local observed usage, not account totals, remaining credits or cost; a logical call and its retry attempts are separate. Dry-run, skipped and status checks are identified as such, not successful semantic comparisons. Enabling metadata recording does not authorize transmitting private material to Jev.
+
+## Specification conflict triggers
+
+Use local tools for hash/identity, time ordering, revision scope, actual payload/code differences and recorded decisions. A newer document may change an unrelated topic; a newer implementation may deviate from the governing specification. Neither fact requires semantic scoring.
+
+After these checks, Jev may help when optional evidence still needs reading order, or sufficient approved summaries need one finite semantic judgment, such as whether two passages describe the same operation, contradict a specific field rule or leave the rule unstated. Include unknown/insufficient evidence; do not ask which source is authoritative or which implementation should win by date. Separate judgments rather than combining freshness, correctness and authority in one score.
+
+Example: a dated API document describes a nested request, a later code change uses a flat request, and a newer functional document changes role restrictions without specifying transport. Compare transport-related evidence locally first. If a recorded decision already settles the request format, no Jev is needed. If wording remains ambiguous, approved bounded summaries may support a finite contradiction/unstated comparison; Main retains the adoption decision and any necessary owner confirmation.
+
+An explicit Jev request triggers the relevant Skill, not permission to upload every available source. Check authorization for query, criteria and summaries separately; sanitization is not permission. No approved sufficient input means continue local review and report that limitation. Use the existing available CLI or MCP by capability without reinstalling or changing settings. No per-conflict mandatory call, confidence threshold or automatic code/specification rewrite.
+
+## Critical semantic checkpoints
+
+Consider Jev at a meaningful decision boundary, not on every round. First name the unresolved question, the next action its answer could change, sufficient approved inputs and the finite options or rubric. If its result cannot change reading order, evidence collection or a bounded comparison, continue directly. A significant decision is a reason to assess usefulness, not permission to delegate authority.
+
+| Checkpoint after local retrieval | Useful semantic assistance | Limit or exclusion |
+|---|---|---|
+| Conflicting document or historical summaries | Classify one scoped contradiction, match, or unstated rule; rank additional evidence worth reading | Dates, hashes, revision identity and governing decisions stay local; unknown evidence requires confirmation |
+| Several optional references could close a current evidence gap | Rank reading order against the exact unresolved question | Keep every mandatory source and requested exhaustive coverage; no automatic discard |
+| Requirement-to-implementation or document-to-source mapping remains ambiguous | Compare approved descriptions for the same operation or explicit criterion | Verify symbols, runtime behavior and omissions locally; Jev cannot prove coverage or find absent inputs |
+| A proposed change has an unclear relation to the requested scope | Label an approved summary against explicit in-scope/out-of-scope/unclear criteria | Main retains authorization, ownership and actual diff review; classification cannot expand scope |
+| Several viable tool, design or release-note candidates have a stated qualitative criterion | Evaluate that single criterion and retain uncertainties | Check real capabilities, compatibility, licensing, cost and tests with direct evidence; no automatic final selection |
+| Similar issue summaries need a semantic group or duplication hypothesis | Suggest a finite label or same/different/unclear comparison | Preserve IDs, unresolved blockers and facts; do not merge or close items automatically |
+
+Stop or skip when deterministic checks settle the question, a decision already exists, private inputs lack approval, necessary evidence is absent, the rubric combines unrelated judgments, or the model/language is unsuitable. Requested semantic evaluation may return unknown without another call. Do not manufacture missing facts, use a score as authority, or treat critical security/legal/permission/release approval as model classifications. New source evidence, criteria or decisions invalidate the affected comparison; unchanged inputs need no repeated call. Follow the existing CLI/MCP capability and failure fallback rules.
+
+Manually review representative positive, negative and unknown cases for a new rubric; calibration or real model behavior remains unverified until actually exercised. Report actual calls separately from instruction changes, keeping confidence distinct from factual correctness.

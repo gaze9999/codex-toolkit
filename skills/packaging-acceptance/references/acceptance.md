@@ -21,3 +21,15 @@ Record PID, parent creation time, owning client and owned resources before lifec
 ## Release readback
 
 Check the exact source revision, native runner, artifact set and archive/asset hashes. Confirm remote assets separately after an authorized publication. A local file, successful CI upload or prepared release is not remote publication proof. Keep read-token credentials in the runner secret store; source access permission does not establish redistribution permission.
+
+## Authorized GitHub publication
+
+Check the actual project version scheme, Tag convention, intended commit, branch protections, required CI and release workflow. Never create a Tag/Release from a preparation-only or CP request. Version magnitude does not determine publication permission or cadence. Preserve independent component versions and package-native syntax; changed published contents require a new version rather than a silent replacement.
+
+For a requested release, verify relevant README installation/compatibility claims, confirmed licensing and required shipped notices, metadata/version alignment, user-facing notes and applicable native/artifact gates. Generated notes need review for omissions. Community-health files are optional recommendations unless required by the project. Build provenance, signatures or attestations are selected for the actual supply-chain risk and supported workflow, not added automatically.
+
+Inspect draft, prerelease, latest and immutable settings before publication. With immutable releases, attach all assets to a draft before publishing; a workflow that uploads assets after `release.published` is incompatible with that sequence and needs an explicitly scoped workflow decision before enabling immutability. Do not change repository settings just to complete an audit.
+
+Read back the remote Tag's commit, Release state, required workflow results, asset names/version/size and downloaded SHA-256 against the reviewed manifest. Distinguish source archives from runnable assets and GitHub Release from package-registry or Plugin-marketplace delivery. Upload success alone is not completed acceptance. Report missing assets or native checks with their impact and next step.
+
+Sources checked 2026-10-07: [GitHub releases](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases), [managing releases](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository), [immutable releases](https://docs.github.com/en/code-security/concepts/supply-chain-security/immutable-releases), [SemVer](https://semver.org/), [Python metadata](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/)

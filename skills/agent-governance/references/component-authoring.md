@@ -67,3 +67,11 @@ Codex instruction discovery has a configurable combined byte cap, 32 KiB by defa
 - [Community reading observations](https://www.reddit.com/r/codex/comments/1t1rbqt/codex_may_only_read_the_first_220_lines_of_a/): reported partial reads in particular sessions; this is an anecdotal failure mode, not an official 220-line cap or a cross-model benchmark
 
 Sources checked 2026-10-07. Numeric drafting ranges above are local maintenance choices. Recheck current documentation when host discovery, metadata/schema or executable integration changes.
+
+## Version and publication decisions
+
+Follow the component's established version scheme and current official platform rules. SemVer describes public compatibility, not a release schedule: breaking interfaces require major, compatible features minor, compatible fixes patch; define an explicit policy for pre-1.0 stability. Use package-native version syntax, including Python's version rules. Skill, Plugin, core and aggregate release versions are independent. Do not bump every component for unrelated CI or documentation changes.
+
+Keep publication authorization separate from version edits, preparation and installation. If the user defines CP as commit/push, it does not authorize a Tag or Release. Apply CPR only through the actual project's release policy; documentation-only repositories may publish through a branch instead. Community examples inform cadence and communication, not mandatory release branches or automatic publication.
+
+For an authorized release, inspect relevant README/version/license/package metadata, notes, required checks and artifact inputs. Route distribution validation to packaging-acceptance and legal changes to license-maintainer when needed. Optional SECURITY, CONTRIBUTING, CODE_OF_CONDUCT, templates, citation and changelog files depend on audience and maintenance needs; GitHub's community checklist is not a universal Release gate. Preserve verified legal notices and material operating limitations. Recheck platform documentation before changing release automation or settings.

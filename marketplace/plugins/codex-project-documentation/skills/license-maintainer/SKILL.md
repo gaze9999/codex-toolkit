@@ -2,7 +2,7 @@
 name: license-maintainer
 description: Maintain repository LICENSE, NOTICE, COPYRIGHT, SPDX and README license references from verified ownership and distribution evidence. Use for licensing files, not general README writing; never choose or change a license without explicit direction.
 metadata:
-  version: "0.4.13"
+  version: "0.4.14"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -42,3 +42,5 @@ Maintain copyright and licensing documents without inventing ownership, legal te
 - Check filenames, internal links, SPDX syntax, manifest values, covered paths, holder names, year text, required notices, and packaging inclusion against repository state.
 - Use an existing license or notice validator when the project already provides one. Do not claim legal compatibility from syntax validation alone.
 - Report the evidence used, files changed, exact user-provided decisions, validation performed, and any unresolved ownership, compatibility, distribution, or attribution question.
+
+For public distribution, inspect the actual shipped source, wheel/archive and vendored assets, not only repository dependencies. Verify canonical LICENSE, required third-party notices and package SPDX/license-file metadata using the applicable packaging standard. GitHub visibility or license detection is not redistribution or compatibility proof. An unresolved licensing decision blocks the affected distribution, not unrelated authorized work; never silently choose, relicense or remove legal text.

@@ -13,15 +13,15 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "8ddbd1ab6d3ef8428121552ace481d10c466aa75e81659f2b7e59278a506d4b3",
+      "sha256": "7796ed0ff71a0a67f0882302633f15bb903e1b0ec161da779920aa5171065f05",
       "source": "plugins/project-documentation/plugin.json"
     },
     "skills/license-maintainer/SKILL.md": {
-      "sha256": "98ba0f81299e3f64e51140d014f046fa599974b7eafc04b6d8aea827d96fc307",
+      "sha256": "03ab9ce88a229a4a1a99c16bf8172b54089bf28d95767da3cd364b4a4db33383",
       "source": "skills/license-maintainer/SKILL.md"
     },
     "skills/license-maintainer/agents/openai.yaml": {
-      "sha256": "e7383ecd304757d7376f58f7939050fe801f74f2c91a957b9f560718d0f98534",
+      "sha256": "47adf94531949ee6e3d82bc5784e11783df891c04c53baa5b2153c0d79d25076",
       "source": "skills/license-maintainer/agents/openai.yaml"
     },
     "skills/license-maintainer/assets/icon-small.png": {
@@ -41,11 +41,11 @@
       "source": "skills/license-maintainer/assets/icon.svg"
     },
     "skills/readme-maintainer/SKILL.md": {
-      "sha256": "9ecc28514fa5aa2d9000ffaf5eb7bd442b9ac6e41f0d538455e6b8d03691d641",
+      "sha256": "e23fd61bc94a62d956de9616bdc95a41b0351bac01633bc7973428bbe4569873",
       "source": "skills/readme-maintainer/SKILL.md"
     },
     "skills/readme-maintainer/agents/openai.yaml": {
-      "sha256": "6c13754201710f2714504976988343465b8f4d9b4fb988d8f237ec356bcda7a8",
+      "sha256": "a80ae4cd1f21fd965dfb2f3f3a46fe4c7de098d8ab31fab7ff8ca2d252ece507",
       "source": "skills/readme-maintainer/agents/openai.yaml"
     },
     "skills/readme-maintainer/assets/icon-small.png": {
@@ -67,6 +67,10 @@
     "skills/readme-maintainer/references/presentation.md": {
       "sha256": "71becb201c9e1c733be1aeaddc7ff3115dce3a7ed59f95ec0935d4e9a5b405d9",
       "source": "skills/readme-maintainer/references/presentation.md"
+    },
+    "skills/readme-maintainer/references/release-readiness.md": {
+      "sha256": "55c65c19fd8997698055865bd7b47553a5723f77e4a1ed9cd4d1359145ba8939",
+      "source": "skills/readme-maintainer/references/release-readiness.md"
     }
   },
   "license": "MIT",
@@ -76,5 +80,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.1.1",
-  "version": "0.1.3"
+  "version": "0.1.4"
 }

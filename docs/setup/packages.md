@@ -117,11 +117,7 @@ dist/<tag>/
 - 若封裝後再改 Skill, 用 `--version <same-tag>` 重封裝, 不帶版本會再增加一次 patch
 - 可用 `--repo <path>` 指定另一個具有 `skills/` 的 repository, 或以 `--output-dir <path>` 指定輸出根目錄, 每個 Tag 仍有獨立子目錄
 
-發布需當次明確授權, 封裝完成後, 依 [Skills 安裝](../skills.md) 將 Skill 單向同步到本機, 用當次 Tag 驗證, 再 commit, push, 建立同名 Tag 並將當次組合 ZIP 與 MCP 資產上傳 GitHub Release:
-
-```powershell
-python mcp/scripts/audit_skills.py --release-tag <tag> --installed-root "$env:USERPROFILE\.codex\skills"
-```
+發布需當次明確授權, 封裝後核對每個 Skill 的版本與當次 manifest, 只同步已授權的安裝 owner. Plugin Skills 透過原生市集更新, 不另裝同名獨立 Skill, 使用適用的來源 / 鏡像 audit, 個別 Skill 版本不必與整包 Tag 相同
 
 若要半自動發布, 可使用 [release.py](../../mcp/scripts/release.py) 串接準備, 驗證與 GitHub Release, 需要 Python 3.11 以上及已登入的 GitHub CLI. 首次建置先在隔離 Python 環境安裝 [發布相依清單](../../mcp/tools/release.requirements.txt), 清單依固定來源的 build-system 與 Jev 稽核相依維護:
 
@@ -136,3 +132,19 @@ python mcp/scripts/release.py publish <tag>
 若 sandbox 與 GitHub CLI 使用不同檔案權限, `prepare` 與 `publish` 可傳入同一個 `--asset-root /absolute/release-assets`, Skill assets 會放在 `<asset-root>/<tag>`, MCP wheel 會放在 `<asset-root>/mcp/<tag>`, 仍執行相同來源與 hash 核對
 
 `prepare` 提供版本與 Skill ZIP 封裝, 並以 [prepare_mcp_release.py](../../mcp/scripts/prepare_mcp_release.py) 在隔離副本建置本機 adapters, Jev 與安裝工具 wheel, 加入固定版本的第三方 Python MCP, 跨平台安裝包與第三方授權包. `publish` 同時附上 `mcp-release-manifest.json`, 供 setup 更新入口核對 wheel 版本與 checksum, 並推送已提交的分支與建立 GitHub Release, 發布前要求乾淨的 working tree, 分支追蹤 `origin` 同名分支, 且 Tag 尚不存在
+
+## GitHub 版本與發布判斷
+
+`cp` 只提交及推送, 不建立 Tag / Release. `cpr` 或明確發布要求才沿專案流程交付, 準備封裝、修改 metadata 或更新本機外掛不代表已發布
+
+版本號與發布時機分開判斷. 採 [SemVer](https://semver.org/lang/zh-TW/) 時, 不相容介面變更用 major, 相容的新功能用 minor, 相容修正用 patch, 初始 0.x 階段另依既有穩定性政策. Git Tag 可用 `vX.Y.Z`, 套件欄位遵循自身格式, Python 依其版本規則. Skill、Plugin、Python 套件及整包版本各自管理, 不因無關 CI / 文件修改整批升版
+
+依實際使用者影響及交付需求安排發布, 不限定只有 major / minor 才能發, 也不每次修改都自動發. [VS Code 的歷史流程](https://github.com/microsoft/vscode/wiki/Release-Process)示範驗證後以 patch 交付修正, [Hatch 發布](https://github.com/pypa/hatch/releases)提供分版變更說明, 可參考而不照搬分支與週期. [社群討論](https://www.reddit.com/r/AskProgramming/comments/1vkn207/in_semver_do_you_draw_a_line_as_to_which_ci/)也區分產品版本與 CI 修改, 屬情境意見, 相容性仍回查正式規格
+
+發布前依當次產物核對 README 的安裝 / 使用 / 相容性、metadata / Tag / commit、LICENSE 與必要第三方 notices、必要 CI、資產及變更說明. 既有 MIT 不變, 公開可讀不等於可重新散布. SECURITY、CONTRIBUTING、CODE_OF_CONDUCT、templates、citation 或 changelog 依用途補充, [GitHub 社群檢查表](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/about-community-profiles-for-public-repositories)不是全部專案的發布門檻
+
+[GitHub 自動變更說明](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes)可作草稿, 仍需補直接提交、使用者影響、遷移及已知限制. GitHub 自動提供的 source ZIP 與可執行安裝包分開驗收, 推送、Tag、Release、資產上傳及下載 hash 各自回報
+
+使用 [immutable releases](https://docs.github.com/en/code-security/concepts/supply-chain-security/immutable-releases) 時先建 draft、附齊資產再發布. 本專案目前 CLI workflow 於 `release.published` 後補資產, 啟用 immutable 前須先處理流程相容性, 本次不修改 GitHub 設定. 同版本本機重封裝不代表可替換已發布內容, 正式內容變更用新版本
+
+來源核對日期: 2026-10-07
