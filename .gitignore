@@ -88,3 +88,7 @@ junit.xml
 
 # Generated local Desktop settings fragment
 /desktop-settings.local.toml
+
+# Actual project instructions stay local; public starter templates remain tracked
+/AGENTS.md
+/python-tools/AGENTS.md
