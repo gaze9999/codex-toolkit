@@ -1,0 +1,12 @@
+# Release-related README evidence
+
+Read this reference only when a requested README change concerns public distribution, versions or release readiness.
+
+- Verify purpose, shortest installation/use path, actual supported platforms/runtime, package/release download links and update or migration steps against the intended artifact. Keep planned support separate from verified support. Distinguish GitHub-generated source archives from uploaded runnable packages; source download is not proof of a working executable.
+- Find the displayed README: GitHub checks `.github/`, then repository root, then `docs/`. Avoid editing a shadowed copy unintentionally. Prefer relative internal documentation/image links and compact verified examples; add screenshots only when they improve a current usage step.
+- Link the canonical LICENSE, preserve required notices and distinguish first-party terms from redistributed dependencies. Public visibility and GitHub license detection do not establish permission or compatibility. Never select or replace a license merely for release readiness.
+- Keep version claims consistent with actual package metadata and artifacts. Independent components may have different versions. A README badge or metadata edit is not publication evidence.
+- Release notes explain user-visible changes, fixes, compatibility, migration and relevant known limitations. Generated notes are a draft: review direct commits and important changes omitted by PR-based generation. Link a maintained changelog when useful instead of duplicating it.
+- Recommend SECURITY, CONTRIBUTING, CODE_OF_CONDUCT, issue/PR templates or citation only for a real audience need. These are community recommendations, not mandatory files for every GitHub Release.
+
+Sources checked 2026-10-07: [GitHub README](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes), [licensing](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository), [community profiles](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/about-community-profiles-for-public-repositories), [generated release notes](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes), [Python package metadata](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/)

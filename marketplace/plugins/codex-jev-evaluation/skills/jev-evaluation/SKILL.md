@@ -3,7 +3,7 @@ name: jev-evaluation
 description: Rank locally retrieved context or compare approved summaries with a finite rubric when semantic ordering remains useful. Use for Jev setup or diagnosis too, not routine coding preflight.
 metadata:
   short-description: Optional candidate ranking and typed semantic evaluation
-  version: "0.4.13"
+  version: "0.4.14"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -34,3 +34,7 @@ Choose the available Jev CLI or MCP route by required capability, shell/client a
 ## Maintain one source
 
 Edit the version-controlled Skill, validate changed behavior, then synchronize only its managed installed copy. The wheel uses the same scripts under `codex_jev_mcp`; see [usage](references/usage.md#opt-in-local-monitoring) for requested metadata monitoring. Recording is opt-in and never changes ordinary Jev use decisions. Keep credentials outside repositories and Skill archives. Installation readback does not prove an already-open client refreshed its Skill list; no performance or context savings are established without measurement.
+
+At consequential semantic checkpoints, use [critical checkpoint conditions](references/usage.md#critical-semantic-checkpoints) to assess whether a bounded comparison can change the next action; do not require a call for every important decision.
+
+For specification conflicts, first verify local source identity, revision/Git chronology, exact differences and confirmed decisions. Consider Jev only for unresolved semantic evidence ordering or an atomic comparison of approved summaries with explicit unknown options; read [conflict triggers](references/usage.md#specification-conflict-triggers). It cannot decide source authority, authorize external transfer or replace a required specification decision.

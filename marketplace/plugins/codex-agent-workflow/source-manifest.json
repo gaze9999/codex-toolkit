@@ -13,15 +13,15 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "e28028bd8826ded5e73c0814db9404699cbd117d62cb219ea74b8e73dbf8972a",
+      "sha256": "75274bc5d2a919eef0606c4fcc1955a707a198972d7794b5234ecd3434e59e6b",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
-      "sha256": "62a6db33120d4f4272a26902689053b4285ac5e525653db842af74e946ce6262",
+      "sha256": "b355799d46aa60b3da295ca1b9e0c3144444b8b872de936bb9635aeebc0167eb",
       "source": "skills/agent-governance/SKILL.md"
     },
     "skills/agent-governance/agents/openai.yaml": {
-      "sha256": "b00ff61b51aef0837fb84be3b49f09fc083a805cb48c68c85d3f57d7b9e878fe",
+      "sha256": "85d39d022b6f926a49d73eb4ea85f60e05878065eb5846d982516a9c1469a416",
       "source": "skills/agent-governance/agents/openai.yaml"
     },
     "skills/agent-governance/assets/icon-small.png": {
@@ -85,7 +85,7 @@
       "source": "skills/agent-governance/assets/project-starter/root/AGENTS.md"
     },
     "skills/agent-governance/references/component-authoring.md": {
-      "sha256": "881ed2c300537ce4e5d84a572099273690057bddc1e7f8dc9b5d14476701b704",
+      "sha256": "c81c02c0bcecc1dc4802c786af816b995c89b1177afc954e0a33f87d51bc534e",
       "source": "skills/agent-governance/references/component-authoring.md"
     },
     "skills/agent-governance/references/context-continuity.md": {
@@ -105,7 +105,7 @@
       "source": "skills/agent-governance/references/maintenance-acceptance.md"
     },
     "skills/agent-governance/references/task-execution-and-reporting.md": {
-      "sha256": "3471e2f263247ee497e31a32b0f12019cb0b8b86e9735d2915536a12b0f62d55",
+      "sha256": "85c7d67c76bcf0d587464ca23841b12a83aca7b778729b19ae4b7087b6f5982c",
       "source": "skills/agent-governance/references/task-execution-and-reporting.md"
     },
     "skills/coding-prompt/SKILL.md": {
@@ -236,5 +236,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.1.1",
-  "version": "0.1.5"
+  "version": "0.1.6"
 }

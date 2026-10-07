@@ -192,3 +192,7 @@ Reviewed 2026-10-05. Sources may include relevant Reddit communities, X, Bluesky
 - [Community report #49390](https://github.com/openai/codex/issues/49390): unfinished required work after intermediate completion; a case supporting completion reconciliation, not a claim about every version/model
 
 Language conventions, authorization and `cpr` behavior are maintained user/project choices, not universal product requirements.
+
+Version selection, commit/push, Tag, draft, publication, asset upload and post-publication download verification are separate states. Report the actual completed stage and remaining required gates. A community practice or version bump does not expand publication authorization; preserve user-defined CP/CPR boundaries and repository-specific delivery policy.
+
+At consequential semantic checkpoints, assess optional evaluation after local evidence filtering: contradictory summaries, ambiguous requirement/source mappings, evidence reading order or candidate comparison under an explicit finite criterion. Require a specific unresolved question, sufficient approved input and a result that can change the next action. Keep mandatory evidence, permissions, source authority, architecture and acceptance with Main; skip rule-determined or settled questions and retain unknowns. Load the available evaluation Skill for its actual data and execution boundaries, not as a routine preflight.
