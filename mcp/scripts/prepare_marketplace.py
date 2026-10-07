@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[2]
 PRODUCER = 'codex-toolkit.marketplace.v1'
 
 def encode(value):
-    return (json.dumps(value, ensure_ascii=False, indent=2) + '\n').encode('utf-8')
+    return (json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + '\n').encode('utf-8')
 
 def prepare(root):
     files = {}

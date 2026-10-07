@@ -1,74 +1,74 @@
 {
-  "plugin": "codex-multilingual-proofreading",
-  "version": "0.1.1",
   "files": {
+    "LICENSE": {
+      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
+      "source": "LICENSE"
+    },
     "plugin.json": {
-      "source": "plugins/multilingual-proofreading/plugin.json",
-      "sha256": "03c2a627183fca805a78b466ab0ad1bd36360dd07c830eb665622b6c9479a090"
-    },
-    "skills/multilingual-proofreading/agents/openai.yaml": {
-      "source": "skills/multilingual-proofreading/agents/openai.yaml",
-      "sha256": "dac4a3ae57b245fdf00ab3a6a3fde17d7b95bfde4adb0086ceb4d61b4b9fb0c3"
-    },
-    "skills/multilingual-proofreading/assets/icon-small.png": {
-      "source": "skills/multilingual-proofreading/assets/icon-small.png",
-      "sha256": "996c08fb346447da7f0361e40f336292620d5070a786aaea3287508d049c3a23"
-    },
-    "skills/multilingual-proofreading/assets/icon-small.svg": {
-      "source": "skills/multilingual-proofreading/assets/icon-small.svg",
-      "sha256": "4e2e092f61a1f54a6d9831cab1a5aea92acd6dcdd8f52ead82c85c97efacc04c"
-    },
-    "skills/multilingual-proofreading/assets/icon.png": {
-      "source": "skills/multilingual-proofreading/assets/icon.png",
-      "sha256": "c787f3ec7d54644a544deaae167b53fb2cd64f401a2edc229bc24c26aa35cd9b"
-    },
-    "skills/multilingual-proofreading/assets/icon.svg": {
-      "source": "skills/multilingual-proofreading/assets/icon.svg",
-      "sha256": "4e2e092f61a1f54a6d9831cab1a5aea92acd6dcdd8f52ead82c85c97efacc04c"
-    },
-    "skills/multilingual-proofreading/SKILL.md": {
-      "source": "skills/multilingual-proofreading/SKILL.md",
-      "sha256": "700e4bf2ecce3d28a926b5b60a2dd654a4f6bc432b74f5eb392c072e6d4b2c17"
+      "sha256": "03c2a627183fca805a78b466ab0ad1bd36360dd07c830eb665622b6c9479a090",
+      "source": "plugins/multilingual-proofreading/plugin.json"
     },
     "resources/proofreading/en/cspell.json": {
-      "source": "mcp/tools/proofreading/en/cspell.json",
-      "sha256": "0fd9d50aa1c00b37e06c93005e6d356695005c8eb983c6d7c1a0fb86525e726b"
+      "sha256": "0fd9d50aa1c00b37e06c93005e6d356695005c8eb983c6d7c1a0fb86525e726b",
+      "source": "mcp/tools/proofreading/en/cspell.json"
     },
     "resources/proofreading/ja/.textlintrc.json": {
-      "source": "mcp/tools/proofreading/ja/.textlintrc.json",
-      "sha256": "531cba62da36d1aed90e0b6e73a09055e518e5fe0abf824bb9a1b2911438e285"
+      "sha256": "531cba62da36d1aed90e0b6e73a09055e518e5fe0abf824bb9a1b2911438e285",
+      "source": "mcp/tools/proofreading/ja/.textlintrc.json"
     },
     "resources/proofreading/textlint-mcp.cjs": {
-      "source": "mcp/tools/proofreading/textlint-mcp.cjs",
-      "sha256": "824f4e808d0463f9583e23c41ec23d7a1caa23d631a7b86477350c241e1980da"
+      "sha256": "824f4e808d0463f9583e23c41ec23d7a1caa23d631a7b86477350c241e1980da",
+      "source": "mcp/tools/proofreading/textlint-mcp.cjs"
     },
     "resources/proofreading/zh-tw/.textlintrc.cjs": {
-      "source": "mcp/tools/proofreading/zh-tw/.textlintrc.cjs",
-      "sha256": "a2166e629d72de1904c7f2e212114c2839e77081bfa104913fe05e784f71e140"
+      "sha256": "a2166e629d72de1904c7f2e212114c2839e77081bfa104913fe05e784f71e140",
+      "source": "mcp/tools/proofreading/zh-tw/.textlintrc.cjs"
     },
     "resources/proofreading/zh-tw/protected-copy.cjs": {
-      "source": "mcp/tools/proofreading/zh-tw/protected-copy.cjs",
-      "sha256": "937d5ea0154024f7d8604a9dac677af81dfb001c1fcc0a9f4774978c5e6fc8a0"
+      "sha256": "937d5ea0154024f7d8604a9dac677af81dfb001c1fcc0a9f4774978c5e6fc8a0",
+      "source": "mcp/tools/proofreading/zh-tw/protected-copy.cjs"
     },
     "resources/proofreading/zh-tw/taiwan-style.cjs": {
-      "source": "mcp/tools/proofreading/zh-tw/taiwan-style.cjs",
-      "sha256": "d033b0f4d955ebd4d40abc2d12dd45f98da2164e393e8784c1525c4ce99e93ac"
+      "sha256": "d033b0f4d955ebd4d40abc2d12dd45f98da2164e393e8784c1525c4ce99e93ac",
+      "source": "mcp/tools/proofreading/zh-tw/taiwan-style.cjs"
     },
     "resources/proofreading/zh-tw/terms.yml": {
-      "source": "mcp/tools/proofreading/zh-tw/terms.yml",
-      "sha256": "1853e1104bb1f082b216dda91373baa5dbfaa35f58e967e774358db0cbc737eb"
+      "sha256": "1853e1104bb1f082b216dda91373baa5dbfaa35f58e967e774358db0cbc737eb",
+      "source": "mcp/tools/proofreading/zh-tw/terms.yml"
     },
-    "LICENSE": {
-      "source": "LICENSE",
-      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a"
+    "skills/multilingual-proofreading/SKILL.md": {
+      "sha256": "700e4bf2ecce3d28a926b5b60a2dd654a4f6bc432b74f5eb392c072e6d4b2c17",
+      "source": "skills/multilingual-proofreading/SKILL.md"
+    },
+    "skills/multilingual-proofreading/agents/openai.yaml": {
+      "sha256": "dac4a3ae57b245fdf00ab3a6a3fde17d7b95bfde4adb0086ceb4d61b4b9fb0c3",
+      "source": "skills/multilingual-proofreading/agents/openai.yaml"
+    },
+    "skills/multilingual-proofreading/assets/icon-small.png": {
+      "sha256": "996c08fb346447da7f0361e40f336292620d5070a786aaea3287508d049c3a23",
+      "source": "skills/multilingual-proofreading/assets/icon-small.png"
+    },
+    "skills/multilingual-proofreading/assets/icon-small.svg": {
+      "sha256": "4e2e092f61a1f54a6d9831cab1a5aea92acd6dcdd8f52ead82c85c97efacc04c",
+      "source": "skills/multilingual-proofreading/assets/icon-small.svg"
+    },
+    "skills/multilingual-proofreading/assets/icon.png": {
+      "sha256": "c787f3ec7d54644a544deaae167b53fb2cd64f401a2edc229bc24c26aa35cd9b",
+      "source": "skills/multilingual-proofreading/assets/icon.png"
+    },
+    "skills/multilingual-proofreading/assets/icon.svg": {
+      "sha256": "4e2e092f61a1f54a6d9831cab1a5aea92acd6dcdd8f52ead82c85c97efacc04c",
+      "source": "skills/multilingual-proofreading/assets/icon.svg"
     }
   },
+  "license": "MIT",
+  "plugin": "codex-multilingual-proofreading",
+  "producer": "codex-toolkit.marketplace.v1",
+  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [
     "textlint",
     "cspell"
   ],
-  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
-  "producer": "codex-toolkit.marketplace.v1",
   "source_state": "canonical-file-hashes",
-  "license": "MIT"
+  "version": "0.1.1"
 }

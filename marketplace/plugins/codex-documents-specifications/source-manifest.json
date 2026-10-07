@@ -1,145 +1,145 @@
 {
-  "plugin": "codex-documents-specifications",
-  "version": "0.1.2",
   "files": {
+    "LICENSE": {
+      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
+      "source": "LICENSE"
+    },
     "plugin.json": {
-      "source": "plugins/documents-specifications/plugin.json",
-      "sha256": "5a62246af2e2688bc864ba4be8748bede6e1e441977006889ecb9b45ec64472d"
-    },
-    "skills/context-brief/agents/openai.yaml": {
-      "source": "skills/context-brief/agents/openai.yaml",
-      "sha256": "7797cc02b54f0e21673db1314cfbd5ee0d43c95dd5916386abd65d9b34a91fbe"
-    },
-    "skills/context-brief/assets/icon-small.png": {
-      "source": "skills/context-brief/assets/icon-small.png",
-      "sha256": "18ff326439e1d0c576ce4cc7f6510a7577821ecc4f4d5a733263fea4ae939b8e"
-    },
-    "skills/context-brief/assets/icon-small.svg": {
-      "source": "skills/context-brief/assets/icon-small.svg",
-      "sha256": "04143acbc8044a3d55095ad1db90f87baac7cd0aa62a26b3ad606f98d8c481cc"
-    },
-    "skills/context-brief/assets/icon.png": {
-      "source": "skills/context-brief/assets/icon.png",
-      "sha256": "cc8edc6a3de6c0e58de6a918a08e942d8fcdfd25a4360d6826ef9199a37b82a2"
-    },
-    "skills/context-brief/assets/icon.svg": {
-      "source": "skills/context-brief/assets/icon.svg",
-      "sha256": "92475c4e428aeb58582c0994dd028ff7106618b8a9e1bb14f5fc810d7260c29e"
-    },
-    "skills/context-brief/requirements.txt": {
-      "source": "skills/context-brief/requirements.txt",
-      "sha256": "abe055f48cd4e706d9f8591d104e8f1d683bdee0ce95cb04f5df99757302be74"
-    },
-    "skills/context-brief/scripts/extract_source_text.py": {
-      "source": "skills/context-brief/scripts/extract_source_text.py",
-      "sha256": "824bdf83eb9791b0e499f18cdb48c04d6e8cfd780da681894e5c145a39594ab5"
-    },
-    "skills/context-brief/scripts/ocr_fallback.py": {
-      "source": "skills/context-brief/scripts/ocr_fallback.py",
-      "sha256": "cfcca0ab932160071219a3b8025cfbcd8ccf3ddf1a71548c43dd36362a939674"
-    },
-    "skills/context-brief/scripts/validate_context_brief.py": {
-      "source": "skills/context-brief/scripts/validate_context_brief.py",
-      "sha256": "5ad26def4afb187587f67ea3354f80c3931a76067933d92df5ed11ceaa9c15fa"
+      "sha256": "5a62246af2e2688bc864ba4be8748bede6e1e441977006889ecb9b45ec64472d",
+      "source": "plugins/documents-specifications/plugin.json"
     },
     "skills/context-brief/SKILL.md": {
-      "source": "skills/context-brief/SKILL.md",
-      "sha256": "90cea61e01955b3e173851e19b6e63c58d75084bda19895c7d1b8eb6eb0edcba"
+      "sha256": "90cea61e01955b3e173851e19b6e63c58d75084bda19895c7d1b8eb6eb0edcba",
+      "source": "skills/context-brief/SKILL.md"
     },
-    "skills/document-source-matching/agents/openai.yaml": {
-      "source": "skills/document-source-matching/agents/openai.yaml",
-      "sha256": "13127f83b6351c1b6e839e170d7cabac3c2c417182e9b9d7ce1af91c07b03710"
+    "skills/context-brief/agents/openai.yaml": {
+      "sha256": "7797cc02b54f0e21673db1314cfbd5ee0d43c95dd5916386abd65d9b34a91fbe",
+      "source": "skills/context-brief/agents/openai.yaml"
     },
-    "skills/document-source-matching/assets/icon-small.png": {
-      "source": "skills/document-source-matching/assets/icon-small.png",
-      "sha256": "4fd2599b24052b083a1b44e57bea9cdea41472a116a4060169e10c86c2985396"
+    "skills/context-brief/assets/icon-small.png": {
+      "sha256": "18ff326439e1d0c576ce4cc7f6510a7577821ecc4f4d5a733263fea4ae939b8e",
+      "source": "skills/context-brief/assets/icon-small.png"
     },
-    "skills/document-source-matching/assets/icon-small.svg": {
-      "source": "skills/document-source-matching/assets/icon-small.svg",
-      "sha256": "095192cb842c89ee505ef84856497b496c990286afa6533478622595353b27b0"
+    "skills/context-brief/assets/icon-small.svg": {
+      "sha256": "04143acbc8044a3d55095ad1db90f87baac7cd0aa62a26b3ad606f98d8c481cc",
+      "source": "skills/context-brief/assets/icon-small.svg"
     },
-    "skills/document-source-matching/assets/icon.png": {
-      "source": "skills/document-source-matching/assets/icon.png",
-      "sha256": "89e2c748116189eee91498b7c69d320d6ad64981e2cfa19fd83e5d2c87f3a915"
+    "skills/context-brief/assets/icon.png": {
+      "sha256": "cc8edc6a3de6c0e58de6a918a08e942d8fcdfd25a4360d6826ef9199a37b82a2",
+      "source": "skills/context-brief/assets/icon.png"
     },
-    "skills/document-source-matching/assets/icon.svg": {
-      "source": "skills/document-source-matching/assets/icon.svg",
-      "sha256": "095192cb842c89ee505ef84856497b496c990286afa6533478622595353b27b0"
+    "skills/context-brief/assets/icon.svg": {
+      "sha256": "92475c4e428aeb58582c0994dd028ff7106618b8a9e1bb14f5fc810d7260c29e",
+      "source": "skills/context-brief/assets/icon.svg"
     },
-    "skills/document-source-matching/SKILL.md": {
-      "source": "skills/document-source-matching/SKILL.md",
-      "sha256": "073e37f0ead6623bf17b84f203db34f527a4f917304a72c9b42fda9c31dbee9a"
+    "skills/context-brief/requirements.txt": {
+      "sha256": "abe055f48cd4e706d9f8591d104e8f1d683bdee0ce95cb04f5df99757302be74",
+      "source": "skills/context-brief/requirements.txt"
     },
-    "skills/doc-updater/agents/openai.yaml": {
-      "source": "skills/doc-updater/agents/openai.yaml",
-      "sha256": "efd5f1949e89f94687b4dec0aaee89637eb3bc03a8cfee4b6659ca5cd01e95c7"
+    "skills/context-brief/scripts/extract_source_text.py": {
+      "sha256": "824bdf83eb9791b0e499f18cdb48c04d6e8cfd780da681894e5c145a39594ab5",
+      "source": "skills/context-brief/scripts/extract_source_text.py"
     },
-    "skills/doc-updater/assets/icon-small.png": {
-      "source": "skills/doc-updater/assets/icon-small.png",
-      "sha256": "2c44570d85bc97fee8229166c0a2f4604456d501d6f257d916d0f87673f26f06"
+    "skills/context-brief/scripts/ocr_fallback.py": {
+      "sha256": "cfcca0ab932160071219a3b8025cfbcd8ccf3ddf1a71548c43dd36362a939674",
+      "source": "skills/context-brief/scripts/ocr_fallback.py"
     },
-    "skills/doc-updater/assets/icon-small.svg": {
-      "source": "skills/doc-updater/assets/icon-small.svg",
-      "sha256": "6d93ba2b47da11d00fa19fee3b4ac018b8cdb48c9ff1be662d1036cb35475e75"
-    },
-    "skills/doc-updater/assets/icon.png": {
-      "source": "skills/doc-updater/assets/icon.png",
-      "sha256": "581cdccf67f3b0b8f03e8b2aa22b52f40113ea086e27b2457d1b40e6c8c90aeb"
-    },
-    "skills/doc-updater/assets/icon.svg": {
-      "source": "skills/doc-updater/assets/icon.svg",
-      "sha256": "154aa7ea113f70fcb816f527ddc81afb1db2dcdc891992c9339771659b5bf742"
-    },
-    "skills/doc-updater/references/doc-update-rules.md": {
-      "source": "skills/doc-updater/references/doc-update-rules.md",
-      "sha256": "192dae01ec2fa2792d5bc8e7e270c71257b967eec173baeaea193eab9cb0089f"
-    },
-    "skills/doc-updater/references/notion-sync-reader-writer-contract.md": {
-      "source": "skills/doc-updater/references/notion-sync-reader-writer-contract.md",
-      "sha256": "c4dcbd9a01dba206d6965487af84a5dadf5fc7dfe45f0d4989e825f6e4ecebea"
-    },
-    "skills/doc-updater/references/presentation.md": {
-      "source": "skills/doc-updater/references/presentation.md",
-      "sha256": "89d18d0213692a561e8d0ef68681752ba7936089cf27e672405978996fbee048"
-    },
-    "skills/doc-updater/scripts/inspect_markdown_sync_target.py": {
-      "source": "skills/doc-updater/scripts/inspect_markdown_sync_target.py",
-      "sha256": "9f7530322f289745df5c2588a790d883e1c226ff4cd6b6a8f57ff7048f672b66"
-    },
-    "skills/doc-updater/scripts/inspect_notion_sync_target.py": {
-      "source": "skills/doc-updater/scripts/inspect_notion_sync_target.py",
-      "sha256": "b047b0e0503c56621ef77c7514588536f6d3537c8624cb3f8666342b65d1c5bb"
-    },
-    "skills/doc-updater/scripts/scan_changed_files.py": {
-      "source": "skills/doc-updater/scripts/scan_changed_files.py",
-      "sha256": "7a01542ee416ffcaeccccfa35aa80bfc9846815703434be43f08ee60ed7cfc32"
-    },
-    "skills/doc-updater/scripts/write_markdown_sync_target.py": {
-      "source": "skills/doc-updater/scripts/write_markdown_sync_target.py",
-      "sha256": "a6b3d387db47029e3a01598306038013adc96a1c427dee274daba898fecef9dd"
+    "skills/context-brief/scripts/validate_context_brief.py": {
+      "sha256": "5ad26def4afb187587f67ea3354f80c3931a76067933d92df5ed11ceaa9c15fa",
+      "source": "skills/context-brief/scripts/validate_context_brief.py"
     },
     "skills/doc-updater/SKILL.md": {
-      "source": "skills/doc-updater/SKILL.md",
-      "sha256": "8c0a2b46a5d3e775aafa1a180e3d74577919353664019dd1ffcca95a3fafd579"
+      "sha256": "8c0a2b46a5d3e775aafa1a180e3d74577919353664019dd1ffcca95a3fafd579",
+      "source": "skills/doc-updater/SKILL.md"
     },
-    "skills/local-document-processing/agents/openai.yaml": {
-      "source": "skills/local-document-processing/agents/openai.yaml",
-      "sha256": "e9911931490af720c2d89aa7ed2083b50d4e944ec6095571f554931dcaedd967"
+    "skills/doc-updater/agents/openai.yaml": {
+      "sha256": "efd5f1949e89f94687b4dec0aaee89637eb3bc03a8cfee4b6659ca5cd01e95c7",
+      "source": "skills/doc-updater/agents/openai.yaml"
+    },
+    "skills/doc-updater/assets/icon-small.png": {
+      "sha256": "2c44570d85bc97fee8229166c0a2f4604456d501d6f257d916d0f87673f26f06",
+      "source": "skills/doc-updater/assets/icon-small.png"
+    },
+    "skills/doc-updater/assets/icon-small.svg": {
+      "sha256": "6d93ba2b47da11d00fa19fee3b4ac018b8cdb48c9ff1be662d1036cb35475e75",
+      "source": "skills/doc-updater/assets/icon-small.svg"
+    },
+    "skills/doc-updater/assets/icon.png": {
+      "sha256": "581cdccf67f3b0b8f03e8b2aa22b52f40113ea086e27b2457d1b40e6c8c90aeb",
+      "source": "skills/doc-updater/assets/icon.png"
+    },
+    "skills/doc-updater/assets/icon.svg": {
+      "sha256": "154aa7ea113f70fcb816f527ddc81afb1db2dcdc891992c9339771659b5bf742",
+      "source": "skills/doc-updater/assets/icon.svg"
+    },
+    "skills/doc-updater/references/doc-update-rules.md": {
+      "sha256": "192dae01ec2fa2792d5bc8e7e270c71257b967eec173baeaea193eab9cb0089f",
+      "source": "skills/doc-updater/references/doc-update-rules.md"
+    },
+    "skills/doc-updater/references/notion-sync-reader-writer-contract.md": {
+      "sha256": "c4dcbd9a01dba206d6965487af84a5dadf5fc7dfe45f0d4989e825f6e4ecebea",
+      "source": "skills/doc-updater/references/notion-sync-reader-writer-contract.md"
+    },
+    "skills/doc-updater/references/presentation.md": {
+      "sha256": "89d18d0213692a561e8d0ef68681752ba7936089cf27e672405978996fbee048",
+      "source": "skills/doc-updater/references/presentation.md"
+    },
+    "skills/doc-updater/scripts/inspect_markdown_sync_target.py": {
+      "sha256": "9f7530322f289745df5c2588a790d883e1c226ff4cd6b6a8f57ff7048f672b66",
+      "source": "skills/doc-updater/scripts/inspect_markdown_sync_target.py"
+    },
+    "skills/doc-updater/scripts/inspect_notion_sync_target.py": {
+      "sha256": "b047b0e0503c56621ef77c7514588536f6d3537c8624cb3f8666342b65d1c5bb",
+      "source": "skills/doc-updater/scripts/inspect_notion_sync_target.py"
+    },
+    "skills/doc-updater/scripts/scan_changed_files.py": {
+      "sha256": "7a01542ee416ffcaeccccfa35aa80bfc9846815703434be43f08ee60ed7cfc32",
+      "source": "skills/doc-updater/scripts/scan_changed_files.py"
+    },
+    "skills/doc-updater/scripts/write_markdown_sync_target.py": {
+      "sha256": "a6b3d387db47029e3a01598306038013adc96a1c427dee274daba898fecef9dd",
+      "source": "skills/doc-updater/scripts/write_markdown_sync_target.py"
+    },
+    "skills/document-source-matching/SKILL.md": {
+      "sha256": "073e37f0ead6623bf17b84f203db34f527a4f917304a72c9b42fda9c31dbee9a",
+      "source": "skills/document-source-matching/SKILL.md"
+    },
+    "skills/document-source-matching/agents/openai.yaml": {
+      "sha256": "13127f83b6351c1b6e839e170d7cabac3c2c417182e9b9d7ce1af91c07b03710",
+      "source": "skills/document-source-matching/agents/openai.yaml"
+    },
+    "skills/document-source-matching/assets/icon-small.png": {
+      "sha256": "4fd2599b24052b083a1b44e57bea9cdea41472a116a4060169e10c86c2985396",
+      "source": "skills/document-source-matching/assets/icon-small.png"
+    },
+    "skills/document-source-matching/assets/icon-small.svg": {
+      "sha256": "095192cb842c89ee505ef84856497b496c990286afa6533478622595353b27b0",
+      "source": "skills/document-source-matching/assets/icon-small.svg"
+    },
+    "skills/document-source-matching/assets/icon.png": {
+      "sha256": "89e2c748116189eee91498b7c69d320d6ad64981e2cfa19fd83e5d2c87f3a915",
+      "source": "skills/document-source-matching/assets/icon.png"
+    },
+    "skills/document-source-matching/assets/icon.svg": {
+      "sha256": "095192cb842c89ee505ef84856497b496c990286afa6533478622595353b27b0",
+      "source": "skills/document-source-matching/assets/icon.svg"
     },
     "skills/local-document-processing/SKILL.md": {
-      "source": "skills/local-document-processing/SKILL.md",
-      "sha256": "f7c8f64c4079f7ff6a79fa0e93d50d3945451c3ff13f36c123405a173a81ca3b"
+      "sha256": "f7c8f64c4079f7ff6a79fa0e93d50d3945451c3ff13f36c123405a173a81ca3b",
+      "source": "skills/local-document-processing/SKILL.md"
     },
-    "LICENSE": {
-      "source": "LICENSE",
-      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a"
+    "skills/local-document-processing/agents/openai.yaml": {
+      "sha256": "e9911931490af720c2d89aa7ed2083b50d4e944ec6095571f554931dcaedd967",
+      "source": "skills/local-document-processing/agents/openai.yaml"
     }
   },
+  "license": "MIT",
+  "plugin": "codex-documents-specifications",
+  "producer": "codex-toolkit.marketplace.v1",
+  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [
     "local-documents"
   ],
-  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
-  "producer": "codex-toolkit.marketplace.v1",
   "source_state": "canonical-file-hashes",
-  "license": "MIT"
+  "version": "0.1.2"
 }

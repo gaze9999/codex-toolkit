@@ -32,6 +32,16 @@ class MarketplaceTests(unittest.TestCase):
         self.assertEqual(market.synchronize(self.root)['status'], 'pass')
         self.assertTrue((self.root / 'marketplace/plugins/codex-example/LICENSE').is_file())
 
+    def test_filesystem_enumeration_order_does_not_change_manifest(self):
+        expected = market.prepare(self.root)
+        original = market.payload.side_effect
+        def reversed_payload(root, bundle):
+            files, provenance = original(root, bundle)
+            provenance['files'] = dict(reversed(list(provenance['files'].items())))
+            return dict(reversed(list(files.items()))), provenance
+        with patch.object(market, 'payload', side_effect=reversed_payload):
+            self.assertEqual(market.prepare(self.root), expected)
+
     def test_source_change_updates_intact_mirror(self):
         market.synchronize(self.root, True)
         self.raw = b'changed Skill'
