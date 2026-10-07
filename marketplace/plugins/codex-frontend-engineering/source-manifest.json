@@ -4,8 +4,16 @@
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
     },
+    "assets/toolkit.png": {
+      "sha256": "befd09b04133f3489a2dc023f295c8edace1ddc1d502f6b538788f877fc34e89",
+      "source": "assets/branding/toolkit.png"
+    },
+    "assets/toolkit.svg": {
+      "sha256": "391acb0dc2f459b41bfb0c64fbeeaa159f8ab9c526fcca54b3415bd15fa8c5d4",
+      "source": "assets/branding/toolkit.svg"
+    },
     "plugin.json": {
-      "sha256": "ae2f88ff07b63cad30a61f58fe4210b64ff7f3c9456c01b53c547b9a4b34a459",
+      "sha256": "de10aa7c180fabbaefaa5f8d4ca7e0a1e0dd50cf8b30202599be3f7151aac2a9",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "skills/angular-development/SKILL.md": {
@@ -199,5 +207,5 @@
     "edge-devtools"
   ],
   "source_state": "canonical-file-hashes",
-  "version": "0.1.0"
+  "version": "0.1.1"
 }

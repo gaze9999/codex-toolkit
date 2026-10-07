@@ -4,8 +4,16 @@
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
     },
+    "assets/toolkit.png": {
+      "sha256": "befd09b04133f3489a2dc023f295c8edace1ddc1d502f6b538788f877fc34e89",
+      "source": "assets/branding/toolkit.png"
+    },
+    "assets/toolkit.svg": {
+      "sha256": "391acb0dc2f459b41bfb0c64fbeeaa159f8ab9c526fcca54b3415bd15fa8c5d4",
+      "source": "assets/branding/toolkit.svg"
+    },
     "plugin.json": {
-      "sha256": "5a62246af2e2688bc864ba4be8748bede6e1e441977006889ecb9b45ec64472d",
+      "sha256": "27cf6fc53a1a3ab9ba2b25847a7dcc2cb689c20ad43bfa6a9dc5aaa989bfb3fa",
       "source": "plugins/documents-specifications/plugin.json"
     },
     "skills/context-brief/SKILL.md": {
@@ -141,5 +149,5 @@
     "local-documents"
   ],
   "source_state": "canonical-file-hashes",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

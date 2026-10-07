@@ -10,3 +10,8 @@ plugins/** text=auto eol=lf
 marketplace/** text=auto eol=lf
 LICENSE text eol=lf
 mcp/tools/proofreading/** text=auto eol=lf
+
+# Keep branding source hashes stable across platforms
+assets/**/*.svg text eol=lf
+assets/**/*.png -text
+VERSION text eol=lf

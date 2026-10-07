@@ -9,7 +9,12 @@
         "packaging-acceptance"
       ],
       "runtime_profiles": [],
-      "resources": []
+      "resources": [
+        {
+          "source": "assets/branding",
+          "target": "assets"
+        }
+      ]
     },
     {
       "id": "jev-evaluation",
@@ -21,7 +26,12 @@
       "runtime_profiles": [
         "jev"
       ],
-      "resources": []
+      "resources": [
+        {
+          "source": "assets/branding",
+          "target": "assets"
+        }
+      ]
     },
     {
       "id": "documents-specifications",
@@ -36,7 +46,12 @@
       "runtime_profiles": [
         "local-documents"
       ],
-      "resources": []
+      "resources": [
+        {
+          "source": "assets/branding",
+          "target": "assets"
+        }
+      ]
     },
     {
       "id": "environment-evidence",
@@ -49,7 +64,12 @@
       "runtime_profiles": [
         "workspace-inspection"
       ],
-      "resources": []
+      "resources": [
+        {
+          "source": "assets/branding",
+          "target": "assets"
+        }
+      ]
     },
     {
       "id": "frontend-engineering",
@@ -68,7 +88,12 @@
         "serena",
         "edge-devtools"
       ],
-      "resources": []
+      "resources": [
+        {
+          "source": "assets/branding",
+          "target": "assets"
+        }
+      ]
     },
     {
       "id": "agent-workflow",
@@ -81,7 +106,12 @@
         "task-guide"
       ],
       "runtime_profiles": [],
-      "resources": []
+      "resources": [
+        {
+          "source": "assets/branding",
+          "target": "assets"
+        }
+      ]
     },
     {
       "id": "multilingual-proofreading",
@@ -98,6 +128,10 @@
         {
           "source": "mcp/tools/proofreading",
           "target": "resources/proofreading"
+        },
+        {
+          "source": "assets/branding",
+          "target": "assets"
         }
       ]
     },
@@ -109,7 +143,12 @@
         "local-activity-query"
       ],
       "runtime_profiles": [],
-      "resources": []
+      "resources": [
+        {
+          "source": "assets/branding",
+          "target": "assets"
+        }
+      ]
     },
     {
       "id": "project-documentation",
@@ -120,7 +159,12 @@
         "license-maintainer"
       ],
       "runtime_profiles": [],
-      "resources": []
+      "resources": [
+        {
+          "source": "assets/branding",
+          "target": "assets"
+        }
+      ]
     }
   ],
   "management": "Codex /plugins",

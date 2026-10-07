@@ -4,8 +4,16 @@
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
     },
+    "assets/toolkit.png": {
+      "sha256": "befd09b04133f3489a2dc023f295c8edace1ddc1d502f6b538788f877fc34e89",
+      "source": "assets/branding/toolkit.png"
+    },
+    "assets/toolkit.svg": {
+      "sha256": "391acb0dc2f459b41bfb0c64fbeeaa159f8ab9c526fcca54b3415bd15fa8c5d4",
+      "source": "assets/branding/toolkit.svg"
+    },
     "plugin.json": {
-      "sha256": "dd69608b628c0158e42058c2d69e750d8bfbdfaa58f247829b091beaccfa8c58",
+      "sha256": "83d7c251b8830c8d54420b8c119d1f600d8a658ecdbe0705a0b5be8b03b33f82",
       "source": "plugins/jev-evaluation/plugin.json"
     },
     "skills/jev-evaluation/LICENSE": {
@@ -85,5 +93,5 @@
     "jev"
   ],
   "source_state": "canonical-file-hashes",
-  "version": "0.1.0"
+  "version": "0.1.1"
 }

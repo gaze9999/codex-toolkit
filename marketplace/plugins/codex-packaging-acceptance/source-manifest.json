@@ -4,8 +4,16 @@
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
     },
+    "assets/toolkit.png": {
+      "sha256": "befd09b04133f3489a2dc023f295c8edace1ddc1d502f6b538788f877fc34e89",
+      "source": "assets/branding/toolkit.png"
+    },
+    "assets/toolkit.svg": {
+      "sha256": "391acb0dc2f459b41bfb0c64fbeeaa159f8ab9c526fcca54b3415bd15fa8c5d4",
+      "source": "assets/branding/toolkit.svg"
+    },
     "plugin.json": {
-      "sha256": "0f96386bd1b495f2d6e4d2f1a9f500a21f1520882fa48e6270d5ead9d46426ed",
+      "sha256": "6f809f42d46b0a904d246a81f4f71aa34da4f8e0ae35262b8844927bbd65e7be",
       "source": "plugins/packaging-acceptance/plugin.json"
     },
     "skills/packaging-acceptance/SKILL.md": {
@@ -27,5 +35,5 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "version": "0.1.0"
+  "version": "0.1.1"
 }
