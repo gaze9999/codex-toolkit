@@ -8,7 +8,7 @@ python -m unittest discover -s tests -t . -v
 
 目前自動測試涵蓋
 
-- CLI 自動發現的全部可執行 module 之 `--help` 可安全執行, `local_documents` 的 MCP 層與驗證由 `codex-setup` 管理, 不納入本工具包
+- CLI 自動發現的全部可執行 module 之 `--help` 可安全執行, `local_documents` 的 MCP 層與驗證由本 repo 的 `mcp/` 管理, 不納入本工具包
 - CLI 工具清單、穩定別名與實際 subprocess 輸出
 - `launch-cli.cmd` / `launch-cli.ps1` 在任意工作目錄的參數轉送與 exit code
 - PowerShell 5.1 / 7 的 PS1 入口, 包含繁中、空白、引號與尾端反斜線參數
