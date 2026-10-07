@@ -1,6 +1,6 @@
 # Codex Toolkit
 
-可獨立使用的 Python 工具、Codex Skills、Plugins 與 MCP 串接, 支援文件處理、Markdown 安全更新、程式碼盤點、治理與驗證證據整理
+可獨立使用的 Python 工具、Codex Skills、Plugins 與 MCP 串接, 支援文件處理、Markdown 安全更新、程式碼盤點、工作規範與驗證證據整理
 
 ## 選擇使用方式
 

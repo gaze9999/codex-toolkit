@@ -18,6 +18,7 @@ jobs:
       - run: python -B mcp/scripts/prepare_plugin_release.py --check
       - run: python -B mcp/scripts/prepare_marketplace.py --check
       - run: python -B -m unittest discover -s mcp/tests -p 'test_*.py'
+      - run: node --test mcp/tests/test_taiwan_style.cjs
       - name: Verify standalone Python tools
         working-directory: python-tools
         run: |
