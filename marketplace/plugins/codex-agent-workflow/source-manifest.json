@@ -13,15 +13,15 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "89a104813720cbba63b8112d762918b6b4ee1413172737c9496c5dfc0c4785dd",
+      "sha256": "e28028bd8826ded5e73c0814db9404699cbd117d62cb219ea74b8e73dbf8972a",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
-      "sha256": "4973025e0dd316221f0abc35c9a3c7be5ff589966663e1e87fa4cdf22b5716b0",
+      "sha256": "62a6db33120d4f4272a26902689053b4285ac5e525653db842af74e946ce6262",
       "source": "skills/agent-governance/SKILL.md"
     },
     "skills/agent-governance/agents/openai.yaml": {
-      "sha256": "aea94f440867df520a89ab9d30ec389dc345f49919da812a801c97f6914277ec",
+      "sha256": "b00ff61b51aef0837fb84be3b49f09fc083a805cb48c68c85d3f57d7b9e878fe",
       "source": "skills/agent-governance/agents/openai.yaml"
     },
     "skills/agent-governance/assets/icon-small.png": {
@@ -105,15 +105,15 @@
       "source": "skills/agent-governance/references/maintenance-acceptance.md"
     },
     "skills/agent-governance/references/task-execution-and-reporting.md": {
-      "sha256": "81193b30c1c03e3d6d8861f29ac1d635777b4879ea8195767a9c2fe507cfb5c4",
+      "sha256": "3471e2f263247ee497e31a32b0f12019cb0b8b86e9735d2915536a12b0f62d55",
       "source": "skills/agent-governance/references/task-execution-and-reporting.md"
     },
     "skills/coding-prompt/SKILL.md": {
-      "sha256": "c41acb4f296f87351a3645cc7d7cfa18753316aecc7c8bd450ec9b3106f20830",
+      "sha256": "86049d0a267e3b15d18edbb3d46185885c6e1fb19f362a6bf8325fbd77c5edca",
       "source": "skills/coding-prompt/SKILL.md"
     },
     "skills/coding-prompt/agents/openai.yaml": {
-      "sha256": "80a368250888b8c8582f4317f21a7a1568158390d05d0a78654c31ffcfc0920e",
+      "sha256": "d1d8289a0d3d9fd5f885b41c2e4acb95dd26e7389afe5e9dc1fe79d0007af616",
       "source": "skills/coding-prompt/agents/openai.yaml"
     },
     "skills/coding-prompt/assets/icon-small.png": {
@@ -137,7 +137,7 @@
       "source": "skills/coding-prompt/references/prompt-patterns.md"
     },
     "skills/coding-prompt/references/workflow.md": {
-      "sha256": "e6612e24746044644091ee150d7150a71be192b8e49b9a8557f2ba738f84897c",
+      "sha256": "d35381f086446cfe6741503097ca3b70bbdd0ae8a4ccc43a10dc940ada286754",
       "source": "skills/coding-prompt/references/workflow.md"
     },
     "skills/task-guide/README.md": {
@@ -145,11 +145,11 @@
       "source": "skills/task-guide/README.md"
     },
     "skills/task-guide/SKILL.md": {
-      "sha256": "887f519b52319f2b9c1d02718bb37b0cc91da43fcce8b3ccfb209791815a464f",
+      "sha256": "01e8a5a4cfb359228500ac4d2390104b35d7edbbee9363c50d90b5f404f99bab",
       "source": "skills/task-guide/SKILL.md"
     },
     "skills/task-guide/agents/openai.yaml": {
-      "sha256": "1e2fe3e0d429be8ef2f143b725c0f5d2ad399bb1a8edca8eaff4f8a3d7d869a4",
+      "sha256": "d87400f77d4c74337840869c92f64dd05f639652af7588c665ffd1c8fd522343",
       "source": "skills/task-guide/agents/openai.yaml"
     },
     "skills/task-guide/assets/history-commit.example.json": {
@@ -189,7 +189,7 @@
       "source": "skills/task-guide/references/task-guide.md"
     },
     "skills/task-guide/references/workflow.md": {
-      "sha256": "3338f1c5fec93f50b31cf5bf4530edd4496a7ce3e6827fc5dd2573d8ce596342",
+      "sha256": "aac713bf4eb7bd14c41da42fb396b4cf7c6ec80cc00ac281ee086ae042e8865b",
       "source": "skills/task-guide/references/workflow.md"
     },
     "skills/task-guide/scripts/create_task_guide.py": {
@@ -236,5 +236,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.1.1",
-  "version": "0.1.4"
+  "version": "0.1.5"
 }

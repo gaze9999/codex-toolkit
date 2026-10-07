@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-documents-specifications",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Extract local documents, match source hashes and maintain traceable specifications.",
   "author": {
     "name": "gaze9999"

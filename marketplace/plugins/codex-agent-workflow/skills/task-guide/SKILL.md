@@ -3,7 +3,7 @@ name: task-guide
 description: Create or refresh feature-specific coding task guides from a project's actual instructions, identified sources and confirmed decisions. Use for reusable task rules, stable work-item IDs and concise history snapshots with source authority and verification boundaries; not agent role assignment, ordinary summaries or implementation work.
 metadata:
   short-description: Create portable feature-specific coding task guides
-  version: "0.4.14"
+  version: "0.4.15"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

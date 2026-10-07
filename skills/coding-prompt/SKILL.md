@@ -3,7 +3,7 @@ name: coding-prompt
 description: Create a concise cross-project coding-agent prompt and model recommendation only when the user explicitly asks for a prompt or handoff; do not use for direct implementation requests.
 metadata:
   short-description: Concise cross-project coding prompt
-  version: "0.4.13"
+  version: "0.4.14"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
