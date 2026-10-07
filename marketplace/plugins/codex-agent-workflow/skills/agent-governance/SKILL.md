@@ -3,7 +3,7 @@ name: agent-governance
 description: Create, audit, or simplify project AGENTS.md layers and Codex subagent roles. Use for agent-governance work, including a new project setup, not ordinary implementation or general code review.
 metadata:
   short-description: Agent governance, role boundaries, and instruction minimization
-  version: "0.4.17"
+  version: "0.4.20"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -24,8 +24,11 @@ Keep the smallest instruction set that preserves authorization, contracts, proje
 
 - Read user-provided files or uploads and inspect the target repository before choosing an instruction structure. Do not require this repository or a fixed source path to be available.
 - For an authorized new setup, read [project-starter/README.md](assets/project-starter/README.md) and select only relevant templates for the confirmed project type and tool support. Fill verified facts, remove placeholders, and keep the always-loaded root and nested files brief.
+- Before creating project-local instructions, roles or agent guides, confirm repository visibility and tracked status. Public repositories default to local Git exclusion of the actual generated agent paths; private repositories may version reviewed portable project guidance. Unknown visibility stays local. Read [instruction layering](references/instruction-layering.md) for precise exclusions, tracked-file handling and explicitly public template exceptions. Neither visibility nor file generation authorizes staging or publication.
 - Start with built-in agents; add custom roles only for a durable difference in ownership, permissions, tools, or expected output. Keep Model and reasoning choices unset until the target environment supports and needs a specific override.
 - Put task routing detail in a conditional guide when needed. Do not turn templates into standing instructions for every turn or treat a template as authorization to create tasks or delegate.
+
+- When project environment, lifecycle acceptance or role/resource ownership needs adaptation, read [project environment routing](references/project-environment-routing.md). Select conditional defaults from actual project evidence; templates do not enable or authorize delegation.
 
 ## Put each rule at the narrowest durable layer
 

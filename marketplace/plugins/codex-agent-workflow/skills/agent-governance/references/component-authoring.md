@@ -75,3 +75,6 @@ Follow the component's established version scheme and current official platform 
 Keep publication authorization separate from version edits, preparation and installation. If the user defines CP as commit/push, it does not authorize a Tag or Release. Apply CPR only through the actual project's release policy; documentation-only repositories may publish through a branch instead. Community examples inform cadence and communication, not mandatory release branches or automatic publication.
 
 For an authorized release, inspect relevant README/version/license/package metadata, notes, required checks and artifact inputs. Route distribution validation to packaging-acceptance and legal changes to license-maintainer when needed. Optional SECURITY, CONTRIBUTING, CODE_OF_CONDUCT, templates, citation and changelog files depend on audience and maintenance needs; GitHub's community checklist is not a universal Release gate. Preserve verified legal notices and material operating limitations. Recheck platform documentation before changing release automation or settings.
+
+
+For suspected secret exposure or maintenance of cleanup guidance, read [sensitive-data removal](sensitive-data-removal.md). Keep incident execution separately authorized; normal component maintenance does not authorize history rewrites.

@@ -2,7 +2,7 @@
 name: packaging-acceptance
 description: Verify portable CLI, Web, GUI or Plugin packaging and release evidence using the project's actual entry points and platform workflow. Use for relocation, lifecycle, manifests and artifact provenance, not routine application builds or automatic publication.
 metadata:
-  version: "0.1.1"
+  version: "0.1.2"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
