@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-local-activity",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Query bounded local activity counts and source health without conversation content.",
   "author": {
     "name": "gaze9999"
@@ -14,7 +14,7 @@
         "shortDescription": "Query bounded local activity counts and source health without conversation content.",
         "logo": "./assets/toolkit.png",
         "composerIcon": "./assets/toolkit.png",
-        "brandColor": "#4AD7BD"
+        "brandColor": "#E8A36D"
       }
     }
   }

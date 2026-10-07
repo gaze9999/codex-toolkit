@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Codex Toolkit toolbox">
-  <rect width="512" height="512" rx="88" fill="#102B2A"/>
-  <path d="M192 170v-40h128v40" fill="none" stroke="#4AD7BD" stroke-width="28" stroke-linejoin="round"/>
-  <rect x="104" y="170" width="304" height="224" rx="32" fill="#4AD7BD"/>
-  <path d="m210 234-44 48 44 48m92-96 44 48-44 48m-38-100-22 104" fill="none" stroke="#102B2A" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect width="512" height="512" rx="88" fill="#FFF7EF"/>
+  <path d="M192 170v-40h128v40" fill="none" stroke="#E8A36D" stroke-width="28" stroke-linejoin="round"/>
+  <rect x="104" y="170" width="304" height="224" rx="32" fill="#E8A36D"/>
+  <path d="m210 234-44 48 44 48m92-96 44 48-44 48m-38-100-22 104" fill="none" stroke="#744A35" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
