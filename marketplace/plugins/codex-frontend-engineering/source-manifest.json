@@ -8,7 +8,7 @@
     },
     "skills/angular-development/agents/openai.yaml": {
       "source": "skills/angular-development/agents/openai.yaml",
-      "sha256": "c561329815dee272254c348dfabda351461008bd0a163921f84ab14e78728ebc"
+      "sha256": "6bd7faff2f8d9396f77b15919ca28740189285fdd7bbdb403e4248b6c605cbf8"
     },
     "skills/angular-development/assets/icon-small.png": {
       "source": "skills/angular-development/assets/icon-small.png",
@@ -16,7 +16,7 @@
     },
     "skills/angular-development/assets/icon-small.svg": {
       "source": "skills/angular-development/assets/icon-small.svg",
-      "sha256": "81b93071c27a1ff6034caeda406c3b44631a033a1e634cacc259f09a22d64cbc"
+      "sha256": "cbe2480397138742daae96ddca07c2d11751d6c055ff0fa3e2a45b79b7a55155"
     },
     "skills/angular-development/assets/icon.png": {
       "source": "skills/angular-development/assets/icon.png",
@@ -24,23 +24,23 @@
     },
     "skills/angular-development/assets/icon.svg": {
       "source": "skills/angular-development/assets/icon.svg",
-      "sha256": "81b93071c27a1ff6034caeda406c3b44631a033a1e634cacc259f09a22d64cbc"
+      "sha256": "cbe2480397138742daae96ddca07c2d11751d6c055ff0fa3e2a45b79b7a55155"
     },
     "skills/angular-development/references/architecture.md": {
       "source": "skills/angular-development/references/architecture.md",
-      "sha256": "9f033cbd94195912da4b5e58e1a5568c46ebf16ee53474e88f454d4f0525f93d"
+      "sha256": "7005248be5bdc995471bd28e6b0bcdeff428e7c3ea74345ad5ec54d8b68fad29"
     },
     "skills/angular-development/references/component-behavior.md": {
       "source": "skills/angular-development/references/component-behavior.md",
-      "sha256": "20f2a6e2f8475970f3a9de51dadaed785f44baa13f79ee185ba9ec0b19931821"
+      "sha256": "25ae03b8f0aa91eff780dcee6012b4797a007e8bc697938da8c027881d04780a"
     },
     "skills/angular-development/SKILL.md": {
       "source": "skills/angular-development/SKILL.md",
-      "sha256": "87ba089d62bb09c09c15b866959c6cdf3ba1a7a06d9e728197ee4584e34b79f6"
+      "sha256": "bca30fa22b6a656c8c93adc0be22e484f4727ceb8f6b614ecdbccf83567088a8"
     },
     "skills/angular-member-order/agents/openai.yaml": {
       "source": "skills/angular-member-order/agents/openai.yaml",
-      "sha256": "25516ac5bcc533799d83cf8e06cf4886a268e641a365b0f1db6238eb03c078ca"
+      "sha256": "f3eaa642dac0bdea8f31804fbe3b26ad4e86d8c16affd463670d29948666f297"
     },
     "skills/angular-member-order/assets/icon-small.png": {
       "source": "skills/angular-member-order/assets/icon-small.png",
@@ -48,7 +48,7 @@
     },
     "skills/angular-member-order/assets/icon-small.svg": {
       "source": "skills/angular-member-order/assets/icon-small.svg",
-      "sha256": "cdf0a566a28abc8a02fff0bf3d4fe22e8f8b5505400a9c38d009bdced15044d0"
+      "sha256": "d8eac6b1a1de3c569ecaef5b67bf600af36b566b512aabb88ce0957ca099a734"
     },
     "skills/angular-member-order/assets/icon.png": {
       "source": "skills/angular-member-order/assets/icon.png",
@@ -56,23 +56,23 @@
     },
     "skills/angular-member-order/assets/icon.svg": {
       "source": "skills/angular-member-order/assets/icon.svg",
-      "sha256": "c386bacef785331db1bc12dd455702b80893384787d7ccad7556022f883d3ca2"
+      "sha256": "584f72134212ee9e471e975a8769a72bbfbaa7eabe3d82c12d15a603fa28a270"
     },
     "skills/angular-member-order/references/signal-io-migration.md": {
       "source": "skills/angular-member-order/references/signal-io-migration.md",
-      "sha256": "a22bf55817f2705e39c05b20459ba221f7772b8d34d9a47637eaac657be17303"
+      "sha256": "954dec987fb2544d730edc0d59e99c16c32fdedee5098c924ac65ca9c46ae813"
     },
     "skills/angular-member-order/scripts/generate_component_member_order_prompt.py": {
       "source": "skills/angular-member-order/scripts/generate_component_member_order_prompt.py",
-      "sha256": "cfb4aa5f9bb24932cbd8609c76d8120a25c7c421906aacbbf6da307a48e5c4a8"
+      "sha256": "1c0e68a2095af0357287ba07eb3c82e7618f3ba25db00a70167b4b845aef2634"
     },
     "skills/angular-member-order/SKILL.md": {
       "source": "skills/angular-member-order/SKILL.md",
-      "sha256": "a5c3d5483a30ba441fbe6dcb63044a2a81ace8994b22bacd91fa246db0f705b9"
+      "sha256": "061c552df1eeb44c2a4ed8be3d57706cae3f94de36dd37d86283f4f6851179a9"
     },
     "skills/react-development/agents/openai.yaml": {
       "source": "skills/react-development/agents/openai.yaml",
-      "sha256": "e7cd9740f801a098c62e69786d6781b2870dd73a9784427938dcc9df34659df8"
+      "sha256": "a2ddef8caa64d78d3c8daa5b58b4cbffa3cee87ccbd304dec782967123cf17dd"
     },
     "skills/react-development/assets/icon-small.png": {
       "source": "skills/react-development/assets/icon-small.png",
@@ -80,7 +80,7 @@
     },
     "skills/react-development/assets/icon-small.svg": {
       "source": "skills/react-development/assets/icon-small.svg",
-      "sha256": "8fd5069830d8e331095148af13baf5ec4cf9bca6db741ca8a0f08fb14bd614ef"
+      "sha256": "5867bc401380711d9f8cfddc70e09d76a9c745ec32dd8255fbbd5ded384bacb5"
     },
     "skills/react-development/assets/icon.png": {
       "source": "skills/react-development/assets/icon.png",
@@ -88,23 +88,23 @@
     },
     "skills/react-development/assets/icon.svg": {
       "source": "skills/react-development/assets/icon.svg",
-      "sha256": "8fd5069830d8e331095148af13baf5ec4cf9bca6db741ca8a0f08fb14bd614ef"
+      "sha256": "5867bc401380711d9f8cfddc70e09d76a9c745ec32dd8255fbbd5ded384bacb5"
     },
     "skills/react-development/references/server-hydration.md": {
       "source": "skills/react-development/references/server-hydration.md",
-      "sha256": "4b3a5f9c1775ad39160693615e33c3b919108cdc9d0bdf0791730dcb6da8571d"
+      "sha256": "d1a2a7b2ba18e7df3f6e32200a52edbfe0294473ae1aaf06e6fd29e99c8fbf7d"
     },
     "skills/react-development/references/state-effects.md": {
       "source": "skills/react-development/references/state-effects.md",
-      "sha256": "d91a40059ee9e2c49fa6b92c1bbb0141fa204899396d9134aa46d3404f05c0ae"
+      "sha256": "7b9a3e766ef2958f9d34c199824af1de895efe395cddd25c280027c4209684cf"
     },
     "skills/react-development/SKILL.md": {
       "source": "skills/react-development/SKILL.md",
-      "sha256": "ae7950d8aad34a1349a7a7436778d83c122e9e1f70e3e82d897e6caf58b7da4c"
+      "sha256": "54a091d77ba08bd3c1991b5d573fafbe44806993260f61a892a9e64f7329ce1c"
     },
     "skills/vue-development/agents/openai.yaml": {
       "source": "skills/vue-development/agents/openai.yaml",
-      "sha256": "cdcd7c739acac5561e8675111e3d4e52160c38074934ab4a7eea304b7ec77396"
+      "sha256": "d7d733ab53b6b60709e969a0218a9d353310141cba83e8a6c07bf6cec5397029"
     },
     "skills/vue-development/assets/icon-small.png": {
       "source": "skills/vue-development/assets/icon-small.png",
@@ -124,19 +124,19 @@
     },
     "skills/vue-development/references/nuxt-ssr.md": {
       "source": "skills/vue-development/references/nuxt-ssr.md",
-      "sha256": "a45dc731467bdbd15e325e27bb3bba27cf08b29b01c8fed2bff4ec30389364a9"
+      "sha256": "b216d8a0be7c83478186828775a7d896907adb6a6f055acf48768080ea4ee092"
     },
     "skills/vue-development/references/reactivity.md": {
       "source": "skills/vue-development/references/reactivity.md",
-      "sha256": "d22074931e6285d04aba64f3da7e163aae6fcb2ca5934fa3dc797fe924d48871"
+      "sha256": "b19ff6650105da41219e9c93fce6b4e33c3a83ce8724d185a13661158a1a3dee"
     },
     "skills/vue-development/SKILL.md": {
       "source": "skills/vue-development/SKILL.md",
-      "sha256": "cbab721fd8025f828ec0e2b415130d87de6c73e54c737fcf9266d4dd345d5335"
+      "sha256": "7dac1333ee19b82cab11407661da6c7f108fd074b590c540c15187fcaa4b6fb6"
     },
     "skills/ui-ux-design/agents/openai.yaml": {
       "source": "skills/ui-ux-design/agents/openai.yaml",
-      "sha256": "04120a84e40475ec767c559a71a7f2032cda7e723950e871cf7ea46d6c6a19e7"
+      "sha256": "bc8e1bd877a73cff88570a8040b7698597ec97c4af578c3b25256ebe54bbad78"
     },
     "skills/ui-ux-design/assets/icon-small.png": {
       "source": "skills/ui-ux-design/assets/icon-small.png",
@@ -144,7 +144,7 @@
     },
     "skills/ui-ux-design/assets/icon-small.svg": {
       "source": "skills/ui-ux-design/assets/icon-small.svg",
-      "sha256": "ce1ce76fb5ec8d6f3f1dfde5f8adc1d76fc0e3ca6693a6ecd4557ff08597e680"
+      "sha256": "5a3797d5deb504bcefec784eb189a3a1d656a829dbf20356f5ab17ebb1c8a40a"
     },
     "skills/ui-ux-design/assets/icon.png": {
       "source": "skills/ui-ux-design/assets/icon.png",
@@ -152,15 +152,15 @@
     },
     "skills/ui-ux-design/assets/icon.svg": {
       "source": "skills/ui-ux-design/assets/icon.svg",
-      "sha256": "ce1ce76fb5ec8d6f3f1dfde5f8adc1d76fc0e3ca6693a6ecd4557ff08597e680"
+      "sha256": "5a3797d5deb504bcefec784eb189a3a1d656a829dbf20356f5ab17ebb1c8a40a"
     },
     "skills/ui-ux-design/SKILL.md": {
       "source": "skills/ui-ux-design/SKILL.md",
-      "sha256": "eb8471b7fbc6a8e8f5af933b9b433341d904dc35e964878d0c10e8774724e9bf"
+      "sha256": "a586014f68a209b912554c8c8ed171ca6f4805e7e08727591022be3dfa8e801d"
     },
     "skills/playwright-cli/agents/openai.yaml": {
       "source": "skills/playwright-cli/agents/openai.yaml",
-      "sha256": "65bd100a36524b4a1034efe1c156403f777a4caef4b2a4d555337b70f59e2be9"
+      "sha256": "273c38022ba20e9982ec2880eb2b594b58b6a997e2c4a26215938c409010d697"
     },
     "skills/playwright-cli/assets/icon-small.png": {
       "source": "skills/playwright-cli/assets/icon-small.png",
@@ -168,7 +168,7 @@
     },
     "skills/playwright-cli/assets/icon-small.svg": {
       "source": "skills/playwright-cli/assets/icon-small.svg",
-      "sha256": "6c7cfb3fcaef5f017c485ac285527bb947d66a449434eceffff0340d9c49524c"
+      "sha256": "848bdda8c6262cb5550b4548c690fc754ca4e13f24ee0e17e3262f1a2f346669"
     },
     "skills/playwright-cli/assets/icon.png": {
       "source": "skills/playwright-cli/assets/icon.png",
@@ -176,7 +176,7 @@
     },
     "skills/playwright-cli/assets/icon.svg": {
       "source": "skills/playwright-cli/assets/icon.svg",
-      "sha256": "6c7cfb3fcaef5f017c485ac285527bb947d66a449434eceffff0340d9c49524c"
+      "sha256": "848bdda8c6262cb5550b4548c690fc754ca4e13f24ee0e17e3262f1a2f346669"
     },
     "skills/playwright-cli/references/commands.md": {
       "source": "skills/playwright-cli/references/commands.md",
@@ -184,7 +184,7 @@
     },
     "skills/playwright-cli/SKILL.md": {
       "source": "skills/playwright-cli/SKILL.md",
-      "sha256": "902929a24b99aef399f8ee669296bc74822ab24d32fa5f68afa0566b14851c73"
+      "sha256": "1b8a93ab5ffdac0ebbba7a32fac1f551d9d6aaeb4eabcd1db1597b7dfde94d2b"
     },
     "LICENSE": {
       "source": "LICENSE",

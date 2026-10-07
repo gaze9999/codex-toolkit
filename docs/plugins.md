@@ -83,7 +83,7 @@ Windows 也可用 `launch-cli.ps1`, macOS 用 `sh launch-cli.sh`. CLI 同時呈�
 封裝來源必須是乾淨、已提交的版本. 每個套件內的 `source-manifest.json` 保留版本、commit、來源映射與逐檔 SHA-256, 組合包另包含 `.agents/plugins/marketplace.json` 與 `plugin-release-manifest.json`. 上傳前逐一讀回壓縮檔, 核對完整檔案集合、內容與 checksum
 
 ```text
-codex-setup-plugins.zip
+codex-toolkit-plugins.zip
 ├── .agents/plugins/marketplace.json
 ├── plugin-release-manifest.json
 └── plugins/codex-ID/
@@ -117,7 +117,7 @@ macOS/Linux 使用 `sh launch-cli.sh` 的相同參數, setup wheel 含此入口�
 
 預覽以 JSON 列出來源版本、變更檔、保留項目及原生重新安裝範圍. 原生 CLI 替換同名 Marketplace 需移除再加入, 因此重新安裝涵蓋目前所有註冊項目, 未選項目沿用舊快照內容. 套用先核對來源及目標有無新修改, 保存新快照與設定備份, 透過原生 Codex 命令註冊及安裝, 再核對完整項目、啟用狀態與快取內容. 失敗時以原生命令復原舊來源並核對, 不整檔覆寫設定或直接改快取
 
-此入口適用既有本機 `codex-setup` Marketplace 且項目為標準啟用設定. 停用或自訂設定、Git Marketplace、初次安裝與帳戶串接保留原生介面, 不猜測設定遷移方式. 其他設定如在交易期間另有變動, 回報實際差異核對狀態
+此入口適用既有本機 `codex-toolkit` Marketplace 且項目為標準啟用設定. 停用或自訂設定、Git Marketplace、初次安裝與帳戶串接保留原生介面, 不猜測設定遷移方式. 其他設定如在交易期間另有變動, 回報實際差異核對狀態
 
 快照標記 `working-tree`, 保存來源 HEAD 與逐檔 hash, 不代表 commit 或 Release. 正式發布仍遵循乾淨已提交來源的門檻. 新來源、快取核對、client 重新載入與模型行為分開回報, 舊來源及備份保留供復原
 

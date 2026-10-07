@@ -8,7 +8,7 @@
     },
     "skills/multilingual-proofreading/agents/openai.yaml": {
       "source": "skills/multilingual-proofreading/agents/openai.yaml",
-      "sha256": "ade3eaee6b762b00c466a2c978c3bd4b67facf4a53bab4d1ad2a53f58f12d35e"
+      "sha256": "dac4a3ae57b245fdf00ab3a6a3fde17d7b95bfde4adb0086ceb4d61b4b9fb0c3"
     },
     "skills/multilingual-proofreading/assets/icon-small.png": {
       "source": "skills/multilingual-proofreading/assets/icon-small.png",
@@ -16,7 +16,7 @@
     },
     "skills/multilingual-proofreading/assets/icon-small.svg": {
       "source": "skills/multilingual-proofreading/assets/icon-small.svg",
-      "sha256": "0bc949cda379fe9e811310547beca64579a683d442ec56415d1b29d4ec5d38c6"
+      "sha256": "4e2e092f61a1f54a6d9831cab1a5aea92acd6dcdd8f52ead82c85c97efacc04c"
     },
     "skills/multilingual-proofreading/assets/icon.png": {
       "source": "skills/multilingual-proofreading/assets/icon.png",
@@ -24,11 +24,11 @@
     },
     "skills/multilingual-proofreading/assets/icon.svg": {
       "source": "skills/multilingual-proofreading/assets/icon.svg",
-      "sha256": "0bc949cda379fe9e811310547beca64579a683d442ec56415d1b29d4ec5d38c6"
+      "sha256": "4e2e092f61a1f54a6d9831cab1a5aea92acd6dcdd8f52ead82c85c97efacc04c"
     },
     "skills/multilingual-proofreading/SKILL.md": {
       "source": "skills/multilingual-proofreading/SKILL.md",
-      "sha256": "40c810d505563593f8f0317a929c94a37c322fe30570d6b6d47cfdf3baa826fb"
+      "sha256": "700e4bf2ecce3d28a926b5b60a2dd654a4f6bc432b74f5eb392c072e6d4b2c17"
     },
     "resources/proofreading/en/cspell.json": {
       "source": "mcp/tools/proofreading/en/cspell.json",

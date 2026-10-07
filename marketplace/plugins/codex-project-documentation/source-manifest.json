@@ -36,7 +36,7 @@
     },
     "skills/license-maintainer/agents/openai.yaml": {
       "source": "skills/license-maintainer/agents/openai.yaml",
-      "sha256": "464ce44af06add87b35f31f440d8ccdc12a5c7a8f73df1383a1c32065c663ca3"
+      "sha256": "e7383ecd304757d7376f58f7939050fe801f74f2c91a957b9f560718d0f98534"
     },
     "skills/license-maintainer/assets/icon-small.png": {
       "source": "skills/license-maintainer/assets/icon-small.png",
@@ -44,7 +44,7 @@
     },
     "skills/license-maintainer/assets/icon-small.svg": {
       "source": "skills/license-maintainer/assets/icon-small.svg",
-      "sha256": "3fe6f8110050a9f241a2f26f3c8ea78b62f5811bdbb4d4718d41b683566108c6"
+      "sha256": "6bd43b6e786fef1ffd819f475d9602d1695b5f8b9843d86036f5be5eb167e8a9"
     },
     "skills/license-maintainer/assets/icon.png": {
       "source": "skills/license-maintainer/assets/icon.png",
@@ -52,11 +52,11 @@
     },
     "skills/license-maintainer/assets/icon.svg": {
       "source": "skills/license-maintainer/assets/icon.svg",
-      "sha256": "3fe6f8110050a9f241a2f26f3c8ea78b62f5811bdbb4d4718d41b683566108c6"
+      "sha256": "6bd43b6e786fef1ffd819f475d9602d1695b5f8b9843d86036f5be5eb167e8a9"
     },
     "skills/license-maintainer/SKILL.md": {
       "source": "skills/license-maintainer/SKILL.md",
-      "sha256": "f3060d2807cf806739cb6c1e637e9ecae6d2cf592d6782fe1ed498598df98a59"
+      "sha256": "98ba0f81299e3f64e51140d014f046fa599974b7eafc04b6d8aea827d96fc307"
     },
     "LICENSE": {
       "source": "LICENSE",

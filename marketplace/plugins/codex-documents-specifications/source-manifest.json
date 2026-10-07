@@ -8,7 +8,7 @@
     },
     "skills/context-brief/agents/openai.yaml": {
       "source": "skills/context-brief/agents/openai.yaml",
-      "sha256": "89899f134c73ac5a5fdd7362faa8a923641e6740ca1989e2bec6d74d606207eb"
+      "sha256": "7797cc02b54f0e21673db1314cfbd5ee0d43c95dd5916386abd65d9b34a91fbe"
     },
     "skills/context-brief/assets/icon-small.png": {
       "source": "skills/context-brief/assets/icon-small.png",
@@ -16,7 +16,7 @@
     },
     "skills/context-brief/assets/icon-small.svg": {
       "source": "skills/context-brief/assets/icon-small.svg",
-      "sha256": "180c50a8e49f89ec6c034b2d0448cd51219384e97a0135299ff35cde661d37cf"
+      "sha256": "04143acbc8044a3d55095ad1db90f87baac7cd0aa62a26b3ad606f98d8c481cc"
     },
     "skills/context-brief/assets/icon.png": {
       "source": "skills/context-brief/assets/icon.png",
@@ -24,19 +24,19 @@
     },
     "skills/context-brief/assets/icon.svg": {
       "source": "skills/context-brief/assets/icon.svg",
-      "sha256": "85a0dee726a896bdf2380688a13405acbc2405f081f18d50feb365bde0661f16"
+      "sha256": "92475c4e428aeb58582c0994dd028ff7106618b8a9e1bb14f5fc810d7260c29e"
     },
     "skills/context-brief/requirements.txt": {
       "source": "skills/context-brief/requirements.txt",
-      "sha256": "77acdc19bb5411688108ee6f482b3d5dc548653090c208ec9d5e319155f0f649"
+      "sha256": "abe055f48cd4e706d9f8591d104e8f1d683bdee0ce95cb04f5df99757302be74"
     },
     "skills/context-brief/scripts/extract_source_text.py": {
       "source": "skills/context-brief/scripts/extract_source_text.py",
-      "sha256": "2137ec442bca20e4da5b8b36bf49c5853920fb7f2a30ec0d8d8fe67b91fe716c"
+      "sha256": "824bdf83eb9791b0e499f18cdb48c04d6e8cfd780da681894e5c145a39594ab5"
     },
     "skills/context-brief/scripts/ocr_fallback.py": {
       "source": "skills/context-brief/scripts/ocr_fallback.py",
-      "sha256": "af896dcf0ba16ed9a53c602764d17e1e6d52ec7a0bda2f3dc223a53678c0c41f"
+      "sha256": "cfcca0ab932160071219a3b8025cfbcd8ccf3ddf1a71548c43dd36362a939674"
     },
     "skills/context-brief/scripts/validate_context_brief.py": {
       "source": "skills/context-brief/scripts/validate_context_brief.py",
@@ -44,11 +44,11 @@
     },
     "skills/context-brief/SKILL.md": {
       "source": "skills/context-brief/SKILL.md",
-      "sha256": "0d14ad382ae3165b1459896db5d222197bcb1c281eb13a901ab5f6d4e6637e99"
+      "sha256": "90cea61e01955b3e173851e19b6e63c58d75084bda19895c7d1b8eb6eb0edcba"
     },
     "skills/document-source-matching/agents/openai.yaml": {
       "source": "skills/document-source-matching/agents/openai.yaml",
-      "sha256": "e60e5809e7fdcbeba8f083ff3b7aaa85657efee3c24f559366770805471e91df"
+      "sha256": "13127f83b6351c1b6e839e170d7cabac3c2c417182e9b9d7ce1af91c07b03710"
     },
     "skills/document-source-matching/assets/icon-small.png": {
       "source": "skills/document-source-matching/assets/icon-small.png",
@@ -56,7 +56,7 @@
     },
     "skills/document-source-matching/assets/icon-small.svg": {
       "source": "skills/document-source-matching/assets/icon-small.svg",
-      "sha256": "c9309e8873f24a6cbf6a08663b4c486aa55c77470044a3357519941666ca1d0e"
+      "sha256": "095192cb842c89ee505ef84856497b496c990286afa6533478622595353b27b0"
     },
     "skills/document-source-matching/assets/icon.png": {
       "source": "skills/document-source-matching/assets/icon.png",
@@ -64,11 +64,11 @@
     },
     "skills/document-source-matching/assets/icon.svg": {
       "source": "skills/document-source-matching/assets/icon.svg",
-      "sha256": "c9309e8873f24a6cbf6a08663b4c486aa55c77470044a3357519941666ca1d0e"
+      "sha256": "095192cb842c89ee505ef84856497b496c990286afa6533478622595353b27b0"
     },
     "skills/document-source-matching/SKILL.md": {
       "source": "skills/document-source-matching/SKILL.md",
-      "sha256": "e74258ffa330207714843a53b331422ea184d8dab87bacdd000592a12575f98e"
+      "sha256": "073e37f0ead6623bf17b84f203db34f527a4f917304a72c9b42fda9c31dbee9a"
     },
     "skills/doc-updater/agents/openai.yaml": {
       "source": "skills/doc-updater/agents/openai.yaml",
@@ -92,11 +92,11 @@
     },
     "skills/doc-updater/references/doc-update-rules.md": {
       "source": "skills/doc-updater/references/doc-update-rules.md",
-      "sha256": "16d46ea7d55a202471e82f82325b5546ee09db6c04f524aecbc2a704feb9d6f0"
+      "sha256": "192dae01ec2fa2792d5bc8e7e270c71257b967eec173baeaea193eab9cb0089f"
     },
     "skills/doc-updater/references/notion-sync-reader-writer-contract.md": {
       "source": "skills/doc-updater/references/notion-sync-reader-writer-contract.md",
-      "sha256": "86c64a849e81230d0260ca47c0e772901d0b455c65883425982f7eb85ecdd464"
+      "sha256": "c4dcbd9a01dba206d6965487af84a5dadf5fc7dfe45f0d4989e825f6e4ecebea"
     },
     "skills/doc-updater/references/presentation.md": {
       "source": "skills/doc-updater/references/presentation.md",
@@ -104,11 +104,11 @@
     },
     "skills/doc-updater/scripts/inspect_markdown_sync_target.py": {
       "source": "skills/doc-updater/scripts/inspect_markdown_sync_target.py",
-      "sha256": "adea7651a9a88a9d71f07e7f0dbfdc211fb445df76ada33816f0af034509ebef"
+      "sha256": "9f7530322f289745df5c2588a790d883e1c226ff4cd6b6a8f57ff7048f672b66"
     },
     "skills/doc-updater/scripts/inspect_notion_sync_target.py": {
       "source": "skills/doc-updater/scripts/inspect_notion_sync_target.py",
-      "sha256": "a50d0c21aa9bc0367afcf970517c2af4c1ae2fd24f74e5de434c0134f4454d65"
+      "sha256": "b047b0e0503c56621ef77c7514588536f6d3537c8624cb3f8666342b65d1c5bb"
     },
     "skills/doc-updater/scripts/scan_changed_files.py": {
       "source": "skills/doc-updater/scripts/scan_changed_files.py",
@@ -116,7 +116,7 @@
     },
     "skills/doc-updater/scripts/write_markdown_sync_target.py": {
       "source": "skills/doc-updater/scripts/write_markdown_sync_target.py",
-      "sha256": "8b1b4b9a9fd810cbfa3ee32ffb32146f20246f86274b6ef76ba3fafd52e3fb00"
+      "sha256": "a6b3d387db47029e3a01598306038013adc96a1c427dee274daba898fecef9dd"
     },
     "skills/doc-updater/SKILL.md": {
       "source": "skills/doc-updater/SKILL.md",
