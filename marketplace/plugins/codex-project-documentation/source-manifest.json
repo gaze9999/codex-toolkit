@@ -1,71 +1,71 @@
 {
-  "plugin": "codex-project-documentation",
-  "version": "0.1.1",
   "files": {
+    "LICENSE": {
+      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
+      "source": "LICENSE"
+    },
     "plugin.json": {
-      "source": "plugins/project-documentation/plugin.json",
-      "sha256": "f6a528cc01958dee6e110b24d92dab04bde9cc72aff65d3656d26192a964cafd"
-    },
-    "skills/readme-maintainer/agents/openai.yaml": {
-      "source": "skills/readme-maintainer/agents/openai.yaml",
-      "sha256": "6c13754201710f2714504976988343465b8f4d9b4fb988d8f237ec356bcda7a8"
-    },
-    "skills/readme-maintainer/assets/icon-small.png": {
-      "source": "skills/readme-maintainer/assets/icon-small.png",
-      "sha256": "40fa7a14785cf08b528eb773fa15ed36433df6601024a47f0f706a2d8a0c545c"
-    },
-    "skills/readme-maintainer/assets/icon-small.svg": {
-      "source": "skills/readme-maintainer/assets/icon-small.svg",
-      "sha256": "9c464980d56e1b32d8d0352a246a3b292d082a60d2c901a0123ef9d909fd7665"
-    },
-    "skills/readme-maintainer/assets/icon.png": {
-      "source": "skills/readme-maintainer/assets/icon.png",
-      "sha256": "35fae5aacfed52b1c235c221ac5a3ce1887e731b7d53d2844fe29b07aeb91bec"
-    },
-    "skills/readme-maintainer/assets/icon.svg": {
-      "source": "skills/readme-maintainer/assets/icon.svg",
-      "sha256": "4991987c662526729b0517efb8a683c7863198908dcd3fa12676191c4ece11ff"
-    },
-    "skills/readme-maintainer/references/presentation.md": {
-      "source": "skills/readme-maintainer/references/presentation.md",
-      "sha256": "71becb201c9e1c733be1aeaddc7ff3115dce3a7ed59f95ec0935d4e9a5b405d9"
-    },
-    "skills/readme-maintainer/SKILL.md": {
-      "source": "skills/readme-maintainer/SKILL.md",
-      "sha256": "9ecc28514fa5aa2d9000ffaf5eb7bd442b9ac6e41f0d538455e6b8d03691d641"
-    },
-    "skills/license-maintainer/agents/openai.yaml": {
-      "source": "skills/license-maintainer/agents/openai.yaml",
-      "sha256": "e7383ecd304757d7376f58f7939050fe801f74f2c91a957b9f560718d0f98534"
-    },
-    "skills/license-maintainer/assets/icon-small.png": {
-      "source": "skills/license-maintainer/assets/icon-small.png",
-      "sha256": "def29a0eb50efdf3b6803e78d24406983786c71f937b98a7606b5adacf780be1"
-    },
-    "skills/license-maintainer/assets/icon-small.svg": {
-      "source": "skills/license-maintainer/assets/icon-small.svg",
-      "sha256": "6bd43b6e786fef1ffd819f475d9602d1695b5f8b9843d86036f5be5eb167e8a9"
-    },
-    "skills/license-maintainer/assets/icon.png": {
-      "source": "skills/license-maintainer/assets/icon.png",
-      "sha256": "7c4f83860912f47942a1e6fe7e687aea792c9372f3c546220026e60529a717ef"
-    },
-    "skills/license-maintainer/assets/icon.svg": {
-      "source": "skills/license-maintainer/assets/icon.svg",
-      "sha256": "6bd43b6e786fef1ffd819f475d9602d1695b5f8b9843d86036f5be5eb167e8a9"
+      "sha256": "f6a528cc01958dee6e110b24d92dab04bde9cc72aff65d3656d26192a964cafd",
+      "source": "plugins/project-documentation/plugin.json"
     },
     "skills/license-maintainer/SKILL.md": {
-      "source": "skills/license-maintainer/SKILL.md",
-      "sha256": "98ba0f81299e3f64e51140d014f046fa599974b7eafc04b6d8aea827d96fc307"
+      "sha256": "98ba0f81299e3f64e51140d014f046fa599974b7eafc04b6d8aea827d96fc307",
+      "source": "skills/license-maintainer/SKILL.md"
     },
-    "LICENSE": {
-      "source": "LICENSE",
-      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a"
+    "skills/license-maintainer/agents/openai.yaml": {
+      "sha256": "e7383ecd304757d7376f58f7939050fe801f74f2c91a957b9f560718d0f98534",
+      "source": "skills/license-maintainer/agents/openai.yaml"
+    },
+    "skills/license-maintainer/assets/icon-small.png": {
+      "sha256": "def29a0eb50efdf3b6803e78d24406983786c71f937b98a7606b5adacf780be1",
+      "source": "skills/license-maintainer/assets/icon-small.png"
+    },
+    "skills/license-maintainer/assets/icon-small.svg": {
+      "sha256": "6bd43b6e786fef1ffd819f475d9602d1695b5f8b9843d86036f5be5eb167e8a9",
+      "source": "skills/license-maintainer/assets/icon-small.svg"
+    },
+    "skills/license-maintainer/assets/icon.png": {
+      "sha256": "7c4f83860912f47942a1e6fe7e687aea792c9372f3c546220026e60529a717ef",
+      "source": "skills/license-maintainer/assets/icon.png"
+    },
+    "skills/license-maintainer/assets/icon.svg": {
+      "sha256": "6bd43b6e786fef1ffd819f475d9602d1695b5f8b9843d86036f5be5eb167e8a9",
+      "source": "skills/license-maintainer/assets/icon.svg"
+    },
+    "skills/readme-maintainer/SKILL.md": {
+      "sha256": "9ecc28514fa5aa2d9000ffaf5eb7bd442b9ac6e41f0d538455e6b8d03691d641",
+      "source": "skills/readme-maintainer/SKILL.md"
+    },
+    "skills/readme-maintainer/agents/openai.yaml": {
+      "sha256": "6c13754201710f2714504976988343465b8f4d9b4fb988d8f237ec356bcda7a8",
+      "source": "skills/readme-maintainer/agents/openai.yaml"
+    },
+    "skills/readme-maintainer/assets/icon-small.png": {
+      "sha256": "40fa7a14785cf08b528eb773fa15ed36433df6601024a47f0f706a2d8a0c545c",
+      "source": "skills/readme-maintainer/assets/icon-small.png"
+    },
+    "skills/readme-maintainer/assets/icon-small.svg": {
+      "sha256": "9c464980d56e1b32d8d0352a246a3b292d082a60d2c901a0123ef9d909fd7665",
+      "source": "skills/readme-maintainer/assets/icon-small.svg"
+    },
+    "skills/readme-maintainer/assets/icon.png": {
+      "sha256": "35fae5aacfed52b1c235c221ac5a3ce1887e731b7d53d2844fe29b07aeb91bec",
+      "source": "skills/readme-maintainer/assets/icon.png"
+    },
+    "skills/readme-maintainer/assets/icon.svg": {
+      "sha256": "4991987c662526729b0517efb8a683c7863198908dcd3fa12676191c4ece11ff",
+      "source": "skills/readme-maintainer/assets/icon.svg"
+    },
+    "skills/readme-maintainer/references/presentation.md": {
+      "sha256": "71becb201c9e1c733be1aeaddc7ff3115dce3a7ed59f95ec0935d4e9a5b405d9",
+      "source": "skills/readme-maintainer/references/presentation.md"
     }
   },
-  "runtime_profiles": [],
-  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
+  "license": "MIT",
+  "plugin": "codex-project-documentation",
   "producer": "codex-toolkit.marketplace.v1",
+  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
+  "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "license": "MIT"
+  "version": "0.1.1"
 }

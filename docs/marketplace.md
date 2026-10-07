@@ -8,6 +8,14 @@ codex plugin list --marketplace codex-toolkit --json
 codex plugin add codex-agent-workflow@codex-toolkit
 ```
 
+Windows 若出現 `Filename too long`, Git for Windows 可啟用長路徑, 這項設定影響該使用者的 Git:
+
+```text
+git config --global core.longpaths true
+```
+
+也可從較短的來源路徑加入本機市集. 支援細節見 [Git for Windows 設定](https://github.com/git-for-windows/git/blob/main/Documentation/config/core.adoc)
+
 市集加入後可選擇治理、文件、前端、證據、Jev、校對、活動摘要及 README / 授權等外掛. 這是個人可加入的市集, 官方公開目錄上架另有提交流程
 
 Plugin 的 Skills 與資源由來源生成, runtime、帳戶與 MCP 註冊依用途安裝. 既有同名 Skill 若已直接安裝或來自另一個市集, 先選定單一啟用來源, 避免同時使用兩份. 不複製另一台電腦的 venv、client cache 或憑證

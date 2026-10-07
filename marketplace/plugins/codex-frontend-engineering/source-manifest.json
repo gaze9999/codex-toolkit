@@ -1,203 +1,203 @@
 {
-  "plugin": "codex-frontend-engineering",
-  "version": "0.1.0",
   "files": {
+    "LICENSE": {
+      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
+      "source": "LICENSE"
+    },
     "plugin.json": {
-      "source": "plugins/frontend-engineering/plugin.json",
-      "sha256": "ae2f88ff07b63cad30a61f58fe4210b64ff7f3c9456c01b53c547b9a4b34a459"
-    },
-    "skills/angular-development/agents/openai.yaml": {
-      "source": "skills/angular-development/agents/openai.yaml",
-      "sha256": "6bd7faff2f8d9396f77b15919ca28740189285fdd7bbdb403e4248b6c605cbf8"
-    },
-    "skills/angular-development/assets/icon-small.png": {
-      "source": "skills/angular-development/assets/icon-small.png",
-      "sha256": "328e4c9cec94aad16587c8a8c03ad3d2f278f3241d77503b1e7e4cf4f04a2aef"
-    },
-    "skills/angular-development/assets/icon-small.svg": {
-      "source": "skills/angular-development/assets/icon-small.svg",
-      "sha256": "cbe2480397138742daae96ddca07c2d11751d6c055ff0fa3e2a45b79b7a55155"
-    },
-    "skills/angular-development/assets/icon.png": {
-      "source": "skills/angular-development/assets/icon.png",
-      "sha256": "46a3edb1551968ab559d5062e270ec1d7a242b357aaf6035edac4e8ae8d07581"
-    },
-    "skills/angular-development/assets/icon.svg": {
-      "source": "skills/angular-development/assets/icon.svg",
-      "sha256": "cbe2480397138742daae96ddca07c2d11751d6c055ff0fa3e2a45b79b7a55155"
-    },
-    "skills/angular-development/references/architecture.md": {
-      "source": "skills/angular-development/references/architecture.md",
-      "sha256": "7005248be5bdc995471bd28e6b0bcdeff428e7c3ea74345ad5ec54d8b68fad29"
-    },
-    "skills/angular-development/references/component-behavior.md": {
-      "source": "skills/angular-development/references/component-behavior.md",
-      "sha256": "25ae03b8f0aa91eff780dcee6012b4797a007e8bc697938da8c027881d04780a"
+      "sha256": "ae2f88ff07b63cad30a61f58fe4210b64ff7f3c9456c01b53c547b9a4b34a459",
+      "source": "plugins/frontend-engineering/plugin.json"
     },
     "skills/angular-development/SKILL.md": {
-      "source": "skills/angular-development/SKILL.md",
-      "sha256": "bca30fa22b6a656c8c93adc0be22e484f4727ceb8f6b614ecdbccf83567088a8"
+      "sha256": "bca30fa22b6a656c8c93adc0be22e484f4727ceb8f6b614ecdbccf83567088a8",
+      "source": "skills/angular-development/SKILL.md"
     },
-    "skills/angular-member-order/agents/openai.yaml": {
-      "source": "skills/angular-member-order/agents/openai.yaml",
-      "sha256": "f3eaa642dac0bdea8f31804fbe3b26ad4e86d8c16affd463670d29948666f297"
+    "skills/angular-development/agents/openai.yaml": {
+      "sha256": "6bd7faff2f8d9396f77b15919ca28740189285fdd7bbdb403e4248b6c605cbf8",
+      "source": "skills/angular-development/agents/openai.yaml"
     },
-    "skills/angular-member-order/assets/icon-small.png": {
-      "source": "skills/angular-member-order/assets/icon-small.png",
-      "sha256": "86caf1cf7b9345391160dcaeac239e9527f2f8624c15386afc1159fdbc2eb717"
+    "skills/angular-development/assets/icon-small.png": {
+      "sha256": "328e4c9cec94aad16587c8a8c03ad3d2f278f3241d77503b1e7e4cf4f04a2aef",
+      "source": "skills/angular-development/assets/icon-small.png"
     },
-    "skills/angular-member-order/assets/icon-small.svg": {
-      "source": "skills/angular-member-order/assets/icon-small.svg",
-      "sha256": "d8eac6b1a1de3c569ecaef5b67bf600af36b566b512aabb88ce0957ca099a734"
+    "skills/angular-development/assets/icon-small.svg": {
+      "sha256": "cbe2480397138742daae96ddca07c2d11751d6c055ff0fa3e2a45b79b7a55155",
+      "source": "skills/angular-development/assets/icon-small.svg"
     },
-    "skills/angular-member-order/assets/icon.png": {
-      "source": "skills/angular-member-order/assets/icon.png",
-      "sha256": "c0563466b2c009b2faaa5b4266905720c51cb39aa4d71fc650f4503a08bab189"
+    "skills/angular-development/assets/icon.png": {
+      "sha256": "46a3edb1551968ab559d5062e270ec1d7a242b357aaf6035edac4e8ae8d07581",
+      "source": "skills/angular-development/assets/icon.png"
     },
-    "skills/angular-member-order/assets/icon.svg": {
-      "source": "skills/angular-member-order/assets/icon.svg",
-      "sha256": "584f72134212ee9e471e975a8769a72bbfbaa7eabe3d82c12d15a603fa28a270"
+    "skills/angular-development/assets/icon.svg": {
+      "sha256": "cbe2480397138742daae96ddca07c2d11751d6c055ff0fa3e2a45b79b7a55155",
+      "source": "skills/angular-development/assets/icon.svg"
     },
-    "skills/angular-member-order/references/signal-io-migration.md": {
-      "source": "skills/angular-member-order/references/signal-io-migration.md",
-      "sha256": "954dec987fb2544d730edc0d59e99c16c32fdedee5098c924ac65ca9c46ae813"
+    "skills/angular-development/references/architecture.md": {
+      "sha256": "7005248be5bdc995471bd28e6b0bcdeff428e7c3ea74345ad5ec54d8b68fad29",
+      "source": "skills/angular-development/references/architecture.md"
     },
-    "skills/angular-member-order/scripts/generate_component_member_order_prompt.py": {
-      "source": "skills/angular-member-order/scripts/generate_component_member_order_prompt.py",
-      "sha256": "1c0e68a2095af0357287ba07eb3c82e7618f3ba25db00a70167b4b845aef2634"
+    "skills/angular-development/references/component-behavior.md": {
+      "sha256": "25ae03b8f0aa91eff780dcee6012b4797a007e8bc697938da8c027881d04780a",
+      "source": "skills/angular-development/references/component-behavior.md"
     },
     "skills/angular-member-order/SKILL.md": {
-      "source": "skills/angular-member-order/SKILL.md",
-      "sha256": "061c552df1eeb44c2a4ed8be3d57706cae3f94de36dd37d86283f4f6851179a9"
+      "sha256": "061c552df1eeb44c2a4ed8be3d57706cae3f94de36dd37d86283f4f6851179a9",
+      "source": "skills/angular-member-order/SKILL.md"
     },
-    "skills/react-development/agents/openai.yaml": {
-      "source": "skills/react-development/agents/openai.yaml",
-      "sha256": "a2ddef8caa64d78d3c8daa5b58b4cbffa3cee87ccbd304dec782967123cf17dd"
+    "skills/angular-member-order/agents/openai.yaml": {
+      "sha256": "f3eaa642dac0bdea8f31804fbe3b26ad4e86d8c16affd463670d29948666f297",
+      "source": "skills/angular-member-order/agents/openai.yaml"
     },
-    "skills/react-development/assets/icon-small.png": {
-      "source": "skills/react-development/assets/icon-small.png",
-      "sha256": "9957e3c69320d5c675a866a78dd8fa433b64b3152252e4590729eff1a19dbe75"
+    "skills/angular-member-order/assets/icon-small.png": {
+      "sha256": "86caf1cf7b9345391160dcaeac239e9527f2f8624c15386afc1159fdbc2eb717",
+      "source": "skills/angular-member-order/assets/icon-small.png"
     },
-    "skills/react-development/assets/icon-small.svg": {
-      "source": "skills/react-development/assets/icon-small.svg",
-      "sha256": "5867bc401380711d9f8cfddc70e09d76a9c745ec32dd8255fbbd5ded384bacb5"
+    "skills/angular-member-order/assets/icon-small.svg": {
+      "sha256": "d8eac6b1a1de3c569ecaef5b67bf600af36b566b512aabb88ce0957ca099a734",
+      "source": "skills/angular-member-order/assets/icon-small.svg"
     },
-    "skills/react-development/assets/icon.png": {
-      "source": "skills/react-development/assets/icon.png",
-      "sha256": "03a14f5fd1f0ed80c34960b645d6df5c716fd85804207fa249030230515ca285"
+    "skills/angular-member-order/assets/icon.png": {
+      "sha256": "c0563466b2c009b2faaa5b4266905720c51cb39aa4d71fc650f4503a08bab189",
+      "source": "skills/angular-member-order/assets/icon.png"
     },
-    "skills/react-development/assets/icon.svg": {
-      "source": "skills/react-development/assets/icon.svg",
-      "sha256": "5867bc401380711d9f8cfddc70e09d76a9c745ec32dd8255fbbd5ded384bacb5"
+    "skills/angular-member-order/assets/icon.svg": {
+      "sha256": "584f72134212ee9e471e975a8769a72bbfbaa7eabe3d82c12d15a603fa28a270",
+      "source": "skills/angular-member-order/assets/icon.svg"
     },
-    "skills/react-development/references/server-hydration.md": {
-      "source": "skills/react-development/references/server-hydration.md",
-      "sha256": "d1a2a7b2ba18e7df3f6e32200a52edbfe0294473ae1aaf06e6fd29e99c8fbf7d"
+    "skills/angular-member-order/references/signal-io-migration.md": {
+      "sha256": "954dec987fb2544d730edc0d59e99c16c32fdedee5098c924ac65ca9c46ae813",
+      "source": "skills/angular-member-order/references/signal-io-migration.md"
     },
-    "skills/react-development/references/state-effects.md": {
-      "source": "skills/react-development/references/state-effects.md",
-      "sha256": "7b9a3e766ef2958f9d34c199824af1de895efe395cddd25c280027c4209684cf"
-    },
-    "skills/react-development/SKILL.md": {
-      "source": "skills/react-development/SKILL.md",
-      "sha256": "54a091d77ba08bd3c1991b5d573fafbe44806993260f61a892a9e64f7329ce1c"
-    },
-    "skills/vue-development/agents/openai.yaml": {
-      "source": "skills/vue-development/agents/openai.yaml",
-      "sha256": "d7d733ab53b6b60709e969a0218a9d353310141cba83e8a6c07bf6cec5397029"
-    },
-    "skills/vue-development/assets/icon-small.png": {
-      "source": "skills/vue-development/assets/icon-small.png",
-      "sha256": "b26a7378366574e38baeeb109b5d6eecb1af15278ad9e84e5244dc22d84efc54"
-    },
-    "skills/vue-development/assets/icon-small.svg": {
-      "source": "skills/vue-development/assets/icon-small.svg",
-      "sha256": "d54e0353ef1afde11aa7d7aa41aa9d5788e9a5b2e56f3a7802f024b2bc3df62f"
-    },
-    "skills/vue-development/assets/icon.png": {
-      "source": "skills/vue-development/assets/icon.png",
-      "sha256": "81783ae05f29cf53ca14fcd5394c78788456536d3076184e9850a49c1cc836f9"
-    },
-    "skills/vue-development/assets/icon.svg": {
-      "source": "skills/vue-development/assets/icon.svg",
-      "sha256": "6dbfcaec5cc25c7986538bd4d0bf7d50d34dc5e250bf7fb4b4e9326bcdeb1b2e"
-    },
-    "skills/vue-development/references/nuxt-ssr.md": {
-      "source": "skills/vue-development/references/nuxt-ssr.md",
-      "sha256": "b216d8a0be7c83478186828775a7d896907adb6a6f055acf48768080ea4ee092"
-    },
-    "skills/vue-development/references/reactivity.md": {
-      "source": "skills/vue-development/references/reactivity.md",
-      "sha256": "b19ff6650105da41219e9c93fce6b4e33c3a83ce8724d185a13661158a1a3dee"
-    },
-    "skills/vue-development/SKILL.md": {
-      "source": "skills/vue-development/SKILL.md",
-      "sha256": "7dac1333ee19b82cab11407661da6c7f108fd074b590c540c15187fcaa4b6fb6"
-    },
-    "skills/ui-ux-design/agents/openai.yaml": {
-      "source": "skills/ui-ux-design/agents/openai.yaml",
-      "sha256": "bc8e1bd877a73cff88570a8040b7698597ec97c4af578c3b25256ebe54bbad78"
-    },
-    "skills/ui-ux-design/assets/icon-small.png": {
-      "source": "skills/ui-ux-design/assets/icon-small.png",
-      "sha256": "f9fc86cd7ee2808dfaa43fc96b00c23afd29ebd7beeee2953bf5d72445071da5"
-    },
-    "skills/ui-ux-design/assets/icon-small.svg": {
-      "source": "skills/ui-ux-design/assets/icon-small.svg",
-      "sha256": "5a3797d5deb504bcefec784eb189a3a1d656a829dbf20356f5ab17ebb1c8a40a"
-    },
-    "skills/ui-ux-design/assets/icon.png": {
-      "source": "skills/ui-ux-design/assets/icon.png",
-      "sha256": "a4a044a48411f24072caa5a428b69edfe58aa2bb7f50435402769a0c9a0c21fd"
-    },
-    "skills/ui-ux-design/assets/icon.svg": {
-      "source": "skills/ui-ux-design/assets/icon.svg",
-      "sha256": "5a3797d5deb504bcefec784eb189a3a1d656a829dbf20356f5ab17ebb1c8a40a"
-    },
-    "skills/ui-ux-design/SKILL.md": {
-      "source": "skills/ui-ux-design/SKILL.md",
-      "sha256": "a586014f68a209b912554c8c8ed171ca6f4805e7e08727591022be3dfa8e801d"
-    },
-    "skills/playwright-cli/agents/openai.yaml": {
-      "source": "skills/playwright-cli/agents/openai.yaml",
-      "sha256": "273c38022ba20e9982ec2880eb2b594b58b6a997e2c4a26215938c409010d697"
-    },
-    "skills/playwright-cli/assets/icon-small.png": {
-      "source": "skills/playwright-cli/assets/icon-small.png",
-      "sha256": "ead0765a85c7e2735dc349b858c633d1e65b6856c5b7582bd01a2dc8a32b8ef8"
-    },
-    "skills/playwright-cli/assets/icon-small.svg": {
-      "source": "skills/playwright-cli/assets/icon-small.svg",
-      "sha256": "848bdda8c6262cb5550b4548c690fc754ca4e13f24ee0e17e3262f1a2f346669"
-    },
-    "skills/playwright-cli/assets/icon.png": {
-      "source": "skills/playwright-cli/assets/icon.png",
-      "sha256": "a46781a92c69f9c149122b5a58ed3b265a1aede878b129f7330b241d657c4061"
-    },
-    "skills/playwright-cli/assets/icon.svg": {
-      "source": "skills/playwright-cli/assets/icon.svg",
-      "sha256": "848bdda8c6262cb5550b4548c690fc754ca4e13f24ee0e17e3262f1a2f346669"
-    },
-    "skills/playwright-cli/references/commands.md": {
-      "source": "skills/playwright-cli/references/commands.md",
-      "sha256": "6b30d3e339fd9053b59bb11a5a66f6d7ce75a1aa2e6066a0fe5598a3a4d7399d"
+    "skills/angular-member-order/scripts/generate_component_member_order_prompt.py": {
+      "sha256": "1c0e68a2095af0357287ba07eb3c82e7618f3ba25db00a70167b4b845aef2634",
+      "source": "skills/angular-member-order/scripts/generate_component_member_order_prompt.py"
     },
     "skills/playwright-cli/SKILL.md": {
-      "source": "skills/playwright-cli/SKILL.md",
-      "sha256": "1b8a93ab5ffdac0ebbba7a32fac1f551d9d6aaeb4eabcd1db1597b7dfde94d2b"
+      "sha256": "1b8a93ab5ffdac0ebbba7a32fac1f551d9d6aaeb4eabcd1db1597b7dfde94d2b",
+      "source": "skills/playwright-cli/SKILL.md"
     },
-    "LICENSE": {
-      "source": "LICENSE",
-      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a"
+    "skills/playwright-cli/agents/openai.yaml": {
+      "sha256": "273c38022ba20e9982ec2880eb2b594b58b6a997e2c4a26215938c409010d697",
+      "source": "skills/playwright-cli/agents/openai.yaml"
+    },
+    "skills/playwright-cli/assets/icon-small.png": {
+      "sha256": "ead0765a85c7e2735dc349b858c633d1e65b6856c5b7582bd01a2dc8a32b8ef8",
+      "source": "skills/playwright-cli/assets/icon-small.png"
+    },
+    "skills/playwright-cli/assets/icon-small.svg": {
+      "sha256": "848bdda8c6262cb5550b4548c690fc754ca4e13f24ee0e17e3262f1a2f346669",
+      "source": "skills/playwright-cli/assets/icon-small.svg"
+    },
+    "skills/playwright-cli/assets/icon.png": {
+      "sha256": "a46781a92c69f9c149122b5a58ed3b265a1aede878b129f7330b241d657c4061",
+      "source": "skills/playwright-cli/assets/icon.png"
+    },
+    "skills/playwright-cli/assets/icon.svg": {
+      "sha256": "848bdda8c6262cb5550b4548c690fc754ca4e13f24ee0e17e3262f1a2f346669",
+      "source": "skills/playwright-cli/assets/icon.svg"
+    },
+    "skills/playwright-cli/references/commands.md": {
+      "sha256": "6b30d3e339fd9053b59bb11a5a66f6d7ce75a1aa2e6066a0fe5598a3a4d7399d",
+      "source": "skills/playwright-cli/references/commands.md"
+    },
+    "skills/react-development/SKILL.md": {
+      "sha256": "54a091d77ba08bd3c1991b5d573fafbe44806993260f61a892a9e64f7329ce1c",
+      "source": "skills/react-development/SKILL.md"
+    },
+    "skills/react-development/agents/openai.yaml": {
+      "sha256": "a2ddef8caa64d78d3c8daa5b58b4cbffa3cee87ccbd304dec782967123cf17dd",
+      "source": "skills/react-development/agents/openai.yaml"
+    },
+    "skills/react-development/assets/icon-small.png": {
+      "sha256": "9957e3c69320d5c675a866a78dd8fa433b64b3152252e4590729eff1a19dbe75",
+      "source": "skills/react-development/assets/icon-small.png"
+    },
+    "skills/react-development/assets/icon-small.svg": {
+      "sha256": "5867bc401380711d9f8cfddc70e09d76a9c745ec32dd8255fbbd5ded384bacb5",
+      "source": "skills/react-development/assets/icon-small.svg"
+    },
+    "skills/react-development/assets/icon.png": {
+      "sha256": "03a14f5fd1f0ed80c34960b645d6df5c716fd85804207fa249030230515ca285",
+      "source": "skills/react-development/assets/icon.png"
+    },
+    "skills/react-development/assets/icon.svg": {
+      "sha256": "5867bc401380711d9f8cfddc70e09d76a9c745ec32dd8255fbbd5ded384bacb5",
+      "source": "skills/react-development/assets/icon.svg"
+    },
+    "skills/react-development/references/server-hydration.md": {
+      "sha256": "d1a2a7b2ba18e7df3f6e32200a52edbfe0294473ae1aaf06e6fd29e99c8fbf7d",
+      "source": "skills/react-development/references/server-hydration.md"
+    },
+    "skills/react-development/references/state-effects.md": {
+      "sha256": "7b9a3e766ef2958f9d34c199824af1de895efe395cddd25c280027c4209684cf",
+      "source": "skills/react-development/references/state-effects.md"
+    },
+    "skills/ui-ux-design/SKILL.md": {
+      "sha256": "a586014f68a209b912554c8c8ed171ca6f4805e7e08727591022be3dfa8e801d",
+      "source": "skills/ui-ux-design/SKILL.md"
+    },
+    "skills/ui-ux-design/agents/openai.yaml": {
+      "sha256": "bc8e1bd877a73cff88570a8040b7698597ec97c4af578c3b25256ebe54bbad78",
+      "source": "skills/ui-ux-design/agents/openai.yaml"
+    },
+    "skills/ui-ux-design/assets/icon-small.png": {
+      "sha256": "f9fc86cd7ee2808dfaa43fc96b00c23afd29ebd7beeee2953bf5d72445071da5",
+      "source": "skills/ui-ux-design/assets/icon-small.png"
+    },
+    "skills/ui-ux-design/assets/icon-small.svg": {
+      "sha256": "5a3797d5deb504bcefec784eb189a3a1d656a829dbf20356f5ab17ebb1c8a40a",
+      "source": "skills/ui-ux-design/assets/icon-small.svg"
+    },
+    "skills/ui-ux-design/assets/icon.png": {
+      "sha256": "a4a044a48411f24072caa5a428b69edfe58aa2bb7f50435402769a0c9a0c21fd",
+      "source": "skills/ui-ux-design/assets/icon.png"
+    },
+    "skills/ui-ux-design/assets/icon.svg": {
+      "sha256": "5a3797d5deb504bcefec784eb189a3a1d656a829dbf20356f5ab17ebb1c8a40a",
+      "source": "skills/ui-ux-design/assets/icon.svg"
+    },
+    "skills/vue-development/SKILL.md": {
+      "sha256": "7dac1333ee19b82cab11407661da6c7f108fd074b590c540c15187fcaa4b6fb6",
+      "source": "skills/vue-development/SKILL.md"
+    },
+    "skills/vue-development/agents/openai.yaml": {
+      "sha256": "d7d733ab53b6b60709e969a0218a9d353310141cba83e8a6c07bf6cec5397029",
+      "source": "skills/vue-development/agents/openai.yaml"
+    },
+    "skills/vue-development/assets/icon-small.png": {
+      "sha256": "b26a7378366574e38baeeb109b5d6eecb1af15278ad9e84e5244dc22d84efc54",
+      "source": "skills/vue-development/assets/icon-small.png"
+    },
+    "skills/vue-development/assets/icon-small.svg": {
+      "sha256": "d54e0353ef1afde11aa7d7aa41aa9d5788e9a5b2e56f3a7802f024b2bc3df62f",
+      "source": "skills/vue-development/assets/icon-small.svg"
+    },
+    "skills/vue-development/assets/icon.png": {
+      "sha256": "81783ae05f29cf53ca14fcd5394c78788456536d3076184e9850a49c1cc836f9",
+      "source": "skills/vue-development/assets/icon.png"
+    },
+    "skills/vue-development/assets/icon.svg": {
+      "sha256": "6dbfcaec5cc25c7986538bd4d0bf7d50d34dc5e250bf7fb4b4e9326bcdeb1b2e",
+      "source": "skills/vue-development/assets/icon.svg"
+    },
+    "skills/vue-development/references/nuxt-ssr.md": {
+      "sha256": "b216d8a0be7c83478186828775a7d896907adb6a6f055acf48768080ea4ee092",
+      "source": "skills/vue-development/references/nuxt-ssr.md"
+    },
+    "skills/vue-development/references/reactivity.md": {
+      "sha256": "b19ff6650105da41219e9c93fce6b4e33c3a83ce8724d185a13661158a1a3dee",
+      "source": "skills/vue-development/references/reactivity.md"
     }
   },
+  "license": "MIT",
+  "plugin": "codex-frontend-engineering",
+  "producer": "codex-toolkit.marketplace.v1",
+  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [
     "playwright",
     "serena",
     "edge-devtools"
   ],
-  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
-  "producer": "codex-toolkit.marketplace.v1",
   "source_state": "canonical-file-hashes",
-  "license": "MIT"
+  "version": "0.1.0"
 }

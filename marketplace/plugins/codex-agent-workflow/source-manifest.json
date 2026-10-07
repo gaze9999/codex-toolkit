@@ -1,231 +1,231 @@
 {
-  "plugin": "codex-agent-workflow",
-  "version": "0.1.2",
   "files": {
+    "LICENSE": {
+      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
+      "source": "LICENSE"
+    },
     "plugin.json": {
-      "source": "plugins/agent-workflow/plugin.json",
-      "sha256": "c2c935d5fd6c1d321534c3bd3a79a7fd1f7e9ca3475cbd123545f8c78924d9ff"
-    },
-    "skills/agent-governance/agents/openai.yaml": {
-      "source": "skills/agent-governance/agents/openai.yaml",
-      "sha256": "aea94f440867df520a89ab9d30ec389dc345f49919da812a801c97f6914277ec"
-    },
-    "skills/agent-governance/assets/icon-small.png": {
-      "source": "skills/agent-governance/assets/icon-small.png",
-      "sha256": "5752e55c1e7440d24f344611ade405ca908bc6460e552201a38fd6f5443a31a7"
-    },
-    "skills/agent-governance/assets/icon-small.svg": {
-      "source": "skills/agent-governance/assets/icon-small.svg",
-      "sha256": "8ae2e9bc034e22c6a2b29a16002e0ecc0e44f4d395e9e80f368a5b1c9dccae9b"
-    },
-    "skills/agent-governance/assets/icon.png": {
-      "source": "skills/agent-governance/assets/icon.png",
-      "sha256": "12abffeebce1421147275e1245bf50245639e8dcf856a3a1672c8287f882d99e"
-    },
-    "skills/agent-governance/assets/icon.svg": {
-      "source": "skills/agent-governance/assets/icon.svg",
-      "sha256": "44e4bb9b5e420bcfa30b1ed006c0a2bbe4f90bce8c65a4e6b1d6fea6b3f5ecda"
-    },
-    "skills/agent-governance/assets/project-starter/examples/host-and-custom-elements/.codex/agent-guidance/records.md": {
-      "source": "skills/agent-governance/assets/project-starter/examples/host-and-custom-elements/.codex/agent-guidance/records.md",
-      "sha256": "a5819e9fe749940dd9db002fa53b9ed46ca599c86abe13b9f752408d205ab60b"
-    },
-    "skills/agent-governance/assets/project-starter/examples/host-and-custom-elements/AGENTS.md": {
-      "source": "skills/agent-governance/assets/project-starter/examples/host-and-custom-elements/AGENTS.md",
-      "sha256": "e9edead9156cf3d1c07137f2618ca2c366c17fd65ab1ab43338d0b0ffbce26ff"
-    },
-    "skills/agent-governance/assets/project-starter/nested/AGENTS.md": {
-      "source": "skills/agent-governance/assets/project-starter/nested/AGENTS.md",
-      "sha256": "d03954e3289b8a352557017d3243d74c3e8d7e6824a0bf906008e81ab2f821bf"
-    },
-    "skills/agent-governance/assets/project-starter/project-types.md": {
-      "source": "skills/agent-governance/assets/project-starter/project-types.md",
-      "sha256": "32bf63a11096dd5187551be53c9c5f58c88bf8dc628d301721d98a77a53e3949"
-    },
-    "skills/agent-governance/assets/project-starter/README.md": {
-      "source": "skills/agent-governance/assets/project-starter/README.md",
-      "sha256": "9dff4d96a6020ba9f36b2ce2d8571ba2d5d6d7cca6e11ae8828c987497f44470"
-    },
-    "skills/agent-governance/assets/project-starter/root/.codex/agent-guidance/tasks.md": {
-      "source": "skills/agent-governance/assets/project-starter/root/.codex/agent-guidance/tasks.md",
-      "sha256": "17b78d4e0d1313e790982661c89d2435fb8b039e3bc1b6cb9ef4e6df1aa05b0d"
-    },
-    "skills/agent-governance/assets/project-starter/root/.codex/agents/game_balance_reviewer.toml": {
-      "source": "skills/agent-governance/assets/project-starter/root/.codex/agents/game_balance_reviewer.toml",
-      "sha256": "c75d5031b89169ae94018b826fb3705bad3214e6e0ac3d18033e7a17775c43eb"
-    },
-    "skills/agent-governance/assets/project-starter/root/.codex/agents/project_explorer.toml": {
-      "source": "skills/agent-governance/assets/project-starter/root/.codex/agents/project_explorer.toml",
-      "sha256": "9d19477e0e68f8e3749995ea00bcefd027eaa321a15d43f6aabbc360c82c940a"
-    },
-    "skills/agent-governance/assets/project-starter/root/.codex/agents/project_reviewer.toml": {
-      "source": "skills/agent-governance/assets/project-starter/root/.codex/agents/project_reviewer.toml",
-      "sha256": "b4fd6cf9b2aa698ab5b0dd16f41ae941c3a5b4dc2e06edad89425f0b7c2e5616"
-    },
-    "skills/agent-governance/assets/project-starter/root/.codex/agents/project_worker.toml": {
-      "source": "skills/agent-governance/assets/project-starter/root/.codex/agents/project_worker.toml",
-      "sha256": "ab9cdd46d2d39c9dff575a813d103beb082d06002c0b8feabc3f8657023e14a6"
-    },
-    "skills/agent-governance/assets/project-starter/root/AGENTS.md": {
-      "source": "skills/agent-governance/assets/project-starter/root/AGENTS.md",
-      "sha256": "1f88b1afd857018866b5e63959d5f830ed3d6a299352511bf93eeaba132da418"
-    },
-    "skills/agent-governance/references/component-authoring.md": {
-      "source": "skills/agent-governance/references/component-authoring.md",
-      "sha256": "881ed2c300537ce4e5d84a572099273690057bddc1e7f8dc9b5d14476701b704"
-    },
-    "skills/agent-governance/references/context-continuity.md": {
-      "source": "skills/agent-governance/references/context-continuity.md",
-      "sha256": "69c0bd19aaae23ac9153a7b126f29aa5793cb822cb071d57c1a160e5f93b04a5"
-    },
-    "skills/agent-governance/references/delegation-routing.md": {
-      "source": "skills/agent-governance/references/delegation-routing.md",
-      "sha256": "bd1f2ae7c5e7e995f59d6a400f97ee0bff0f415d7434809c67bb2e5db129de5c"
-    },
-    "skills/agent-governance/references/instruction-layering.md": {
-      "source": "skills/agent-governance/references/instruction-layering.md",
-      "sha256": "a2dbd741e30dfd3461050194963bb6b30f20dcf8e8866ad563a45035215dbea5"
-    },
-    "skills/agent-governance/references/maintenance-acceptance.md": {
-      "source": "skills/agent-governance/references/maintenance-acceptance.md",
-      "sha256": "8e1e25b2b645e991dadc3b28b64d5ef87307ddead440d5d0ae4c0ec6efe66125"
-    },
-    "skills/agent-governance/references/task-execution-and-reporting.md": {
-      "source": "skills/agent-governance/references/task-execution-and-reporting.md",
-      "sha256": "81193b30c1c03e3d6d8861f29ac1d635777b4879ea8195767a9c2fe507cfb5c4"
+      "sha256": "c2c935d5fd6c1d321534c3bd3a79a7fd1f7e9ca3475cbd123545f8c78924d9ff",
+      "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
-      "source": "skills/agent-governance/SKILL.md",
-      "sha256": "4973025e0dd316221f0abc35c9a3c7be5ff589966663e1e87fa4cdf22b5716b0"
+      "sha256": "4973025e0dd316221f0abc35c9a3c7be5ff589966663e1e87fa4cdf22b5716b0",
+      "source": "skills/agent-governance/SKILL.md"
     },
-    "skills/coding-prompt/agents/openai.yaml": {
-      "source": "skills/coding-prompt/agents/openai.yaml",
-      "sha256": "80a368250888b8c8582f4317f21a7a1568158390d05d0a78654c31ffcfc0920e"
+    "skills/agent-governance/agents/openai.yaml": {
+      "sha256": "aea94f440867df520a89ab9d30ec389dc345f49919da812a801c97f6914277ec",
+      "source": "skills/agent-governance/agents/openai.yaml"
     },
-    "skills/coding-prompt/assets/icon-small.png": {
-      "source": "skills/coding-prompt/assets/icon-small.png",
-      "sha256": "9ae62010b1c982ffcc6a5c6b2f0c0efcdfef0dc1cd211f52bcc6b244dd12ca9b"
+    "skills/agent-governance/assets/icon-small.png": {
+      "sha256": "5752e55c1e7440d24f344611ade405ca908bc6460e552201a38fd6f5443a31a7",
+      "source": "skills/agent-governance/assets/icon-small.png"
     },
-    "skills/coding-prompt/assets/icon-small.svg": {
-      "source": "skills/coding-prompt/assets/icon-small.svg",
-      "sha256": "0f7def57001a132c3dbe0812378c1f223c340ee9a1fc67d55907f590479e64bd"
+    "skills/agent-governance/assets/icon-small.svg": {
+      "sha256": "8ae2e9bc034e22c6a2b29a16002e0ecc0e44f4d395e9e80f368a5b1c9dccae9b",
+      "source": "skills/agent-governance/assets/icon-small.svg"
     },
-    "skills/coding-prompt/assets/icon.png": {
-      "source": "skills/coding-prompt/assets/icon.png",
-      "sha256": "0c191061df0c45f186f066a5a164ffb6ca1ea56ef9ba4717373b9688165106aa"
+    "skills/agent-governance/assets/icon.png": {
+      "sha256": "12abffeebce1421147275e1245bf50245639e8dcf856a3a1672c8287f882d99e",
+      "source": "skills/agent-governance/assets/icon.png"
     },
-    "skills/coding-prompt/assets/icon.svg": {
-      "source": "skills/coding-prompt/assets/icon.svg",
-      "sha256": "ee0123198b3c3567737de7a3057d455df2729e5bb29b75fd9e42da8aa1b66c7d"
+    "skills/agent-governance/assets/icon.svg": {
+      "sha256": "44e4bb9b5e420bcfa30b1ed006c0a2bbe4f90bce8c65a4e6b1d6fea6b3f5ecda",
+      "source": "skills/agent-governance/assets/icon.svg"
     },
-    "skills/coding-prompt/references/prompt-patterns.md": {
-      "source": "skills/coding-prompt/references/prompt-patterns.md",
-      "sha256": "ecd8197fc1b81b8c368dc89bd3196b4b43278bb11113546af5049886b4d15a2c"
+    "skills/agent-governance/assets/project-starter/README.md": {
+      "sha256": "9dff4d96a6020ba9f36b2ce2d8571ba2d5d6d7cca6e11ae8828c987497f44470",
+      "source": "skills/agent-governance/assets/project-starter/README.md"
     },
-    "skills/coding-prompt/references/workflow.md": {
-      "source": "skills/coding-prompt/references/workflow.md",
-      "sha256": "e6612e24746044644091ee150d7150a71be192b8e49b9a8557f2ba738f84897c"
+    "skills/agent-governance/assets/project-starter/examples/host-and-custom-elements/.codex/agent-guidance/records.md": {
+      "sha256": "a5819e9fe749940dd9db002fa53b9ed46ca599c86abe13b9f752408d205ab60b",
+      "source": "skills/agent-governance/assets/project-starter/examples/host-and-custom-elements/.codex/agent-guidance/records.md"
+    },
+    "skills/agent-governance/assets/project-starter/examples/host-and-custom-elements/AGENTS.md": {
+      "sha256": "e9edead9156cf3d1c07137f2618ca2c366c17fd65ab1ab43338d0b0ffbce26ff",
+      "source": "skills/agent-governance/assets/project-starter/examples/host-and-custom-elements/AGENTS.md"
+    },
+    "skills/agent-governance/assets/project-starter/nested/AGENTS.md": {
+      "sha256": "d03954e3289b8a352557017d3243d74c3e8d7e6824a0bf906008e81ab2f821bf",
+      "source": "skills/agent-governance/assets/project-starter/nested/AGENTS.md"
+    },
+    "skills/agent-governance/assets/project-starter/project-types.md": {
+      "sha256": "32bf63a11096dd5187551be53c9c5f58c88bf8dc628d301721d98a77a53e3949",
+      "source": "skills/agent-governance/assets/project-starter/project-types.md"
+    },
+    "skills/agent-governance/assets/project-starter/root/.codex/agent-guidance/tasks.md": {
+      "sha256": "17b78d4e0d1313e790982661c89d2435fb8b039e3bc1b6cb9ef4e6df1aa05b0d",
+      "source": "skills/agent-governance/assets/project-starter/root/.codex/agent-guidance/tasks.md"
+    },
+    "skills/agent-governance/assets/project-starter/root/.codex/agents/game_balance_reviewer.toml": {
+      "sha256": "c75d5031b89169ae94018b826fb3705bad3214e6e0ac3d18033e7a17775c43eb",
+      "source": "skills/agent-governance/assets/project-starter/root/.codex/agents/game_balance_reviewer.toml"
+    },
+    "skills/agent-governance/assets/project-starter/root/.codex/agents/project_explorer.toml": {
+      "sha256": "9d19477e0e68f8e3749995ea00bcefd027eaa321a15d43f6aabbc360c82c940a",
+      "source": "skills/agent-governance/assets/project-starter/root/.codex/agents/project_explorer.toml"
+    },
+    "skills/agent-governance/assets/project-starter/root/.codex/agents/project_reviewer.toml": {
+      "sha256": "b4fd6cf9b2aa698ab5b0dd16f41ae941c3a5b4dc2e06edad89425f0b7c2e5616",
+      "source": "skills/agent-governance/assets/project-starter/root/.codex/agents/project_reviewer.toml"
+    },
+    "skills/agent-governance/assets/project-starter/root/.codex/agents/project_worker.toml": {
+      "sha256": "ab9cdd46d2d39c9dff575a813d103beb082d06002c0b8feabc3f8657023e14a6",
+      "source": "skills/agent-governance/assets/project-starter/root/.codex/agents/project_worker.toml"
+    },
+    "skills/agent-governance/assets/project-starter/root/AGENTS.md": {
+      "sha256": "1f88b1afd857018866b5e63959d5f830ed3d6a299352511bf93eeaba132da418",
+      "source": "skills/agent-governance/assets/project-starter/root/AGENTS.md"
+    },
+    "skills/agent-governance/references/component-authoring.md": {
+      "sha256": "881ed2c300537ce4e5d84a572099273690057bddc1e7f8dc9b5d14476701b704",
+      "source": "skills/agent-governance/references/component-authoring.md"
+    },
+    "skills/agent-governance/references/context-continuity.md": {
+      "sha256": "69c0bd19aaae23ac9153a7b126f29aa5793cb822cb071d57c1a160e5f93b04a5",
+      "source": "skills/agent-governance/references/context-continuity.md"
+    },
+    "skills/agent-governance/references/delegation-routing.md": {
+      "sha256": "bd1f2ae7c5e7e995f59d6a400f97ee0bff0f415d7434809c67bb2e5db129de5c",
+      "source": "skills/agent-governance/references/delegation-routing.md"
+    },
+    "skills/agent-governance/references/instruction-layering.md": {
+      "sha256": "a2dbd741e30dfd3461050194963bb6b30f20dcf8e8866ad563a45035215dbea5",
+      "source": "skills/agent-governance/references/instruction-layering.md"
+    },
+    "skills/agent-governance/references/maintenance-acceptance.md": {
+      "sha256": "8e1e25b2b645e991dadc3b28b64d5ef87307ddead440d5d0ae4c0ec6efe66125",
+      "source": "skills/agent-governance/references/maintenance-acceptance.md"
+    },
+    "skills/agent-governance/references/task-execution-and-reporting.md": {
+      "sha256": "81193b30c1c03e3d6d8861f29ac1d635777b4879ea8195767a9c2fe507cfb5c4",
+      "source": "skills/agent-governance/references/task-execution-and-reporting.md"
     },
     "skills/coding-prompt/SKILL.md": {
-      "source": "skills/coding-prompt/SKILL.md",
-      "sha256": "c41acb4f296f87351a3645cc7d7cfa18753316aecc7c8bd450ec9b3106f20830"
+      "sha256": "c41acb4f296f87351a3645cc7d7cfa18753316aecc7c8bd450ec9b3106f20830",
+      "source": "skills/coding-prompt/SKILL.md"
     },
-    "skills/task-routing/agents/openai.yaml": {
-      "source": "skills/task-routing/agents/openai.yaml",
-      "sha256": "dcf8b4073c1be384474a0cd66dc7553c8f85bb7b5285a04379986b70be375bcb"
+    "skills/coding-prompt/agents/openai.yaml": {
+      "sha256": "80a368250888b8c8582f4317f21a7a1568158390d05d0a78654c31ffcfc0920e",
+      "source": "skills/coding-prompt/agents/openai.yaml"
     },
-    "skills/task-routing/assets/icon-small.png": {
-      "source": "skills/task-routing/assets/icon-small.png",
-      "sha256": "fdc0e969ee3366d7ef6006bf5bc78aff8470636c333a353bccb829e8af56c997"
+    "skills/coding-prompt/assets/icon-small.png": {
+      "sha256": "9ae62010b1c982ffcc6a5c6b2f0c0efcdfef0dc1cd211f52bcc6b244dd12ca9b",
+      "source": "skills/coding-prompt/assets/icon-small.png"
     },
-    "skills/task-routing/assets/icon-small.svg": {
-      "source": "skills/task-routing/assets/icon-small.svg",
-      "sha256": "afe98fdff167500b651602fd8580ab07de6d4229100a55e14a6f525226286435"
+    "skills/coding-prompt/assets/icon-small.svg": {
+      "sha256": "0f7def57001a132c3dbe0812378c1f223c340ee9a1fc67d55907f590479e64bd",
+      "source": "skills/coding-prompt/assets/icon-small.svg"
     },
-    "skills/task-routing/assets/icon.png": {
-      "source": "skills/task-routing/assets/icon.png",
-      "sha256": "bd624dda9bd190c8b429f93aa36594ab4c912eb67556ae8ac2d97a19aa9a983e"
+    "skills/coding-prompt/assets/icon.png": {
+      "sha256": "0c191061df0c45f186f066a5a164ffb6ca1ea56ef9ba4717373b9688165106aa",
+      "source": "skills/coding-prompt/assets/icon.png"
     },
-    "skills/task-routing/assets/icon.svg": {
-      "source": "skills/task-routing/assets/icon.svg",
-      "sha256": "bef1bc5a0e57eb1c45ea415ccd890f63916917a4bd88d9e582dfa134dd3209e6"
+    "skills/coding-prompt/assets/icon.svg": {
+      "sha256": "ee0123198b3c3567737de7a3057d455df2729e5bb29b75fd9e42da8aa1b66c7d",
+      "source": "skills/coding-prompt/assets/icon.svg"
     },
-    "skills/task-routing/references/workflow.md": {
-      "source": "skills/task-routing/references/workflow.md",
-      "sha256": "684e2972178c6ac9b4ca3d12dab52759a52d6de58f929192a9f386777032bbcc"
+    "skills/coding-prompt/references/prompt-patterns.md": {
+      "sha256": "ecd8197fc1b81b8c368dc89bd3196b4b43278bb11113546af5049886b4d15a2c",
+      "source": "skills/coding-prompt/references/prompt-patterns.md"
     },
-    "skills/task-routing/SKILL.md": {
-      "source": "skills/task-routing/SKILL.md",
-      "sha256": "465e1d616c4331582a8c62942c25d3458fa3e767aabeafb78058d9ef668b7b86"
-    },
-    "skills/task-guide/agents/openai.yaml": {
-      "source": "skills/task-guide/agents/openai.yaml",
-      "sha256": "1e2fe3e0d429be8ef2f143b725c0f5d2ad399bb1a8edca8eaff4f8a3d7d869a4"
-    },
-    "skills/task-guide/assets/history-commit.example.json": {
-      "source": "skills/task-guide/assets/history-commit.example.json",
-      "sha256": "7e6bc3c39db2ea0c3e6d5961e19d93a49c28cd86791868f5b09f600d5e2f1bf1"
-    },
-    "skills/task-guide/assets/history.example.json": {
-      "source": "skills/task-guide/assets/history.example.json",
-      "sha256": "37aacb4eae8b828d1e2dcbcaccb97ee3362ad06422b3d4e33b389df2e522b8c6"
-    },
-    "skills/task-guide/assets/icon-small.png": {
-      "source": "skills/task-guide/assets/icon-small.png",
-      "sha256": "2eaf6c7ff383eae750e31a60125b9180877632d2e0eecfa716384be235308d83"
-    },
-    "skills/task-guide/assets/icon-small.svg": {
-      "source": "skills/task-guide/assets/icon-small.svg",
-      "sha256": "d8d9df77d857352725f752aed0ef345baa5422bbc67036bf7bd7f22e74c67235"
-    },
-    "skills/task-guide/assets/icon.png": {
-      "source": "skills/task-guide/assets/icon.png",
-      "sha256": "49df503d9345bcddeb9e4349c5f6385490bc21c5a8814c1a8ba49776d3a18657"
-    },
-    "skills/task-guide/assets/icon.svg": {
-      "source": "skills/task-guide/assets/icon.svg",
-      "sha256": "d8d9df77d857352725f752aed0ef345baa5422bbc67036bf7bd7f22e74c67235"
-    },
-    "skills/task-guide/assets/task-guide.example.json": {
-      "source": "skills/task-guide/assets/task-guide.example.json",
-      "sha256": "848fd26e3bb8b49bfc85fa08db10bc6ce166fbe7fa19e81dea3a6a9f3ae29662"
+    "skills/coding-prompt/references/workflow.md": {
+      "sha256": "e6612e24746044644091ee150d7150a71be192b8e49b9a8557f2ba738f84897c",
+      "source": "skills/coding-prompt/references/workflow.md"
     },
     "skills/task-guide/README.md": {
-      "source": "skills/task-guide/README.md",
-      "sha256": "2a5cca455bb1f4774fad81293aae9ca397f1cca258680ffea560389f5fcb7956"
-    },
-    "skills/task-guide/references/decision-records.md": {
-      "source": "skills/task-guide/references/decision-records.md",
-      "sha256": "4fb1310e943b0767a45ec0def4f6c930915c248b4db5141ac60a6f68706d3967"
-    },
-    "skills/task-guide/references/task-guide.md": {
-      "source": "skills/task-guide/references/task-guide.md",
-      "sha256": "2e3c01af4d23b81b2ae13e4e146e8ce870a42e97eb9a30b3ea0389ca9a9012e3"
-    },
-    "skills/task-guide/references/workflow.md": {
-      "source": "skills/task-guide/references/workflow.md",
-      "sha256": "3338f1c5fec93f50b31cf5bf4530edd4496a7ce3e6827fc5dd2573d8ce596342"
-    },
-    "skills/task-guide/scripts/create_task_guide.py": {
-      "source": "skills/task-guide/scripts/create_task_guide.py",
-      "sha256": "f6c2439ddfd6620c4afdfffaa6ca3633fa48fd19a8e12141ab8d29241a449d9b"
-    },
-    "skills/task-guide/scripts/record_history.py": {
-      "source": "skills/task-guide/scripts/record_history.py",
-      "sha256": "74f859d6cb15316f6d7ac259e3a1dac92b06f5603d2b32296bffa341612edc38"
+      "sha256": "2a5cca455bb1f4774fad81293aae9ca397f1cca258680ffea560389f5fcb7956",
+      "source": "skills/task-guide/README.md"
     },
     "skills/task-guide/SKILL.md": {
-      "source": "skills/task-guide/SKILL.md",
-      "sha256": "887f519b52319f2b9c1d02718bb37b0cc91da43fcce8b3ccfb209791815a464f"
+      "sha256": "887f519b52319f2b9c1d02718bb37b0cc91da43fcce8b3ccfb209791815a464f",
+      "source": "skills/task-guide/SKILL.md"
     },
-    "LICENSE": {
-      "source": "LICENSE",
-      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a"
+    "skills/task-guide/agents/openai.yaml": {
+      "sha256": "1e2fe3e0d429be8ef2f143b725c0f5d2ad399bb1a8edca8eaff4f8a3d7d869a4",
+      "source": "skills/task-guide/agents/openai.yaml"
+    },
+    "skills/task-guide/assets/history-commit.example.json": {
+      "sha256": "7e6bc3c39db2ea0c3e6d5961e19d93a49c28cd86791868f5b09f600d5e2f1bf1",
+      "source": "skills/task-guide/assets/history-commit.example.json"
+    },
+    "skills/task-guide/assets/history.example.json": {
+      "sha256": "37aacb4eae8b828d1e2dcbcaccb97ee3362ad06422b3d4e33b389df2e522b8c6",
+      "source": "skills/task-guide/assets/history.example.json"
+    },
+    "skills/task-guide/assets/icon-small.png": {
+      "sha256": "2eaf6c7ff383eae750e31a60125b9180877632d2e0eecfa716384be235308d83",
+      "source": "skills/task-guide/assets/icon-small.png"
+    },
+    "skills/task-guide/assets/icon-small.svg": {
+      "sha256": "d8d9df77d857352725f752aed0ef345baa5422bbc67036bf7bd7f22e74c67235",
+      "source": "skills/task-guide/assets/icon-small.svg"
+    },
+    "skills/task-guide/assets/icon.png": {
+      "sha256": "49df503d9345bcddeb9e4349c5f6385490bc21c5a8814c1a8ba49776d3a18657",
+      "source": "skills/task-guide/assets/icon.png"
+    },
+    "skills/task-guide/assets/icon.svg": {
+      "sha256": "d8d9df77d857352725f752aed0ef345baa5422bbc67036bf7bd7f22e74c67235",
+      "source": "skills/task-guide/assets/icon.svg"
+    },
+    "skills/task-guide/assets/task-guide.example.json": {
+      "sha256": "848fd26e3bb8b49bfc85fa08db10bc6ce166fbe7fa19e81dea3a6a9f3ae29662",
+      "source": "skills/task-guide/assets/task-guide.example.json"
+    },
+    "skills/task-guide/references/decision-records.md": {
+      "sha256": "4fb1310e943b0767a45ec0def4f6c930915c248b4db5141ac60a6f68706d3967",
+      "source": "skills/task-guide/references/decision-records.md"
+    },
+    "skills/task-guide/references/task-guide.md": {
+      "sha256": "2e3c01af4d23b81b2ae13e4e146e8ce870a42e97eb9a30b3ea0389ca9a9012e3",
+      "source": "skills/task-guide/references/task-guide.md"
+    },
+    "skills/task-guide/references/workflow.md": {
+      "sha256": "3338f1c5fec93f50b31cf5bf4530edd4496a7ce3e6827fc5dd2573d8ce596342",
+      "source": "skills/task-guide/references/workflow.md"
+    },
+    "skills/task-guide/scripts/create_task_guide.py": {
+      "sha256": "f6c2439ddfd6620c4afdfffaa6ca3633fa48fd19a8e12141ab8d29241a449d9b",
+      "source": "skills/task-guide/scripts/create_task_guide.py"
+    },
+    "skills/task-guide/scripts/record_history.py": {
+      "sha256": "74f859d6cb15316f6d7ac259e3a1dac92b06f5603d2b32296bffa341612edc38",
+      "source": "skills/task-guide/scripts/record_history.py"
+    },
+    "skills/task-routing/SKILL.md": {
+      "sha256": "465e1d616c4331582a8c62942c25d3458fa3e767aabeafb78058d9ef668b7b86",
+      "source": "skills/task-routing/SKILL.md"
+    },
+    "skills/task-routing/agents/openai.yaml": {
+      "sha256": "dcf8b4073c1be384474a0cd66dc7553c8f85bb7b5285a04379986b70be375bcb",
+      "source": "skills/task-routing/agents/openai.yaml"
+    },
+    "skills/task-routing/assets/icon-small.png": {
+      "sha256": "fdc0e969ee3366d7ef6006bf5bc78aff8470636c333a353bccb829e8af56c997",
+      "source": "skills/task-routing/assets/icon-small.png"
+    },
+    "skills/task-routing/assets/icon-small.svg": {
+      "sha256": "afe98fdff167500b651602fd8580ab07de6d4229100a55e14a6f525226286435",
+      "source": "skills/task-routing/assets/icon-small.svg"
+    },
+    "skills/task-routing/assets/icon.png": {
+      "sha256": "bd624dda9bd190c8b429f93aa36594ab4c912eb67556ae8ac2d97a19aa9a983e",
+      "source": "skills/task-routing/assets/icon.png"
+    },
+    "skills/task-routing/assets/icon.svg": {
+      "sha256": "bef1bc5a0e57eb1c45ea415ccd890f63916917a4bd88d9e582dfa134dd3209e6",
+      "source": "skills/task-routing/assets/icon.svg"
+    },
+    "skills/task-routing/references/workflow.md": {
+      "sha256": "684e2972178c6ac9b4ca3d12dab52759a52d6de58f929192a9f386777032bbcc",
+      "source": "skills/task-routing/references/workflow.md"
     }
   },
-  "runtime_profiles": [],
-  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
+  "license": "MIT",
+  "plugin": "codex-agent-workflow",
   "producer": "codex-toolkit.marketplace.v1",
+  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
+  "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "license": "MIT"
+  "version": "0.1.2"
 }
