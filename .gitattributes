@@ -9,3 +9,4 @@ skills/** text=auto eol=lf
 plugins/** text=auto eol=lf
 marketplace/** text=auto eol=lf
 LICENSE text eol=lf
+mcp/tools/proofreading/** text=auto eol=lf
