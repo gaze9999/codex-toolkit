@@ -3,7 +3,7 @@ name: multilingual-proofreading
 description: Proofread Traditional Chinese, English or Japanese prose for terminology, punctuation, spelling, grammar and natural wording. Use for requested proofreading or material document-quality gaps, not automatic translation or a blanket check on every chat reply.
 metadata:
   short-description: Language-aware proofreading and terminology consistency
-  version: "0.4.14"
+  version: "0.4.15"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -16,6 +16,7 @@ Preserve the author's meaning, factual claims, register and terminology. Infer t
 
 - Traditional Chinese: use Taiwan terminology, preserve the enumeration comma `、` in Chinese lists, and use the requested half-width punctuation elsewhere. Normally connect clauses with commas, use a period only when meaning requires separate sentences, do not use semicolons for segmentation, and omit final periods when that preference applies. Preserve periods inside filenames, versions and decimals.
 - For Taiwan Chinese software prose, describe API, tool, module or system integration as `串接`; retain `接線` for physical wiring or mathematical tangents. Consult the available project/setup vocabulary for context-dependent choices, including `設定`, `預設`, `相依套件`, `呼叫`, `建置`, `本機`, `唯讀`, `記錄檔` and `儲存庫`. Keep information/message, user/client and cache/buffer meanings distinct. Manually assess wording that a narrow dictionary pattern does not match; do not replace all occurrences of an ambiguous term.
+- For agent instructions and personal tooling, use `工作規範`, `設定管理` or `權限管理` according to meaning instead of a generic governance label. Retain established `AI 治理`, `資料治理`, `公司治理`, formal names and identifiers such as `agent-governance`. Contextual lint advice has no automatic fix; choose the wording from the actual responsibility.
 - Authored Taiwan Traditional Chinese progress, handoffs and final reports also need a manual script/terminology review, including returned agent text. Preserve quotes and identifiers. A term list is not a complete simplified-character detector; narrow rules supplement semantic review rather than authorize blanket conversion
 - English: use the document's English convention, retain normal sentence punctuation, and distinguish spelling, grammar and semantic editing. Add verified product names to the applicable dictionary rather than suppressing all unknown words.
 - Japanese: preserve `、。`, keep `ですます` or `である` consistent within the intended register, and do not apply Chinese terminology or punctuation substitutions.

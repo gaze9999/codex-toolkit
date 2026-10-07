@@ -20,6 +20,14 @@ function rule(context) {
       const protectedRanges = [...text.matchAll(/https?:\/\/\S+|「[^」]*」|『[^』]*』|“[^”]*”|"[^"\n]*"/gu)]
         .map(match => [match.index, match.index + match[0].length]);
       const protectedAt = index => protectedRanges.some(([start, end]) => start <= index && index < end);
+      // Ambiguous governance wording needs a contextual choice, never an automatic fix.
+      const governance = /(?:AGENTS(?:\.md)?|Agent|Codex|Skills?|Plugins?|MCP|個人|工作|任務|對話|工具|設定|權限)[ \t]*治理/giu;
+      for (const match of text.matchAll(governance)) {
+        if (!protectedAt(match.index)) report(node, new RuleError(
+          '依用途使用工作規範、設定管理或權限管理, 正式治理名稱保留, 需人工判讀',
+          { index: match.index },
+        ));
+      }
       // A text node can end before inline code, links or emphasis on the same line
       const remainingLine = getSource().slice(node.range[1]).split(/\r?\n/u, 1)[0];
       const atLineEnd = /^[\s*_~]*$/u.test(remainingLine);

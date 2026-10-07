@@ -1,4 +1,5 @@
 version: 1
+# Contextual governance wording is advisory in taiwan-style.cjs, not a global replacement.
 # Scope and source IDs: docs/tools/proofreading.md, reviewed 2026-10-05
 # Apply to authored prose; specification/UI copy needs explicit change authorization.
 # protected-copy.cjs preserves HTML and declared literal UI/specification text.
