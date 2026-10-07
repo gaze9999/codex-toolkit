@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "fa2f84c9308ece89d07126f3ffbb10d69c0f2e5b68103bbf4ad3e05ac850fd87",
+      "sha256": "efacd81d75a8e0b18dc9536ea733729c68be476511069142989ac967fc93d813",
       "source": "plugins/local-activity/plugin.json"
     },
     "skills/local-activity-query/SKILL.md": {
@@ -35,6 +35,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.1.0",
-  "version": "0.1.2"
+  "toolkit_version": "0.2.0",
+  "version": "0.1.3"
 }

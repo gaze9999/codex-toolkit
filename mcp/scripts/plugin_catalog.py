@@ -11,16 +11,16 @@ SCHEMA = "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json"
 NAME = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
 VERSION = re.compile(r"(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?")
 LINK = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
-SKIP = {"__pycache__", ".git", ".venv", "node_modules", "build", "dist", ".cache", ".tmp", ".pytest_cache", ".mypy_cache", ".ruff_cache"}
+SKIP = {"__pycache__", ".git", ".venv", "venv", "node_modules", "build", "dist", ".cache", ".tmp", "tmp", "temp", "tests", "test", "test-results", ".pytest_cache", ".mypy_cache", ".ruff_cache", "_workbench"}
 
 
 def safe_source(root: Path, relative: str) -> Path:
     parts = PurePosixPath(relative)
-    if not relative or parts.is_absolute() or ".." in parts.parts or "\\" in relative or ":" in relative:
+    if not relative or relative != parts.as_posix() or parts.is_absolute() or ".." in parts.parts or "\\" in relative or ":" in relative:
         raise ValueError("Invalid package-relative path: " + relative)
     root = root.resolve()
     path = root.joinpath(*parts.parts)
-    if not path.resolve().is_relative_to(root) or any(item.is_symlink() for item in (path, *path.parents) if item.is_relative_to(root)):
+    if not path.resolve().is_relative_to(root) or any(item.is_symlink() or getattr(item, "is_junction", lambda: False)() for item in (path, *path.parents) if item.is_relative_to(root)):
         raise ValueError("Source escapes its root or uses a link: " + relative)
     return path
 
@@ -30,12 +30,12 @@ def source_files(root: Path, relative: str):
     if not folder.exists():
         raise ValueError("Missing plugin source: " + relative)
     for path in ([folder] if folder.is_file() else sorted(folder.rglob("*"))):
-        parts = path.relative_to(folder).parts if folder.is_dir() else ()
-        if any(part in SKIP or part.endswith(".egg-info") for part in parts) or path.suffix in {".pyc", ".pyo", ".zip", ".whl", ".log", ".tmp"}:
+        parts = path.relative_to(root).parts
+        if any(part.casefold() in SKIP or part.endswith(".egg-info") for part in parts) or path.suffix.lower() in {".pyc", ".pyo", ".zip", ".whl", ".log", ".tmp"}:
             continue
         safe_source(root, path.relative_to(root).as_posix())
         if path.is_file():
-            if path.name == "auth.json" or path.name.startswith(".env") and path.name != ".env.example" or path.suffix.lower() in {".pem", ".key"}:
+            if path.name.casefold() in {"auth.json", "credentials.json", "credentials", "id_rsa", "id_ed25519"} or path.name.casefold().startswith(".env") and path.name != ".env.example" or path.suffix.lower() in {".pem", ".key", ".p12", ".pfx"}:
                 raise ValueError("Private material in plugin source")
             yield path, path.relative_to(folder).as_posix() if folder.is_dir() else folder.name
 
@@ -57,8 +57,8 @@ def load_catalog(root: Path) -> list[dict]:
         ids.add(identifier)
         if entry.get("status") not in {"ready", "blocked"} or entry.get("status") == "blocked" and (not isinstance(entry.get("blocked_reason"), str) or not entry["blocked_reason"].strip()):
             raise ValueError("Plugin availability needs an explicit reason")
-        if not isinstance(entry.get("skills"), list) or not entry["skills"]:
-            raise ValueError("Plugin must select at least one Skill")
+        if not isinstance(entry.get("skills"), list):
+            raise ValueError("Plugin Skills must be an array")
         for skill in entry["skills"]:
             if not isinstance(skill, str) or not NAME.fullmatch(skill) or skill in owners:
                 raise ValueError("A Skill needs one canonical bundle owner: " + str(skill))
@@ -81,6 +81,15 @@ def load_catalog(root: Path) -> list[dict]:
                 raise ValueError("Invalid plugin resource mapping")
             safe_source(root, resource["source"])
             safe_source(root, resource["target"])
+        components = entry.get("components", [])
+        if not isinstance(components, list):
+            raise ValueError("Plugin components must be an array")
+        for component in components:
+            if not isinstance(component, dict) or set(component) != {"source", "target"} or any(not isinstance(value, str) for value in component.values()):
+                raise ValueError("Invalid plugin component mapping")
+            if not safe_source(root, component["source"]).is_file():
+                raise ValueError("Plugin component must select one file")
+            safe_source(root, component["target"])
         bundles.append({**entry, "manifest": manifest, "manifest_source": manifest_path})
     return bundles
 
@@ -90,13 +99,16 @@ def payload(root: Path, bundle: dict) -> tuple[dict[str, bytes], dict]:
 
     def add(source: Path, target: str):
         safe_source(root, target)
-        if any(target.casefold() == name.casefold() for name in files):
+        key = target.casefold()
+        if key == "source-manifest.json" or any(key == name.casefold() or key.startswith(name.casefold() + "/") or name.casefold().startswith(key + "/") for name in files):
             raise ValueError("Duplicate plugin target: " + target)
         raw = source.read_bytes()
         files[target] = raw
         sources[target] = {"source": source.relative_to(root).as_posix(), "sha256": hashlib.sha256(raw).hexdigest()}
 
     add(safe_source(root, bundle["manifest_source"]), "plugin.json")
+    if safe_source(root, "LICENSE").is_file():
+        add(safe_source(root, "LICENSE"), "LICENSE")
     for skill in bundle["skills"]:
         for source, relative in source_files(root, "skills/" + skill):
             add(source, "skills/" + skill + "/" + relative)
@@ -105,6 +117,12 @@ def payload(root: Path, bundle: dict) -> tuple[dict[str, bytes], dict]:
             raise ValueError("Invalid plugin resource mapping")
         for source, relative in source_files(root, resource["source"]):
             add(source, resource["target"] + "/" + relative)
+    for component in bundle.get("components", []):
+        selected = list(source_files(root, component["source"]))
+        if len(selected) != 1:
+            raise ValueError("Plugin component was excluded by distribution rules")
+        add(selected[0][0], component["target"])
+    validate_components(files, bundle["manifest"])
     for name, raw in files.items():
         if not name.endswith(".md"):
             continue
@@ -128,6 +146,33 @@ def payload(root: Path, bundle: dict) -> tuple[dict[str, bytes], dict]:
                 raise ValueError("Unbundled reference: " + name + " -> " + target)
     return files, {"plugin": bundle["manifest"]["name"], "version": bundle["manifest"]["version"], "files": sources,
                    "runtime_profiles": bundle["runtime_profiles"], "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration"}
+
+
+def validate_components(files: dict[str, bytes], manifest: dict) -> None:
+    """Validate packaged entry points without installing or invoking their contents."""
+    overlay = manifest.get("extensions", {}).get("com.openai", {})
+    if not isinstance(overlay, dict):
+        raise ValueError("OpenAI extension must be an object")
+    for field in ("apps", "hooks"):
+        relative = overlay.get(field)
+        if relative is None:
+            continue
+        if not isinstance(relative, str) or not relative.startswith("./") or ".." in PurePosixPath(relative).parts or relative[2:] not in files:
+            raise ValueError("Unbundled plugin entry point: " + field)
+        data = json.loads(files[relative[2:]])
+        if not isinstance(data, dict) or not isinstance(data.get(field), dict) or not data[field]:
+            raise ValueError("Plugin entry point needs a nonempty " + field + " object")
+    if "mcp.json" in files:
+        data = json.loads(files["mcp.json"])
+        if not isinstance(data, dict) or data.get("$schema") != "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json" or not isinstance(data.get("mcpServers"), dict) or not data["mcpServers"]:
+            raise ValueError("Invalid portable MCP configuration")
+        for server in data["mcpServers"].values():
+            if not isinstance(server, dict) or server.get("type") not in {"stdio", "streamable-http", "sse"}:
+                raise ValueError("Portable MCP server needs an explicit transport type")
+            if server["type"] == "stdio" and not isinstance(server.get("command"), str) or server["type"] != "stdio" and not isinstance(server.get("url"), str):
+                raise ValueError("Portable MCP server needs its command or URL")
+    if not any(name.startswith("skills/") and name.endswith("/SKILL.md") for name in files) and "mcp.json" not in files and not overlay.get("apps"):
+        raise ValueError("Plugin needs a Skill, MCP server or registered app mapping")
 
 
 def inventory(root: Path, settings: dict) -> list[dict]:

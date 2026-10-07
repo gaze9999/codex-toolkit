@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {"id":"prompt-explicit","kind":"positive","prompt":"請產生一段可複製的 coding-agent prompt, 讓另一個 agent 修正登入錯誤","expected":["coding-prompt"]},
+    {"id":"prompt-direct-fix","kind":"negative","prompt":"直接修正這個純 Python 函式的邊界錯誤, 執行既有 focused test","expected":[]},
+    {"id":"routing-explicit","kind":"positive","prompt":"這個工作應該留在原對話、fork 還是委派 subagent? 請依 context 與驗收成本判斷","expected":["task-routing"]},
+    {"id":"governance-layers","kind":"collision","prompt":"重整這個專案的 root 與 nested AGENTS.md, 移除重複規則","expected":["agent-governance"]},
+    {"id":"angular-implementation","kind":"collision","prompt":"修正 Angular Component 的表單狀態與請求生命週期","expected":["angular-development"]},
+    {"id":"angular-order","kind":"collision","prompt":"只整理 Angular Component class member 順序, 保留所有行為","expected":["angular-member-order"]},
+    {"id":"react-state","kind":"positive","prompt":"修正 React state 與 effect 造成的重複請求","expected":["react-development"]},
+    {"id":"vue-state","kind":"positive","prompt":"修正 Vue composable 的 reactive 狀態更新","expected":["vue-development"]},
+    {"id":"ui-detail-review","kind":"positive","prompt":"檢查這個介面的 table 跑版、modal 更新跳動與標示資訊是否符合原始描述, 自行操作並回報問題","expected":["ui-ux-design"]},
+    {"id":"ui-delivery-acceptance","kind":"collision","prompt":"完成 Angular 報表介面後, 交付前自行核對原始需求、實際資料與手機畫面, 修正漏做與跑版","expected":["angular-development","ui-ux-design"]},
+    {"id":"ui-source-only-review","kind":"collision","prompt":"只根據這張截圖檢查 UI 與描述是否一致, 不修改程式, 也不要把截圖當成真實資料驗證","expected":["ui-ux-design"]},
+    {"id":"docs-update","kind":"collision","prompt":"根據已驗證的 diff 同步現有 API Markdown 文件","expected":["doc-updater"]},
+    {"id":"readme-restructure","kind":"collision","prompt":"依目前儲存庫原始碼大幅重整 README","expected":["readme-maintainer"]},
+    {"id":"review-evidence","kind":"collision","prompt":"只讀檢查現有驗證記錄的版本與涵蓋範圍, 不重跑測試","expected":["validation-evidence-review"]},
+    {"id":"packaging-verify","kind":"collision","prompt":"核對既有 portable ZIP 的來源 hash、搬移與退出清理證據","expected":["packaging-acceptance"]},
+    {"id":"packaging-build","kind":"collision","prompt":"把已指定的 Skills、MCP 與應用程式資源組裝成乾淨 Plugin 與應用程式套件, 先預覽, 再打包, 不發布","expected":["plugin-packaging"]},
+    {"id":"setup-selected","kind":"positive","prompt":"診斷這台電腦缺少的單項 Playwright 工具與必要相依","expected":["development-tool-setup"]},
+    {"id":"research-synthesis","kind":"positive","prompt":"研究官方與工程案例, 比較兩種 RAG 檢索架構並列出證據缺口","expected":["research-learning-synthesis"]},
+    {"id":"simple-fact","kind":"negative","prompt":"JSON 的 true 是大寫還是小寫?","expected":[]},
+    {"id":"task-guide","kind":"positive","prompt":"依指定專案規格建立功能專用 coding task guide","expected":["task-guide"]},
+    {"id":"no-auto-docs","kind":"negative","prompt":"完成這個純 Python 的小型重構, 不需要修改文件或建立任務指引","expected":[]}
+  ]
+}

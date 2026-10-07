@@ -39,7 +39,7 @@
 | [RTK](https://github.com/rtk-ai/rtk) | 輸出過濾與估算壓縮率, 官方亦區分輸出減少與整體帳單減少 | 保存原始錯誤與 exit code, 不將輸出壓縮率直接換算為任務省費比例 |
 | [MarkItDown](https://github.com/microsoft/markitdown), [textlint](https://github.com/textlint/textlint), [CSpell](https://github.com/streetsidesoftware/cspell) 與 [Mermaid CLI](https://github.com/mermaid-js/mermaid-cli) | 已有本機 CLI 與檔案產物的工具 | 先核對既有核心及所需格式 / 規則, 不為 CLI 已覆蓋的單次工作安裝另一套引擎 |
 | [社群討論: Playwright CLI / MCP 比較](https://www.reddit.com/r/Playwright/comments/1vx2wew/playwright_mcp_vs_playwright_cli_the_comparison/) | 討論 running test / mocks 的接續, session 提早關閉, 以及總 input/output 成本未必隨單次 input 降低 | 作為需要驗證的情境, 依已安裝版本 help 與實測確認 attachment / test lifecycle, 不直接採用留言中的旗標或成本比例 |
-| [Windows session 案例 #364](https://github.com/microsoft/playwright-cli/issues/364), [版本啟動案例 #42402](https://github.com/microsoft/playwright/issues/42402) 與 [Skill 旗標案例 #243](https://github.com/microsoft/playwright-cli/issues/243) | 特定舊版有 session, runtime / startup 與文件旗標回報, issue 狀態及版本各自不同 | Windows 安裝後必須實測跨次 open / snapshot / 操作 / close, 以目前版本 help 為準. 不推論同一問題仍存在於已核對版本 |
+| [Windows session 案例 #364](https://github.com/microsoft/playwright-cli/issues/364), [版本啟動案例 #42402](https://github.com/microsoft/playwright/issues/42402) 與 [Skill 旗標案例 #243](https://github.com/microsoft/playwright-cli/issues/243) | session、runtime / startup 與旗標行為依工具版本確認 | Windows 安裝後必須實測跨次 open / snapshot / 操作 / close, 以目前版本 help 與實際操作結果為準 |
 
 官方資料用來確認功能與支援範圍, 社群資料用來找重現條件與失敗案例. 兩者共同支援選用判斷, 效率結論仍需本機相同任務的量測
 

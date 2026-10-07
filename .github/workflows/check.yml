@@ -17,6 +17,10 @@ jobs:
       - run: python -B mcp/scripts/audit_skills.py
       - run: python -B mcp/scripts/prepare_plugin_release.py --check
       - run: python -B mcp/scripts/prepare_marketplace.py --check
+      - name: Check routing fixtures and product sources
+        run: |
+          python -B tooling/evaluate.py routing
+          python -B tooling/package.py plan
       - run: python -B -m unittest discover -s mcp/tests -p 'test_*.py'
       - run: node --test mcp/tests/test_taiwan_style.cjs
       - name: Verify standalone Python tools
@@ -27,3 +31,19 @@ jobs:
           python -B -m unittest discover -s tests -t . -p test_cli_smoke.py
           python -B -m unittest discover -s tests -t . -p test_release_tools.py
       - run: git diff --check
+  packaging:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [windows-2022, macos-14]
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -B -m unittest discover -s mcp/tests -p test_packaging_workflow.py
+      - name: Assemble and read back source products
+        run: |
+          python -B tooling/package.py build --version 0.0.0 --output dist/source-check
+          python -B tooling/package.py verify --output dist/source-check

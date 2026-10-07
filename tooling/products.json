@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "products": [
+    {
+      "id": "plugins",
+      "kind": "plugins",
+      "default": true,
+      "requires": [],
+      "description": "Domain Plugins and a generated local Marketplace"
+    },
+    {
+      "id": "skills",
+      "kind": "source",
+      "default": true,
+      "sources": [
+        "skills"
+      ],
+      "strip_prefix": "skills/",
+      "requires": [],
+      "description": "Canonical standalone Skills with their resources"
+    },
+    {
+      "id": "governance",
+      "kind": "source",
+      "default": true,
+      "sources": [
+        "agents"
+      ],
+      "requires": [],
+      "description": "Optional neutral agent starter examples"
+    },
+    {
+      "id": "application-source",
+      "kind": "source",
+      "default": true,
+      "sources": [
+        "mcp",
+        "python-tools",
+        "agents",
+        "skills",
+        "plugins",
+        "docs",
+        "tooling",
+        "evals",
+        "assets",
+        "README.md",
+        "LICENSE",
+        "VERSION",
+        "launch-cli.cmd",
+        "launch-cli.ps1",
+        "launch-cli.sh"
+      ],
+      "requires": [
+        "Python version and selected dependencies declared by each package"
+      ],
+      "description": "Setup CLI, standalone Python tools, MCP adapters, installers and requirements"
+    },
+    {
+      "id": "mcp",
+      "kind": "mcp",
+      "default": false,
+      "requires": [
+        "Pinned wheel build requirements",
+        "Network access to pinned third-party packages"
+      ],
+      "description": "Existing wheel, installer and notice builders, followed by source/hash verification"
+    },
+    {
+      "id": "portable-cli",
+      "kind": "native",
+      "interface": "cli",
+      "default": false,
+      "requires": [
+        "Native Windows/macOS runner",
+        "Standalone Python pinned by cli-release.requirements.json",
+        "Network access to pinned packages"
+      ],
+      "description": "Relocatable setup CLI runtime and its existing smoke checks"
+    }
+  ]
+}

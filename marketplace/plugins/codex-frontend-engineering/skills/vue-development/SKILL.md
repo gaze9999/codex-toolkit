@@ -2,7 +2,7 @@
 name: vue-development
 description: Implement, diagnose, refactor or review Vue components, composables, stores and routes using the detected Vue ecosystem. Load Nuxt/SSR guidance only for server rendering, hydration, deployment or Nuxt integration.
 metadata:
-  version: "0.4.14"
+  version: "0.4.15"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -20,3 +20,5 @@ Inspect manifests/lockfiles, compiler/router/store/build settings and relevant c
 Read [reactivity and component contracts](references/reactivity.md) for watcher/composable/state changes, or [Nuxt and SSR](references/nuxt-ssr.md) for request isolation, hydration, server/client APIs or deployment. Do not load both for a simple local template edit.
 
 Select actual type/template/focused tests/lint/build for the changed behavior. Use the existing component/browser runner or available browser capability when interaction is not statically provable. Record route/state/actions/console/network and expected/actual results, close only owned sessions. Measure the same route/state before performance conclusions and verify language support before symbol retrieval.
+
+For user-visible layout, copy, displayed-data or interaction changes, use the available ui-ux-design Skill for requirement comparison and rendered-flow acceptance before delivery, without waiting for user screenshots. If unavailable, compare the original request with the affected rendered states directly and identify unverified behavior.

@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "29b1b3e6320baff47576f7d9b8e588e199586c0bf129a73f1779ebf7fd3cf03a",
+      "sha256": "0ce03ae8121c1bb1e9a39450e4ef7ac3c262d1509a12ac9dfbc6297c88337159",
       "source": "plugins/jev-evaluation/plugin.json"
     },
     "skills/jev-evaluation/LICENSE": {
@@ -93,6 +93,6 @@
     "jev"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.1.0",
-  "version": "0.1.3"
+  "toolkit_version": "0.2.0",
+  "version": "0.1.4"
 }

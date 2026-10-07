@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "22e678aba5f0866550686260191f9981d4c2d2cb8f88e77df452b6875ccf2cc3",
+      "sha256": "4b2cd327f62085fd9c2e639cfefc3485a92ac0e055c67c11cdfeeb1b1ccda8f7",
       "source": "plugins/documents-specifications/plugin.json"
     },
     "skills/context-brief/SKILL.md": {
@@ -149,6 +149,6 @@
     "local-documents"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.1.0",
-  "version": "0.1.5"
+  "toolkit_version": "0.2.0",
+  "version": "0.1.6"
 }

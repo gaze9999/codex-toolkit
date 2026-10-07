@@ -3,7 +3,7 @@ name: agent-governance
 description: Create, audit, or simplify project AGENTS.md layers and Codex subagent roles. Use for agent-governance work, including a new project setup, not ordinary implementation or general code review.
 metadata:
   short-description: Agent governance, role boundaries, and instruction minimization
-  version: "0.4.21"
+  version: "0.5.0"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -73,6 +73,8 @@ Keep the smallest instruction set that preserves authorization, contracts, proje
 For maintenance spanning canonical guidance, installed Skills/Plugins and teaching, read [maintenance acceptance](references/maintenance-acceptance.md). Use it for affected-source synchronization and representative checks, not a per-turn ritual.
 
 For adding or revising owned Skills, references, Python helpers, Plugins, MCP adapters or their distribution, read [component authoring](references/component-authoring.md). Use it to select the maintained unit, language, conditional context and necessary checks, without adding a fixed per-task checklist or a new delegation policy.
+
+For Skill/Plugin boundaries, conditional context, handoff formats or measured before/after evaluation, read [operating efficiency](references/operating-efficiency.md).
 
 ## Verify and deliver
 

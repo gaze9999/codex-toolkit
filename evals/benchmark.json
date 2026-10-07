@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {"id":"simple-fix","acceptance":"Reproduce one bounded defect, repair it and pass its focused regression"},
+    {"id":"medium-feature","acceptance":"Complete one feature slice and preserve its callers and public interface"},
+    {"id":"bug-investigation","acceptance":"Identify an unknown root cause with reproducible evidence before repair"},
+    {"id":"review","acceptance":"Report seeded concrete regressions and distinguish false positives"},
+    {"id":"large-refactor","acceptance":"Preserve defined behavior across a bounded cross-module change"},
+    {"id":"research","acceptance":"Resolve a bounded question with inspected primary sources and explicit unknowns"},
+    {"id":"docs","acceptance":"Synchronize specified documentation with the verified source state"},
+    {"id":"packaging","acceptance":"Build and read back explicit products, reject unsafe or unmanaged inputs and preserve distribution boundaries"}
+  ],
+  "protocol": "Pin task inputs, initial revision, acceptance, environment and trial. Record before/after separately. Use the same acceptance reviewer. Missing metrics are null. Do not run live releases or credentialed APIs merely to benchmark."
+}

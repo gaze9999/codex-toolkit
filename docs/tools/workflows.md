@@ -33,7 +33,7 @@ Windows 執行 `launch-cli.cmd mcp --profile game`, macOS / Linux 執行 `sh lau
 
 Python 與 JS library 需先選目標專案, 所以入口列出該項相依與專案安裝步驟, 不安裝到全域或自行新增 MCP. 官方 API / 帳戶服務仍各自授權, Codex 側邊欄內建整合沿用原本設定
 
-新 Python 模擬專案可在自己的目錄建立獨立環境, NumPy 與 SciPy 的本次候選版本需要 Python 3.12+, 其他項目的相容條件見 [相依清單](../../mcp/tools/development-tools.requirements.json)
+新 Python 模擬專案可在自己的目錄建立獨立環境, NumPy 與 SciPy 的設定清單中的版本需要 Python 3.12+, 其他項目的相容條件見 [相依清單](../../mcp/tools/development-tools.requirements.json)
 
 ```text
 py -3.13 -m venv .venv-balance

@@ -1,5 +1,5 @@
 interface:
-  display_name: "Vue Development (v0.4.14)"
+  display_name: "Vue Development (v0.4.15)"
   short_description: "Build Vue features with optional Nuxt and SSR guidance"
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"

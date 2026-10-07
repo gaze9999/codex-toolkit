@@ -1,6 +1,6 @@
 interface:
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
-  display_name: "UI UX Design (v0.4.12)"
-  short_description: "Research and verify interface flows and usability"
-  default_prompt: "Use $ui-ux-design to inspect the requested interface flow, choose available capabilities by need, make the authorized small change and verify the affected user behavior."
+  display_name: "UI UX Design (v0.5.0)"
+  short_description: "Check UI details and original requirements before delivery"
+  default_prompt: "Use $ui-ux-design to compare the actual interface with the original request, inspect layout, displayed data and interactions in the browser, and report or fix discrepancies within the authorized scope."

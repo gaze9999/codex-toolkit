@@ -6,7 +6,8 @@
       "batch": "0",
       "status": "ready",
       "skills": [
-        "packaging-acceptance"
+        "packaging-acceptance",
+        "plugin-packaging"
       ],
       "runtime_profiles": [],
       "resources": [
@@ -92,6 +93,12 @@
         {
           "source": "assets/branding",
           "target": "assets"
+        }
+      ],
+      "components": [
+        {
+          "source": "agents/references/angular-style.md",
+          "target": "agents/references/angular-style.md"
         }
       ]
     },

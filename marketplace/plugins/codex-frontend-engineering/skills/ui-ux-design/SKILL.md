@@ -1,8 +1,8 @@
 ---
 name: ui-ux-design
-description: Analyze, prototype, implement or review user interfaces and task flows from actual requirements, research and observed behavior. Use for UI/UX decisions or interface usability changes, not a backend-only task or a local formatting edit.
+description: Design or review UI/UX and check rendered interfaces against the original request before delivery. Use for layout defects, misleading displayed data, missing requirements and interaction changes, including UI work without user-provided screenshots.
 metadata:
-  version: "0.4.12"
+  version: "0.5.0"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -10,6 +10,14 @@ metadata:
 # UI / UX Design
 
 Start with the user's task, existing interface, project constraints and the requested deliverable. Analysis or a design reference does not authorize implementation, account changes or publication. Preserve the selected stack, design system and useful existing interactions.
+
+## Check the requested result before delivery
+
+For a detailed review, reported layout/data discrepancy, or user-visible implementation, read [UI acceptance and detail review](references/detail-review.md). Reconcile the original request and still-valid follow-ups, compare each affected requirement with the served interface and its data, then fix and retest discrepancies within the existing authorization. Perform this acceptance pass without waiting for the user to supply screenshots or request a separate review.
+
+Use the available browser capability to operate and visually inspect the affected states, capture and inspect your own screenshots when useful, and supplement them with DOM, console, request and data evidence. A successful build, screenshot creation or plausible mockup does not establish requirement compliance. If the target cannot run or be reached, complete independent checks and identify the unverified requirements and missing runtime evidence.
+
+Jev is optional for semantic ordering of retrieved material or a finite comparison of approved summaries when rules cannot decide it. It does not validate pixels, data bindings or interactions. Keep governing requirements in Main's context and follow the available jev-evaluation Skill's data boundary when evaluation is useful; its absence does not block UI acceptance.
 
 ## Work from a representative flow
 

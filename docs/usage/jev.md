@@ -10,21 +10,21 @@ MCP 與 Skill 實作維持在 `codex-setup/skills/jev-evaluation/`, 各專案共
 
 跨文件/歷史證據排序, 工作項目分類與共用工具候選比較的邊界見 [Skill 使用情境](../../skills/jev-evaluation/references/usage.md#when-to-use-jev). Jev 不決定項目已完成, 可開工或規格衝突採哪一方, 也不替代程式等價, 權限, hash 與 Test 驗證, 全面檢查仍須涵蓋全部要求
 
-query, rubric 與候選摘要都需符合外傳授權, 改成摘要或移除個資不代表自動獲准. 排序後先讀相關 Markdown 抽出版, 需要畫面證據, 缺漏/疑義/版本衝突或明確原始來源核對時才回查原檔
+query, rubric 與候選摘要都需符合外傳授權, 摘要與去識別資料仍須取得外傳授權. 排序後先讀相關 Markdown 抽出版, 需要畫面證據, 缺漏/疑義/版本衝突或明確原始來源核對時才回查原檔
 
 ## 呼叫原則
 
 一次問一個可明確判斷的語意條件, 選項與 criteria 保持一致, 缺少資訊時保留 unknown, 計數, 日期先後, 版本與 ID 比較交給程式. 同一批必要 state 的獨立問題才合併, 不為 batch 塞入無關全文, rank helper 已合併 optional candidates, 不需要再逐筆呼叫
 
-新的 rubric, model 或繁體中文情境先以可外傳且有預期答案的代表案例檢查, confidence 不代表事實正確率. 相同輸入與規則的結果可在當次工作重用, 來源改變則重查, 不新增例行輪詢或每輪評分. 完整設計邊界見 [question design](../../skills/jev-evaluation/references/usage.md#question-design-and-call-cost), 可分享的說明另見 [Codex Playbook](https://github.com/gaze9999/codex-playbook)
+新的 rubric, model 或繁體中文情境先以可外傳且有預期答案的代表案例檢查, confidence 表示模型信心, 事實正確性由來源核對. 相同輸入與規則的結果可在當次工作重用, 來源改變則重查, 不新增例行輪詢或每輪評分. 完整設計邊界見 [question design](../../skills/jev-evaluation/references/usage.md#question-design-and-call-cost), 可分享的說明另見 [Codex Playbook](https://github.com/gaze9999/codex-playbook)
 
 ## 如何辨識實際使用
 
 | 紀錄 | 能證明的範圍 |
 | --- | --- |
-| 已安裝/註冊 | 設定存在, 不代表目前對話已載入 |
+| 已安裝/註冊 | 設定存在, 執行中的對話需重新載入並確認工具可呼叫 |
 | `jev_status` 或 required-only 離線驗證 | 本機狀態或 MCP 通道, 沒有對工作候選做遠端評分 |
-| `jev_rank` / `jev_evaluate` 回傳 `status=ok` | 該次語意比較完成, 不代表 Main 已接受結果或程式驗證通過 |
+| `jev_rank` / `jev_evaluate` 回傳 `status=ok` | 該次語意比較完成, Main 依證據決定採用方式, 程式另行驗證 |
 | `status=fallback` / `skipped` / `dry-run` | 未完成遠端語意比較, 依實際狀態繼續原流程 |
 
 實際使用後簡短說明用途, tool/status 與 Main 採用方式或 fallback, 回應有 model 才記錄實際 model. 不預設新增永久 log, 不貼輸入內容或 Key, 未使用的原因僅在使用者詢問或與本次評估相關時說明
@@ -70,7 +70,7 @@ Tool: `jev_rank`
 
 - `id` 必須唯一, 使用不含來源路徑的識別值, ID 與原始來源的對照留在 Main
 - `required=true` 的 ID 在本機保留, 不把它的 text 送去評分, 必讀規格不依排序結果刪除
-- 其他候選依 probability 排序, 每個候選仍保留, probability 是語意相關性訊號, 不代表程式或規格正確率
+- 其他候選依 probability 排序, 每個候選仍保留, probability 表示語意相關性, 程式與規格依來源及測試核對
 - `status=fallback` 時保留原順序與 ID, probability 為 null, Main 繼續用原有工具處理
 
 可以對 Codex 說:
@@ -157,4 +157,4 @@ macOS/Linux 可使用已確認的 `python3`, CLI 參數與 MCP 工具參數不�
 
 永久紀錄預設關閉, 明確需要時, 安裝獨立的 `local-activity-monitor`, 使用 `--enable-jev --configure-only` 啟用, 再以 `--codex --open` 開啟本機頁面, 停用使用 `--disable-jev --configure-only`, 舊 MCP process 需重新載入新版 client
 
-只保存時間, operation/source, model, known tokens, latency, HTTP attempts 與 body bytes/status, 不保存 query, rubric, candidates, state, answers, Key, header 或 raw error, telemetry 失敗不改變 Jev 結果, 未知 token 保留為 null, 畫面標示本機觀察統計, 不代表帳戶總用量, 額度或費用, 同一操作與 HTTP 重試分開計數
+只保存時間, operation/source, model, known tokens, latency, HTTP attempts 與 body bytes/status, 不保存 query, rubric, candidates, state, answers, Key, header 或 raw error, telemetry 失敗不改變 Jev 結果, 未知 token 保留為 null, 畫面顯示本機已觀察的統計, 帳戶總用量、額度及費用由服務帳戶查詢, 同一操作與 HTTP 重試分開計數

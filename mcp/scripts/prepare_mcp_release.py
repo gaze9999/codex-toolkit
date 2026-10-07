@@ -32,7 +32,10 @@ PROJECTS = (
     (Path("mcp/mcp_servers/tool_setup"), "codex-tool-setup", (Path("mcp/mcp_servers/tool_setup"),)),
 )
 INSTALLER_FILES = (
-    "README.md", "LICENSE", "plugins/catalog.json",
+    "README.md", "LICENSE", "VERSION", "plugins/catalog.json",
+    "tooling/package.py", "tooling/evaluate.py", "tooling/products.json",
+    "evals/routing.json", "evals/benchmark.json", "docs/operating-model.md",
+    "mcp/scripts/prepare_release.py",
     "mcp/mcp_servers/presets/baseline.json",
     "launch-cli.cmd", "launch-cli.ps1", "launch-cli.sh",
     "docs/README.md", "docs/agents.md", "docs/skills.md", "docs/third-party.md", "docs/setup/cli.md", "docs/tools/selection.md",

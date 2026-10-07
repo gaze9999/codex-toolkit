@@ -1,6 +1,6 @@
 interface:
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
-  display_name: "Angular Development (v0.4.14)"
+  display_name: "Angular Development (v0.4.17)"
   short_description: "Implement Angular features and inspect ownership"
   default_prompt: "Use $angular-development to inspect the actual Angular versions and affected component, form or architecture, then complete and verify the scoped change."

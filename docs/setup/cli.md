@@ -106,7 +106,7 @@ python mcp/scripts/install_mcp.py local_documents --runtime /absolute/document-r
 - `--apply` 先安裝明確提供的 wheel, 檢查套件相容性, 再呼叫 runtime 內的 guarded installer
 - `--verify` 驗證 stdio discovery, 六種原生格式, 抽出版定位, OCR 與 Markdown 防護, 只使用臨時 fixture
 
-原 `--documents-repo`, server 的 `--tools-root` 與 `python -m mcp_tools.*` 入口已退休, 舊版需重新安裝套件並註冊, 新設定使用已安裝模組, 不包含 repo 的 server.py 路徑
+Server 使用已安裝的模組啟動, runtime 與註冊依 installer 的預覽及套用結果設定
 
 ## 建置與版本
 
@@ -151,7 +151,7 @@ python mcp/scripts/install_mcp.py jev --help
 - [Jev 操作教學](../usage/jev.md)
 - [Local Documents 開發驗證](../../mcp/mcp_servers/local_documents/README.md)
 
-註冊後重新載入支援 MCP 的 client, 再核對工具清單, installer 或獨立 stdio 驗證通過, 不代表目前對話已 reload
+註冊後重新載入支援 MCP 的 client, 再核對工具清單, installer 或獨立 stdio 驗證通過, 執行中的對話需重新載入後確認工具清單
 
 這是 stdio 部署, 遠端 HTTP endpoint 需另行選擇 transport, authentication 與 host, Windows/macOS/Linux 的 native 相依需依平台安裝, 實機支援範圍以驗證結果為準
 
@@ -213,7 +213,7 @@ Apply 核對 wheel CRC / metadata / hash, 建立個別 venv 或沿用現有環�
 
 其他維護者正在處理 Skill 鏡像時, 可加入 `--no-skill-sync`, 仍安裝與驗證 runtime, 只略過 managed Skill 同步
 
-Apply 顯示是否需要重新載入 Codex, 檔案與 wheel 已安裝不代表已開啟對話的 MCP process 自動更換, baseline 本身不執行 Jev 語意比較, 不啟用永久紀錄
+Apply 顯示是否需要重新載入 Codex, 更新 wheel 後重新載入 MCP process 才使用新版本. baseline 設定 runtime 與註冊, Jev 語意比較及持續紀錄由各自入口啟用
 
 ## Bundle 維護
 
@@ -241,7 +241,7 @@ CLI 與 MCP 使用同一份 `skills/jev-evaluation/scripts/jev.py`, wheel 以 `c
 
 監看工具安裝後, 使用 `local-activity-monitor --enable-jev --configure-only` 明確啟用本機紀錄, 以 `--codex --open` 啟動頁面, 預設 `http://127.0.0.1:8787/`, 關閉終端機或 Ctrl+C 停止, `--disable-jev --configure-only` 停用紀錄並保留歷史
 
-只保存 timestamps, operation/source, model, known tokens, latency, body bytes 與安全狀態, 不保存 prompt, query, rubric, candidates, answers, Key 或 raw error, 寫入失敗不影響 Jev, 舊 process 需 reload, 畫面是本機觀察統計, 不代表帳戶總用量或剩餘額度
+只保存 timestamps, operation/source, model, known tokens, latency, body bytes 與安全狀態, 不保存 prompt, query, rubric, candidates, answers, Key 或 raw error, 寫入失敗不影響 Jev, 舊 process 需 reload, 畫面顯示本機已觀察的統計, 帳戶總用量及剩餘額度由服務帳戶查詢
 
 Codex 只讀近期本機 JSONL metadata, 增量追蹤, 使用 thread 最新累計快照, 不將重複快照加總, 不解析 exec 內容或讀取對話文字 / auth.json, Mac M5 / Linux 的原生執行尚未驗證
 

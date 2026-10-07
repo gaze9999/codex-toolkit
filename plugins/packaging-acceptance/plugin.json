@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-packaging-acceptance",
-  "version": "0.1.5",
-  "description": "Validate portable package inputs, lifecycle and native-platform release evidence.",
+  "version": "0.2.0",
+  "description": "Assemble selected Plugin/application products and validate package sources and lifecycle.",
   "author": {
     "name": "gaze9999"
   },
@@ -11,11 +11,13 @@
     "com.openai": {
       "interface": {
         "displayName": "封裝與發布驗收",
-        "shortDescription": "Validate portable package inputs, lifecycle and native-platform release evidence.",
+        "shortDescription": "Assemble selected Plugin/application products and validate package sources and lifecycle.",
         "logo": "./assets/toolkit.png",
         "composerIcon": "./assets/toolkit.png",
-        "brandColor": "#E8A36D"
+        "brandColor": "#E8A36D",
+        "websiteURL": "https://github.com/gaze9999/codex-toolkit"
       }
     }
-  }
+  },
+  "homepage": "https://github.com/gaze9999/codex-toolkit"
 }

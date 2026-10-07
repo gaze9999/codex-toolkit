@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plugin Packaging (v0.1.0)"
+  short_description: "Build clean Plugin and application packages"
+  default_prompt: "Use $plugin-packaging to automate packages from these canonical Skills and application sources, preview the selected products and verify their contents."

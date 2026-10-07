@@ -4,6 +4,8 @@
 
 | 分類 | 文件 | 內容 |
 |---|---|---|
+| 操作 | [打包與評估](operating-model.md) | 產品來源、建置選項、路由觀察與 metrics 欄位 |
+| 操作 | [打包與評估](operating-model.md) | 產品來源、建置選項、路由觀察與 metrics 欄位 |
 | 設定分類 | [Agents](agents.md) | Global、Desktop、Git、ChatGPT / Work 與跨電腦同步 |
 | 設定分類 | [Skills](skills.md) | 自訂 Skill 清單、安裝與使用位置 |
 | 設定分類 | [Plugins](plugins.md) | Codex 官方管理入口與設定檢視 |
@@ -19,4 +21,4 @@
 | 使用教學 | [Local Documents](usage/local-documents.md) | 擷取、OCR、Markdown 定位與安全寫入 |
 | 使用教學 | [Jev](usage/jev.md) | 候選 context 排序、有限評估與診斷 |
 
-操作與治理說明統一放在根目錄 `docs/`, Skill 內部指令、專案範本與套件 metadata 所需的 README 留在所屬來源. 第三方授權來源見[授權索引](third-party.md)
+操作與工作規範說明統一放在根目錄 `docs/`, Skill 內部指令、專案範本與套件 metadata 所需的 README 留在所屬來源. 第三方授權來源見[授權索引](third-party.md)

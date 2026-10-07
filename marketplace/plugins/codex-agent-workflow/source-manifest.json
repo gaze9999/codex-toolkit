@@ -13,15 +13,15 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "3b26f44a45e89fc15d89838f3691701b6be04f9213fed3e6461253ffc7bf5144",
+      "sha256": "1cf3850cd5661ccf57f36c343f5f97ecc471796b8cc166cb29907dc821c08574",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
-      "sha256": "3c8e8d8c5d2563ab210f2982f8604da387bb847ab59cd97c54ab06be1a63ab65",
+      "sha256": "91e1ef144c4ee681609f5165cf3b4af7714f4ab5e2ebfc7b41afa75b5f06c914",
       "source": "skills/agent-governance/SKILL.md"
     },
     "skills/agent-governance/agents/openai.yaml": {
-      "sha256": "660b72b08e36300917bda529550266143e7f1d39e739f657b89b319b48a4be8f",
+      "sha256": "50d06d2e22688e8266cfdf2d34f977c1ede0ec656a58c06e0432d5e303380e0c",
       "source": "skills/agent-governance/agents/openai.yaml"
     },
     "skills/agent-governance/assets/icon-small.png": {
@@ -115,6 +115,10 @@
     "skills/agent-governance/references/maintenance-acceptance.md": {
       "sha256": "8e1e25b2b645e991dadc3b28b64d5ef87307ddead440d5d0ae4c0ec6efe66125",
       "source": "skills/agent-governance/references/maintenance-acceptance.md"
+    },
+    "skills/agent-governance/references/operating-efficiency.md": {
+      "sha256": "b7cef5235ace0c02b92e99fa04a4a4eac078519d8502a67be4024176cd1770fe",
+      "source": "skills/agent-governance/references/operating-efficiency.md"
     },
     "skills/agent-governance/references/project-environment-routing.md": {
       "sha256": "5b169064200c2f85f1e489e965cd2476580a6841863a1aae5d793d19caaf885c",
@@ -255,6 +259,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.1.0",
-  "version": "0.1.10"
+  "toolkit_version": "0.2.0",
+  "version": "0.2.0"
 }

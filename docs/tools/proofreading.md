@@ -7,7 +7,7 @@
 | `textlint` | [textlint 官方 MCP](https://textlint.org/docs/mcp/) 15.8.0, [prh](https://github.com/textlint-rule/textlint-rule-prh) 6.1.0, Node 20.18+ | 台灣用語詞表與繁中半形標點, 本機處理 |
 | `textlint-ja` | 同一官方引擎, 獨立 [日文規則集](https://github.com/textlint-ja/textlint-rule-preset-ja-technical-writing) 12.0.2 | 助詞, 文體與日文技術寫作, 保留日文標點 |
 | `cspell` | [CSpell CLI](https://cspell.org/docs/how-it-works) 10.3.6, Node 22.18+ | 英文拼字與產品詞表, 本機處理 |
-| `languagetool` | [LanguageTool](https://dev.languagetool.org/http-server), 另選本機 Java 服務或核准的雲端服務 | 需要時補英文文法檢查, 語言支援不代表完整繁中或日文拼字檢查 |
+| `languagetool` | [LanguageTool](https://dev.languagetool.org/http-server), 另選本機 Java 服務或核准的雲端服務 | 需要時補英文文法檢查, 繁中或日文拼字檢查需選用支援該語言的工具 |
 
 Windows 使用 `launch-cli.cmd mcp`, macOS / Linux 使用 `sh launch-cli.sh mcp`, 在文字校對類別選擇一項, 每次只安裝該項及相依, 也可由既有 development-tool installer 指定同名選項
 

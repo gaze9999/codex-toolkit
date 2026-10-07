@@ -5,4 +5,4 @@ hatchling
 uv_build>=0.8.12,<0.9.0
 
 # Reuse the Jev SDK requirements for the Skill script help audit.
--r ../skills/jev-evaluation/requirements.txt
+-r ../../skills/jev-evaluation/requirements.txt
