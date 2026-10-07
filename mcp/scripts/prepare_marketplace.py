@@ -38,7 +38,8 @@ def prepare(root):
         prefix = 'marketplace/plugins/' + name + '/'
         package['LICENSE'] = license_bytes
         provenance['files']['LICENSE'] = {'source': 'LICENSE', 'sha256': hashlib.sha256(license_bytes).hexdigest()}
-        provenance.update({'producer': PRODUCER, 'source_state': 'canonical-file-hashes', 'license': 'MIT'})
+        provenance.update({'producer': PRODUCER, 'source_state': 'canonical-file-hashes', 'license': 'MIT',
+                           'toolkit_version': safe_source(root, 'VERSION').read_text(encoding='utf-8').strip() if safe_source(root, 'VERSION').is_file() else None})
         package['source-manifest.json'] = encode(provenance)
         files.update({prefix + relative: raw for relative, raw in package.items()})
         index['plugins'].append({'name': name, 'source': {'source': 'local', 'path': './marketplace/plugins/' + name},
@@ -62,6 +63,7 @@ def existing(root):
 def owned_before(root, before):
     """Only overwrite intact generated packages, never arbitrary files or hand edits."""
     prefixes = {Path(name).parts[2] for name in before if name.startswith('marketplace/plugins/')}
+    previous_versions = set()
     for plugin in prefixes:
         prefix = f'marketplace/plugins/{plugin}/'
         raw = before.get(prefix + 'source-manifest.json')
@@ -70,6 +72,7 @@ def owned_before(root, before):
         manifest = json.loads(raw)
         if manifest.get('producer') != PRODUCER:
             raise ValueError('Unowned payload: ' + plugin)
+        previous_versions.add(manifest.get('toolkit_version'))
         expected = manifest['files']
         actual = {name[len(prefix):]: raw for name, raw in before.items() if name.startswith(prefix) and name != prefix + 'source-manifest.json'}
         if set(actual) != set(expected) or any(hashlib.sha256(raw).hexdigest() != expected[name]['sha256'] for name, raw in actual.items()):
@@ -80,7 +83,15 @@ def owned_before(root, before):
             expected_index['plugins'].append({'name': plugin, 'source': {'source': 'local', 'path': './marketplace/plugins/' + plugin},
                                                'policy': {'installation': 'AVAILABLE', 'authentication': 'ON_USE'}, 'category': 'Productivity'})
         actual_index = json.loads(before['.agents/plugins/marketplace.json'])
-        if actual_index.get('interface') == {'displayName': 'Codex Toolkit'}:
+        previous_interface = {'displayName': 'Codex Toolkit'}
+        if len(previous_versions) == 1 and None not in previous_versions:
+            previous_version = next(iter(previous_versions))
+            if not isinstance(previous_version, str) or not re.fullmatch(r'\d+\.\d+\.\d+', previous_version):
+                raise ValueError('Invalid previous Toolkit version')
+            previous_interface = {'displayName': f'🧰 Codex Toolkit v{previous_version}'}
+        # The first branded snapshot predates version provenance.
+        legacy_initial = previous_versions == {None} and actual_index.get('interface') == {'displayName': '🧰 Codex Toolkit v0.1.0'}
+        if actual_index.get('interface') == previous_interface or legacy_initial:
             actual_index['interface'] = marketplace_interface(root)
         actual_entries = actual_index.get('plugins')
         if isinstance(actual_entries, list):

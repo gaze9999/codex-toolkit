@@ -40,6 +40,18 @@ class MarketplaceTests(unittest.TestCase):
         self.assertEqual(value['interface']['displayName'], '🧰 Codex Toolkit v0.1.0')
         self.assertEqual(market.synchronize(self.root)['status'], 'pass')
 
+    def test_intact_version_upgrade_preserves_catalog_guard(self):
+        (self.root / 'VERSION').write_text('0.1.0\n', encoding='utf-8')
+        market.synchronize(self.root, True)
+        (self.root / 'VERSION').write_text('0.1.1\n', encoding='utf-8')
+        market.synchronize(self.root, True)
+        value = market.json.loads((self.root / '.agents/plugins/marketplace.json').read_text())
+        self.assertEqual(value['interface']['displayName'], '🧰 Codex Toolkit v0.1.1')
+        value['interface']['displayName'] = 'Manual title'
+        (self.root / '.agents/plugins/marketplace.json').write_text(market.json.dumps(value))
+        with self.assertRaisesRegex(ValueError, 'edited'):
+            market.synchronize(self.root, True)
+
     def test_invalid_version_is_rejected(self):
         (self.root / 'VERSION').write_text('unverified version', encoding='utf-8')
         with self.assertRaisesRegex(ValueError, 'Invalid Toolkit version'):

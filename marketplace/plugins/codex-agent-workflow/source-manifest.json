@@ -5,15 +5,15 @@
       "source": "LICENSE"
     },
     "assets/toolkit.png": {
-      "sha256": "befd09b04133f3489a2dc023f295c8edace1ddc1d502f6b538788f877fc34e89",
+      "sha256": "dff331901c72c163d7df0d52fbe88e8c77d6bb5e42d9940eec12be387bdb1211",
       "source": "assets/branding/toolkit.png"
     },
     "assets/toolkit.svg": {
-      "sha256": "391acb0dc2f459b41bfb0c64fbeeaa159f8ab9c526fcca54b3415bd15fa8c5d4",
+      "sha256": "9a3a22f496588d2789ee81dd858edd59dec3c5fc7da22677aab0d50f1348a4f9",
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "3417535d666897bc7dcba0b05989c3752ee698c5687702323461dfa505660792",
+      "sha256": "89a104813720cbba63b8112d762918b6b4ee1413172737c9496c5dfc0c4785dd",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
@@ -235,5 +235,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "version": "0.1.3"
+  "toolkit_version": "0.1.1",
+  "version": "0.1.4"
 }

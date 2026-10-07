@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-packaging-acceptance",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Validate portable package inputs, lifecycle and native-platform release evidence.",
   "author": {
     "name": "gaze9999"
@@ -14,7 +14,7 @@
         "shortDescription": "Validate portable package inputs, lifecycle and native-platform release evidence.",
         "logo": "./assets/toolkit.png",
         "composerIcon": "./assets/toolkit.png",
-        "brandColor": "#4AD7BD"
+        "brandColor": "#E8A36D"
       }
     }
   }
