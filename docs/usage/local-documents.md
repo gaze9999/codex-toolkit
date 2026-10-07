@@ -48,7 +48,7 @@ Tool: `extract_document`
 | `written` | 是否實際寫入 output, 預覽時為 false |
 | `status=partial` | OCR 有失敗或省略, 請查看 `ocr.errors` 與 `ocr.omitted_items` |
 | `truncated=true` | 回傳本文已截斷, `content_chars` 是完整本文字數 |
-| `output_sha256` | 本次產生的完整 Markdown hash, 預覽時不代表已存在同內容的檔案 |
+| `output_sha256` | 完整 Markdown 的 hash, 預覽時計算預定輸出, 寫入後可用它核對檔案 |
 
 支援 PDF, XLSX, DOCX, PPTX, CSV, TXT 與 PNG/JPEG/TIFF/BMP/WebP 等點陣圖, 來源上限 128 MiB, 原始文件仍是規格權威, OCR 信心分數不能證明欄位或表格關係正確
 
@@ -174,6 +174,6 @@ Tool: `update_markdown`
 | 核心套件缺少或 API 不相容 | 在同一 runtime 安裝相容的核心 wheel, 檢查套件版本後重新啟動 |
 | 雲端 placeholder 無法原子取代 | 先確認本機檔案狀態, 確有需要時, 明確使用 `in_place=true` 備援, 會建立備份 |
 
-Markdown 預覽也需要目標在 write root, MCP 的 preview 或 write 參數都不代表可自行放寬範圍, 此工具不執行 Notion 同步, Git 歷史操作或程式編譯
+Markdown 預覽與寫入的目標都須位於 write root, 存取範圍由啟動設定指定. Notion 同步、Git 操作與程式編譯使用各自入口
 
-文件與 Markdown CLI 已合併至本 repo 的 `python-tools/`, 原 `python -m mcp_tools.*` 已移除, MCP 的啟動與驗證由本 repo 的 `mcp/` 管理
+文件與 Markdown CLI、versioned core 及 MCP 的安裝與驗證入口見 [文件工具](../../python-tools/README.md)

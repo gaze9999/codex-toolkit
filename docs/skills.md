@@ -23,7 +23,7 @@
 | AI 與媒體 | [Editorial Illustration](../skills/editorial-illustration/SKILL.md) | 依固定 editorial illustration 視覺方向處理使用者提供的圖片 |
 | Frontend 與遊戲 | [Angular Development](../skills/angular-development/SKILL.md) | 依實際 Angular 與 TypeScript runtime 分配 Component, Service, state 與資料轉換責任 |
 | Frontend 與遊戲 | [UI UX Design](../skills/ui-ux-design/SKILL.md) | 依實際流程與研究檢查介面, 文案, 原型, responsive 與無障礙, 先驗證小區塊 |
-| Frontend 與遊戲 | [Angular Member Order](../skills/angular-member-order/SKILL.md) | 安全整理 Angular Component class member 與可選 Signal I/O 遷移 |
+| Frontend 與遊戲 | [Angular Member Order](../skills/angular-member-order/SKILL.md) | 安全整理 Angular Component class member 與可選的 Signal I/O 改寫 |
 | Frontend 與遊戲 | [Unity Development](../skills/unity-development/SKILL.md) | 依實際 Unity version, package, serialized asset 與 build target 開發及驗證 |
 | Frontend 與遊戲 | [Game Balance Simulation](../skills/game-balance-simulation/SKILL.md) | 共用遊戲規則跑模擬, 比較策略與分布, 重播數值及狀態錯誤 |
 | Frontend 與遊戲 | [Vue Development](../skills/vue-development/SKILL.md) | 依實際 Vue, Nuxt 或 Vite stack 開發並保留 component, state, SSR 與 build contracts |

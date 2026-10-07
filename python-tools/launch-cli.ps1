@@ -13,9 +13,6 @@ try {
     if (-not (Test-Path -LiteralPath $executable -PathType Leaf)) {
         $executable = Join-Path $PSScriptRoot '.venv\Scripts\python.exe'
         if (-not (Test-Path -LiteralPath $executable -PathType Leaf)) {
-            $executable = Join-Path $PSScriptRoot '.venv-gui\Scripts\python.exe'
-        }
-        if (-not (Test-Path -LiteralPath $executable -PathType Leaf)) {
             $executable = (Get-Command python -CommandType Application -ErrorAction Stop | Select-Object -First 1).Source
         }
         $nativeArgs = @((Join-Path $PSScriptRoot 'launch-cli.py')) + $nativeArgs

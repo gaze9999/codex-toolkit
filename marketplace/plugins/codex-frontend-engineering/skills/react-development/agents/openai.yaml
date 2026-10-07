@@ -1,7 +1,7 @@
 interface:
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
-  display_name: "React Development (v0.4.14)"
+  display_name: "React Development (v0.4.15)"
   short_description: "Build React features with focused lifecycle guidance"
   default_prompt: "Use $react-development to inspect the actual React runtime and affected component/state contracts, then complete and verify the scoped change."
 

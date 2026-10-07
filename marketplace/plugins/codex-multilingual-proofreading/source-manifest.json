@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "fd0e9f64dc6881bb542b4e4292749af7526c4c4042f17c64d32d78052949753e",
+      "sha256": "cfcba05613932e5c622f9e6bc564c7608c88ae796e266d74452d30160a2a9e63",
       "source": "plugins/multilingual-proofreading/plugin.json"
     },
     "resources/proofreading/en/cspell.json": {
@@ -78,6 +78,6 @@
     "cspell"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.1.0",
-  "version": "0.1.4"
+  "toolkit_version": "0.2.0",
+  "version": "0.1.5"
 }

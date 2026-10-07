@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "e66ef30e20179afc93e21953e9b0d9d18f48599b5d0efd61059bdc2a30285a3b",
+      "sha256": "303296a0173a298e3e93516d0faeb676f6350806127163b4ab4253cb0a590162",
       "source": "plugins/packaging-acceptance/plugin.json"
     },
     "skills/packaging-acceptance/SKILL.md": {
@@ -27,6 +27,18 @@
     "skills/packaging-acceptance/references/acceptance.md": {
       "sha256": "db1de71eddb09ca0e851546024093d27c114f653754c711ee8efe14da5f1a683",
       "source": "skills/packaging-acceptance/references/acceptance.md"
+    },
+    "skills/plugin-packaging/SKILL.md": {
+      "sha256": "a012e4f55a546835c33ca6a9c84474bd716b7e37752f7ccc7f170deeac435537",
+      "source": "skills/plugin-packaging/SKILL.md"
+    },
+    "skills/plugin-packaging/agents/openai.yaml": {
+      "sha256": "87d92c3c7c36c5dcfd514eb19b8f68c36fae3b0b556ec352d28240532b04c2c5",
+      "source": "skills/plugin-packaging/agents/openai.yaml"
+    },
+    "skills/plugin-packaging/references/assembly.md": {
+      "sha256": "ed5a2dac8a3b8556b502b306cd8fe3b112bc56088d591070a1a8c2c3a8984b05",
+      "source": "skills/plugin-packaging/references/assembly.md"
     }
   },
   "license": "MIT",
@@ -35,6 +47,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.1.0",
-  "version": "0.1.5"
+  "toolkit_version": "0.2.0",
+  "version": "0.2.0"
 }

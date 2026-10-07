@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "76cd96f18e592b2f826b2feae38696a6b2a45bc3de9f8424a1be36ed6071f784",
+      "sha256": "caae88bc23425e0afcec4b91cac90e0b1693a76c119764b3b8ef4f22db60249a",
       "source": "plugins/environment-evidence/plugin.json"
     },
     "skills/environment-consistency-check/SKILL.md": {
@@ -77,6 +77,6 @@
     "workspace-inspection"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.1.0",
-  "version": "0.1.2"
+  "toolkit_version": "0.2.0",
+  "version": "0.1.3"
 }

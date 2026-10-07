@@ -4,7 +4,7 @@
 
 根目錄的操作入口統一使用 `launch-xxx` 命名, 工具原始碼集中在 `src/`, 相依清單與選用設定集中在 `setup/`, README、版本、Python 套件與 Git 設定仍保留在根目錄
 
-Windows 使用 `launch-cli.cmd` 或 `launch-cli.ps1`, macOS 使用 `python launch-cli.py`, 只提供終端機操作, 已移除桌面 GUI、瀏覽器介面及 `--web` 模式
+Windows 使用 `launch-cli.cmd` 或 `launch-cli.ps1`, macOS 使用 `python launch-cli.py`, 以終端機選取工具及操作參數
 
 ## CLI 入口
 
@@ -20,7 +20,7 @@ CLI 免安裝包需保留整個 `MyPyToolsCLI/` 資料夾, Windows 在終端機�
 .\launch-cli.cmd document-to-markdown --help
 ```
 
-Windows 本機 CLI 使用 `launch-cli.cmd`, 優先使用專案的 `.venv` Python, 為相容既有環境再嘗試 `.venv-gui`, 都不存在時使用 PATH 中的 Python, macOS 原始碼版使用 `python launch-cli.py`, 呼叫時可以在任意工作目錄使用啟動檔的完整路徑, 輸入與輸出仍依目前工作目錄及明確參數解析
+Windows 本機 CLI 使用 `launch-cli.cmd`, 優先使用專案的 `.venv` Python, 不存在時使用 PATH 中可執行的 Python, macOS 原始碼版使用 `python launch-cli.py`, 呼叫時可以在任意工作目錄使用啟動檔的完整路徑, 輸入與輸出仍依目前工作目錄及明確參數解析
 
 PDF、Office 文件及精確 token 計算需要選用相依套件, 由開發環境安裝, 不在每次啟動時自動下載
 

@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "7796ed0ff71a0a67f0882302633f15bb903e1b0ec161da779920aa5171065f05",
+      "sha256": "7c34af88d7bd6b7ee14eb2750be2b4494d361b1bef9b109d5c59a11ba62b1c16",
       "source": "plugins/project-documentation/plugin.json"
     },
     "skills/license-maintainer/SKILL.md": {
@@ -79,6 +79,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.1.0",
-  "version": "0.1.4"
+  "toolkit_version": "0.2.0",
+  "version": "0.1.5"
 }

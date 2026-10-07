@@ -1,5 +1,5 @@
 interface:
-  display_name: "Angular Member Order (v0.4.13)"
+  display_name: "Angular Member Order (v0.4.14)"
   short_description: "Safely organize Angular component class members"
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"

@@ -2,7 +2,7 @@
 
 <img src="assets/branding/toolkit.png" alt="Codex Toolkit 工具箱圖案" width="88" />
 
-**Toolkit v0.1.0** · [MIT](LICENSE)
+**Toolkit v0.2.0** · [MIT](LICENSE)
 
 可獨立使用的 Python 工具、Codex Skills、Plugins 與 MCP 串接, 支援文件處理、Markdown 安全更新、程式碼盤點、工作規範與驗證證據整理
 
@@ -50,9 +50,9 @@ launch-cli.cmd --help
 launch-cli.cmd plugins --list
 ```
 
-## 維護與教學
+## 操作與設定
 
-
+- [打包與評估](docs/operating-model.md): 自動組裝、路由觀察與 before / after 欄位
 - [文件索引](docs/README.md): 安裝、工具選擇、MCP 與操作指引
 - [元件維護規範](skills/agent-governance/references/component-authoring.md): Skill、reference、Python、Plugin 與 MCP 的責任
 - [個人環境還原](docs/restore.md): Profile 選項、預覽、逐項套用與衝突處理
@@ -60,7 +60,7 @@ launch-cli.cmd plugins --list
 - [Python 工具教學](python-tools/README.md): CLI、相依套件、範例與測試
 - [Plugin 來源與封裝](docs/plugins.md): 自含資源、來源 hash 與驗證
 
-可攜功能的來源在這份儲存庫, 個人設定保留於私人 `codex-setup`. `agents/` 是選用的通用範例, 套用前先預覽, 不代表作者的本機設定
+`agents/` 提供選用的通用範例, 套用前先預覽適用範圍, 個人設定以各自 profile 管理
 
 ## 檢查
 
@@ -70,7 +70,7 @@ python -B mcp/scripts/prepare_plugin_release.py --check
 python -B mcp/scripts/prepare_marketplace.py --check
 ```
 
-工具行為檢查按修改範圍選用 [Python 測試指引](python-tools/docs/testing.md). Windows 與 macOS 免安裝 CLI 由各自原生 Release 工作流程建置及驗證, 目前沒有新 `codex-toolkit` 的免安裝成品
+工具行為檢查按修改範圍選用 [Python 測試指引](python-tools/docs/testing.md), 產品選取、來源格式與建置條件見 [打包與評估工具](docs/operating-model.md). Windows 與 macOS CLI 由各自原生建置入口產生
 
 ## 授權
 
