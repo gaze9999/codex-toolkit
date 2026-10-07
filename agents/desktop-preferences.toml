@@ -1,0 +1,9 @@
+# Optional starter fragment. Preview and choose preferences before merging.
+[features]
+memories = false
+[memories]
+generate_memories = false
+use_memories = false
+disable_on_external_context = true
+[desktop]
+git-branch-prefix = "dev/"

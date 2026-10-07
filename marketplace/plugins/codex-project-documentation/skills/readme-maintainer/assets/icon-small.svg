@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">README Maintainer icon</title>
+  <desc id="desc">An open reference book with a bookmark</desc>
+  <rect width="128" height="128" rx="28" fill="#F8D6C9"/>
+<path d="M64 34C52 26 34 24 18 28v67c18-4 34-2 46 6 12-8 28-10 46-6V28c-16-4-34-2-46 6z" fill="#FFF5EB" stroke="#C87970" stroke-width="4" stroke-linejoin="round"/>
+<path d="M64 35v64" stroke="#A77074" stroke-width="4"/>
+<path d="M29 45l24 3M29 59l24 3M29 73l17 2M76 59l22-2M76 73l22-2M76 85l14-2" stroke="#A77074" stroke-width="4" stroke-linecap="round"/>
+<path d="M83 27h13v23l-6-4-7 4z" fill="#E6A078"/>
+</svg>

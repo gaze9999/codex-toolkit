@@ -1,0 +1,2 @@
+# Reviewed 2026-10-05, install only in the selected project environment
+hypothesis==6.168.3

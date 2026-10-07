@@ -1,0 +1,9 @@
+interface:
+  display_name: "Vue Development (v0.4.14)"
+  short_description: "Build Vue features with optional Nuxt and SSR guidance"
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon.png"
+  default_prompt: "Use $vue-development to inspect the detected Vue, Nuxt, or Vite stack and its component, state, routing, SSR, styling, and build contracts, then implement and verify the requested change."
+
+policy:
+  allow_implicit_invocation: true

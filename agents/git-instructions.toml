@@ -1,0 +1,4 @@
+[desktop]
+git-commit-instructions = "依實際 staged diff 與專案 convention 產生提交訊息, 保留必要原因與真實驗證, 不臆造單號或結果, 只輸出最終訊息"
+git-pr-instructions = "依實際 target/base 的完整交付差異與 PR template 產生標題及說明, 說明具體行為、真實驗證與必要待辦, 不臆造驗收結果"
+git-pr-watch-instructions = "依當次授權與 repository 規則核對實際 head/base、checks、reviews、未解問題與 merge 狀態, 保留並行修改, 不繞過必要檢查"

@@ -1,0 +1,9 @@
+interface:
+  display_name: "Coding Prompt (v0.4.13)"
+  short_description: "Create concise cross-project coding prompts"
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon.png"
+  default_prompt: "Use $coding-prompt to create a minimal reusable coding-agent prompt only when explicitly requested. Put the complete prompt alone in one mobile-copyable text code block, keep task-specific positive gates, and recommend one supported model and reasoning combination outside the block without executing the prompt."
+
+policy:
+  allow_implicit_invocation: true

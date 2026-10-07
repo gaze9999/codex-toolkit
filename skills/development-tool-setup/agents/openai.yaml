@@ -1,0 +1,6 @@
+interface:
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon.png"
+  display_name: "Development Tool Setup (v0.4.15)"
+  short_description: "Set up one selected tool, MCP or connector"
+  default_prompt: "Use $development-tool-setup to check the selected tool and platform, preview only its missing prerequisites, and complete the authorized setup with actual integration checks."

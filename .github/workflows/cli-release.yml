@@ -1,0 +1,109 @@
+name: Portable CLI release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing tag or revision to test, never publishes from manual runs
+        required: true
+        type: string
+      version:
+        description: SemVer for test archive names
+        required: true
+        default: v0.0.0
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: windows-2022
+            target: windows-x64
+          - runner: macos-14
+            target: macos-arm64
+          - runner: macos-15-intel
+            target: macos-x64
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.release.tag_name || inputs.tag }}
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
+        with:
+          version: '0.12.10'
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Build and smoke test the native CLI
+        shell: bash
+        env:
+          CLI_TAG: ${{ github.event.release.tag_name || inputs.version }}
+          UV_PYTHON_INSTALL_DIR: ${{ runner.temp }}/cli-python
+          UV_PYTHON_INSTALL_BIN: '0'
+          UV_PYTHON_INSTALL_REGISTRY: '0'
+          UV_NO_CONFIG: '1'
+        run: |
+          uv python install 3.13.15 --no-bin --no-registry --no-config
+          CLI_PYTHON=$(uv python find 3.13.15 --managed-python --no-python-downloads --no-config)
+          "$CLI_PYTHON" -B mcp/scripts/prepare_cli_release.py --python "$CLI_PYTHON" --tag "$CLI_TAG" --output dist/cli
+      - uses: actions/upload-artifact@v4
+        with:
+          name: portable-${{ matrix.target }}
+          path: dist/cli/*
+          if-no-files-found: error
+
+  attach:
+    if: github.event_name == 'release'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.release.tag_name }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: portable-*
+          path: dist/cli
+          merge-multiple: true
+      - name: Verify exact source, checksums and target set
+        env:
+          CLI_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          python3 -B - <<'PY'
+          import hashlib, os, sys
+          from pathlib import Path
+          sys.path.insert(0, 'mcp/scripts')
+          from prepare_cli_release import verify_archive
+          tag = os.environ['CLI_TAG']
+          folder = Path('dist/cli')
+          paths = sorted(folder.glob('*.zip'))
+          targets = set()
+          for path in paths:
+              manifest = verify_archive(path)
+              assert manifest['tag'] == tag and manifest['interface'] == 'cli'
+              assert manifest['target'] not in targets
+              targets.add(manifest['target'])
+              expected = hashlib.sha256(path.read_bytes()).hexdigest()+'  '+path.name+'\n'
+              assert path.with_name(path.name+'.sha256').read_text() == expected
+          assert targets == {'windows-x64', 'macos-arm64', 'macos-x64'}
+          assert len(list(folder.iterdir())) == 6
+          PY
+      - name: Attach verified portable CLI archives
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CLI_TAG: ${{ github.event.release.tag_name }}
+        run: gh release upload "$CLI_TAG" dist/cli/*.zip dist/cli/*.sha256 --repo "$GITHUB_REPOSITORY"

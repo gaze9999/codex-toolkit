@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Filter Rule Maintenance icon</title>
+  <desc id="desc">A precise filter protected by a shield</desc>
+  <rect width="512" height="512" rx="112" fill="#F8D6C9"/>
+<g transform="scale(4)">
+<path d="M64 18l36 15v28c0 23-15 38-36 49-21-11-36-26-36-49V33z" fill="#70474F" stroke="#C87970" stroke-width="5" stroke-linejoin="round"/>
+<path d="M43 44h42L70 62v20l-12 6V62z" fill="#FFF5EB"/>
+<path d="M43 44h42" stroke="#E6A078" stroke-width="5" stroke-linecap="round"/>
+<path d="M77 89l6 6 12-14" fill="none" stroke="#E6A078" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>

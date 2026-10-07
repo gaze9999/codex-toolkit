@@ -1,0 +1,54 @@
+name: Plugin source checks and release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      revision:
+        description: Existing revision to check, never publishes from manual runs
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-latest, windows-2022, macos-14]
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.release.tag_name || inputs.revision }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Check canonical mappings without packaging
+        run: python -B mcp/scripts/prepare_plugin_release.py --check
+
+  publish:
+    if: github.event_name == 'release'
+    needs: check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.release.tag_name }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Build and read back source-mapped release archives
+        run: python -B mcp/scripts/prepare_plugin_release.py --output dist/plugins
+      - name: Attach verified Plugin archives
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PLUGIN_TAG: ${{ github.event.release.tag_name }}
+        run: gh release upload "$PLUGIN_TAG" dist/plugins/*.zip dist/plugins/*.sha256 --repo "$GITHUB_REPOSITORY"

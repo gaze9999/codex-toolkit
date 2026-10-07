@@ -1,0 +1,6 @@
+# Build backends and validation runtime for this setup's MCP release
+setuptools>=77,<83
+wheel>=0.45,<1
+mcp==2.2.0
+hatchling>=1.27,<2
+uv_build>=0.8.12,<0.9

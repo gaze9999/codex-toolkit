@@ -1,0 +1,63 @@
+{
+  "title": "訂單查詢任務指引",
+  "section_order": ["source_authority", "open_items", "read_by_task", "work_item_ids", "implementation_boundaries", "verification", "documentation"],
+  "scope": [
+    "此為虛構範例, 僅示範指引格式; 實際規則需依目標專案確認",
+    "本次授權範圍為 src/orders/ 的查詢畫面與既有 client; 共享 API 與後端變更需有對應授權"
+  ],
+  "path_resolution": [
+    "規格與文件路徑以 project root 為基準; 若來源移到外部資料夾, 由目前 task 指定其 root"
+  ],
+  "read_by_task": [
+    {"need": "欄位, 查詢與錯誤處理", "evidence": "依目前任務與來源資訊找到對應查詢規格的 Markdown 抽出版, 不限定檔名, 先讀相關章節, 再核對 src/orders/ 的 owner 與呼叫端; 缺漏, 不明確, 過期, 衝突或明確要求核對原始來源時才回查原規格, 畫面配置需要時才看截圖"},
+    {"need": "API mapping", "evidence": "依來源資訊找到對應目前 API 規格的 Markdown 抽出版, 不限定檔名, 先讀相關 operation 與目前 client; 缺漏, 不明確, 過期, 衝突或明確核對原始來源時才看原規格; 未定欄位僅阻擋相依行為"},
+    {"need": "接續工作", "evidence": "docs/orders-progress.md 保留目前決策與待辦; 需要先前證據時才讀 docs/orders-history.md"}
+  ],
+  "source_authority": [
+    "查詢欄位與互動以專案指定的原始查詢規格為依據; API 名稱, 型別與錯誤格式以原始 API 規格為依據; 依來源資訊找到相符的 Markdown 抽出版作為優先閱讀入口, 不要求同名或固定資料夾, 不改變原始來源判定權",
+    "明確使用者決策保留於 docs/orders-progress.md 並指出影響項目; 索引與現有程式碼不能自行建立新規格"
+  ],
+  "work_item_ids": {
+    "registry": "docs/orders-progress.md",
+    "separator": "-",
+    "digits": 2,
+    "groups": [
+      {"prefix": "UI", "meaning": "畫面與互動項目"},
+      {"prefix": "API", "meaning": "API 接入與相容性項目"},
+      {"prefix": "MT", "meaning": "可維護性與技術演進項目"}
+    ],
+    "reserved": ["UI-01", "UI-04", "~~UI-07~~", "API-02"],
+    "items": [
+      {"key": "query-panel", "prefix": "UI", "title": "既有查詢區", "id": "UI-01"},
+      {"key": "query-filter", "prefix": "UI", "title": "新增條件連動"},
+      {"key": "query-mapping", "prefix": "API", "title": "新增 response mapping 核對"},
+      {"key": "query-projection", "prefix": "MT", "title": "新增重複投影盤點"}
+    ]
+  },
+  "id_rules": [
+    "本例前綴只示範分類, 目標專案沿用既有定義; 目前, 已完成與歷史 ID 均保留",
+    "新增項目從各分類最大序號續編, 不補歷史空號; 名稱, 優先序與狀態改變時 ID 不變",
+    "已修正項目保留原列, ID 以 ~~ID~~ 畫線; 部分完成保留剩餘待辦, 不拿完成 ID 替補其他項目",
+    "同一工作項目沿用原 ID; 拆分/合併時於既有紀錄保留關聯, 不自行改寫歷史錨點"
+  ],
+  "implementation_boundaries": [
+    "保留既有查詢 state owner 與過期回應保護; 未確認的 wire 欄位不可由 UI 名稱推測"
+  ],
+  "verification": [
+    "依目前相依與 package scripts 選擇既有 focused check; 未執行的正式 API 與權限驗證須個別註明"
+  ],
+  "documentation": [
+    "目前狀態維護於 docs/orders-progress.md; 詳細歷史證據留在 docs/orders-history.md",
+    "指引與快照使用精簡中文; 新快照標題使用 yyyy-mm-dd hh:mm, 已確認 commit 記短 SHA, 無 commit 時直接紀錄; 混合未提交變更須註明, 原有紀錄不改寫"
+  ],
+  "documentation_triggers": [
+    {"trigger": "實作或驗證改變工作狀態", "result": "依既有文件流程更新受影響項目與驗證邊界"},
+    {"trigger": "只有指引或工具變更", "result": "只更新授權文件, 不推進 application 狀態"}
+  ],
+  "closeout": [
+    "交付實際變更位置, 驗證結果與未解項目; 歷史檢查不證明目前 source"
+  ],
+  "open_items": [
+    "ASK USER: 排序同值時的次序未定義; 指向目前決策紀錄, 不自行增加查詢規則"
+  ]
+}

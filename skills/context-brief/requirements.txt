@@ -1,0 +1,5 @@
+# Optional structured PDF extraction and offline OCR fallback for this Skill.
+pypdf>=5.0,<7
+pdfplumber>=0.11,<1
+rapidocr>=3.0,<4
+onnxruntime>=1.18,<2

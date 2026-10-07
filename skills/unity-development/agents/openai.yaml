@@ -1,0 +1,9 @@
+interface:
+  display_name: "Unity Development (v0.4.13)"
+  short_description: "Implement and verify Unity project changes safely"
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon.png"
+  default_prompt: "Use $unity-development to inspect this project's Unity version, packages, serialized assets, pipelines, and build targets, then implement and verify the requested Unity change without breaking asset or GUID contracts."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>工具安裝與設定指引</title>
+<style>
+body{font-family:system-ui,sans-serif;line-height:1.8;max-width:900px;margin:36px auto;padding:0 22px;color:#172535;background:#f7fafc}
+h1,h2{line-height:1.4}section{background:white;border:1px solid #d7e1e8;border-radius:12px;padding:18px 24px;margin:20px 0}
+a{color:#075bbd}code{font-size:.95em;background:#edf2f6;padding:2px 6px;border-radius:4px}table{border-collapse:collapse;width:100%}td,th{padding:10px;border-bottom:1px solid #d7e1e8;text-align:left}pre{overflow:auto;background:#edf2f6;padding:14px}li{margin:6px 0}
+</style>
+<h1>工具安裝與設定指引</h1>
+<p id="selected-tool">依選定工具完成帳戶, 相依與實際操作驗證</p>
+<section><h2>先看本次結果</h2>
+<p>完成安裝或需要人工處理時, 此頁會在預設瀏覽器開啟. 套件安裝, MCP 註冊, 帳戶登入與實際呼叫是不同步驟, 請依輸出的缺項繼續處理</p>
+<table><tr><th>顯示狀態</th><th>下一步</th></tr>
+<tr><td><code>manual_setup_required</code></td><td>先完成該工具要求的 app, 帳戶, notebook, project 或檔案範圍設定, 再執行同一入口</td></tr>
+<tr><td><code>missing_dependencies</code></td><td>依缺項補齊相容的 runtime 或套件, 不重裝已符合需求的項目</td></tr>
+<tr><td><code>manual_verification_required</code></td><td>檢查已完成, 接著確認帳戶權限, 工具載入與安全的實際操作</td></tr>
+<tr><td>安裝失敗或平台不支援</td><td>依原始錯誤與退出狀態處理, 核對平台及版本, 之後的安裝步驟不會自動補跑</td></tr></table></section>
+<section><h2>需要額外設定時</h2><ul>
+<li>OAuth 服務: 使用 Codex MCP 設定中的帳戶連接, 或該服務正式支援的 connector 流程. 需要命令列登入時使用 <code>codex mcp login &lt;實際 entry 名稱&gt;</code></li>
+<li>API key: 在自己的電腦依該工具要求設定環境變數, 不把值寫進 repository, 登入網址, 指令紀錄或對話. 各電腦的憑證分開建立</li>
+<li>App 或本機服務: 先啟動必要 app / 服務, 再選定核准的 project, notebook, 資料庫或檔案範圍</li>
+<li>Home Assistant: 先啟用官方整合並核准可提供的 entities, 再以 <code>--server-url</code> 指定不含憑證的 endpoint</li>
+<li>RSS: 以 <code>--feeds-path</code> 指定實際存在的 OPML / JSON 檔案</li>
+<li>PATH: 依安裝輸出與所用工具的說明確認執行檔位置, 需要時重開終端機. 安裝工具不會直接替你變更永久 PATH</li>
+</ul></section>
+<section><h2>確認可用</h2><ol>
+<li>重新載入 MCP 或開啟新的 Codex 對話, 核對工具是否出現</li>
+<li>使用公開資料或已核准範圍執行一次安全讀取, 核對帳戶權限與實際回應</li>
+<li>CLI 工具先核對版本及安全的操作結果. 瀏覽器工具另驗證指定頁面的互動與必要 console / network 證據</li>
+</ol></section>
+<section><h2>操作與語言</h2>
+<p>工具清單輸入 <code>0</code> 或按 Enter 返回類別, 類別清單輸入 <code>0</code> 顯示全部, <code>Q</code> 或 Enter 離開. 選擇「顯示目前用途的全部工具」可查看該用途下的全部項目, 每次仍只處理一項工具</p>
+<p>選單預設為繁體中文台灣用語, 輸出編碼無法表示中文時使用英文. 輸入 <code>L</code> 開啟語言選項. 字型缺字或顯示異常時可手動選英文, 指引維持中文</p>
+<pre>launch-cli.cmd mcp --lang en
+sh launch-cli.sh mcp --lang en
+codex-mcp-setup --lang en</pre>
+<p>自動化使用 <code>--yes</code> 或 <code>--no-guide</code> 時不開啟指引, <code>--list</code> 與非互動輸入也不開啟. Windows 個別 PowerShell 入口可用 <code>-NoGuide</code></p></section>
+<section><h2>各項工具的中文說明</h2><p>以下本機文件保存工具來源, 版本, 平台與具體設定方式, 技術名稱與必要指令保留原文</p><ul>
+<li><a href="../tools/catalog.md">MCP, 帳戶服務與資料來源</a></li>
+<li><a href="../tools/development.md">開發工具與 runtime</a></li>
+<li><a href="../tools/proofreading.md">中英日文字校對</a></li>
+<li><a href="../tools/workflows.md">UI / UX 工具</a></li>
+<li><a href="../tools/workflows.md">用途分類與工具更新</a></li>
+</ul></section>
+<script>
+const tool = new URLSearchParams(location.hash.slice(1)).get('tool');
+if (tool) document.getElementById('selected-tool').textContent = `本次選定工具: ${tool}`;
+</script>
+</html>

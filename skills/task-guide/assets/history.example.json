@@ -1,0 +1,7 @@
+{
+  "timestamp": "2026-10-01 09:30",
+  "title": "訂單查詢格式示範",
+  "summary": "此為虛構範例; 新增 UI-08 條件連動與 API-03 mapping 核對, 保留原有 ID; 尚未實作",
+  "checks": ["僅核對文件與編號, 未執行 application Test 或正式 API 驗證"],
+  "open_items": ["排序同值時的次序待確認"]
+}

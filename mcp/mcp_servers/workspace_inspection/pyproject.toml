@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+license = {file = "LICENSE"}
+name = "codex-workspace-inspection-mcp"
+version = "0.2.0"
+description = "Read-only workspace consistency and validation evidence MCP"
+readme = "README.md"
+requires-python = ">=3.11"
+dynamic = ["dependencies"]
+
+[project.scripts]
+workspace-inspection-mcp = "workspace_inspection_mcp.server:main"
+workspace-inspection-register = "workspace_inspection_mcp.install:main"
+workspace-inspection-verify = "workspace_inspection_mcp.verify:main"
+
+[tool.setuptools]
+include-package-data = false
+packages = ["workspace_inspection_mcp"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}

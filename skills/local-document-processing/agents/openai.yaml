@@ -1,0 +1,4 @@
+interface:
+  display_name: "Local Document Processing (v0.1.1)"
+  short_description: "Extract sources and preview guarded Markdown updates"
+  default_prompt: "Use $local-document-processing for these explicit local sources and authorized Markdown targets."

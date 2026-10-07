@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+license = {file = "LICENSE"}
+name = "codex-local-documents-mcp"
+version = "0.2.0"
+description = "Portable local document extraction, OCR and guarded Markdown MCP"
+readme = "mcp_servers/local_documents/README.md"
+requires-python = ">=3.11"
+dynamic = ["dependencies"]
+
+[project.scripts]
+local-documents-mcp = "mcp_servers.local_documents.document_server:main"
+local-documents-register = "mcp_servers.local_documents.install_document_mcp:main"
+local-documents-verify = "mcp_servers.local_documents.verify_document_mcp:main"
+
+[tool.setuptools]
+include-package-data = false
+packages = ["mcp_servers", "mcp_servers.local_documents"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["mcp_servers/local_documents/requirements.txt"]}

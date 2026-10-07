@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Component Member Order icon</title>
+  <desc id="desc">Grouped component members arranged in a clear order</desc>
+  <rect width="512" height="512" rx="112" fill="#F8D6C9"/>
+<g transform="scale(4)">
+<rect x="32" y="17" width="77" height="94" rx="12" fill="#FFF5EB"/>
+<path d="M46 34h35" stroke="#A77074" stroke-width="5" stroke-linecap="round"/>
+<rect x="44" y="46" width="53" height="14" rx="4" fill="#C87970"/>
+<rect x="44" y="66" width="53" height="14" rx="4" fill="#E6A078"/>
+<rect x="44" y="86" width="53" height="14" rx="4" fill="#C87970"/>
+<path d="M57 53h28M57 73h20M57 93h28" stroke="#70474F" stroke-width="3" stroke-linecap="round"/>
+<path d="M19 37v50m-7-8 7 8 7-8" fill="none" stroke="#C87970" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>

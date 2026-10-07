@@ -1,0 +1,9 @@
+interface:
+  display_name: "Editorial Illustration (v0.4.12)"
+  short_description: "Generate editorial illustrations from uploaded images"
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon.png"
+  default_prompt: "Use $editorial-illustration to transform each uploaded image into a standalone editorial illustration using the bundled base art direction and my optional adjustments."
+
+policy:
+  allow_implicit_invocation: true

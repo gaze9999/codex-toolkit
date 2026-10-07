@@ -1,0 +1,4 @@
+interface:
+  display_name: "Local Activity Query (v0.1.0)"
+  short_description: "Read bounded local counters and source health summaries"
+  default_prompt: "Use $local-activity-query to summarize the requested window from this authorized local monitor."

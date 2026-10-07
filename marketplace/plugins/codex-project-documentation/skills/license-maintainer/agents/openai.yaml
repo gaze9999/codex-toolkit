@@ -1,0 +1,9 @@
+interface:
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon.png"
+  display_name: "License Maintainer (v0.4.13)"
+  short_description: "Maintain verified license and copyright files"
+  default_prompt: "Use $license-maintainer to inspect repository licensing evidence and maintain the requested LICENSE, NOTICE, COPYRIGHT, SPDX, third-party notice, package metadata, and README license references without choosing or changing legal terms on the user's behalf."
+
+policy:
+  allow_implicit_invocation: true

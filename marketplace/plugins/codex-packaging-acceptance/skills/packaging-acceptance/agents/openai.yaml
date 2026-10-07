@@ -1,0 +1,4 @@
+interface:
+  display_name: "Packaging Acceptance (v0.1.0)"
+  short_description: "Check portable inputs, lifecycle and release evidence"
+  default_prompt: "Use $packaging-acceptance to verify this package against the actual source and permitted test scope."

@@ -1,0 +1,231 @@
+{
+  "plugin": "codex-agent-workflow",
+  "version": "0.1.2",
+  "files": {
+    "plugin.json": {
+      "source": "plugins/agent-workflow/plugin.json",
+      "sha256": "c2c935d5fd6c1d321534c3bd3a79a7fd1f7e9ca3475cbd123545f8c78924d9ff"
+    },
+    "skills/agent-governance/agents/openai.yaml": {
+      "source": "skills/agent-governance/agents/openai.yaml",
+      "sha256": "aea94f440867df520a89ab9d30ec389dc345f49919da812a801c97f6914277ec"
+    },
+    "skills/agent-governance/assets/icon-small.png": {
+      "source": "skills/agent-governance/assets/icon-small.png",
+      "sha256": "5752e55c1e7440d24f344611ade405ca908bc6460e552201a38fd6f5443a31a7"
+    },
+    "skills/agent-governance/assets/icon-small.svg": {
+      "source": "skills/agent-governance/assets/icon-small.svg",
+      "sha256": "8bdc33c0e3f12886094c68b420414a0c8a7ce7cc9a638524c6eb37f643965326"
+    },
+    "skills/agent-governance/assets/icon.png": {
+      "source": "skills/agent-governance/assets/icon.png",
+      "sha256": "12abffeebce1421147275e1245bf50245639e8dcf856a3a1672c8287f882d99e"
+    },
+    "skills/agent-governance/assets/icon.svg": {
+      "source": "skills/agent-governance/assets/icon.svg",
+      "sha256": "44e4bb9b5e420bcfa30b1ed006c0a2bbe4f90bce8c65a4e6b1d6fea6b3f5ecda"
+    },
+    "skills/agent-governance/assets/project-starter/examples/host-and-custom-elements/.codex/agent-guidance/records.md": {
+      "source": "skills/agent-governance/assets/project-starter/examples/host-and-custom-elements/.codex/agent-guidance/records.md",
+      "sha256": "a5819e9fe749940dd9db002fa53b9ed46ca599c86abe13b9f752408d205ab60b"
+    },
+    "skills/agent-governance/assets/project-starter/examples/host-and-custom-elements/AGENTS.md": {
+      "source": "skills/agent-governance/assets/project-starter/examples/host-and-custom-elements/AGENTS.md",
+      "sha256": "e9edead9156cf3d1c07137f2618ca2c366c17fd65ab1ab43338d0b0ffbce26ff"
+    },
+    "skills/agent-governance/assets/project-starter/nested/AGENTS.md": {
+      "source": "skills/agent-governance/assets/project-starter/nested/AGENTS.md",
+      "sha256": "d03954e3289b8a352557017d3243d74c3e8d7e6824a0bf906008e81ab2f821bf"
+    },
+    "skills/agent-governance/assets/project-starter/project-types.md": {
+      "source": "skills/agent-governance/assets/project-starter/project-types.md",
+      "sha256": "1e5664d82fd995259b51645e1320f93af3b2f533881156096f2aed63e8fdacc3"
+    },
+    "skills/agent-governance/assets/project-starter/README.md": {
+      "source": "skills/agent-governance/assets/project-starter/README.md",
+      "sha256": "e5d340de60aad3f8bbcbf1912489e3bd75f5a263c97c30b4d16f8dc5f7742d63"
+    },
+    "skills/agent-governance/assets/project-starter/root/.codex/agent-guidance/tasks.md": {
+      "source": "skills/agent-governance/assets/project-starter/root/.codex/agent-guidance/tasks.md",
+      "sha256": "93249ca8f5f1214e32b92bc95af3549d263d4bbb4e5d52e4d72c986f51c903e4"
+    },
+    "skills/agent-governance/assets/project-starter/root/.codex/agents/game_balance_reviewer.toml": {
+      "source": "skills/agent-governance/assets/project-starter/root/.codex/agents/game_balance_reviewer.toml",
+      "sha256": "00d9825cd31e670b8224a676d8f9864a86aec94a1053798084f24ca1d2b15528"
+    },
+    "skills/agent-governance/assets/project-starter/root/.codex/agents/project_explorer.toml": {
+      "source": "skills/agent-governance/assets/project-starter/root/.codex/agents/project_explorer.toml",
+      "sha256": "37a3522c577bd250c00a85304ad34879566721b7744f501d09b33264211f5c52"
+    },
+    "skills/agent-governance/assets/project-starter/root/.codex/agents/project_reviewer.toml": {
+      "source": "skills/agent-governance/assets/project-starter/root/.codex/agents/project_reviewer.toml",
+      "sha256": "d086fa145d3112b420717d581fd9aaead24dc419847b3e88ba2714965226975c"
+    },
+    "skills/agent-governance/assets/project-starter/root/.codex/agents/project_worker.toml": {
+      "source": "skills/agent-governance/assets/project-starter/root/.codex/agents/project_worker.toml",
+      "sha256": "eb2b89c1064fa81479c53ad60da3a914007d5ae715171d8115bc5aaf6eadf8fd"
+    },
+    "skills/agent-governance/assets/project-starter/root/AGENTS.md": {
+      "source": "skills/agent-governance/assets/project-starter/root/AGENTS.md",
+      "sha256": "ca01a2212ba09117ee4b2cae20cb0726c71f817102ad932441923cf0766f9d4a"
+    },
+    "skills/agent-governance/references/component-authoring.md": {
+      "source": "skills/agent-governance/references/component-authoring.md",
+      "sha256": "881ed2c300537ce4e5d84a572099273690057bddc1e7f8dc9b5d14476701b704"
+    },
+    "skills/agent-governance/references/context-continuity.md": {
+      "source": "skills/agent-governance/references/context-continuity.md",
+      "sha256": "69c0bd19aaae23ac9153a7b126f29aa5793cb822cb071d57c1a160e5f93b04a5"
+    },
+    "skills/agent-governance/references/delegation-routing.md": {
+      "source": "skills/agent-governance/references/delegation-routing.md",
+      "sha256": "bd1f2ae7c5e7e995f59d6a400f97ee0bff0f415d7434809c67bb2e5db129de5c"
+    },
+    "skills/agent-governance/references/instruction-layering.md": {
+      "source": "skills/agent-governance/references/instruction-layering.md",
+      "sha256": "1761f9ab4ed2263bac1c68c605c1ac1f50546f794863bdb665585dd192c06dda"
+    },
+    "skills/agent-governance/references/maintenance-acceptance.md": {
+      "source": "skills/agent-governance/references/maintenance-acceptance.md",
+      "sha256": "8e1e25b2b645e991dadc3b28b64d5ef87307ddead440d5d0ae4c0ec6efe66125"
+    },
+    "skills/agent-governance/references/task-execution-and-reporting.md": {
+      "source": "skills/agent-governance/references/task-execution-and-reporting.md",
+      "sha256": "81193b30c1c03e3d6d8861f29ac1d635777b4879ea8195767a9c2fe507cfb5c4"
+    },
+    "skills/agent-governance/SKILL.md": {
+      "source": "skills/agent-governance/SKILL.md",
+      "sha256": "4973025e0dd316221f0abc35c9a3c7be5ff589966663e1e87fa4cdf22b5716b0"
+    },
+    "skills/coding-prompt/agents/openai.yaml": {
+      "source": "skills/coding-prompt/agents/openai.yaml",
+      "sha256": "58df24cb36e8da0c8d08ee76f693457e89d6543a0d3d2cdc6b0fa4dba5d13f81"
+    },
+    "skills/coding-prompt/assets/icon-small.png": {
+      "source": "skills/coding-prompt/assets/icon-small.png",
+      "sha256": "9ae62010b1c982ffcc6a5c6b2f0c0efcdfef0dc1cd211f52bcc6b244dd12ca9b"
+    },
+    "skills/coding-prompt/assets/icon-small.svg": {
+      "source": "skills/coding-prompt/assets/icon-small.svg",
+      "sha256": "a20cd4d7d430cccd442bf02ca01c30f8f7ca695baf2eb9a3f8823233f59a949c"
+    },
+    "skills/coding-prompt/assets/icon.png": {
+      "source": "skills/coding-prompt/assets/icon.png",
+      "sha256": "0c191061df0c45f186f066a5a164ffb6ca1ea56ef9ba4717373b9688165106aa"
+    },
+    "skills/coding-prompt/assets/icon.svg": {
+      "source": "skills/coding-prompt/assets/icon.svg",
+      "sha256": "ee0123198b3c3567737de7a3057d455df2729e5bb29b75fd9e42da8aa1b66c7d"
+    },
+    "skills/coding-prompt/references/prompt-patterns.md": {
+      "source": "skills/coding-prompt/references/prompt-patterns.md",
+      "sha256": "ecd8197fc1b81b8c368dc89bd3196b4b43278bb11113546af5049886b4d15a2c"
+    },
+    "skills/coding-prompt/references/workflow.md": {
+      "source": "skills/coding-prompt/references/workflow.md",
+      "sha256": "1678a649374b0c5b58cd5ddd2d3e9e95472e06fc60332e0f9aec2c211ff016b4"
+    },
+    "skills/coding-prompt/SKILL.md": {
+      "source": "skills/coding-prompt/SKILL.md",
+      "sha256": "47c99f3f87337036135217885b3aa5542952e49b000243485214bd0a78d797bb"
+    },
+    "skills/task-routing/agents/openai.yaml": {
+      "source": "skills/task-routing/agents/openai.yaml",
+      "sha256": "53896a3e03b7b4059a308473ea9c318b0abd7624a3f0f98a733fd446cbb71505"
+    },
+    "skills/task-routing/assets/icon-small.png": {
+      "source": "skills/task-routing/assets/icon-small.png",
+      "sha256": "fdc0e969ee3366d7ef6006bf5bc78aff8470636c333a353bccb829e8af56c997"
+    },
+    "skills/task-routing/assets/icon-small.svg": {
+      "source": "skills/task-routing/assets/icon-small.svg",
+      "sha256": "afe98fdff167500b651602fd8580ab07de6d4229100a55e14a6f525226286435"
+    },
+    "skills/task-routing/assets/icon.png": {
+      "source": "skills/task-routing/assets/icon.png",
+      "sha256": "bd624dda9bd190c8b429f93aa36594ab4c912eb67556ae8ac2d97a19aa9a983e"
+    },
+    "skills/task-routing/assets/icon.svg": {
+      "source": "skills/task-routing/assets/icon.svg",
+      "sha256": "bef1bc5a0e57eb1c45ea415ccd890f63916917a4bd88d9e582dfa134dd3209e6"
+    },
+    "skills/task-routing/references/workflow.md": {
+      "source": "skills/task-routing/references/workflow.md",
+      "sha256": "8a3ffaf44b97a378938bbc398f96275fa2459c82810337321ed0b61c1b14e82d"
+    },
+    "skills/task-routing/SKILL.md": {
+      "source": "skills/task-routing/SKILL.md",
+      "sha256": "45f226270a92b0429007828a14a00ae3c7e2c2e0c2ea7e890d8ebd13c95dc6e2"
+    },
+    "skills/task-guide/agents/openai.yaml": {
+      "source": "skills/task-guide/agents/openai.yaml",
+      "sha256": "06f876be15c667ee8ba90ac3d9c52af47e6da6290a4578542dbf2c0519ad0400"
+    },
+    "skills/task-guide/assets/history-commit.example.json": {
+      "source": "skills/task-guide/assets/history-commit.example.json",
+      "sha256": "7e6bc3c39db2ea0c3e6d5961e19d93a49c28cd86791868f5b09f600d5e2f1bf1"
+    },
+    "skills/task-guide/assets/history.example.json": {
+      "source": "skills/task-guide/assets/history.example.json",
+      "sha256": "37aacb4eae8b828d1e2dcbcaccb97ee3362ad06422b3d4e33b389df2e522b8c6"
+    },
+    "skills/task-guide/assets/icon-small.png": {
+      "source": "skills/task-guide/assets/icon-small.png",
+      "sha256": "2eaf6c7ff383eae750e31a60125b9180877632d2e0eecfa716384be235308d83"
+    },
+    "skills/task-guide/assets/icon-small.svg": {
+      "source": "skills/task-guide/assets/icon-small.svg",
+      "sha256": "736b9ce82d711aa1a23eb3d1e2e91b3c2a8154dddc29f5efa20bb73da67c1eb8"
+    },
+    "skills/task-guide/assets/icon.png": {
+      "source": "skills/task-guide/assets/icon.png",
+      "sha256": "49df503d9345bcddeb9e4349c5f6385490bc21c5a8814c1a8ba49776d3a18657"
+    },
+    "skills/task-guide/assets/icon.svg": {
+      "source": "skills/task-guide/assets/icon.svg",
+      "sha256": "736b9ce82d711aa1a23eb3d1e2e91b3c2a8154dddc29f5efa20bb73da67c1eb8"
+    },
+    "skills/task-guide/assets/task-guide.example.json": {
+      "source": "skills/task-guide/assets/task-guide.example.json",
+      "sha256": "848fd26e3bb8b49bfc85fa08db10bc6ce166fbe7fa19e81dea3a6a9f3ae29662"
+    },
+    "skills/task-guide/README.md": {
+      "source": "skills/task-guide/README.md",
+      "sha256": "fa7ba5b41818cf35159d7752695f533d617af1f039c8578f8c1b1e8dbe60fc35"
+    },
+    "skills/task-guide/references/decision-records.md": {
+      "source": "skills/task-guide/references/decision-records.md",
+      "sha256": "4fb1310e943b0767a45ec0def4f6c930915c248b4db5141ac60a6f68706d3967"
+    },
+    "skills/task-guide/references/task-guide.md": {
+      "source": "skills/task-guide/references/task-guide.md",
+      "sha256": "429d5530f1ce0e836acffba99eb97d3b3199429496ea6d70ce0121a82e94a759"
+    },
+    "skills/task-guide/references/workflow.md": {
+      "source": "skills/task-guide/references/workflow.md",
+      "sha256": "702147091aaf84dd7d8bd7a42d5ea6949a0d8e4ec6b4dbd860c209c596c728c5"
+    },
+    "skills/task-guide/scripts/create_task_guide.py": {
+      "source": "skills/task-guide/scripts/create_task_guide.py",
+      "sha256": "f6c2439ddfd6620c4afdfffaa6ca3633fa48fd19a8e12141ab8d29241a449d9b"
+    },
+    "skills/task-guide/scripts/record_history.py": {
+      "source": "skills/task-guide/scripts/record_history.py",
+      "sha256": "74f859d6cb15316f6d7ac259e3a1dac92b06f5603d2b32296bffa341612edc38"
+    },
+    "skills/task-guide/SKILL.md": {
+      "source": "skills/task-guide/SKILL.md",
+      "sha256": "beee83ca1048707f86714ff9b2c9b1d7ae6e32a9b1de903980c14a03a4059f9c"
+    },
+    "LICENSE": {
+      "source": "LICENSE",
+      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a"
+    }
+  },
+  "runtime_profiles": [],
+  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
+  "producer": "codex-toolkit.marketplace.v1",
+  "source_state": "canonical-file-hashes",
+  "license": "MIT"
+}

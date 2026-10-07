@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Unity Development icon</title>
+  <desc id="desc">An isometric cube representing a three dimensional project</desc>
+  <rect width="512" height="512" rx="112" fill="#F8D6C9"/>
+<g transform="scale(4)">
+<path d="M64 23l38 22-38 22-38-22z" fill="#C87970"/>
+<path d="M26 45l38 22v42L26 87z" fill="#A77074"/>
+<path d="M102 45L64 67v42l38-22z" fill="#FFF5EB"/>
+<path d="M64 23l38 22v42l-38 22-38-22V45zM26 45l38 22 38-22M64 67v42" fill="none" stroke="#FFF5EB" stroke-width="4" stroke-linejoin="round"/>
+<path d="M27 16v14M20 23h14" stroke="#E6A078" stroke-width="3" stroke-linecap="round"/>
+</g>
+</svg>

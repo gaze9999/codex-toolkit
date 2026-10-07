@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+license = {file = "LICENSE"}
+name = "codex-jev-mcp"
+version = "0.1.0"
+description = "Portable Jev CLI and stdio MCP with opt-in local metadata telemetry"
+readme = "README.md"
+requires-python = ">=3.10"
+dynamic = ["dependencies"]
+
+[project.scripts]
+jev = "codex_jev_mcp.jev:main"
+jev-mcp = "codex_jev_mcp.mcp_server:main"
+jev-verify = "codex_jev_mcp.verify_mcp:main"
+
+[tool.setuptools]
+include-package-data = false
+packages = ["codex_jev_mcp"]
+package-dir = {codex_jev_mcp = "scripts"}
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}

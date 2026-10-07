@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "translations": {
+    "zh-TW": {
+      "Select a tool category (profile: {0}):": "選擇工具類別 (目前用途: {0}):",
+      "Show all tools in this profile": "顯示目前用途的全部工具",
+      "Exit": "離開",
+      "Back to categories": "返回類別選單",
+      "Back": "返回",
+      "Language": "語言 / Language",
+      "Tool number (0 / Enter = Back): ": "工具編號 (0 / Enter = 返回): ",
+      "Language number (0 / Enter = Back): ": "語言編號 (0 / Enter = 返回): ",
+      "All tools in this profile": "目前用途的全部工具",
+      "manual setup required": "需先完成人工設定",
+      "check / install": "檢查 / 安裝",
+      "unsupported on Windows": "不支援 Windows",
+      "server URL required": "需輸入自有服務網址",
+      "Enter a number from the list": "請輸入清單內的編號",
+      "Source: {0}": "來源: {0}",
+      "See requirements": "見相依清單",
+      "{0}: {1}\n  Scope: {2}\n  Purpose: {3}\n  Package source: {4}": "{0}: {1}\n  安裝範圍: {2}\n  用途: {3}\n  套件來源: {4}",
+      "Required setup: {0}": "需先完成: {0}",
+      "Service requirement: {0}": "服務相依: {0}",
+      "Credential variable: {0} ({1}); configure locally, keep values out of chat and source": "憑證環境變數: {0} ({1}), 請在本機設定, 不把值貼入對話或程式碼",
+      "Reusing the existing installation / provider; no installation steps needed": "沿用既有安裝 / provider, 沒有需要安裝的項目",
+      "Next steps: verify account access and real use": "下一步: 核對帳戶權限與實際操作",
+      "Remaining setup and verification:": "尚待完成的設定與驗證:",
+      "Config backup: {0}": "設定備份: {0}",
+      "Account login: use the existing plugin / connector account connection": "帳戶登入: 使用既有 plugin / connector 的帳戶連接流程",
+      "Open the official OAuth login now? [y/N] ": "現在開啟官方 OAuth 帳戶登入? [y/N] ",
+      "OAuth login completed; verify service permissions with a safe call": "OAuth 登入步驟已完成, 請用安全呼叫核對服務權限",
+      "Account login: connect in Codex MCP settings, or rerun this entry and choose login": "帳戶登入: 在 Codex MCP 設定連接此服務, 或重跑本入口並選擇登入",
+      "After setup, reload MCP / open a new Codex chat, check tool discovery, then perform a safe call": "完成設定後, 在 Codex 重新載入 MCP / 開啟新對話, 確認工具出現, 再執行安全呼叫",
+      "After setup, run a safe CLI check and verify its output and configuration": "完成設定後, 執行選定 CLI 的安全檢查, 核對實際輸出與設定",
+      "Verify: {0}": "驗證: {0}",
+      "Setup guide: {0}": "設定說明: {0}",
+      "Setup cancelled": "已取消設定",
+      "Your Home Assistant MCP URL (no credentials): ": "自有 Home Assistant MCP URL (不含憑證): ",
+      "Absolute RSS OPML / JSON file path: ": "RSS OPML / JSON 檔案的完整路徑: ",
+      "Complete the required setup, then rerun this entry; no installation performed": "請先完成上述設定再重跑本入口, 目前未執行安裝",
+      "Preview only; add --apply to install the listed components": "目前只預覽, 加上 --apply 才會安裝列出的項目",
+      "Install this tool and only the listed prerequisites? [y/N] ": "安裝這一項及列出的必要相依? [y/N] ",
+      "Install the listed components for {0} only? [y/N] ": "只安裝 {0} 與列出的必要相依? [y/N] ",
+      "Cancelled; no installation performed": "已取消, 未執行安裝",
+      "Check status: {0}": "檢查狀態: {0}",
+      "Post-install checks are incomplete; resolve these items and rerun this entry": "安裝後的檢查仍有缺項, 請完成下列項目後重跑本入口",
+      "Unknown option: {0}": "未知參數: {0}",
+      "Missing value: {0}": "參數缺少值: {0}",
+      "Repeated option: {0}": "重複參數: {0}",
+      "Unknown profile: {0}": "未知用途分類: {0}",
+      "Select exactly one tool": "每次請選擇一項工具",
+      "Select a tool from the current catalog": "請選擇目前清單內的工具",
+      "Use an interactive terminal or select one tool explicitly": "請使用互動終端機, 或明確指定一項工具",
+      "Select one tool name from tools/development-tools.requirements.json": "請指定 tools/development-tools.requirements.json 內的一項工具",
+      "This tool has no configured MCP interface": "這項工具沒有可用的 MCP 接法",
+      "{0} does not support Windows; no runtime or tool was installed": "{0} 不支援 Windows, 未安裝 runtime 或工具",
+      "The selected Python must be a working Python 3.11+ executable": "指定的 Python 必須是可執行的 Python 3.11+ 程式",
+      "Missing Python 3.11+. Source: {0}; package: {1}; scope: current user; purpose: run the selected {2} installer": "缺少 Python 3.11+, 來源: {0}, 套件: {1}, 範圍: 目前使用者, 用途: 執行選定的 {2} 安裝工具",
+      "Install the listed Python runtime, then preview the selected tool? [y/N]": "先安裝列出的 Python runtime, 再預覽選定工具? [y/N]",
+      "Rerun with -Apply to confirm Python and the selected tool installation": "請加上 -Apply 重跑, 以確認 Python 與選定工具的安裝",
+      "Install Python for this selected tool? [y/N]": "為選定工具安裝 Python? [y/N]",
+      "WinGet is missing; install Python 3.11+ from the approved Python source first": "缺少 WinGet, 請先從核准的 Python 來源安裝 Python 3.11+",
+      "Python was installed but is not visible; reopen the terminal and rerun the same selected tool": "Python 已安裝但目前找不到, 請重開終端機並重跑同一項工具",
+      "Opening the Chinese setup guide: {0}": "正在開啟中文設定指引: {0}",
+      "Could not open the guide automatically. Open it manually: {0}": "無法自動開啟指引, 請自行開啟: {0}",
+      "Category number (0 = All, L = Language, Q / Enter = Exit): ": "類別編號 (0 = 顯示全部, L = 語言, Q / Enter = 離開): ",
+      "Python 3.11+ is missing, install uv and Python {0} for this manager only": "缺少 Python 3.11+, 將安裝管理器專用的 uv 與 Python {0}",
+      "Sources: {0}, {1}": "來源: {0}, {1}",
+      "Current-user location: {0}, PATH and shell profiles remain unchanged": "安裝到目前使用者目錄: {0}, 不修改 PATH 或 shell profile",
+      "Install this manager runtime and continue? [y/N]": "安裝管理器執行環境並繼續啟動? [y/N]"
+    }
+  },
+  "labels": {
+    "en": {
+      "group": {
+        "開發工具": "Development tools",
+        "生活與帳戶": "Life and accounts",
+        "UI / UX": "UI / UX",
+        "天氣與交通": "Weather and transport",
+        "搜尋與研究收集": "Search and research",
+        "視覺化與計算": "Charts and calculations",
+        "文件與辦公": "Documents and office",
+        "學習與遊戲": "Learning and games",
+        "購物與財務": "Shopping and finance",
+        "醫療資料來源": "Medical sources",
+        "文字校對": "Proofreading",
+        "其他": "Other"
+      },
+      "title": {
+        "textlint 繁中": "textlint Traditional Chinese",
+        "textlint 日文": "textlint Japanese",
+        "CSpell 英文拼字": "CSpell English spelling",
+        "LanguageTool 英文文法, 選配": "LanguageTool English grammar, optional"
+      },
+      "language": {
+        "zh-TW": "Traditional Chinese (Taiwan)",
+        "en": "English"
+      }
+    },
+    "zh-TW": {
+      "profile": {
+        "all": "全部",
+        "development": "開發",
+        "design": "設計",
+        "office": "辦公",
+        "research": "研究",
+        "personal": "生活與學習"
+      },
+      "language": {
+        "zh-TW": "繁體中文 (台灣)",
+        "en": "English"
+      }
+    }
+  }
+}

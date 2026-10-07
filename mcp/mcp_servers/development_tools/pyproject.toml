@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=77,<83"]
+build-backend = "setuptools.build_meta"
+
+[project]
+license = {file = "LICENSE"}
+name = "codex-development-tools-mcp"
+version = "0.1.0"
+description = "Selected RTK output filtering or cmux session operations for Codex"
+requires-python = ">=3.11"
+dependencies = ["mcp==2.2.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

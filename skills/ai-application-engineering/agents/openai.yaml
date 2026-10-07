@@ -1,0 +1,9 @@
+interface:
+  display_name: "AI Application Engineering (v0.4.12)"
+  short_description: "Engineer LLM, agent, tool, and RAG applications"
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon.png"
+  default_prompt: "Use $ai-application-engineering to inspect the current AI stack, preserve its provider and permission boundaries, implement the requested LLM, agent, tool-calling, RAG, embedding, or runtime change, and verify the affected behavior."
+
+policy:
+  allow_implicit_invocation: true

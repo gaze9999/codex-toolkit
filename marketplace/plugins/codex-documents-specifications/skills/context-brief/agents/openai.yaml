@@ -1,0 +1,9 @@
+interface:
+  display_name: "Context Brief (v0.4.13)"
+  short_description: "Create reusable contract briefs from identified sources"
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon.png"
+  default_prompt: "Use $context-brief only when the user explicitly provides or identifies implementation source material, such as a spec, API doc, schema, requirements doc, SDK guide, or integration guide, and wants a reusable Markdown contract brief for later tasks. Do not trigger it from message count or compaction count, and do not use it for transcripts, progress handoffs, ordinary summaries, direct coding, or coding task prompts."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+license = {file = "LICENSE"}
+name = "codex-tool-setup"
+version = "0.4.0"
+description = "Portable CLI for Codex tools, skills, agents and setup"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["PyYAML==6.0.3", "markdown-it-py==4.2.0", "packaging==26.3"]
+
+[project.scripts]
+codex-setup = "codex_tool_setup.cli:setup_main"
+codex-mcp-setup = "codex_tool_setup.cli:mcp_main"
+codex-tool-setup = "codex_tool_setup.cli:main"
+codex-tool-check = "codex_tool_setup.cli:check_main"
+codex-tool-update = "codex_tool_setup.cli:update_main"
+codex-mcp-uninstall = "codex_tool_setup.cli:uninstall_main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

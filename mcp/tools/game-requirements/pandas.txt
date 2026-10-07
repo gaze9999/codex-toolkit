@@ -1,0 +1,2 @@
+# Reviewed 2026-10-05, install only in the selected project environment
+pandas==3.0.6

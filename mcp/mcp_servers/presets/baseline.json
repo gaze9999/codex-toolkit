@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "name": "baseline",
+  "servers": [
+    {
+      "name": "jev",
+      "kind": "python",
+      "project": "skills/jev-evaluation",
+      "packages": {
+        "codex-jev-mcp": "0.1.0"
+      },
+      "module": "codex_jev_mcp.mcp_server",
+      "verify_module": "codex_jev_mcp.verify_mcp",
+      "tools": [
+        "jev_rank",
+        "jev_evaluate",
+        "jev_status"
+      ],
+      "env_vars": [
+        "TYPESAFE_API_KEY",
+        "TYPESAFE_MODEL",
+        "CODEX_HOME",
+        "JEV_TELEMETRY"
+      ],
+      "startup_timeout_sec": 30,
+      "tool_timeout_sec": 30,
+      "roots_required": false
+    },
+    {
+      "name": "local_documents",
+      "kind": "python",
+      "project": "mcp",
+      "packages": {
+        "my-py-document-core": "0.2.2",
+        "codex-local-documents-mcp": "0.2.0"
+      },
+      "module": "mcp_servers.local_documents.document_server",
+      "verify_module": "mcp_servers.local_documents.verify_document_mcp",
+      "tools": [
+        "document_status",
+        "extract_document",
+        "inspect_markdown",
+        "locate_markdown_extracts",
+        "update_markdown"
+      ],
+      "startup_timeout_sec": 120,
+      "tool_timeout_sec": 300,
+      "roots_required": true
+    },
+    {
+      "name": "workspace_inspection",
+      "kind": "python",
+      "project": "mcp/mcp_servers/workspace_inspection",
+      "packages": {
+        "my-py-workspace-core": "0.2.0",
+        "codex-workspace-inspection-mcp": "0.2.0"
+      },
+      "module": "workspace_inspection_mcp.server",
+      "verify_module": "workspace_inspection_mcp.verify",
+      "tools": [
+        "workspace_status",
+        "validation_evidence",
+        "compare_environment"
+      ],
+      "startup_timeout_sec": 30,
+      "tool_timeout_sec": 120,
+      "roots_required": true
+    },
+    {
+      "name": "openaiDeveloperDocs",
+      "kind": "http",
+      "url": "https://developers.openai.com/mcp",
+      "optional": false
+    },
+    {
+      "name": "context7",
+      "kind": "http",
+      "url": "https://mcp.context7.com/mcp",
+      "optional": true
+    }
+  ]
+}

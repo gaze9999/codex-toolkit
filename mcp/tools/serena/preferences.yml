@@ -1,0 +1,4 @@
+# Merge into an existing serena_config.yml; this is not a complete config.
+# Keep machine-specific projects, paths and other settings in that file.
+web_dashboard_interface: browser
+web_dashboard_open_on_launch: false

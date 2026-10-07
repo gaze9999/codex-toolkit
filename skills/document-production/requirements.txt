@@ -1,0 +1,5 @@
+# Optional Python libraries for structured document creation, reading, and validation.
+pypdf>=5.0,<7
+pdfplumber>=0.11,<1
+python-docx>=1.1,<2
+reportlab>=4.0,<5

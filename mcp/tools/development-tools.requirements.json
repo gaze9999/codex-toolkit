@@ -1,0 +1,4428 @@
+{
+  "schema_version": 1,
+  "python": {
+    "minimum_version": [
+      3,
+      11,
+      0
+    ],
+    "bootstrap_version": "3.13",
+    "source": "https://www.python.org/",
+    "windows_package": "Python.Python.3.13",
+    "macos_package": "python@3.13"
+  },
+  "dependency_installers": {
+    "node": {
+      "source": "https://nodejs.org/",
+      "version": "LTS, >=18",
+      "windows": {
+        "commands": [
+          [
+            "winget",
+            "install",
+            "--id",
+            "OpenJS.NodeJS.LTS",
+            "--exact",
+            "--source",
+            "winget"
+          ]
+        ],
+        "scope": "machine, may require administrator approval"
+      },
+      "macos": {
+        "commands": [
+          [
+            "brew",
+            "install",
+            "node"
+          ]
+        ],
+        "scope": "Homebrew prefix"
+      },
+      "linux": {
+        "manual": "Install Node.js 18+ and npm using the approved distribution or Node.js source"
+      }
+    },
+    "npm": {
+      "source": "https://nodejs.org/",
+      "version": "bundled with Node.js",
+      "all": {
+        "manual": "npm is bundled with Node.js; repair the selected Node.js installation if npm is missing"
+      }
+    },
+    "codex": {
+      "source": "https://learn.chatgpt.com/docs/codex/cli",
+      "version": "0.160.0",
+      "requires": [
+        "node",
+        "npm"
+      ],
+      "all": {
+        "commands": [
+          [
+            "npm",
+            "install",
+            "-g",
+            "--prefix",
+            "{npm_prefix}",
+            "@openai/codex@0.160.0"
+          ]
+        ],
+        "scope": "setup user npm prefix"
+      }
+    },
+    "git": {
+      "source": "https://git-scm.com/",
+      "version": "package manager stable",
+      "windows": {
+        "commands": [
+          [
+            "winget",
+            "install",
+            "--id",
+            "Git.Git",
+            "--exact",
+            "--source",
+            "winget"
+          ]
+        ],
+        "scope": "package manager default, may require administrator approval"
+      },
+      "macos": {
+        "commands": [
+          [
+            "brew",
+            "install",
+            "git"
+          ]
+        ],
+        "scope": "Homebrew prefix"
+      },
+      "linux": {
+        "manual": "Install Git using the approved distribution package manager"
+      }
+    }
+  },
+  "tools": {
+    "context7": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "codex"
+        }
+      ],
+      "manual_checks": [
+        "Hosted MCP registration and a successful public library query"
+      ],
+      "mcp": {
+        "name": "context7",
+        "url": "https://mcp.context7.com/mcp"
+      },
+      "automatic_install": {
+        "all": {
+          "scope": "selected MCP entry in Codex user config",
+          "source": "https://context7.com/docs/clients/codex",
+          "version": "hosted service",
+          "action": "register_mcp"
+        }
+      },
+      "install": {
+        "all": "codex mcp add context7 --url https://mcp.context7.com/mcp"
+      },
+      "kind": "mcp",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "source": "https://context7.com/docs/clients/codex",
+      "group": "開發工具",
+      "categories": [
+        "開發工具",
+        "搜尋與研究收集",
+        "遊戲開發與模擬"
+      ]
+    },
+    "playwright": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "node",
+          "minimum_version": [
+            18,
+            0,
+            0
+          ],
+          "version_args": [
+            "--version"
+          ]
+        },
+        {
+          "command": "npm"
+        },
+        {
+          "command": "playwright-cli"
+        }
+      ],
+      "packages": {
+        "@playwright/cli": "0.1.22",
+        "@playwright/mcp": "0.0.83"
+      },
+      "manual_checks": [
+        "An installed supported browser and a successful open / snapshot / interaction",
+        "An existing or explicitly installed Playwright Skill"
+      ],
+      "automatic_install": {
+        "all": {
+          "scope": "setup user npm prefix",
+          "source": "https://github.com/microsoft/playwright-cli",
+          "version": "0.1.22",
+          "commands": [
+            [
+              "npm",
+              "install",
+              "-g",
+              "--prefix",
+              "{npm_prefix}",
+              "@playwright/cli@0.1.22"
+            ]
+          ]
+        }
+      },
+      "install": {
+        "all": "npm install -g @playwright/cli@0.1.22"
+      },
+      "interfaces": {
+        "mcp": {
+          "dependencies": [
+            {
+              "command": "node",
+              "minimum_version": [
+                18,
+                0,
+                0
+              ],
+              "version_args": [
+                "--version"
+              ]
+            },
+            {
+              "command": "npm"
+            },
+            {
+              "command": "playwright-mcp"
+            }
+          ],
+          "mcp": {
+            "name": "playwright",
+            "entry_suffix": "/@playwright/mcp/cli.js",
+            "args": [
+              "--isolated",
+              "--headless",
+              "--browser",
+              "chrome"
+            ]
+          },
+          "automatic_install": {
+            "all": {
+              "scope": "setup user npm prefix and one Codex MCP entry",
+              "source": "https://github.com/microsoft/playwright-mcp",
+              "version": "0.0.83",
+              "action": "node_mcp",
+              "commands": [
+                [
+                  "npm",
+                  "install",
+                  "-g",
+                  "--prefix",
+                  "{npm_prefix}",
+                  "@playwright/mcp@0.0.83"
+                ]
+              ]
+            }
+          },
+          "install": {
+            "all": "Select --interface mcp to install the official Playwright MCP"
+          },
+          "manual_checks": [
+            "MCP tool discovery and a successful isolated browser interaction",
+            "Installed supported browser; no personal browser profile reuse"
+          ],
+          "kind": "mcp",
+          "origin": "official",
+          "source": "https://github.com/microsoft/playwright-mcp"
+        }
+      },
+      "kind": "development-tool",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "source": "https://github.com/microsoft/playwright-cli",
+      "group": "開發工具",
+      "categories": [
+        "開發工具",
+        "UI / UX",
+        "遊戲開發與模擬"
+      ]
+    },
+    "rtk": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "rtk"
+        }
+      ],
+      "manual_checks": [
+        "Success and failure output, warnings and exit codes are preserved for the intended commands"
+      ],
+      "automatic_install": {
+        "windows": {
+          "scope": "user",
+          "source": "https://github.com/rtk-ai/rtk",
+          "version": "0.50.0",
+          "commands": [
+            [
+              "winget",
+              "install",
+              "--id",
+              "rtk-ai.rtk",
+              "--exact",
+              "--version",
+              "0.50.0",
+              "--source",
+              "winget",
+              "--scope",
+              "user"
+            ]
+          ]
+        },
+        "macos": {
+          "scope": "Homebrew prefix",
+          "source": "https://github.com/rtk-ai/rtk",
+          "version": "Homebrew stable",
+          "commands": [
+            [
+              "brew",
+              "install",
+              "rtk"
+            ]
+          ]
+        },
+        "linux": {
+          "scope": "Cargo user prefix",
+          "source": "https://github.com/rtk-ai/rtk",
+          "version": "0.50.0",
+          "requires": [
+            {
+              "command": "cargo"
+            },
+            {
+              "command": "rustc",
+              "minimum_version": [
+                1,
+                91,
+                0
+              ],
+              "version_args": [
+                "--version"
+              ]
+            }
+          ],
+          "commands": [
+            [
+              "cargo",
+              "install",
+              "--git",
+              "https://github.com/rtk-ai/rtk",
+              "--tag",
+              "v0.50.0",
+              "--locked"
+            ]
+          ]
+        }
+      },
+      "install": {
+        "windows": "winget install --id rtk-ai.rtk --exact --source winget --scope user",
+        "macos": "brew install rtk",
+        "linux": "Use the matching binary from https://github.com/rtk-ai/rtk/releases"
+      },
+      "interfaces": {
+        "mcp": {
+          "dependencies": [
+            {
+              "command": "rtk",
+              "minimum_version": [
+                0,
+                50,
+                0
+              ],
+              "version_args": [
+                "--version"
+              ]
+            }
+          ],
+          "mcp": {
+            "name": "rtk",
+            "module": "development_tool_mcp.server",
+            "tool": "rtk"
+          },
+          "automatic_install": {
+            "all": {
+              "scope": "independent user Python venv and one Codex MCP entry",
+              "source": "mcp/mcp_servers/development_tools",
+              "version": "0.1.0",
+              "action": "python_mcp",
+              "commands": []
+            }
+          },
+          "install": {
+            "all": "Select --interface mcp to wrap RTK pipe, retaining the CLI"
+          },
+          "manual_checks": [
+            "RTK 0.50+ pipe support",
+            "Native exit code and diagnostics preserved after filtering",
+            "Explicit read roots for log files"
+          ],
+          "kind": "mcp",
+          "origin": "setup-adapter"
+        }
+      },
+      "kind": "development-tool",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "source": "https://github.com/rtk-ai/rtk",
+      "group": "開發工具",
+      "categories": [
+        "開發工具"
+      ]
+    },
+    "repoprompt": {
+      "platforms": [
+        "macos"
+      ],
+      "minimum_macos": [
+        14,
+        0,
+        0
+      ],
+      "dependencies": [
+        {
+          "app": "RepoPrompt CE.app"
+        }
+      ],
+      "source_build_dependencies": {
+        "minimum_macos": [
+          26,
+          0,
+          0
+        ],
+        "commands": [
+          "git",
+          "python3",
+          "xcodebuild"
+        ],
+        "xcode": "26+, full Xcode for the Finder installer"
+      },
+      "manual_checks": [
+        "RepoPrompt CE app launch and approved repository access"
+      ],
+      "automatic_install": {
+        "macos": {
+          "scope": "~/Applications",
+          "source": "https://github.com/repoprompt/homebrew-repoprompt-ce",
+          "version": "Homebrew tap stable",
+          "commands": [
+            [
+              "brew",
+              "tap",
+              "repoprompt/repoprompt-ce"
+            ],
+            [
+              "brew",
+              "install",
+              "--cask",
+              "--appdir={app_dir}",
+              "repoprompt-ce"
+            ]
+          ]
+        }
+      },
+      "install": {
+        "macos": "brew tap repoprompt/repoprompt-ce, then brew install --cask repoprompt-ce"
+      },
+      "interfaces": {
+        "mcp": {
+          "dependencies": [
+            {
+              "app": "RepoPrompt CE.app"
+            },
+            {
+              "native_mcp": "repoprompt"
+            }
+          ],
+          "mcp": {
+            "name": "repoprompt",
+            "native_command": [
+              "repoprompt-mcp",
+              "rpce-cli"
+            ]
+          },
+          "automatic_install": {
+            "macos": {
+              "scope": "one Codex MCP entry; existing native app",
+              "source": "https://github.com/repoprompt/repoprompt-ce",
+              "version": "installed app version",
+              "action": "native_mcp",
+              "commands": []
+            }
+          },
+          "install": {
+            "macos": "Install the app independently, then select --interface mcp; --mcp-executable can select its bundled repoprompt-mcp"
+          },
+          "manual_checks": [
+            "Native macOS app and bundled MCP binary version",
+            "RepoPrompt app running, MCP enabled and selected workspace permissions",
+            "Windows native installation unsupported"
+          ],
+          "kind": "mcp",
+          "origin": "official"
+        }
+      },
+      "kind": "development-tool",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "source": "https://github.com/repoprompt/homebrew-repoprompt-ce",
+      "group": "開發工具",
+      "categories": [
+        "開發工具"
+      ]
+    },
+    "cmux": {
+      "platforms": [
+        "macos"
+      ],
+      "dependencies": [
+        {
+          "command": "cmux"
+        }
+      ],
+      "manual_checks": [
+        "Workspace separation and session notifications"
+      ],
+      "automatic_install": {
+        "macos": {
+          "scope": "~/Applications",
+          "source": "https://github.com/manaflow-ai/cmux",
+          "version": "Homebrew tap stable",
+          "commands": [
+            [
+              "brew",
+              "tap",
+              "manaflow-ai/cmux"
+            ],
+            [
+              "brew",
+              "install",
+              "--cask",
+              "--appdir={app_dir}",
+              "cmux"
+            ]
+          ]
+        }
+      },
+      "install": {
+        "macos": "brew tap manaflow-ai/cmux, then brew install --cask cmux; official DMG is also available"
+      },
+      "interfaces": {
+        "mcp": {
+          "mcp": {
+            "name": "cmux",
+            "module": "development_tool_mcp.server",
+            "tool": "cmux"
+          },
+          "automatic_install": {
+            "macos": {
+              "scope": "independent user Python venv and one Codex MCP entry",
+              "source": "mcp/mcp_servers/development_tools",
+              "version": "0.1.0",
+              "action": "python_mcp",
+              "commands": []
+            }
+          },
+          "install": {
+            "macos": "Install cmux independently, then select --interface mcp for workspace/pane tools"
+          },
+          "manual_checks": [
+            "Running native macOS app and permitted socket access",
+            "Keep cmux processes-only socket policy; no automatic allowAll",
+            "Real workspace/pane interaction"
+          ],
+          "kind": "mcp",
+          "origin": "setup-adapter"
+        }
+      },
+      "kind": "development-tool",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "source": "https://github.com/manaflow-ai/cmux",
+      "group": "開發工具",
+      "categories": [
+        "開發工具"
+      ]
+    },
+    "t3code": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "codex"
+        },
+        {
+          "app": "T3 Code.app",
+          "windows_package": "T3Tools.T3Code",
+          "linux_command": "t3"
+        }
+      ],
+      "manual_checks": [
+        "T3 Code Desktop installation or the chosen CLI / local web runtime",
+        "Codex authentication, selected release channel and thread / worktree behavior"
+      ],
+      "automatic_install": {
+        "windows": {
+          "scope": "package manager default",
+          "source": "https://github.com/pingdotgg/t3code",
+          "version": "winget stable",
+          "commands": [
+            [
+              "winget",
+              "install",
+              "--id",
+              "T3Tools.T3Code",
+              "--exact",
+              "--source",
+              "winget"
+            ]
+          ]
+        },
+        "macos": {
+          "scope": "~/Applications",
+          "source": "https://github.com/pingdotgg/t3code",
+          "version": "Homebrew stable",
+          "commands": [
+            [
+              "brew",
+              "install",
+              "--cask",
+              "--appdir={app_dir}",
+              "t3-code"
+            ]
+          ]
+        },
+        "linux": {
+          "scope": "setup user npm prefix, CLI / local web",
+          "source": "https://github.com/pingdotgg/t3code",
+          "version": "0.0.45",
+          "requires": [
+            "node",
+            "npm"
+          ],
+          "commands": [
+            [
+              "npm",
+              "install",
+              "-g",
+              "--prefix",
+              "{npm_prefix}",
+              "t3@0.0.45"
+            ]
+          ]
+        }
+      },
+      "install": {
+        "windows": "winget install --id T3Tools.T3Code --exact",
+        "macos": "brew install --cask t3-code",
+        "linux": "Use the matching package from https://github.com/pingdotgg/t3code/releases"
+      },
+      "interfaces": {
+        "mcp": {
+          "manual_setup": "T3 Code main source has an app-managed /mcp endpoint with per-thread credentials and revocation. Verify the installed release and use its managed session; no stable external credential/bootstrap flow is confirmed.",
+          "install": {
+            "all": "Use the MCP managed by the selected T3 Code session"
+          },
+          "manual_checks": [
+            "Installed release MCP support",
+            "App-managed provider session, token lifecycle and granted capabilities"
+          ],
+          "kind": "mcp",
+          "origin": "official"
+        }
+      },
+      "kind": "development-tool",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "source": "https://github.com/pingdotgg/t3code",
+      "group": "開發工具",
+      "categories": [
+        "開發工具"
+      ]
+    },
+    "conductor": {
+      "platforms": [
+        "macos"
+      ],
+      "dependencies": [
+        {
+          "command": "git"
+        },
+        {
+          "command": "codex"
+        },
+        {
+          "app": "Conductor.app"
+        }
+      ],
+      "manual_checks": [
+        "Conductor Mac Desktop installation, Codex authentication and workspace setup"
+      ],
+      "automatic_install": {
+        "macos": {
+          "scope": "~/Applications",
+          "source": "https://formulae.brew.sh/cask/conductor",
+          "version": "Homebrew stable",
+          "commands": [
+            [
+              "brew",
+              "install",
+              "--cask",
+              "--appdir={app_dir}",
+              "conductor"
+            ]
+          ]
+        }
+      },
+      "install": {
+        "macos": "Use the Mac Desktop download and worktree guide at https://www.conductor.build/"
+      },
+      "interfaces": {
+        "mcp": {
+          "platforms": [
+            "windows",
+            "macos",
+            "linux"
+          ],
+          "dependencies": [
+            {
+              "command": "codex"
+            }
+          ],
+          "mcp": {
+            "name": "conductor",
+            "url": "https://api.conductor.build/mcp"
+          },
+          "auth": "oauth",
+          "service_requirements": [
+            "Conductor account and selected organization",
+            "Hosted beta manages cloud workspaces; verify company data approval"
+          ],
+          "automatic_install": {
+            "all": {
+              "scope": "one Codex hosted MCP entry",
+              "source": "https://www.conductor.build/docs/api/mcp",
+              "version": "hosted beta",
+              "action": "register_mcp"
+            }
+          },
+          "install": {
+            "all": "Select --interface mcp, then codex mcp login conductor"
+          },
+          "manual_checks": [
+            "OAuth and organization access",
+            "whoami/list_projects only before any cloud workspace mutation"
+          ],
+          "kind": "mcp",
+          "origin": "official",
+          "source": "https://www.conductor.build/docs/api/mcp"
+        }
+      },
+      "kind": "development-tool",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "source": "https://formulae.brew.sh/cask/conductor",
+      "group": "開發工具",
+      "categories": [
+        "開發工具"
+      ]
+    },
+    "todoist": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "codex"
+        }
+      ],
+      "mcp": {
+        "name": "todoist",
+        "url": "https://ai.todoist.net/mcp"
+      },
+      "auth": "oauth",
+      "automatic_install": {
+        "all": {
+          "scope": "one Codex hosted MCP entry",
+          "source": "https://developer.todoist.com/",
+          "version": "hosted service",
+          "action": "register_mcp"
+        }
+      },
+      "install": {
+        "all": "Register one endpoint, then codex mcp login todoist"
+      },
+      "manual_checks": [
+        "OAuth and task/project read access",
+        "Create/update/delete tasks only when requested"
+      ],
+      "kind": "mcp",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "source": "https://developer.todoist.com/",
+      "group": "生活與帳戶",
+      "categories": [
+        "生活與帳戶"
+      ]
+    },
+    "readwise": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "codex"
+        }
+      ],
+      "mcp": {
+        "name": "readwise",
+        "url": "https://mcp2.readwise.io/mcp"
+      },
+      "auth": "oauth",
+      "service_requirements": [
+        "Readwise/Reader account and applicable subscription"
+      ],
+      "automatic_install": {
+        "all": {
+          "scope": "one Codex hosted MCP entry",
+          "source": "https://docs.readwise.io/tools/mcp",
+          "version": "current combined Readwise/Reader service",
+          "action": "register_mcp"
+        }
+      },
+      "install": {
+        "all": "Register the current mcp2 endpoint, then codex mcp login readwise"
+      },
+      "manual_checks": [
+        "OAuth and library search",
+        "Reader/highlight writes only when requested"
+      ],
+      "kind": "mcp",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "source": "https://docs.readwise.io/tools/mcp",
+      "group": "生活與帳戶",
+      "categories": [
+        "生活與帳戶",
+        "搜尋與研究收集",
+        "文件與辦公",
+        "學習與遊戲"
+      ]
+    },
+    "raindrop": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "codex"
+        }
+      ],
+      "mcp": {
+        "name": "raindrop",
+        "url": "https://api.raindrop.io/rest/v2/ai/mcp"
+      },
+      "auth": "oauth",
+      "service_requirements": [
+        "Raindrop.io Pro; MCP beta"
+      ],
+      "automatic_install": {
+        "all": {
+          "scope": "one Codex hosted MCP entry",
+          "source": "https://developer.raindrop.io/mcp/mcp",
+          "version": "hosted beta",
+          "action": "register_mcp"
+        }
+      },
+      "install": {
+        "all": "Register one endpoint, then codex mcp login raindrop"
+      },
+      "manual_checks": [
+        "OAuth and bookmark search",
+        "Bookmark/collection writes only when requested"
+      ],
+      "kind": "mcp",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "source": "https://developer.raindrop.io/mcp/mcp",
+      "group": "生活與帳戶",
+      "categories": [
+        "生活與帳戶",
+        "搜尋與研究收集",
+        "文件與辦公",
+        "學習與遊戲"
+      ]
+    },
+    "dropbox": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "codex"
+        }
+      ],
+      "mcp": {
+        "name": "dropbox",
+        "url": "https://mcp.dropbox.com/mcp"
+      },
+      "auth": "oauth",
+      "prefer_plugins": [
+        "dropbox",
+        "app-69b31dc2110c8191b8b47dc98fe5a052"
+      ],
+      "automatic_install": {
+        "all": {
+          "scope": "one Codex hosted MCP entry if no enabled provider",
+          "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+          "version": "hosted beta",
+          "action": "register_mcp"
+        }
+      },
+      "install": {
+        "all": "Reuse an enabled Dropbox plugin, or register and codex mcp login dropbox"
+      },
+      "manual_checks": [
+        "OAuth and account/team boundary",
+        "File search before any file/share mutation"
+      ],
+      "kind": "mcp",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+      "group": "生活與帳戶",
+      "categories": [
+        "生活與帳戶",
+        "文件與辦公"
+      ]
+    },
+    "notion": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "codex"
+        }
+      ],
+      "mcp": {
+        "name": "notion",
+        "url": "https://mcp.notion.com/mcp"
+      },
+      "auth": "oauth",
+      "prefer_plugins": [
+        "notion"
+      ],
+      "automatic_install": {
+        "all": {
+          "scope": "one Codex hosted MCP entry if no enabled provider",
+          "source": "https://developers.notion.com/guides/mcp/get-started-with-mcp",
+          "version": "hosted service",
+          "action": "register_mcp"
+        }
+      },
+      "install": {
+        "all": "Reuse an enabled Notion plugin, or register and codex mcp login notion"
+      },
+      "manual_checks": [
+        "OAuth, workspace selection and allowed pages",
+        "Page/database writes only when requested"
+      ],
+      "kind": "mcp",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "source": "https://developers.notion.com/guides/mcp/get-started-with-mcp",
+      "group": "生活與帳戶",
+      "categories": [
+        "生活與帳戶",
+        "搜尋與研究收集",
+        "文件與辦公"
+      ]
+    },
+    "google-calendar": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "prefer_plugins": [
+        "google-calendar"
+      ],
+      "manual_setup": "Prefer the Google Calendar app connector. Official Workspace MCP is Developer Preview and requires enrollment, Google Cloud API/OAuth setup and a compatible OAuth client.",
+      "reference_mcp_url": "https://calendarmcp.googleapis.com/mcp/v1",
+      "install": {
+        "all": "Connect the Google Calendar app independently; advanced remote MCP setup remains manual"
+      },
+      "manual_checks": [
+        "Account/admin authorization",
+        "Calendar and free/busy scopes; verify installed client OAuth compatibility"
+      ],
+      "kind": "connector",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "source": "Connect the Google Calendar app independently; advanced remote MCP setup remains manual",
+      "group": "生活與帳戶",
+      "categories": [
+        "生活與帳戶"
+      ]
+    },
+    "google-drive": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "prefer_plugins": [
+        "google-drive"
+      ],
+      "manual_setup": "Prefer the Google Drive app connector. Official Workspace MCP is Developer Preview and requires enrollment, Google Cloud API/OAuth setup and a compatible OAuth client.",
+      "reference_mcp_url": "https://drivemcp.googleapis.com/mcp/v1",
+      "install": {
+        "all": "Connect the Google Drive app independently; advanced remote MCP setup remains manual"
+      },
+      "manual_checks": [
+        "Account/admin authorization",
+        "Selected file scopes and installed client OAuth compatibility"
+      ],
+      "kind": "connector",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "source": "Connect the Google Drive app independently; advanced remote MCP setup remains manual",
+      "group": "生活與帳戶",
+      "categories": [
+        "生活與帳戶",
+        "搜尋與研究收集",
+        "文件與辦公"
+      ]
+    },
+    "google-maps": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "codex"
+        }
+      ],
+      "mcp": {
+        "name": "google_maps",
+        "url": "https://mapstools.googleapis.com/mcp",
+        "registration": {
+          "env_http_headers": {
+            "X-Goog-Api-Key": "GOOGLE_MAPS_API_KEY"
+          }
+        }
+      },
+      "auth": "environment_header",
+      "credential_env": [
+        "GOOGLE_MAPS_API_KEY"
+      ],
+      "service_requirements": [
+        "Google Cloud billing, enabled Maps Grounding Lite API and restricted API key"
+      ],
+      "automatic_install": {
+        "all": {
+          "scope": "one Codex hosted MCP entry; credential env name only",
+          "source": "https://developers.google.com/maps/ai/grounding-lite",
+          "version": "hosted service",
+          "action": "register_mcp"
+        }
+      },
+      "install": {
+        "all": "Configure GOOGLE_MAPS_API_KEY locally, then register one endpoint"
+      },
+      "manual_checks": [
+        "Billing/API enabled and API key restrictions",
+        "Paid calls only in the requested scope; preserve required Maps attribution"
+      ],
+      "kind": "mcp",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "source": "https://developers.google.com/maps/ai/grounding-lite",
+      "group": "生活與帳戶",
+      "categories": [
+        "生活與帳戶",
+        "天氣與交通"
+      ]
+    },
+    "home-assistant": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "codex"
+        }
+      ],
+      "custom_endpoint": true,
+      "mcp": {
+        "name": "home_assistant"
+      },
+      "auth": "oauth_or_environment_bearer",
+      "automatic_install": {
+        "all": {
+          "scope": "one Codex entry for the user's approved Home Assistant instance",
+          "source": "https://www.home-assistant.io/integrations/mcp_server",
+          "version": "installed Home Assistant integration",
+          "action": "register_mcp"
+        }
+      },
+      "install": {
+        "all": "Enable MCP in Home Assistant; pass --server-url https://YOUR-INSTANCE/api/mcp and optional --token-env-var HOME_ASSISTANT_TOKEN"
+      },
+      "manual_checks": [
+        "Existing instance, integration and authentication",
+        "Only exposed entities; verify status before low-risk control"
+      ],
+      "kind": "mcp",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "source": "https://www.home-assistant.io/integrations/mcp_server",
+      "group": "生活與帳戶",
+      "categories": [
+        "生活與帳戶"
+      ]
+    },
+    "github": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "prefer_plugins": [
+        "github",
+        "codex-security"
+      ],
+      "manual_setup": "Prefer the installed GitHub plugin and its account/repository permissions. Configure a separate MCP only when this provider is unavailable.",
+      "install": {
+        "all": "Connect GitHub through the plugin directory"
+      },
+      "manual_checks": [
+        "Authentication and intended repository permissions",
+        "External messages and repository mutations require the requested scope"
+      ],
+      "kind": "connector",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "source": "Connect GitHub through the plugin directory",
+      "group": "開發工具",
+      "categories": [
+        "開發工具"
+      ]
+    },
+    "cwa-weather": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "node",
+          "minimum_version": [
+            18,
+            0,
+            0
+          ],
+          "version_args": [
+            "--version"
+          ]
+        },
+        {
+          "command": "npm"
+        }
+      ],
+      "mcp": {
+        "name": "cwa_weather",
+        "entry_suffix": "/@gonetone/mcp-server-taiwan-weather/dist/index.js",
+        "args": [],
+        "registration": {
+          "env": {},
+          "env_vars": [
+            "CWA_API_KEY"
+          ]
+        }
+      },
+      "credential_env": [
+        "CWA_API_KEY"
+      ],
+      "packages": {
+        "@gonetone/mcp-server-taiwan-weather": "0.1.4"
+      },
+      "manual_checks": [
+        "Client reload, tools/list and a safe actual tool call",
+        "Check account quota and data boundary",
+        "Community implementation; CWA F-C0032-001 36-hour city/county forecast only"
+      ],
+      "automatic_install": {
+        "all": {
+          "action": "node_mcp",
+          "source": "https://github.com/GoneTone/mcp-server-taiwan-weather",
+          "version": "0.1.4",
+          "scope": "setup user npm prefix and one selected MCP entry",
+          "commands": [
+            [
+              "npm",
+              "install",
+              "-g",
+              "--prefix",
+              "{npm_prefix}",
+              "@gonetone/mcp-server-taiwan-weather@0.1.4"
+            ]
+          ]
+        }
+      },
+      "install": {
+        "all": "Select this tool independently; provide credential via approved environment"
+      },
+      "kind": "mcp",
+      "origin": "community",
+      "reviewed_date": "2026-10-04",
+      "source": "https://github.com/GoneTone/mcp-server-taiwan-weather",
+      "group": "天氣與交通",
+      "categories": [
+        "天氣與交通",
+        "生活與帳戶"
+      ]
+    },
+    "cwa-extended": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "credential_env": [
+        "CWA_API_KEY"
+      ],
+      "manual_setup": "Install the selected roc-cwa-mcp wheel in its own environment, set CWA_API_KEY locally, and register roc-cwa-mcp; keep the key out of command arguments",
+      "source_dependencies": {
+        "python": ">=3.10",
+        "packages": [
+          "mcp[cli]>=1.6.0",
+          "requests>=2.28.0"
+        ],
+        "entry": "src/server.py"
+      },
+      "manual_checks": [
+        "3-day/week forecast and station rainfall; verify selected city/town and dataset time"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://github.com/lwsinclair/roc-cwa-mcp"
+      },
+      "kind": "mcp",
+      "origin": "community",
+      "reviewed_date": "2026-10-04",
+      "source": "https://github.com/lwsinclair/roc-cwa-mcp",
+      "group": "天氣與交通",
+      "python_wheel": {
+        "name": "roc-cwa-mcp",
+        "version": "0.1.0",
+        "requires_python": ">=3.10"
+      },
+      "minimum_python": [
+        3,
+        10
+      ],
+      "categories": [
+        "天氣與交通",
+        "生活與帳戶"
+      ]
+    },
+    "open-meteo": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "node",
+          "minimum_version": [
+            24,
+            0,
+            0
+          ],
+          "version_args": [
+            "--version"
+          ]
+        },
+        {
+          "command": "npm"
+        }
+      ],
+      "mcp": {
+        "name": "open_meteo",
+        "entry_suffix": "/@cyanheads/open-meteo-mcp-server/dist/index.js",
+        "args": [],
+        "registration": {
+          "env": {
+            "MCP_TRANSPORT_TYPE": "stdio",
+            "MCP_LOG_LEVEL": "info"
+          },
+          "env_vars": []
+        }
+      },
+      "credential_env": [],
+      "packages": {
+        "@cyanheads/open-meteo-mcp-server": "0.4.0"
+      },
+      "manual_checks": [
+        "Client reload, tools/list and a safe actual tool call",
+        "Check account quota and data boundary",
+        "Non-commercial keyless use; commercial use needs Open-Meteo paid API",
+        "Node 24+ minimum; preview any runtime replacement before applying"
+      ],
+      "automatic_install": {
+        "all": {
+          "action": "node_mcp",
+          "source": "https://github.com/cyanheads/open-meteo-mcp-server",
+          "version": "0.4.0",
+          "scope": "setup user npm prefix and one selected MCP entry",
+          "commands": [
+            [
+              "npm",
+              "install",
+              "-g",
+              "--prefix",
+              "{npm_prefix}",
+              "@cyanheads/open-meteo-mcp-server@0.4.0"
+            ]
+          ]
+        }
+      },
+      "install": {
+        "all": "Select this tool independently; provide credential via approved environment"
+      },
+      "kind": "mcp",
+      "origin": "community",
+      "reviewed_date": "2026-10-04",
+      "source": "https://github.com/cyanheads/open-meteo-mcp-server",
+      "group": "天氣與交通",
+      "categories": [
+        "天氣與交通",
+        "生活與帳戶"
+      ]
+    },
+    "tdx": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "codex"
+        }
+      ],
+      "mcp": {
+        "name": "tdx_rail",
+        "url": "https://tdx.transportdata.tw/tdx-mcp/rail",
+        "registration": {
+          "env_http_headers": {
+            "cid": "TDX_CLIENT_ID",
+            "cst": "TDX_CLIENT_SECRET"
+          }
+        }
+      },
+      "authentication": "environment_headers",
+      "credential_env": [
+        "TDX_CLIENT_ID",
+        "TDX_CLIENT_SECRET"
+      ],
+      "manual_checks": [
+        "Client reload, tools/list and one safe actual tool call",
+        "TDX account, permissions and usage points; booking authorization is separate"
+      ],
+      "automatic_install": {
+        "all": {
+          "action": "register_mcp",
+          "source": "https://github.com/tdxmotc/MCP",
+          "version": "hosted service",
+          "scope": "one selected Codex user MCP entry"
+        }
+      },
+      "install": {
+        "all": "Select this tool independently; authorize account access when required"
+      },
+      "kind": "mcp",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "source": "https://github.com/tdxmotc/MCP",
+      "group": "天氣與交通",
+      "categories": [
+        "天氣與交通",
+        "生活與帳戶"
+      ]
+    },
+    "tavily": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "codex"
+        }
+      ],
+      "mcp": {
+        "name": "tavily",
+        "url": "https://mcp.tavily.com/mcp/",
+        "registration": {
+          "http_headers": {
+            "X-Tavily-Access-Mode": "keyless"
+          }
+        }
+      },
+      "authentication": "keyless",
+      "credential_env": [],
+      "manual_checks": [
+        "Client reload, tools/list and one safe actual tool call",
+        "Free rate-limited Search/Extract; authenticated crawl/research is a separate selection"
+      ],
+      "automatic_install": {
+        "all": {
+          "action": "register_mcp",
+          "source": "https://docs.tavily.com/documentation/keyless",
+          "version": "hosted service",
+          "scope": "one selected Codex user MCP entry"
+        }
+      },
+      "install": {
+        "all": "Select this tool independently; authorize account access when required"
+      },
+      "kind": "mcp",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "source": "https://docs.tavily.com/documentation/keyless",
+      "group": "搜尋與研究收集",
+      "categories": [
+        "搜尋與研究收集"
+      ]
+    },
+    "exa": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "codex"
+        }
+      ],
+      "mcp": {
+        "name": "exa",
+        "url": "https://mcp.exa.ai/mcp",
+        "registration": {}
+      },
+      "authentication": "keyless",
+      "credential_env": [],
+      "manual_checks": [
+        "Client reload, tools/list and one safe actual tool call",
+        "Keyless limited search/fetch; OAuth/API-key agent runs use account quota"
+      ],
+      "automatic_install": {
+        "all": {
+          "action": "register_mcp",
+          "source": "https://exa.ai/docs/get-started/exa-mcp",
+          "version": "hosted service",
+          "scope": "one selected Codex user MCP entry"
+        }
+      },
+      "install": {
+        "all": "Select this tool independently; authorize account access when required"
+      },
+      "kind": "mcp",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "source": "https://exa.ai/docs/get-started/exa-mcp",
+      "group": "搜尋與研究收集",
+      "categories": [
+        "搜尋與研究收集"
+      ]
+    },
+    "brave-search": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "node",
+          "minimum_version": [
+            22,
+            0,
+            0
+          ],
+          "version_args": [
+            "--version"
+          ]
+        },
+        {
+          "command": "npm"
+        }
+      ],
+      "mcp": {
+        "name": "brave_search",
+        "entry_suffix": "/@brave/brave-search-mcp-server/dist/index.js",
+        "args": [
+          "--transport",
+          "stdio"
+        ],
+        "registration": {
+          "env": {},
+          "env_vars": [
+            "BRAVE_API_KEY"
+          ]
+        }
+      },
+      "credential_env": [
+        "BRAVE_API_KEY"
+      ],
+      "packages": {
+        "@brave/brave-search-mcp-server": "2.1.4"
+      },
+      "manual_checks": [
+        "Client reload, tools/list and a safe actual tool call",
+        "Check account quota and data boundary"
+      ],
+      "automatic_install": {
+        "all": {
+          "action": "node_mcp",
+          "source": "https://github.com/brave/brave-search-mcp-server",
+          "version": "2.1.4",
+          "scope": "setup user npm prefix and one selected MCP entry",
+          "commands": [
+            [
+              "npm",
+              "install",
+              "-g",
+              "--prefix",
+              "{npm_prefix}",
+              "@brave/brave-search-mcp-server@2.1.4"
+            ]
+          ]
+        }
+      },
+      "install": {
+        "all": "Select this tool independently; provide credential via approved environment"
+      },
+      "kind": "mcp",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "source": "https://github.com/brave/brave-search-mcp-server",
+      "group": "搜尋與研究收集",
+      "categories": [
+        "搜尋與研究收集"
+      ]
+    },
+    "firecrawl": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "codex"
+        }
+      ],
+      "mcp": {
+        "name": "firecrawl",
+        "url": "https://mcp.firecrawl.dev/v2/mcp",
+        "registration": {}
+      },
+      "authentication": "keyless",
+      "credential_env": [],
+      "manual_checks": [
+        "Client reload, tools/list and one safe actual tool call",
+        "Keyless Search/Scrape/Parse daily limits; optional --token-env-var FIRECRAWL_API_KEY enables account quota"
+      ],
+      "automatic_install": {
+        "all": {
+          "action": "register_mcp",
+          "source": "https://docs.firecrawl.dev/mcp-server/keyless",
+          "version": "hosted service",
+          "scope": "one selected Codex user MCP entry"
+        }
+      },
+      "install": {
+        "all": "Select this tool independently; authorize account access when required"
+      },
+      "kind": "mcp",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "source": "https://docs.firecrawl.dev/mcp-server/keyless",
+      "group": "搜尋與研究收集",
+      "categories": [
+        "搜尋與研究收集"
+      ]
+    },
+    "rss": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "node",
+          "minimum_version": [
+            20,
+            0,
+            0
+          ],
+          "version_args": [
+            "--version"
+          ]
+        },
+        {
+          "command": "npm"
+        },
+        {
+          "command": "git"
+        }
+      ],
+      "mcp": {
+        "name": "rss",
+        "entry_suffix": "/mcp-rss-aggregator/build/index.js"
+      },
+      "manual_checks": [
+        "Explicit OPML/JSON feed file; verify feed dates and fetch originals when summaries are incomplete",
+        "The MCP supplies collection tools; recurring schedule and deduplication need a separately selected workflow"
+      ],
+      "repository": "https://github.com/imprvhub/mcp-rss-aggregator",
+      "source_commit": "3fb9e3261459213dcec5a59fccc073c897714819",
+      "automatic_install": {
+        "all": {
+          "action": "repo_node_mcp",
+          "source": "https://github.com/imprvhub/mcp-rss-aggregator",
+          "version": "0.3.0 @ 3fb9e3261459213dcec5a59fccc073c897714819",
+          "scope": "independent setup user source directory and one selected MCP entry",
+          "commands": []
+        }
+      },
+      "install": {
+        "all": "Select rss with --feeds-path /absolute/path/feeds.opml"
+      },
+      "kind": "mcp",
+      "origin": "community",
+      "reviewed_date": "2026-10-04",
+      "source": "https://github.com/imprvhub/mcp-rss-aggregator",
+      "group": "搜尋與研究收集",
+      "categories": [
+        "搜尋與研究收集"
+      ]
+    },
+    "arxiv": {
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "python_package": "arxiv-mcp-server==0.8.0",
+      "mcp": {
+        "name": "arxiv",
+        "native_command": [
+          "arxiv-mcp-server",
+          "arxiv-mcp-server.exe"
+        ]
+      },
+      "manual_checks": [
+        "Python >=3.11, isolated arXiv environment with MCP SDK >=1.27,<2",
+        "Verify paper storage and optional PDF/pro extras before adding them",
+        "Search and metadata are public network operations; paper saves/topic watches modify local storage"
+      ],
+      "automatic_install": {
+        "all": {
+          "action": "python_mcp",
+          "source": "https://github.com/blazickjp/arxiv-mcp-server",
+          "version": "0.8.0 (PyPI)",
+          "scope": "independent user Python venv and one selected MCP entry",
+          "commands": []
+        }
+      },
+      "install": {
+        "all": "Python installer creates only the selected arXiv environment; upstream also supports uvx"
+      },
+      "kind": "mcp",
+      "origin": "community",
+      "reviewed_date": "2026-10-04",
+      "source": "https://github.com/blazickjp/arxiv-mcp-server",
+      "group": "搜尋與研究收集",
+      "python_wheel": {
+        "name": "arxiv-mcp-server",
+        "version": "0.8.0",
+        "requires_python": ">=3.11"
+      },
+      "minimum_python": [
+        3,
+        11
+      ],
+      "categories": [
+        "搜尋與研究收集",
+        "學習與遊戲"
+      ]
+    },
+    "reddit": {
+      "title": "Reddit RSS",
+      "source": "https://github.com/jorgen-k/reddit-mcp",
+      "kind": "mcp",
+      "origin": "community",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Python >=3.10, uv/uvx or isolated pip install",
+        "Public feeds omit scores and full comment-tree relationships"
+      ],
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {
+        "all": {
+          "source": "https://github.com/jorgen-k/reddit-mcp",
+          "scope": "independent user Python venv and one selected MCP entry",
+          "action": "python_mcp",
+          "commands": [],
+          "version": "1.2.1"
+        }
+      },
+      "install": {
+        "all": "https://github.com/jorgen-k/reddit-mcp"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "搜尋與研究收集",
+      "python_package": "reddit-rss-mcp==1.2.1",
+      "python_entry": "reddit-rss-mcp",
+      "mcp": {
+        "name": "reddit",
+        "native_command": [
+          "reddit-rss-mcp",
+          "reddit-rss-mcp.exe"
+        ]
+      },
+      "python_wheel": {
+        "name": "reddit-rss-mcp",
+        "version": "1.2.1",
+        "requires_python": ">=3.10"
+      },
+      "minimum_python": [
+        3,
+        10
+      ],
+      "categories": [
+        "搜尋與研究收集"
+      ]
+    },
+    "mapbox": {
+      "title": "Mapbox",
+      "source": "https://github.com/mapbox/mcp-server",
+      "kind": "mcp",
+      "origin": "official",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Mapbox account/token, API quota and location-data boundary"
+      ],
+      "manual_setup": "Select hosted https://mcp.mapbox.com/mcp or the project local server; verify documented token transport and selected client visualization support",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://github.com/mapbox/mcp-server"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "視覺化與計算",
+      "categories": [
+        "視覺化與計算",
+        "UI / UX",
+        "天氣與交通"
+      ]
+    },
+    "google-docs": {
+      "title": "Google Docs",
+      "source": "https://developers.google.com/workspace/guides/configure-mcp-servers",
+      "kind": "mcp",
+      "origin": "official",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Google Cloud setup, selected account and document permissions"
+      ],
+      "manual_setup": "Workspace Developer Preview requires enrollment, Google Cloud OAuth client and service scopes; select the approved connector or documented Docs route",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://developers.google.com/workspace/guides/configure-mcp-servers"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "文件與辦公",
+      "categories": [
+        "文件與辦公"
+      ]
+    },
+    "google-sheets": {
+      "title": "Google Sheets",
+      "source": "https://developers.google.com/workspace/guides/configure-mcp-servers",
+      "kind": "mcp",
+      "origin": "official",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Google Cloud setup, selected account and sheet permissions"
+      ],
+      "manual_setup": "Workspace Developer Preview requires enrollment, Google Cloud OAuth client and service scopes; prefer an available spreadsheet connector for one-off work",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://developers.google.com/workspace/guides/configure-mcp-servers"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "文件與辦公",
+      "categories": [
+        "文件與辦公",
+        "視覺化與計算",
+        "遊戲開發與模擬",
+        "購物與財務"
+      ]
+    },
+    "excel": {
+      "title": "Excel",
+      "source": "https://github.com/haris-musa/excel-mcp-server",
+      "kind": "mcp",
+      "origin": "community",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Python >=3.11; excel-mcp-server 1.1.1; openpyxl; writes formulas, calculation results need another verified engine"
+      ],
+      "manual_setup": "uvx excel-mcp-server stdio --allow-dir /approved/workbooks; explicit allow-dir required by this setup",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://github.com/haris-musa/excel-mcp-server"
+      },
+      "reuse_existing": [
+        "spreadsheets"
+      ],
+      "reviewed_date": "2026-10-04",
+      "group": "文件與辦公",
+      "python_wheel": {
+        "name": "excel-mcp-server",
+        "version": "1.1.1",
+        "requires_python": ">=3.11"
+      },
+      "minimum_python": [
+        3,
+        11
+      ],
+      "categories": [
+        "文件與辦公",
+        "視覺化與計算",
+        "遊戲開發與模擬",
+        "購物與財務"
+      ]
+    },
+    "markitdown": {
+      "title": "Microsoft MarkItDown",
+      "source": "https://github.com/microsoft/markitdown",
+      "kind": "mcp",
+      "origin": "official",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Python >=3.10; markitdown-mcp 0.0.1a7; markitdown[all]; format-dependent extras"
+      ],
+      "manual_setup": "Select markitdown-mcp in an isolated Python environment and review the permitted files/URLs and format extras before registration",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://github.com/microsoft/markitdown"
+      },
+      "reuse_existing": [
+        "local_documents"
+      ],
+      "reviewed_date": "2026-10-04",
+      "group": "文件與辦公",
+      "python_wheel": {
+        "name": "markitdown-mcp",
+        "version": "0.0.1a7",
+        "requires_python": ">=3.10"
+      },
+      "minimum_python": [
+        3,
+        10
+      ],
+      "categories": [
+        "文件與辦公",
+        "搜尋與研究收集",
+        "開發工具"
+      ]
+    },
+    "carbone": {
+      "title": "Carbone",
+      "source": "https://github.com/carboneio/carbone-mcp",
+      "kind": "mcp",
+      "origin": "official",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Carbone service/token, templates, output permissions and conversion engine"
+      ],
+      "manual_setup": "Select Cloud or approved self-hosted Carbone, token and template workspace; prepare a pinned local launcher or documented endpoint",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://github.com/carboneio/carbone-mcp"
+      },
+      "reuse_existing": [
+        "documents",
+        "spreadsheets"
+      ],
+      "reviewed_date": "2026-10-04",
+      "group": "文件與辦公",
+      "categories": [
+        "文件與辦公"
+      ]
+    },
+    "wolfram": {
+      "title": "Wolfram",
+      "source": "https://www.wolfram.com/artificial-intelligence/mcp/",
+      "kind": "mcp",
+      "origin": "official",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Wolfram local license/runtime or Cloud access; identify outbound inputs and quota"
+      ],
+      "manual_setup": "Choose Wolfram Local (installed licensed Wolfram app) or Cloud account access; follow the matching documented configuration",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://www.wolfram.com/artificial-intelligence/mcp/"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "視覺化與計算",
+      "categories": [
+        "視覺化與計算",
+        "搜尋與研究收集",
+        "遊戲開發與模擬",
+        "購物與財務"
+      ]
+    },
+    "jupyter": {
+      "title": "Datalayer Jupyter",
+      "source": "https://github.com/datalayer/jupyter-mcp-server",
+      "kind": "mcp",
+      "origin": "maintainer",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Python >=3.10; jupyter-mcp-server 2.2.3; code-sandboxes >=1.9; Jupyter URL/token; notebook filesystem and code execution permissions"
+      ],
+      "manual_setup": "Select an approved Jupyter Server/kernel and isolated jupyter-mcp-server environment before enabling notebook execution",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://github.com/datalayer/jupyter-mcp-server"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "視覺化與計算",
+      "python_wheel": {
+        "name": "jupyter-mcp-server",
+        "version": "2.2.3",
+        "requires_python": ">=3.10"
+      },
+      "minimum_python": [
+        3,
+        10
+      ],
+      "categories": [
+        "視覺化與計算",
+        "搜尋與研究收集",
+        "開發工具",
+        "文件與辦公",
+        "遊戲開發與模擬",
+        "購物與財務"
+      ]
+    },
+    "jisho": {
+      "title": "Jisho",
+      "source": "https://github.com/giuliocapecchi/jisho-mcp",
+      "kind": "mcp",
+      "origin": "community",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Public dictionary endpoint/network; verify current package/runtime before install"
+      ],
+      "manual_setup": "Review the selected source/runtime launcher, pin the release and verify a public word lookup",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://github.com/giuliocapecchi/jisho-mcp"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "學習與遊戲",
+      "python_wheel": {
+        "name": "jisho-mcp",
+        "version": "0.1.0",
+        "requires_python": ">=3.10"
+      },
+      "minimum_python": [
+        3,
+        10
+      ],
+      "categories": [
+        "學習與遊戲",
+        "搜尋與研究收集",
+        "生活與帳戶",
+        "文字校對"
+      ]
+    },
+    "anki": {
+      "title": "Anki",
+      "source": "https://github.com/ankimcp/anki-mcp-server",
+      "kind": "mcp",
+      "origin": "community",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Anki Desktop, AnkiConnect, selected deck backup; creation/modification/deletion scope"
+      ],
+      "manual_setup": "Start Anki Desktop with approved AnkiConnect, select the local deck and restrict exposed tools before registering a pinned launcher",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://github.com/ankimcp/anki-mcp-server"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "學習與遊戲",
+      "categories": [
+        "學習與遊戲",
+        "搜尋與研究收集",
+        "生活與帳戶"
+      ]
+    },
+    "steam": {
+      "title": "Steam",
+      "source": "https://github.com/matheusslg/steam-mcp",
+      "kind": "mcp",
+      "origin": "community",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Steam Web API/account credentials as required by selected tools, profile privacy and store region"
+      ],
+      "manual_setup": "Select a pinned source/runtime launcher and safe Steam API credentials after reviewing the target account visibility",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://github.com/matheusslg/steam-mcp"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "學習與遊戲",
+      "categories": [
+        "學習與遊戲",
+        "搜尋與研究收集"
+      ],
+      "mcp": {
+        "name": "steam",
+        "entry_suffix": "/dist/index.js",
+        "entry_directory": "steam-mcp"
+      }
+    },
+    "igdb": {
+      "title": "IGDB",
+      "source": "https://github.com/bielacki/igdb-mcp-server",
+      "kind": "mcp",
+      "origin": "community",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Twitch developer app, IGDB access/token and quota"
+      ],
+      "manual_setup": "Select a pinned source/runtime launcher and approved Twitch/IGDB credentials",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://github.com/bielacki/igdb-mcp-server"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "學習與遊戲",
+      "python_wheel": {
+        "name": "igdb-mcp-server",
+        "version": "0.1.0",
+        "requires_python": ">=3.12"
+      },
+      "minimum_python": [
+        3,
+        12
+      ],
+      "categories": [
+        "學習與遊戲",
+        "搜尋與研究收集"
+      ],
+      "mcp": {
+        "name": "igdb",
+        "module": "igdb_mcp_server.server"
+      }
+    },
+    "sensor-tower": {
+      "title": "Sensor Tower",
+      "source": "https://sensortower.com/mcp-server-demo",
+      "kind": "mcp",
+      "origin": "official",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Active API subscription and approved credentials; market/revenue figures are estimates"
+      ],
+      "manual_setup": "Use the official onboarding configuration supplied to the subscribed account; public demo page does not establish a reusable endpoint",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://sensortower.com/mcp-server-demo"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "學習與遊戲",
+      "categories": [
+        "學習與遊戲",
+        "搜尋與研究收集"
+      ]
+    },
+    "taiwan-price-compare": {
+      "title": "Taiwan Price Compare",
+      "source": "https://github.com/coseto6125/mcp-taiwan-price-compare",
+      "kind": "mcp",
+      "origin": "community",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Python project/runtime; verify item model, shipping, promotion and timestamp on store pages"
+      ],
+      "manual_setup": "Review the selected Python package/source launcher and platform access before registration",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://github.com/coseto6125/mcp-taiwan-price-compare"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "購物與財務",
+      "python_wheel": {
+        "name": "mcp-taiwan-price-compare",
+        "version": "0.5.0",
+        "requires_python": ">=3.13"
+      },
+      "minimum_python": [
+        3,
+        13
+      ],
+      "categories": [
+        "購物與財務",
+        "生活與帳戶"
+      ]
+    },
+    "taiwan-card-rewards": {
+      "title": "Taiwan Card Rewards",
+      "source": "https://github.com/acetaxxxx/taiwan-card-rewards-mcp",
+      "kind": "mcp",
+      "origin": "community",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "User-supplied bank rules and caps; reward capacity and card credit limit are distinct inputs"
+      ],
+      "manual_setup": "Configure dated bank reward rules before registering the selected community source",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://github.com/acetaxxxx/taiwan-card-rewards-mcp"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "購物與財務",
+      "categories": [
+        "購物與財務",
+        "生活與帳戶"
+      ]
+    },
+    "alpha-vantage": {
+      "title": "Alpha Vantage",
+      "source": "https://mcp.alphavantage.co/",
+      "kind": "mcp",
+      "origin": "official",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Alpha Vantage API key/plan, quote delay and quota; do not save keys in a URL"
+      ],
+      "manual_setup": "Obtain the account-specific MCP configuration, use credential-safe headers/launcher and confirm selected market-data entitlement",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://mcp.alphavantage.co/"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "購物與財務",
+      "categories": [
+        "購物與財務",
+        "搜尋與研究收集"
+      ]
+    },
+    "jquants-docs": {
+      "title": "J-Quants Documentation",
+      "source": "https://github.com/J-Quants/j-quants-doc-mcp",
+      "kind": "mcp",
+      "origin": "official",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Python >=3.10; uv or pip; serves API documentation rather than market quotes"
+      ],
+      "manual_setup": "Install a pinned source revision in an isolated Python >=3.10 environment; documented entry is j-quants-doc-mcp",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://github.com/J-Quants/j-quants-doc-mcp"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "購物與財務",
+      "python_wheel": {
+        "name": "j-quants-doc-mcp",
+        "version": "1.0.0",
+        "requires_python": ">=3.10"
+      },
+      "minimum_python": [
+        3,
+        10
+      ],
+      "categories": [
+        "購物與財務"
+      ]
+    },
+    "jquants-api": {
+      "title": "J-Quants Market API",
+      "source": "https://www.jpx.co.jp/english/markets/other-data-services/j-quants-api/index.html",
+      "kind": "api",
+      "origin": "official",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Account/plan, API version and market/date/license fields"
+      ],
+      "manual_setup": "Select the official J-Quants API in the consuming app; implement an MCP adapter only for a separately authorized integration",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://www.jpx.co.jp/english/markets/other-data-services/j-quants-api/index.html"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "購物與財務",
+      "categories": [
+        "購物與財務"
+      ]
+    },
+    "twse": {
+      "title": "TWSE OpenAPI",
+      "source": "https://openapi.twse.com.tw/",
+      "kind": "api",
+      "origin": "official",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Dataset date/timezone, currency, adjustments, license and quota"
+      ],
+      "manual_setup": "Read the official Swagger schema for the selected dataset and implement its consuming API integration when requested",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://openapi.twse.com.tw/"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "購物與財務",
+      "categories": [
+        "購物與財務"
+      ]
+    },
+    "tpex": {
+      "title": "TPEx OpenAPI",
+      "source": "https://www.tpex.org.tw/openapi/",
+      "kind": "api",
+      "origin": "official",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Dataset date/timezone, currency, adjustments, license and quota"
+      ],
+      "manual_setup": "Read the official Swagger schema for the selected dataset and implement its consuming API integration when requested",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://www.tpex.org.tw/openapi/"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "購物與財務",
+      "categories": [
+        "購物與財務"
+      ]
+    },
+    "angular": {
+      "title": "Angular CLI MCP",
+      "source": "https://angular.dev/ai/mcp",
+      "kind": "mcp",
+      "origin": "official",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Actual project package manager and matching Node/Angular CLI; do not install a global latest CLI"
+      ],
+      "manual_setup": "Verify the target project Angular CLI version and its MCP support; launch that existing CLI entry with mcp in the project directory",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://angular.dev/ai/mcp"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "開發工具",
+      "categories": [
+        "開發工具"
+      ]
+    },
+    "supabase": {
+      "title": "Supabase",
+      "source": "https://supabase.com/docs/guides/ai-tools/mcp",
+      "kind": "mcp",
+      "origin": "official",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Selected development project, read-only database scope and allowed tool groups"
+      ],
+      "manual_setup": "Choose a development project first; scope hosted https://mcp.supabase.com/mcp with project_ref and read_only=true, then OAuth",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://supabase.com/docs/guides/ai-tools/mcp"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "開發工具",
+      "categories": [
+        "開發工具"
+      ]
+    },
+    "neon": {
+      "title": "Neon",
+      "source": "https://neon.com/blog/give-your-agent-neon-tools",
+      "kind": "mcp",
+      "origin": "official",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Selected development project/branch, read-only scope and allowed tool categories"
+      ],
+      "manual_setup": "Choose a development project first; scope hosted https://mcp.neon.tech/mcp with projectId and readonly=true, then authorize the account",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://neon.com/blog/give-your-agent-neon-tools"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "開發工具",
+      "categories": [
+        "開發工具"
+      ]
+    },
+    "ecpay-skill": {
+      "title": "ECPay API Skill",
+      "source": "https://github.com/ECPay/ecpay-api-skill",
+      "kind": "skill",
+      "origin": "official",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Merchant test credentials, official API/environment, callback signature and idempotency; actual payment actions require authorization"
+      ],
+      "manual_setup": "Select a pinned official Skill source for authorized ECPay integration; inspect its Codex setup and license before installation",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://github.com/ECPay/ecpay-api-skill"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "開發工具",
+      "categories": [
+        "開發工具",
+        "購物與財務"
+      ]
+    },
+    "pubmed": {
+      "title": "PubMed / NCBI",
+      "source": "https://www.ncbi.nlm.nih.gov/home/develop/api/",
+      "kind": "api",
+      "origin": "official",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Public literature API quota, PMID/DOI, study quality and applicability"
+      ],
+      "manual_setup": "Use NCBI E-utilities/PMC official APIs for the requested literature workflow; a custom MCP requires a selected adapter scope",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://www.ncbi.nlm.nih.gov/home/develop/api/"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "醫療資料來源",
+      "categories": [
+        "醫療資料來源",
+        "搜尋與研究收集"
+      ]
+    },
+    "cochrane": {
+      "title": "Cochrane Library",
+      "source": "https://www.cochranelibrary.com/",
+      "kind": "website",
+      "origin": "official",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Access/subscription and review date/quality; no confirmed MCP endpoint"
+      ],
+      "manual_setup": "Use the existing browser/search connector for the requested review; this source returned HTTP 403 during setup verification",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://www.cochranelibrary.com/"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "醫療資料來源",
+      "categories": [
+        "醫療資料來源",
+        "搜尋與研究收集"
+      ]
+    },
+    "nice": {
+      "title": "NICE Guidelines",
+      "source": "https://www.nice.org.uk/guidance",
+      "kind": "website",
+      "origin": "official",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Guideline update date and applicable population; no confirmed MCP endpoint"
+      ],
+      "manual_setup": "Use the existing browser/search connector for the requested guideline; this source returned HTTP 403 during setup verification",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://www.nice.org.uk/guidance"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "醫療資料來源",
+      "categories": [
+        "醫療資料來源",
+        "搜尋與研究收集"
+      ]
+    },
+    "tfda": {
+      "title": "TFDA Drug Labels",
+      "source": "https://mcp.fda.gov.tw/",
+      "kind": "website",
+      "origin": "official",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Official product/permit and current label version; browser access"
+      ],
+      "manual_setup": "Use the official drug-label site for requested checks; mcp in this hostname does not identify a Model Context Protocol endpoint",
+      "manual_checks": [
+        "Verify the selected release, exact invocation, approved data/permission scope and a safe actual operation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://mcp.fda.gov.tw/"
+      },
+      "reuse_existing": [],
+      "reviewed_date": "2026-10-04",
+      "group": "醫療資料來源",
+      "categories": [
+        "醫療資料來源",
+        "搜尋與研究收集"
+      ]
+    },
+    "x": {
+      "title": "x",
+      "kind": "mcp",
+      "origin": "official",
+      "source": "https://docs.x.com/tools/mcp",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "codex"
+        }
+      ],
+      "authentication": "app-only bearer",
+      "credential_env": [
+        "X_APP_BEARER_TOKEN"
+      ],
+      "mcp": {
+        "name": "x",
+        "url": "https://api.x.com/mcp",
+        "registration": {
+          "bearer_token_env_var": "X_APP_BEARER_TOKEN"
+        }
+      },
+      "manual_checks": [
+        "Client reload, actual tools/list and a safe authorized operation",
+        "App-only read route; developer account/credits required; user-context writes require separately selected xurl OAuth bridge"
+      ],
+      "automatic_install": {
+        "all": {
+          "action": "register_mcp",
+          "source": "https://docs.x.com/tools/mcp",
+          "version": "hosted service",
+          "scope": "one selected Codex MCP entry"
+        }
+      },
+      "install": {
+        "all": "Select this one tool and complete its account/permission setup"
+      },
+      "reviewed_date": "2026-10-04",
+      "group": "搜尋與研究收集",
+      "categories": [
+        "搜尋與研究收集"
+      ]
+    },
+    "apify": {
+      "title": "apify",
+      "kind": "mcp",
+      "origin": "official",
+      "source": "https://docs.apify.com/integrations/mcp",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "codex"
+        }
+      ],
+      "authentication": "oauth",
+      "credential_env": [],
+      "mcp": {
+        "name": "apify",
+        "url": "https://mcp.apify.com",
+        "registration": {}
+      },
+      "manual_checks": [
+        "Client reload, actual tools/list and a safe authorized operation",
+        "Select Actors, examine cost and reliability, and approve data boundary before running them"
+      ],
+      "automatic_install": {
+        "all": {
+          "action": "register_mcp",
+          "source": "https://docs.apify.com/integrations/mcp",
+          "version": "hosted service",
+          "scope": "one selected Codex MCP entry"
+        }
+      },
+      "install": {
+        "all": "Select this one tool and complete its account/permission setup"
+      },
+      "reviewed_date": "2026-10-04",
+      "group": "搜尋與研究收集",
+      "categories": [
+        "搜尋與研究收集"
+      ]
+    },
+    "openalex": {
+      "title": "openalex",
+      "kind": "mcp",
+      "origin": "official",
+      "source": "https://help.openalex.org/access/connector/",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "codex"
+        }
+      ],
+      "authentication": "oauth",
+      "credential_env": [],
+      "mcp": {
+        "name": "openalex",
+        "url": "https://mcp.openalex.org/mcp",
+        "registration": {}
+      },
+      "manual_checks": [
+        "Client reload, actual tools/list and a safe authorized operation",
+        "OAuth account and quota; literature metadata/citation context and full-text locations"
+      ],
+      "automatic_install": {
+        "all": {
+          "action": "register_mcp",
+          "source": "https://help.openalex.org/access/connector/",
+          "version": "hosted service",
+          "scope": "one selected Codex MCP entry"
+        }
+      },
+      "install": {
+        "all": "Select this one tool and complete its account/permission setup"
+      },
+      "reviewed_date": "2026-10-04",
+      "group": "搜尋與研究收集",
+      "categories": [
+        "搜尋與研究收集",
+        "學習與遊戲"
+      ]
+    },
+    "mermaid": {
+      "title": "mermaid",
+      "kind": "mcp",
+      "origin": "official",
+      "source": "https://mermaid.ai/docs/ai/mcp-server",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "codex"
+        }
+      ],
+      "authentication": "selected feature/account",
+      "credential_env": [],
+      "mcp": {
+        "name": "mermaid",
+        "url": "https://mcp.mermaid.ai/mcp",
+        "registration": {}
+      },
+      "manual_checks": [
+        "Client reload, actual tools/list and a safe authorized operation",
+        "Confirm diagram source remains editable and chosen feature authentication; hosted content goes to Mermaid service"
+      ],
+      "automatic_install": {
+        "all": {
+          "action": "register_mcp",
+          "source": "https://mermaid.ai/docs/ai/mcp-server",
+          "version": "hosted service",
+          "scope": "one selected Codex MCP entry"
+        }
+      },
+      "install": {
+        "all": "Select this one tool and complete its account/permission setup"
+      },
+      "reviewed_date": "2026-10-04",
+      "group": "視覺化與計算",
+      "categories": [
+        "視覺化與計算",
+        "開發工具",
+        "UI / UX",
+        "文件與辦公",
+        "遊戲開發與模擬"
+      ]
+    },
+    "excalidraw": {
+      "title": "excalidraw",
+      "kind": "mcp",
+      "origin": "official",
+      "source": "https://github.com/excalidraw/excalidraw-mcp",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "codex"
+        }
+      ],
+      "authentication": "documented hosted access",
+      "credential_env": [],
+      "mcp": {
+        "name": "excalidraw",
+        "url": "https://mcp.excalidraw.com",
+        "registration": {}
+      },
+      "manual_checks": [
+        "Client reload, actual tools/list and a safe authorized operation",
+        "Verify selected client MCP App rendering and editable drawing source"
+      ],
+      "automatic_install": {
+        "all": {
+          "action": "register_mcp",
+          "source": "https://github.com/excalidraw/excalidraw-mcp",
+          "version": "hosted service",
+          "scope": "one selected Codex MCP entry"
+        }
+      },
+      "install": {
+        "all": "Select this one tool and complete its account/permission setup"
+      },
+      "reviewed_date": "2026-10-04",
+      "group": "視覺化與計算",
+      "categories": [
+        "視覺化與計算",
+        "開發工具",
+        "UI / UX",
+        "文件與辦公"
+      ]
+    },
+    "echarts": {
+      "title": "MCP ECharts",
+      "kind": "mcp",
+      "origin": "community",
+      "source": "https://github.com/hustcc/mcp-echarts",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "node",
+          "minimum_version": [
+            18,
+            0,
+            0
+          ],
+          "version_args": [
+            "--version"
+          ]
+        },
+        {
+          "command": "npm"
+        }
+      ],
+      "mcp": {
+        "name": "echarts",
+        "entry_suffix": "/mcp-echarts/build/index.js"
+      },
+      "packages": {
+        "mcp-echarts": "0.7.1"
+      },
+      "manual_checks": [
+        "Verify native @napi-rs/canvas binary for the target platform",
+        "Generate and inspect PNG/SVG/option locally; optional MinIO upload is a separate configuration",
+        "Review external URLs in chart options before rendering company data"
+      ],
+      "automatic_install": {
+        "all": {
+          "action": "node_mcp",
+          "source": "https://github.com/hustcc/mcp-echarts",
+          "version": "0.7.1",
+          "scope": "setup user npm prefix and one selected MCP entry",
+          "commands": [
+            [
+              "npm",
+              "install",
+              "-g",
+              "--prefix",
+              "{npm_prefix}",
+              "mcp-echarts@0.7.1"
+            ]
+          ]
+        }
+      },
+      "install": {
+        "all": "Select echarts independently; inspect a fixture before use"
+      },
+      "reviewed_date": "2026-10-04",
+      "group": "視覺化與計算",
+      "categories": [
+        "視覺化與計算",
+        "開發工具",
+        "UI / UX",
+        "文件與辦公",
+        "遊戲開發與模擬"
+      ]
+    },
+    "chrome-devtools": {
+      "title": "Chrome DevTools MCP",
+      "kind": "mcp",
+      "origin": "official",
+      "source": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+      "reviewed_date": "2026-10-04",
+      "group": "開發工具",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "node",
+          "minimum_version": [
+            20,
+            19,
+            0
+          ],
+          "version_args": [
+            "--version"
+          ],
+          "version_ranges": [
+            {
+              "minimum": [
+                20,
+                19,
+                0
+              ],
+              "maximum_exclusive": [
+                21,
+                0,
+                0
+              ]
+            },
+            {
+              "minimum": [
+                22,
+                12,
+                0
+              ],
+              "maximum_exclusive": [
+                23,
+                0,
+                0
+              ]
+            },
+            {
+              "minimum": [
+                23,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "command": "npm"
+        }
+      ],
+      "packages": {
+        "chrome-devtools-mcp": "1.10.1"
+      },
+      "mcp": {
+        "name": "chrome_devtools",
+        "entry_suffix": "/chrome-devtools-mcp/build/src/bin/chrome-devtools-mcp.js",
+        "args": [
+          "--headless",
+          "--isolated",
+          "--no-usage-statistics",
+          "--no-performance-crux"
+        ],
+        "registration": {
+          "env": {
+            "CHROME_DEVTOOLS_MCP_NO_UPDATE_CHECKS": "1"
+          }
+        }
+      },
+      "automatic_install": {
+        "all": {
+          "action": "node_mcp",
+          "source": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+          "version": "1.10.1",
+          "scope": "setup user npm prefix, selected local rules and one MCP entry",
+          "commands": [
+            [
+              "npm",
+              "install",
+              "-g",
+              "--prefix",
+              "{npm_prefix}",
+              "chrome-devtools-mcp@1.10.1"
+            ]
+          ]
+        }
+      },
+      "install": {
+        "all": "Select this independent tool in launch-cli.cmd mcp or launch-cli.sh mcp"
+      },
+      "manual_checks": [
+        "Client reload, actual tools/list and a safe operation for the selected capability",
+        "Installed Chrome, isolated browser interaction, console/network and an authorized performance trace",
+        "No private browser profile reuse; usage statistics and CrUX URL lookup disabled in this preset"
+      ],
+      "categories": [
+        "開發工具",
+        "UI / UX",
+        "遊戲開發與模擬"
+      ]
+    },
+    "edge-devtools": {
+      "title": "Edge DevTools MCP",
+      "kind": "mcp",
+      "origin": "setup-adapter",
+      "source": "https://learn.microsoft.com/en-us/microsoft-edge/web-platform/devtools-mcp-server",
+      "reviewed_date": "2026-10-05",
+      "group": "開發工具",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "node",
+          "minimum_version": [
+            20,
+            19,
+            0
+          ],
+          "version_args": [
+            "--version"
+          ],
+          "version_ranges": [
+            {
+              "minimum": [
+                20,
+                19,
+                0
+              ],
+              "maximum_exclusive": [
+                21,
+                0,
+                0
+              ]
+            },
+            {
+              "minimum": [
+                22,
+                12,
+                0
+              ],
+              "maximum_exclusive": [
+                23,
+                0,
+                0
+              ]
+            },
+            {
+              "minimum": [
+                23,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "minimum_python": [
+        3,
+        11,
+        0
+      ],
+      "python_package": "codex-edge-devtools-mcp==0.1.0",
+      "python_entry": "edge-devtools-mcp",
+      "python_source": "mcp/mcp_servers/edge_devtools",
+      "python_wheel": {
+        "name": "codex-edge-devtools-mcp",
+        "version": "0.1.0",
+        "bundled_upstream": "chrome-devtools-mcp@1.10.1"
+      },
+      "mcp": {
+        "name": "edge_devtools",
+        "native_command": [
+          "edge-devtools-mcp",
+          "edge-devtools-mcp.exe"
+        ],
+        "args": [
+          "--node-path",
+          "{node_executable}"
+        ],
+        "health_args": [
+          "--check"
+        ],
+        "registration": {
+          "env": {
+            "CHROME_DEVTOOLS_MCP_NO_UPDATE_CHECKS": "1"
+          }
+        }
+      },
+      "automatic_install": {
+        "all": {
+          "action": "python_mcp",
+          "source": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+          "version": "0.1.0 (official runtime 1.10.1)",
+          "scope": "independent setup-managed user Python environment and one Codex MCP entry",
+          "commands": []
+        }
+      },
+      "install": {
+        "all": "Select edge-devtools in launch-cli.cmd mcp or launch-cli.sh mcp; use the bundled wheel when available"
+      },
+      "manual_checks": [
+        "Installed Microsoft Edge and a compatible Node.js runtime",
+        "Client reload, actual tools/list, local page DOM, console/network and an authorized performance trace",
+        "Headless isolated profile by default; usage statistics, CrUX URL lookup and update checks disabled"
+      ],
+      "categories": [
+        "開發工具",
+        "UI / UX",
+        "遊戲開發與模擬"
+      ]
+    },
+    "serena": {
+      "title": "Serena MCP",
+      "kind": "mcp",
+      "origin": "maintainer",
+      "source": "https://github.com/oraios/serena",
+      "reviewed_date": "2026-10-04",
+      "group": "開發工具",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "minimum_python": [
+        3,
+        11
+      ],
+      "python_package": "serena-agent==1.7.0",
+      "python_entry": "serena",
+      "python_wheel": {
+        "name": "serena-agent",
+        "version": "1.7.0",
+        "requires_python": ">=3.11,<3.15"
+      },
+      "mcp": {
+        "name": "serena",
+        "native_command": [
+          "serena",
+          "serena.exe"
+        ],
+        "args": [
+          "start-mcp-server",
+          "--context",
+          "codex",
+          "--enable-web-dashboard",
+          "false",
+          "--open-web-dashboard",
+          "false",
+          "--enable-gui-log-window",
+          "false"
+        ]
+      },
+      "automatic_install": {
+        "all": {
+          "action": "python_mcp",
+          "source": "https://pypi.org/project/serena-agent/1.7.0/",
+          "version": "1.7.0",
+          "scope": "independent user Python venv and one selected MCP entry",
+          "commands": []
+        }
+      },
+      "install": {
+        "all": "Independent Python environment from pinned PyPI wheel; upstream also supports uv"
+      },
+      "manual_checks": [
+        "Activate the intended repository explicitly before use, without selecting the parent multi-project workspace",
+        "Verify language-server dependencies for the actual languages, then symbol lookup and references",
+        "No hooks or parallel memory workflow enabled by this setup; edits remain within the current task scope"
+      ],
+      "categories": [
+        "開發工具",
+        "遊戲開發與模擬"
+      ]
+    },
+    "textlint": {
+      "title": "textlint 繁中",
+      "kind": "mcp",
+      "origin": "official",
+      "source": "https://textlint.org/docs/mcp/",
+      "reviewed_date": "2026-10-04",
+      "group": "文字校對",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "node",
+          "minimum_version": [
+            20,
+            18,
+            0
+          ],
+          "version_args": [
+            "--version"
+          ]
+        },
+        {
+          "command": "npm"
+        }
+      ],
+      "packages": {
+        "textlint": "15.8.0",
+        "textlint-rule-prh": "6.1.0"
+      },
+      "mcp": {
+        "name": "textlint",
+        "entry_suffix": "/textlint/bin/textlint.js",
+        "args": [
+          "--mcp",
+          "--config",
+          "{npm_prefix}/proofreading/zh-tw/.textlintrc.cjs"
+        ],
+        "registration": {},
+        "config_suffix": "/proofreading/zh-tw/.textlintrc.cjs",
+        "launcher_asset": "proofreading/textlint-mcp.cjs"
+      },
+      "automatic_install": {
+        "all": {
+          "action": "node_mcp",
+          "source": "https://textlint.org/docs/mcp/",
+          "version": "15.8.0",
+          "scope": "setup user npm prefix, selected local rules and one MCP entry",
+          "commands": [
+            [
+              "npm",
+              "install",
+              "-g",
+              "--prefix",
+              "{npm_prefix}",
+              "textlint@15.8.0",
+              "textlint-rule-prh@6.1.0"
+            ]
+          ]
+        }
+      },
+      "install": {
+        "all": "Select this independent tool in launch-cli.cmd mcp or launch-cli.sh mcp"
+      },
+      "manual_checks": [
+        "Client reload, actual tools/list and a safe operation for the selected capability",
+        "Use only the selected language profile; split mixed-language content and preserve quotations/code/URLs",
+        "Fix tools return corrected content; apply file changes only within the requested scope"
+      ],
+      "setup_assets": {
+        "source": "mcp/tools/proofreading/zh-tw",
+        "destination": "proofreading/zh-tw",
+        "files": [
+          ".textlintrc.cjs",
+          "terms.yml",
+          "taiwan-style.cjs",
+          "protected-copy.cjs"
+        ],
+        "shared_files": [
+          {
+            "source": "mcp/tools/proofreading/textlint-mcp.cjs",
+            "destination": "proofreading/textlint-mcp.cjs"
+          }
+        ]
+      },
+      "categories": [
+        "文字校對",
+        "開發工具",
+        "UI / UX",
+        "文件與辦公",
+        "遊戲開發與模擬"
+      ]
+    },
+    "textlint-ja": {
+      "title": "textlint 日文",
+      "kind": "mcp",
+      "origin": "official",
+      "source": "https://textlint.org/docs/mcp/",
+      "reviewed_date": "2026-10-04",
+      "group": "文字校對",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "node",
+          "minimum_version": [
+            20,
+            18,
+            0
+          ],
+          "version_args": [
+            "--version"
+          ]
+        },
+        {
+          "command": "npm"
+        }
+      ],
+      "packages": {
+        "textlint": "15.8.0",
+        "textlint-rule-preset-ja-technical-writing": "12.0.2"
+      },
+      "mcp": {
+        "name": "textlint_ja",
+        "entry_suffix": "/textlint/bin/textlint.js",
+        "args": [
+          "--mcp",
+          "--config",
+          "{npm_prefix}/proofreading/ja/.textlintrc.json"
+        ],
+        "registration": {},
+        "config_suffix": "/proofreading/ja/.textlintrc.json",
+        "launcher_asset": "proofreading/textlint-mcp.cjs"
+      },
+      "automatic_install": {
+        "all": {
+          "action": "node_mcp",
+          "source": "https://textlint.org/docs/mcp/",
+          "version": "15.8.0",
+          "scope": "setup user npm prefix, selected local rules and one MCP entry",
+          "commands": [
+            [
+              "npm",
+              "install",
+              "-g",
+              "--prefix",
+              "{npm_prefix}",
+              "textlint@15.8.0",
+              "textlint-rule-preset-ja-technical-writing@12.0.2"
+            ]
+          ]
+        }
+      },
+      "install": {
+        "all": "Select this independent tool in launch-cli.cmd mcp or launch-cli.sh mcp"
+      },
+      "manual_checks": [
+        "Client reload, actual tools/list and a safe operation for the selected capability",
+        "Use only the selected language profile; split mixed-language content and preserve quotations/code/URLs",
+        "Fix tools return corrected content; apply file changes only within the requested scope"
+      ],
+      "setup_assets": {
+        "source": "mcp/tools/proofreading/ja",
+        "destination": "proofreading/ja",
+        "files": [
+          ".textlintrc.json"
+        ],
+        "shared_files": [
+          {
+            "source": "mcp/tools/proofreading/textlint-mcp.cjs",
+            "destination": "proofreading/textlint-mcp.cjs"
+          }
+        ]
+      },
+      "categories": [
+        "文字校對",
+        "開發工具",
+        "UI / UX",
+        "文件與辦公"
+      ]
+    },
+    "cspell": {
+      "title": "CSpell 英文拼字",
+      "kind": "development-tool",
+      "origin": "maintainer",
+      "source": "https://cspell.org/docs/how-it-works",
+      "reviewed_date": "2026-10-04",
+      "group": "文字校對",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "node",
+          "minimum_version": [
+            22,
+            18,
+            0
+          ],
+          "version_args": [
+            "--version"
+          ]
+        },
+        {
+          "command": "npm"
+        },
+        {
+          "command": "cspell"
+        }
+      ],
+      "tool_commands": [
+        "cspell"
+      ],
+      "setup_assets": {
+        "source": "mcp/tools/proofreading/en",
+        "destination": "proofreading/en",
+        "files": [
+          "cspell.json"
+        ]
+      },
+      "packages": {
+        "cspell": "10.3.6"
+      },
+      "automatic_install": {
+        "all": {
+          "source": "https://github.com/streetsidesoftware/cspell",
+          "version": "10.3.6",
+          "scope": "setup user npm prefix and independent English spelling config",
+          "commands": [
+            [
+              "npm",
+              "install",
+              "-g",
+              "--prefix",
+              "{npm_prefix}",
+              "cspell@10.3.6"
+            ]
+          ]
+        }
+      },
+      "install": {
+        "all": "CLI, use the managed proofreading/en/cspell.json or the existing project config"
+      },
+      "manual_checks": [
+        "Verify an English spelling error and the intended project dictionary",
+        "This is CLI spelling, not an official MCP or a grammar checker"
+      ],
+      "categories": [
+        "文字校對",
+        "開發工具",
+        "UI / UX",
+        "文件與辦公",
+        "遊戲開發與模擬"
+      ]
+    },
+    "languagetool": {
+      "title": "LanguageTool 英文文法, 選配",
+      "kind": "development-tool",
+      "origin": "maintainer",
+      "source": "https://languagetool.org/",
+      "reviewed_date": "2026-10-04",
+      "group": "文字校對",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Select local Java server or approved hosted service and verify its current runtime/plan",
+        "Officially listed Chinese and Japanese do not include spelling checks"
+      ],
+      "manual_setup": "Choose local grammar processing or an explicitly approved hosted account; no official MCP verified",
+      "automatic_install": {},
+      "install": {
+        "all": "https://dev.languagetool.org/http-server"
+      },
+      "manual_checks": [
+        "An English grammar check, actual text-processing destination and account limits"
+      ],
+      "categories": [
+        "文字校對",
+        "開發工具",
+        "文件與辦公"
+      ]
+    },
+    "mobbin": {
+      "title": "Mobbin MCP",
+      "source": "https://github.com/mobbin/mobbin-mcp-server",
+      "kind": "mcp",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "group": "UI / UX",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "codex"
+        }
+      ],
+      "automatic_install": {
+        "all": {
+          "action": "register_mcp",
+          "version": "hosted service",
+          "scope": "one selected Codex MCP entry",
+          "source": "https://github.com/mobbin/mobbin-mcp-server"
+        }
+      },
+      "install": {
+        "all": "https://github.com/mobbin/mobbin-mcp-server"
+      },
+      "manual_checks": [
+        "OAuth and an eligible Mobbin account; hosted search is subject to the current plan and quota",
+        "Search a public design reference, inspect the returned screen and flow context",
+        "Do not upload company/customer content or publish copied designs without authorization"
+      ],
+      "authentication": "oauth",
+      "service_requirements": [
+        "An existing Mobbin Pro or Team account with MCP entitlement; no subscription purchase in this installer"
+      ],
+      "mcp": {
+        "name": "mobbin",
+        "url": "https://api.mobbin.com/mcp"
+      },
+      "categories": [
+        "UI / UX"
+      ]
+    },
+    "spartan": {
+      "title": "spartan UI MCP",
+      "source": "https://www.spartan.ng/documentation/mcp",
+      "kind": "mcp",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "group": "UI / UX",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "node",
+          "minimum_version": [
+            22,
+            0,
+            0
+          ],
+          "version_args": [
+            "--version"
+          ]
+        },
+        {
+          "command": "npm"
+        }
+      ],
+      "automatic_install": {
+        "all": {
+          "action": "node_mcp",
+          "source": "https://github.com/spartan-ng/spartan",
+          "version": "1.5.0",
+          "scope": "setup user npm prefix and one selected MCP entry",
+          "commands": [
+            [
+              "npm",
+              "install",
+              "-g",
+              "--prefix",
+              "{npm_prefix}",
+              "@spartan-ng/mcp@1.5.0"
+            ]
+          ]
+        }
+      },
+      "install": {
+        "all": "https://www.spartan.ng/documentation/mcp"
+      },
+      "manual_checks": [
+        "Select the documentation/cache version matching the target spartan release",
+        "Actual component documentation lookup; the MCP does not install UI components into a project"
+      ],
+      "packages": {
+        "@spartan-ng/mcp": "1.5.0"
+      },
+      "mcp": {
+        "name": "spartan",
+        "entry_suffix": "/@spartan-ng/mcp/src/server.js"
+      },
+      "categories": [
+        "UI / UX",
+        "開發工具"
+      ]
+    },
+    "penpot": {
+      "title": "Penpot MCP",
+      "source": "https://penpot.app/ai/mcp-server",
+      "kind": "mcp",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "group": "UI / UX",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "automatic_install": {},
+      "install": {
+        "all": "https://penpot.app/ai/mcp-server"
+      },
+      "manual_checks": [
+        "Keep keys out of public URLs, logs, documents and repository settings; this installer does not accept credential-bearing endpoint URLs",
+        "Local setup defaults to loopback HTTP at localhost:4401/mcp; keep filesystem access and dev tools disabled unless needed",
+        "Keep the selected Penpot file/plugin connected, then verify a safe read before authorized design edits"
+      ],
+      "manual_setup": "Choose existing Penpot hosted MCP or a local server matching the Penpot version, enable the integration and connect the intended open file; use the private configuration supplied by Penpot",
+      "service_requirements": [
+        "Hosted: a Penpot account, enabled MCP integration, a private MCP key and the intended open design file",
+        "Local: matching @penpot/mcp, Node.js (official local setup tested on 22.x), the plugin server and an active browser/plugin connection"
+      ],
+      "categories": [
+        "UI / UX",
+        "開發工具"
+      ]
+    },
+    "axe": {
+      "title": "Axe MCP Server",
+      "source": "https://docs.deque.com/devtools-server/4.0.0/en/axe-mcp-server/",
+      "kind": "mcp",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "group": "UI / UX",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "automatic_install": {},
+      "install": {
+        "all": "https://docs.deque.com/devtools-server/4.0.0/en/axe-mcp-server/"
+      },
+      "manual_checks": [
+        "Configure one authentication mode: API key or OAuth access token, not both",
+        "For OAuth use the documented @deque/axe-auth run supervisor; do not write secret values into repository configuration",
+        "Analyze an authorized test page, inspect violations and manually check keyboard/focus behavior; a scan alone is not complete accessibility verification"
+      ],
+      "manual_setup": "Complete Deque subscription entitlement, select npm or Docker and authenticate using the official API-key or OAuth instructions before configuring the selected client",
+      "service_requirements": [
+        "A Deque subscription enabling Axe MCP Server; the free browser extension does not establish MCP entitlement",
+        "npm distribution: Node.js 22.19.0+ and Chromium/Playwright browser; Docker is a separate distribution",
+        "An approved Deque SaaS, regional, private-cloud or on-prem instance and data boundary"
+      ],
+      "categories": [
+        "UI / UX",
+        "開發工具"
+      ]
+    },
+    "baymard": {
+      "title": "Baymard UX research",
+      "source": "https://baymard.com/blog",
+      "kind": "website",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "group": "UI / UX",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "automatic_install": {},
+      "install": {
+        "all": "https://baymard.com/blog"
+      },
+      "manual_checks": [
+        "Keep article date, scope and tested-user context; a reference does not prove the target UI is usable"
+      ],
+      "manual_setup": "Use available search/browser tools to read public research articles; premium research requires the existing account entitlement. No official MCP endpoint was verified",
+      "categories": [
+        "UI / UX"
+      ]
+    },
+    "angular-material": {
+      "title": "Angular Material / CDK",
+      "source": "https://material.angular.dev/",
+      "kind": "library",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "group": "UI / UX",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "automatic_install": {},
+      "install": {
+        "all": "https://material.angular.dev/"
+      },
+      "manual_checks": [
+        "Client reload, actual tool discovery and a safe authorized operation"
+      ],
+      "manual_setup": "Inspect the selected project Angular version and package/license constraints; use its matching Angular CLI MCP or available version-specific documentation search. Install components only within an authorized project change",
+      "service_requirements": [
+        "The actual Angular workspace and compatible @angular/material / @angular/cdk versions"
+      ],
+      "reuse_existing": [
+        "angular",
+        "context7"
+      ],
+      "categories": [
+        "UI / UX",
+        "開發工具"
+      ]
+    },
+    "primeui": {
+      "title": "PrimeNG / PrimeUI license reference",
+      "source": "https://primeui.dev/nextchapter",
+      "kind": "website",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "group": "UI / UX",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "automatic_install": {},
+      "install": {
+        "all": "https://primeui.dev/nextchapter"
+      },
+      "manual_checks": [
+        "The announced new model starts with PrimeNG 22, PrimeReact 11 and PrimeVue 5; existing MIT releases retain MIT rights",
+        "Do not infer commercial eligibility or costs from an older package or an unverified account; no official MCP endpoint was verified here"
+      ],
+      "manual_setup": "Verify the exact selected library release and applicable MIT or PrimeUI license and Community eligibility before adoption",
+      "categories": [
+        "UI / UX"
+      ]
+    },
+    "codex-cli": {
+      "title": "Codex standalone CLI",
+      "source": "https://learn.chatgpt.com/docs/codex/cli",
+      "kind": "cli",
+      "origin": "official",
+      "reviewed_date": "2026-10-04",
+      "group": "開發工具",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [
+        {
+          "command": "node",
+          "minimum_version": [
+            16,
+            0,
+            0
+          ],
+          "version_args": [
+            "--version"
+          ]
+        },
+        {
+          "command": "npm"
+        },
+        {
+          "command": "codex",
+          "minimum_version": [
+            0,
+            160,
+            0
+          ],
+          "version_args": [
+            "--version"
+          ]
+        }
+      ],
+      "automatic_install": {
+        "all": {
+          "source": "https://registry.npmjs.org/@openai/codex",
+          "version": "0.160.0",
+          "scope": "setup user npm prefix; Desktop bundled CLI is separate",
+          "commands": [
+            [
+              "npm",
+              "install",
+              "-g",
+              "--prefix",
+              "{npm_prefix}",
+              "@openai/codex@0.160.0"
+            ]
+          ]
+        }
+      },
+      "install": {
+        "all": "https://learn.chatgpt.com/docs/codex/cli"
+      },
+      "manual_checks": [
+        "Check the resolved executable and codex --version in a new terminal",
+        "Do not replace the Desktop app binary or assume its app update channel changed"
+      ],
+      "packages": {
+        "@openai/codex": "0.160.0"
+      },
+      "tool_commands": [
+        "codex"
+      ],
+      "categories": [
+        "開發工具"
+      ]
+    },
+    "numpy": {
+      "title": "NumPy",
+      "source": "https://numpy.org/doc/stable/reference/random/index.html",
+      "kind": "library",
+      "origin": "maintainer",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Project Python >=3.12; reviewed numpy 2.5.3; matching official wheel and required dependencies",
+        "Select the game or simulation virtual environment and preserve its dependency lock"
+      ],
+      "manual_setup": "Select the project environment first, then use its package manager or python -m pip install --require-virtualenv --only-binary=:all: -r <setup-root>/mcp/tools/game-requirements/numpy.txt",
+      "manual_checks": [
+        "Run pip check, import the selected library in the project interpreter, then replay the affected game-rule tests and baseline simulation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://numpy.org/doc/stable/reference/random/index.html"
+      },
+      "project_dependency": {
+        "manager": "pip",
+        "name": "numpy",
+        "reviewed_version": "2.5.3",
+        "requires_python": ">=3.12",
+        "requirements_file": "mcp/tools/game-requirements/numpy.txt",
+        "wheel_source": "https://pypi.org/project/numpy/"
+      },
+      "reviewed_date": "2026-10-05",
+      "group": "遊戲開發與模擬",
+      "categories": [
+        "遊戲開發與模擬",
+        "搜尋與研究收集",
+        "開發工具",
+        "視覺化與計算"
+      ]
+    },
+    "pandas": {
+      "title": "pandas",
+      "source": "https://pandas.pydata.org/docs/user_guide/index.html",
+      "kind": "library",
+      "origin": "maintainer",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Project Python >=3.11; reviewed pandas 3.0.6; matching official wheel and required dependencies",
+        "Select the game or simulation virtual environment and preserve its dependency lock"
+      ],
+      "manual_setup": "Select the project environment first, then use its package manager or python -m pip install --require-virtualenv --only-binary=:all: -r <setup-root>/mcp/tools/game-requirements/pandas.txt",
+      "manual_checks": [
+        "Run pip check, import the selected library in the project interpreter, then replay the affected game-rule tests and baseline simulation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://pandas.pydata.org/docs/user_guide/index.html"
+      },
+      "project_dependency": {
+        "manager": "pip",
+        "name": "pandas",
+        "reviewed_version": "3.0.6",
+        "requires_python": ">=3.11",
+        "requirements_file": "mcp/tools/game-requirements/pandas.txt",
+        "wheel_source": "https://pypi.org/project/pandas/"
+      },
+      "reviewed_date": "2026-10-05",
+      "group": "遊戲開發與模擬",
+      "categories": [
+        "遊戲開發與模擬",
+        "搜尋與研究收集",
+        "開發工具",
+        "文件與辦公",
+        "視覺化與計算",
+        "購物與財務"
+      ]
+    },
+    "scipy": {
+      "title": "SciPy",
+      "source": "https://docs.scipy.org/doc/scipy/tutorial/index.html",
+      "kind": "library",
+      "origin": "maintainer",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Project Python >=3.12; reviewed scipy 1.18.1; matching official wheel and required dependencies",
+        "Select the game or simulation virtual environment and preserve its dependency lock"
+      ],
+      "manual_setup": "Select the project environment first, then use its package manager or python -m pip install --require-virtualenv --only-binary=:all: -r <setup-root>/mcp/tools/game-requirements/scipy.txt",
+      "manual_checks": [
+        "Run pip check, import the selected library in the project interpreter, then replay the affected game-rule tests and baseline simulation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://docs.scipy.org/doc/scipy/tutorial/index.html"
+      },
+      "project_dependency": {
+        "manager": "pip",
+        "name": "scipy",
+        "reviewed_version": "1.18.1",
+        "requires_python": ">=3.12",
+        "requirements_file": "mcp/tools/game-requirements/scipy.txt",
+        "wheel_source": "https://pypi.org/project/scipy/"
+      },
+      "reviewed_date": "2026-10-05",
+      "group": "遊戲開發與模擬",
+      "categories": [
+        "遊戲開發與模擬",
+        "搜尋與研究收集",
+        "開發工具",
+        "視覺化與計算",
+        "購物與財務"
+      ]
+    },
+    "sympy": {
+      "title": "SymPy",
+      "source": "https://docs.sympy.org/latest/index.html",
+      "kind": "library",
+      "origin": "maintainer",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Project Python >=3.9; reviewed sympy 1.14.0; matching official wheel and required dependencies",
+        "Select the game or simulation virtual environment and preserve its dependency lock"
+      ],
+      "manual_setup": "Select the project environment first, then use its package manager or python -m pip install --require-virtualenv --only-binary=:all: -r <setup-root>/mcp/tools/game-requirements/sympy.txt",
+      "manual_checks": [
+        "Run pip check, import the selected library in the project interpreter, then replay the affected game-rule tests and baseline simulation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://docs.sympy.org/latest/index.html"
+      },
+      "project_dependency": {
+        "manager": "pip",
+        "name": "sympy",
+        "reviewed_version": "1.14.0",
+        "requires_python": ">=3.9",
+        "requirements_file": "mcp/tools/game-requirements/sympy.txt",
+        "wheel_source": "https://pypi.org/project/sympy/"
+      },
+      "reviewed_date": "2026-10-05",
+      "group": "遊戲開發與模擬",
+      "categories": [
+        "遊戲開發與模擬",
+        "搜尋與研究收集",
+        "開發工具",
+        "視覺化與計算"
+      ]
+    },
+    "matplotlib": {
+      "title": "Matplotlib",
+      "source": "https://matplotlib.org/stable/users/index.html",
+      "kind": "library",
+      "origin": "maintainer",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Project Python >=3.11; reviewed matplotlib 3.11.2; matching official wheel and required dependencies",
+        "Select the game or simulation virtual environment and preserve its dependency lock"
+      ],
+      "manual_setup": "Select the project environment first, then use its package manager or python -m pip install --require-virtualenv --only-binary=:all: -r <setup-root>/mcp/tools/game-requirements/matplotlib.txt",
+      "manual_checks": [
+        "Run pip check, import the selected library in the project interpreter, then replay the affected game-rule tests and baseline simulation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://matplotlib.org/stable/users/index.html"
+      },
+      "project_dependency": {
+        "manager": "pip",
+        "name": "matplotlib",
+        "reviewed_version": "3.11.2",
+        "requires_python": ">=3.11",
+        "requirements_file": "mcp/tools/game-requirements/matplotlib.txt",
+        "wheel_source": "https://pypi.org/project/matplotlib/"
+      },
+      "reviewed_date": "2026-10-05",
+      "group": "遊戲開發與模擬",
+      "categories": [
+        "遊戲開發與模擬",
+        "搜尋與研究收集",
+        "開發工具",
+        "文件與辦公",
+        "視覺化與計算"
+      ]
+    },
+    "hypothesis": {
+      "title": "Hypothesis",
+      "source": "https://hypothesis.readthedocs.io/en/latest/stateful.html",
+      "kind": "library",
+      "origin": "maintainer",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Project Python >=3.10; reviewed hypothesis 6.168.3; matching official wheel and required dependencies",
+        "Select the game or simulation virtual environment and preserve its dependency lock"
+      ],
+      "manual_setup": "Select the project environment first, then use its package manager or python -m pip install --require-virtualenv --only-binary=:all: -r <setup-root>/mcp/tools/game-requirements/hypothesis.txt",
+      "manual_checks": [
+        "Run pip check, import the selected library in the project interpreter, then replay the affected game-rule tests and baseline simulation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://hypothesis.readthedocs.io/en/latest/stateful.html"
+      },
+      "project_dependency": {
+        "manager": "pip",
+        "name": "hypothesis",
+        "reviewed_version": "6.168.3",
+        "requires_python": ">=3.10",
+        "requirements_file": "mcp/tools/game-requirements/hypothesis.txt",
+        "wheel_source": "https://pypi.org/project/hypothesis/"
+      },
+      "reviewed_date": "2026-10-05",
+      "group": "遊戲開發與模擬",
+      "categories": [
+        "遊戲開發與模擬",
+        "開發工具"
+      ]
+    },
+    "simpy": {
+      "title": "SimPy",
+      "source": "https://simpy.readthedocs.io/en/stable/",
+      "kind": "library",
+      "origin": "maintainer",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Project Python >=3.8; reviewed simpy 4.1.2; matching official wheel and required dependencies",
+        "Select the game or simulation virtual environment and preserve its dependency lock"
+      ],
+      "manual_setup": "Select the project environment first, then use its package manager or python -m pip install --require-virtualenv --only-binary=:all: -r <setup-root>/mcp/tools/game-requirements/simpy.txt",
+      "manual_checks": [
+        "Run pip check, import the selected library in the project interpreter, then replay the affected game-rule tests and baseline simulation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://simpy.readthedocs.io/en/stable/"
+      },
+      "project_dependency": {
+        "manager": "pip",
+        "name": "simpy",
+        "reviewed_version": "4.1.2",
+        "requires_python": ">=3.8",
+        "requirements_file": "mcp/tools/game-requirements/simpy.txt",
+        "wheel_source": "https://pypi.org/project/simpy/"
+      },
+      "reviewed_date": "2026-10-05",
+      "group": "遊戲開發與模擬",
+      "categories": [
+        "遊戲開發與模擬",
+        "開發工具",
+        "視覺化與計算"
+      ]
+    },
+    "optuna": {
+      "title": "Optuna",
+      "source": "https://optuna.readthedocs.io/en/stable/",
+      "kind": "library",
+      "origin": "maintainer",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Project Python >=3.9; reviewed optuna 5.0.0; matching official wheel and required dependencies",
+        "Select the game or simulation virtual environment and preserve its dependency lock"
+      ],
+      "manual_setup": "Select the project environment first, then use its package manager or python -m pip install --require-virtualenv --only-binary=:all: -r <setup-root>/mcp/tools/game-requirements/optuna.txt",
+      "manual_checks": [
+        "Run pip check, import the selected library in the project interpreter, then replay the affected game-rule tests and baseline simulation"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://optuna.readthedocs.io/en/stable/"
+      },
+      "project_dependency": {
+        "manager": "pip",
+        "name": "optuna",
+        "reviewed_version": "5.0.0",
+        "requires_python": ">=3.9",
+        "requirements_file": "mcp/tools/game-requirements/optuna.txt",
+        "wheel_source": "https://pypi.org/project/optuna/"
+      },
+      "reviewed_date": "2026-10-05",
+      "group": "遊戲開發與模擬",
+      "categories": [
+        "遊戲開發與模擬",
+        "搜尋與研究收集",
+        "開發工具",
+        "視覺化與計算",
+        "購物與財務"
+      ]
+    },
+    "fast-check": {
+      "title": "fast-check",
+      "source": "https://fast-check.dev/docs/introduction/getting-started/",
+      "kind": "library",
+      "origin": "maintainer",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Selected JS/TS project, matching Node runtime, package manager and existing test runner",
+        "Reviewed fast-check 4.10.2; Node >=12.17.0; project compatibility still applies"
+      ],
+      "manual_setup": "Add fast-check as a devDependency using the selected project package manager and lockfile; do not install a global CLI or register an MCP",
+      "manual_checks": [
+        "Replay a shrunk counterexample with the actual framework seed/path/action history; run the existing project tests"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://fast-check.dev/docs/introduction/getting-started/"
+      },
+      "project_dependency": {
+        "manager": "npm",
+        "name": "fast-check",
+        "reviewed_version": "4.10.2",
+        "engines": {
+          "node": ">=12.17.0"
+        },
+        "scope": "devDependency"
+      },
+      "reviewed_date": "2026-10-05",
+      "group": "遊戲開發與模擬",
+      "categories": [
+        "遊戲開發與模擬",
+        "開發工具"
+      ]
+    },
+    "machinations": {
+      "title": "Machinations",
+      "source": "https://machinations.io/docs",
+      "kind": "reference",
+      "origin": "official",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "service_requirements": [
+        "Browser and selected account; Community diagrams are public by default; private designs need a suitable account plan"
+      ],
+      "manual_setup": "Use the product browser interface for an approved economy model; no directly registrable official MCP endpoint has been verified",
+      "manual_checks": [
+        "Confirm diagram visibility, simulation budget, model rules and export results before using them as game evidence"
+      ],
+      "automatic_install": {},
+      "install": {
+        "all": "https://machinations.io/docs"
+      },
+      "reviewed_date": "2026-10-05",
+      "group": "遊戲開發與模擬",
+      "categories": [
+        "遊戲開發與模擬",
+        "視覺化與計算"
+      ]
+    },
+    "openai-docs": {
+      "title": "OpenAI Developer Docs",
+      "source": "https://developers.openai.com/mcp",
+      "kind": "mcp",
+      "origin": "official",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "dependencies": [],
+      "url": "https://developers.openai.com/mcp",
+      "mcp": {
+        "name": "openaiDeveloperDocs",
+        "url": "https://developers.openai.com/mcp"
+      },
+      "automatic_install": {
+        "all": {
+          "action": "http_mcp",
+          "source": "https://developers.openai.com/mcp",
+          "version": "provider-managed",
+          "scope": "one selected MCP entry",
+          "commands": []
+        }
+      },
+      "service_requirements": [],
+      "manual_checks": [
+        "Verify a safe documentation query in the active client"
+      ],
+      "install": {
+        "all": "Hosted documentation MCP, no local server package"
+      },
+      "reviewed_date": "2026-10-06",
+      "group": "開發與驗證",
+      "categories": [
+        "開發與驗證",
+        "搜尋與研究收集"
+      ]
+    }
+  },
+  "optional_adapter": {
+    "name": "codex-development-tools-mcp",
+    "version": "0.1.0",
+    "python": ">=3.11",
+    "runtime_packages": [
+      "mcp==2.2.0"
+    ],
+    "build_packages": [
+      "setuptools>=77,<83"
+    ],
+    "source": "mcp/mcp_servers/development_tools"
+  },
+  "profiles": {
+    "development": {
+      "title": "開發電腦",
+      "groups": [
+        "開發工具",
+        "UI / UX",
+        "文字校對",
+        "文件與辦公",
+        "視覺化與計算",
+        "遊戲開發與模擬"
+      ]
+    },
+    "design": {
+      "title": "設計與 UI / UX",
+      "groups": [
+        "UI / UX",
+        "視覺化與計算",
+        "文字校對"
+      ]
+    },
+    "office": {
+      "title": "文件與辦公",
+      "groups": [
+        "文件與辦公",
+        "文字校對",
+        "生活與帳戶"
+      ]
+    },
+    "research": {
+      "title": "搜尋與研究",
+      "groups": [
+        "搜尋與研究收集",
+        "視覺化與計算",
+        "醫療資料來源",
+        "文字校對"
+      ]
+    },
+    "personal": {
+      "title": "生活與學習",
+      "groups": [
+        "生活與帳戶",
+        "天氣與交通",
+        "學習與遊戲",
+        "購物與財務"
+      ]
+    },
+    "all": {
+      "title": "全部分類",
+      "groups": []
+    },
+    "game": {
+      "title": "遊戲開發與模擬",
+      "groups": [
+        "遊戲開發與模擬"
+      ],
+      "tools": [
+        "excel",
+        "google-sheets",
+        "wolfram",
+        "jupyter",
+        "echarts",
+        "mermaid",
+        "playwright",
+        "chrome-devtools",
+        "serena",
+        "context7",
+        "textlint",
+        "cspell"
+      ]
+    }
+  }
+}
