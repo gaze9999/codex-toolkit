@@ -19,7 +19,37 @@ env:
   RELEASE_TAG: ${{ inputs.tag || github.event.release.tag_name }}
 
 jobs:
+  eligibility:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.release.tag_name || inputs.tag || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Check stable aggregate Release eligibility
+        if: github.event_name == 'release'
+        shell: bash
+        working-directory: .
+        env:
+          POLICY_TAG: ${{ github.event.release.tag_name }}
+          POLICY_PRERELEASE: ${{ github.event.release.prerelease }}
+        run: |
+          python - <<'PY'
+          import os, re
+          from pathlib import Path
+          tag = os.environ['POLICY_TAG']
+          version = Path('VERSION').read_text(encoding='utf-8').strip()
+          if not re.fullmatch(r'v[1-9][0-9]*\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)', tag):
+              raise SystemExit('A complete stable version at or above 1.0.0 is required')
+          if tag != 'v' + version or os.environ['POLICY_PRERELEASE'] == 'true':
+              raise SystemExit('Release must match the stable aggregate VERSION')
+          PY
+
   source:
+    needs: eligibility
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -41,6 +71,7 @@ jobs:
           if-no-files-found: error
 
   cli:
+    needs: eligibility
     strategy:
       fail-fast: false
       matrix:
@@ -122,6 +153,7 @@ jobs:
           if-no-files-found: error
 
   publish:
+    if: github.event_name == 'release'
     needs: [source, cli]
     runs-on: ubuntu-latest
     permissions:
@@ -130,6 +162,30 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       GH_REPO: ${{ github.repository }}
     steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.release.tag_name }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Check stable aggregate Release eligibility
+        shell: bash
+        working-directory: .
+        env:
+          POLICY_TAG: ${{ github.event.release.tag_name }}
+          POLICY_PRERELEASE: ${{ github.event.release.prerelease }}
+        run: |
+          python - <<'PY'
+          import os, re
+          from pathlib import Path
+          tag = os.environ['POLICY_TAG']
+          version = Path('VERSION').read_text(encoding='utf-8').strip()
+          if not re.fullmatch(r'v[1-9][0-9]*\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)', tag):
+              raise SystemExit('A complete stable version at or above 1.0.0 is required')
+          if tag != 'v' + version or os.environ['POLICY_PRERELEASE'] == 'true':
+              raise SystemExit('Release must match the stable aggregate VERSION')
+          PY
       - uses: actions/download-artifact@v4
         with:
           pattern: '*'

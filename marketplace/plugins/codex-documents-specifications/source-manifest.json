@@ -149,6 +149,6 @@
     "local-documents"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.1.1",
+  "toolkit_version": "0.1.0",
   "version": "0.1.5"
 }

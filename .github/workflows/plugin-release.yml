@@ -14,7 +14,37 @@ permissions:
   contents: read
 
 jobs:
+  eligibility:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.release.tag_name || inputs.revision || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Check stable aggregate Release eligibility
+        if: github.event_name == 'release'
+        shell: bash
+        working-directory: .
+        env:
+          POLICY_TAG: ${{ github.event.release.tag_name }}
+          POLICY_PRERELEASE: ${{ github.event.release.prerelease }}
+        run: |
+          python - <<'PY'
+          import os, re
+          from pathlib import Path
+          tag = os.environ['POLICY_TAG']
+          version = Path('VERSION').read_text(encoding='utf-8').strip()
+          if not re.fullmatch(r'v[1-9][0-9]*\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)', tag):
+              raise SystemExit('A complete stable version at or above 1.0.0 is required')
+          if tag != 'v' + version or os.environ['POLICY_PRERELEASE'] == 'true':
+              raise SystemExit('Release must match the stable aggregate VERSION')
+          PY
+
   check:
+    needs: eligibility
     strategy:
       fail-fast: false
       matrix:
@@ -45,6 +75,23 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13'
+      - name: Check stable aggregate Release eligibility
+        shell: bash
+        working-directory: .
+        env:
+          POLICY_TAG: ${{ github.event.release.tag_name }}
+          POLICY_PRERELEASE: ${{ github.event.release.prerelease }}
+        run: |
+          python - <<'PY'
+          import os, re
+          from pathlib import Path
+          tag = os.environ['POLICY_TAG']
+          version = Path('VERSION').read_text(encoding='utf-8').strip()
+          if not re.fullmatch(r'v[1-9][0-9]*\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)', tag):
+              raise SystemExit('A complete stable version at or above 1.0.0 is required')
+          if tag != 'v' + version or os.environ['POLICY_PRERELEASE'] == 'true':
+              raise SystemExit('Release must match the stable aggregate VERSION')
+          PY
       - name: Build and read back source-mapped release archives
         run: python -B mcp/scripts/prepare_plugin_release.py --output dist/plugins
       - name: Attach verified Plugin archives

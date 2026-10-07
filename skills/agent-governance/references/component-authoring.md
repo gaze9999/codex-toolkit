@@ -78,3 +78,6 @@ For an authorized release, inspect relevant README/version/license/package metad
 
 
 For suspected secret exposure or maintenance of cleanup guidance, read [sensitive-data removal](sensitive-data-removal.md). Keep incident execution separately authorized; normal component maintenance does not authorize history rewrites.
+
+
+For CPR, resolve permitted delivery stages before choosing commands: commit/push, exact-version Tag and GitHub/package release are separate. Patch fixes may need immediate distribution; minor-only milestone tagging is a project option, not a SemVer mandate. Prefer full X.Y.Z tags, keep their commit fixed, and apply project pre-1.0 restrictions without converting them into global policy. CP never creates a Tag/Release.
