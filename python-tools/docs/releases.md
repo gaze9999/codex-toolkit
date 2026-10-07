@@ -57,7 +57,7 @@ python launch-cli.py scripts.release publish v0.2.0 --asset-root C:\path\release
 
 `publish` 要求乾淨 working tree, 目前 branch 追蹤同名 `origin` branch, 本機與遠端 Tag 尚不存在, GitHub CLI 已登入, 並重新執行來源驗證, 輸入完整 Tag 確認後才 push branch 與建立 GitHub Release, 最後核對遠端 asset 名稱與大小
 
-`codex-setup` 仍保留自己的 Skills ZIP 與 Codex MCP 發布流程, 本流程負責可獨立使用的 `my-py-tools` 來源包、Python 核心 wheel 與 CLI 免安裝包
+`codex-toolkit` 管理 Skills / Plugin、MCP 與獨立 Python 工具的發布流程, 本流程負責 Python 來源包、核心 wheel 與 CLI 免安裝包, 既有套件及產物名稱保留相容性
 
 ## Windows 與 macOS 免安裝 CLI
 

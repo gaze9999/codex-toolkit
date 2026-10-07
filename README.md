@@ -50,6 +50,8 @@ launch-cli.cmd plugins --list
 
 - [文件索引](docs/README.md): 安裝、工具選擇、MCP 與操作指引
 - [元件維護規範](skills/agent-governance/references/component-authoring.md): Skill、reference、Python、Plugin 與 MCP 的責任
+- [個人環境還原](docs/restore.md): Profile 選項、預覽、逐項套用與衝突處理
+- [獨立 Python 使用](python-tools/docs/standalone.md): 脫離 Codex / 市集使用 CLI 或 wheel
 - [Python 工具教學](python-tools/README.md): CLI、相依套件、範例與測試
 - [Plugin 來源與封裝](docs/plugins.md): 自含資源、來源 hash 與驗證
 

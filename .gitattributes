@@ -3,3 +3,9 @@ skills/document-production/scripts/validate_markdown.py text eol=lf
 *.cmd text eol=crlf
 # Preserve upstream license bytes for pinned checksums on every platform
 third_party/licenses/*.txt -text
+
+# Canonical Plugin sources and payload hashes must survive Git checkouts
+skills/** text=auto eol=lf
+plugins/** text=auto eol=lf
+marketplace/** text=auto eol=lf
+LICENSE text eol=lf

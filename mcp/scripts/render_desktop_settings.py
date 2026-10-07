@@ -47,10 +47,11 @@ def render(source: Path) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--source-root", type=Path, help="Explicit personal Desktop/Git source directory")
     parser.add_argument("--output", type=Path, help="Create a UTF-8 fragment; refuses an existing file")
     args = parser.parse_args()
     try:
-        result = render(Path(__file__).resolve().parents[2] / "agents")
+        result = render(args.source_root or Path(__file__).resolve().parents[2] / "agents")
         if args.output:
             with args.output.open("x", encoding="utf-8", newline="\n") as stream:
                 stream.write(result)

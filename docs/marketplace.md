@@ -19,6 +19,12 @@ Plugin 的 Skills 與資源由來源生成, runtime、帳戶與 MCP 註冊依用
 | 需要實際 MCP 工具 | 依 [安裝指引](setup/cli.md) 設定 runtime、權限與帳戶 |
 | iPhone / iPad ChatGPT | 依 ChatGPT 當前支援的 Plugin / 遠端 MCP 接入, 本機 stdio runtime 不會直接在手機執行 |
 
+## Python 工具可獨立使用
+
+市集負責安裝工作流程, Python CLI / 核心可從同一公開來源獨立取得, 不需要 Codex 或 MCP. 完整目錄、相依、執行及 core wheel 的用法見 [獨立使用說明](../python-tools/docs/standalone.md)
+
+個人的治理檔、版本與選用項目可保存在私人 profile, 換機使用 [環境還原入口](restore.md)
+
 ## 來源與更新
 
 Canonical Skills 在 `skills/`, Plugin manifest / owner 在 `plugins/`. `marketplace/plugins/` 是有來源映射及 SHA-256 的自含散布副本, 不手改生成內容

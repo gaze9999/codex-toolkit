@@ -15,6 +15,7 @@ ARTIFACTS = ("AGENTS.md", "subagents.config.toml")
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--source-root", type=Path, help="Explicit personal agent source directory; defaults to neutral repository examples.")
     parser.add_argument("--codex-home", type=Path, help="Override CODEX_HOME or ~/.codex.")
     parser.add_argument("--install", action="store_true", help="Install missing or identical files.")
     parser.add_argument("--replace", action="store_true", help="Back up and replace different files; requires --install.")
@@ -27,10 +28,16 @@ def main() -> int:
     if home == Path(home.anchor) or home == repo or repo in home.parents:
         parser.error("Codex home must not be a filesystem root or inside this repository")
 
+    source_root = (args.source_root or repo / "agents").expanduser().resolve()
+    if source_root == Path(source_root.anchor) or source_root == home or source_root.is_relative_to(home):
+        parser.error("Use an independent agent source directory outside Codex home")
+    if source_root.is_symlink():
+        parser.error("Agent source must not be a symlink")
+
     pending = []
     conflicts = []
     for name in ARTIFACTS:
-        source, target = repo / "agents" / name, home / name
+        source, target = source_root / name, home / name
         if not source.is_file():
             parser.error(f"source missing: {source}")
         if target.is_symlink():

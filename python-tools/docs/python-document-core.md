@@ -4,7 +4,7 @@
 
 ## 建置與安裝
 
-在 repo 根目錄使用具備 setuptools 與 wheel 的 Python 建置:
+在 `codex-toolkit/python-tools/` 目錄使用具備 setuptools 與 wheel 的 Python 建置:
 
 ```text
 python -m pip wheel --no-deps --no-build-isolation --wheel-dir /absolute/wheels .
