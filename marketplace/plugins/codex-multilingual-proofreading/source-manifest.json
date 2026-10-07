@@ -4,8 +4,16 @@
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
     },
+    "assets/toolkit.png": {
+      "sha256": "befd09b04133f3489a2dc023f295c8edace1ddc1d502f6b538788f877fc34e89",
+      "source": "assets/branding/toolkit.png"
+    },
+    "assets/toolkit.svg": {
+      "sha256": "391acb0dc2f459b41bfb0c64fbeeaa159f8ab9c526fcca54b3415bd15fa8c5d4",
+      "source": "assets/branding/toolkit.svg"
+    },
     "plugin.json": {
-      "sha256": "9cb18ac06a69324d0bff0d42ece263b481fbb89229bcd4a47c0ae22721809e68",
+      "sha256": "da8cba797cef8ba2a5a4922be62170fe75492825fa9c3bce78449b3787cf9fd6",
       "source": "plugins/multilingual-proofreading/plugin.json"
     },
     "resources/proofreading/en/cspell.json": {
@@ -70,5 +78,5 @@
     "cspell"
   ],
   "source_state": "canonical-file-hashes",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

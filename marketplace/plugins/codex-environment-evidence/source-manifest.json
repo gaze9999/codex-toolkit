@@ -4,8 +4,16 @@
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
     },
+    "assets/toolkit.png": {
+      "sha256": "befd09b04133f3489a2dc023f295c8edace1ddc1d502f6b538788f877fc34e89",
+      "source": "assets/branding/toolkit.png"
+    },
+    "assets/toolkit.svg": {
+      "sha256": "391acb0dc2f459b41bfb0c64fbeeaa159f8ab9c526fcca54b3415bd15fa8c5d4",
+      "source": "assets/branding/toolkit.svg"
+    },
     "plugin.json": {
-      "sha256": "13205bd530c9a3f95c52f419aa592801847cded7afddfb20091fa941de9edf04",
+      "sha256": "c4e2825e415093ec55986f8b4c13d47c9ea47518719ea461d4fa347dfbcfc664",
       "source": "plugins/environment-evidence/plugin.json"
     },
     "skills/environment-consistency-check/SKILL.md": {
@@ -69,5 +77,5 @@
     "workspace-inspection"
   ],
   "source_state": "canonical-file-hashes",
-  "version": "0.1.0"
+  "version": "0.1.1"
 }

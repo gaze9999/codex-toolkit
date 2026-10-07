@@ -1,5 +1,9 @@
 # Codex Toolkit
 
+<img src="assets/branding/toolkit.png" alt="Codex Toolkit 工具箱圖案" width="88" />
+
+**Toolkit v0.1.0** · [MIT](LICENSE)
+
 可獨立使用的 Python 工具、Codex Skills、Plugins 與 MCP 串接, 支援文件處理、Markdown 安全更新、程式碼盤點、工作規範與驗證證據整理
 
 ## 選擇使用方式

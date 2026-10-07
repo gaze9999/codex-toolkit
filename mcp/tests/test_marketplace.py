@@ -32,6 +32,19 @@ class MarketplaceTests(unittest.TestCase):
         self.assertEqual(market.synchronize(self.root)['status'], 'pass')
         self.assertTrue((self.root / 'marketplace/plugins/codex-example/LICENSE').is_file())
 
+    def test_version_is_visible_without_changing_marketplace_identity(self):
+        (self.root / 'VERSION').write_text('0.1.0\n', encoding='utf-8')
+        market.synchronize(self.root, True)
+        value = market.json.loads((self.root / '.agents/plugins/marketplace.json').read_text())
+        self.assertEqual(value['name'], 'codex-toolkit')
+        self.assertEqual(value['interface']['displayName'], '🧰 Codex Toolkit v0.1.0')
+        self.assertEqual(market.synchronize(self.root)['status'], 'pass')
+
+    def test_invalid_version_is_rejected(self):
+        (self.root / 'VERSION').write_text('unverified version', encoding='utf-8')
+        with self.assertRaisesRegex(ValueError, 'Invalid Toolkit version'):
+            market.prepare(self.root)
+
     def test_filesystem_enumeration_order_does_not_change_manifest(self):
         expected = market.prepare(self.root)
         original = market.payload.side_effect

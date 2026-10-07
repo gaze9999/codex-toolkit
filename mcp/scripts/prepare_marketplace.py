@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 import sys
 
@@ -15,9 +16,19 @@ PRODUCER = 'codex-toolkit.marketplace.v1'
 def encode(value):
     return (json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + '\n').encode('utf-8')
 
+def marketplace_interface(root):
+    path = safe_source(root, 'VERSION')
+    if not path.is_file():
+        return {'displayName': 'Codex Toolkit'}
+    version = path.read_text(encoding='utf-8').strip()
+    if not re.fullmatch(r'\d+\.\d+\.\d+', version):
+        raise ValueError('Invalid Toolkit version')
+    return {'displayName': f'🧰 Codex Toolkit v{version}'}
+
+
 def prepare(root):
     files = {}
-    index = {'name': 'codex-toolkit', 'interface': {'displayName': 'Codex Toolkit'}, 'plugins': []}
+    index = {'name': 'codex-toolkit', 'interface': marketplace_interface(root), 'plugins': []}
     license_bytes = safe_source(root, 'LICENSE').read_bytes()
     for bundle in load_catalog(root):
         if bundle['status'] != 'ready':
@@ -64,11 +75,13 @@ def owned_before(root, before):
         if set(actual) != set(expected) or any(hashlib.sha256(raw).hexdigest() != expected[name]['sha256'] for name, raw in actual.items()):
             raise ValueError('Generated payload was edited; preserve and review it: ' + plugin)
     if '.agents/plugins/marketplace.json' in before:
-        expected_index = {'name': 'codex-toolkit', 'interface': {'displayName': 'Codex Toolkit'}, 'plugins': []}
+        expected_index = {'name': 'codex-toolkit', 'interface': marketplace_interface(root), 'plugins': []}
         for plugin in sorted(prefixes):
             expected_index['plugins'].append({'name': plugin, 'source': {'source': 'local', 'path': './marketplace/plugins/' + plugin},
                                                'policy': {'installation': 'AVAILABLE', 'authentication': 'ON_USE'}, 'category': 'Productivity'})
         actual_index = json.loads(before['.agents/plugins/marketplace.json'])
+        if actual_index.get('interface') == {'displayName': 'Codex Toolkit'}:
+            actual_index['interface'] = marketplace_interface(root)
         actual_entries = actual_index.get('plugins')
         if isinstance(actual_entries, list):
             actual_index['plugins'] = sorted(actual_entries, key=lambda row: row.get('name', ''))
