@@ -2,7 +2,7 @@
 name: unity-development
 description: Implement, refactor, diagnose, or review Unity projects while preserving the repository's Unity version, packages, scenes, prefabs, serialized assets, render/input pipelines, and build targets. Use for Unity project work, not general C# outside Unity.
 metadata:
-  version: "0.4.13"
+  version: "0.4.14"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -37,3 +37,5 @@ For economy, progression or stochastic-reward work, use an available game-balanc
 - Run the smallest relevant build or platform check when build settings, stripping, IL2CPP, shaders, Addressables, native plugins, or platform APIs are affected.
 - Separate script/test success from unverified editor interaction, asset import, graphics output, device behavior, performance, and platform build results.
 - Report the Unity and package versions used, changed assets and GUID-sensitive operations, actual checks, and any editor or target-platform verification not run.
+
+For explicit test strategy, missing coverage or lifecycle acceptance work, use an available test-strategy Skill and its relevant domain reference. Keep actual project checks usable without that optional Skill. Recorded evidence review, target-platform execution and release authorization remain separate.

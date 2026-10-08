@@ -32,6 +32,7 @@
 | 架構與研究 | [Research Learning Synthesis](../skills/research-learning-synthesis/SKILL.md) | 從可追溯來源整理研究, 學習與可採取的結論 |
 | 證據與來源 | [Document Source Matching](../skills/document-source-matching/SKILL.md) | 對照來源身分與抽出版, 區分 hash 一致與內容涵蓋 |
 | 證據與來源 | [Environment Consistency Check](../skills/environment-consistency-check/SKILL.md) | 比對明確環境範圍, 保留存取失敗與部分掃描狀態 |
+| 測試與交付 | [Test Strategy](../skills/test-strategy/SKILL.md) | 依變更與風險選測試, 條件式涵蓋應用程式、遊戲、AI 與發布驗收 |
 | 證據與來源 | [Validation Evidence Review](../skills/validation-evidence-review/SKILL.md) | 檢視驗證證據的來源版本, 結果與未涵蓋範圍 |
 | 文件 | [Doc Updater](../skills/doc-updater/SKILL.md) | 實作後依 verified diff 同步必要的 docs, memo, changelog 或 API reference |
 | 文件 | [Local Document Processing](../skills/local-document-processing/SKILL.md) | 沿用 versioned document core 擷取文件與預覽安全更新, 核對來源 hash 及寫入範圍 |

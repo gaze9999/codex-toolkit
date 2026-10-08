@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-environment-evidence",
-  "version": "0.1.3",
-  "description": "Compare scoped environments and assess existing validation evidence against explicit baselines.",
+  "version": "0.2.0",
+  "description": "Select risk-based checks, compare scoped environments and interpret existing validation evidence with explicit coverage and sampling limits.",
   "author": {
     "name": "gaze9999"
   },
@@ -11,7 +11,7 @@
     "com.openai": {
       "interface": {
         "displayName": "環境與驗證證據",
-        "shortDescription": "Compare scoped environments and assess existing validation evidence against explicit baselines.",
+        "shortDescription": "Select risk-based checks, compare scoped environments and interpret existing validation evidence with explicit coverage and sampling limits.",
         "logo": "./assets/toolkit.png",
         "composerIcon": "./assets/toolkit.png",
         "brandColor": "#E8A36D",

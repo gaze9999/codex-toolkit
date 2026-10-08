@@ -2,7 +2,7 @@
 name: ai-application-engineering
 description: Build, refactor, diagnose, or review production LLM, agent, tool-calling, RAG, embedding, and model-runtime integrations across providers. Use for AI application code and workflow behavior, not ordinary prompt writing or generic image generation.
 metadata:
-  version: "0.4.12"
+  version: "0.4.13"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -39,3 +39,5 @@ Engineer AI features from the repository's actual provider, model, runtime, data
 - Run live or end-to-end checks only when the task requires them and credentials, cost, permissions, data handling, and environment access are authorized.
 - Evaluate changed behavior against representative cases and explicit failure conditions. Separate code correctness, model/retrieval quality, and provider availability; compare end-to-end latency and total task cost, including retries and recovery, before claiming an efficiency improvement.
 - Report the exact provider/model/runtime exercised, actual checks, blocked live boundaries, and any results that remain probabilistic or environment-specific.
+
+For explicit test strategy, missing coverage or lifecycle acceptance work, use an available test-strategy Skill and its relevant domain reference. Keep actual project checks usable without that optional Skill. Recorded evidence review, target-platform execution and release authorization remain separate.

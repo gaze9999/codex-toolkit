@@ -2,7 +2,7 @@
 
 `local_documents` 用於本機文件擷取, OCR 備援與 Markdown 安全更新, 不需要遠端 API Key, 先依 [安裝說明](../setup/cli.md) 註冊, 再由支援 MCP 的 client 呼叫工具
 
-MCP 實作位於 `codex-setup/mcp_servers/local_documents/`, CLI 核心使用已安裝的 `my-py-document-core` versioned API, 不需另一個 repo 的路徑, 日常操作不需要手動啟動 server, client 會管理 stdio 程序
+MCP 實作位於 `codex-toolkit/mcp/mcp_servers/local_documents/`, CLI 核心使用已安裝的 `my-py-document-core` versioned API, 不需另一個 repo 的路徑, 日常操作不需要手動啟動 server, client 會管理 stdio 程序
 
 ## 先確認可用範圍
 

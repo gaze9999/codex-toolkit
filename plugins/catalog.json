@@ -60,7 +60,8 @@
       "status": "ready",
       "skills": [
         "environment-consistency-check",
-        "validation-evidence-review"
+        "validation-evidence-review",
+        "test-strategy"
       ],
       "runtime_profiles": [
         "workspace-inspection"
