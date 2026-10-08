@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 license = {file = "LICENSE"}
 name = "codex-jev-mcp"
-version = "0.1.0"
+version = "0.1.1"
 description = "Portable Jev CLI and stdio MCP with opt-in local metadata telemetry"
 readme = "README.md"
 requires-python = ">=3.10"

@@ -46,6 +46,8 @@ Use the existing Skill installer or copy this whole `jev-evaluation` folder to o
 
 The combined release ZIP includes a top-level `jev-evaluation/` folder that retains its standalone installer. See [README.md](../README.md) for the two-command Windows/macOS installation. `scripts/install_mcp.py` creates an isolated runtime, installs pinned requirements, copies the Skill, backs up changed managed files/settings and adds only a managed `[mcp_servers.jev]` block to the user config. It refuses an existing unowned server or unknown installed files. `--replace` allows a backed-up update of known Skill files; `--dry-run` previews destinations without writes or network. Server startup performs no installation or API request; `required = false` keeps an unavailable optional server from blocking the client.
 
+A Skill/Plugin copy does not install the SDK. The installer checks the exact pinned SDK and its required imports in its selected virtual environment before changing Skill files or client configuration; a cache marker alone is insufficient. An existing destination must be a complete virtual environment; other or incomplete directories are preserved for review. Use the reported `python` path for `verify_mcp.py`, not an unrelated `python` on PATH. `mcp_sdk_missing` identifies a missing SDK in that interpreter; `mcp_dependency_missing` identifies a missing dependency. Neither establishes an API or credential failure. Run the owned installer again to repair that runtime when installation is authorized; ordinary server startup never installs packages.
+
 Move only the Skill, not the whole Codex profile, credentials, runtime environment or unrelated settings. Generated settings contain that computer's paths; run the installer on each machine instead of copying config.toml or a virtual environment. Maintain repository source first, then update the managed installed folder and compare file hashes; use the existing repository release helper when a release is explicitly requested. Registration and package checks do not prove an already-open client loaded the new server; reload the client and verify its tool list.
 
 ## MCP tools and mobile boundary
@@ -139,7 +141,7 @@ Primary references: [API schema](https://docs.typesafe.ai/api), [models and lang
 
 ## Wheel installation and opt-in local monitoring
 
-The `codex-jev-mcp` wheel packages the same client as `codex_jev_mcp`; entry points are `jev`, `jev-mcp` and `jev-verify`. Installed stdio registration uses `python -I -B -m codex_jev_mcp.mcp_server`, independent of checkout or working directory. Build with `python -m pip wheel --no-deps --wheel-dir /absolute/wheels .` from this Skill folder. The baseline bootstrap in codex-setup installs a verified local wheel bundle; the existing Skill installer remains available.
+The `codex-jev-mcp` wheel packages the same client as `codex_jev_mcp`; entry points are `jev`, `jev-mcp` and `jev-verify`. Installed stdio registration uses `python -I -B -m codex_jev_mcp.mcp_server`, independent of checkout or working directory. Build with `python -m pip wheel --no-deps --wheel-dir /absolute/wheels .` from this Skill folder. The Toolkit baseline bootstrap installs a verified local wheel bundle; the existing Skill installer remains available.
 
 ## Opt-in local monitoring
 
