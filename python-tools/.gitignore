@@ -1,41 +1,20 @@
-# Python bytecode and tool caches
-__pycache__/
-*.py[cod]
+# Common Python, dependency and build rules are inherited from ../.gitignore
+# Python tool-specific caches
 *$py.class
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-.tox/
-.nox/
 /tiktoken-cache/
-node_modules/
-# Preserve ignored files left by earlier GUI builds without restoring that code
+
+# Local runtimes and build inputs, including retained GUI build files
 /src/gui/
 /setup/runtime/
 /.build-inputs/
 /.workbench-ui/
 
-# Test and coverage output
-.coverage
-.coverage.*
-coverage.xml
-htmlcov/
-coverage/
-test-results/
-playwright-report/
-.playwright-cli/
-blob-report/
+# Additional test and proofreading output
 junit*.xml
 .textlintcache
 
-# Build, package, and temporary output
-build/
-dist/
-*.egg-info/
-*.tmp
-*.temp
+# Local recovery files
 *.bak
-*.log
 
 # Local tool output and recovery bundles
 .bundle/
@@ -43,10 +22,5 @@ dist/
 .work-artifact-cleaner/
 /.process-audit/
 
-# Local configuration and virtual environments
-.env
-.venv/
+# Additional virtual environments
 .venv-*/
-venv/
-
-# Local project agent instructions
