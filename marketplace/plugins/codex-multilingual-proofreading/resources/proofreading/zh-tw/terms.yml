@@ -5,6 +5,28 @@ version: 1
 # protected-copy.cjs preserves HTML and declared literal UI/specification text.
 rules:
 
+  # Preferred authored data-processing terminology; preserve backup/math terms.
+  - expected: 差異讀取
+    patterns: [增量讀取]
+    specs:
+    - from: 改為增量讀取資料
+      to: 改為差異讀取資料
+  - expected: 差異寫入
+    patterns: [增量寫入]
+    specs:
+    - from: 採用增量寫入
+      to: 採用差異寫入
+  - expected: 差異讀寫
+    patterns: [增量讀寫]
+    specs:
+    - from: 使用增量讀寫
+      to: 使用差異讀寫
+  - expected: 差異更新
+    patterns: [增量更新]
+    specs:
+    - from: 資料增量更新
+      to: 資料差異更新
+
   # Authored delivery prose; retain literal source material and identifiers
   - expected: 關卡
     patterns:

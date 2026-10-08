@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "cfcba05613932e5c622f9e6bc564c7608c88ae796e266d74452d30160a2a9e63",
+      "sha256": "01bd794d57058f19b67f9761e0ff157c9af6d3779e205a48207e4cf2697b3f5d",
       "source": "plugins/multilingual-proofreading/plugin.json"
     },
     "resources/proofreading/en/cspell.json": {
@@ -41,7 +41,7 @@
       "source": "mcp/tools/proofreading/zh-tw/taiwan-style.cjs"
     },
     "resources/proofreading/zh-tw/terms.yml": {
-      "sha256": "961f0dab15a9587f405d7e2e594eaa2b3f0d6ab65748c7057bfa556680735e2b",
+      "sha256": "f5b87ff4c8b09fc588a2878a97fb26f66f30232f192ba00738343de41e20d0fb",
       "source": "mcp/tools/proofreading/zh-tw/terms.yml"
     },
     "skills/multilingual-proofreading/SKILL.md": {
@@ -79,5 +79,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.3.0",
-  "version": "0.1.5"
+  "version": "0.1.6"
 }
