@@ -9,7 +9,7 @@ Plugin 由 `skills/` 的工作流程、`plugins/catalog.json` 的來源映射及
 | `packaging-acceptance` | `packaging-acceptance`、`plugin-packaging` | 無 |
 | `jev-evaluation` | `jev-evaluation` | `jev` |
 | `documents-specifications` | `context-brief`、`document-source-matching`、`doc-updater`、`local-document-processing` | `local-documents` |
-| `environment-evidence` | `environment-consistency-check`、`validation-evidence-review` | `workspace-inspection` |
+| `environment-evidence` | `environment-consistency-check`、`validation-evidence-review`、`test-strategy` | `workspace-inspection` |
 | `frontend-engineering` | `angular-development`、`angular-member-order`、`react-development`、`vue-development`、`ui-ux-design`、`playwright-cli` | `playwright`、`serena`、`edge-devtools` |
 | `agent-workflow` | `agent-governance`、`coding-prompt`、`task-routing`、`task-guide` | 無 |
 | `multilingual-proofreading` | `multilingual-proofreading` | `textlint`、`cspell` |
@@ -50,7 +50,7 @@ python -B mcp/scripts/prepare_marketplace.py --check
 
 ZIP 使用固定 metadata 與排序, 暫存組裝後讀回全部成員與 SHA-256, 完整通過才寫到新的輸出目錄. 每組含 `plugin.json`、`LICENSE`、`source-manifest.json`、Skills 與選定資源. 組合 `codex-toolkit-plugins.zip` 含 `.agents/plugins/marketplace.json` 與 `plugin-release-manifest.json`
 
-市集生成器依逐檔 hash 辨識可更新的副本, 來源或生成內容有獨立修改時停止受影響更新. `.github/workflows/plugin-release.yml` 在符合 [版本門檻](release-policy.md) 的 Release 建置 ZIP 與 checksum, 手動執行依 workflow 設定處理指定來源. 整合產品操作見 [打包工具](operating-model.md)
+市集生成器依逐檔 hash 辨識可更新的副本, 來源或生成內容有獨立修改時停止受影響更新. `.github/workflows/plugin-release.yml` 在符合 [Plugin workflow 的實際門檻](../.github/workflows/plugin-release.yml) 的 Release 建置 ZIP 與 checksum, 手動執行依 workflow 設定處理指定來源. 整合產品操作見 [打包工具](operating-model.md)
 
 ## 本機同步
 

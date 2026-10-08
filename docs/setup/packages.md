@@ -21,6 +21,12 @@ python -m pip install -r mcp/tools/release.requirements.txt
 python -B mcp/scripts/audit_skills.py
 ```
 
+已有相容環境具備 Jev MCP SDK 時, 可使用 `--python-executable` 指定 helper 的 Python, 沿用既有相依套件:
+
+```text
+python -B mcp/scripts/audit_skills.py --python-executable /path/to/python-with-jev-sdk
+```
+
 MCP 各 package 的版本由自己的 `pyproject.toml` 保存, 第三方版本、來源及授權 hash 由 `mcp/tools/mcp-wheels.requirements.json` 管理. 獨立 Python 工具的建置見 [Python 使用說明](../../python-tools/docs/standalone.md)
 
 ## Skills ZIP
@@ -42,7 +48,7 @@ python -B tooling/package.py plan --product mcp --product portable-cli
 
 MCP builder 在隔離副本建置第一方 core / adapters、固定第三方 wheel 與 installer, 產物包含版本、來源 hash 與第三方授權. CLI builder 使用 `mcp/tools/cli-release.requirements.json` 的 Python 及套件, 在選定平台建置並執行搬移後的啟動 / 結束檢查. `--verify` 讀回既有 CLI archive
 
-穩定 1.0.0 起, `.github/workflows/cli-release.yml` 處理原生 CLI, `python-tools-release.yml` 處理 Python core wheel, `plugin-release.yml` 處理 Plugin ZIP, 版本門檻見 [交付設定](../release-policy.md). 手動 workflow 的輸出與 Release 資產依各自事件條件設定
+穩定 1.0.0 起, `.github/workflows/cli-release.yml` 處理原生 CLI, `python-tools-release.yml` 處理 Python core wheel, `plugin-release.yml` 處理 Plugin ZIP, 版本門檻見 [CLI workflow 的實際門檻](../../.github/workflows/cli-release.yml). 手動 workflow 的輸出與 Release 資產依各自事件條件設定
 
 ## 版本與發布設定
 

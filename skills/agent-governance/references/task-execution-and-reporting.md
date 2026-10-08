@@ -199,3 +199,7 @@ At consequential semantic checkpoints, assess optional evaluation after local ev
 
 
 For suspected sensitive-data exposure, read [sensitive-data removal](sensitive-data-removal.md) before planning cleanup. Distinguish credential containment, rewritten history, remote state and unresolved copies, without printing secrets or treating CP/CPR as rewrite authorization.
+
+## Conditional Git identity and delivery
+
+For an authorized commit or publication, verify the actual repository author/committer identity, version metadata and workflow gates before writing. Keep personal and company identities separate; do not infer an email or modify global Git settings. A copied handoff supplies source/evidence context, not new publication authority. Project-specific delivery gates belong in project instructions and executable workflows, not a private-policy dependency in a public package.

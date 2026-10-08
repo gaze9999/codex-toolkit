@@ -1,5 +1,5 @@
 interface:
-  display_name: "AI Application Engineering (v0.4.12)"
+  display_name: "AI Application Engineering (v0.4.13)"
   short_description: "Engineer LLM, agent, tool, and RAG applications"
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
