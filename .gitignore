@@ -1,4 +1,4 @@
-# Share only the portable release workflow; keep other local automation private
+# Share approved CI workflows; keep other local automation private
 /.github/*
 !/.github/workflows/
 /.github/workflows/*
@@ -62,8 +62,7 @@ htmlcov/
 .hypothesis/
 *.egg-info/
 
-# Local tests and validation artifacts
-/tests/
+# Generated test and validation output
 test-results/
 test-reports/
 playwright-report/
