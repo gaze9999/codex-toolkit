@@ -59,15 +59,24 @@ jobs:
         with:
           python-version: '3.14'
       - run: python -m pip install -r setup/requirements-release.txt
+      - name: Read independent Python tools version
+        id: component
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
+              output.write('tag=v' + Path('VERSION').read_text(encoding='utf-8').strip() + '\n')
+          PY
       - name: Prepare and verify source ZIP and independent core wheels
         run: python launch-cli.py scripts.release prepare
       - uses: actions/upload-artifact@v4
         with:
           name: source-release
           path: |
-            python-tools/dist/${{ env.RELEASE_TAG }}/*.zip
-            python-tools/dist/${{ env.RELEASE_TAG }}/*.whl
-            python-tools/dist/${{ env.RELEASE_TAG }}/release-manifest.json
+            python-tools/dist/${{ steps.component.outputs.tag }}/*.zip
+            python-tools/dist/${{ steps.component.outputs.tag }}/*.whl
+            python-tools/dist/${{ steps.component.outputs.tag }}/release-manifest.json
           if-no-files-found: error
 
   cli:
@@ -100,7 +109,8 @@ jobs:
       - name: Build independent CLI through release helper
         shell: pwsh
         run: |
-          python launch-cli.py scripts.release cli "$env:RELEASE_TAG"
+          $componentTag = 'v' + (Get-Content VERSION -Raw).Trim()
+          python launch-cli.py scripts.release cli "$componentTag"
           if ($LASTEXITCODE -ne 0) { throw 'CLI release build failed' }
       - name: Verify native CLI without a source checkout or local Python
         shell: pwsh

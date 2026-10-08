@@ -162,7 +162,7 @@ class DistributionTests(unittest.TestCase):
 
     def test_release_workflow_and_spec_are_terminal_only(self):
         root = Path(__file__).resolve().parents[1]
-        workflow = (root / ".github/workflows/release.yml").read_text(encoding="utf-8")
+        workflow = (root.parent / ".github/workflows/python-tools-release.yml").read_text(encoding="utf-8")
         spec = (root / "src/distribution/cli.spec").read_text(encoding="utf-8")
         self.assertIn("needs: [source, cli]", workflow)
         self.assertIn("$assets.Count -ne 10", workflow)
