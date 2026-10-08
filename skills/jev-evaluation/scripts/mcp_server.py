@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 """Expose the existing bounded Jev client through the official MCP SDK."""
-from __future__ import annotations
-
 import argparse
+import json
 import os
+import sys
 from pathlib import Path
 from types import SimpleNamespace
-from typing import Any
+from typing import Any, TYPE_CHECKING
 
-from mcp.server import MCPServer
-from mcp_types import ToolAnnotations
-from pydantic import BaseModel, ConfigDict, StrictBool
+if TYPE_CHECKING:
+    from mcp.server import MCPServer
 
 if __package__:
     from . import jev
@@ -18,14 +17,17 @@ else:
     import jev
 
 
-class Candidate(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    id: str
-    text: str | None = None
-    required: StrictBool = False
+def build_server(key_file: Path | None = None) -> "MCPServer":
+    from mcp.server import MCPServer
+    from mcp_types import ToolAnnotations
+    from pydantic import BaseModel, ConfigDict, StrictBool
 
+    class Candidate(BaseModel):
+        model_config = ConfigDict(extra="forbid")
+        id: str
+        text: str | None = None
+        required: StrictBool = False
 
-def build_server(key_file: Path | None = None) -> MCPServer:
     server = MCPServer("Jev", instructions="Optional semantic comparison after local retrieval and deterministic filtering, when reading order or an explicit finite rubric remains useful. Not routine coding preflight. Query, rubric and candidate text go to a remote API and require approval; required candidate text stays local. Main retains source authority, dependencies and acceptance; no candidate or required check is discarded.")
     annotations = ToolAnnotations(readOnlyHint=True, destructiveHint=False, idempotentHint=False, openWorldHint=True)
 
@@ -63,12 +65,18 @@ def build_server(key_file: Path | None = None) -> MCPServer:
     return server
 
 
-def main(argv: list[str] | None = None) -> None:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--key-file", type=Path, help="Override the local credential file, never pass the key itself.")
     args = parser.parse_args(argv)
-    build_server(args.key_file).run(transport="stdio")
+    try:
+        build_server(args.key_file).run(transport="stdio")
+        return 0
+    except ModuleNotFoundError as exc:
+        reason = "mcp_sdk_missing" if (exc.name or "").split(".")[0] in {"mcp", "mcp_types"} else "mcp_dependency_missing"
+        print(json.dumps({"status": "fallback", "reason": reason, "python": sys.executable}), file=sys.stderr)
+        return 1
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

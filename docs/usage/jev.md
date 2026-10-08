@@ -2,7 +2,7 @@
 
 Jev 用於已整理候選的語意排序與有限分類, 文件搜尋, 必讀規格保留, 最終判斷與驗證仍由 Main 負責, 先依 [安裝說明](../setup/cli.md) 註冊, 詳細 API 與 CLI 說明見 [既有 usage reference](../../skills/jev-evaluation/references/usage.md)
 
-MCP 與 Skill 實作維持在 `codex-setup/skills/jev-evaluation/`, 各專案共用同一份使用者層級設定, 不在每個 repo 建立另一份 server
+MCP 與 Skill 實作維持在 `codex-toolkit/skills/jev-evaluation/`, 各專案共用同一份使用者層級設定, 不在每個 repo 建立另一份 server
 
 ## 何時值得使用
 
@@ -30,6 +30,12 @@ query, rubric 與候選摘要都需符合外傳授權, 摘要與去識別資料�
 實際使用後簡短說明用途, tool/status 與 Main 採用方式或 fallback, 回應有 model 才記錄實際 model. 不預設新增永久 log, 不貼輸入內容或 Key, 未使用的原因僅在使用者詢問或與本次評估相關時說明
 
 ## 需要診斷時檢查本機狀態
+
+安裝 Skill 或 Plugin 不會自動安裝 Python 相依套件, 每台電腦使用 Toolkit baseline 或 [Jev 安裝程式](../../skills/jev-evaluation/README.md) 建立自己的隔離環境
+
+安裝程式會檢查固定版本 SDK 及必要匯入, 快取標記相同也要檢查, 修復後才寫入設定. 使用回傳的 `python` 路徑執行已安裝 Skill 的 [verify_mcp.py](../../skills/jev-evaluation/scripts/verify_mcp.py), 不以其他 Python 的檢查結果判定該環境
+
+`mcp_sdk_missing` 表示所用 Python 缺少 SDK, `mcp_dependency_missing` 表示缺少相依, 兩者與 Key 或 API 連線問題分開. `--help` 可在沒有 SDK 的環境查看, 離線 MCP 驗證則需要 SDK
 
 可以對 Codex 說:
 

@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 license = {file = "LICENSE"}
 name = "codex-tool-setup"
-version = "0.4.0"
+version = "0.4.1"
 description = "Portable CLI for Codex tools, skills, agents and setup"
 readme = "README.md"
 requires-python = ">=3.11"

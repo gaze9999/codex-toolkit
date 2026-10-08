@@ -7,7 +7,7 @@
       "kind": "python",
       "project": "skills/jev-evaluation",
       "packages": {
-        "codex-jev-mcp": "0.1.0"
+        "codex-jev-mcp": "0.1.1"
       },
       "module": "codex_jev_mcp.mcp_server",
       "verify_module": "codex_jev_mcp.verify_mcp",

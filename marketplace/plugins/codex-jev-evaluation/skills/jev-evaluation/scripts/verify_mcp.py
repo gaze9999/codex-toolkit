@@ -9,11 +9,10 @@ import os
 from pathlib import Path
 import sys
 
-from mcp import Client
-from mcp.client.stdio import StdioServerParameters
-
-
 async def verify(online: bool) -> int:
+    from mcp import Client
+    from mcp.client.stdio import StdioServerParameters
+
     arguments = ["-I", "-B", "-m", __package__ + ".mcp_server"] if __package__ else ["-B", str(Path(__file__).with_name("mcp_server.py"))]
     server = StdioServerParameters(command=sys.executable, args=arguments, env=os.environ.copy())
     async with Client(server, read_timeout_seconds=30) as client:
@@ -37,6 +36,10 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         return asyncio.run(asyncio.wait_for(verify(args.online), timeout=45))
+    except ModuleNotFoundError as exc:
+        reason = "mcp_sdk_missing" if (exc.name or "").split(".")[0] in {"mcp", "mcp_types"} else "mcp_dependency_missing"
+        print(json.dumps({"status": "fallback", "reason": reason, "python": sys.executable}))
+        return 1
     except Exception:
         print('{"status":"fallback","reason":"mcp_verification_unavailable"}')
         return 1

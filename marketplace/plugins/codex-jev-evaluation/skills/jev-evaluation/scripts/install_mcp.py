@@ -52,6 +52,48 @@ def python_path(runtime: Path) -> Path:
     return runtime / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
 
 
+def runtime_ready(python: Path, requirements: Path) -> bool:
+    pin = re.search(r"(?m)^mcp==([^\s;]+)\s*$", requirements.read_text(encoding="utf-8"))
+    if not pin:
+        raise ValueError("missing_mcp_requirement")
+    code = (
+        "import sys; from importlib.metadata import version; "
+        "from mcp import Client; from mcp.server import MCPServer; "
+        "from mcp_types import ToolAnnotations; "
+        "from pydantic import BaseModel, ConfigDict, StrictBool; "
+        "assert version('mcp') == sys.argv[1]; "
+        "assert sys.prefix != sys.base_prefix; "
+        "exec('if sys.version_info < (3, 11): import tomli')"
+    )
+    try:
+        result = subprocess.run([str(python), "-I", "-B", "-c", code, pin.group(1)], capture_output=True, timeout=20, check=False)
+        return result.returncode == 0
+    except (OSError, subprocess.SubprocessError):
+        return False
+
+
+def prepare_runtime(runtime: Path, requirements: Path) -> Path:
+    python = python_path(runtime)
+    existed = python.is_file()
+    if runtime.exists() and (not (runtime / "pyvenv.cfg").is_file() or not existed):
+        raise ValueError("existing_runtime_not_virtual_environment")
+    if not existed:
+        venv.EnvBuilder(with_pip=True).create(runtime)
+    expected = hashlib.sha256(requirements.read_bytes()).hexdigest()
+    marker = runtime / "jev-requirements.sha256"
+    ready = runtime_ready(python, requirements)
+    if not ready or not marker.is_file() or marker.read_text(encoding="ascii").strip() != expected:
+        command = [str(python), "-m", "pip", "install", "--disable-pip-version-check", "--quiet", "--timeout", "20", "--retries", "1", "--index-url", "https://pypi.org/simple"]
+        if existed and not ready:
+            command.append("--force-reinstall")
+        subprocess.run([*command, "-r", str(requirements)], check=True)
+        subprocess.run([str(python), "-m", "pip", "check"], capture_output=True, check=True, timeout=30)
+        if not runtime_ready(python, requirements):
+            raise ValueError("mcp_runtime_unavailable")
+        atomic_write(marker, expected.encode("ascii"))
+    return python
+
+
 def update_config(original: str, python: Path, server: Path) -> str:
     try:
         import tomllib
@@ -120,10 +162,10 @@ def install(source: Path, target: Path, config: Path, runtime: Path, replace: bo
             atomic_write(target / name, content)
     if initial != candidate:
         atomic_write(config, candidate)
-    return {"status": "ok", "skill": str(target), "config": str(config), "runtime": str(runtime), "backup": str(backup) if backup.exists() else None, "restart_required": True}
+    return {"status": "ok", "skill": str(target), "config": str(config), "runtime": str(runtime), "python": str(python_path(runtime)), "backup": str(backup) if backup.exists() else None, "restart_required": True}
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--skill-root", type=Path, help="Override the client's verified user-scoped Skill directory.")
     parser.add_argument("--config", type=Path, help="Override user Codex config.toml; never supply a project config for global installation.")
@@ -132,7 +174,8 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true", help="Show destinations only, without installing packages or editing files.")
     parser.add_argument("--verify-online", action="store_true", help="After installation, verify MCP with a small built-in public sample.")
     parser.add_argument("--runtime-ready", action="store_true", help=argparse.SUPPRESS)
-    args = parser.parse_args()
+    arguments = sys.argv[1:] if argv is None else argv
+    args = parser.parse_args(arguments)
     source = Path(__file__).resolve().parents[1]
     codex = Path(os.environ.get("CODEX_HOME") or Path.home() / ".codex").expanduser()
     target = (args.skill_root or default_skill_root(codex)) / NAME
@@ -142,19 +185,15 @@ def main() -> int:
         if sys.version_info < (3, 10):
             raise ValueError("python_3_10_required")
         if args.dry_run:
-            print(json.dumps({"status": "dry_run", "skill": str(target), "config": str(config), "runtime": str(runtime)}, ensure_ascii=False))
+            print(json.dumps({"status": "dry_run", "skill": str(target), "config": str(config), "runtime": str(runtime), "python": str(python_path(runtime))}, ensure_ascii=False))
             return 0
         python = python_path(runtime)
+        requirements = source / "requirements.txt"
         if not args.runtime_ready:
-            if not python.is_file():
-                venv.EnvBuilder(with_pip=True).create(runtime)
-            requirements = source / "requirements.txt"
-            expected = hashlib.sha256(requirements.read_bytes()).hexdigest()
-            marker = runtime / "jev-requirements.sha256"
-            if not marker.is_file() or marker.read_text(encoding="ascii").strip() != expected:
-                subprocess.run([str(python), "-m", "pip", "install", "--disable-pip-version-check", "--quiet", "--timeout", "20", "--retries", "1", "--index-url", "https://pypi.org/simple", "-r", str(requirements)], check=True)
-                marker.write_text(expected, encoding="ascii")
-            return subprocess.run([str(python), "-B", str(Path(__file__).resolve()), *sys.argv[1:], "--runtime", str(runtime), "--runtime-ready"], check=False).returncode
+            python = prepare_runtime(runtime, requirements)
+            return subprocess.run([str(python), "-B", str(Path(__file__).resolve()), *arguments, "--runtime", str(runtime), "--runtime-ready"], check=False).returncode
+        if not runtime_ready(python, requirements):
+            raise ValueError("mcp_runtime_unavailable")
         result = install(source, target, config, runtime, args.replace)
         verification = subprocess.run([str(python), "-B", str(target / "scripts/verify_mcp.py"), *(["--online"] if args.verify_online else [])], capture_output=True, text=True, encoding="utf-8", timeout=50, check=False)
         try:
@@ -167,8 +206,8 @@ def main() -> int:
         print(json.dumps(result, ensure_ascii=False))
         return 0 if verification.returncode == 0 else 1
     except ValueError as exc:
-        known = {"python_3_10_required", "skill_contains_private_or_linked_file", "invalid_managed_config_block", "existing_jev_server_not_managed", "invalid_skill_location", "existing_skill_use_replace", "unexpected_installed_files_preserve_and_review", "config_changed_during_install", "skill_changed_during_install"}
-        print(json.dumps({"status": "fallback", "reason": str(exc) if str(exc) in known else "invalid_configuration"}))
+        known = {"existing_runtime_not_virtual_environment", "missing_mcp_requirement", "mcp_runtime_unavailable", "python_3_10_required", "skill_contains_private_or_linked_file", "invalid_managed_config_block", "existing_jev_server_not_managed", "invalid_skill_location", "existing_skill_use_replace", "unexpected_installed_files_preserve_and_review", "config_changed_during_install", "skill_changed_during_install"}
+        print(json.dumps({"status": "fallback", "reason": str(exc) if str(exc) in known else "invalid_configuration", "python": str(python_path(runtime))}))
         return 1
     except (OSError, subprocess.SubprocessError):
         print(json.dumps({"status": "fallback", "reason": "installation_failed_check_local_destinations_and_runtime"}))

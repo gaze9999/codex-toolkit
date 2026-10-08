@@ -166,7 +166,15 @@
           "command": "npm"
         },
         {
-          "command": "playwright-cli"
+          "command": "playwright-cli",
+          "minimum_version": [
+            0,
+            1,
+            22
+          ],
+          "version_args": [
+            "--version"
+          ]
         }
       ],
       "packages": {

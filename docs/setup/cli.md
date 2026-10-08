@@ -44,13 +44,13 @@ Agents / Skills 清單使用確切名稱選取項目, Global 安裝與 Skills �
 
 ## 任意位置部署 Local Documents
 
-準備 `my_py_document_core-0.2.0-py3-none-any.whl` 與 `codex_local_documents_mcp-0.2.0-py3-none-any.whl`, 在使用者選擇的位置建立 Python 3.11+ 環境, 首次安裝公開相依套件需網路或對應平台的本機 wheel cache
+準備 `my_py_document_core-0.2.2-py3-none-any.whl` 與 `codex_local_documents_mcp-0.2.0-py3-none-any.whl`, 在使用者選擇的位置建立 Python 3.11+ 環境, 首次安裝公開相依套件需網路或對應平台的本機 wheel cache
 
 Windows 範例, 請換成該電腦的真實路徑:
 
 ```powershell
 python -m venv C:\path\document-runtime
-C:\path\document-runtime\Scripts\python.exe -m pip install C:\path\wheels\my_py_document_core-0.2.0-py3-none-any.whl C:\path\wheels\codex_local_documents_mcp-0.2.0-py3-none-any.whl
+C:\path\document-runtime\Scripts\python.exe -m pip install C:\path\wheels\my_py_document_core-0.2.2-py3-none-any.whl C:\path\wheels\codex_local_documents_mcp-0.2.0-py3-none-any.whl
 C:\path\document-runtime\Scripts\python.exe -m pip check
 ```
 
@@ -97,7 +97,7 @@ python mcp/scripts/install_mcp.py local_documents --python /absolute/document-ru
 首次建立 runtime 時提供兩個 wheel:
 
 ```text
-python mcp/scripts/install_mcp.py local_documents --runtime /absolute/document-runtime --core-wheel /absolute/wheels/my_py_document_core-0.2.0-py3-none-any.whl --server-wheel /absolute/wheels/codex_local_documents_mcp-0.2.0-py3-none-any.whl --read-root /absolute/documents --apply --verify
+python mcp/scripts/install_mcp.py local_documents --runtime /absolute/document-runtime --core-wheel /absolute/wheels/my_py_document_core-0.2.2-py3-none-any.whl --server-wheel /absolute/wheels/codex_local_documents_mcp-0.2.0-py3-none-any.whl --read-root /absolute/documents --apply --verify
 ```
 
 - 預設或 `--dry-run` 只顯示 plan 與 wheel metadata/SHA-256, 不建立環境, 安裝套件或寫檔
@@ -116,7 +116,7 @@ Server 使用已安裝的模組啟動, runtime 與註冊依 installer 的預覽�
 python -m pip wheel --no-deps --no-build-isolation --wheel-dir /absolute/wheels .
 ```
 
-目前 Local Documents server 固定使用 `my-py-document-core==0.2.0`, Workspace Inspection 新版來源固定使用 `my-py-workspace-core==0.2.0`, 並要求各自的 `API_VERSION=1`, 核心公開參數, 回傳資料或錯誤語意有變更時, 先檢查相容性再更新相依套件, 每個 MCP 可使用自己的相容版本與獨立環境. 新版來源與套件發布、runtime 安裝分開處理, 既有環境需更新後才能比較 current baseline
+目前 Local Documents server 固定使用 `my-py-document-core==0.2.2`, Workspace Inspection 新版來源固定使用 `my-py-workspace-core==0.2.0`, 並要求各自的 `API_VERSION=1`, 核心公開參數, 回傳資料或錯誤語意有變更時, 先檢查相容性再更新相依套件, 每個 MCP 可使用自己的相容版本與獨立環境. 新版來源與套件發布、runtime 安裝分開處理, 既有環境需更新後才能比較 current baseline
 
 ## Workspace Inspection
 
@@ -142,6 +142,8 @@ python mcp/scripts/install_mcp.py jev --help
 ```
 
 安裝位置可使用 `--skill-root`, `--runtime` 與 `--config` 指定, 組合包中的 Jev Skill installer 不需要完整 repo, 詳見 [Jev 安裝文件](../../skills/jev-evaluation/README.md)
+
+Skill / Plugin 檔案與 Python 相依套件分開安裝, Jev installer 會在寫入設定前核對隔離環境內的 SDK, 回傳 `python` 路徑供後續 MCP 驗證使用, requirements 快取標記不能取代實際匯入檢查
 
 `--verify-online` 以內建公開範例呼叫 Jev API, 未指定時沿用離線 MCP 驗證, 不把私人專案內容當作驗證資料
 

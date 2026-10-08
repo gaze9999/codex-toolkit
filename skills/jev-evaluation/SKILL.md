@@ -3,7 +3,7 @@ name: jev-evaluation
 description: Rank locally retrieved context or compare approved summaries with a finite rubric when semantic ordering remains useful. Use for Jev setup or diagnosis too, not routine coding preflight.
 metadata:
   short-description: Optional candidate ranking and typed semantic evaluation
-  version: "0.4.14"
+  version: "0.4.15"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
