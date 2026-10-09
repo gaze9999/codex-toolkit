@@ -3,7 +3,7 @@ name: agent-governance
 description: Create, audit, or simplify project AGENTS.md layers and Codex subagent roles. Use for agent-governance work, including a new project setup, not ordinary implementation or general code review.
 metadata:
   short-description: Agent governance, role boundaries, and instruction minimization
-  version: "0.5.1"
+  version: "0.5.2"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -65,6 +65,7 @@ Keep the smallest instruction set that preserves authorization, contracts, proje
 
 ## Load detailed guidance only when needed
 
+- When organizing public/private development sources or planned public delivery, read [public and private delivery](references/public-private-delivery.md). Separate current visibility from intended publication, including private development that will become public; choose methods by audience, data, scope and authorization.
 - When creating, splitting, or relocating global, root, nested, or tool-specific agent instructions, read [instruction-layering.md](references/instruction-layering.md).
 - When changing task intake, source selection, Git authorization or completion reporting, read [task-execution-and-reporting.md](references/task-execution-and-reporting.md). Keep examples conditional rather than always loaded.
 - When changing delegation, worker ownership, subagent context, or model/reasoning routing, read [delegation-routing.md](references/delegation-routing.md).

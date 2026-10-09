@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "7c34af88d7bd6b7ee14eb2750be2b4494d361b1bef9b109d5c59a11ba62b1c16",
+      "sha256": "f1bfdc07f76cd11f06f4c0a010546df7ffcb8f07f2eac4c8eb05286ae88348f5",
       "source": "plugins/project-documentation/plugin.json"
     },
     "skills/license-maintainer/SKILL.md": {
@@ -41,11 +41,11 @@
       "source": "skills/license-maintainer/assets/icon.svg"
     },
     "skills/readme-maintainer/SKILL.md": {
-      "sha256": "e23fd61bc94a62d956de9616bdc95a41b0351bac01633bc7973428bbe4569873",
+      "sha256": "16dae5a1c87c360af84ceaaa9b62b97fd049108637b4c08ca84549d9480c0d91",
       "source": "skills/readme-maintainer/SKILL.md"
     },
     "skills/readme-maintainer/agents/openai.yaml": {
-      "sha256": "a80ae4cd1f21fd965dfb2f3f3a46fe4c7de098d8ab31fab7ff8ca2d252ece507",
+      "sha256": "f3b29656d0a0fb92a9dbeaee2f2e07590691abb49d5434c186757f3fed03bdc5",
       "source": "skills/readme-maintainer/agents/openai.yaml"
     },
     "skills/readme-maintainer/assets/icon-small.png": {
@@ -65,7 +65,7 @@
       "source": "skills/readme-maintainer/assets/icon.svg"
     },
     "skills/readme-maintainer/references/presentation.md": {
-      "sha256": "71becb201c9e1c733be1aeaddc7ff3115dce3a7ed59f95ec0935d4e9a5b405d9",
+      "sha256": "cf9d11983963e225c974cc7cdc08ac71efd42ec1ed0b70af4bcbe320f3ddda76",
       "source": "skills/readme-maintainer/references/presentation.md"
     },
     "skills/readme-maintainer/references/release-readiness.md": {
@@ -79,6 +79,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.3.1",
-  "version": "0.1.5"
+  "toolkit_version": "0.3.2",
+  "version": "0.1.6"
 }

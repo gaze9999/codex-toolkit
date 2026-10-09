@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-project-documentation",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Maintain repository README and licensing documents with separate evidence and authorization boundaries.",
   "author": {
     "name": "gaze9999"

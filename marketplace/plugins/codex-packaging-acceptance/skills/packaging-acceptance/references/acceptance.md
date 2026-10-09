@@ -2,6 +2,7 @@
 
 ## Inputs and identity
 
+- Resolve current source visibility and intended audience separately. Private development followed by a public version is public-target delivery; inspect the selected public source/history/artifact boundary when that stage is in scope. Choose checks from the actual payload, data and authorized outcome, rather than imposing one public/private layout or a full history audit on every package.
 - Resolve canonical sources and generated outputs. Record the commit plus a digest of relevant uncommitted inputs when allowed; formal release artifacts use a clean committed snapshot. Never equate HEAD with dirty source bytes.
 - Check manifest schema, stable package identity, independent component versions, dependency locks, hashes and reference closure. Include required scripts/references/assets, exclude caches, credentials and unrelated installed state. Plugin Skills have one source owner; identify directly installed copies before enabling the corresponding Plugin.
 - Distinguish an internal build catalog from host marketplace metadata. New portable Plugins use root plugin.json and optional mcp.json. Resolve current host/schema support before using a compatibility overlay or platform-specific hook.
@@ -11,6 +12,8 @@
 For changed distribution inputs, inspect actual mapped files and, when available within authorized checks, ZIP/wheel/Plugin contents: secrets, credential files, local config, logs, fixtures and examples. Report inspected scope and scanner limits; a pattern scan does not prove absence of all sensitive data. Do not build artifacts merely for this check when packaging is excluded.
 
 Suspected exposure blocks affected publication. Follow the [GitHub procedure](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository). Credential rotation, history cleanup and replacement of distributed artifacts are distinct stages; changing the current payload does not erase old distributed copies. Cleanup and repository-setting changes require separate authorization.
+
+For public data generated from private sources, derive selected fields from the actual consumer/schema and inspect the resulting payload and build prerequisites. Private authoring notes and credentials stay outside that public boundary; browser-delivered data remains readable. When candidate application writes existing state, choose digest/revision guards and atomic replacement appropriate to concurrency, and verify relevant persisted-data compatibility before publication. These methods apply to the affected data/update path, not every release.
 
 ## Minimal checks
 
