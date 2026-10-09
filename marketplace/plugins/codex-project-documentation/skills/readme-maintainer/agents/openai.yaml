@@ -1,5 +1,5 @@
 interface:
-  display_name: "README Maintainer (v0.4.15)"
+  display_name: "README Maintainer (v0.4.16)"
   short_description: "Create accurate repository README documentation"
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"

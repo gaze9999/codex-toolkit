@@ -21,6 +21,9 @@
     {"id":"research-synthesis","kind":"positive","prompt":"研究官方與工程案例, 比較兩種 RAG 檢索架構並列出證據缺口","expected":["research-learning-synthesis"]},
     {"id":"simple-fact","kind":"negative","prompt":"JSON 的 true 是大寫還是小寫?","expected":[]},
     {"id":"task-guide","kind":"positive","prompt":"依指定專案規格建立功能專用 coding task guide","expected":["task-guide"]},
-    {"id":"no-auto-docs","kind":"negative","prompt":"完成這個純 Python 的小型重構, 不需要修改文件或建立任務指引","expected":[]}
+    {"id":"no-auto-docs","kind":"negative","prompt":"完成這個純 Python 的小型重構, 不需要修改文件或建立任務指引","expected":[]},
+    {"id":"tag-policy-only","kind":"positive","prompt":"依目前專案設計版本與 Tag 策略, 區分日常 push 與版本節點, 只交付規則","expected":["packaging-acceptance"]},
+    {"id":"tag-authorized-delivery","kind":"positive","prompt":"依專案版本規範提交、推送並建立本次 Tag, 核對遠端指向, 不建立 GitHub Release","expected":["packaging-acceptance"]},
+    {"id":"tag-not-routine-push","kind":"negative","prompt":"只提交並推送這個已驗證的文字修正, 不建立版本 Tag 或 Release","expected":[]}
   ]
 }

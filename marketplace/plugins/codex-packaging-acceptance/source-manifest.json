@@ -13,20 +13,24 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "303296a0173a298e3e93516d0faeb676f6350806127163b4ab4253cb0a590162",
+      "sha256": "4963858458741890c322c78522bd880c7813a339c6fb7d61dc3c03f63fcd669c",
       "source": "plugins/packaging-acceptance/plugin.json"
     },
     "skills/packaging-acceptance/SKILL.md": {
-      "sha256": "4b74f86e6c98ffe72097fcb5391af65658cbdb7ff532a7ee16bbd9d8315e03a5",
+      "sha256": "df9e271566c38694661e7f0a8c8d8fa991eec14bf37c9adc6d8737085d94e7cd",
       "source": "skills/packaging-acceptance/SKILL.md"
     },
     "skills/packaging-acceptance/agents/openai.yaml": {
-      "sha256": "c0a0b1a8dd4df1f311f64912ea4f997d846d5b622ac9c99186f35feb0fc27357",
+      "sha256": "152a9efc6882f1bb62ca25df08b5f2e28c1620d24301fa65dc0b5b137dea1351",
       "source": "skills/packaging-acceptance/agents/openai.yaml"
     },
     "skills/packaging-acceptance/references/acceptance.md": {
-      "sha256": "db1de71eddb09ca0e851546024093d27c114f653754c711ee8efe14da5f1a683",
+      "sha256": "48e0d9728d2aa1d984fa4cb82ddce01773ba096f6463f9d83a1da91738e6dedf",
       "source": "skills/packaging-acceptance/references/acceptance.md"
+    },
+    "skills/packaging-acceptance/references/version-tags.md": {
+      "sha256": "1cc6b429367feae63e15e98474d929b7eb0e559fbe9f62207020fafcc0898e57",
+      "source": "skills/packaging-acceptance/references/version-tags.md"
     },
     "skills/plugin-packaging/SKILL.md": {
       "sha256": "a012e4f55a546835c33ca6a9c84474bd716b7e37752f7ccc7f170deeac435537",
@@ -47,6 +51,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.3.1",
-  "version": "0.2.0"
+  "toolkit_version": "0.3.2",
+  "version": "0.2.1"
 }

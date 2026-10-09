@@ -16,7 +16,7 @@
 | Agent 與 context | [Jev Evaluation](../skills/jev-evaluation/SKILL.md) | 按需排序候選 context 或進行有限語意分類, 提供 Windows / macOS 共用 MCP 與 CLI |
 | 開發工具 | [Development Tool Setup](../skills/development-tool-setup/SKILL.md) | 逐項檢查 Context7, Playwright, RTK 與工作台相依, 以 Python installer 完成已授權的單項安裝及診斷 |
 | 開發工具 | [Playwright CLI](../skills/playwright-cli/SKILL.md) | 以具名隔離 session 重現 UI, 核對 snapshot, Console, Requests 與 screenshot |
-| 開發工具 | [Packaging Acceptance](../skills/packaging-acceptance/SKILL.md) | 核對來源映射、版本、hash、搬移與退出清理, 依授權選最小或完整驗收 |
+| 開發工具 | [Packaging Acceptance](../skills/packaging-acceptance/SKILL.md) | 核對來源映射、版本、hash、搬移與退出清理, 依授權選最小或完整驗收, [Tag 策略](../skills/packaging-acceptance/references/version-tags.md) 按需載入 |
 | 開發工具 | [Local Activity Query](../skills/local-activity-query/SKILL.md) | 查詢指定 loopback monitor 的期間計數與健康摘要, 保留未知與部分回補狀態 |
 | AI 與媒體 | [AI Application Engineering](../skills/ai-application-engineering/SKILL.md) | 實作或診斷 LLM, Agent, Tool Calling, RAG, Embedding 與 model runtime |
 | AI 與媒體 | [ComfyUI Workflow](../skills/comfyui-workflow/SKILL.md) | 維護可重現的 Stable Diffusion / ComfyUI graph, model 與硬體設定 |

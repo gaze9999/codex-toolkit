@@ -2,14 +2,14 @@
 name: readme-maintainer
 description: Create or substantially restructure a repository README from verified project evidence. Use for README-focused work, not routine documentation sync, license decisions or downloadable reports.
 metadata:
-  version: "0.4.15"
+  version: "0.4.16"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
 
 # README Maintainer
 
-Produce a README that is accurate, scannable, usable by a new developer, and suitable for public presentation when the repository permits it.
+Produce a README that is accurate, scannable and usable by its intended readers. Resolve current repository visibility separately from planned public presentation, including private development that will become public.
 
 ## Activation and boundary
 

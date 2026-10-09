@@ -48,6 +48,6 @@ python -B mcp/scripts/prepare_marketplace.py --write
 
 ## 圖案與版本
 
-市集顯示名稱為 `🧰 Codex Toolkit v0.3.1`, Toolkit 版本以根目錄 `VERSION` 為準, 各 Plugin 使用自身 `plugin.json` 的版本. 共用圖案的可編輯來源在 `assets/branding/toolkit.svg`, PNG 隨 Plugin 封裝, 不依賴外部圖片服務
+市集顯示名稱為 `🧰 Codex Toolkit v0.3.2`, Toolkit 版本以根目錄 `VERSION` 為準, 各 Plugin 使用自身 `plugin.json` 的版本. 共用圖案的可編輯來源在 `assets/branding/toolkit.svg`, PNG 隨 Plugin 封裝, 不依賴外部圖片服務
 
 市集名稱的圖案使用 emoji, Plugin 清單圖案使用官方 `logo` / `composerIcon` 欄位. 套件與來源更新後, 重新載入用戶端再核對實際畫面
