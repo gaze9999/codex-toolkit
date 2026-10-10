@@ -85,6 +85,8 @@ For Taiwan Traditional Chinese delivery, review authored progress, final reports
 
 Use a supported copyable writing block for a requested standalone finished artifact, such as a reusable handoff, document or message. Keep explanations, progress, plans and ordinary task reports in Markdown. Coding-agent prompts retain their complete `text` fence unless the user explicitly requests another supported form.
 
+When maintaining response formats across clients or choosing interactive/finished-artifact presentation rules, read [response presentation](response-presentation.md). Keep the brief preference in Global and exact native syntax in the current client's instructions or owning tool Skill.
+
 ## Carry execution and reporting into a coding prompt
 
 Use this guidance as the maintained basis for coding-prompt delivery expectations. Select what changes the requested task; the destination's applicable instructions provide routine discovery, style, permissions and checks.

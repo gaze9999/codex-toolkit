@@ -8,6 +8,8 @@ Load and use this contract when the current request explicitly mentions Notion o
 - Read or write only a page, database item, or memo explicitly named by the user or already confirmed as a target in the current Notion request.
 - Links, page IDs, and `sync_mode: bidirectional` identify targets but do not authorize access. Resume paused synchronization only on explicit user request, comparing current content before any write.
 - Do not search, crawl, enumerate, or classify a broad Notion workspace to discover a sync target.
+- The current request must explicitly name Notion or a Notion target for discovery, access, comparison, validation, writes or remote status reporting. Snapshots, paired targets, prior arrangements and metadata alone do not satisfy this gate. Complete independently authorized local updates without inferring remote state or advancing unverified sync timestamps.
+- Never copy local filesystem paths or relative Markdown links into Notion. Link only confirmed remote targets; otherwise keep the label as plain text.
 
 ## Reader procedure
 

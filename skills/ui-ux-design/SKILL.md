@@ -2,7 +2,7 @@
 name: ui-ux-design
 description: Design or review UI/UX and check rendered interfaces against the original request before delivery. Use for layout defects, misleading displayed data, missing requirements and interaction changes, including UI work without user-provided screenshots.
 metadata:
-  version: "0.5.0"
+  version: "0.6.0"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -31,6 +31,8 @@ Jev is optional for semantic ordering of retrieved material or a finite comparis
 Choose the available browser interface for the real flow. A bounded reproduction can use CLI + a browser Skill when shell access and artifacts are available; use an existing MCP when its client integration or page introspection better fits the task. CLI can retain sessions, so state alone does not require MCP. Follow the selected tool's instructions for unique task sessions, fresh snapshot targets and cleanup, then verify relevant console/request results as well as the rendered UI.
 
 Inspect task completion, labels, validation and recovery, ordering, update/refresh behavior, independent disclosure state, responsive layout and keyboard/focus. Distinguish a visually stretched collapsed card from an actual state change, and keep summary information visible when it is needed before expanding details.
+
+For automatically updated tables or details, use the streaming cases in [detail review](references/detail-review.md#streaming-tables-and-details) to verify record identity, interaction state and the project's selected update policy.
 
 Use the project's existing table/filter/pagination and preference mechanisms when appropriate. Defaults follow the target project's current decisions; preserve valid user overrides. Tags retain readable text and sufficient contrast, and tooltips explain the actual metric or action rather than repeating a label or an unrelated limitation.
 

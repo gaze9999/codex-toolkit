@@ -17,6 +17,8 @@ Development: turn a concrete defect or changed requirement into a useful failing
 
 For retention or performance, capture a comparable baseline and workload, warm/cold states, wall time and attributable resources. Multiple tools or services running concurrently are nuisance factors, not a formula for removing load. Match chart units, sorting, sampling and aggregation to raw fixtures. An aggregate metric cannot prove every underlying record.
 
+For collection/streaming changes, burst handling or long-running resource checks, use [performance and streaming updates](performance-and-streams.md) to select layer-specific measurements, bounded diagnostics and recovery cases.
+
 For recorded intermittent failures and broader coverage gaps, an available validation-evidence-review Skill supplies conditional risk cases and statistical interpretation. Without it, keep claims descriptive unless the sampling unit, independence, estimator and uncertainty are established. Do not turn isolated fixtures into production reliability percentages.
 
 Sources: [Playwright practices](https://playwright.dev/docs/best-practices), [pytest flaky tests](https://docs.pytest.org/en/stable/explanation/flaky.html), [Chrome memory problems](https://developer.chrome.com/docs/devtools/memory-problems). Recheck exact installed versions when using their commands or APIs.

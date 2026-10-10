@@ -1,6 +1,0 @@
-interface:
-  icon_small: "./assets/icon-small.png"
-  icon_large: "./assets/icon.png"
-  display_name: "Environment Consistency Check (v0.4.12)"
-  short_description: "Compare Skills and environment mirrors without writes"
-  default_prompt: "Use $environment-consistency-check to compare these two local environments and report actionable differences."

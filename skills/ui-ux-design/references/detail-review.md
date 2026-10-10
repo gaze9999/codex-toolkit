@@ -34,6 +34,25 @@ Select relevant rows rather than applying every component or state to every page
 | Help and language | Headings, labels, units and tooltips explain actual meaning, aggregation and actions concisely. Place numeric units legibly. Preserve original required copy and use the target locale's terminology. Attach help to the relevant control when appropriate, avoid redundant help icons and repeated generic caveats. |
 | Keyboard and accessibility | Affected controls have meaningful names, keyboard operation, visible focus and appropriate states. Modal/menu opening, closing and focus return work; labels, errors and help remain discoverable without hover-only use. Preserve readable contrast and supported touch targets. |
 
+## Streaming tables and details
+
+Read these cases when data updates can reorder interactive rows or replace open details. Resolve whether the stream carries full state, ordered changes or log entries, then test the project's selected update policy with identifiable fixture records.
+
+| Case | Observable acceptance |
+|---|---|
+| A row moves between pointer targeting and activation | The opened or modified record has the intended stable ID. A row index or matching label alone cannot identify it. |
+| Updates arrive during keyboard focus, selection or editing | Focus, selected record and unsaved input follow the agreed policy. A removed record has an explicit state and never silently retargets an action. |
+| Hover/focus protection is selected | Data keeps arriving while presentation is held; pending state stays bounded. Leaving the protected state applies the accepted latest snapshot, preserving sorting and open detail identity. Test pointer and keyboard paths separately. |
+| Bursts, duplicates or reconnects change revisions | Accepted state converges to the expected generation/version, required events survive and stale responses cannot replace newer accepted data. |
+| A route is hidden, revisited or closed | Hidden-view work follows the subscription policy, re-entry catches up correctly and owned listeners/streams/callbacks are released on teardown. |
+| Summary counts exceed displayed detail capacity | Source total, filtered count, retained history and returned/displayed limit have distinct meanings. Validate arithmetic and truncated-detail behavior from fixtures. |
+
+Use observable states and relevant requests to synchronize the check. Prefer the selected browser tool's supported waiting/assertion behavior over arbitrary sleeps. Keep rendered fixture evidence and real source/API evidence identifiable.
+
+For automatically updating content, evaluate applicable [WCAG 2.2.2 pause/stop/hide requirements](https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html), including its essential-content exception. Focus-only suspension leaves a separate accessibility requirement to assess: the user must be able to pause without holding focus captive. Choose the mechanism within the product's requirements; a refresh button and a presentation-pause control serve different purposes.
+
+Sources checked 2026-10-10: [Playwright assertions](https://playwright.dev/docs/test-assertions) for observable-state waiting, WCAG for pause criteria, and [MDN SSE](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) for stream lifecycle. The fixture cases above are engineering acceptance choices, selected by the affected behavior.
+
 ## Evidence that supports a finding
 
 Use a compact finding with the requirement, observed discrepancy, impact, route/state and reproduction, expected result, evidence, responsible owner and retest status. Link the relevant screenshot or source when it helps verification. Prioritize blocked actions/data loss or wrong information, then interaction/layout failures, then cosmetic discrepancies by actual impact; do not invent severity from file length or preference alone.

@@ -30,6 +30,8 @@ For arrival-driven API load, inspect open versus closed workload semantics and o
 
 ## Resource and UI stability
 
+For collection/transport comparisons, identify source checks, collections, payloads and applied renders separately. Compare equal final watermarks and report total cost alongside cost per accepted operation. Interpret process CPU time, elapsed time and process I/O under their recorded units/cache conditions; physical disk claims need storage measurements. Inspect Debug/instrumentation overhead and bounded file retention. A zero counter increment carries the counter's observed resolution. These distinctions supplement the workload/block rules above.
+
 Compare post-cleanup heap/RSS and owned DOM/listener/controller/task counts at equivalent checkpoints across independent update/open/close cycles after warmup. A rising slope is a retention signal needing source/trace evidence; RSS growth alone does not prove a leak because caches, allocators and GC differ. Stable count alone does not prove absence of leaks.
 
 Keep exact visual/state assertions independent of timing: card bounds before/during/after refresh, font-size overflow, tooltip ownership, retained chart nodes, canceled callbacks and loading/empty/error transitions. Synthetic UI checks do not establish physical-device or production-volume performance. Report source, oracle, workload and concurrency conditions, actual counts/results, inference assumptions, uncertainty and the smallest remaining acceptance check. Example numbers above are illustrative, not evidence from any project.

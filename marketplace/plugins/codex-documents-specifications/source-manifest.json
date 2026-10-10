@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "4b2cd327f62085fd9c2e639cfefc3485a92ac0e055c67c11cdfeeb1b1ccda8f7",
+      "sha256": "b3e5e6c1886a4b292ffe23945e12c4aaa26af18283f3b0b0437a30e18ed008a8",
       "source": "plugins/documents-specifications/plugin.json"
     },
     "skills/context-brief/SKILL.md": {
@@ -57,11 +57,11 @@
       "source": "skills/context-brief/scripts/validate_context_brief.py"
     },
     "skills/doc-updater/SKILL.md": {
-      "sha256": "bd0873b1ff4c346af022b6c2e2e6abdd67da040e9b7d13126ded03861bc03017",
+      "sha256": "5849994bff3dfad39dc4f72e169d0c625b1e87d94dbb632ae1e233716c962adc",
       "source": "skills/doc-updater/SKILL.md"
     },
     "skills/doc-updater/agents/openai.yaml": {
-      "sha256": "10acd913dae56a651437febf18e21ccda36653de79b3b22f57ec3a316db6278e",
+      "sha256": "9f74a4d69b1c7d9bdad42ce24cd9a9e4206533d97faedf8a530110f8da7b8e48",
       "source": "skills/doc-updater/agents/openai.yaml"
     },
     "skills/doc-updater/assets/icon-small.png": {
@@ -81,16 +81,20 @@
       "source": "skills/doc-updater/assets/icon.svg"
     },
     "skills/doc-updater/references/doc-update-rules.md": {
-      "sha256": "192dae01ec2fa2792d5bc8e7e270c71257b967eec173baeaea193eab9cb0089f",
+      "sha256": "78db117d3d55db80fb49ec823747dc3ab1a61eac719b8db8b6045542dc112775",
       "source": "skills/doc-updater/references/doc-update-rules.md"
     },
     "skills/doc-updater/references/notion-sync-reader-writer-contract.md": {
-      "sha256": "c4dcbd9a01dba206d6965487af84a5dadf5fc7dfe45f0d4989e825f6e4ecebea",
+      "sha256": "bcaf13d096138fe9e634701e9d2cb5f31c2020a154c7c9a64bcbf176328a5a72",
       "source": "skills/doc-updater/references/notion-sync-reader-writer-contract.md"
     },
     "skills/doc-updater/references/presentation.md": {
       "sha256": "89d18d0213692a561e8d0ef68681752ba7936089cf27e672405978996fbee048",
       "source": "skills/doc-updater/references/presentation.md"
+    },
+    "skills/doc-updater/references/source-and-history.md": {
+      "sha256": "0e88b12807dd0953c52970196dffa156350ded79cd1b5b6258c22ac696c61c43",
+      "source": "skills/doc-updater/references/source-and-history.md"
     },
     "skills/doc-updater/scripts/inspect_markdown_sync_target.py": {
       "sha256": "9f7530322f289745df5c2588a790d883e1c226ff4cd6b6a8f57ff7048f672b66",
@@ -108,37 +112,17 @@
       "sha256": "a6b3d387db47029e3a01598306038013adc96a1c427dee274daba898fecef9dd",
       "source": "skills/doc-updater/scripts/write_markdown_sync_target.py"
     },
-    "skills/document-source-matching/SKILL.md": {
-      "sha256": "4da14cb2302aca9a5f164a9f3dd8e7ba4ee69bbb59c4648cd283da6e39f11cd8",
-      "source": "skills/document-source-matching/SKILL.md"
-    },
-    "skills/document-source-matching/agents/openai.yaml": {
-      "sha256": "240610794fda625726170fc12fa65bf58d7e72602cb4350e2c1dac2adc702377",
-      "source": "skills/document-source-matching/agents/openai.yaml"
-    },
-    "skills/document-source-matching/assets/icon-small.png": {
-      "sha256": "4fd2599b24052b083a1b44e57bea9cdea41472a116a4060169e10c86c2985396",
-      "source": "skills/document-source-matching/assets/icon-small.png"
-    },
-    "skills/document-source-matching/assets/icon-small.svg": {
-      "sha256": "095192cb842c89ee505ef84856497b496c990286afa6533478622595353b27b0",
-      "source": "skills/document-source-matching/assets/icon-small.svg"
-    },
-    "skills/document-source-matching/assets/icon.png": {
-      "sha256": "89e2c748116189eee91498b7c69d320d6ad64981e2cfa19fd83e5d2c87f3a915",
-      "source": "skills/document-source-matching/assets/icon.png"
-    },
-    "skills/document-source-matching/assets/icon.svg": {
-      "sha256": "095192cb842c89ee505ef84856497b496c990286afa6533478622595353b27b0",
-      "source": "skills/document-source-matching/assets/icon.svg"
-    },
     "skills/local-document-processing/SKILL.md": {
-      "sha256": "f7c8f64c4079f7ff6a79fa0e93d50d3945451c3ff13f36c123405a173a81ca3b",
+      "sha256": "f49af0960f48dd8fce01dba5d461e30f0d319de0cbb1a667e06ec90e617bfbe1",
       "source": "skills/local-document-processing/SKILL.md"
     },
     "skills/local-document-processing/agents/openai.yaml": {
-      "sha256": "e9911931490af720c2d89aa7ed2083b50d4e944ec6095571f554931dcaedd967",
+      "sha256": "264fe64bc427f9f95b3537513bfcec658ad1deb415f4a69c04c54675ff205ad8",
       "source": "skills/local-document-processing/agents/openai.yaml"
+    },
+    "skills/local-document-processing/references/source-matching.md": {
+      "sha256": "038edfd9d6ff0c442936a3bef767298e9528e7a719841776dc5facabd08f2000",
+      "source": "skills/local-document-processing/references/source-matching.md"
     }
   },
   "license": "MIT",
@@ -149,6 +133,6 @@
     "local-documents"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.3.2",
-  "version": "0.1.6"
+  "toolkit_version": "0.4.0",
+  "version": "0.2.0"
 }

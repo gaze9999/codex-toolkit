@@ -2,7 +2,7 @@
 name: research-learning-synthesis
 description: Synthesize technical research, community practices or papers into evidence-qualified conclusions and a small learning path, including prerequisites and overlooked alternatives. Use for a research brief or knowledge-gap review, not a simple factual lookup or automatic scheduling.
 metadata:
-  version: "0.4.12"
+  version: "0.5.0"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -12,6 +12,8 @@ metadata:
 Start with the user's question, intended use and known constraints. Use already-authorized relevant notes or conversations to avoid repeated discovery, but do not treat an old assistant answer as verified evidence or assume the user's proficiency.
 
 ## Build a bounded evidence set
+
+For broader discovery, literature/implementation tracing or conflicting community claims, read [source selection and tracing](references/source-selection.md). Select relevant source families and stop when the decision has adequate support.
 
 - Search by the underlying problem, not only known tool names. Include a useful alternative or adjacent concept when it broadens understanding; do not expand every branch into a separate investigation.
 - Official or community research may include official docs, engineering cases, Codex/other AI or relevant Reddit communities, original posts and discussions on X, Bluesky or other platforms, authoritative sites, engineering/research blogs and papers. Select by the question, not a fixed platform quota. Check authorship, expertise, date, version, method and counterevidence; popularity aids discovery but does not establish correctness. Distinguish product specifications, practice, opinion and research evidence.

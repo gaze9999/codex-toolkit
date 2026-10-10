@@ -2,7 +2,9 @@
 
 每個子目錄是一個可獨立安裝的 Skill, `SKILL.md` 定義啟用條件, `agents/openai.yaml` 保存介面資訊, 詳細流程依任務載入 `references/` 或 `scripts/`
 
-保留 focused Skills 的用途、輸入與驗收邊界, Plugin 用於分組交付與選擇性啟用, 不合併成大 Skill. 同一 Skill 避免同時使用獨立與 Plugin 來源, 分組及文件領域的 trigger 範例見 [Plugins](plugins.md#skill-邊界與選擇性啟用)
+依獨立用途、輸入與驗收邊界選用 Skill, 同一流程的小型判斷放在條件式 references. Plugin 依用途與相依分組交付, 同一 Skill 選擇單一啟用來源. 分組與選用條件見 [Plugins](plugins.md#skill-邊界與選擇性啟用)
+
+調整指示時, 依 [代表任務比較](../skills/agent-governance/references/component-authoring.md#evaluate-instruction-utility) 核對版本相容、實際使用、必要行為及交付結果. 安裝數量、篇幅與單一 benchmark 平均值各有不同意義, 保留任務所需規則, 效益由相符的驗收與完整用量判斷
 
 以此儲存庫為來源, 僅單向同步選定 Skill 到 `$CODEX_HOME/skills/`, 保留 `.system`、第三方 plugin 與其他來源的 Skills. 需要新專案治理時使用 [project starter](../skills/agent-governance/assets/project-starter/README.md), 範本需依實際專案改寫
 
@@ -22,20 +24,18 @@
 | AI 與媒體 | [ComfyUI Workflow](../skills/comfyui-workflow/SKILL.md) | 維護可重現的 Stable Diffusion / ComfyUI graph, model 與硬體設定 |
 | AI 與媒體 | [Editorial Illustration](../skills/editorial-illustration/SKILL.md) | 依固定 editorial illustration 視覺方向處理使用者提供的圖片 |
 | Frontend 與遊戲 | [Angular Development](../skills/angular-development/SKILL.md) | 依實際 Angular 與 TypeScript runtime 分配 Component, Service, state 與資料轉換責任 |
-| Frontend 與遊戲 | [UI UX Design](../skills/ui-ux-design/SKILL.md) | 依實際流程與研究檢查介面, 文案, 原型, responsive 與無障礙, 先驗證小區塊 |
+| Frontend 與遊戲 | [UI UX Design](../skills/ui-ux-design/SKILL.md) | 核對原始需求、畫面與資料, 條件式檢查 [即時表格](../skills/ui-ux-design/references/detail-review.md#streaming-tables-and-details) 的列身分、排序、焦點與無障礙 |
 | Frontend 與遊戲 | [Angular Member Order](../skills/angular-member-order/SKILL.md) | 安全整理 Angular Component class member 與可選的 Signal I/O 改寫 |
 | Frontend 與遊戲 | [Unity Development](../skills/unity-development/SKILL.md) | 依實際 Unity version, package, serialized asset 與 build target 開發及驗證 |
 | Frontend 與遊戲 | [Game Balance Simulation](../skills/game-balance-simulation/SKILL.md) | 共用遊戲規則跑模擬, 比較策略與分布, 重播數值及狀態錯誤 |
 | Frontend 與遊戲 | [Vue Development](../skills/vue-development/SKILL.md) | 依實際 Vue, Nuxt 或 Vite stack 開發並保留 component, state, SSR 與 build contracts |
 | Frontend 與遊戲 | [React Development](../skills/react-development/SKILL.md) | 依實際 React runtime 處理 component, state, effects, routing 與按需 SSR / hydration |
 | 架構與研究 | [System Design Analysis](../skills/system-design-analysis/SKILL.md) | 依需求與來源分析系統邊界, 資料流, 取捨與驗證範圍 |
-| 架構與研究 | [Research Learning Synthesis](../skills/research-learning-synthesis/SKILL.md) | 從可追溯來源整理研究, 學習與可採取的結論 |
-| 證據與來源 | [Document Source Matching](../skills/document-source-matching/SKILL.md) | 對照來源身分與抽出版, 區分 hash 一致與內容涵蓋 |
-| 證據與來源 | [Environment Consistency Check](../skills/environment-consistency-check/SKILL.md) | 比對明確環境範圍, 保留存取失敗與部分掃描狀態 |
-| 測試與交付 | [Test Strategy](../skills/test-strategy/SKILL.md) | 依變更與風險選測試, 條件式涵蓋應用程式、遊戲、AI 與發布驗收 |
-| 證據與來源 | [Validation Evidence Review](../skills/validation-evidence-review/SKILL.md) | 檢視驗證證據的來源版本, 結果與未涵蓋範圍 |
+| 架構與研究 | [Research Learning Synthesis](../skills/research-learning-synthesis/SKILL.md) | 按問題選用 [官方、社群、論文、原始碼與實測來源](../skills/research-learning-synthesis/references/source-selection.md), 追溯版本、反例與可採取的結論 |
+| 測試與交付 | [Test Strategy](../skills/test-strategy/SKILL.md) | 依變更與風險選測試, 條件式涵蓋應用程式、遊戲、AI、[效能與串流](../skills/test-strategy/references/performance-and-streams.md) 及發布驗收 |
+| 證據與來源 | [Validation Evidence Review](../skills/validation-evidence-review/SKILL.md) | 檢視驗證記錄, 或按需唯讀比對 [環境鏡像](../skills/validation-evidence-review/references/environment-comparison.md) 的相對路徑與 hash |
 | 文件 | [Doc Updater](../skills/doc-updater/SKILL.md) | 實作後依 verified diff 同步必要的 docs, memo, changelog 或 API reference |
-| 文件 | [Local Document Processing](../skills/local-document-processing/SKILL.md) | 沿用 versioned document core 擷取文件與預覽安全更新, 核對來源 hash 及寫入範圍 |
+| 文件 | [Local Document Processing](../skills/local-document-processing/SKILL.md) | 唯讀 [比對抽出版來源](../skills/local-document-processing/references/source-matching.md), 或沿用文件核心擷取與預覽安全更新 |
 | 文件 | [Document Production](../skills/document-production/SKILL.md) | 產生可交付的 PDF, DOCX 或 Markdown 正式文件 |
 | 文件 | [Multilingual Proofreading](../skills/multilingual-proofreading/SKILL.md) | 依語言校對台灣繁中, 英文與日文, 保留引用原文與程式碼 |
 | 文件 | [README Maintainer](../skills/readme-maintainer/SKILL.md) | 依 repository 證據建立或大幅重整 README |

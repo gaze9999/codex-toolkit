@@ -17,7 +17,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "537b968ac6214c630c2da21e9daf0d2b02c66172c3b1a35f5844cf28465045ae",
+      "sha256": "4f236b17b69d42608463077a40ef5bcab68f3a92061df96d7fad6e4f052b87d1",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "skills/angular-development/SKILL.md": {
@@ -153,11 +153,11 @@
       "source": "skills/react-development/references/state-effects.md"
     },
     "skills/ui-ux-design/SKILL.md": {
-      "sha256": "d98beb26b765cd8f663da92c051ddaf05b6aa76cc7186887c8f74b70b2ed2c96",
+      "sha256": "25d68bb0b873c7d0d27faed148d5dc941921d282fffb05ae2f0e0b669ef47411",
       "source": "skills/ui-ux-design/SKILL.md"
     },
     "skills/ui-ux-design/agents/openai.yaml": {
-      "sha256": "f9b67767ad19c582dff9b57ae5cf0b1e6de88ac258e09c521dd4f8430c2a6c16",
+      "sha256": "9d479eb915bd327df416f50c81bf0d6970ba00842237ce18d844a57cf00637f1",
       "source": "skills/ui-ux-design/agents/openai.yaml"
     },
     "skills/ui-ux-design/assets/icon-small.png": {
@@ -177,7 +177,7 @@
       "source": "skills/ui-ux-design/assets/icon.svg"
     },
     "skills/ui-ux-design/references/detail-review.md": {
-      "sha256": "88fa48e475a7e28e47c90471295b1f2fbd3a1133f6418ca7cd8075ceffb3e2ed",
+      "sha256": "403c7d997652aef7a0268bc72f806e859be9f3555972acc2eaeb6fea8084a45a",
       "source": "skills/ui-ux-design/references/detail-review.md"
     },
     "skills/vue-development/SKILL.md": {
@@ -223,6 +223,6 @@
     "edge-devtools"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.3.2",
-  "version": "0.2.0"
+  "toolkit_version": "0.4.0",
+  "version": "0.3.0"
 }

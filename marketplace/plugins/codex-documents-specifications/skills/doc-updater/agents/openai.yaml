@@ -1,5 +1,5 @@
 interface:
-  display_name: "Doc Updater (v0.4.15)"
+  display_name: "Doc Updater (v0.4.16)"
   short_description: "Align existing docs from verified implementation changes"
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"

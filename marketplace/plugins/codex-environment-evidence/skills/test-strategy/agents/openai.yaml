@@ -1,5 +1,5 @@
 interface:
-  display_name: "Test Strategy (v0.1.0)"
+  display_name: "Test Strategy (v0.2.0)"
   short_description: "Select scoped checks for development and delivery"
   default_prompt: "Use $test-strategy to select and complete authorized checks for the changed behavior and remaining acceptance risks."
 policy:
