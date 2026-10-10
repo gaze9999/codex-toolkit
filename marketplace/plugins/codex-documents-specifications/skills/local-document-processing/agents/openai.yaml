@@ -1,4 +1,4 @@
 interface:
-  display_name: "Local Document Processing (v0.1.1)"
-  short_description: "Extract sources and preview guarded Markdown updates"
-  default_prompt: "Use $local-document-processing for these explicit local sources and authorized Markdown targets."
+  display_name: "Local Document Processing (v0.2.0)"
+  short_description: "Find source extracts and apply guarded document processing"
+  default_prompt: "Use $local-document-processing to match existing source extracts or process these selected local documents within the authorized write scope."

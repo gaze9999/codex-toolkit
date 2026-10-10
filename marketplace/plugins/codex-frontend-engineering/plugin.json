@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-frontend-engineering",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Develop Angular, React and Vue interfaces with scoped browser and reference diagnostics.",
   "author": {
     "name": "gaze9999"

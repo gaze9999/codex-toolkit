@@ -1,8 +1,8 @@
 ---
 name: local-document-processing
-description: Extract selected local PDF/Office sources or apply guarded Markdown edits through an installed document core or Local Documents MCP. Use for conversion/edit operations, not authored reports, source matching alone or specification decisions.
+description: Find source-backed Markdown extracts, convert selected local PDF/Office documents, or apply guarded Markdown edits through an installed document core or Local Documents MCP. Use for source processing, not authored reports or specification decisions.
 metadata:
-  version: "0.1.1"
+  version: "0.2.0"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -10,6 +10,8 @@ metadata:
 # Local Document Processing
 
 Resolve the explicitly selected source/output and actual CLI or live MCP schema. Prefer existing extraction/Markdown operations backed by the installed versioned document core. Do not import another checkout or install a tool during ordinary processing.
+
+For existing-extract lookup or source/hash comparison, read [source matching](references/source-matching.md). Keep that mode read-only; conversion and target updates use the authorized operation below.
 
 - Check source identity and an existing usable Markdown extract before converting again. Original documents retain authority; record source SHA-256, extraction version, page/sheet locations and partial coverage.
 - Start with native text/table extraction. Enable OCR only for missing scanned content needed by the task. OCR being optional for an operation does not mean the installed server has lightweight dependencies; inspect its actual requirements before setup.

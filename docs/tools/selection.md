@@ -4,6 +4,8 @@
 
 ## 如何決定
 
+Skill 依任務、專案實際技術及選定工具啟用. 平台 / SDK 專用 Skill 只在使用該平台、SDK、工具或明確要求時載入, Agent、React、環境變數、圖表等一般關鍵字不決定 provider、Framework、代管服務或帳戶開通. 選定工具後遵守必要前置流程, 第三方 Plugin 保留原廠來源與更新方式
+
 先沿用目前能完成任務的能力. Coding agent 有 shell, 工作目錄與可讀取的產物時, 可重現的檔案處理, 測試, Git 操作與批次查詢通常適合 CLI + Skills. CLI 提供操作, Skill 保存何時用, 如何驗收與必要的權限邊界
 
 需要 client 原生的工具探索, 型別化參數, 資源讀取或通知, 遠端帳戶連接, 或受限制的 agent 無法使用 shell 時, 再評估既有 MCP / connector. MCP 提供標準化整合與 capability discovery, 實際支援仍由 server 與 client 決定. CLI 也能回傳 JSON, 登入帳戶及保留狀態, 所以這些特性單獨存在時不足以決定採用 MCP. [MCP 官方架構](https://modelcontextprotocol.io/docs/learn/architecture)
@@ -20,9 +22,10 @@
 | GitHub PR / CI | `gh` 可讀 PR diff, JSON 欄位與失敗 log, 批次查詢與腳本可重現 | client 已有 OAuth connector, 需要官方 toolsets / read-only 模式, 或 CLI 權限不可用 | 優先既有 `gh` 或官方 GitHub MCP / connector, 不自製重複的 PR server |
 | 大量 Test / Build 輸出 | RTK 明確 CLI prefix 或 `pipe`, 保存原始 log 與原命令 exit code | agent 需要結構化呼叫既有文字 / 核准 log 的受限 adapter | RTK CLI 與本 setup adapter 共用同一 binary, 預設不用 hooks |
 | 文件轉 Markdown / OCR | 已安裝文件核心的 CLI 做單次 / 批次擷取, 明確來源與輸出位置 | 多 client 反覆查文件與章節, 需要 server 的 root / hash 檢查 | 沿用 python-tools 與 Local Documents 共用核心, 不重做轉換引擎 |
-| 抽出版定位, Markdown 檢查與安全更新 | 明確路徑 / hash, batch check, diff / preview / 限定更新範圍 | 有效的 structured tools 能減少反覆解析, 且維持同一權限與 hash 前置條件 | [Local Documents](../usage/local-documents.md), [來源比對 Skill](../../skills/document-source-matching/SKILL.md) |
-| Skills / 環境差異 | repo audit, 版本與 hash 比對, 預覽與備份後同步 | 跨 client 反覆盤點, Workspace Inspection 提供已設定 roots 的受限唯讀查詢 | [Environment Consistency Check](../../skills/environment-consistency-check/SKILL.md), 未設定 roots 的 MCP 保留 pending 狀態 |
+| 抽出版定位, Markdown 檢查與安全更新 | 明確路徑 / hash, batch check, diff / preview / 限定更新範圍 | 有效的 structured tools 能減少反覆解析, 且維持同一權限與 hash 前置條件 | [Local Documents](../usage/local-documents.md), [來源比對](../../skills/local-document-processing/references/source-matching.md) |
+| Skills / 環境差異 | repo audit, 版本與 hash 比對, 同步依另外授權的預覽與備份流程處理 | 跨 client 反覆盤點, Workspace Inspection 提供已設定 roots 的受限唯讀查詢 | [唯讀環境比對](../../skills/validation-evidence-review/references/environment-comparison.md), 未設定 roots 的 MCP 保留 pending 狀態 |
 | 驗證證據彙整 | 讀既有 JSON / log, 核對 commit / baseline 與未涵蓋項目 | 多 client 反覆查同一份 evidence index | [Validation Evidence Review](../../skills/validation-evidence-review/SKILL.md), 不因查紀錄而重跑測試 |
+| 效能與即時資料 | 既有測試或量測入口, 比較同一 fixture 的 CPU 時間、耗時、I/O 與更新結果 | 需要現有瀏覽器 / profiler 的 trace、程序歸屬或受限結構化指標 | [效能與串流參考](../../skills/test-strategy/references/performance-and-streams.md), 程式 I/O 與實體磁碟證據分別核對 |
 | 中英日校對 | 本機 textlint / CSpell 與專案詞表, 檔案批次檢查 | 已有 textlint typed lint / fix 工具, client 不具 shell 或需要回傳修正版內容 | [校對 Skill](../../skills/multilingual-proofreading/SKILL.md), CLI fix 寫檔與 MCP 回傳內容分別核對 |
 | 本機圖表與產物 | Mermaid CLI 或既有繪圖工具產生可攜檔案 | 需要所選服務的 hosted 編輯, 帳戶或互動能力 | 先確認格式 / browser 相依與外傳範圍, 不因 catalog 有 hosted MCP 就上傳資料 |
 | Jev 有限排序 / 分類與監看資料 | 已安裝核心的 CLI, 明確輸入 / rubric 或 HTTP / JSON 唯讀查詢 | 多 client 共用已認證工具或受限資料源, 需要 typed tool discovery | 共用核心與既有服務, 排程及長期監看由 monitor / scheduler 負責, MCP 本身不提供排程 |

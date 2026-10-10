@@ -1,9 +1,9 @@
 ---
 name: test-strategy
-description: Select and implement risk-based checks for changed behavior, test gaps, failures or release acceptance. Use for explicit testing strategy work across applications, games and AI systems, not routine edits already covered by a sufficient project check or read-only summaries of existing results.
+description: Design and execute scoped checks for behavior changes, test gaps, failures or performance and release acceptance. Use for testing strategy work, not when routine checks suffice or when only summarizing recorded results.
 metadata:
   short-description: Risk-based checks across development and delivery
-  version: "0.1.0"
+  version: "0.2.0"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -29,6 +29,7 @@ Choose the smallest evidence that can resolve the actual acceptance risk. Keep e
 ## Conditional detail
 
 - For browser, API, storage, cross-platform tools or packaging, read [application and delivery cases](references/application-delivery.md).
+- For an authorized performance comparison, streaming update regression or sustained-resource check, read [performance and streaming updates](references/performance-and-streams.md).
 - For game rules, Unity/Unreal lifecycle, target hardware or multiplayer, read [game cases](references/game-testing.md).
 - For LLM/RAG/agents or stochastic media/model workflows, read [AI evaluation](references/ai-evaluation.md).
 - When the required evidence needs an additional interface or engine adapter, read [tool selection](references/tool-selection.md). Existing compatible CLI/client access comes first; new MCP installation needs its own confirmed scope.

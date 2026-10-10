@@ -1,6 +1,0 @@
-interface:
-  icon_small: "./assets/icon-small.png"
-  icon_large: "./assets/icon.png"
-  display_name: "Document Source Matching (v0.4.14)"
-  short_description: "Match Markdown extracts to their original source files"
-  default_prompt: "Use $document-source-matching to find the current Markdown extract and explain the matching evidence."

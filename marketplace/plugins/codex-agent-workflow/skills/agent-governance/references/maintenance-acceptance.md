@@ -8,7 +8,7 @@ Map only the changed behavior to its canonical source, installed owner, affected
 
 Use a compatible available CLI for a repeatable preview and focused application. Existing source/mirror guards, backups and native Plugin installation own mechanical writes. Assign one writer to a shared installation transaction, preview current source and targets, and recheck affected content before acceptance. Do not overwrite a newer source with an old preview or restore unrelated configuration from a whole-file backup.
 
-For installed owned Plugins, use the verified setup's `docs/plugins.md` and `plugins --sync-installed` entry. It builds a local working-tree snapshot, preserving registered identities and native installation. Formal release requires its separate committed-source gates. Configuration, cache bytes, reload and actual behavior remain separate evidence.
+For installed owned Plugins, inspect the registered marketplace source before choosing an update. Read the canonical [Plugin update guidance](https://github.com/gaze9999/codex-toolkit/blob/main/docs/plugins.md#已安裝-plugin-更新), not a private setup path. A Git marketplace uses published sources and the native marketplace/Plugin update operations; preserve that source unless a switch is explicitly requested. An existing local marketplace may use `mcp/scripts/sync_local_plugins.py` for a selected working-tree snapshot. The setup alias `plugins --sync-installed` forwards to that local-only entry and is not a Git-source updater. Preserve registered IDs, enabled states and unrelated settings. Committed release gates, cache bytes, reload and actual behavior remain separate evidence.
 
 ## Representative acceptance cases
 
@@ -24,6 +24,13 @@ Use isolated sample artifacts and current supported tools when behavioral evalua
 | A replacement task is explicitly authorized | The verified handoff puts current objective/next action first and preserves dirty/ignored artifacts, authority and evidence limits; it does not grant old release/delete authority |
 | A Taiwan Traditional Chinese report has mixed script or aggregated counts | Authored prose is corrected while literal names/quotes remain; cases, data combinations and batches stay distinct; partial type/API evidence remains explicit |
 | A copyable standalone artifact is requested | A supported writing block contains the finished artifact; ordinary progress/reports and coding prompt fences retain their intended format |
+| Raw HTML folding tags appeared literally in a chat response | Authored chat prose uses readable Markdown without HTML folding; code/quoted HTML remains intact, and headings, lists and fences retain valid boundaries |
+| A response requests interaction in a client without the required surface | Actual client capabilities determine the fallback; no invented directive/button or persistence claim, and the requested text/file remains usable |
 | Only an App runtime changes and a validator module disappears | The selected interpreter/module/exit result is identified; source defects and unavailable checks remain distinct; no unrelated dependency installation |
+| HEAD is unchanged but a tested working-tree input changes | Evidence identifies the relevant source/artifact bytes; an old result is not accepted for the changed input merely because the commit matches |
+| A project's launcher contract changes while its restore guide still names the old behavior | The selected guide and manifest are updated from the verified implementation, preserving other project content and installed-source policy |
+| A task passes while a Skill was only loaded/read | Task acceptance, applicable Skill behaviors and observed compliance remain separate; source presence does not establish behavior coverage |
+| A conditional reference is never needed by the selected case | The unexercised condition stays untested, not failed; missing evidence for an applicable behavior stays unknown |
+| A community loading report conflicts with current host documentation | Check the maintainer resolution and actual runtime/discovery paths before changing settings; an unsupported path or historical issue does not establish a current defect |
 
 Explicit, implicit and adjacent negative trigger cases complement source/metadata checks. This follows [OpenAI's Skill evaluation approach](https://developers.openai.com/blog/eval-skills); do not claim model reliability, speed or usage improvement from source checks alone.

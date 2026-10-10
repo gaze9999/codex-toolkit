@@ -24,6 +24,24 @@
     {"id":"no-auto-docs","kind":"negative","prompt":"完成這個純 Python 的小型重構, 不需要修改文件或建立任務指引","expected":[]},
     {"id":"tag-policy-only","kind":"positive","prompt":"依目前專案設計版本與 Tag 策略, 區分日常 push 與版本節點, 只交付規則","expected":["packaging-acceptance"]},
     {"id":"tag-authorized-delivery","kind":"positive","prompt":"依專案版本規範提交、推送並建立本次 Tag, 核對遠端指向, 不建立 GitHub Release","expected":["packaging-acceptance"]},
-    {"id":"tag-not-routine-push","kind":"negative","prompt":"只提交並推送這個已驗證的文字修正, 不建立版本 Tag 或 Release","expected":[]}
+    {"id":"tag-not-routine-push","kind":"negative","prompt":"只提交並推送這個已驗證的文字修正, 不建立版本 Tag 或 Release","expected":[]},
+    {"id":"source-match-readonly","kind":"positive","prompt":"唯讀找出這份 PDF 的現有 Markdown 抽出版, 比對記錄的來源路徑與 SHA-256, 不重新轉換或覆寫","expected":["local-document-processing"]},
+    {"id":"source-convert-selected","kind":"positive","prompt":"把這份本機 Office 文件轉成指定 Markdown, 先核對是否有可用抽出版, 只寫入已指定輸出","expected":["local-document-processing"]},
+    {"id":"environment-compare-readonly","kind":"positive","prompt":"唯讀比對指定來源與本機 Skills 鏡像的相對路徑、大小與 SHA-256, 列出缺少、多出與變更, 不同步","expected":["validation-evidence-review"]},
+    {"id":"docs-match-not-update","kind":"collision","prompt":"只定位指定原始規格的現有抽出版, 保留來源版本與 hash, 不改規格或實作文件","expected":["local-document-processing"]},
+    {"id":"generic-env-not-platform","kind":"negative","prompt":"只解釋 Python os.environ 讀取環境變數的方式, 不設定服務或帳戶","expected":[]},
+    {"id":"generic-agent-not-provision","kind":"negative","prompt":"只說明 agent 這個英文單字的一般意思, 不建立應用程式或開通服務","expected":[]},
+    {"id":"performance-plan-explicit","kind":"positive","prompt":"使用 $test-strategy 比較這個監測服務的輪詢與來源通知版本, 在隔離 fixture 執行閒置與活動量測, 分開記錄 CPU 時間、程式 I/O 與畫面更新","expected":["test-strategy"]},
+    {"id":"performance-stream-implicit","kind":"positive","prompt":"請設計並執行現有串流服務的大量更新與慢用戶端測試, 驗證最終資料一致及有容量上限的長時間診斷","expected":["test-strategy"]},
+    {"id":"performance-recorded-only","kind":"collision","prompt":"唯讀分析這兩份既有 SSE 效能記錄, 核對來源 hash、收集次數與 CPU/I/O 比較是否可比, 不重跑或新增收集","expected":["validation-evidence-review"]},
+    {"id":"ui-stream-record-identity","kind":"positive","prompt":"檢查即時更新的表格是否在排序變動時點到錯誤資料, 核對鍵盤焦點、開啟明細的 ID 與離開後的最新畫面, 依目前更新策略驗收","expected":["ui-ux-design"]},
+    {"id":"ui-count-detail-limit","kind":"positive","prompt":"核對 UI 摘要總數、篩選結果與只顯示 1000 筆明細的欄位意義, 用現有 fixture 追到 API 與畫面, 保留未知值","expected":["ui-ux-design"]},
+    {"id":"performance-not-routine-text","kind":"negative","prompt":"只修正這段已核對的純文字拼字, 用 diff 確認, 不做效能量測或壓力測試","expected":[]},
+    {"id":"governance-launcher-mirror","kind":"positive","prompt":"依已核對的啟動器原始碼更新保存的專案 AGENTS 指引與 hash manifest, 只改此項工作規範, 保留本機差異與 GitHub Plugin 來源","expected":["agent-governance"]},
+    {"id":"research-expand-explicit","kind":"positive","prompt":"使用 $research-learning-synthesis 擴大這份研究的來源, 從官方、Power User、論文與原始碼追溯版本和反例, 再整理可採取的結論","expected":["research-learning-synthesis"]},
+    {"id":"research-conflicting-implicit","kind":"positive","prompt":"比較這幾份工程實測、預印本與論壇說法, 找到原始方法與獨立反例, 同一論文的鏡像不要重複算證據","expected":["research-learning-synthesis"]},
+    {"id":"research-not-simple-lookup","kind":"negative","prompt":"只回答 SSE 縮寫的英文全名, 不展開研究、學習路徑或安裝","expected":[]},
+    {"id":"governance-instruction-utility","kind":"positive","prompt":"調整這組 Skills 的指示與 references, 保留必要權限和驗收, 用相符任務核對版本與行為, 不直接套用 benchmark 的固定數量或效益","expected":["agent-governance"]},
+    {"id":"research-benchmark-disagreement","kind":"collision","prompt":"唯讀研究 AGENTS.md 與 Skills 的兩份 benchmark 為何結果不同, 對照版本、任務、方法和限制, 不修改工作規範或執行新的模型實驗","expected":["research-learning-synthesis"]}
   ]
 }

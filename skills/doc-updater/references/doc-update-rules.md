@@ -1,6 +1,6 @@
 # Documentation impact and target selection
 
-Read this reference only when evidence strength, documentation impact or target selection is unclear. [SKILL.md](../SKILL.md) owns activation, source authority, authorization, local updates and history rules. For an explicitly authorized Notion update, use the [reader and writer contract](notion-sync-reader-writer-contract.md).
+Read when evidence strength, documentation impact or target selection is unclear. [SKILL.md](../SKILL.md) owns activation, authorization and local updates. Conflicting revisions or paired current/history files use [source authority and history](source-and-history.md). An explicitly authorized Notion update uses the [reader and writer contract](notion-sync-reader-writer-contract.md).
 
 ## Evidence strength
 

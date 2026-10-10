@@ -40,7 +40,6 @@
       "status": "ready",
       "skills": [
         "context-brief",
-        "document-source-matching",
         "doc-updater",
         "local-document-processing"
       ],
@@ -59,7 +58,6 @@
       "batch": "1B",
       "status": "ready",
       "skills": [
-        "environment-consistency-check",
         "validation-evidence-review",
         "test-strategy"
       ],

@@ -13,39 +13,15 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "cfd28e80ba93d2e8922b7529a9f561579325fcc79d682f55c7cc1865dbf1384e",
+      "sha256": "bed2729599dcfffb9d92e94242a8195a97fa75294bf8374930799eea2c221ffe",
       "source": "plugins/environment-evidence/plugin.json"
     },
-    "skills/environment-consistency-check/SKILL.md": {
-      "sha256": "c134033781a1dc463a66db2fd83426af665bf09cc868b81b8b69ed359b0a21b3",
-      "source": "skills/environment-consistency-check/SKILL.md"
-    },
-    "skills/environment-consistency-check/agents/openai.yaml": {
-      "sha256": "f23f5699097c1c157190a42dedd7034f5b3ac16c7ad5721ce59da3384abb837d",
-      "source": "skills/environment-consistency-check/agents/openai.yaml"
-    },
-    "skills/environment-consistency-check/assets/icon-small.png": {
-      "sha256": "408ba6310ae8dba02bfef7355bc1328303f98fd3dfdb141339e6bf609c6c89b0",
-      "source": "skills/environment-consistency-check/assets/icon-small.png"
-    },
-    "skills/environment-consistency-check/assets/icon-small.svg": {
-      "sha256": "ffd60fce4636ec14377470c4d28015ca69fd55a9efffbc27742a3ca63ceebe9a",
-      "source": "skills/environment-consistency-check/assets/icon-small.svg"
-    },
-    "skills/environment-consistency-check/assets/icon.png": {
-      "sha256": "67bde72171d183d240da3fd711470fde754039cfcca2c5f25ffb4aefd72d9654",
-      "source": "skills/environment-consistency-check/assets/icon.png"
-    },
-    "skills/environment-consistency-check/assets/icon.svg": {
-      "sha256": "ffd60fce4636ec14377470c4d28015ca69fd55a9efffbc27742a3ca63ceebe9a",
-      "source": "skills/environment-consistency-check/assets/icon.svg"
-    },
     "skills/test-strategy/SKILL.md": {
-      "sha256": "558b0dd9e181fa842372bdabe13d503c0b4f72a66a4c7c8a30ced260e6f95e36",
+      "sha256": "58606053b94c2166e9649a7c6b0eb0ff096cdaac57252263ddcb5b0128e334ee",
       "source": "skills/test-strategy/SKILL.md"
     },
     "skills/test-strategy/agents/openai.yaml": {
-      "sha256": "dbd56ecf5ee94194299df20a560c673f8a314bebb81f77abf6379baf2d46f5b7",
+      "sha256": "6219cbac1ba14713694b3b2b731e5bc0c8a96a198a1363dba92e53583b45e4cf",
       "source": "skills/test-strategy/agents/openai.yaml"
     },
     "skills/test-strategy/references/ai-evaluation.md": {
@@ -53,23 +29,27 @@
       "source": "skills/test-strategy/references/ai-evaluation.md"
     },
     "skills/test-strategy/references/application-delivery.md": {
-      "sha256": "89cd75011456848342efe60fb472bcb89fabbeeec993811ee1f6a5cf436424a3",
+      "sha256": "7fdfe7885574f074e31ee33b7ca6f4eed87e08b02073612b70b0e9f308600cb0",
       "source": "skills/test-strategy/references/application-delivery.md"
     },
     "skills/test-strategy/references/game-testing.md": {
       "sha256": "ec24e7fab1f673bf0fe3bd7c1fe64f9774821975b2ab54e95cf75fe890eb7255",
       "source": "skills/test-strategy/references/game-testing.md"
     },
+    "skills/test-strategy/references/performance-and-streams.md": {
+      "sha256": "219c6c2933a2c12c66ba3d8c8caf4197f9e53998e79a1bd8f4e960ea55f65d07",
+      "source": "skills/test-strategy/references/performance-and-streams.md"
+    },
     "skills/test-strategy/references/tool-selection.md": {
       "sha256": "e71e520e6411c5fe4c5dec0684c94cf35db28f760f5098fe583e42faaef93ab4",
       "source": "skills/test-strategy/references/tool-selection.md"
     },
     "skills/validation-evidence-review/SKILL.md": {
-      "sha256": "57baa99318be491d268cef5561808569b71ed4a29f4a02fe60b2c10768c8c9b5",
+      "sha256": "7b06f5703b3fd6af075e01a9c1fc6f5135a3db4f345ad31660a1197fc30ae690",
       "source": "skills/validation-evidence-review/SKILL.md"
     },
     "skills/validation-evidence-review/agents/openai.yaml": {
-      "sha256": "2363219adb1128566ca1e71e3063cba0dac11b2d1d6d163a4badee429d5f0b71",
+      "sha256": "34976592308e0470cc16b8dcc0034d5263350fefc203b822b605d2fa12a48780",
       "source": "skills/validation-evidence-review/agents/openai.yaml"
     },
     "skills/validation-evidence-review/assets/icon-small.png": {
@@ -88,8 +68,12 @@
       "sha256": "f9c530265a1d10fdb704102dc5ef261c4b88e7318568f7cd7eff4198ed2b2a51",
       "source": "skills/validation-evidence-review/assets/icon.svg"
     },
+    "skills/validation-evidence-review/references/environment-comparison.md": {
+      "sha256": "aa310801d3d13e24e5ce5f4bdece89445a7728ff40bff1fdcf36f299a262ad5c",
+      "source": "skills/validation-evidence-review/references/environment-comparison.md"
+    },
     "skills/validation-evidence-review/references/statistical-interpretation.md": {
-      "sha256": "12784bc29ceed9455cfbee8af8f4db4dcbb3021c4ef2b780d587ebe7840b2957",
+      "sha256": "efc6895a5379570bf9f8a80334c514f8eb5e4237a62b7689f94f2c2a4b86404c",
       "source": "skills/validation-evidence-review/references/statistical-interpretation.md"
     },
     "skills/validation-evidence-review/references/testing-risk-cases.md": {
@@ -109,6 +93,6 @@
     "workspace-inspection"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.3.2",
-  "version": "0.2.0"
+  "toolkit_version": "0.4.0",
+  "version": "0.3.0"
 }

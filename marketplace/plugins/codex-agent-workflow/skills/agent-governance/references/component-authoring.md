@@ -46,6 +46,8 @@ The Agent Skills standard recommends an entrypoint below 500 lines and 5000 toke
 
 Codex instruction discovery has a configurable combined byte cap, 32 KiB by default. Check the actual applicable chain and configured limit, including inherited instructions. Keep common rules short and conditional details outside that chain; do not raise the cap automatically or claim a character count equals tokens.
 
+The initial Skill catalog and the combined AGENTS instruction chain have separate budgets. Check the actual host/version, discovery warnings and loaded paths before changing enabled Skills or storage locations. Moving body details to references does not shorten catalog metadata. Plugin membership, installed Skill count and Skills activated for one task are different quantities.
+
 ## Add or revise safely
 
 1. Identify the requested outcome, actual users/callers, existing capability, source owner, authorization, inputs/outputs and acceptance. Check current files, metadata and concurrent differences; add only a missing capability or demonstrated correction.
@@ -67,6 +69,37 @@ Codex instruction discovery has a configurable combined byte cap, 32 KiB by defa
 - [Community reading observations](https://www.reddit.com/r/codex/comments/1t1rbqt/codex_may_only_read_the_first_220_lines_of_a/): reported partial reads in particular sessions; this is an anecdotal failure mode, not an official 220-line cap or a cross-model benchmark
 
 Sources checked 2026-10-07. Numeric drafting ranges above are local maintenance choices. Recheck current documentation when host discovery, metadata/schema or executable integration changes.
+
+## Current workflow evidence
+
+Sources checked 2026-10-10. Apply the method to the detected model/client and task; keep optional examples out of the always-loaded instruction chain.
+
+| Source and evidence type | Maintenance decision |
+|---|---|
+| [OpenAI's Astra guidance](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra), model-specific official guidance | Keep descriptions precise and references conditional. Evaluate model-specific recipe changes against actual target runtimes. |
+| [OpenAI Skill evals](https://developers.openai.com/blog/eval-skills), official method | Add relevant explicit, implicit and negative cases. Inspect observed actions/results when evaluating behavior; fixture validation remains source validation. |
+| [Phelan164/codex-howto](https://github.com/Phelan164/codex-howto), maintained workflow and small controlled seed comparisons | Compare minimal guidance with the existing workflow by task class, acceptance and total run cost. Keep published benchmark effects tied to their tested tasks/models. |
+| [Durdinss's workflow](https://www.reddit.com/r/codex/comments/1u9b6xh/whats_your_agentic_ai_setup/), individual Power User report | Route to relevant project material. Select environmental checks by concrete dependencies; retain established task continuation and authorization rules. |
+| [QA evidence discussion](https://www.reddit.com/r/codex/comments/1vamjmf/how_do_yall_build_qa_agents_that_actually_work/), individual reports and replies | Prefer runner-produced provenance/results and actual UI/data observations. Keep private artifacts local and use a compact reference when existing output is sufficient. |
+| [OpenAI's current Skill documentation](https://learn.chatgpt.com/docs/build-skills), official support | Front-load discriminating triggers for catalog truncation. Check discovery paths and invocation behavior in the selected host; reusable distribution can use a Plugin. |
+| [Codex issue #17111](https://github.com/openai/codex/issues/17111), report with maintainer resolution | Separate Skill storage from global AGENTS discovery. The maintainer identified the reported global AGENTS location as unsupported; the issue was closed, not a confirmed current loading defect. |
+
+## Evaluate instruction utility
+
+Use these findings when an instruction/Skill change needs effectiveness evaluation. Original methods and limitations were read on 2026-10-10; these are research inputs, not measured results for this Toolkit or the user's runtime.
+
+| Original study and version | Applicable method and evidence boundary |
+|---|---|
+| [Evaluating AGENTS.md, v3, 2026-09-29](https://arxiv.org/html/2602.11988v3), preprint | Compared generated/developer context on Python SWE-bench/CTXbench with selected older models. No generally demonstrated task-resolution gain, and length alone did not explain results. Security and other non-resolution requirements were outside the evaluated outcomes. |
+| [SkillsBench, v4, 2026-06-14](https://arxiv.org/html/2602.12670v4), preprint and maintained benchmark | Paired curated-Skill/no-Skill terminal-container tasks across model/harness configurations. Gains vary, with some task regressions. Compact task-specific guidance is a hypothesis to test; task module counts do not define an installed-Skill or Plugin quota. |
+| [SWE-Skills-Bench, v1, 2026-03-16](https://arxiv.org/html/2603.15401v1), preliminary preprint | Single Claude Code/Haiku 4.5 configuration with requirement-derived tests highlights compatibility/overhead risks. Sections 3.2 and 4.1 disagree on Skill placement, and the linked code entry returned 404 during this review; loading/reproduction needs verification before reusing its effects. |
+| [Skill Coverage, v2, 2026-07-04](https://arxiv.org/html/2606.20659v2), preprint | Maps source-grounded conditional behaviors to observable trajectories, separating uncovered, satisfied and violated cases. Its LLM labels were human-audited but remain fallible; task success and behavior coverage are separate measurements. |
+
+- First identify the actual failure or missing decision. Remove inherited duplicates and irrelevant recipes within scope, while preserving authorization, data and required acceptance boundaries. Neither file length nor benchmark averages justify deleting a needed rule.
+- Compare matched representative tasks with the existing and candidate guidance, keeping mandatory instructions in both variants. A no-optional-Skill variant may help attribution. Record model/client, source bytes, discovery/loading, relevant environment, acceptance and total cost/time, including retries and corrections. Do not run paid or external evaluations without the required authorization/data scope.
+- Check the selected workflow's applicable behaviors from actual actions/artifacts. Keep loading/reading, constraint applicability, satisfaction/violation and final task acceptance separate. A condition never exercised stays untested; an applicable condition with inadequate evidence remains unknown.
+- Validate generated tests against original requirements and representative failures. Deterministic execution establishes the verifier's result, not that the verifier covers every requested outcome. Pair rendered UI, real data and safety/authorization checks with their required evidence.
+- Adopt improvements by task class and runtime compatibility. Preserve unfavorable results, compare repeated runs when uncertainty matters and restore the prior guidance if the candidate loses required behavior. Do not transfer a preprint's gain, fixed module count or older-model setting to another runtime.
 
 ## Version and publication decisions
 
