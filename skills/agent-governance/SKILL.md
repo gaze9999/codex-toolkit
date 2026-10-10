@@ -3,7 +3,7 @@ name: agent-governance
 description: Create, audit, or simplify project AGENTS.md layers, Codex subagent roles and durable goal recovery across conversations. Use for instruction-governance work, not ordinary implementation or general code review.
 metadata:
   short-description: Agent governance, role boundaries, and instruction minimization
-  version: "0.5.6"
+  version: "0.5.7"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -36,7 +36,7 @@ Create or simplify instruction layers and durable role boundaries. Keep rules th
 | Sensitive-data exposure or history cleanup | [Sensitive-data removal](references/sensitive-data-removal.md) |
 | Canonical guidance, installed owners and teaching synchronization | [Maintenance acceptance](references/maintenance-acceptance.md) |
 | Persistent project tracking, cross-device settings or recurring document maintenance | [Shared workflow](references/shared-workflow.md) |
-| Owned Skills, helpers, Plugins, MCP or distribution changes | [Component authoring](references/component-authoring.md) |
+| Owned instructions, Skills, helpers, Plugins, MCP, tool selection or teaching workflow changes | [Component authoring](references/component-authoring.md), including relevant collected research |
 | Skill/Plugin boundaries, context budgets or measured comparison | [Operating efficiency](references/operating-efficiency.md) |
 
 ## Verify and deliver

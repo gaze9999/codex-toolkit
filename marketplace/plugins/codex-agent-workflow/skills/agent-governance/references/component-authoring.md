@@ -48,9 +48,17 @@ Codex instruction discovery has a configurable combined byte cap, 32 KiB by defa
 
 The initial Skill catalog and the combined AGENTS instruction chain have separate budgets. Check the actual host/version, discovery warnings and loaded paths before changing enabled Skills or storage locations. Moving body details to references does not shorten catalog metadata. Plugin membership, installed Skill count and Skills activated for one task are different quantities.
 
+## Reuse collected maintenance evidence
+
+Before changing instructions, Skill/Plugin behavior, tool selection or teaching workflows, resolve the project's approved research record through its existing configuration or guidance. When a relevant collection exists, read its matching topic, applicable version, current conclusion, original evidence and unresolved conflicts before deciding the change. Follow linked material only when it affects that decision; do not reread the entire collection.
+
+Compare collected findings with current implementation and confirmed user/project decisions. Refresh necessary primary sources when evidence is missing, stale, incompatible or conflicting, or the request requires verification. If the record is unavailable, report the affected evidence gap and continue independent work from adequate authorized sources. Do not wait for the next scheduled run, create another collector or infer that a collection ran from a Page's modification date.
+
+Pure wording corrections and previously verified mechanical synchronization may reuse compatible evidence. Recheck when meaning, behavior, source provenance or the target state changes. Collection is evidence, not installation/publication authority; preserve private and company data boundaries. For locating and maintaining the selected record, see [shared workflow](shared-workflow.md).
+
 ## Add or revise safely
 
-1. Identify the requested outcome, actual users/callers, existing capability, source owner, authorization, inputs/outputs and acceptance. Check current files, metadata and concurrent differences; add only a missing capability or demonstrated correction.
+1. Identify the requested outcome, actual users/callers, existing capability, source owner, authorization, inputs/outputs and acceptance. Check current files, metadata and concurrent differences, and apply the collected-evidence conditions above; add only a missing capability or demonstrated correction.
 2. Select the narrowest maintained unit above. Keep discovery descriptions discriminating; supply an explicit loading condition for a new reference. Instructions should change decisions, not repeat general model knowledge or project rules.
 3. For executable work, preserve explicit inputs, bounded output/errors/exit codes, dry-run or preview when useful, overwrite/hash guards and cleanup of owned resources. Windows/macOS paths and platform differences belong in the relevant implementation/setup, not hardcoded personal paths in portable guidance.
 4. When the public API, distribution payload or behavior changes, update its actual version and callers according to the package's compatibility/release policy. Skill, Plugin, core and release versions are distinct. Never equate a metadata bump or working-tree snapshot with a release.

@@ -37,7 +37,7 @@
 | 文件 | [Doc Updater](../skills/doc-updater/SKILL.md) | 實作後依 verified diff 同步必要的 docs, memo, changelog 或 API reference |
 | 文件 | [Local Document Processing](../skills/local-document-processing/SKILL.md) | 唯讀 [比對抽出版來源](../skills/local-document-processing/references/source-matching.md), 或沿用文件核心擷取與預覽安全更新 |
 | 文件 | [Document Production](../skills/document-production/SKILL.md) | 產生可交付的 PDF, DOCX 或 Markdown 正式文件 |
-| 文件 | [Multilingual Proofreading](../skills/multilingual-proofreading/SKILL.md) | 依語言校對台灣繁中, 英文與日文, 保留引用原文與程式碼 |
+| 文件 | [Multilingual Proofreading](../skills/multilingual-proofreading/SKILL.md) | 校對台灣繁中、英文與日文, 依授權維護詞彙來源及語境, 保留引用與程式碼 |
 | 文件 | [README Maintainer](../skills/readme-maintainer/SKILL.md) | 依 repository 證據建立或大幅重整 README |
 | 文件 | [License Maintainer](../skills/license-maintainer/SKILL.md) | 依授權與 ownership 證據維護 LICENSE, NOTICE, COPYRIGHT, SPDX 與 README 授權連結 |
 | Rules 與 Filter | [Network Filter Rules](../skills/network-filter-rules/SKILL.md) | 維護 AdGuard, uBlock Origin, DNS, hosts 與相似 filter/rewrite rules |

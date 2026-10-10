@@ -1,9 +1,9 @@
 ---
 name: multilingual-proofreading
-description: Proofread Traditional Chinese, English or Japanese prose for terminology, punctuation, spelling, grammar and natural wording. Use for requested proofreading or material document-quality gaps, not automatic translation or a blanket check on every chat reply.
+description: Proofread Traditional Chinese, English or Japanese prose for terminology, punctuation, spelling, grammar and natural wording, or maintain a requested terminology profile. Use for requested proofreading or material document-quality gaps, not automatic translation or a blanket check on every chat reply.
 metadata:
   short-description: Language-aware proofreading and terminology consistency
-  version: "0.4.15"
+  version: "0.4.16"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -23,6 +23,8 @@ Preserve the author's meaning, factual claims, register and terminology. Infer t
 - For mixed-language documents, check separately by language segment or the author's declared file profile. Preserve quoted source text, code, URLs, identifiers, names and citations; distinguish corrections to surrounding prose from changes to literal material. Do not infer language from a filename alone when it conflicts with the actual content.
 
 ## Check and correct
+
+For requested Taiwan Chinese vocabulary/rule maintenance, read [Taiwan terminology sources](references/taiwan-terminology.md). Keep official terminology, product/project wording and personal preferences distinguishable; ordinary proofreading does not require collecting new entries.
 
 Select actually available terminology, punctuation, spelling or grammar capabilities by the languages, local rules and approved data boundary. Use the current project configuration when applicable. Reuse a compatible CLI or MCP, inspect its schema or help, and use an available setup Skill only if installation or diagnosis is needed. Tool recipes and versions belong in the setup catalog, not this workflow.
 

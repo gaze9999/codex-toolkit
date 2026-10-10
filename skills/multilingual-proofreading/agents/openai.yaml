@@ -1,7 +1,7 @@
 interface:
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
-  display_name: "Multilingual Proofreading (v0.4.15)"
+  display_name: "Multilingual Proofreading (v0.4.16)"
   short_description: "Proofread Taiwan Chinese, English and Japanese by language"
   default_prompt: "Use $multilingual-proofreading to correct the requested prose while preserving meaning and literal source material. Choose available language-appropriate checking capabilities, use Taiwan terminology, retain 、 in Chinese lists and half-width punctuation elsewhere, and preserve Japanese 、。 and the intended register."
 
