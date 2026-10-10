@@ -9,14 +9,15 @@ Read when the user requests persistent project tracking, cross-device configurat
 | Portable public tools, Skills and generated Plugins | Public toolkit |
 | Personal choices, selected Page IDs and private candidates | Private settings source |
 | Sanitized methods and reusable examples | Public teaching source |
-| Current project goals, task status and acceptance evidence | Selected shared tracking Page or task system |
+| Current project goals, differences, task status and acceptance evidence | Existing current-state document, approved tracking Page or task system |
 | Credentials, device paths, granted roots and session state | Target device's approved storage |
 
-Select projects from actual work, not a fixed list. Preserve repository identity, repository-relative paths, source/base revision and content hashes. Locate each checkout on the destination device; do not treat an absolute path as its identity. Retrieve the authorized published/private source, preview selected changes, merge conflicts and back up before application. Verify saved source, remote delivery, destination content and client loading separately. Offline or unpushed work remains explicitly pending, not silently overwritten by a newer snapshot.
+Select projects from actual work, not a fixed list. An existing tracker can serve multiple projects with distinct identities; durable work needs a recoverable record, not a new document for every repository. Preserve repository identity, repository-relative paths, source/base revision and content hashes. Locate each checkout on the destination device; do not treat an absolute path as its identity. Retrieve the authorized published/private source, preview selected changes, merge conflicts and back up before application. Verify saved source, remote delivery, destination content and client loading separately. Offline or unpushed work remains explicitly pending, not silently overwritten by a newer snapshot.
 
 ## Update shared state, without an execution log
 
-- Use stable project/task IDs and canonical Page IDs. Update the same task's goal, owner, status, next action and evidence when they change. Existing acceptance and deferred decisions survive a device or conversation change.
+- Locate the selected record through project instructions or existing tracking configuration at the start of relevant work, including user-opened new conversations. Use stable project/task identity and the record's existing location or Page ID; see [context continuity](context-continuity.md#recover-durable-goals-in-a-new-conversation).
+- Keep durable goals/decisions/acceptance distinct from observed state, differences and pending work. Update the same record when these or its owner/next action/evidence change. Existing acceptance and deferred decisions survive device or conversation changes; reuse the approved environment and format rather than requiring a shared Page for company material.
 - Read current content and instruction blocks before writing. Use the platform's current revision/hash guards and reconcile the save receipt with readback. A conflict requires rereading and rebuilding only the rejected change, not replaying successful operations.
 - Match research by topic, source and applicable version. Merge additional evidence into the current conclusion, retaining unresolved contradictions and meaningful provenance. No substantive difference means no write.
 - Consolidate superseded, agent-generated summaries in place. Preserve original attachments, human edits, unresolved work and evidence needed for acceptance. Keep compact completion evidence linking to its original artifact; do not copy entire logs or source documents into each update.
