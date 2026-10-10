@@ -13,15 +13,15 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "13dee0331cdf15d18b4027d7a23aad1828a7cdd5401d5b14ee1d8fb351fc8f8d",
+      "sha256": "e19d1149bc54b71c0aa6f280d334e89e10be7fea2c63001cdc0a1de463557e01",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
-      "sha256": "fac6f9e95587cf27a8ec280b97d7c8faefbf2797ee622f272b7fe37bc7290964",
+      "sha256": "84b46a330e833b3cbe0dd83389c203ed9c514ab11bc051d427b2a64136ef415a",
       "source": "skills/agent-governance/SKILL.md"
     },
     "skills/agent-governance/agents/openai.yaml": {
-      "sha256": "e7471326a608f10959ebd3e8f1f9c5068bd660fa2e2aec2abe6717e36caf5821",
+      "sha256": "f0c1c10a8a2d0dfe00c57adc8d68bedb4dae20e9d2ef96d618eb38716ef04b3e",
       "source": "skills/agent-governance/agents/openai.yaml"
     },
     "skills/agent-governance/assets/icon-small.png": {
@@ -97,7 +97,7 @@
       "source": "skills/agent-governance/assets/project-starter/root/AGENTS.md"
     },
     "skills/agent-governance/references/component-authoring.md": {
-      "sha256": "18ced5edb0e5f5ac6e7015c60cbb577267d1c273383232c544010588dc8f68c5",
+      "sha256": "e675aa87a9857efaa8ca173aa820d6bf8d0bd583a3ff41a109816cb6f8bf8829",
       "source": "skills/agent-governance/references/component-authoring.md"
     },
     "skills/agent-governance/references/context-continuity.md": {
@@ -141,7 +141,7 @@
       "source": "skills/agent-governance/references/sensitive-data-removal.md"
     },
     "skills/agent-governance/references/shared-workflow.md": {
-      "sha256": "a60967eed0a3fd27db84b4163c73bdc5ebf9b997687c0899c5f35638b53eef94",
+      "sha256": "3e20b7bb68360a34a806f983e9b02177818840cbc410f5c0586c4bff371d41da",
       "source": "skills/agent-governance/references/shared-workflow.md"
     },
     "skills/agent-governance/references/task-execution-and-reporting.md": {
@@ -276,5 +276,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.4.2",
-  "version": "0.2.7"
+  "version": "0.2.8"
 }

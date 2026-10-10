@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "01bd794d57058f19b67f9761e0ff157c9af6d3779e205a48207e4cf2697b3f5d",
+      "sha256": "51b33bf6ba4b1fb2dfd65980799aa9c9fa02bc0ccd6434334e62d198a59c02cf",
       "source": "plugins/multilingual-proofreading/plugin.json"
     },
     "resources/proofreading/en/cspell.json": {
@@ -41,15 +41,15 @@
       "source": "mcp/tools/proofreading/zh-tw/taiwan-style.cjs"
     },
     "resources/proofreading/zh-tw/terms.yml": {
-      "sha256": "f5b87ff4c8b09fc588a2878a97fb26f66f30232f192ba00738343de41e20d0fb",
+      "sha256": "45cc3cae05ecc42bd41360e39399fdb61fac79011d1cb358b4c2b338bf290235",
       "source": "mcp/tools/proofreading/zh-tw/terms.yml"
     },
     "skills/multilingual-proofreading/SKILL.md": {
-      "sha256": "5f82c1c56b1350ccd8229f95b8c8a7bcab283d4fc84122ec19b7fe8e70c3e079",
+      "sha256": "64df9e2a12ba5401f5b0f62f83b31357bc1d492970af55aad3b7655b70b2ca3a",
       "source": "skills/multilingual-proofreading/SKILL.md"
     },
     "skills/multilingual-proofreading/agents/openai.yaml": {
-      "sha256": "d481f835b7f8428fb17739169ca16b7848583d1027045404dc3ed007ec31b721",
+      "sha256": "84f3ce623fed3bcbb971731fcfb1a2b98256c88de9aff1213cbe22999b82d099",
       "source": "skills/multilingual-proofreading/agents/openai.yaml"
     },
     "skills/multilingual-proofreading/assets/icon-small.png": {
@@ -67,6 +67,10 @@
     "skills/multilingual-proofreading/assets/icon.svg": {
       "sha256": "4e2e092f61a1f54a6d9831cab1a5aea92acd6dcdd8f52ead82c85c97efacc04c",
       "source": "skills/multilingual-proofreading/assets/icon.svg"
+    },
+    "skills/multilingual-proofreading/references/taiwan-terminology.md": {
+      "sha256": "36240abfafbd2df269aab4dd3a010b080fa3a4bc6f4dcb1c8b329a358b1df901",
+      "source": "skills/multilingual-proofreading/references/taiwan-terminology.md"
     }
   },
   "license": "MIT",
@@ -79,5 +83,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.4.2",
-  "version": "0.1.6"
+  "version": "0.1.7"
 }

@@ -53,6 +53,28 @@ rules:
     - from: 历史成果
       to: 歷史成果
 
+  # Display-device prose only; retain the curtain/barrier meaning of 屏幕.
+  # MOE Revised Mandarin Dictionary, reviewed 2026-10-10:
+  # 螢幕: https://dict.revised.moe.edu.tw/dictView.jsp?ID=158134&la=0&powerMode=0
+  # 屏幕: https://dict.revised.moe.edu.tw/dictView.jsp?ID=26113&la=0&powerMode=0
+  # Replacement scope and examples are authored here; no dictionary definitions are imported.
+  - expected: $1螢幕
+    pattern: /((?:電腦|電視|手機|筆電|平板)(?:的)?[ \t]*)屏幕/g
+    prh: 顯示裝置語境使用螢幕, 屏幕的遮蔽物語意保留
+    specs:
+    - from: 電腦屏幕
+      to: 電腦螢幕
+    - from: 手機的屏幕
+      to: 手機的螢幕
+    - from: 平板 屏幕
+      to: 平板 螢幕
+    - from: 筆電螢幕
+      to: 筆電螢幕
+    - from: 屏幕遮住入口
+      to: 屏幕遮住入口
+    - from: 山壁如屏幕
+      to: 山壁如屏幕
+
   # Established computing terms. Sources: mdn, android-security, dotnet, dependencies
   - expected: 軟體
     patterns:
