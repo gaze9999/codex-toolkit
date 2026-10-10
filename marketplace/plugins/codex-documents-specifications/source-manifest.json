@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "b3e5e6c1886a4b292ffe23945e12c4aaa26af18283f3b0b0437a30e18ed008a8",
+      "sha256": "d64251b6471ab53e841b28d8bd4279deddfcb86c56cb6e2dd3f0ce1d1fc2d8f8",
       "source": "plugins/documents-specifications/plugin.json"
     },
     "skills/context-brief/SKILL.md": {
@@ -57,11 +57,11 @@
       "source": "skills/context-brief/scripts/validate_context_brief.py"
     },
     "skills/doc-updater/SKILL.md": {
-      "sha256": "5849994bff3dfad39dc4f72e169d0c625b1e87d94dbb632ae1e233716c962adc",
+      "sha256": "485421e854e76510e4d0b16714bd42132fc3eba7940cf2ace441d4c0da135d05",
       "source": "skills/doc-updater/SKILL.md"
     },
     "skills/doc-updater/agents/openai.yaml": {
-      "sha256": "9f74a4d69b1c7d9bdad42ce24cd9a9e4206533d97faedf8a530110f8da7b8e48",
+      "sha256": "06ce7853c8d9c81a53678747233a278a6020a506063102029c76da210961a9d7",
       "source": "skills/doc-updater/agents/openai.yaml"
     },
     "skills/doc-updater/assets/icon-small.png": {
@@ -117,7 +117,7 @@
       "source": "skills/local-document-processing/SKILL.md"
     },
     "skills/local-document-processing/agents/openai.yaml": {
-      "sha256": "264fe64bc427f9f95b3537513bfcec658ad1deb415f4a69c04c54675ff205ad8",
+      "sha256": "4b362643d5f71df71de9ab8567e3eaa6914c037f644f82f08fe11df342e53481",
       "source": "skills/local-document-processing/agents/openai.yaml"
     },
     "skills/local-document-processing/references/source-matching.md": {
@@ -133,6 +133,6 @@
     "local-documents"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.4.0",
-  "version": "0.2.0"
+  "toolkit_version": "0.4.1",
+  "version": "0.2.1"
 }

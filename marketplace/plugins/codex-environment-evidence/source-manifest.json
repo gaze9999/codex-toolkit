@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "bed2729599dcfffb9d92e94242a8195a97fa75294bf8374930799eea2c221ffe",
+      "sha256": "bc4b48e10f61cc8f4032a811d641464a8bdc4d7feb174734951053e70ec68f88",
       "source": "plugins/environment-evidence/plugin.json"
     },
     "skills/test-strategy/SKILL.md": {
@@ -49,7 +49,7 @@
       "source": "skills/validation-evidence-review/SKILL.md"
     },
     "skills/validation-evidence-review/agents/openai.yaml": {
-      "sha256": "34976592308e0470cc16b8dcc0034d5263350fefc203b822b605d2fa12a48780",
+      "sha256": "f5b32d26eec6771a7f9687f4d6ae7c8c9e1ebbc6d28171cf246f64de3cfdb7a5",
       "source": "skills/validation-evidence-review/agents/openai.yaml"
     },
     "skills/validation-evidence-review/assets/icon-small.png": {
@@ -93,6 +93,6 @@
     "workspace-inspection"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.4.0",
-  "version": "0.3.0"
+  "toolkit_version": "0.4.1",
+  "version": "0.3.1"
 }

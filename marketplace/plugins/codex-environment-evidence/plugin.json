@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-environment-evidence",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Select risk-based checks, compare scoped environments and interpret existing validation evidence with explicit coverage and sampling limits.",
   "author": {
     "name": "gaze9999"

@@ -13,15 +13,15 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "d425518237053a3350c95d87a65de1e32452f8292eab846baa1749e585992316",
+      "sha256": "a0744c1fec03acd9d974f22fd119c90a1a4f5ae807f0a68064599aad531cc165",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
-      "sha256": "3c255245ecaf78696eb1f4b937b38a4dbef7d3f8ce8ea85e3731e8a1ac0ce5da",
+      "sha256": "b181346e990edc73cf74ce6c2383be4d5800d3a60d8d2dbcb925cb726de3ff4b",
       "source": "skills/agent-governance/SKILL.md"
     },
     "skills/agent-governance/agents/openai.yaml": {
-      "sha256": "1e290a394d71b95ccc92814340fa9ae885e22c91e90931e559f53225326a137e",
+      "sha256": "e263dc578698847c069640ff42f5d11066a8c0d8432072b97dba50cf74cc4202",
       "source": "skills/agent-governance/agents/openai.yaml"
     },
     "skills/agent-governance/assets/icon-small.png": {
@@ -271,6 +271,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.4.0",
-  "version": "0.2.3"
+  "toolkit_version": "0.4.1",
+  "version": "0.2.4"
 }
