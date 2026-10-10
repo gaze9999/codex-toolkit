@@ -1,5 +1,5 @@
 interface:
-  display_name: "Agent Governance (v0.5.3)"
+  display_name: "Agent Governance (v0.5.5)"
   short_description: "Simplify agent governance and clarify role boundaries"
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"

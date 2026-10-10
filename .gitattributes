@@ -16,3 +16,4 @@ mcp/tools/proofreading/** text=auto eol=lf
 assets/**/*.svg text eol=lf
 assets/**/*.png -text
 VERSION text eol=lf
+.agents/plugins/marketplace.json text eol=lf

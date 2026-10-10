@@ -32,15 +32,15 @@ Prefer an existing compatible command, API or supported Plugin reference. A one-
 
 Global/general guidance uses concise Taiwan Traditional Chinese. Project root/nested instructions, roles, Skill instructions/references and internal usage guides use concise English. User-facing reports and personal README use Taiwan Traditional Chinese unless the user/repository specifies otherwise. Preserve identifiers, parser vocabulary, quotations, legal text and intentionally localized templates/output.
 
-The following are local drafting guides, not product limits, acceptance quotas or reasons to remove a necessary rule. Count English prose by words, Chinese prose approximately by Chinese characters, and separately inspect actual UTF-8 bytes/tokens. A shorter file does not itself prove better reliability, usage or speed.
+Size follows the loaded decision scope, without local word-count targets. Inspect actual UTF-8 bytes/tokens when discovery or context limits matter. A shorter file does not itself prove better reliability, usage or speed.
 
-| Loaded material | Practical drafting guide |
+| Loaded material | Keep at this layer |
 |---|---|
-| Skill description | Usually 20-50 English words, front-load purpose and trigger; the standard permits at most 1024 characters |
-| New focused `SKILL.md` body | Usually 200-800 English words; a tiny workflow can be shorter, complex workflows keep necessary boundaries and route conditional detail |
-| Conditional reference | One subject, often 300-1500 English words; add navigation/search hints when it grows, split by real use case rather than a quota |
-| Root/nested project instructions or role delta | Usually 100-600 English words, recording durable facts/constraints absent from an inherited layer |
-| A new global/general instruction section | Usually 100-400 Chinese characters; merge inherited duplicates instead of repeating the full workflow |
+| Skill description | Purpose and discriminating trigger within current standard/parser limits |
+| `SKILL.md` body | Essential authority, inputs, decisions and acceptance; route conditional detail |
+| Conditional reference | A real use case, with navigation when needed |
+| Project instructions or role delta | Durable local facts/constraints absent from inherited layers |
+| Global/general instructions | Stable cross-project preferences and boundaries, merging inherited duplicates |
 
 The Agent Skills standard recommends an entrypoint below 500 lines and 5000 tokens. Treat these as upper guidance, not targets or evidence that every line was read. Keep trigger, authorization, essential inputs, stop conditions and acceptance easy to find. Link conditional references directly from the entrypoint; do not default-load all references. Before changing an established large Skill, inspect its callers and unique decisions, not just length.
 

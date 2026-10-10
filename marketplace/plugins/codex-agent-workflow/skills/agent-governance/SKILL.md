@@ -3,7 +3,7 @@ name: agent-governance
 description: Create, audit, or simplify project AGENTS.md layers and Codex subagent roles. Use for agent-governance work, including a new project setup, not ordinary implementation or general code review.
 metadata:
   short-description: Agent governance, role boundaries, and instruction minimization
-  version: "0.5.3"
+  version: "0.5.5"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -19,7 +19,7 @@ Create or simplify instruction layers and durable role boundaries. Keep rules th
 - Verify current official OpenAI behavior when changing instruction discovery, configuration, model/reasoning or subagents. Distinguish project evidence and human reports from product specifications.
 - Stable cross-project preferences belong in Global, project facts at root/nested scope, role differences in roles, conditional procedures in references, and current goals/permissions/progress in the task. Judge execution scope rather than the directory where guidance is authored.
 - Global/general instructions use concise Taiwan Traditional Chinese; project, role and Skill instructions/references use concise English unless explicitly overridden. Classify templates by intended use and preserve parser terms, quotations and localized outputs. User-facing language follows the user/project.
-- Preserve confirmed decisions, exact contractual wording, authorization, public interfaces and acceptance. Prefer existing enforcement tools over repeated prose; do not add dependencies or fixed length/output quotas to shorten instructions. Resolve paths, installed capabilities and versions from current evidence.
+- Preserve confirmed decisions, exact contractual wording, authorization, public interfaces and acceptance. Prefer existing enforcement tools over repeated prose. Replace discoverable paths, versions, role lists and routine sequences with source-selection conditions; keep exact values only when they govern safety, compatibility or an explicit decision. Examples do not become mandatory defaults, and brevity needs no fixed length/output quota.
 
 ## Select relevant detail
 
@@ -35,6 +35,7 @@ Create or simplify instruction layers and durable role boundaries. Keep rules th
 | Public/private sources or planned public delivery | [Public and private delivery](references/public-private-delivery.md) |
 | Sensitive-data exposure or history cleanup | [Sensitive-data removal](references/sensitive-data-removal.md) |
 | Canonical guidance, installed owners and teaching synchronization | [Maintenance acceptance](references/maintenance-acceptance.md) |
+| Persistent project tracking, cross-device settings or recurring document maintenance | [Shared workflow](references/shared-workflow.md) |
 | Owned Skills, helpers, Plugins, MCP or distribution changes | [Component authoring](references/component-authoring.md) |
 | Skill/Plugin boundaries, context budgets or measured comparison | [Operating efficiency](references/operating-efficiency.md) |
 
