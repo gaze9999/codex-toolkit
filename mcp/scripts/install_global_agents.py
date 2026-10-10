@@ -17,7 +17,7 @@ ARTIFACTS = ("AGENTS.md", "subagents.config.toml")
 def is_link(path: Path) -> bool:
     try:
         metadata = path.lstat()
-    except FileNotFoundError:
+    except (FileNotFoundError, NotADirectoryError):
         return False
     return stat.S_ISLNK(metadata.st_mode) or bool(
         getattr(metadata, "st_file_attributes", 0) & stat.FILE_ATTRIBUTE_REPARSE_POINT
