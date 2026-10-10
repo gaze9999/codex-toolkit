@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Check or install portable Codex global instructions and subagent model profile."""
+"""Check or install Codex global instructions, model profile and Markdown references."""
 
 from __future__ import annotations
 
 import argparse
 import os
 import shutil
+import stat
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
@@ -13,11 +14,51 @@ from pathlib import Path
 ARTIFACTS = ("AGENTS.md", "subagents.config.toml")
 
 
+def is_link(path: Path) -> bool:
+    try:
+        metadata = path.lstat()
+    except FileNotFoundError:
+        return False
+    return stat.S_ISLNK(metadata.st_mode) or bool(
+        getattr(metadata, "st_file_attributes", 0) & stat.FILE_ATTRIBUTE_REPARSE_POINT
+    )
+
+
+def reference_paths(directory: Path):
+    if is_link(directory):
+        raise ValueError(f"reference is a link; review it manually: {directory}")
+    if not directory.exists():
+        return
+    if not directory.is_dir():
+        raise ValueError(f"references must be a directory: {directory}")
+    for path in sorted(directory.iterdir()):
+        if is_link(path):
+            raise ValueError(f"reference is a link; review it manually: {path}")
+        if path.is_dir():
+            yield from reference_paths(path)
+        elif path.is_file() and path.suffix.lower() == ".md":
+            yield path
+
+
+def check_target(path: Path, home: Path) -> None:
+    for parent in (path.parent, *path.parent.parents):
+        if is_link(parent):
+            raise ValueError(f"target parent is a link; review it manually: {parent}")
+        if parent.exists() and not parent.is_dir():
+            raise ValueError(f"target parent is not a directory: {parent}")
+        if parent == home:
+            break
+    if is_link(path):
+        raise ValueError(f"target is a link; review it manually: {path}")
+    if path.exists() and not path.is_file():
+        raise ValueError(f"target is not a file: {path}")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source-root", type=Path, help="Explicit personal agent source directory; defaults to neutral repository examples.")
     parser.add_argument("--codex-home", type=Path, help="Override CODEX_HOME or ~/.codex.")
-    parser.add_argument("--install", action="store_true", help="Install missing or identical files.")
+    parser.add_argument("--install", action="store_true", help="Install missing files and optional references/*.md, preserving relative paths.")
     parser.add_argument("--replace", action="store_true", help="Back up and replace different files; requires --install.")
     args = parser.parse_args()
     if args.replace and not args.install:
@@ -36,21 +77,24 @@ def main() -> int:
 
     pending = []
     conflicts = []
-    for name in ARTIFACTS:
-        source, target = source_root / name, home / name
-        if not source.is_file():
-            parser.error(f"source missing: {source}")
-        if target.is_symlink():
-            parser.error(f"target is a symlink; review it manually: {target}")
-        if target.exists() and not target.is_file():
-            parser.error(f"target is not a file: {target}")
-        if target.is_file() and target.read_bytes() == source.read_bytes():
-            print(f"CURRENT {target}")
-            continue
-        print(f"{'DIFFERENT' if target.exists() else 'MISSING'} {target}")
-        pending.append((source, target))
-        if target.exists():
-            conflicts.append(target)
+    try:
+        sources = [source_root / name for name in ARTIFACTS]
+        sources.extend(reference_paths(source_root / "references"))
+        for source in sources:
+            target = home / source.relative_to(source_root)
+            if is_link(source) or not source.is_file():
+                raise ValueError(f"source missing or linked: {source}")
+            check_target(target, home)
+            content = source.read_bytes()
+            if target.is_file() and target.read_bytes() == content:
+                print(f"CURRENT {target}")
+                continue
+            print(f"{'DIFFERENT' if target.exists() else 'MISSING'} {target}")
+            pending.append((target, content))
+            if target.exists():
+                conflicts.append(target)
+    except ValueError as error:
+        parser.error(str(error))
 
     if not pending:
         return 0
@@ -60,17 +104,24 @@ def main() -> int:
         print("Review differing files or use --install --replace; no files were changed")
         return 1
 
-    home.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
-    for source, target in pending:
+    backup_root = home / "backups" / "codex-setup" / stamp
+    try:
+        for target in conflicts:
+            check_target(backup_root / target.relative_to(home), home)
+    except ValueError as error:
+        parser.error(str(error))
+    home.mkdir(parents=True, exist_ok=True)
+    for target, content in pending:
         if target.exists():
-            backup = home / "backups" / "codex-setup" / stamp / target.name
+            backup = backup_root / target.relative_to(home)
             backup.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(target, backup)
             print(f"BACKUP {backup}")
-        with tempfile.NamedTemporaryFile(dir=home, prefix=target.name + ".", suffix=".tmp", delete=False) as file:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        with tempfile.NamedTemporaryFile(dir=target.parent, prefix=target.name + ".", suffix=".tmp", delete=False) as file:
             temporary = Path(file.name)
-            file.write(source.read_bytes())
+            file.write(content)
         try:
             temporary.replace(target)
         finally:

@@ -14,6 +14,15 @@
 
 Setup CLI 可列出來源與預覽單項差異, 不需套用所有設定
 
+Global 安裝器選取來源的 `AGENTS.md`、`subagents.config.toml` 及可選 `references/` 內的 Markdown, 保留巢狀相對路徑. 參考文件由指示按需引用, 避免加入每次載入的全文. 非 Markdown 與目標既有的其他檔案保留原狀
+
+```text
+python mcp/scripts/install_global_agents.py --source-root /path/to/private/agents
+python mcp/scripts/install_global_agents.py --source-root /path/to/private/agents --install
+```
+
+預覽不寫入, 任何內容衝突都會停止整批套用. 已核對後用 `--install --replace` 先備份再取代, 備份保留相對路徑. 來源參考文件或目標路徑含 symbolic link / junction 時停止並列出位置, 避免沿連結讀寫其他目錄
+
 ```text
 launch-cli.cmd agents --list
 launch-cli.cmd agents global
