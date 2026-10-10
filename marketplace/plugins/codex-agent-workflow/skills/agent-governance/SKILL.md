@@ -1,9 +1,9 @@
 ---
 name: agent-governance
-description: Create, audit, or simplify project AGENTS.md layers and Codex subagent roles. Use for agent-governance work, including a new project setup, not ordinary implementation or general code review.
+description: Create, audit, or simplify project AGENTS.md layers, Codex subagent roles and durable goal recovery across conversations. Use for instruction-governance work, not ordinary implementation or general code review.
 metadata:
   short-description: Agent governance, role boundaries, and instruction minimization
-  version: "0.5.5"
+  version: "0.5.6"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -17,7 +17,7 @@ Create or simplify instruction layers and durable role boundaries. Keep rules th
 - An audit or recommendation is read-only. An edit request authorizes the identified instructions, role configuration and related guidance; it does not authorize application refactoring, installation or external actions. Complete requested edits and their relevant checks; an explicit prompt/plan/review/handoff request receives that artifact.
 - Resolve applicable instruction sources, actual project/tool configuration, relevant Git status/diff and ignored guidance. Preserve concurrent work. Choose sources and acceptance from the intended outcome and effective authorization, without a fixed questionnaire or exhaustive rereading.
 - Verify current official OpenAI behavior when changing instruction discovery, configuration, model/reasoning or subagents. Distinguish project evidence and human reports from product specifications.
-- Stable cross-project preferences belong in Global, project facts at root/nested scope, role differences in roles, conditional procedures in references, and current goals/permissions/progress in the task. Judge execution scope rather than the directory where guidance is authored.
+- Stable cross-project preferences belong in Global, project facts and authorized record pointers at root/nested scope, role differences in roles, and conditional procedures in references. Execution state stays in the task; durable goals, decisions and acceptance use the selected authorized project record. Judge execution scope rather than the directory where guidance is authored.
 - Global/general instructions use concise Taiwan Traditional Chinese; project, role and Skill instructions/references use concise English unless explicitly overridden. Classify templates by intended use and preserve parser terms, quotations and localized outputs. User-facing language follows the user/project.
 - Preserve confirmed decisions, exact contractual wording, authorization, public interfaces and acceptance. Prefer existing enforcement tools over repeated prose. Replace discoverable paths, versions, role lists and routine sequences with source-selection conditions; keep exact values only when they govern safety, compatibility or an explicit decision. Examples do not become mandatory defaults, and brevity needs no fixed length/output quota.
 
@@ -31,7 +31,7 @@ Create or simplify instruction layers and durable role boundaries. Keep rules th
 | Task intake, evidence, Git authority or reporting | [Task execution and reporting](references/task-execution-and-reporting.md) |
 | Cross-client response formats, finished writing or interactive presentation | [Response presentation](references/response-presentation.md) |
 | Delegation, worker context or supported model/reasoning choices | [Delegation routing](references/delegation-routing.md) |
-| Ongoing steering, interrupted work, compaction or handoffs | [Context continuity](references/context-continuity.md) |
+| Ongoing steering, new-conversation goal recovery, interrupted work, compaction or handoffs | [Context continuity](references/context-continuity.md) |
 | Public/private sources or planned public delivery | [Public and private delivery](references/public-private-delivery.md) |
 | Sensitive-data exposure or history cleanup | [Sensitive-data removal](references/sensitive-data-removal.md) |
 | Canonical guidance, installed owners and teaching synchronization | [Maintenance acceptance](references/maintenance-acceptance.md) |
