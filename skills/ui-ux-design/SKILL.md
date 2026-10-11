@@ -2,7 +2,7 @@
 name: ui-ux-design
 description: Design or review UI/UX and check rendered interfaces against the original request before delivery. Use for layout defects, misleading displayed data, missing requirements and interaction changes, including UI work without user-provided screenshots.
 metadata:
-  version: "0.6.1"
+  version: "0.7.0"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -10,6 +10,12 @@ metadata:
 # UI / UX Design
 
 Start with the user's task, existing interface, project constraints and the requested deliverable. Analysis or a design reference does not authorize implementation, account changes or publication. Preserve the selected stack, design system and useful existing interactions.
+
+## Select sources and component patterns
+
+For design-system selection, accessibility targets or conflicting guidance, read [design sources](references/design-sources.md). Classify the relevant passage and its platform/version before adopting it; preserve confirmed product decisions and resolve affected conflicts explicitly.
+
+For ambiguous component names, interaction design or component specifications/handoff, read [component patterns](references/component-patterns.md). Select semantics, modality, focus/dismissal and positioning separately, then adapt the relevant specification fields to the actual API and task. Existing project docs, galleries and prototypes remain the working entry points.
 
 ## Check the requested result before delivery
 
