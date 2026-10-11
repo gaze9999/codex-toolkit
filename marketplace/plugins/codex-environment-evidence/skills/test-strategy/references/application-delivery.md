@@ -15,6 +15,15 @@ Read for affected browser, API, storage, CLI or packaging behavior. Select by re
 
 Development: turn a concrete defect or changed requirement into a useful failing check when justified, then verify its repair. Testing: preserve scope, fixtures and source state; investigate flaky failures without hiding them. Release: apply the actual project gate, route artifact acceptance to an available packaging-acceptance Skill, and separate preparation from authorized publication.
 
+## Loaded behavior and consumer boundaries
+
+Read for changed settings, service/API behavior or shared-component integration. Select the affected links in the chain rather than treating one successful check as evidence for all of them.
+
+- For configuration changes, distinguish saved configuration, emitted request, returned response and the service's loaded state. A validated file or successful response does not show that an existing process loaded the new setting; inspect the relevant runtime through its established entry point.
+- For a shared API, compare the callable runtime entry, published declarations when present, supported capability detection and affected consumer usage. Keep proposed interfaces separate from implemented callable APIs, and verify the consumer's actual bundle/pin independently of the source checkout.
+- For close/reset/destroy changes, exercise the documented preserve/dispose policy: static form state, dynamically owned content, requests/subscriptions and later reopen behavior as applicable. Check bounded history/pending data and listener cleanup where those resources exist; do not infer retention from an empty panel.
+- For an affected native capability or fallback, verify the selected branch in supported environments or an explicitly isolated fixture. Record how the fallback was selected and its evidence limits. For floating-widget semantics, focus and layering, use the applicable UI acceptance reference or primary pattern rather than treating all overlays as the same widget.
+
 For retention or performance, capture a comparable baseline and workload, warm/cold states, wall time and attributable resources. Multiple tools or services running concurrently are nuisance factors, not a formula for removing load. Match chart units, sorting, sampling and aggregation to raw fixtures. An aggregate metric cannot prove every underlying record.
 
 For collection/streaming changes, burst handling or long-running resource checks, use [performance and streaming updates](performance-and-streams.md) to select layer-specific measurements, bounded diagnostics and recovery cases.

@@ -13,15 +13,15 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "e19d1149bc54b71c0aa6f280d334e89e10be7fea2c63001cdc0a1de463557e01",
+      "sha256": "6de1a06fcc0f71504fb5dfdd383369eb56f47cd8a89eb2181c3f6d2e23f9cba7",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
-      "sha256": "84b46a330e833b3cbe0dd83389c203ed9c514ab11bc051d427b2a64136ef415a",
+      "sha256": "c9cfc85ba88bba448829542d08be73318d7e7989caee88a679ed9bcd22f889ff",
       "source": "skills/agent-governance/SKILL.md"
     },
     "skills/agent-governance/agents/openai.yaml": {
-      "sha256": "f0c1c10a8a2d0dfe00c57adc8d68bedb4dae20e9d2ef96d618eb38716ef04b3e",
+      "sha256": "76cd2206c83fef678e3bf9d1bcf0d06ddfea1586a76738da6ffd13711b082727",
       "source": "skills/agent-governance/agents/openai.yaml"
     },
     "skills/agent-governance/assets/icon-small.png": {
@@ -101,7 +101,7 @@
       "source": "skills/agent-governance/references/component-authoring.md"
     },
     "skills/agent-governance/references/context-continuity.md": {
-      "sha256": "3efece26d8bda8a9e1f498792c2b73e27b0128b19862251c3f4255bd3a5a6b61",
+      "sha256": "6e6bfdf3a4aceabeaffd52726e90973a3c89d6f402507e9fce4223a42bd74253",
       "source": "skills/agent-governance/references/context-continuity.md"
     },
     "skills/agent-governance/references/delegation-routing.md": {
@@ -275,6 +275,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.4.2",
-  "version": "0.2.8"
+  "toolkit_version": "0.5.0",
+  "version": "0.2.9"
 }
