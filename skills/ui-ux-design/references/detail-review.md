@@ -34,6 +34,34 @@ Select relevant rows rather than applying every component or state to every page
 | Help and language | Headings, labels, units and tooltips explain actual meaning, aggregation and actions concisely. Place numeric units legibly. Preserve original required copy and use the target locale's terminology. Attach help to the relevant control when appropriate, avoid redundant help icons and repeated generic caveats. |
 | Keyboard and accessibility | Affected controls have meaningful names, keyboard operation, visible focus and appropriate states. Modal/menu opening, closing and focus return work; labels, errors and help remain discoverable without hover-only use. Preserve readable contrast and supported touch targets. |
 
+## Visible entry points, records and drag interactions
+
+Read for controls inside collapsed/hidden containers, paginated data or reorderable content. Reach the control through the same visible entry and disclosure/navigation sequence as a user. A direct event dispatch or forced action may help diagnosis, but does not establish normal pointer/keyboard operability; retest through the user path.
+
+For a filtered, sorted or paginated view, derive expected stable record IDs from the fixture/source and the active filter, sort, page and page-size rules. Compare displayed records and counts with that expected subset rather than a fixed row count or the full source before filtering/pagination. Exercise changing these controls and opening a detail when their behavior is affected.
+
+For dragging, select the affected transitions: complete a move, cancel it, lose pointer capture, click without dragging, then perform an ordinary action. Check that transient drag state/listeners are released, the intended record is moved, and the selected persistence policy survives reload. Where refresh/reordering must retain a mounted node's identity, verify that node and its focus/selection survive rather than merely matching its text.
+
+[Playwright actionability](https://playwright.dev/docs/actionability) documents the checks bypassed by forced actions. The record and drag cases are engineering acceptance choices, selected by the affected behavior.
+
+## Floating interfaces
+
+Read when changing Tooltip, Menu, non-modal panels/dialogs or modal dialogs. Establish the selected widget pattern, then inspect three independent concerns: semantics and accessible relationships, opening/closing and focus behavior, and positioning/layering. A name such as Popup does not determine a widget role. Share compatible positioning/lifecycle code while preserving each widget's interaction contract and existing component ownership.
+
+Native Popover API content is non-modal and uses the Top Layer; that rendering mechanism does not supply every Menu, Tooltip or Dialog behavior. `showModal()` provides modal behavior and makes the rest of its containing document inert. Match roles, names, trigger relationships and modality to the actual pattern and supported implementation.
+
+Select relevant browser cases from the changed behavior:
+
+| Concern | Observable acceptance |
+|---|---|
+| Tooltip/help | Pointer and keyboard entry expose the intended description without moving focus into a tooltip. Where WCAG hover/focus criteria apply, content remains readable when the pointer enters it and follows the applicable dismissal/persistence conditions. Interactive content uses its appropriate panel/widget pattern. |
+| Focus and keyboard | Initial focus respects the documented autofocus/content policy and usable targets. Menu arrow navigation, Tab/Shift+Tab exit and Escape follow its selected pattern; modal tab containment and focus return follow the dialog workflow. Hidden, removed and disabled targets are handled by that pattern: the ARIA Menu pattern keeps disabled items focusable but inactive. |
+| Nested ownership | A nested Escape affects the intended open layer. Closing a parent modal disposes or closes its owned floating content; focus does not return to a removed, hidden or inert opener. Background interaction matches non-modal versus modal behavior within the relevant document. |
+| Position and compatibility | In affected transformed/overflow containers, supported viewport/zoom, scroll and resize states, content remains positioned and readable. Exercise the supported native Top Layer path and the documented DOM fallback when capability handling changes; high z-index alone does not prove clipping is resolved. |
+| Cleanup and relationships | Reopen and teardown release owned handlers/DOM and restore existing accessible relationships such as `aria-describedby`, retaining descriptions owned by other components. Trigger states such as `aria-haspopup`/`aria-expanded` agree with the actual role and open state where applicable. |
+
+Sources checked 2026-10-11: [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API), [MDN showModal](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/showModal), [WAI-ARIA Menu](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/), [WAI-ARIA modal Dialog](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) and [WCAG hover/focus content](https://www.w3.org/WAI/WCAG22/Understanding/content-on-hover-or-focus.html). Apply the selected pattern and supported versions; these cases are not a mandatory suite for unrelated UI work.
+
 ## Streaming tables and details
 
 Read these cases when data updates can reorder interactive rows or replace open details. Resolve whether the stream carries full state, ordered changes or log entries, then test the project's selected update policy with identifiable fixture records.

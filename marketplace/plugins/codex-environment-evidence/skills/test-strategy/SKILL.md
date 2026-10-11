@@ -3,7 +3,7 @@ name: test-strategy
 description: Design and execute scoped checks for behavior changes, test gaps, failures or performance and release acceptance. Use for testing strategy work, not when routine checks suffice or when only summarizing recorded results.
 metadata:
   short-description: Risk-based checks across development and delivery
-  version: "0.2.0"
+  version: "0.2.1"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

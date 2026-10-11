@@ -27,6 +27,14 @@ The milestone, decision-note and validation approach is informed by [OpenAI's lo
 
 Maintain the selected record at meaningful changes using its existing write/conflict guards; see [shared workflow](shared-workflow.md). Do not require a new filename, schema, handoff document or per-message log.
 
+## Make the current checkpoint discoverable
+
+Use the existing task context or authorized record to make the effective goal, current artifacts, pending acceptance and next action easy to locate. Keep older decisions/checks separate from current state; preserve useful history with its checked source and applicability. Mark superseded acceptance as historical rather than letting a past PASS stand for a changed artifact.
+
+Identify the tested source/diff or artifact hash, relevant consumer/runtime state and evidence location when they affect resumption. HEAD alone cannot identify uncommitted tested bytes. Before dependent work, reconcile the checkpoint with current files and recheck only affected evidence.
+
+Record an owned session/fixture/process as active or closed when its lifecycle affects the next action, including the supported way to resume or recreate it. After teardown, retain its evidence but verify a fresh target before reusing session IDs, browser locators or runtime assumptions. Do not reopen another owner's resources or repeat unrelated accepted checks merely to refresh the checkpoint.
+
 ## Decide when continuity needs a different conversation
 
 Prefer a checkpoint in the current task first: reconcile effective requirements, remove superseded decisions from active work and verify current artifacts. Compaction, message count, a model change or a lengthy history alone does not require replacement.
