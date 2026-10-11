@@ -17,7 +17,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "1b884478eb309029e2fbfb754fe9e9d6a30498705dec6073831c6b98dd59274f",
+      "sha256": "630c68d340f0c11793f13783c840e27906404c362cc803acd287ed757f9d6b89",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "skills/angular-development/SKILL.md": {
@@ -153,11 +153,11 @@
       "source": "skills/react-development/references/state-effects.md"
     },
     "skills/ui-ux-design/SKILL.md": {
-      "sha256": "6d2e0234ec5fa31fd865066612f7b220dc908c57d6cfd9ca38a71262cf3913b2",
+      "sha256": "3ffba9756e1366718f721c3b47350398f743e80ee97cd333c8b97b221a5ce13a",
       "source": "skills/ui-ux-design/SKILL.md"
     },
     "skills/ui-ux-design/agents/openai.yaml": {
-      "sha256": "a0581612357f7ec88167b55d9e45b9afa90dd73a38710832b8dda7dae2cb5400",
+      "sha256": "b7b17e07b8b246ab203e08612e87148a6326c02cedd3a9f151922b906f24ac28",
       "source": "skills/ui-ux-design/agents/openai.yaml"
     },
     "skills/ui-ux-design/assets/icon-small.png": {
@@ -176,8 +176,16 @@
       "sha256": "5a3797d5deb504bcefec784eb189a3a1d656a829dbf20356f5ab17ebb1c8a40a",
       "source": "skills/ui-ux-design/assets/icon.svg"
     },
+    "skills/ui-ux-design/references/component-patterns.md": {
+      "sha256": "65bdbf4bea0ff6bbff569cef4b37c17ba95d21086c2f77591130767eecfb50c3",
+      "source": "skills/ui-ux-design/references/component-patterns.md"
+    },
+    "skills/ui-ux-design/references/design-sources.md": {
+      "sha256": "6ee25a97bbf72061ea61dd174eae894ba5c9881c6ecb3c3d5fa5009cebc419fe",
+      "source": "skills/ui-ux-design/references/design-sources.md"
+    },
     "skills/ui-ux-design/references/detail-review.md": {
-      "sha256": "b2b545f0818b849e5362dd70d4493eb607b759fa9873dbd7d0e6a9ca11ad8f5a",
+      "sha256": "e146eae476b87ed352d1f0dfcd15ddec4769498b78f960c8eaf7a24ee31b5991",
       "source": "skills/ui-ux-design/references/detail-review.md"
     },
     "skills/vue-development/SKILL.md": {
@@ -223,6 +231,6 @@
     "edge-devtools"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.5.0",
-  "version": "0.3.1"
+  "toolkit_version": "0.6.0",
+  "version": "0.4.0"
 }

@@ -46,6 +46,8 @@ For dragging, select the affected transitions: complete a move, cancel it, lose 
 
 ## Floating interfaces
 
+When the requested name or modality is ambiguous, select its intended use with [component patterns](component-patterns.md) before choosing a role. For a disagreement between standards, design-system guidance and project decisions, use [design sources](design-sources.md).
+
 Read when changing Tooltip, Menu, non-modal panels/dialogs or modal dialogs. Establish the selected widget pattern, then inspect three independent concerns: semantics and accessible relationships, opening/closing and focus behavior, and positioning/layering. A name such as Popup does not determine a widget role. Share compatible positioning/lifecycle code while preserving each widget's interaction contract and existing component ownership.
 
 Native Popover API content is non-modal and uses the Top Layer; that rendering mechanism does not supply every Menu, Tooltip or Dialog behavior. `showModal()` provides modal behavior and makes the rest of its containing document inert. Match roles, names, trigger relationships and modality to the actual pattern and supported implementation.

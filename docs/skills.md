@@ -24,7 +24,7 @@
 | AI 與媒體 | [ComfyUI Workflow](../skills/comfyui-workflow/SKILL.md) | 維護可重現的 Stable Diffusion / ComfyUI graph, model 與硬體設定 |
 | AI 與媒體 | [Editorial Illustration](../skills/editorial-illustration/SKILL.md) | 依固定 editorial illustration 視覺方向處理使用者提供的圖片 |
 | Frontend 與遊戲 | [Angular Development](../skills/angular-development/SKILL.md) | 依實際 Angular 與 TypeScript runtime 分配 Component, Service, state 與資料轉換責任 |
-| Frontend 與遊戲 | [UI UX Design](../skills/ui-ux-design/SKILL.md) | 核對原始需求、畫面與資料, 條件式檢查 [即時表格](../skills/ui-ux-design/references/detail-review.md#streaming-tables-and-details) 的列身分、排序、焦點與無障礙 |
+| Frontend 與遊戲 | [UI UX Design](../skills/ui-ux-design/SKILL.md) | 核對原始需求、畫面與資料, 按需選 [設計來源](../skills/ui-ux-design/references/design-sources.md)、[元件術語與規格](../skills/ui-ux-design/references/component-patterns.md), 條件式檢查 [即時表格](../skills/ui-ux-design/references/detail-review.md#streaming-tables-and-details) 的列身分、排序、焦點與無障礙 |
 | Frontend 與遊戲 | [Angular Member Order](../skills/angular-member-order/SKILL.md) | 安全整理 Angular Component class member 與可選的 Signal I/O 改寫 |
 | Frontend 與遊戲 | [Unity Development](../skills/unity-development/SKILL.md) | 依實際 Unity version, package, serialized asset 與 build target 開發及驗證 |
 | Frontend 與遊戲 | [Game Balance Simulation](../skills/game-balance-simulation/SKILL.md) | 共用遊戲規則跑模擬, 比較策略與分布, 重播數值及狀態錯誤 |
