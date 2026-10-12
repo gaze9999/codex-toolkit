@@ -3,7 +3,7 @@ name: agent-governance
 description: Create, audit, or simplify project AGENTS.md layers, Codex subagent roles and durable goal recovery across conversations. Use for instruction-governance work, not ordinary implementation or general code review.
 metadata:
   short-description: Agent governance, role boundaries, and instruction minimization
-  version: "0.5.8"
+  version: "0.5.9"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -14,7 +14,7 @@ Create or simplify instruction layers and durable role boundaries. Keep rules th
 
 ## Scope
 
-- An audit or recommendation is read-only. An edit request authorizes the identified instructions, role configuration and related guidance; it does not authorize application refactoring, installation or external actions. Complete requested edits and their relevant checks; an explicit prompt/plan/review/handoff request receives that artifact.
+- An audit or recommendation is read-only. An edit request authorizes the identified instructions, role configuration and related guidance; it does not authorize application refactoring, installation or external actions. Complete requested edits and their relevant checks; an explicit prompt/plan/review/handoff request receives that artifact within its specified scope.
 - Resolve applicable instruction sources, actual project/tool configuration, relevant Git status/diff and ignored guidance. Preserve concurrent work. Choose sources and acceptance from the intended outcome and effective authorization, without a fixed questionnaire or exhaustive rereading.
 - Verify current official OpenAI behavior when changing instruction discovery, configuration, model/reasoning or subagents. Distinguish project evidence and human reports from product specifications.
 - Stable cross-project preferences belong in Global, project facts and authorized record pointers at root/nested scope, role differences in roles, and conditional procedures in references. Execution state stays in the task; durable goals, decisions and acceptance use the selected authorized project record. Judge execution scope rather than the directory where guidance is authored.
