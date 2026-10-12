@@ -81,6 +81,8 @@
         "react-development",
         "vue-development",
         "ui-ux-design",
+        "internationalization-engineering",
+        "accessibility-engineering",
         "playwright-cli"
       ],
       "runtime_profiles": [

@@ -10,7 +10,7 @@ Plugin 由 `skills/` 的工作流程、`plugins/catalog.json` 的來源映射及
 | `jev-evaluation` | `jev-evaluation` | `jev` |
 | `documents-specifications` | `context-brief`、`doc-updater`、`local-document-processing` | `local-documents` |
 | `environment-evidence` | `validation-evidence-review`、`test-strategy` | `workspace-inspection` |
-| `frontend-engineering` | `angular-development`、`angular-member-order`、`react-development`、`vue-development`、`ui-ux-design`、`playwright-cli` | `playwright`、`serena`、`edge-devtools` |
+| `frontend-engineering` | `angular-development`、`angular-member-order`、`react-development`、`vue-development`、`ui-ux-design`、`internationalization-engineering`、`accessibility-engineering`、`playwright-cli` | `playwright`、`serena`、`edge-devtools` |
 | `agent-workflow` | `agent-governance`、`coding-prompt`、`task-routing`、`task-guide` | 無 |
 | `multilingual-proofreading` | `multilingual-proofreading` | `textlint`、`cspell` |
 | `local-activity` | `local-activity-query` | 無 |
@@ -18,7 +18,9 @@ Plugin 由 `skills/` 的工作流程、`plugins/catalog.json` 的來源映射及
 
 `runtime_profiles` 列出所屬 setup 的選用工具, 依任務另外設定 runtime、MCP 與帳戶. 文件與工作區 MCP 使用 `python-tools/` 的 versioned core. Plugin 的網站連到 [GitHub 來源](https://github.com/gaze9999/codex-toolkit)
 
-前端 Plugin 收錄 [UI 需求與細節驗收](../skills/ui-ux-design/references/detail-review.md)、[Angular 排版與短寫](../skills/angular-development/references/angular-style.md)、[呼叫鏈與 Model 型別](../skills/angular-development/references/code-maintainability.md), 以及 [agent 參考索引](../agents/references/angular-style.md). 相同參考檔隨 Angular 獨立 Skill 自動收錄
+前端 Plugin 收錄 [UI 設計來源與範本選用](../skills/ui-ux-design/references/design-foundations.md)、[UI 需求與細節驗收](../skills/ui-ux-design/references/detail-review.md)、[Angular 排版與短寫](../skills/angular-development/references/angular-style.md)、[呼叫鏈與 Model 型別](../skills/angular-development/references/code-maintainability.md), 以及 [agent 參考索引](../agents/references/angular-style.md). 相同參考檔隨 Angular 獨立 Skill 自動收錄
+
+多語系程式行為使用 [Internationalization Engineering](../skills/internationalization-engineering/SKILL.md), 無障礙程式行為使用 [Accessibility Engineering](../skills/accessibility-engineering/SKILL.md). 各自按需載入平台接法或驗證參考, 沿用專案套件與既有檢查. 文案品質另由校對 Skill 處理, 資源檢查或自動掃描通過不代表完整畫面與輔助科技驗收
 
 即時表格的列身分、焦點、排序與暫停條件由 [UI 驗收參考](../skills/ui-ux-design/references/detail-review.md#streaming-tables-and-details) 說明. 環境與驗證證據 Plugin 收錄 [效能與串流量測](../skills/test-strategy/references/performance-and-streams.md), 區分來源收集、保存、傳輸與畫面更新, 按需選擇閒置、活動、大量更新與長時間診斷案例
 

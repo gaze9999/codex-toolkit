@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-frontend-engineering",
-  "version": "0.4.0",
-  "description": "Develop Angular, React and Vue interfaces with scoped browser and reference diagnostics.",
+  "version": "0.5.0",
+  "description": "Build Angular, React and Vue interfaces with UI/UX, i18n, accessibility and scoped browser checks.",
   "author": {
     "name": "gaze9999"
   },
@@ -11,7 +11,7 @@
     "com.openai": {
       "interface": {
         "displayName": "前端工程與瀏覽器診斷",
-        "shortDescription": "Develop Angular, React and Vue interfaces with scoped browser and reference diagnostics.",
+        "shortDescription": "Build Angular, React and Vue interfaces with UI/UX, i18n, accessibility and scoped browser checks.",
         "logo": "./assets/toolkit.png",
         "composerIcon": "./assets/toolkit.png",
         "brandColor": "#E8A36D",

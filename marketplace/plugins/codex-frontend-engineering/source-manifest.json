@@ -17,15 +17,31 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "630c68d340f0c11793f13783c840e27906404c362cc803acd287ed757f9d6b89",
+      "sha256": "31077c55632255bd79c11d9fcf2d8c470c6a4aeff9dfb7460c8d75682348f6e6",
       "source": "plugins/frontend-engineering/plugin.json"
     },
+    "skills/accessibility-engineering/SKILL.md": {
+      "sha256": "8006e2107a2c8c44a7d205528287e1ab48d2b2a02d8a1c5e21abc6c79b3c0c51",
+      "source": "skills/accessibility-engineering/SKILL.md"
+    },
+    "skills/accessibility-engineering/agents/openai.yaml": {
+      "sha256": "ee272ad7bfa60ed20477e88550bea88e2f5803601982c245ab440129fe39f708",
+      "source": "skills/accessibility-engineering/agents/openai.yaml"
+    },
+    "skills/accessibility-engineering/references/platform-integration.md": {
+      "sha256": "40cb1be16d1b05143e15952af258bb8fd31a9f136014d58cad70836b269047d6",
+      "source": "skills/accessibility-engineering/references/platform-integration.md"
+    },
+    "skills/accessibility-engineering/references/validation.md": {
+      "sha256": "36afc76219137b2a9b94943ecbf9029002294d597d28918a44749a01e19226d5",
+      "source": "skills/accessibility-engineering/references/validation.md"
+    },
     "skills/angular-development/SKILL.md": {
-      "sha256": "095ca9fb7e61158004692a4239f8f6aa6a5f6eb083fca1bb00be48648f86ef23",
+      "sha256": "4920640478db25716195386316614b93ade82cb8dddf695745f127e36e512e06",
       "source": "skills/angular-development/SKILL.md"
     },
     "skills/angular-development/agents/openai.yaml": {
-      "sha256": "63d5a40ae34818f83b53ff76a5560d1dd71f2fbf06b758fade7bf43450ebdfd4",
+      "sha256": "ae1ee82e42055ad9b4732daf1accb818385267cdf2aa9cb5b13e4064db61d1d5",
       "source": "skills/angular-development/agents/openai.yaml"
     },
     "skills/angular-development/assets/icon-small.png": {
@@ -92,6 +108,22 @@
       "sha256": "1c0e68a2095af0357287ba07eb3c82e7618f3ba25db00a70167b4b845aef2634",
       "source": "skills/angular-member-order/scripts/generate_component_member_order_prompt.py"
     },
+    "skills/internationalization-engineering/SKILL.md": {
+      "sha256": "98a246b7f16c4183aaf510c05c317a191ab6a46582a5d7ee3cb8fdff4057319d",
+      "source": "skills/internationalization-engineering/SKILL.md"
+    },
+    "skills/internationalization-engineering/agents/openai.yaml": {
+      "sha256": "6bf9c2d5d380fc48d39422d8826c354d8390a6d621a15e7bf3049d98158334d2",
+      "source": "skills/internationalization-engineering/agents/openai.yaml"
+    },
+    "skills/internationalization-engineering/references/platform-integration.md": {
+      "sha256": "7f91014e57b143130fbdf51d1c9b697c7ef5a1209a1c63951f1d6ce73dc2401f",
+      "source": "skills/internationalization-engineering/references/platform-integration.md"
+    },
+    "skills/internationalization-engineering/references/validation.md": {
+      "sha256": "3d87899cb8cf82927b003d55ecebc5af403082afc2cea6486dd1d3178bd5a708",
+      "source": "skills/internationalization-engineering/references/validation.md"
+    },
     "skills/playwright-cli/SKILL.md": {
       "sha256": "1b8a93ab5ffdac0ebbba7a32fac1f551d9d6aaeb4eabcd1db1597b7dfde94d2b",
       "source": "skills/playwright-cli/SKILL.md"
@@ -121,11 +153,11 @@
       "source": "skills/playwright-cli/references/commands.md"
     },
     "skills/react-development/SKILL.md": {
-      "sha256": "91685544603d12df45051d49d0a77e2d5efd6fbfe115baa7b2e86d3fab4fd390",
+      "sha256": "490e54ad042f9dfe68db6b873da29f72a010de6acb0d900e2a9bd836c2024d45",
       "source": "skills/react-development/SKILL.md"
     },
     "skills/react-development/agents/openai.yaml": {
-      "sha256": "f4249665d9ab78a38d2723e84a427887c42b9e0f5cb881293e58276a72f0c23e",
+      "sha256": "260aedac7c974e3f1d0269a15c6fac6f5312f70589d3fc36232a2beca9aba9d8",
       "source": "skills/react-development/agents/openai.yaml"
     },
     "skills/react-development/assets/icon-small.png": {
@@ -153,11 +185,11 @@
       "source": "skills/react-development/references/state-effects.md"
     },
     "skills/ui-ux-design/SKILL.md": {
-      "sha256": "3ffba9756e1366718f721c3b47350398f743e80ee97cd333c8b97b221a5ce13a",
+      "sha256": "d504e5ba071a30f034788eb0855b6c5210e77d8d1814f918eddfdfc8e0062501",
       "source": "skills/ui-ux-design/SKILL.md"
     },
     "skills/ui-ux-design/agents/openai.yaml": {
-      "sha256": "b7b17e07b8b246ab203e08612e87148a6326c02cedd3a9f151922b906f24ac28",
+      "sha256": "43a695775799f4d885981b320d4a84dd6c5f5aef4d29f092e8f9464fd3cebfe8",
       "source": "skills/ui-ux-design/agents/openai.yaml"
     },
     "skills/ui-ux-design/assets/icon-small.png": {
@@ -180,6 +212,10 @@
       "sha256": "65bdbf4bea0ff6bbff569cef4b37c17ba95d21086c2f77591130767eecfb50c3",
       "source": "skills/ui-ux-design/references/component-patterns.md"
     },
+    "skills/ui-ux-design/references/design-foundations.md": {
+      "sha256": "48d7ac1ac18d741a0f1ae81d4cdb8569f55ebdb8d0995ecd1ec327ab3270920d",
+      "source": "skills/ui-ux-design/references/design-foundations.md"
+    },
     "skills/ui-ux-design/references/design-sources.md": {
       "sha256": "6ee25a97bbf72061ea61dd174eae894ba5c9881c6ecb3c3d5fa5009cebc419fe",
       "source": "skills/ui-ux-design/references/design-sources.md"
@@ -189,11 +225,11 @@
       "source": "skills/ui-ux-design/references/detail-review.md"
     },
     "skills/vue-development/SKILL.md": {
-      "sha256": "c00306d2ceaa8697bb7749c797424ad6f944c31e9aed56103ab314d53db6f637",
+      "sha256": "7f3e517308c794333bcfd239084091690400d8ba2675fb1f4726f02a3b9ae386",
       "source": "skills/vue-development/SKILL.md"
     },
     "skills/vue-development/agents/openai.yaml": {
-      "sha256": "b59cf36e0ad72e02f8684f84d5a62910335852df00d5b86c75ac1ef19fa95a87",
+      "sha256": "32b3134e4f0a12ec0615519041e84c5460cf1a68caeb2eb08545e8a5e04a8a44",
       "source": "skills/vue-development/agents/openai.yaml"
     },
     "skills/vue-development/assets/icon-small.png": {
@@ -232,5 +268,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.6.0",
-  "version": "0.4.0"
+  "version": "0.5.0"
 }
