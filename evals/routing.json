@@ -42,6 +42,14 @@
     {"id":"research-conflicting-implicit","kind":"positive","prompt":"比較這幾份工程實測、預印本與論壇說法, 找到原始方法與獨立反例, 同一論文的鏡像不要重複算證據","expected":["research-learning-synthesis"]},
     {"id":"research-not-simple-lookup","kind":"negative","prompt":"只回答 SSE 縮寫的英文全名, 不展開研究、學習路徑或安裝","expected":[]},
     {"id":"governance-instruction-utility","kind":"positive","prompt":"調整這組 Skills 的指示與 references, 保留必要權限和驗收, 用相符任務核對版本與行為, 不直接套用 benchmark 的固定數量或效益","expected":["agent-governance"]},
-    {"id":"research-benchmark-disagreement","kind":"collision","prompt":"唯讀研究 AGENTS.md 與 Skills 的兩份 benchmark 為何結果不同, 對照版本、任務、方法和限制, 不修改工作規範或執行新的模型實驗","expected":["research-learning-synthesis"]}
+    {"id":"research-benchmark-disagreement","kind":"collision","prompt":"唯讀研究 AGENTS.md 與 Skills 的兩份 benchmark 為何結果不同, 對照版本、任務、方法和限制, 不修改工作規範或執行新的模型實驗","expected":["research-learning-synthesis"]},
+    {"id":"i18n-explicit","kind":"positive","prompt":"用 internationalization-engineering 檢查既有翻譯資源的缺漏、參數與複數規則, 不變更套件","expected":["internationalization-engineering"]},
+    {"id":"i18n-locale-boundary","kind":"positive","prompt":"網站切換語系後日期少一天, 請檢查語系與時區格式化, 保留 API 原始值","expected":["internationalization-engineering"]},
+    {"id":"i18n-prose-negative","kind":"collision","prompt":"只校對這段繁體中文說明的台灣用語, 不修改翻譯資源或程式","expected":["multilingual-proofreading"]},
+    {"id":"a11y-explicit","kind":"positive","prompt":"用 accessibility-engineering 唯讀檢查 dialog 的鍵盤、焦點與輔助科技行為","expected":["accessibility-engineering"]},
+    {"id":"a11y-form-semantics","kind":"positive","prompt":"這個表單的 label 和錯誤提示沒有被螢幕閱讀器辨識, 請修正語意與關聯","expected":["accessibility-engineering"]},
+    {"id":"i18n-a11y-backend-negative","kind":"negative","prompt":"只修正 Python 批次計算的整數邊界, 沒有 UI、文案或多語系需求","expected":[]},
+    {"id":"angular-i18n-review","kind":"collision","prompt":"唯讀檢查 Angular 既有多語系表單的資源及 reactive 語系 owner, 不做畫面驗收","expected":["angular-development","internationalization-engineering"]},
+    {"id":"react-a11y-review","kind":"collision","prompt":"唯讀檢查 React dialog 的 ref、鍵盤與焦點回復, 不修改設計也不操作瀏覽器","expected":["react-development","accessibility-engineering"]}
   ]
 }

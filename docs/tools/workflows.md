@@ -86,6 +86,12 @@ Penpot hosted 模式從既有帳戶啟用 MCP, 選定設計檔並使用其提供
 
 Axe 免費 browser extension 與需訂閱的 Axe MCP Server 分開選用. 依 [官方 authentication](https://docs.deque.com/devtools-server/4.0.0/en/authentication) 設定單一憑證模式, OAuth 使用官方 supervisor 更新短效 token. 掃描前確認所用 Deque instance 與頁面資料範圍. 既有測試 runner 也可使用 [axe-core / Playwright](https://playwright.dev/docs/accessibility-testing) 做本機自動檢查, 不因採用 axe 就要求付費 MCP
 
+## 設計來源與範本
+
+[UI / UX 設計參考](../../skills/ui-ux-design/references/design-foundations.md)以 Apple HIG 為主要來源、Google Material 為其次, 再依問題選用 W3C WCAG / APG、Nielsen 可用性原則或 Carbon 資料表指引. 專案規格、目標平台、無障礙要求與既有設計系統仍優先
+
+[Apple Design Resources](https://developer.apple.com/design/resources/)提供官方設計範本入口, [Google Material 入門](https://m3.material.io/get-started)提供 Material 3 Design Kit 入口. 按平台與版本選取, 沿用已有的設計工具, 範本取得、授權與實際可操作分別核對
+
 ## 從需求到驗證
 
 先選一段代表流程, 明確列出使用者目的, 入口, 成功, 空狀態及可恢復的錯誤. 研究真實產品畫面與研究文章時保留原始連結, 日期, 適用場景及證據類型, 複製畫面不是目標流程已可用的證明

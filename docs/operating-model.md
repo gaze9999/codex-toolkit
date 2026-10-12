@@ -18,7 +18,9 @@
 
 ## UI 與程式碼工作流程
 
-`frontend-engineering` 包含 Angular、React、Vue、UI/UX 與 Playwright Skills. `ui-ux-design` 對照原始需求及有效補充, 操作實際介面, 檢查畫面、顯示資料、互動、窄畫面與必要的錯誤 / 載入狀態, 修正後重測. 無法連到目標時, 列出受影響需求與缺少的執行環境
+`frontend-engineering` 包含 Angular、React、Vue、UI/UX、i18n、a11y 與 Playwright Skills. `ui-ux-design` 對照原始需求及有效補充, 操作實際介面, 檢查畫面、顯示資料、互動、窄畫面與必要的錯誤 / 載入狀態, 修正後重測. 無法連到目標時, 列出受影響需求與缺少的執行環境
+
+翻譯資源、語系切換與在地格式由 `internationalization-engineering` 處理, 語意、鍵盤、焦點與輔助科技行為由 `accessibility-engineering` 處理. 依變更載入相符平台與驗證參考, 不因啟用 Plugin 就每次執行完整流程, 也不自動安裝套件或 MCP
 
 Angular 範例提供責任分組、響應式排版、單 statement `if`、提早 return、`??=` / `||=`、數字顯示與 TypeScript `extends` / `Pick` / `Omit`. 採用前核對版本、運算語意與資料精確度, 完整內容見 [排版與短寫](../skills/angular-development/references/angular-style.md)、[呼叫鏈與型別](../skills/angular-development/references/code-maintainability.md)
 

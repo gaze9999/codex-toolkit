@@ -2,7 +2,7 @@
 name: ui-ux-design
 description: Design or review UI/UX and check rendered interfaces against the original request before delivery. Use for layout defects, misleading displayed data, missing requirements and interaction changes, including UI work without user-provided screenshots.
 metadata:
-  version: "0.7.0"
+  version: "0.7.1"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -14,6 +14,8 @@ Start with the user's task, existing interface, project constraints and the requ
 ## Select sources and component patterns
 
 For design-system selection, accessibility targets or conflicting guidance, read [design sources](references/design-sources.md). Classify the relevant passage and its platform/version before adopting it; preserve confirmed product decisions and resolve affected conflicts explicitly.
+
+For a new design, prototype or unresolved visual/interaction decision, read [design foundations and reference selection](references/design-foundations.md). When the project has no selected system or platform requirement, start with Apple HIG and then Google Material. Existing requirements, platform semantics, accessibility targets and the selected design system govern adoption. Load only relevant passages and official templates; do not replace a theme or copy native units from reference order alone.
 
 For ambiguous component names, interaction design or component specifications/handoff, read [component patterns](references/component-patterns.md). Select semantics, modality, focus/dismissal and positioning separately, then adapt the relevant specification fields to the actual API and task. Existing project docs, galleries and prototypes remain the working entry points.
 
@@ -32,6 +34,8 @@ Jev is optional for semantic ordering of retrieved material or a finite comparis
 - Select research, editable prototype, implementation and browser/a11y capabilities from what is actually available. Reuse an authenticated integration and its required Skills; install a tool only for a demonstrated gap within authorization. Keep exact tool recipes in the maintained setup rather than fixing providers here.
 - Match component packages to the project's framework/version, license, theme, keyboard/focus and localization requirements. Library adoption and dependency upgrades need scope that includes those changes.
 
+For changed messages, locale switching or localized formatting, use the available internationalization-engineering Skill. For changed semantics, keyboard/focus, errors or assistive-technology behavior, use accessibility-engineering. Load only the affected references and preserve the existing component, data and copy contracts.
+
 ## Verify what users experience
 
 Choose the available browser interface for the real flow. A bounded reproduction can use CLI + a browser Skill when shell access and artifacts are available; use an existing MCP when its client integration or page introspection better fits the task. CLI can retain sessions, so state alone does not require MCP. Follow the selected tool's instructions for unique task sessions, fresh snapshot targets and cleanup, then verify relevant console/request results as well as the rendered UI.
@@ -43,5 +47,7 @@ For automatically updated tables or details, use the streaming cases in [detail 
 Use the project's existing table/filter/pagination and preference mechanisms when appropriate. Defaults follow the target project's current decisions; preserve valid user overrides. Tags retain readable text and sufficient contrast, and tooltips explain the actual metric or action rather than repeating a label or an unrelated limitation.
 
 Proofread prose by language with available checks and semantic review, preserve original quotations/code and Japanese punctuation. An automatic accessibility scan covers only detectable issues; verify the affected keyboard/focus and task behavior in the served page.
+
+Use available internationalization-engineering for changed locale/resource/formatting behavior and accessibility-engineering for changed semantics, keyboard/focus or assistive-technology behavior. Keep the UI review scoped to requirements and rendered flow; retain necessary checks when a companion Skill is unavailable.
 
 Report the changed flow, evidence, actual validation and unresolved boundaries. Static checks, design rendering and fixture/browser results each prove their exercised scope; do not claim a live account or production flow was verified without observing it.

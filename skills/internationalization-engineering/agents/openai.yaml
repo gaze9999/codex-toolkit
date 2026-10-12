@@ -1,0 +1,7 @@
+interface:
+  display_name: "Internationalization Engineering (v0.1.0)"
+  short_description: "Implement locale, messages and formatting contracts"
+  default_prompt: "Use $internationalization-engineering to inspect the detected stack and locale/resource contracts, implement the authorized change, and verify affected messages, formatting and rendered states."
+
+policy:
+  allow_implicit_invocation: true
