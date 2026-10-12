@@ -13,15 +13,15 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "6de1a06fcc0f71504fb5dfdd383369eb56f47cd8a89eb2181c3f6d2e23f9cba7",
+      "sha256": "754bbdcc55f04a926b159a197caeb26e22b359ce01b92a87ce057b00bf6476ed",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
-      "sha256": "c9cfc85ba88bba448829542d08be73318d7e7989caee88a679ed9bcd22f889ff",
+      "sha256": "664d17d1ae89a5ebb7d9d57b61ad30f9a0a7803fbace79b4d136a3b314a3e336",
       "source": "skills/agent-governance/SKILL.md"
     },
     "skills/agent-governance/agents/openai.yaml": {
-      "sha256": "76cd2206c83fef678e3bf9d1bcf0d06ddfea1586a76738da6ffd13711b082727",
+      "sha256": "d842144f8bb36a67e2d95ec2f2a84911c4fd8bb113acc4e2f66fdc137cbc25db",
       "source": "skills/agent-governance/agents/openai.yaml"
     },
     "skills/agent-governance/assets/icon-small.png": {
@@ -101,7 +101,7 @@
       "source": "skills/agent-governance/references/component-authoring.md"
     },
     "skills/agent-governance/references/context-continuity.md": {
-      "sha256": "6e6bfdf3a4aceabeaffd52726e90973a3c89d6f402507e9fce4223a42bd74253",
+      "sha256": "19d217bdba3bee0c58c29c89a9c2c7b276783bb0f3c181bc00ed89f06a80b600",
       "source": "skills/agent-governance/references/context-continuity.md"
     },
     "skills/agent-governance/references/delegation-routing.md": {
@@ -145,7 +145,7 @@
       "source": "skills/agent-governance/references/shared-workflow.md"
     },
     "skills/agent-governance/references/task-execution-and-reporting.md": {
-      "sha256": "64ec525e112c6a25abc587089e1045de56da786edd3c1f3266d75db90465c799",
+      "sha256": "99d66a9892841239cd89b9879a0957c4a773f7f3a6cd96bf49444f51b0e719db",
       "source": "skills/agent-governance/references/task-execution-and-reporting.md"
     },
     "skills/coding-prompt/SKILL.md": {
@@ -276,5 +276,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.6.0",
-  "version": "0.2.9"
+  "version": "0.2.10"
 }
