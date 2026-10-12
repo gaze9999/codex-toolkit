@@ -24,6 +24,12 @@ Use search engines, scholarly indexes and catalog aggregators to discover origin
 - Follow corrections, withdrawals and material changes when they affect the conclusion. Record what was actually read: full text, selected sections, abstract or metadata. Preserve publication/revision dates separately from retrieval time.
 - Stop expanding when evidence resolves the decision at the required confidence, additional sources repeat the same origin or access/resource limits apply. State the remaining claim and missing evidence directly.
 
+## Reuse scoped lookup records
+
+Start from the current question, constraints and evidence gaps, including a new conversation or project. Read only matching records and their relevant saved conclusions. Reuse compatible verified portions across projects, but an unknown scope, a similar URL or a previous no-result search is only a discovery lead; it does not establish coverage of the current need. Search remaining gaps and new source families without treating the record as a whitelist or its revisit date as a waiting period.
+
+For an authorized record, retain source or bounded query scope, last-checked time and suggested revisit time. Include question/project and applicable version in the scope when they affect reuse. Update matching rows only after completing that scoped query or source verification; reading the record or failed access does not refresh its time. Revisit earlier for changed context, versions, conflicts, missing evidence or explicit requests. Merge duplicates and remove obsolete index rows while preserving referenced evidence and unresolved work. Missing tracking does not block research or authorize a new tracker, account setup or schedule.
+
 ## Optional cross-platform source map
 
 Use these as discovery entry points when their subject can resolve the question. The examples are open-ended, not an endorsement, required roster or recurring collection. Select relevant communities, organizations, authors and venues beyond this list for other domains; do not search every platform on every run.
