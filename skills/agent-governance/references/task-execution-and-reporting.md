@@ -58,6 +58,8 @@ For text-only or read-only work, source inspection, readback, reference, syntax 
 
 ## Completion and traceable reporting
 
+For multi-turn work, distinguish a brief in-progress update, a turn/phase result and final goal acceptance. Each material result identifies the relevant input/source, output or unchanged state, actual evidence, remaining dependency and next action. Omit empty sections and routine logs; do not generate a report file for every reply. An inserted question can receive a short answer while authorized work continues. The end of one reply does not close a durable goal, and user steering supersedes only the affected decision.
+
 Before ending, reconcile the original request and every effective steering message with the delivered work, diff and acceptance evidence. State each requirement's completion, pending acceptance or blocker, including deviations, reasons, impact and remaining work. Complete authorized necessary work that can proceed. Main accepts returned work against its actual checked state.
 
 Lead with the result appropriate to the task: a conclusion for judgment/review, current candidates and comparison for an inventory, or delivered behavior for implementation. Recommend an order when requested or useful; an inventory need not select one winner. Distinguish implementation complete, acceptance complete and delivered/published. An intermediate step, another owner's claim, a file or a focused PASS does not establish overall completion.

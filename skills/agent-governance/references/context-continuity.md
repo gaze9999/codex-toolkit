@@ -2,6 +2,8 @@
 
 Use this reference when governance work changes role context, persistent goals, new-conversation recovery, compaction, task switching, handoffs, memory or Context Brief behavior.
 
+For stage outputs, evidence freshness and local/remote/cloud recovery, use [delivery lifecycle](delivery-lifecycle.md). For navigation, human reports and historical lookup, use the available task-guide's document-views reference, without creating another progress source or requiring a separate Skill installation.
+
 - Do not impose fixed message, compaction, token or elapsed-time thresholds for another task. Continue while one outcome remains active and retained state is reliable; a model change alone does not require a new task.
 - Recommend a separate task for a distinct deliverable or when stale accumulated context causes repeated contradictions or lost constraints. Create it only with explicit authorization for a large, independently reviewable phase likely to need multiple turns. Fork only when that authorized task needs prior history; a fresh task and compact handoff serve clean-context needs.
 - Use a Context Brief only for reusable implementation requirements from identified specifications, APIs, schemas, integration guides or acceptance criteria. Keep transcripts and routine progress out of it.

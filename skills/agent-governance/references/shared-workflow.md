@@ -2,6 +2,8 @@
 
 Read when the user requests persistent project tracking, cross-device configuration or recurring document maintenance. Reuse the selected task/document platform and existing installation writers; this reference adds no scheduler or account access.
 
+For an end-to-end development flow or transfer between local, remote, cloud and dot responsibilities, read [delivery lifecycle](delivery-lifecycle.md). Keep execution capability, durable state and time-sensitive evidence distinct.
+
 ## Keep a single owner
 
 | Material | Canonical owner |
