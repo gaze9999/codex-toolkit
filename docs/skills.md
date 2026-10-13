@@ -36,6 +36,7 @@
 | 架構與研究 | [Research Learning Synthesis](../skills/research-learning-synthesis/SKILL.md) | 按問題選用 [官方、社群、論文、原始碼與實測來源](../skills/research-learning-synthesis/references/source-selection.md), 追溯版本、反例與可採取的結論 |
 | 測試與交付 | [Test Strategy](../skills/test-strategy/SKILL.md) | 依變更與風險選測試, 條件式涵蓋應用程式、遊戲、AI、[效能與串流](../skills/test-strategy/references/performance-and-streams.md) 及發布驗收 |
 | 證據與來源 | [Validation Evidence Review](../skills/validation-evidence-review/SKILL.md) | 檢視驗證記錄, 或按需唯讀比對 [環境鏡像](../skills/validation-evidence-review/references/environment-comparison.md) 的相對路徑與 hash |
+| 視覺化 | [Data Visualization](../skills/data-visualization/SKILL.md) | 依問題選圖, 產生可追溯的圖表、關係圖與互動說明, 核對資料及輸出 |
 | 文件 | [Doc Updater](../skills/doc-updater/SKILL.md) | 實作後依 verified diff 同步必要的 docs, memo, changelog 或 API reference |
 | 文件 | [Local Document Processing](../skills/local-document-processing/SKILL.md) | 唯讀 [比對抽出版來源](../skills/local-document-processing/references/source-matching.md), 或沿用文件核心擷取與預覽安全更新 |
 | 文件 | [Document Production](../skills/document-production/SKILL.md) | 產生可交付的 PDF, DOCX 或 Markdown 正式文件 |

@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-documents-specifications",
-  "version": "0.2.1",
-  "description": "Extract local documents, match source hashes and maintain traceable specifications.",
+  "version": "0.3.0",
+  "description": "Extract documents, maintain specifications and build source-backed visual explanations.",
   "author": {
     "name": "gaze9999"
   },
@@ -11,7 +11,7 @@
     "com.openai": {
       "interface": {
         "displayName": "文件與規格處理",
-        "shortDescription": "Extract local documents, match source hashes and maintain traceable specifications.",
+        "shortDescription": "Extract documents, maintain specifications and build source-backed visual explanations.",
         "logo": "./assets/toolkit.png",
         "composerIcon": "./assets/toolkit.png",
         "brandColor": "#E8A36D",
