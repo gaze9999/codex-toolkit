@@ -27,7 +27,9 @@ Implementation acceptance for UI distinguishes layout, exact copy, field validat
 
 ## Decide what stays detailed
 
-When input growth or repeated calls can affect a design decision, retain a compact complexity view of the significant call path: input variables, node/path boundary, time and auxiliary-space bounds, assumptions, source revision, evidence status and next analysis. Keep API/database call counts and measured latency separate from Big O, and structural maintainability separate from algorithmic complexity. Follow the [delivery lifecycle guidance](../../agent-governance/references/delivery-lifecycle.md#adapt-ui-and-research-to-the-project); do not require complexity metadata for every document or trivial call.
+Write direct explanations of purpose, behavior, steps, results and necessary conditions. Remove boilerplate disclaimers, defensive wording, self-justification and unnecessary contrasts. State material constraints through their concrete impact and handling. Apply this style when creating, revising, organizing or translating documents.
+
+For backend, data-processing or algorithm design affected by input growth or repeated calls, retain a compact complexity view of the significant call path: input variables, node/path boundary, time and auxiliary-space bounds, assumptions, source revision, evidence status and next analysis. Keep API/database call counts and measured latency separate from Big O, and structural maintainability separate from algorithmic complexity. Follow the [delivery lifecycle guidance](../../agent-governance/references/delivery-lifecycle.md#adapt-ui-and-research-to-the-project). Frontend documents exclude Big O analysis and annotations; describe interaction performance, rendering/request behavior and maintainability.
 
 Keep decision-changing detail: exact public contracts and specification wording, source conflicts, authorization, irreversible effects, known failure evidence, acceptance gaps and migration constraints. Keep detailed data tables and raw runner output at their maintained source/evidence destination, with narrow references from the index and report.
 
@@ -44,6 +46,8 @@ Compare historical evidence against current requirement revision, relevant dirty
 Preserve original timestamps/precision and distinguish source revision, decision, observation and verification times. Keep an old issue ID when corrected; link replacement decisions or split/merged work without recycling IDs. A generated current summary may be consolidated in place; append-only history stays append-only with an explicit correction reference. Deletion or relocation of evidence requires checking ownership, references and retention needs first.
 
 ## Review the views together
+
+When a diagram, chart or interactive explanation helps answer the current question, use the available `data-visualization` Skill for visual selection, data mapping and rendered-output checks. Keep the document's narrative and authoritative sources with its owner and reference the maintained figure source. Resolve this optional capability from the current environment when needed.
 
 For document planning, resolve purpose/audience, authority, detail level, owner/update trigger, authorized destination and acceptance. Reuse current filenames and directories; separate editable sources, generated outputs, evidence and temporary material only when their lifecycle differs. Check inbound references, scripts, local-only files and ownership before moving, renaming or removing anything. Portable sources use repository identity and relative paths; rendered handoffs must give recipients reachable links.
 

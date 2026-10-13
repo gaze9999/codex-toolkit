@@ -8,7 +8,7 @@ Plugin 由 `skills/` 的工作流程、`plugins/catalog.json` 的來源映射及
 |---|---|---|
 | `packaging-acceptance` | `packaging-acceptance`、`plugin-packaging` | 無 |
 | `jev-evaluation` | `jev-evaluation` | `jev` |
-| `documents-specifications` | `context-brief`、`doc-updater`、`local-document-processing` | `local-documents` |
+| `documents-specifications` | `context-brief`、`data-visualization`、`doc-updater`、`local-document-processing` | `local-documents` |
 | `environment-evidence` | `validation-evidence-review`、`test-strategy` | `workspace-inspection` |
 | `frontend-engineering` | `angular-development`、`angular-member-order`、`react-development`、`vue-development`、`ui-ux-design`、`internationalization-engineering`、`accessibility-engineering`、`playwright-cli` | `playwright`、`serena`、`edge-devtools` |
 | `agent-workflow` | `agent-governance`、`coding-prompt`、`task-routing`、`task-guide` | 無 |

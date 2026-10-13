@@ -13,15 +13,15 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "8320b333914e3126b75c1caa27248de17a49d947b393ac427cf1e2fe224e9766",
+      "sha256": "241a9bcf8006db75abfbeb35f2998a11410c2ef81c315b430b47351539692304",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
-      "sha256": "d3ef824ffa5ba5f40e24a84e56ff9648677f15e1962efd5f9755995f87b4bc8f",
+      "sha256": "cab70d3cb51a6d7e8c48ff3715052af7d360c5a36664af9ccf5d13f7d3ebc06d",
       "source": "skills/agent-governance/SKILL.md"
     },
     "skills/agent-governance/agents/openai.yaml": {
-      "sha256": "9c9fd78983b34b7e3a7be931a175370d88a204e93503f12df1af24275e7f454d",
+      "sha256": "833d81d46e4a28d768f6efb571a8745e4edd6b3b2a29c10681fbdc6513cb6d73",
       "source": "skills/agent-governance/agents/openai.yaml"
     },
     "skills/agent-governance/assets/icon-small.png": {
@@ -109,7 +109,7 @@
       "source": "skills/agent-governance/references/delegation-routing.md"
     },
     "skills/agent-governance/references/delivery-lifecycle.md": {
-      "sha256": "cc35e060565f7fa4ef5c156ce8616fe41a84e07a13a952a1bd80d8a8d8326fa5",
+      "sha256": "b72bbb6a4da510b3e1ce0db8281da5860cefbc2d345649ff426c397e6d67efcb",
       "source": "skills/agent-governance/references/delivery-lifecycle.md"
     },
     "skills/agent-governance/references/instruction-layering.md": {
@@ -189,11 +189,11 @@
       "source": "skills/task-guide/README.md"
     },
     "skills/task-guide/SKILL.md": {
-      "sha256": "ede8690bd5eeafd09b03314fdb150f76cc85280f38f19372cd1e91b3c976fb5c",
+      "sha256": "cef470f8c772f62d350e9ea42091e73235e918927e03c67f15e9527881c89092",
       "source": "skills/task-guide/SKILL.md"
     },
     "skills/task-guide/agents/openai.yaml": {
-      "sha256": "299c1feae95e6b0564b2565778404347578b9bd519d618e6028c568c1fb2c94a",
+      "sha256": "65fd5e6dff2bb77e59356510fe70774d1adfc4d44b4e19b6b08f54fb9240dfc7",
       "source": "skills/task-guide/agents/openai.yaml"
     },
     "skills/task-guide/assets/history-commit.example.json": {
@@ -229,7 +229,7 @@
       "source": "skills/task-guide/references/decision-records.md"
     },
     "skills/task-guide/references/documentation-views.md": {
-      "sha256": "78e0989a33924eab13ff8bc71469351be401a61e1d60b279f149330b6e57339b",
+      "sha256": "bcacba1567ce71270560cc51e00b8c15fdbd6a79a5a2218c4ede728b4a16aa5d",
       "source": "skills/task-guide/references/documentation-views.md"
     },
     "skills/task-guide/references/task-guide.md": {
@@ -284,5 +284,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.8.0",
-  "version": "0.3.0"
+  "version": "0.3.1"
 }

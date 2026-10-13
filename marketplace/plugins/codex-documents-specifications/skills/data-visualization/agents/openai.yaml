@@ -1,0 +1,7 @@
+interface:
+  display_name: "Data Visualization (v0.1.0)"
+  short_description: "Build source-backed charts and visual explanations"
+  default_prompt: "Use $data-visualization to choose, produce and verify a chart or diagram that answers the reader's question from the available sources."
+
+policy:
+  allow_implicit_invocation: true

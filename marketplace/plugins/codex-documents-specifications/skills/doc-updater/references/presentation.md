@@ -20,6 +20,10 @@ For maintenance, retain the effective existing structure and patch only affected
 
 Keep lengthy instructions and format-specific procedures in the existing relevant references. English internal guidance may contain localized output examples; user-visible content follows the requested language. Source, language, link, rendering and actual operation checks are distinct evidence.
 
+## Charts and diagrams
+
+Keep the document's question, narrative and governing sources with its owner. Use the independently callable [data-visualization Skill](../../data-visualization/SKILL.md) when a chart, diagram or interactive explanation helps the reader compare, explore or understand relationships. It handles visual selection, data mapping, rendering and export checks. Reference one maintained figure source from the document and include a useful caption, units, filters and source revision. Frontend visuals cover interaction, request/state behavior and maintainability.
+
 ## Reading experience
 
 Design for the actual reading surface and task: clear semantic headings/navigation, important results before secondary detail, readable line lengths/tables, nearby explanations and copyable examples. Avoid image-only instructions, unexplained abbreviations, unnecessary nesting and hiding required actions in collapsible content. Use meaningful link text and alt text, and preserve text selection and accessible heading order where the format supports them.

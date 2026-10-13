@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "d64251b6471ab53e841b28d8bd4279deddfcb86c56cb6e2dd3f0ce1d1fc2d8f8",
+      "sha256": "5e360761f2a4fbf33929ac4f185d237f21a89b65f221cce997ac6a81773f5bb7",
       "source": "plugins/documents-specifications/plugin.json"
     },
     "skills/context-brief/SKILL.md": {
@@ -56,12 +56,28 @@
       "sha256": "5ad26def4afb187587f67ea3354f80c3931a76067933d92df5ed11ceaa9c15fa",
       "source": "skills/context-brief/scripts/validate_context_brief.py"
     },
+    "skills/data-visualization/SKILL.md": {
+      "sha256": "7330a127163fa527b1e0426dacd6e36d9d91700cbf9e9443efcc927376bf8602",
+      "source": "skills/data-visualization/SKILL.md"
+    },
+    "skills/data-visualization/agents/openai.yaml": {
+      "sha256": "2fa709665e1adbb708ed02b8da40cc6884edd2c0294e8196db13c65cd897f042",
+      "source": "skills/data-visualization/agents/openai.yaml"
+    },
+    "skills/data-visualization/references/chart-selection.md": {
+      "sha256": "273ef2ea90a238058073b4ebb6706931c99547806ca32962cdaa70d168a91974",
+      "source": "skills/data-visualization/references/chart-selection.md"
+    },
+    "skills/data-visualization/references/delivery-and-verification.md": {
+      "sha256": "b33d6b0d576b2abde7c6210860cd59828a17c8c659ad06a698d12e079f03f2d9",
+      "source": "skills/data-visualization/references/delivery-and-verification.md"
+    },
     "skills/doc-updater/SKILL.md": {
-      "sha256": "485421e854e76510e4d0b16714bd42132fc3eba7940cf2ace441d4c0da135d05",
+      "sha256": "a1c9e1387dc251032453113b4ebea3a3cd344ba09753658196e86a636946bfc7",
       "source": "skills/doc-updater/SKILL.md"
     },
     "skills/doc-updater/agents/openai.yaml": {
-      "sha256": "06ce7853c8d9c81a53678747233a278a6020a506063102029c76da210961a9d7",
+      "sha256": "0159960fc81da380a196fecb2a536bd267b40a01b376a92469e069de5da0daca",
       "source": "skills/doc-updater/agents/openai.yaml"
     },
     "skills/doc-updater/assets/icon-small.png": {
@@ -89,7 +105,7 @@
       "source": "skills/doc-updater/references/notion-sync-reader-writer-contract.md"
     },
     "skills/doc-updater/references/presentation.md": {
-      "sha256": "89d18d0213692a561e8d0ef68681752ba7936089cf27e672405978996fbee048",
+      "sha256": "16f75ce4d9d0c05923ebb8b5c8b0f05a9ebfe209c5bc3e78315fd730bf900136",
       "source": "skills/doc-updater/references/presentation.md"
     },
     "skills/doc-updater/references/source-and-history.md": {
@@ -134,5 +150,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.8.0",
-  "version": "0.2.1"
+  "version": "0.3.0"
 }

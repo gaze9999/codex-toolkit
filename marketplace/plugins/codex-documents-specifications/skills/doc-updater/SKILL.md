@@ -3,7 +3,7 @@ name: doc-updater
 description: Update, align or synchronize identified existing documentation when explicitly requested and supported by verifiable implementation-change evidence. Use for maintaining current docs, not source extraction, new reports or substantial README redesign.
 metadata:
   short-description: Minimize documentation updates from implementation evidence
-  version: "0.4.16"
+  version: "0.4.17"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -21,6 +21,8 @@ Update behavior, public APIs, installation/configuration, deployment, compatibil
 Governing specifications and confirmed decisions retain authority. Preserve unresolved conflicts instead of rewriting requirements to match code. For conflicting versions or paired current/history records, read [source authority and history](references/source-and-history.md).
 
 ## Apply the supported change
+
+Use direct explanations of purpose, behavior, steps, results and necessary conditions. Remove boilerplate disclaimers, defensive wording, self-justification and unnecessary contrasts from the edited content. State material limits through their concrete impact and handling. Apply this style to prose, captions and analysis while preserving authoritative source meaning and legal notices.
 
 - Read relevant implementation evidence and target sections, then make the smallest supported update. Recheck the destination when concurrent edits are possible, preserve unrelated changes, authoritative wording, legal notices and material limits, and keep secrets/private implementation details out of public guarantees.
 - If impact or target selection is unclear, read [documentation impact rules](references/doc-update-rules.md). The optional `scripts/scan_changed_files.py --repo <repo-root>` aids discovery with a compatible Python runtime; equivalent repository inspection needs no new tool installation.
