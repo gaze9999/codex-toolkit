@@ -3,7 +3,7 @@ name: agent-governance
 description: Create, audit, or simplify project AGENTS.md layers, Codex subagent roles and durable goal recovery across conversations. Use for instruction-governance work, not ordinary implementation or general code review.
 metadata:
   short-description: Agent governance, role boundaries, and instruction minimization
-  version: "0.6.1"
+  version: "0.6.2"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -27,7 +27,7 @@ Create or simplify instruction layers and durable role boundaries. Keep rules th
 |---|---|
 | New project instructions, roles or code-maintenance preferences | [Project setup](references/project-setup.md); select starter assets only when useful |
 | Global/root/nested scope, discovery or exact Git exclusions | [Instruction layering](references/instruction-layering.md) |
-| Project lifecycle, environment or shared resource ownership | [Project environment routing](references/project-environment-routing.md) |
+| Project lifecycle, workspace path migration, client adoption or shared resource ownership | [Project environment routing](references/project-environment-routing.md) |
 | Task intake, evidence, Git authority or reporting | [Task execution and reporting](references/task-execution-and-reporting.md) |
 | Cross-client response formats, finished writing or interactive presentation | [Response presentation](references/response-presentation.md) |
 | Delegation, worker context or supported model/reasoning choices | [Delegation routing](references/delegation-routing.md) |

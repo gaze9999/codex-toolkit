@@ -20,6 +20,16 @@ Explorer maps one unresolved area read-only; Worker owns one coherent behavior a
 
 Select an available test-strategy Skill only when testing decisions or missing lifecycle evidence need work; recorded-result interpretation stays with validation-evidence-review when available. Use packaging-acceptance for actual artifact acceptance, and domain Skills for implementation. Missing optional Skills do not block known project checks.
 
+## Workspace paths and client adoption
+
+For an authorized folder migration, map repository identities, current project roots, writable roots, active checkouts/worktrees and configured file references before writes. Use the actual client's supported UI/API and compatible schema. Saved fields, a separate CLI/server readback and the running App's adoption are distinct evidence; a running client may retain or rewrite cached values.
+
+Classify thread records by source/actor, archived/runtime state and current callers. Historical review/subagent records and backups retain provenance and do not establish an active project consumer. Inspect metadata through non-activating reads such as supported `thread/read`; do not start/resume a thread or change its permissions merely to inspect or migrate paths. A separately started server's `notLoaded` state does not establish another client's state. The [App Server documentation](https://learn.chatgpt.com/docs/app-server#read-a-stored-thread-without-resuming) distinguishes stored reads from resume; confirm methods against the actual host version.
+
+Compare paths using each field's supported representation, including Windows extended prefixes and URI/cache keys where applicable. Apply selected fields with source/hash guards and recoverable backups; stop on mapping collisions or concurrent changes. Avoid global substring replacements and full-state restoration.
+
+Retire a compatibility link only after active callers are updated and relevant client/entry checks pass. Verify ownership, link type, exact target and the physical repository before removing only that link. Preserve physical data, unrelated worktrees and historical paths, then check canonical entries again.
+
 ## Dispatch and resources
 
 Define the owned files/modules, expected behavior and independent oracle, authorized data/environment, must-preserve constraints, acceptance, revision/diff state and stop condition. Give only context needed by the slice, preserving previous effective decisions and current user steering. A child cannot expand scope, install dependencies, run production writes or release from a role description.
