@@ -57,3 +57,14 @@ Skill、Plugin、Python package 及 Toolkit 整包各自使用版本. 相容修�
 發布來源須乾淨、已提交且受 Git 追蹤, 每個輸出附 SHA-256 與來源 manifest. 安裝與啟用透過原生用戶端入口, 更新後重新載入並確認工具與 Skill discovery
 
 GitHub Release 需明確授權, 使用新版本 Tag 並指向已核對的提交, 保存 README、LICENSE、必要第三方 notices 與相應資產. Release 說明列使用者可見變更、相容性及必要升級操作
+
+
+### 選擇性還原與既有市集
+
+`restore_profile.py` 預設預覽, `--section` 選還原範圍, `--plugin`、`--skill`、`--tool` 可重複指定 profile 內的部分選項, `--platform windows|macos|linux` 可預覽另一平台的工具, 實際套用工具須在該平台執行
+
+Profile 可增加 `marketplace` 物件, 使用 `source_type` (`git` 或 `local`)、`source` 與可選的 Git `ref`, Git URL 使用無憑證的 HTTPS/SSH 儲存庫來源, local 來源須為已審查 Toolkit checkout, 沒有此欄位的舊 profile 沿用 local 行為
+
+既有同來源市集、ref、自訂值及 Plugin 啟用/停用狀態保留, 已登錄 Plugin 不重裝, 不同來源會阻擋整批寫入, 新 Git 市集預設固定 profile 的已審查 revision, 引擎不將 Git 轉成 local, 也不以工具來源 revision 宣稱既有 Plugin cache 已更新
+
+套用使用目的裝置的 `.setup-restore.lock`, 寫入前重查 config hash, 既有 config 先保存到本機 `backups/setup-restore-*/config.toml` 並核對 SHA-256, 失敗停止後續步驟並回報已完成範圍, 備份與鎖不進跨裝置包, 部分執行不代表整批自動回復

@@ -88,6 +88,78 @@ class RestoreChecks(unittest.TestCase):
         self.assertEqual([row['item'] for row in result['steps']], ['context7'])
         self.assertIn('--interface', result['steps'][0]['command'])
 
+    def test_existing_git_marketplace_and_disabled_plugin_are_preserved(self):
+        self.value['marketplace'] = {'source_type': 'git', 'source': 'https://example.com/owner/toolkit.git'}
+        self.write_profile()
+        self.home.mkdir()
+        config = self.home / 'config.toml'
+        original = '[marketplaces.codex-toolkit]\nsource_type="git"\nsource="git@example.com:owner/toolkit.git"\nref="main"\n[plugins."codex-agent-workflow@codex-toolkit"]\nenabled=false\ncustom="retain"\n'
+        config.write_text(original)
+        result = self.preview(('plugins',))
+        self.assertEqual(result['blocked'], [])
+        self.assertEqual(result['steps'], [])
+        self.assertEqual(result['preserved_plugins'][0]['enabled'], False)
+        self.assertEqual(restore.execute(result, self.home)['status'], 'unchanged')
+        self.assertEqual(config.read_text(), original)
+
+    def test_new_git_marketplace_uses_reviewed_ref(self):
+        self.value['marketplace'] = {'source_type': 'git', 'source': 'https://example.com/owner/toolkit.git'}
+        self.write_profile()
+        result = self.preview(('plugins',))
+        self.assertEqual(result['steps'][0]['command'][-2:], ['--ref', 'a' * 40])
+
+    def test_other_git_source_blocks_all_writes(self):
+        self.value['marketplace'] = {'source_type': 'git', 'source': 'https://example.com/owner/toolkit.git'}
+        self.write_profile()
+        self.home.mkdir()
+        (self.home / 'config.toml').write_text('[marketplaces.codex-toolkit]\nsource_type="git"\nsource="https://example.com/other/toolkit.git"\n')
+        self.assertTrue(self.preview(('plugins',))['blocked'])
+
+    def test_credentials_in_marketplace_source_are_rejected(self):
+        self.value['marketplace'] = {'source_type': 'git', 'source': 'https://token@example.com/owner/toolkit.git'}
+        self.write_profile()
+        with self.assertRaisesRegex(ValueError, 'credential-free'):
+            self.preview(('plugins',))
+
+    def test_explicit_plugin_subset_cannot_expand_profile(self):
+        with self.git:
+            with self.assertRaisesRegex(ValueError, 'outside the profile'):
+                restore.plan(self.root, self.profile, self.home, ('plugins',), selected_plugins=['other'])
+
+    def test_changed_config_stops_before_delegation(self):
+        result = self.preview(('plugins',))
+        self.home.mkdir()
+        (self.home / 'config.toml').write_text('custom = true')
+        with patch.object(restore.subprocess, 'run') as run:
+            with self.assertRaisesRegex(ValueError, 'changed'):
+                restore.execute(result, self.home)
+            run.assert_not_called()
+        self.assertFalse((self.home / '.setup-restore.lock').exists())
+
+    def test_existing_lock_stops_without_removing_other_owner_lock(self):
+        result = self.preview(('plugins',))
+        self.home.mkdir()
+        lock = self.home / '.setup-restore.lock'
+        lock.write_text('other owner')
+        with self.assertRaisesRegex(ValueError, 'device-local lock'):
+            restore.execute(result, self.home)
+        self.assertEqual(lock.read_text(), 'other owner')
+
+    def test_config_backup_is_recoverable_after_partial_failure(self):
+        self.home.mkdir()
+        config = self.home / 'config.toml'
+        config.write_text('custom = "original"')
+        result = self.preview(('skills',))
+        with patch.object(restore.subprocess, 'run', return_value=subprocess.CompletedProcess([], 7)):
+            with self.assertRaisesRegex(ValueError, 'completed steps=0'):
+                restore.execute(result, self.home)
+        backups = list((self.home / 'backups').glob('setup-restore-*/config.toml'))
+        self.assertEqual(len(backups), 1)
+        self.assertEqual(backups[0].read_bytes(), config.read_bytes())
+        config.write_text('custom = "later"')
+        config.write_bytes(backups[0].read_bytes())
+        self.assertEqual(config.read_text(), 'custom = "original"')
+
     def test_failure_stops_later_steps(self):
         preview = {'blocked': [], 'steps': [{'section': 'skills', 'command': ['fake1']}, {'section': 'plugins', 'command': ['fake2']}]}
         with patch.object(restore.subprocess, 'run', return_value=subprocess.CompletedProcess([], 7)) as run:
