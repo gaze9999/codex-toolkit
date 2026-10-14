@@ -168,6 +168,16 @@ class RestoreChecks(unittest.TestCase):
             self.assertEqual(environment['GIT_CONFIG_KEY_1'], 'core.longpaths')
             self.assertEqual(restore.os.environ['GIT_CONFIG_COUNT'], '1')
 
+    def test_marketplace_argument_shell_characters_are_rejected_before_writes(self):
+        for source, reference in [('https://example.com/owner/repo&command', None), ('https://example.com/owner/toolkit.git', 'main&command')]:
+            self.value['marketplace'] = {'source_type': 'git', 'source': source}
+            if reference is not None:
+                self.value['marketplace']['ref'] = reference
+            self.write_profile()
+            with self.assertRaises(ValueError):
+                self.preview(('plugins',))
+            self.assertFalse(self.home.exists())
+
     def test_failure_stops_later_steps(self):
         preview = {'blocked': [], 'steps': [{'section': 'skills', 'command': ['fake1']}, {'section': 'plugins', 'command': ['fake2']}]}
         with patch.object(restore.subprocess, 'run', return_value=subprocess.CompletedProcess([], 7)) as run:

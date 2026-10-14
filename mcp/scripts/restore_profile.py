@@ -36,8 +36,9 @@ def git_identity(source):
         if parsed.scheme not in ('https', 'ssh') or not parsed.hostname or parsed.password or (parsed.username and parsed.scheme == 'https') or parsed.query or parsed.fragment:
             raise ValueError('Use a credential-free HTTPS/SSH Git source')
         host, path = parsed.hostname, parsed.path
-    if len(path.strip('/').removesuffix('.git').split('/')) != 2:
-        raise ValueError('Use an explicit Git repository source')
+    parts = path.strip('/').removesuffix('.git').split('/')
+    if not re.fullmatch(r'[A-Za-z0-9.-]+', host) or len(parts) != 2 or any(not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]*', part) for part in parts):
+        raise ValueError('Use an explicit Git repository source with portable host/owner/name characters')
     return (host + '/' + path.strip('/').removesuffix('.git')).lower()
 
 
@@ -116,7 +117,7 @@ def plan(root, profile, home, sections, apply=False, replace_agents=False,
         wanted = value.get('marketplace', {'source_type': 'local', 'source': str(root)})
         if not isinstance(wanted, dict) or set(wanted) - {'source_type', 'source', 'ref'} or wanted.get('source_type') not in ('local', 'git') or not isinstance(wanted.get('source'), str) or not wanted['source']:
             raise ValueError('Invalid marketplace selection')
-        if 'ref' in wanted and (wanted['source_type'] != 'git' or not isinstance(wanted['ref'], str) or not wanted['ref'] or wanted['ref'].startswith('-')):
+        if 'ref' in wanted and (wanted['source_type'] != 'git' or not isinstance(wanted['ref'], str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._/-]*', wanted['ref'])):
             raise ValueError('Invalid Git marketplace ref')
         if wanted['source_type'] == 'git':
             identity = git_identity(wanted['source'])
