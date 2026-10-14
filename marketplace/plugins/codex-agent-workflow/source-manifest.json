@@ -13,15 +13,15 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "241a9bcf8006db75abfbeb35f2998a11410c2ef81c315b430b47351539692304",
+      "sha256": "6530d6c5987ecb9414fd3e70cbefcf5f399aa5bcce457d642bc7129582006c78",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
-      "sha256": "cab70d3cb51a6d7e8c48ff3715052af7d360c5a36664af9ccf5d13f7d3ebc06d",
+      "sha256": "702075deb6c0e9e657835d044e463b24ae7d6990e08e473242676921795a6e41",
       "source": "skills/agent-governance/SKILL.md"
     },
     "skills/agent-governance/agents/openai.yaml": {
-      "sha256": "833d81d46e4a28d768f6efb571a8745e4edd6b3b2a29c10681fbdc6513cb6d73",
+      "sha256": "6bb7d927a26b57ac18589912c63aa3c24104238a15dacdbef69498c8e6823f6d",
       "source": "skills/agent-governance/agents/openai.yaml"
     },
     "skills/agent-governance/assets/icon-small.png": {
@@ -125,7 +125,7 @@
       "source": "skills/agent-governance/references/operating-efficiency.md"
     },
     "skills/agent-governance/references/project-environment-routing.md": {
-      "sha256": "5b169064200c2f85f1e489e965cd2476580a6841863a1aae5d793d19caaf885c",
+      "sha256": "88ba1e07345bcac190a6769c0ae29ca0937ca686b7c347308fb445ed3d08b593",
       "source": "skills/agent-governance/references/project-environment-routing.md"
     },
     "skills/agent-governance/references/project-setup.md": {
@@ -283,6 +283,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.8.0",
-  "version": "0.3.1"
+  "toolkit_version": "0.9.0",
+  "version": "0.3.2"
 }

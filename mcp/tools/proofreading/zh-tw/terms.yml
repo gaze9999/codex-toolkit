@@ -28,6 +28,18 @@ rules:
       to: 資料差異更新
 
   # Authored delivery prose; retain literal source material and identifiers
+  # Observed confirmation-script variants, user Traditional Chinese preference.
+  - expected: 確認
+    patterns: [确认, 确認, 確认]
+    specs:
+    - from: 确认來源
+      to: 確認來源
+    - from: 确認來源
+      to: 確認來源
+    - from: 確认來源
+      to: 確認來源
+    - from: 確認來源
+      to: 確認來源
   - expected: 關卡
     patterns:
     - 关卡
