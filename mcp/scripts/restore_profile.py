@@ -166,6 +166,19 @@ def plan(root, profile, home, sections, apply=False, replace_agents=False,
     return {'status': 'preview', 'revision': head, 'sections': sorted(selected), 'steps': steps, 'blocked': blocked, 'manual': value.get('manual', []), 'reload_verified': False, 'preserved_plugins': preserved, 'config_sha256': config_digest}
 
 
+def child_environment(home):
+    environment = {**os.environ, 'CODEX_HOME': str(home)}
+    if sys.platform == 'win32':
+        # Native marketplace staging may exceed MAX_PATH; keep this Git option process-local.
+        count = int(environment.get('GIT_CONFIG_COUNT', '0'))
+        if count < 0:
+            raise ValueError('Invalid process-local Git configuration count')
+        environment.update({'GIT_CONFIG_COUNT': str(count + 1),
+                            'GIT_CONFIG_KEY_' + str(count): 'core.longpaths',
+                            'GIT_CONFIG_VALUE_' + str(count): 'true'})
+    return environment
+
+
 def execute(preview, home):
     if preview['blocked']:
         raise ValueError('Resolve preview blockers before any restore writes')
@@ -192,7 +205,7 @@ def execute(preview, home):
             if hashlib.sha256(backup.read_bytes()).hexdigest() != current:
                 raise ValueError('Configuration backup verification failed')
         for step in preview['steps']:
-            result = subprocess.run(step['command'], env={**os.environ, 'CODEX_HOME': str(home)}, check=False)
+            result = subprocess.run(step['command'], env=child_environment(home), check=False)
             if result.returncode:
                 raise ValueError(f"Restore stopped at {step['section']} / {step.get('item', 'sources')}, exit={result.returncode}; completed steps={len(completed)}, inspect installer backups")
             completed.append({'section': step['section'], 'item': step.get('item')})

@@ -68,3 +68,5 @@ Profile 可增加 `marketplace` 物件, 使用 `source_type` (`git` 或 `local`)
 既有同來源市集、ref、自訂值及 Plugin 啟用/停用狀態保留, 已登錄 Plugin 不重裝, 不同來源會阻擋整批寫入, 新 Git 市集預設固定 profile 的已審查 revision, 引擎不將 Git 轉成 local, 也不以工具來源 revision 宣稱既有 Plugin cache 已更新
 
 套用使用目的裝置的 `.setup-restore.lock`, 寫入前重查 config hash, 既有 config 先保存到本機 `backups/setup-restore-*/config.toml` 並核對 SHA-256, 失敗停止後續步驟並回報已完成範圍, 備份與鎖不進跨裝置包, 部分執行不代表整批自動回復
+
+Windows 的原生 Git 市集 staging 使用該次子程序的 `core.longpaths=true`, 保留原有程序 Git 選項, 不修改全域 Git 設定, 中文及空白路徑仍在目的裝置核對

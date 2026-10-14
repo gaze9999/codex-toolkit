@@ -160,6 +160,14 @@ class RestoreChecks(unittest.TestCase):
         config.write_bytes(backups[0].read_bytes())
         self.assertEqual(config.read_text(), 'custom = "original"')
 
+    def test_windows_marketplace_git_options_are_process_local_and_preserve_existing_options(self):
+        with patch.object(restore.sys, 'platform', 'win32'), patch.dict(restore.os.environ, {'GIT_CONFIG_COUNT': '1', 'GIT_CONFIG_KEY_0': 'fixture.option', 'GIT_CONFIG_VALUE_0': 'preserve'}, clear=True):
+            environment = restore.child_environment(self.home)
+            self.assertEqual(environment['GIT_CONFIG_COUNT'], '2')
+            self.assertEqual(environment['GIT_CONFIG_VALUE_0'], 'preserve')
+            self.assertEqual(environment['GIT_CONFIG_KEY_1'], 'core.longpaths')
+            self.assertEqual(restore.os.environ['GIT_CONFIG_COUNT'], '1')
+
     def test_failure_stops_later_steps(self):
         preview = {'blocked': [], 'steps': [{'section': 'skills', 'command': ['fake1']}, {'section': 'plugins', 'command': ['fake2']}]}
         with patch.object(restore.subprocess, 'run', return_value=subprocess.CompletedProcess([], 7)) as run:
