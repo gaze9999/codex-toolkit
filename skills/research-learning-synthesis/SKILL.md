@@ -2,7 +2,7 @@
 name: research-learning-synthesis
 description: Synthesize technical research, community practices or papers into evidence-qualified conclusions and a small learning path, including prerequisites and overlooked alternatives. Use for a research brief or knowledge-gap review, not a simple factual lookup or automatic scheduling.
 metadata:
-  version: "0.5.2"
+  version: "0.5.3"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -11,7 +11,7 @@ metadata:
 
 Start with the user's question, intended use and known constraints. Use already-authorized relevant notes or conversations to avoid repeated discovery, but do not treat an old assistant answer as verified evidence or assume the user's proficiency.
 
-When an approved lookup record is configured, reuse only traceable coverage applicable to the current question, project context and version. A prior visit or unexpired date is not complete coverage. Read matching excerpts and follow the [scoped record conditions](references/source-selection.md#reuse-scoped-lookup-records); research unrelated to an available record can proceed independently.
+When duplicate data or repeated lookup is a concern, optionally consult an approved lookup record. Direct research needs no ledger preflight. If used, read matching excerpts and reuse only traceable coverage applicable to the question, project context and version; prior visits or unexpired dates do not establish complete coverage. Follow the [scoped record conditions](references/source-selection.md#reuse-scoped-lookup-records).
 
 ## Build a bounded evidence set
 
