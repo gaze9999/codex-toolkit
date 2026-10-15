@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate, prepare, and explicitly publish a my-py-tools GitHub Release."""
+"""Validate and prepare my-py-tools assets for the repository's Release CI."""
 
 from __future__ import annotations
 
@@ -162,41 +162,12 @@ def verify(tag: str, output_root: Path | None = None) -> list[Path]:
 
 
 def publish(tag: str, output_root: Path | None = None) -> None:
-    version = prepare_release.normalize_version(tag)
-    tag = "v" + version
-    if run("git", "status", "--porcelain=v1", "-uall", capture=True):
-        raise ValueError("Commit and review all source changes before publishing")
-    branch = run("git", "branch", "--show-current", capture=True)
-    if not branch:
-        raise ValueError("A local branch is required")
-    upstream = run("git", "rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{upstream}", capture=True)
-    if upstream != f"origin/{branch}":
-        raise ValueError(f"Branch must track origin/{branch}")
-    validate_source()
-    assets = verify(tag, output_root)
-    if run("git", "tag", "--list", tag, capture=True):
-        raise ValueError(f"Local tag already exists: {tag}")
-    if run("git", "ls-remote", "--tags", "origin", f"refs/tags/{tag}", capture=True):
-        raise ValueError(f"Remote tag already exists: {tag}")
-    run("gh", "auth", "status", capture=True)
-    existing = subprocess.run(["gh", "release", "view", tag, "--json", "tagName"], cwd=REPO, capture_output=True, text=True, encoding="utf-8")
-    if existing.returncode == 0:
-        raise ValueError(f"GitHub Release already exists: {tag}")
-    head = run("git", "rev-parse", "HEAD", capture=True)
-    print(f"Ready to push {branch} ({head[:12]}) and publish {tag} with {len(assets)} assets")
-    if input("Type the tag to confirm: ").strip() != tag:
-        print("Cancelled")
-        return
-    run("git", "push", "origin", branch)
-    remote = run("git", "ls-remote", "origin", f"refs/heads/{branch}", capture=True)
-    if not remote or remote.split()[0] != head:
-        raise ValueError("Remote branch does not match the reviewed commit")
-    run("gh", "release", "create", tag, *(str(path) for path in assets), "--target", head, "--title", tag, "--generate-notes")
-    remote_release = json.loads(run("gh", "release", "view", tag, "--json", "tagName,assets", capture=True))
-    remote_assets = remote_release.get("assets", [])
-    if remote_release.get("tagName") != tag or {item.get("name"): item.get("size") for item in remote_assets} != {path.name: path.stat().st_size for path in assets}:
-        raise ValueError("GitHub Release assets do not match the local release")
-    print(f"Published {tag}")
+    raise ValueError(
+        "Local publication is retired. Use the existing aggregate version Tag with "
+        ".github/workflows/python-tools-release.yml; publish=false builds artifacts, "
+        "publish=true stages verified assets in a draft Release. Review the complete "
+        "draft before publishing; python-tools and package versions remain independent."
+    )
 
 
 def main() -> int:
@@ -206,7 +177,7 @@ def main() -> int:
     prepare.add_argument("--version", help="Repository version; package versions remain independent")
     prepare.add_argument("--dry-run", action="store_true")
     prepare.add_argument("--asset-root", type=Path, help="Asset root; default: <repo>/dist")
-    publish_parser = subparsers.add_parser("publish", help="Push a reviewed commit and create a GitHub Release")
+    publish_parser = subparsers.add_parser("publish", help="Retired local publisher; use the repository draft Release workflow")
     publish_parser.add_argument("tag", help="Prepared release tag, e.g. v0.2.0")
     publish_parser.add_argument("--asset-root", type=Path, help="Prepared asset root; default: <repo>/dist")
     cli_parser = subparsers.add_parser("cli", help="Build independent native CLI assets for Release CI")
@@ -229,8 +200,7 @@ def main() -> int:
                 verify(str(result["tag"]), output_root)
             print(f"{'PREVIEW' if args.dry_run else 'READY'} {result['tag']}: {result['assets']} assets")
             if not args.dry_run:
-                suffix = f" --asset-root {output_root}" if args.asset_root else ""
-                print(f"Review changes, commit them, then run: python launch-cli.py scripts.release publish {result['tag']}{suffix}")
+                print("Review the assets, then use python-tools-release.yml at the reviewed aggregate Tag; local publication is retired")
     except (OSError, ValueError, json.JSONDecodeError, zipfile.BadZipFile) as error:
         print(f"FAIL {error}", file=sys.stderr)
         return 1

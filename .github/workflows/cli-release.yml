@@ -1,19 +1,16 @@
 name: Portable CLI release
 
 on:
-  release:
-    types: [published]
   workflow_dispatch:
     inputs:
       tag:
-        description: Existing tag or revision to test, never publishes from manual runs
+        description: Existing reviewed full-version aggregate Tag
         required: true
         type: string
-      version:
-        description: SemVer for test archive names
-        required: true
-        default: v0.0.0
-        type: string
+      publish:
+        description: Stage verified assets in a draft Release; never publishes it
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -24,26 +21,26 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          ref: ${{ github.event.release.tag_name || inputs.tag || github.sha }}
+          ref: ${{ inputs.tag }}
           persist-credentials: false
+          fetch-depth: 0
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13'
       - name: Check stable aggregate Release eligibility
-        if: github.event_name == 'release'
         shell: bash
         working-directory: .
         env:
-          POLICY_TAG: ${{ github.event.release.tag_name }}
-          POLICY_PRERELEASE: ${{ github.event.release.prerelease }}
+          POLICY_TAG: ${{ inputs.tag }}
+          POLICY_PRERELEASE: 'false'
         run: |
           python - <<'PY'
           import os, re
           from pathlib import Path
           tag = os.environ['POLICY_TAG']
           version = Path('VERSION').read_text(encoding='utf-8').strip()
-          if not re.fullmatch(r'v[1-9][0-9]*\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)', tag):
-              raise SystemExit('A complete stable version at or above 1.0.0 is required')
+          if not re.fullmatch(r'v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)', tag):
+              raise SystemExit('A complete version Tag is required')
           if tag != 'v' + version or os.environ['POLICY_PRERELEASE'] == 'true':
               raise SystemExit('Release must match the stable aggregate VERSION')
           PY
@@ -64,8 +61,9 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          ref: ${{ github.event.release.tag_name || inputs.tag }}
+          ref: ${{ inputs.tag }}
           persist-credentials: false
+          fetch-depth: 0
       - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
         with:
           version: '0.12.10'
@@ -75,7 +73,7 @@ jobs:
       - name: Build and smoke test the native CLI
         shell: bash
         env:
-          CLI_TAG: ${{ github.event.release.tag_name || inputs.version }}
+          CLI_TAG: ${{ inputs.tag }}
           UV_PYTHON_INSTALL_DIR: ${{ runner.temp }}/cli-python
           UV_PYTHON_INSTALL_BIN: '0'
           UV_PYTHON_INSTALL_REGISTRY: '0'
@@ -91,7 +89,7 @@ jobs:
           if-no-files-found: error
 
   attach:
-    if: github.event_name == 'release'
+    if: inputs.publish
     needs: build
     runs-on: ubuntu-latest
     permissions:
@@ -99,8 +97,9 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          ref: ${{ github.event.release.tag_name }}
+          ref: ${{ inputs.tag }}
           persist-credentials: false
+          fetch-depth: 0
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13'
@@ -108,16 +107,16 @@ jobs:
         shell: bash
         working-directory: .
         env:
-          POLICY_TAG: ${{ github.event.release.tag_name }}
-          POLICY_PRERELEASE: ${{ github.event.release.prerelease }}
+          POLICY_TAG: ${{ inputs.tag }}
+          POLICY_PRERELEASE: 'false'
         run: |
           python - <<'PY'
           import os, re
           from pathlib import Path
           tag = os.environ['POLICY_TAG']
           version = Path('VERSION').read_text(encoding='utf-8').strip()
-          if not re.fullmatch(r'v[1-9][0-9]*\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)', tag):
-              raise SystemExit('A complete stable version at or above 1.0.0 is required')
+          if not re.fullmatch(r'v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)', tag):
+              raise SystemExit('A complete version Tag is required')
           if tag != 'v' + version or os.environ['POLICY_PRERELEASE'] == 'true':
               raise SystemExit('Release must match the stable aggregate VERSION')
           PY
@@ -128,7 +127,7 @@ jobs:
           merge-multiple: true
       - name: Verify exact source, checksums and target set
         env:
-          CLI_TAG: ${{ github.event.release.tag_name }}
+          CLI_TAG: ${{ inputs.tag }}
         run: |
           python3 -B - <<'PY'
           import hashlib, os, sys
@@ -149,8 +148,25 @@ jobs:
           assert targets == {'windows-x64', 'macos-arm64', 'macos-x64'}
           assert len(list(folder.iterdir())) == 6
           PY
+      - name: Prepare verified draft Release
+        shell: bash
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          TAG_OBJECT=$(git rev-parse "refs/tags/$RELEASE_TAG")
+          test "$(git cat-file -t "$TAG_OBJECT")" = tag
+          test "$(git rev-parse "refs/tags/$RELEASE_TAG^{commit}")" = "$(git rev-parse HEAD)"
+          test "$(gh api "repos/$GH_REPO/git/ref/tags/$RELEASE_TAG" --jq '.object.sha')" = "$TAG_OBJECT"
+          if gh release view "$RELEASE_TAG" --json isDraft --jq '.isDraft' > draft-state; then
+            test "$(cat draft-state)" = true || { echo 'Published releases are not overwritten'; exit 1; }
+          else
+            gh release create "$RELEASE_TAG" --verify-tag --draft --title "$RELEASE_TAG" --notes 'Verified build assets; publish only after the complete delivery is reviewed.'
+          fi
       - name: Attach verified portable CLI archives
         env:
           GH_TOKEN: ${{ github.token }}
-          CLI_TAG: ${{ github.event.release.tag_name }}
+          CLI_TAG: ${{ inputs.tag }}
         run: gh release upload "$CLI_TAG" dist/cli/*.zip dist/cli/*.sha256 --repo "$GITHUB_REPOSITORY"

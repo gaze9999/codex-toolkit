@@ -12,6 +12,7 @@
 | 設定分類 | [MCP](mcp.md) | 原始碼、安裝工具、相依與封裝責任 |
 | 安裝與管理 | [CLI](setup/cli.md) | baseline、單項 MCP、獨立 runtime、註冊與解除安裝 |
 | 安裝與管理 | [安裝包](setup/packages.md) | MCP wheel、portable ZIP、Skills 封裝與發布 |
+| 安裝與管理 | [版本與發布](releases.md) | 整包 / 元件版本、來源 Tag、手動建置及草稿資產 |
 | 安裝與管理 | [安裝結果指引](setup/installer-guide.html) | 缺項、帳戶設定與實際操作驗證 |
 | 工具 | [來源清單](tools/catalog.md) | MCP、connector、API 與領域候選 |
 | 工具 | [開發工具](tools/development.md) | runtime、Context7、Playwright、RTK 與工作台 |

@@ -1,6 +1,6 @@
 # 版本與發布
 
-repository 版本記錄於根目錄 `VERSION`, 使用 SemVer, Git Tag 加上 `v` 前綴, 例如 `VERSION=0.2.0` 對應 `v0.2.0`
+獨立 Python tools 的版本記錄於 `python-tools/VERSION`, 使用 SemVer, 資產名稱及 manifest 使用這個元件版本, Git Tag 則由 Toolkit 根目錄的整包 `VERSION` 管理, 兩者不必相同
 
 `my-py-document-core` 與 `my-py-workspace-core` 是用途不同的 Python 套件, 各自以 `pyproject.toml` 管理套件版本, repository Tag 不強迫兩個 wheel 使用同一版本, release manifest 會記錄實際組合
 
@@ -8,7 +8,7 @@ repository 版本記錄於根目錄 `VERSION`, 使用 SemVer, Git Tag 加上 `v`
 
 正式發布先更新 `VERSION`, 檢查 diff, 本機只需執行與修改相關的單元測試、設定及文件檢查, 不需要建置 EXE、app、ZIP 或 wheel, `prepare --dry-run` 仍會建置暫存 wheel, 不屬於最小測試
 
-提交並推送確認過的來源後, 建立指向該 commit 的新 Tag 與 GitHub Release, `release: published` 會觸發雲端來源與平台建置, CI 的 `source` 工作安裝 `setup/requirements-release.txt`, 執行 `scripts.release prepare`, 產生並驗證來源 ZIP、兩個核心 wheel 與來源資訊清單
+提交並推送確認過的來源後, 依授權建立完整 annotated 整包 Tag, 手動執行 `.github/workflows/python-tools-release.yml` 並指定既有 Tag, `publish=false` 只產生 Actions artifacts, `publish=true` 在雲端來源與平台檢查通過後準備草稿 Release, 不自動公開. CI 的 `source` 工作安裝 `setup/requirements-release.txt`, 執行 `scripts.release prepare`, 產生並驗證來源 ZIP、兩個核心 wheel 與來源資訊清單
 
 來源與 CLI 工作全部通過後才上傳正式附件, 建立 Release 不代表產物已就緒, 請確認 Actions 結果與附件清單, 已發布 Tag 與附件不重寫
 
@@ -44,24 +44,17 @@ dist/v0.2.0/
 
 同一版本只能取代由本工具管理且內容未被另行修改的輸出, 發現未知檔案或 hash 不符時會停止, 不覆寫現有資料
 
-## 選用的本機來源發布
+## 發布入口
 
-先檢查 diff 與 manifest, 自行 commit 預定發布的來源變更, helper 不會自動 commit
+本機 `scripts.release publish` 保留命令入口並回傳遷移指引, 不再直接推送分支、建立 Tag 或 Release, 下載交付統一使用 Toolkit 的 `python-tools-release.yml`
 
-```powershell
-python launch-cli.py scripts.release publish v0.2.0
-python launch-cli.py scripts.release publish v0.2.0 --asset-root C:\path\release-assets
-```
+手動 workflow 使用已審查的整包 Tag, 從該提交讀取 `python-tools/VERSION` 與各 package 版本, 先完成必要來源及三平台建置, 再將通過檢查的十份附件加入相同 Tag 的草稿, 拒絕已發布 Release 與重複資產名稱, 核對所有附件、版本、來源與 SHA-256 後依當次授權公開草稿
 
-`--asset-root` 適合 sandbox 與 GitHub CLI 使用不同檔案權限的環境, 指定資料夾下仍使用 `<tag>/` 結構與同一份 manifest/hash 驗證, 不會放寬來源檢查
-
-`publish` 要求乾淨 working tree, 目前 branch 追蹤同名 `origin` branch, 本機與遠端 Tag 尚不存在, GitHub CLI 已登入, 並重新執行來源驗證, 輸入完整 Tag 確認後才 push branch 與建立 GitHub Release, 最後核對遠端 asset 名稱與大小
-
-`codex-toolkit` 管理 Skills / Plugin、MCP 與獨立 Python 工具的發布流程, 本流程負責 Python 來源包、核心 wheel 與 CLI 免安裝包, 既有套件及產物名稱保留相容性
+0.x 與 1.x 使用相同發布程序, 完整流程見 [Toolkit 版本與發布](../../docs/releases.md), 本機來源封裝仍可供驗證, 不取代正式平台產物
 
 ## Windows 與 macOS 免安裝 CLI
 
-正式產物由 `.github/workflows/release.yml` 的 `Release source and standalone CLI` 建置, 原始碼工作與三個平台工作全部成功後才上傳, 不把本機產物當成正式成品
+正式產物由 Toolkit 的 `.github/workflows/python-tools-release.yml` 建置, 原始碼工作與三個平台工作全部成功後才上傳, 不把本機產物當成正式成品
 
 | 平台 | 成品 |
 | --- | --- |
@@ -99,7 +92,7 @@ CLI 輸出使用 UTF-8, 發布工具需要完整儲存庫、開發用 Python 與
 
 ### CI 設定與本機檢查
 
-工作流程由 `release: published` 觸發, 也可手動指定既有 Release Tag, Tag 的 `VERSION` 必須一致, 不會自行變更版本、commit 或重寫 Tag
+工作流程只接受手動指定既有完整整包 Tag, Tag 必須與 Toolkit 根目錄 `VERSION` 一致, 元件資產使用該提交內的 `python-tools/VERSION`, 不會自行變更版本、commit、建立或重寫 Tag
 
 不再需要 Workbench UI 讀取 token、Node.js 或 WebView2 URL / hash 設定, 舊遠端 Secret / Variable 不會由程式自行刪除
 

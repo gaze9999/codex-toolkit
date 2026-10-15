@@ -71,7 +71,7 @@ python -B mcp/scripts/prepare_marketplace.py --check
 
 ZIP 使用固定 metadata 與排序, 暫存組裝後讀回全部成員與 SHA-256, 完整通過才寫到新的輸出目錄. 每組含 `plugin.json`、`LICENSE`、`source-manifest.json`、Skills 與選定資源. 組合 `codex-toolkit-plugins.zip` 含 `.agents/plugins/marketplace.json` 與 `plugin-release-manifest.json`
 
-市集生成器依逐檔 hash 辨識可更新的副本, 來源或生成內容有獨立修改時停止受影響更新. `.github/workflows/plugin-release.yml` 在符合 [Plugin workflow 的實際門檻](../.github/workflows/plugin-release.yml) 的 Release 建置 ZIP 與 checksum, 手動執行依 workflow 設定處理指定來源. 整合產品操作見 [打包工具](operating-model.md)
+市集生成器依逐檔 hash 辨識可更新的副本, 來源或生成內容有獨立修改時停止受影響更新. `.github/workflows/plugin-release.yml` 手動指定已審查的完整整包 Tag, 預設只檢查來源, 明確啟用 `publish` 才建置並驗證 ZIP 與 checksum, 附加至相同 Tag 的草稿 Release, 核對後依授權公開. 整合產品操作見 [打包工具](operating-model.md), 發布流程見 [版本與發布](releases.md)
 
 ## 已安裝 Plugin 更新
 

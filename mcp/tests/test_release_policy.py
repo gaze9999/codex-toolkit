@@ -10,11 +10,11 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parents[2]
-RELEASE_ONLY = "github.event_name == 'release'"
+PUBLISH_INPUT = "inputs.publish"
 GATE = "Check stable aggregate Release eligibility"
 WORKFLOWS = {
     "cli-release.yml": ("tag", {"build": ["eligibility"], "attach": ["build"]}, "attach"),
-    "plugin-release.yml": ("revision", {"check": ["eligibility"], "publish": ["check"]}, "publish"),
+    "plugin-release.yml": ("tag", {"check": ["eligibility"], "publish": ["check"]}, "publish"),
     "python-tools-release.yml": ("tag", {"source": ["eligibility"], "cli": ["eligibility"], "publish": ["source", "cli"]}, "publish"),
 }
 
@@ -42,8 +42,9 @@ class ReleasePolicyTests(unittest.TestCase):
 
     def test_every_actual_gate_accepts_only_matching_stable_aggregate_tags(self):
         cases = [
-            ("v0.1.0", "0.1.0", "false", False),
-            ("v0.99.99", "0.99.99", "false", False),
+            ("v0.1.0", "0.1.0", "false", True),
+            ("v0.1.1", "0.1.1", "false", True),
+            ("v0.99.99", "0.99.99", "false", True),
             ("v1.0.0", "1.0.0", "false", True),
             ("v12.34.56", "12.34.56\n", "false", True),
             ("v1.0.0", "1.0.1", "false", False),
@@ -78,44 +79,49 @@ class ReleasePolicyTests(unittest.TestCase):
                             )
                             self.assertEqual(result.returncode, 0 if allowed else 1, result.stderr)
 
-    def test_release_and_manual_dispatch_wiring(self):
+    def test_only_explicit_manual_publish_can_stage_draft_assets(self):
         for name, (input_name, dependencies, publisher) in WORKFLOWS.items():
             with self.subTest(workflow=name):
                 source = self.sources[name]
                 workflow_jobs = jobs(source)
-                self.assertRegex(source, r"(?m)^  release:\n    types: \[published\]$")
+                triggers = source.split("\npermissions:", 1)[0]
+                self.assertNotRegex(triggers, r"(?m)^  (release|push):")
                 self.assertRegex(source, r"(?m)^  workflow_dispatch:\n    inputs:\n      " + input_name + r":$")
+                self.assertRegex(triggers, r"(?s)      publish:\n.*?        type: boolean\n        default: false")
                 self.assertRegex(source, r"(?m)^permissions:\n  contents: read$")
                 for job_name, required in dependencies.items():
                     expected = required[0] if len(required) == 1 else "[" + ", ".join(required) + "]"
                     self.assertIn("    needs: " + expected + "\n", workflow_jobs[job_name])
                 eligibility = workflow_jobs["eligibility"]
-                self.assertIn("ref: ${{ github.event.release.tag_name || inputs." + input_name + " || github.sha }}", eligibility)
-                self.assertIn("        if: " + RELEASE_ONLY + "\n", gate(eligibility))
+                self.assertIn("ref: ${{ inputs.tag }}", eligibility)
+                self.assertNotIn("        if:", gate(eligibility))
                 publish = workflow_jobs[publisher]
-                self.assertIn("    if: " + RELEASE_ONLY + "\n", publish)
+                self.assertIn("    if: " + PUBLISH_INPUT + "\n", publish)
                 self.assertIn("      contents: write\n", publish)
-                self.assertIn("ref: ${{ github.event.release.tag_name }}", publish)
+                self.assertIn("ref: ${{ inputs.tag }}", publish)
                 self.assertNotIn("        if:", gate(publish))
                 for job_name in ("eligibility", publisher):
                     block = workflow_jobs[job_name]
                     step = gate(block)
                     self.assertIn("        working-directory: .\n", step)
-                    self.assertIn("POLICY_TAG: ${{ github.event.release.tag_name }}", step)
-                    self.assertIn("POLICY_PRERELEASE: ${{ github.event.release.prerelease }}", step)
+                    self.assertIn("POLICY_TAG: ${{ inputs.tag }}", step)
+                    self.assertIn("POLICY_PRERELEASE: 'false'", step)
                     self.assertLess(block.index("uses: actions/checkout@"), block.index(GATE))
                     if job_name == publisher:
                         self.assertLess(block.index(GATE), block.index("gh release upload"))
+                        self.assertIn('--verify-tag --draft', block)
+                        self.assertIn('git/ref/tags/$RELEASE_TAG', block)
+                        self.assertIn('Published releases are not overwritten', block)
+                        self.assertNotIn('--clobber', block)
                 for job_name in dependencies:
                     if job_name == publisher:
                         continue
                     block = workflow_jobs[job_name]
-                    expected_ref = "${{ env.RELEASE_TAG }}" if name == "python-tools-release.yml" else "${{ github.event.release.tag_name || inputs." + input_name + " }}"
+                    expected_ref = "${{ env.RELEASE_TAG }}" if name == "python-tools-release.yml" else "${{ inputs.tag }}"
                     self.assertIn("ref: " + expected_ref, block)
                     self.assertNotIn("contents: write", block)
                     self.assertNotIn("gh release upload", block)
-                # Manual pre-1.0/revision checks run without Release metadata;
-                # eligibility skips its Release-only step, downstream work remains enabled.
+                # Every selected Tag is checked, artifact-only runs keep builds enabled.
                 self.assertNotRegex(eligibility, r"(?m)^    if:")
                 for job_name in dependencies:
                     if job_name != publisher:
@@ -124,7 +130,7 @@ class ReleasePolicyTests(unittest.TestCase):
     def test_python_tools_manual_build_uses_component_version_at_aggregate_ref(self):
         source = self.sources["python-tools-release.yml"]
         workflow_jobs = jobs(source)
-        self.assertIn("RELEASE_TAG: ${{ inputs.tag || github.event.release.tag_name }}", source)
+        self.assertIn("RELEASE_TAG: ${{ inputs.tag }}", source)
         component = re.search(r"      - name: Read independent Python tools version\n(.*?)(?=^      - )", workflow_jobs["source"], re.M | re.S)[1]
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
@@ -140,7 +146,7 @@ class ReleasePolicyTests(unittest.TestCase):
             self.assertIn("python-tools/dist/${{ steps.component.outputs.tag }}/" + asset, workflow_jobs["source"])
         self.assertIn("$componentTag = 'v' + (Get-Content VERSION -Raw).Trim()", workflow_jobs["cli"])
         self.assertIn('python launch-cli.py scripts.release cli "$componentTag"', workflow_jobs["cli"])
-        self.assertIn("CLI_TAG: ${{ github.event.release.tag_name || inputs.version }}", self.sources["cli-release.yml"])
+        self.assertIn("CLI_TAG: ${{ inputs.tag }}", self.sources["cli-release.yml"])
 
 
 if __name__ == "__main__":
