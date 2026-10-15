@@ -1,12 +1,15 @@
 name: Release standalone Python tools
 on:
-  release:
-    types: [published]
   workflow_dispatch:
     inputs:
       tag:
-        description: Existing release tag with the reviewed source changes
+        description: Existing reviewed full-version aggregate Tag
         required: true
+        type: string
+      publish:
+        description: Stage verified assets in a draft Release; never publishes it
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -16,7 +19,7 @@ defaults:
     working-directory: python-tools
 
 env:
-  RELEASE_TAG: ${{ inputs.tag || github.event.release.tag_name }}
+  RELEASE_TAG: ${{ inputs.tag }}
 
 jobs:
   eligibility:
@@ -24,26 +27,26 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          ref: ${{ github.event.release.tag_name || inputs.tag || github.sha }}
+          ref: ${{ inputs.tag }}
           persist-credentials: false
+          fetch-depth: 0
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13'
       - name: Check stable aggregate Release eligibility
-        if: github.event_name == 'release'
         shell: bash
         working-directory: .
         env:
-          POLICY_TAG: ${{ github.event.release.tag_name }}
-          POLICY_PRERELEASE: ${{ github.event.release.prerelease }}
+          POLICY_TAG: ${{ inputs.tag }}
+          POLICY_PRERELEASE: 'false'
         run: |
           python - <<'PY'
           import os, re
           from pathlib import Path
           tag = os.environ['POLICY_TAG']
           version = Path('VERSION').read_text(encoding='utf-8').strip()
-          if not re.fullmatch(r'v[1-9][0-9]*\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)', tag):
-              raise SystemExit('A complete stable version at or above 1.0.0 is required')
+          if not re.fullmatch(r'v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)', tag):
+              raise SystemExit('A complete version Tag is required')
           if tag != 'v' + version or os.environ['POLICY_PRERELEASE'] == 'true':
               raise SystemExit('Release must match the stable aggregate VERSION')
           PY
@@ -102,6 +105,7 @@ jobs:
         with:
           ref: ${{ env.RELEASE_TAG }}
           persist-credentials: false
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.14'
@@ -163,7 +167,7 @@ jobs:
           if-no-files-found: error
 
   publish:
-    if: github.event_name == 'release'
+    if: inputs.publish
     needs: [source, cli]
     runs-on: ubuntu-latest
     permissions:
@@ -174,8 +178,9 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          ref: ${{ github.event.release.tag_name }}
+          ref: ${{ inputs.tag }}
           persist-credentials: false
+          fetch-depth: 0
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13'
@@ -183,16 +188,16 @@ jobs:
         shell: bash
         working-directory: .
         env:
-          POLICY_TAG: ${{ github.event.release.tag_name }}
-          POLICY_PRERELEASE: ${{ github.event.release.prerelease }}
+          POLICY_TAG: ${{ inputs.tag }}
+          POLICY_PRERELEASE: 'false'
         run: |
           python - <<'PY'
           import os, re
           from pathlib import Path
           tag = os.environ['POLICY_TAG']
           version = Path('VERSION').read_text(encoding='utf-8').strip()
-          if not re.fullmatch(r'v[1-9][0-9]*\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)', tag):
-              raise SystemExit('A complete stable version at or above 1.0.0 is required')
+          if not re.fullmatch(r'v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)', tag):
+              raise SystemExit('A complete version Tag is required')
           if tag != 'v' + version or os.environ['POLICY_PRERELEASE'] == 'true':
               raise SystemExit('Release must match the stable aggregate VERSION')
           PY
@@ -200,12 +205,29 @@ jobs:
         with:
           pattern: '*'
           path: release-assets
+      - name: Prepare verified draft Release
+        shell: bash
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          TAG_OBJECT=$(git rev-parse "refs/tags/$RELEASE_TAG")
+          test "$(git cat-file -t "$TAG_OBJECT")" = tag
+          test "$(git rev-parse "refs/tags/$RELEASE_TAG^{commit}")" = "$(git rev-parse HEAD)"
+          test "$(gh api "repos/$GH_REPO/git/ref/tags/$RELEASE_TAG" --jq '.object.sha')" = "$TAG_OBJECT"
+          if gh release view "$RELEASE_TAG" --json isDraft --jq '.isDraft' > draft-state; then
+            test "$(cat draft-state)" = true || { echo 'Published releases are not overwritten'; exit 1; }
+          else
+            gh release create "$RELEASE_TAG" --verify-tag --draft --title "$RELEASE_TAG" --notes 'Verified build assets; publish only after the complete delivery is reviewed.'
+          fi
       - name: Publish only cloud-built, verified source and portable assets
         working-directory: .
         shell: pwsh
         run: |
           $release = gh api "repos/$env:GH_REPO/releases/tags/$env:RELEASE_TAG" | ConvertFrom-Json
-          if ($LASTEXITCODE -ne 0 -or $release.draft) { throw 'A published release is required' }
+          if ($LASTEXITCODE -ne 0 -or -not $release.draft) { throw 'A draft Release is required' }
           $assets = @(Get-ChildItem release-assets -File -Recurse | Where-Object { $_.Name -like 'my-py-tools-*.zip' -or $_.Name -like 'my_py_*_core-*.whl' -or $_.Name -eq 'release-manifest.json' -or $_.Name -like 'cli-manifest-*.json' })
           if ($assets.Count -ne 10) { throw 'Expected source ZIP, two core wheels, release manifest, three CLI ZIPs and three platform manifests' }
           foreach ($asset in $assets) {
