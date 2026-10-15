@@ -11,7 +11,7 @@ Use this reference when creating or refreshing a reusable guide for one project 
 | Title and opening scope | Feature identity, authorized owners, scope and exclusions that materially change execution |
 | Read by task | Start specification tasks with relevant current Markdown extractions; retain original page/sheet pointers and make visual or original checks conditional on concrete gaps, conflicts or requested verification; resolve external roots from the active task or project layout |
 | Source authority | Which original or confirmed decision governs each topic; distinguish original UI/behavior/API evidence from extraction and implementation evidence, retain unresolved conflicts |
-| Work item IDs | Maintained ID registry, project-specific group meanings, allocation rules and preservation of existing identifiers; current item status stays in the registry |
+| Work item IDs | Existing method guidance/approved issuance source, project-specific groups, persistent highest-issued serials and stable IDs; status stays in current progress/issue views |
 | Implementation boundaries | Feature-specific safeguards, state ownership, interface/error rules and accepted decisions that change implementation choices; omit inherited generic rules |
 | Verification | Existing focused checks, coverage limits and when broader checks are needed; commands are instructions, not passing results |
 | Documentation and records | The project's actual maintained destinations and update triggers, if established; do not impose progress/history files on a project that does not use them |
@@ -74,24 +74,38 @@ Optional lists may be empty. The script verifies types and shape; it does not re
 
 ## ID creation input and registration
 
+For new document records, select one to three English letters by complexity and append a numeric serial, such as `X-1`, `UI-12` or `API-3`; zero padding is optional. Existing identifiers stay stable. Calculation conditions, variables or formula labels may use letters alone, such as `X`, `Y`, `Z`, preserving the actual mathematics. Letter-only labels use direct Markdown or `id_rules`; the numeric allocator does not allocate them.
+
+### Issued-ID high-water source
+
+Record each prefix's highest-issued serial or equivalent persistent issued-ID evidence in the project's existing method guide or approved tracking location. Identify the maintained location, prefix/value, supporting issuance/history source and how the allocator reads it; retain no duplicate completion status. Progress records and API/endpoint reference indexes retain their IDs, while this decision removes resolved issue/maintenance rows after concise history preserves their problem, solution, source/version and checks/gaps. Explicit task/project decisions choose retention/removal; the user's current decision takes precedence.
+
+For illustration, a method guide can retain `UI: highest issued 7, source: UI-07 registration/history, allocator reservation: UI-07` even after that row leaves current issues. The next issue is `UI-8` when the chosen format is unpadded, not the remaining list's maximum plus one. Do not fill gaps, renumber or reuse old IDs. References and history remain reachable from the existing index; growing records are not forced into one current-state file.
+
+Before issuance, one owner reads the latest persistent value and relevant current/history evidence, reconciles any higher issued serial and uses the existing revision/write guard. Missing or conflicting issuance evidence blocks new IDs until resolved; zero is valid only for a confirmed unused prefix. On actual registration, persist the new highest-issued value with its source and read it back. Preview proposals do not update the counter; removed rows never lower it.
+
+The existing numeric helper takes supplied reservations, not a persistent store. Populate `reserved` from the maintained issued-ID record or at least the highest issued ID for every used prefix, alongside other known reservations. Record that source and usage in `id_rules`/the method guide. Never pass only remaining current IDs or infer that `--allocate-ids` has registered them. Preserve the exact historical ID spelling when using a high-water reservation.
+
 For numeric ID allocation, `work_item_ids` contains exactly these fields:
 
 | Field | Content |
 | --- | --- |
-| `registry` | Nonempty text locating the project's maintained work-item record |
+| `registry` | Nonempty text locating maintained work records and their existing persistent issuance source |
 | `separator` | `-`, `_`, `.` or an empty string, matching the declared project syntax |
 | `digits` | Integer from 1 to 12 giving the minimum serial width; serials can grow beyond it |
 | `groups` | Nonempty list of objects containing exactly `prefix` and `meaning`; prefixes are unique ASCII letter-leading names using letters, digits or underscores |
-| `reserved` | List of all known current, completed, removed and historical IDs for the declared groups; repeated identical references are allowed |
+| `reserved` | Reservations from the persistent issued-ID/high-water source plus other known IDs, including removed/history IDs; never only remaining current rows; identical repeats are allowed |
 | `items` | List of objects containing `key`, `prefix`, `title` and optionally an existing `id`; keys identify items within this allocation input and must be unique |
 
-Existing `id` values are retained exactly and reserved before new allocation, regardless of item order or title changes. New IDs follow each group's maximum positive serial; gaps are not reused. Corrected IDs and their rows remain in current records; show a fully corrected ID as `~~ID~~`, retain remaining work for partial completion and never substitute another item into its slot. `reserved` also accepts these strikethrough display values and normalizes only their decoration; logical IDs and cross-references retain the original value. An undefined group, incompatible format, duplicate item key/ID or two spellings occupying the same group/serial is rejected. An empty `items` list can describe just the guide's scheme. When the project uses another ID format, omit this object, explain its existing process in `id_rules` and use that process.
+Existing `id` values are retained exactly and reserved before new allocation, regardless of item order or title changes. New IDs follow the maximum supplied issued-ID reservations for each group; the caller supplies the persistent high-water evidence above. Current rows may be removed under their explicit policy without removing issuance reservations. The helper also accepts historical `~~ID~~` decoration and normalizes only that display; logical IDs stay unchanged. An undefined group, incompatible format, duplicate item key/ID or two spellings occupying the same group/serial is rejected. An empty `items` list can describe only the scheme. For another established ID format, retain its process in `id_rules` instead of forcing this allocator.
 
 `--allocate-ids` prints UTF-8 JSON with `status: proposed`, the registry pointer and assigned items. It writes no files, even when `--output` is present. Normal guide generation includes the scheme and group table, not an item-status snapshot or allocation table. Register the proposed IDs in the authorized current record, rechecking unseen concurrent changes first; neither guide generation nor allocation modifies `registry`. Related-item IDs, source references and split/merge mappings are maintained and checked by the coding agent against that record.
 
 ## History snapshots
 
 Use the established history destination and append one concise Chinese record for the authorized document trigger. The title time is `yyyy-mm-dd hh:mm`, using the active user/task timezone. The helper requires an explicit timestamp rather than guessing from its host. The coding agent confirms that time and the source evidence before writing; the [fictional history example](../assets/history.example.json) demonstrates format only.
+
+Select history fields by the material change and intended reader. The JSON fields below describe this optional helper, not a closed list for human history. Use direct Markdown for other useful fields/layouts, include timezone when recording time, and follow [document views](documentation-views.md) for a requested archive-first restart. The helper only appends; it does not archive or verify an old edition.
 
 ```text
 python <skill-root>/scripts/record_history.py <entry.json> --check

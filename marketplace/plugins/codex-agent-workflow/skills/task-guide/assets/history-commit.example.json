@@ -1,10 +1,14 @@
 {
   "timestamp": "2026-10-01 10:05",
-  "title": "完成查詢欄位驗證",
+  "title": "查詢欄位驗證",
   "commit": "abcdef1234",
   "repository": "example",
   "uncommitted": true,
-  "summary": "此為虛構格式示範; commit 已完成 UI-07 欄位格式檢核與錯誤提示; 未提交部分新增 UI-08 條件連動待辦; 現況表保留原列並將 UI-07 畫線",
-  "checks": ["示範: 欄位格式 focused Test 通過; 正式 API 未驗證"],
-  "open_items": ["UI-08 條件連動, API-03 mapping 核對"]
+  "summary": "虛構範例, 時區 Asia/Taipei, UI-07 原問題為不合法格式仍可送出, commit 加入格式檢核與錯誤提示, 來源為本例欄位規格, 問題列移出現況, 原問題與解法留本歷史, 方法指引保留 UI 最高已發行序號 7 及原發行來源, 進度與 API 索引保留 ID, 未提交部分新增 UI-08 條件連動待辦",
+  "checks": [
+    "示範: 欄位格式 focused Test 通過, 正式 API 未驗證"
+  ],
+  "open_items": [
+    "UI-08 條件連動, API-03 mapping 核對"
+  ]
 }

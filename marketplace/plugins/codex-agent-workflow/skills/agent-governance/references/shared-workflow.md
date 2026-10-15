@@ -12,9 +12,31 @@ For an end-to-end development flow or transfer between local, remote, cloud and 
 | Personal choices, selected Page IDs and private candidates | Private settings source |
 | Sanitized methods and reusable examples | Public teaching source |
 | Current project goals, differences, task status and acceptance evidence | Existing current-state document, approved tracking Page or task system |
+| Reusable methods, shared platform checks and version assessments | Existing AGENTS or method guidance |
 | Credentials, device paths, granted roots and session state | Target device's approved storage |
 
 Select projects from actual work, not a fixed list. An existing tracker can serve multiple projects with distinct identities; durable work needs a recoverable record, not a new document for every repository. Preserve repository identity, repository-relative paths, source/base revision and content hashes. Locate each checkout on the destination device; do not treat an absolute path as its identity. Retrieve the authorized published/private source, preview selected changes, merge conflicts and back up before application. Verify saved source, remote delivery, destination content and client loading separately. Offline or unpushed work remains explicitly pending, not silently overwritten by a newer snapshot.
+
+Plan storage by record type in existing destinations. Current state keeps active feature progress and unresolved issue/maintenance work; references maintain API/fields/integration mappings, methods retain procedures/calculations and persistent issued-ID source/usage, and concise history preserves resolved problems and actual checks. Growing records do not belong in a fixed three-part current-state document. Choose row retention/removal from explicit task/project decisions; this decision removes resolved issue/maintenance rows, while progress/reference indexes retain IDs. Update only material decisions, scope, stage, blockers, acceptance or handoffs. Follow the available doc-updater's [current/history procedure](https://github.com/gaze9999/codex-toolkit/blob/main/skills/doc-updater/references/source-and-history.md); installed content and archive evidence have separate checks.
+
+## Optional lookup records and project context
+
+Consult an approved lookup ledger only when duplicate data or repeated lookup is a concern. Direct source lookup needs no ledger preflight, including in a new conversation or project. If using one, resolve it from existing project guidance/configuration, then read matching scope and necessary neighbors rather than the whole ledger. Missing access leaves only the dependent reuse unavailable; continue adequately supported work without creating another tracker.
+
+Start with the question, intended use and evidence gaps. Choose source authority, allowed data scope, applicable revision/runtime, verification method and cost of stale evidence by the project's nature. Keep requirements, conclusions, decisions and acceptance in their maintained owners. The following are examples, not an exhaustive project roster or mandatory check suite:
+
+| Project concern | Select sources and checks |
+|---|---|
+| Business rules, workflows and interfaces | Governing specifications and confirmed decisions define behavior; API/persistence sources and actual environment checks support their respective claims |
+| Software, tools and shared components | Inspect the affected implementation, compatible runtime/configuration and official documentation for capability claims; verify relevant behavior and consumers within scope |
+| Research or data analysis | Trace original work/data and exact revisions, methods, units, time windows and limitations; distinguish calculations, observations, author reports and reproduced results |
+| Documentation or personal work | Use supplied authoritative material and accepted decisions; check meaning, references and destination readback within its permitted data boundary |
+
+Reuse only traceable verified coverage matching that question, context and version, including across chats/projects. Unknown scope, similar URLs, prior visits, unexpired dates and no-result searches are discovery leads rather than complete coverage. Fill uncovered needs and select new sources as required; the ledger is not a whitelist.
+
+Maintain only source or bounded query scope, last verified time and suggested revisit time. Include project/question/version in scope when useful; findings and evidence remain in the topic's maintained destination. Update a matching source/scope/version row only after its actual bounded query or original-source verification completes, using existing write guards and authorization. Ledger reads, paraphrases and failed access do not refresh time. Preserve timezone and original date precision; do not record every search step.
+
+Estimate revisit time from volatility, purpose and stale-evidence cost. Changed requirements, specifications, sources, versions, conflicts, gaps or explicit verification requests may trigger earlier checks. A suggested date is neither a validity guarantee nor a waiting period; check relevant scope when needed, without creating schedules or whole-ledger scans. Merge duplicate/obsolete index rows during relevant maintenance while preserving referenced evidence, conclusions and unresolved work. Use the project's approved environment; personal tracking grants no company-data transfer authority.
 
 ## Private settings in an approved Page
 

@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "5e360761f2a4fbf33929ac4f185d237f21a89b65f221cce997ac6a81773f5bb7",
+      "sha256": "4756df207ce29f2cc98321534d658980f8a0a3f3657c178f2e8830bfe9a7ce1d",
       "source": "plugins/documents-specifications/plugin.json"
     },
     "skills/context-brief/SKILL.md": {
@@ -73,11 +73,11 @@
       "source": "skills/data-visualization/references/delivery-and-verification.md"
     },
     "skills/doc-updater/SKILL.md": {
-      "sha256": "a1c9e1387dc251032453113b4ebea3a3cd344ba09753658196e86a636946bfc7",
+      "sha256": "105a2b3e56641f9a1528edc16dc2beee494d2a990089f66fb106e9f7250e1460",
       "source": "skills/doc-updater/SKILL.md"
     },
     "skills/doc-updater/agents/openai.yaml": {
-      "sha256": "0159960fc81da380a196fecb2a536bd267b40a01b376a92469e069de5da0daca",
+      "sha256": "75f4bbf4aa6126aa06c3d34ab24b339581c778a1220270376ece945168347991",
       "source": "skills/doc-updater/agents/openai.yaml"
     },
     "skills/doc-updater/assets/icon-small.png": {
@@ -109,7 +109,7 @@
       "source": "skills/doc-updater/references/presentation.md"
     },
     "skills/doc-updater/references/source-and-history.md": {
-      "sha256": "0e88b12807dd0953c52970196dffa156350ded79cd1b5b6258c22ac696c61c43",
+      "sha256": "50056e96f3f9a79a75c2dfd7254cad35252e7259c18c6e36b79dc32b18c967af",
       "source": "skills/doc-updater/references/source-and-history.md"
     },
     "skills/doc-updater/scripts/inspect_markdown_sync_target.py": {
@@ -150,5 +150,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.9.0",
-  "version": "0.3.0"
+  "version": "0.3.1"
 }
