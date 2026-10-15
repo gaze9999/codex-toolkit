@@ -50,7 +50,7 @@ The initial Skill catalog and the combined AGENTS instruction chain have separat
 
 ## Reuse collected maintenance evidence
 
-Before changing instructions, Skill/Plugin behavior, tool selection or teaching workflows, resolve the project's approved research record through its existing configuration or guidance. When a relevant collection exists, read its matching topic, applicable version, current conclusion, original evidence and unresolved conflicts before deciding the change. Follow linked material only when it affects that decision; do not reread the entire collection.
+Choose evidence for the current maintenance decision and project. When duplicate data or repeated lookup is a concern, optionally consult the approved lookup/research record through existing configuration or guidance. Read only matching topics, versions, conclusions, original evidence and unresolved conflicts. Direct source checks need no ledger preflight; use [project-specific lookup conditions](shared-workflow.md#optional-lookup-records-and-project-context) when reusing a record.
 
 Compare collected findings with current implementation and confirmed user/project decisions. Refresh necessary primary sources when evidence is missing, stale, incompatible or conflicting, or the request requires verification. If the record is unavailable, report the affected evidence gap and continue independent work from adequate authorized sources. Do not wait for the next scheduled run, create another collector or infer that a collection ran from a Page's modification date.
 

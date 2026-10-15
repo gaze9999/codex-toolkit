@@ -1,7 +1,11 @@
 {
   "timestamp": "2026-10-01 09:30",
   "title": "訂單查詢格式示範",
-  "summary": "此為虛構範例; 新增 UI-08 條件連動與 API-03 mapping 核對, 保留原有 ID; 尚未實作",
-  "checks": ["僅核對文件與編號, 未執行 application Test 或正式 API 驗證"],
-  "open_items": ["排序同值時的次序待確認"]
+  "summary": "虛構範例, 時區 Asia/Taipei, 新增 UI-08 條件連動與 API-03 mapping 核對, 發號來源為既有方法指引的 UI: 7、API: 2 高水位及原發行/歷史紀錄, UI-07 原問題與解法留既有歷史, 尚未實作",
+  "checks": [
+    "僅核對文件與編號, 未執行 application Test 或正式 API 驗證"
+  ],
+  "open_items": [
+    "排序同值時的次序待確認"
+  ]
 }

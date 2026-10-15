@@ -1,6 +1,6 @@
 interface:
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
-  display_name: "Task Guide (v0.5.1)"
+  display_name: "Task Guide (v0.5.2)"
   short_description: "Create task guides, stable IDs and concise history records"
   default_prompt: "Use $task-guide to inspect this project and its sources, then maintain the requested task guide or document views with stable work-item IDs, source authority and actual evidence. Follow the project's language and existing record layout; keep navigation, current state and history distinct."

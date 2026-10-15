@@ -3,7 +3,7 @@ name: doc-updater
 description: Update, align or synchronize identified existing documentation when explicitly requested and supported by verifiable implementation-change evidence. Use for maintaining current docs, not source extraction, new reports or substantial README redesign.
 metadata:
   short-description: Minimize documentation updates from implementation evidence
-  version: "0.4.17"
+  version: "0.4.18"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
