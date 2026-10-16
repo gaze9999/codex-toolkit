@@ -14,6 +14,7 @@ data = [
     (str(root / "VERSION"), "."),
     (str(resources / "catalog.json"), "shared/resources"),
     (str(resources / "tiktoken"), "tiktoken-cache"),
+    (str(source / "text/context_estimates.json"), "text"),
 ]
 for package in ("docx", "pptx"):
     data += collect_data_files(package)
