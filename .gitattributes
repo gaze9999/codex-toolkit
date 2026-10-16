@@ -17,3 +17,14 @@ assets/**/*.svg text eol=lf
 assets/**/*.png -text
 VERSION text eol=lf
 .agents/plugins/marketplace.json text eol=lf
+
+# Preserve canonical Token Count resource hashes across platforms
+python-tools/VERSION text eol=lf
+python-tools/setup/requirements-token-count.txt text eol=lf
+python-tools/src/shared/__init__.py text eol=lf
+python-tools/src/shared/runtime.py text eol=lf
+python-tools/src/text/__init__.py text eol=lf
+python-tools/src/text/context_budget.py text eol=lf
+python-tools/src/text/context_estimates.json text eol=lf
+python-tools/src/text/token_count.py text eol=lf
+python-tools/src/text/token_html.py text eol=lf

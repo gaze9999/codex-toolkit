@@ -8,7 +8,7 @@ Plugin 由 `skills/` 的工作流程、`plugins/catalog.json` 的來源映射及
 |---|---|---|
 | `packaging-acceptance` | `packaging-acceptance`、`plugin-packaging` | 無 |
 | `jev-evaluation` | `jev-evaluation` | `jev` |
-| `documents-specifications` | `context-brief`、`data-visualization`、`doc-updater`、`local-document-processing` | `local-documents` |
+| `documents-specifications` | `context-brief`、`data-visualization`、`doc-updater`、`local-document-processing`、`token-count` | `local-documents`, Token 計數另需 Python 3.10+ 與 `tiktoken` |
 | `environment-evidence` | `validation-evidence-review`、`test-strategy` | `workspace-inspection` |
 | `frontend-engineering` | `angular-development`、`angular-member-order`、`react-development`、`vue-development`、`ui-ux-design`、`internationalization-engineering`、`accessibility-engineering`、`playwright-cli` | `playwright`、`serena`、`edge-devtools` |
 | `agent-workflow` | `agent-governance`、`coding-prompt`、`task-routing`、`task-guide` | 無 |
@@ -17,6 +17,12 @@ Plugin 由 `skills/` 的工作流程、`plugins/catalog.json` 的來源映射及
 | `project-documentation` | `readme-maintainer`、`license-maintainer` | 無 |
 
 `runtime_profiles` 列出所屬 setup 的選用工具, 依任務另外設定 runtime、MCP 與帳戶. 文件與工作區 MCP 使用 `python-tools/` 的 versioned core. Plugin 的網站連到 [GitHub 來源](https://github.com/gaze9999/codex-toolkit)
+
+Token 計數由 [Token Count](../skills/token-count/SKILL.md) 按需求選用, 例如「幫我算這段文字的 Token」、「計算這份 Markdown 的 Token 並匯出 JSON」或「比較這份文件在兩種編碼的 Token 數」, 一般讀檔與編輯不需要啟用, API credentials、帳戶用量及未提供的完整對話 Context 不屬於此計數範圍
+
+同一 Skill 支援 Global/Project Agent、Skills、Memory 與工具定義的 Context 預估, 以及離線彩色 Token 檢視, 預估使用有日期與來源的社群設定, 回報保留分類數字、總計與來源, 詳見 [環境預估方法](../skills/token-count/references/context-budget.md)
+
+文件與規格處理 Plugin 附帶 Python Tools 的同一份 Token 計算核心、版本與專用相依清單, 以來源映射和 hash 產生, 不附 Python、venv 或編碼字典, 不需要另設 MCP. 使用已具 `tiktoken` 的 Python 執行 Skill 內的 [計數入口](../skills/token-count/scripts/count_tokens.py), 明確授權安裝相依套件時使用 Plugin 內的 `resources/token-count/requirements.txt`, 計數不會自行安裝, 編碼字典快取置於套件外, 已安裝內容需更新並由用戶端重新載入後才能探索新 Skill
 
 前端 Plugin 收錄 [UI 設計來源與範本選用](../skills/ui-ux-design/references/design-foundations.md)、[UI 需求與細節驗收](../skills/ui-ux-design/references/detail-review.md)、[Angular 排版與短寫](../skills/angular-development/references/angular-style.md)、[呼叫鏈與 Model 型別](../skills/angular-development/references/code-maintainability.md), 以及 [agent 參考索引](../agents/references/angular-style.md). 相同參考檔隨 Angular 獨立 Skill 自動收錄
 
@@ -34,6 +40,7 @@ Plugin 的收錄數量、已安裝 Skills、探索清單及單次任務實際啟
 |---|---|
 | 找既有抽出版、核對來源 hash | `$local-document-processing` 的 [唯讀來源比對](../skills/local-document-processing/references/source-matching.md) |
 | 轉換文件或修改指定 Markdown | `$local-document-processing`, 分別核對來源、輸出與寫入授權 |
+| 計算文字或檔案 Token、比較編碼與匯出統計 | `$token-count`, 使用選定文字與指定編碼, 預設 `o200k_base` |
 | 根據實作更新已指定文件 | `$doc-updater`, 有變更證據與具體目標, Notion 依明確指定的範圍操作 |
 | 比較來源與已安裝 Skills / runtime | `$validation-evidence-review` 的 [環境比對](../skills/validation-evidence-review/references/environment-comparison.md), 不套用同步 |
 | 檢視既有測試、建置或 UI 證據 | `$validation-evidence-review`, 保留來源版本與涵蓋, 不重跑命令 |

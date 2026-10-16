@@ -42,10 +42,49 @@
         "context-brief",
         "data-visualization",
         "doc-updater",
-        "local-document-processing"
+        "local-document-processing",
+        "token-count"
       ],
       "runtime_profiles": [
         "local-documents"
+      ],
+      "components": [
+        {
+          "source": "python-tools/src/text/context_budget.py",
+          "target": "resources/token-count/src/text/context_budget.py"
+        },
+        {
+          "source": "python-tools/src/text/context_estimates.json",
+          "target": "resources/token-count/src/text/context_estimates.json"
+        },
+        {
+          "source": "python-tools/src/text/token_html.py",
+          "target": "resources/token-count/src/text/token_html.py"
+        },
+        {
+          "source": "python-tools/src/text/token_count.py",
+          "target": "resources/token-count/src/text/token_count.py"
+        },
+        {
+          "source": "python-tools/src/text/__init__.py",
+          "target": "resources/token-count/src/text/__init__.py"
+        },
+        {
+          "source": "python-tools/src/shared/runtime.py",
+          "target": "resources/token-count/src/shared/runtime.py"
+        },
+        {
+          "source": "python-tools/src/shared/__init__.py",
+          "target": "resources/token-count/src/shared/__init__.py"
+        },
+        {
+          "source": "python-tools/setup/requirements-token-count.txt",
+          "target": "resources/token-count/requirements.txt"
+        },
+        {
+          "source": "python-tools/VERSION",
+          "target": "resources/token-count/VERSION"
+        }
       ],
       "resources": [
         {

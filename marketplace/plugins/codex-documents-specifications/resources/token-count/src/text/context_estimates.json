@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-10-16",
+  "system_tokens": 8000,
+  "builtin_tool_tokens": 500,
+  "mcp_server_tokens": [200, 500],
+  "mcp_tool_tokens": [550, 1400],
+  "sources": [
+    {"id": "system", "url": "https://codex.danielvaughan.com/2026/04/28/context-engineering-for-codex-cli-practical-guide/", "updated_on": "2026-10-15", "basis": "Worked example: built-in system prompt = 8000 tokens"},
+    {"id": "tools", "url": "https://blakecrosley.com/guides/codex", "updated_on": "2026-10-14", "basis": "Tool definition approximately 500 tokens; server overhead approximately 200-500 tokens"},
+    {"id": "mcp_tools", "url": "https://onlycli.github.io/OnlyCLI/blog/mcp-token-cost-benchmark/", "checked_on": "2026-10-16", "basis": "MCP tool definition approximately 550-1400 tokens"}
+  ],
+  "official_sources": [
+    "https://learn.chatgpt.com/docs/agent-configuration/agents-md",
+    "https://learn.chatgpt.com/docs/build-skills"
+  ]
+}

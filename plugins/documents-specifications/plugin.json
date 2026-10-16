@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-documents-specifications",
-  "version": "0.3.1",
-  "description": "Extract documents, maintain specifications and build source-backed visual explanations.",
+  "version": "0.5.0",
+  "description": "Process documents, maintain specifications, visualize sources and count text tokens.",
   "author": {
     "name": "gaze9999"
   },
@@ -11,7 +11,7 @@
     "com.openai": {
       "interface": {
         "displayName": "文件與規格處理",
-        "shortDescription": "Extract documents, maintain specifications and build source-backed visual explanations.",
+        "shortDescription": "Process documents, maintain specifications, visualize sources and count text tokens.",
         "logo": "./assets/toolkit.png",
         "composerIcon": "./assets/toolkit.png",
         "brandColor": "#E8A36D",

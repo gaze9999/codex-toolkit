@@ -1,0 +1,7 @@
+interface:
+  display_name: "Token 計算與預估 (v0.2.0)"
+  short_description: "計算與彩色顯示 Token, 依 Agent、Skills 與工具來源預估 Context"
+  default_prompt: "使用 $token-count 計算文字或預估 Agent、Skills 與工具的 Context, 回報分類數字、總計與來源, 需要時產生彩色 Token 檢視"
+
+policy:
+  allow_implicit_invocation: true
