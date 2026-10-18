@@ -15,6 +15,23 @@ Read for broader discovery, a literature/implementation trail or conflicting com
 
 Use search engines, scholarly indexes and catalog aggregators to discover originals. Crossref can identify deposited bibliographic metadata and updates; OpenAlex can connect works, versions/locations and citation trails. A catalog record, DOI, citation count or trending list does not establish full-text access, peer review or correctness. Domain-specific indexes may be more suitable for their subject.
 
+## Select web retrieval
+
+Resolve the evidence gap from relevant supplied sources, project files and compatible verified notes. Retrieve only the missing or changed scope; local sources and lookup records are not mandatory preliminary steps for an unrelated public question. Match technical documentation to the actual library/product version, using its official documentation tools or an available Context7 entry when appropriate.
+
+| Retrieval need | Selection |
+|---|---|
+| Quick public fact or source discovery | Built-in web search or an available authenticated Firecrawl App/connector, according to coverage, freshness, citations and cost |
+| A known URL | Direct page retrieval; when Firecrawl is selected, use its current scrape operation without a redundant discovery search |
+| Several pages or structured fields | Select relevant URLs; use available Firecrawl map, bounded crawl or schema-based extraction only when needed. Limit paths, depth and page count before collection |
+| Rendered UI, navigation or authenticated interaction | An authorized browser/session with the required access and observation tools. Retrieved text alone does not establish layout or interaction behavior |
+
+When choosing Firecrawl, read its available vendor Skill and the selected operation's live schema. Reuse a compatible authenticated App/connector before registering another integration. An App may use MCP; its connection does not establish a separately configured MCP's authentication, team, tools or quota. Inspect the selected route, and recheck balance/limits when budget or job size matters rather than before every lookup. Switching interfaces does not establish free or separate usage.
+
+If access fails or results omit needed evidence, try another permitted retrieval route or primary source for that gap. Respect access controls and data boundaries, retain original URLs and access scope, and stop overlapping searches once evidence is adequate. Local-file parsing through a hosted service is an upload and needs the applicable data authorization. Bulk or recurring collection needs its own scope and authorization.
+
+Selection checked against the available App/MCP tool descriptions and [Firecrawl connection documentation](https://docs.firecrawl.dev/mcp-server) on 2026-10-17. Connection-specific tools and limits remain subject to the actual account, deployment and live schema.
+
 ## Expand only useful branches
 
 - Start with the underlying problem, synonyms and the relevant version/date range. Use technical terms and relevant source languages; do not limit discovery to the user's wording or known product names.
