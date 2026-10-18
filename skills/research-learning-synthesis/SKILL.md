@@ -2,7 +2,7 @@
 name: research-learning-synthesis
 description: Synthesize technical research, community practices or papers into evidence-qualified conclusions and a small learning path, including prerequisites and overlooked alternatives. Use for a research brief or knowledge-gap review, not a simple factual lookup or automatic scheduling.
 metadata:
-  version: "0.5.3"
+  version: "0.5.4"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -19,7 +19,7 @@ For broader discovery, literature/implementation tracing or conflicting communit
 
 - Search by the underlying problem, not only known tool names. Include a useful alternative or adjacent concept when it broadens understanding; do not expand every branch into a separate investigation.
 - Official or community research may include official docs, engineering cases, Codex/other AI or relevant Reddit communities, original posts and discussions on X, Bluesky or other platforms, authoritative sites, engineering/research blogs and papers. Select by the question, not a fixed platform quota. Check authorship, expertise, date, version, method and counterevidence; popularity aids discovery but does not establish correctness. Distinguish product specifications, practice, opinion and research evidence.
-- Choose available search, original-page retrieval, literature or community-reading capabilities for the required coverage, dates and access. Read current tool descriptions and schemas rather than copying provider names or argument recipes into this workflow. Reuse adequate results before adding an overlapping search provider, and distinguish full text from snippets or metadata.
+- Choose available search, original-page retrieval, literature or community-reading capabilities for the required coverage, dates and access. Read current tool descriptions and schemas for operation names, accepted parameters and limits. For built-in web tools or Firecrawl, read [web retrieval selection](references/source-selection.md#select-web-retrieval). Reuse adequate results before adding an overlapping search provider, and distinguish full text from snippets or metadata.
 - Verify current capabilities with official documentation and original implementations. Community reports supply practical hypotheses and conditions, not product guarantees or consensus by popularity.
 - For papers, inspect the original version, research question, method, data/evaluation, comparison basis and limitations. Distinguish peer-reviewed work, preprints, demonstrations and speculation; inaccessible full text limits what can be claimed.
 - Compare independent sources and meaningful counterevidence, not multiple reposts of one claim. Preserve dates, versions and the distinction between source statements and your inference.
