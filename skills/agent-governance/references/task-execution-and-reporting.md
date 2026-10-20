@@ -4,7 +4,7 @@ Read when maintaining task interpretation, source selection, Git authority or co
 
 ## Understand the requested outcome
 
-Interpret the purpose and use case before selecting actions. Reconcile the request with effective decisions, actual project state and available capabilities. The dimensions below are examples, not an exhaustive list, mandatory form or fixed sequence. Add, replace or omit dimensions as the situation requires; gather available facts yourself rather than asking the user to fill every field.
+Before implementation and again before delivery, reconcile the original request, latest corrections and still-effective decisions with the intended changes and actual diff. Preserve named deferrals and exclusions; a wider task label does not reinstate them. Resolve the purpose, current project state and available capabilities before selecting actions. The dimensions below are examples, not an exhaustive list, mandatory form or fixed sequence. Add, replace or omit dimensions as the situation requires; gather available facts yourself rather than asking the user to fill every field.
 
 | Decision | Evidence or boundary that changes execution |
 |---|---|
@@ -27,12 +27,14 @@ Keep the effective outcome and scope stable by default. Expand reading, changes 
 | Question | First source and conditional follow-up |
 |---|---|
 | Instructions and authority | Effective global, repository and target-directory instructions, then relevant conditional guides/Skills |
-| Behavior, fields and APIs | Matching Markdown extracts and confirmed decisions; inspect relevant originals for gaps, conflicts, stale coverage, visual evidence or explicit original-source verification |
+| Behavior, fields and APIs | Confirmed source, lookup subject/key parameters, endpoint, response-field mapping and request count for the affected flow; inspect relevant originals when extracts leave gaps or conflicts |
 | Implementation and compatibility | Target code, callers, configuration, diffs and existing patterns; trace affected shared interfaces and runtime support |
 | Installation, CLI or MCP | Owning setup/Skill, actual version, help/live schema, permissions and data scope |
 | Acceptance and reporting | Current requirements and evidence tied to the relevant code state or artifact |
 
 When authorized recurring source collection is configured, reconcile official guidance, original community cases and advanced-user practice into the selected maintained documents at the requested cadence. For a modification, consult relevant verified content and actual project source; supplement primary evidence for version/freshness conflicts, missing evidence or explicit lookup requests. Keep schedule targets/status in their actual configuration, distinguish specifications, measured cases and opinions, and apply findings under existing requirements and authority. Avoid platform/source quotas and duplicated collection runs.
+
+A shared field name does not establish a shared data source or API. Do not add another request, change the queried subject or substitute a source to align names without confirmed authority. A naming-only change preserves wire formats and request behavior. If a correction selects one source, retire only the conflicting request/decision and reconcile affected code and records; retain unrelated flows and owner boundaries. Reuse answered scope decisions and ask only about a remaining material gap.
 
 Links need a purpose or loading trigger. Do not turn documentation folders into universal required reading. Read referenced attachments/tasks before relying on them, retain source/version pointers and distinguish extracts, originals and historical observations. Avoid unrelated repository scans or unrequested extraction work.
 
@@ -66,14 +68,13 @@ Lead with the result appropriate to the task: a conclusion for judgment/review, 
 
 Report directly in the conversation unless the user requests a document artifact. List every added, modified, moved or deleted file and its concrete scope, including installed guidance/settings. Group by responsibility without omitting filenames; state when no files changed. If the result concerns earlier uncommitted candidates or replaced decisions, describe their current changes and pending acceptance even when this turn made no edits.
 
-| Information | Evidence needed for acceptance or use |
-|---|---|
-| Outcome and current state | Requirement states, delivered behavior or candidates, and implementation/acceptance/publication stage |
-| Changed files and rationale | Every changed filename and scope; material behavior, compatibility and tradeoffs |
-| Verification and provenance | Actual checks, results, coverage and checked revision/artifact; distinguish direct checks, historical evidence, another agent's report and inference |
-| Issues and unfinished acceptance | Traceable source/location, existing ID, affected criterion, status, impact and next action |
-| Recommendations | Evidence, applicable condition and next step; separate optional improvements from required unfinished work |
-| Git or environment stage | Actual commit/push/release, installation, synchronization or client-loading evidence |
+Implementation, refactor and CP/CPT/CPR delivery reports include a detailed Markdown change table. Use a few complete rows for small work; do not expand checks to fill cells. Group related files only when every changed filename and owner remains identifiable. A SHA or "name alignment" alone is insufficient. Honor an explicit artifact-only or message-only request instead of expanding it into a delivery report.
+
+| Feature / files / owner | Before | After | Actual impact and scope | Verification result | Necessary pending acceptance |
+|---|---|---|---|---|---|
+| [Owned behavior and each changed file] | [Prior behavior/source] | [Implemented change or scoped candidate] | [Affected flow and preserved boundaries] | [Actual check, result and checked state] | [Remaining criterion, owner/next action, or none] |
+
+When API calls or data sources change, identify the endpoint, query subject/key parameters, response-field source and requests added/removed in the relevant rows. Distinguish a candidate/backlog item, implemented-but-unverified work, verified work and committed/pushed delivery. Local fixtures do not establish a live API response or persistence result. State which prior decision each correction replaces and update only affected records.
 
 Every delivery or phase report includes actual test/check results and coverage. Distinguish passed, failed, blocked, not run and unverified; explain checks that did not run or apply. Text-only/read-only work may use source inspection, readback or diff checks. Provide commands/artifacts when reproduction needs them; do not run unrelated tests to populate a report. Reconsider old evidence after relevant source/dependency changes.
 
@@ -122,16 +123,26 @@ These shapes illustrate decisions. Replace paths, counts, IDs, SHAs and results 
 
 ### Small governance edit
 
-> Added read-only versus implementation boundaries, with detailed examples in a conditional reference
->
-> Diff and mirror checks passed. The installed files match; existing-client reload was not observed
+```markdown
+Updated [instruction behavior] in [canonical file].
+
+| Feature / files / owner | Before | After | Actual impact and scope | Verification result | Necessary pending acceptance |
+|---|---|---|---|---|---|
+| [Guidance file and owner] | [Previous decision] | [Revised decision] | [Affected instruction layer] | [Actual diff/reference/mirror result] | [Client reload, if not observed] |
+```
+
+One complete row is sufficient when it covers the whole change.
 
 ### Implemented behavior with blocked acceptance
 
 ```markdown
 ## Result
 
-Implemented [observable behavior] in [files / symbols], based on [requirement / effective decision].
+Implemented [observable behavior] based on [requirement / effective decision].
+
+| Feature / files / owner | Before | After | Actual impact and scope | Verification result | Necessary pending acceptance |
+|---|---|---|---|---|---|
+| [Feature and changed files] | [Previous behavior/source] | [Implemented behavior/source] | [Affected flow, endpoint/query/field/request delta when changed] | [Actual checks and scope] | [Unverified live API/persistence or other criterion] |
 
 ## Verification
 
@@ -162,20 +173,16 @@ Recommend one option only when the requested decision or evidence calls for it.
 >
 > [Actual source / structure / prose checks and coverage]. These checks do not prove model triggering or runtime success. Required remaining acceptance: [criterion, impact and next action], or [none with reason]
 
-### Partial implementation acceptance
-
-> Implemented [behavior] in [files / symbols]. Acceptance remains incomplete because [required criterion] is [blocked / failed / unverified]
->
-> [Test case count] cases passed, covering [behavior / checked state]. Separately checked [data combination count] combinations and [execution batch count] batches for [criteria]. [Unrun checks] are [required / optional / inapplicable] because [reason]. [Comparable baseline] supports [comparison], or [comparison] remains unknown
-
-Use only observed counts/results. Remove inapplicable placeholders and retain actionable required gaps.
-
 ### Authorized Git delivery
 
 ```markdown
 ## Result
 
-Committed [actual short SHA]: [concrete delivered change].
+Committed [actual short SHA] and [actual pushed/tagged state].
+
+| Feature / files / owner | Before | After | Actual impact and scope | Verification result | Necessary pending acceptance |
+|---|---|---|---|---|---|
+| [Each delivered file and owner] | [Previous behavior/source] | [Delivered behavior/source] | [Affected flow and request delta] | [Actual checks and remote-ref readback] | [Required remaining stage, if any] |
 
 ## Verification
 
