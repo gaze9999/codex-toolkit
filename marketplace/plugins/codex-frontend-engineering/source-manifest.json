@@ -17,15 +17,15 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "31077c55632255bd79c11d9fcf2d8c470c6a4aeff9dfb7460c8d75682348f6e6",
+      "sha256": "44c761a4ad04faeb2069aab2f565580bbfdb9c2a283dab857db559b02415f83e",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "skills/accessibility-engineering/SKILL.md": {
-      "sha256": "8006e2107a2c8c44a7d205528287e1ab48d2b2a02d8a1c5e21abc6c79b3c0c51",
+      "sha256": "8fc13ecedfc38ac9cb43c2ae738bc35368470119f10722fafdaac8b27fa342c2",
       "source": "skills/accessibility-engineering/SKILL.md"
     },
     "skills/accessibility-engineering/agents/openai.yaml": {
-      "sha256": "ee272ad7bfa60ed20477e88550bea88e2f5803601982c245ab440129fe39f708",
+      "sha256": "d172c596bc61b1c8838d24972c3fd3c7fca045f1b541d380ad1f824fe5ba0ac6",
       "source": "skills/accessibility-engineering/agents/openai.yaml"
     },
     "skills/accessibility-engineering/references/platform-integration.md": {
@@ -33,7 +33,7 @@
       "source": "skills/accessibility-engineering/references/platform-integration.md"
     },
     "skills/accessibility-engineering/references/validation.md": {
-      "sha256": "36afc76219137b2a9b94943ecbf9029002294d597d28918a44749a01e19226d5",
+      "sha256": "fa662068dff048637291cd8ef27ce33e0aecc6e251043ebc58392d1a25bb2bea",
       "source": "skills/accessibility-engineering/references/validation.md"
     },
     "skills/angular-development/SKILL.md": {
@@ -267,6 +267,6 @@
     "edge-devtools"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.11.3",
-  "version": "0.5.0"
+  "toolkit_version": "0.11.4",
+  "version": "0.5.1"
 }

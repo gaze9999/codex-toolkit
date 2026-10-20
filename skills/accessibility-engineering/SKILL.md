@@ -2,7 +2,7 @@
 name: accessibility-engineering
 description: Implement, diagnose or review accessibility (a11y), UI semantics, accessible names, keyboard operation, focus, errors and assistive-technology behavior. Use for programming changes or accessibility checks in the detected web/native stack, not generic visual redesign or a conformance claim based only on an automatic scan.
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

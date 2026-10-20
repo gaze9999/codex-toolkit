@@ -59,6 +59,21 @@ When rendering is available, inspect actual pages for stranded/cropped headings,
 - Include available DOIs and verified publication details. Important facts, statistics, experimental/clinical results, risk-benefit conclusions and disputed professional claims need traceable support.
 - Do not use mismatched, expired, unverified or purely secondary material as primary evidence. Distinguish facts, inferences, assumptions and unknowns; correlation is not causation and a theoretical mechanism is not proven clinical efficacy.
 
+## Calculated fields and preserved objects
+
+Read for an already-selected Office/spreadsheet capability or document export whose acceptance depends on calculated fields, embedded workbook values or preserved native objects. Keep that capability's workflow and format ownership. This section does not expand this Skill's activation scope or authorize another application, dependency or account setup.
+
+| Required evidence | What to check |
+|---|---|
+| Formula or field definition | Read back the intended expression, references and relevant inputs from the saved artifact |
+| Displayed or cached value | Identify whether the value is a cache, a supplied result or an actual calculation. A refresh-on-open flag is a request, not proof of recalculation |
+| Required recalculation | Use an available authorized target client or compatible engine, record its version and observed completion, then compare representative values with independent expected results |
+| Required object preservation | Compare relevant references, formulas, named ranges, links, charts or embedded objects before and after conversion according to the requested format. Keep the original artifact available |
+
+[openpyxl](https://openpyxl.readthedocs.io/en/stable/simple_formulae.html) writes formulas without evaluating them. [XlsxWriter](https://xlsxwriter.readthedocs.io/working_with_formulas.html) normally writes a zero cached result and requests recalculation when opened, unless a result is supplied. Neither write alone proves the requested values were calculated. These source mechanisms were checked 2026-10-21 and do not establish the selected target client's behavior.
+
+Report definition, calculation, preservation and visual checks separately. If required calculation or preservation cannot be verified, retain that specific acceptance gap instead of marking it passed from successful file creation. Do not require a full application round trip for a document whose acceptance does not depend on those behaviors.
+
 ## Multiple formats and QA status
 
 Create one canonical content source. PDF, DOCX and Markdown retain the same sections, numbers, terminology, sources and conclusions, allowing only format-specific presentation. Check for lost paragraphs/table data, citation drift and inconsistent versions after conversion.
