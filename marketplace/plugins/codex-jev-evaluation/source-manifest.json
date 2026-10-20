@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "14476f3d33858f44a8f02cb5cf1c04c4f65838138fbac72fb2da92875383d77c",
+      "sha256": "189d0ab33ba52f43cf3180ef7f5427e77b63c83dc9b543507e8fbfa045858aba",
       "source": "plugins/jev-evaluation/plugin.json"
     },
     "skills/jev-evaluation/LICENSE": {
@@ -25,11 +25,11 @@
       "source": "skills/jev-evaluation/README.md"
     },
     "skills/jev-evaluation/SKILL.md": {
-      "sha256": "cecbe29785b0e48fcb985b28487f23fb2da02dc8663c8a6a8e8ed2e09c9b8f89",
+      "sha256": "1709a10dfeecb3cfb6d579df48136d039a159147ddf8702c7c6df3ff17f96efe",
       "source": "skills/jev-evaluation/SKILL.md"
     },
     "skills/jev-evaluation/agents/openai.yaml": {
-      "sha256": "332fe814cd14333392d1a68ffb9bb0eb8d4e8be45f52ac8df01d889bb62f9a36",
+      "sha256": "04193d04ad3441ffeeb4c2360c208ff3ed6febbd91be3a09374a763d2c0e1a61",
       "source": "skills/jev-evaluation/agents/openai.yaml"
     },
     "skills/jev-evaluation/assets/icon-small.png": {
@@ -53,7 +53,7 @@
       "source": "skills/jev-evaluation/pyproject.toml"
     },
     "skills/jev-evaluation/references/usage.md": {
-      "sha256": "62a04e343b4b8f4ef0031107553e60ca4c7e4b441cb6056258eddfdd7bf836b9",
+      "sha256": "b2f495b43f7bf11eb1609a0da1c50a1eb6dc8c6082ba0dc0e07769def10c55e4",
       "source": "skills/jev-evaluation/references/usage.md"
     },
     "skills/jev-evaluation/requirements.txt": {
@@ -93,6 +93,6 @@
     "jev"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.11.3",
-  "version": "0.1.5"
+  "toolkit_version": "0.11.4",
+  "version": "0.1.6"
 }

@@ -4,6 +4,18 @@
 
 Apply only the checks for the selected capability and provider. The named examples below preserve implementation-specific boundaries, they are not a fixed provider list for general agent workflows.
 
+## Execution route and permission diagnosis
+
+Read this section when the selected tool is denied, appears unavailable or behaves differently between clients. Record the actual local/cloud execution location, shell/browser/App/MCP route, relevant policy and the observed error or result before choosing a repair. A connection, credential or network failure in one route does not establish failure in another.
+
+- Separate command sandbox reachability from approval policy. For command networking, check both the network grant and applicable proxy enforcement. Enabling a proxy does not enable command network access, and a network grant alone does not establish an enforced domain policy.
+- Command network controls do not by themselves disable hosted search, Apps, MCP connections or browser activity. Those routes have their own client, account, capability and managed restrictions. A successful alternative read proves that route only and does not authorize bypassing the failed route's policy.
+- Test only the selected authorized capability. Preserve effective permissions, authentication and providers while diagnosing, and distinguish a local command result from a remote service or another client's result. Change policy or account settings only within a separate, explicit scope.
+
+Source checked 2026-10-21: [OpenAI approvals and network isolation](https://learn.chatgpt.com/docs/agent-approvals-security). Resolve current client/build and execution policy before applying configuration examples.
+
+## Selected integration checks
+
 - Distinguish registration, package availability and actual use. `manual_verification_required` requires the remaining browser/app/authentication checks; an existing file or parsed config does not establish client reload.
 - Context7: for MCP, verify client tool discovery and one public library resolution/document query after reload. For an existing CLI, verify `ctx7 --help`, resolve the public library ID, then query the intended documentation version. A package or HTTP endpoint check alone leaves the selected query path unverified; ordinary docs lookup does not authorize setup, OAuth or Skill installation.
 - Firecrawl: distinguish App/connector and standalone MCP configuration, discovery, authentication and successful use. Verify the selected route with a bounded public read when that capability needs acceptance; an account/credit response proves account access, not search, scrape or crawl behavior. Check current plan/limits for a budget-sensitive job, preserve other providers and report each route's unverified scope. Do not upload a private local file to verify hosted parsing.

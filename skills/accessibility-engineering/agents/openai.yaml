@@ -1,5 +1,5 @@
 interface:
-  display_name: "Accessibility Engineering (v0.1.0)"
+  display_name: "Accessibility Engineering (v0.1.1)"
   short_description: "Verify semantics, keyboard and assistive behavior"
   default_prompt: "Use $accessibility-engineering to inspect the affected UI and platform requirements, implement the authorized accessibility change, and verify semantics, keyboard, focus and relevant assistive behavior."
 

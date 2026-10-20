@@ -13,19 +13,19 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "9fa824a734c4a0eae0c5d9e7ea1ff8317ff86279cc7d839f2f4357bc9d381a8e",
+      "sha256": "68c44ceb19a367c9ec7ae5eed09487d3d2e6104f2b37f740b804baca4c007512",
       "source": "plugins/environment-evidence/plugin.json"
     },
     "skills/test-strategy/SKILL.md": {
-      "sha256": "c9d753448344178ac0055b5fabad949e92efa19564f9cb4e3fabb86db2065abf",
+      "sha256": "895d6eefe22142b386e15d0f5aa71235feaa90f3a5aed1f9150b79efcc94e4ef",
       "source": "skills/test-strategy/SKILL.md"
     },
     "skills/test-strategy/agents/openai.yaml": {
-      "sha256": "c6b44417b85bc2fd3ae5bb3cf25d2d4aaf23bec07b87426da685b51175338334",
+      "sha256": "932d2a2a38decd38741dc3eb27a07d505da51597eda40d02f40e4f11864c0021",
       "source": "skills/test-strategy/agents/openai.yaml"
     },
     "skills/test-strategy/references/ai-evaluation.md": {
-      "sha256": "552b7c95a51968b6d6241677e28ba7985252f63760e626314e9b3c09ee7f9041",
+      "sha256": "36943a4869c35d95ed35f032eb99396cefc5c218051a3ee656caa720d8e3d11e",
       "source": "skills/test-strategy/references/ai-evaluation.md"
     },
     "skills/test-strategy/references/application-delivery.md": {
@@ -93,6 +93,6 @@
     "workspace-inspection"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.11.3",
-  "version": "0.3.2"
+  "toolkit_version": "0.11.4",
+  "version": "0.3.3"
 }

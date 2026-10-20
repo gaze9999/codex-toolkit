@@ -1,5 +1,5 @@
 interface:
-  display_name: "Document Production (v0.4.14)"
+  display_name: "Document Production (v0.4.15)"
   short_description: "Create finished PDF, DOCX, or Markdown artifacts"
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
