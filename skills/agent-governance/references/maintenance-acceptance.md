@@ -43,3 +43,7 @@ Use isolated sample artifacts and current supported tools when behavioral evalua
 | A community loading report conflicts with current host documentation | Check the maintainer resolution and actual runtime/discovery paths before changing settings; an unsupported path or historical issue does not establish a current defect |
 
 Explicit, implicit and adjacent negative trigger cases complement source/metadata checks. This follows [OpenAI's Skill evaluation approach](https://developers.openai.com/blog/eval-skills); do not claim model reliability, speed or usage improvement from source checks alone.
+
+## Specification-preserving UI guidance
+
+Before revising a generation workflow, inventory the authoritative layout, proportions, density, content and interactions. Reuse platform components only where they satisfy confirmed requirements; a reusable template does not authorize replacing the supplied design. Resolve conflicting source requirements at their owner and retain unaffected decisions. Keep test controls outside the product surface. Check functional behavior and specification fidelity separately, and distinguish synthetic isolated previews from live API, Host, authentication and persistence acceptance.
