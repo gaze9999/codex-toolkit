@@ -10,6 +10,10 @@ Use a compatible available CLI for a repeatable preview and focused application.
 
 For installed owned Plugins, inspect the registered marketplace source before choosing an update. Read the canonical [Plugin update guidance](https://github.com/gaze9999/codex-toolkit/blob/main/docs/plugins.md#已安裝-plugin-更新), not a private setup path. A Git marketplace uses published sources and the native marketplace/Plugin update operations; preserve that source unless a switch is explicitly requested. An existing local marketplace may use `mcp/scripts/sync_local_plugins.py` for a selected working-tree snapshot. The setup alias `plugins --sync-installed` forwards to that local-only entry and is not a Git-source updater. Preserve registered IDs, enabled states and unrelated settings. Committed release gates, cache bytes, reload and actual behavior remain separate evidence.
 
+## Verify template application
+
+When maintaining code-convention guidance, an available or read template is not evidence that implementation follows it. Check the changed code against selected applicable conventions, distinguish inherited differences from newly introduced ones, and preserve types, string literals, public contracts and runtime behavior during authorized syntax cleanup. Keep project-specific spellings scoped; do not impose them on unrelated projects or duplicate an already complete framework template. Report focused type/template, fixture and UI checks separately from live Host/API, persistence and full production-build acceptance.
+
 ## Representative acceptance cases
 
 Use isolated sample artifacts and current supported tools when behavioral evaluation is warranted. These are candidate cases, not completed runs or a mandatory per-change suite. Check artifacts/actions and user-visible outcomes, not whether the response repeats a heading or phrase. Capture the actual model/client, source revision or artifact hash, result and remaining scope. Start with the affected must-pass cases; expand for a specific gap.
@@ -32,8 +36,14 @@ Use isolated sample artifacts and current supported tools when behavioral evalua
 | Only an App runtime changes and a validator module disappears | The selected interpreter/module/exit result is identified; source defects and unavailable checks remain distinct; no unrelated dependency installation |
 | HEAD is unchanged but a tested working-tree input changes | Evidence identifies the relevant source/artifact bytes; an old result is not accepted for the changed input merely because the commit matches |
 | A project's launcher contract changes while its restore guide still names the old behavior | The selected guide and manifest are updated from the verified implementation, preserving other project content and installed-source policy |
+| A complete framework template exists but changed code violates an applicable convention | Check the actual diff, correct only authorized differences and retain semantic evidence; no duplicate template or cross-project syntax mandate |
+| An unchanged reference was verified earlier in the active task | Reuse its source/decision pointer; refresh affected evidence only when its validity changes or an original-source check is requested |
 | A task passes while a Skill was only loaded/read | Task acceptance, applicable Skill behaviors and observed compliance remain separate; source presence does not establish behavior coverage |
 | A conditional reference is never needed by the selected case | The unexercised condition stays untested, not failed; missing evidence for an applicable behavior stays unknown |
 | A community loading report conflicts with current host documentation | Check the maintainer resolution and actual runtime/discovery paths before changing settings; an unsupported path or historical issue does not establish a current defect |
 
 Explicit, implicit and adjacent negative trigger cases complement source/metadata checks. This follows [OpenAI's Skill evaluation approach](https://developers.openai.com/blog/eval-skills); do not claim model reliability, speed or usage improvement from source checks alone.
+
+## Specification-preserving UI guidance
+
+Before revising a generation workflow, inventory the authoritative layout, proportions, density, content and interactions. Reuse platform components only where they satisfy confirmed requirements; a reusable template does not authorize replacing the supplied design. Resolve conflicting source requirements at their owner and retain unaffected decisions. Keep test controls outside the product surface. Check functional behavior and specification fidelity separately, and distinguish synthetic isolated previews from live API, Host, authentication and persistence acceptance.
