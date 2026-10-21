@@ -52,6 +52,12 @@ A handoff starts with the current objective, requested next action or wait condi
 
 Preserve all effective constraints and unresolved issues while shortening. Avoid reconstructing the whole transcript, fixed word limits or mandatory extra documents. Do not create, fork, archive or message a task merely to validate these rules.
 
+## Diagnose compaction and interrupted operations
+
+For compaction diagnosis, separate model capacity from the automatic trigger. The [Codex configuration reference](https://learn.chatgpt.com/docs/config-file/config-reference), checked 2026-10-21, defines `model_context_window` as available model context and `model_auto_compact_token_limit` as the trigger (unset uses model defaults). Resolve the supported `model_auto_compact_token_limit_scope` and effective configuration in the target build rather than inferring a trigger from the UI capacity. When an actual failure needs investigation, retain client/build, model, login mode/plan, effective settings, before/after usage and relevant tool-output size. Do not raise limits, switch models or force a new chat from capacity alone; source inspection does not establish latency or savings.
+
+On interrupted external work, distinguish a stopped local call from a cancelled or rolled-back remote operation. Inspect the existing operation receipt/ID and destination state before retrying; if the result is unknown, keep that write pending and continue independent work. [Codex #51835](https://github.com/openai/codex/pull/51835) describes aborting active cells/nested calls while preserving stored session values, not rolling back a remote write. Likewise, process exit does not prove all output was collected: use the existing session's supported collection path and verify the expected artifact before accepting success, instead of rerunning a potentially mutating command. [Codex #53622](https://github.com/openai/codex/pull/53622) documents delayed remote output. These upstream changes were checked 2026-10-21; they do not prove target-client behavior or authorize reviving closed sessions.
+
 ## Match context to the recipient
 
 | Recipient | Provide | Expected return |

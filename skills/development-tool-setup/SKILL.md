@@ -3,7 +3,7 @@ name: development-tool-setup
 description: Install, configure, update, remove or diagnose one selected optional tool, MCP or connector and its prerequisites on Windows, macOS or Linux. Use for setup/availability gaps, not ordinary tasks that can use existing tools.
 metadata:
   short-description: Independent development-tool setup and diagnosis
-  version: "0.4.17"
+  version: "0.4.18"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -20,5 +20,7 @@ Resolve the missing capability, selected tool, target machine, current installat
 For checkout/wheel/wizard installation, Python bootstrap, updates or purpose/language-specific recipes, read [maintained setup](references/maintained-setup.md). It preserves exact entry points, flags, conflict/backup handling and source-doc routing.
 
 After selecting an integration, read only its relevant sections in [integration verification](references/integration-verification.md), including lifecycle cleanup when diagnosing stuck servers/viewers. Preserve tool-specific boundaries and separate registration/package checks, authentication, client discovery and actual use.
+
+For a missing ChatGPT Work entry inside a Project, use the Project memory compatibility section of that reference before proposing installation or account changes.
 
 If setup is unavailable, diagnose through installed tools/current official documentation and identify the required approved location or one reviewed installation. Do not guess personal paths/endpoints or install all tools. Report actual changes/backups/checks and concrete remaining prerequisites.
