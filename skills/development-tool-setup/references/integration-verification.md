@@ -16,6 +16,14 @@ Source checked 2026-10-21: [OpenAI approvals and network isolation](https://lear
 
 ## Selected integration checks
 
+### Project memory compatibility
+
+When ChatGPT Work is missing inside a Project, identify the product/interface, account plan, whether the Project is shared, its effective memory mode and any pending setting transition. The [Projects documentation](https://help.openai.com/en/articles/10169521-projects-in-chatgpt), checked 2026-10-21, says Work is unavailable with project-only memory; shared projects use that mode and cannot switch to default memory. This is a product compatibility condition, not evidence of a broken local MCP or missing package. Do not generalize it to local Codex repositories or unrelated tool failures.
+
+Preserve the approved memory/data boundary. Do not switch memory mode, move private context outside the Project or reinstall tools just to expose Work. Confirm the visible entry and effective setting in the selected account when access is available; otherwise report the unverified account condition and retain an explicit handoff in its approved location. A source check establishes the documented condition only, not account rollout, successful execution or usage savings.
+
+### Provider checks
+
 - Distinguish registration, package availability and actual use. `manual_verification_required` requires the remaining browser/app/authentication checks; an existing file or parsed config does not establish client reload.
 - Context7: for MCP, verify client tool discovery and one public library resolution/document query after reload. For an existing CLI, verify `ctx7 --help`, resolve the public library ID, then query the intended documentation version. A package or HTTP endpoint check alone leaves the selected query path unverified; ordinary docs lookup does not authorize setup, OAuth or Skill installation.
 - Firecrawl: distinguish App/connector and standalone MCP configuration, discovery, authentication and successful use. Verify the selected route with a bounded public read when that capability needs acceptance; an account/credit response proves account access, not search, scrape or crawl behavior. Check current plan/limits for a budget-sensitive job, preserve other providers and report each route's unverified scope. Do not upload a private local file to verify hosted parsing.
