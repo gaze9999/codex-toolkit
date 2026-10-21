@@ -13,15 +13,15 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "ecec696f17ecdd69245c7c5f7599cfe156b9b37a8bc56c28cfc054e304bfe851",
+      "sha256": "fad11e0a4be090ce713e30dab70b6b86f786c1e3bda61211c8697fcd23b1ae96",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
-      "sha256": "3a6b9b5307cc886c24b21532422319f779e7d3c4d76766d8503064aa4552e968",
+      "sha256": "0170d4e902b57c47fe2bcc9ad21cd06a6400be4f1420ab9d97c71b8c985e8b62",
       "source": "skills/agent-governance/SKILL.md"
     },
     "skills/agent-governance/agents/openai.yaml": {
-      "sha256": "4c0db2e6bdb72fc8aefedf2d81c55fe7c0428397761e989205f5993831abe2bf",
+      "sha256": "08bef2b15dae8f187352468e0c437d264e94d441799c539a419ec3089a70c288",
       "source": "skills/agent-governance/agents/openai.yaml"
     },
     "skills/agent-governance/assets/icon-small.png": {
@@ -97,11 +97,11 @@
       "source": "skills/agent-governance/assets/project-starter/root/AGENTS.md"
     },
     "skills/agent-governance/references/component-authoring.md": {
-      "sha256": "44231f8f4616d540237e86f24ce06612fa235794bab2fd5eb4a0a8e713231965",
+      "sha256": "3824aa21357be3b7d5465a1ff62f69da213b92ab9466a79bf553836d19cb3efd",
       "source": "skills/agent-governance/references/component-authoring.md"
     },
     "skills/agent-governance/references/context-continuity.md": {
-      "sha256": "28503c215699ca7ed5674db9b9cda5647fe377bf5577ed0180c6032b460e6ffe",
+      "sha256": "ae947e1e1c7a5273143925e0c13d6204f0ebccf0c96e77d05bf1dd971ad36f7a",
       "source": "skills/agent-governance/references/context-continuity.md"
     },
     "skills/agent-governance/references/delegation-routing.md": {
@@ -117,7 +117,7 @@
       "source": "skills/agent-governance/references/instruction-layering.md"
     },
     "skills/agent-governance/references/maintenance-acceptance.md": {
-      "sha256": "50c9e44068b205fedcbffb116a3159384e187ca24194203258fe128eb9b4e14d",
+      "sha256": "c477ccd0c5b8f15d410f03b649993ece27d786e0ef0bc1126ac6f6ec202c5b5d",
       "source": "skills/agent-governance/references/maintenance-acceptance.md"
     },
     "skills/agent-governance/references/operating-efficiency.md": {
@@ -125,7 +125,7 @@
       "source": "skills/agent-governance/references/operating-efficiency.md"
     },
     "skills/agent-governance/references/project-environment-routing.md": {
-      "sha256": "88ba1e07345bcac190a6769c0ae29ca0937ca686b7c347308fb445ed3d08b593",
+      "sha256": "204b9c895f43cd087034aaaeb038fee4fea7a4af18ae6f2276694bd05ae77361",
       "source": "skills/agent-governance/references/project-environment-routing.md"
     },
     "skills/agent-governance/references/project-setup.md": {
@@ -284,5 +284,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.11.5",
-  "version": "0.3.5"
+  "version": "0.3.6"
 }

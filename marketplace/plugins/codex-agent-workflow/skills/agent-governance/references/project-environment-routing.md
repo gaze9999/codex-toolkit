@@ -41,3 +41,9 @@ Main chooses supported model/effort from uncertainty, consequences and verificat
 Review returned work against actual source/artifact state, checks and remaining acceptance; retain unknowns. Development readiness, focused test PASS, native packaging, installed client discovery and published release are separate states. Recommendations and role availability do not authorize new chats, messages, installations or publication.
 
 Sources checked 2026-10-07: [official custom subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents) describes narrow custom roles and schema; [community setup example](https://www.reddit.com/r/codex/comments/1ujjcxh/how_i_set_up_codex_subagents_without_overusing/) illustrates selective roles, not a benchmark or required configuration. Runtime-specific decisions above are maintenance choices to verify against each project.
+
+## Configuration and concurrent environments
+
+When runtime evidence contradicts a clean Git status, compare the relevant committed source, local overrides, generated artifacts and actually loaded configuration. Inspect skip-worktree/assume-unchanged flags only where relevant; preserve unrelated overrides and flags. A successful build does not establish service startup or authentication. Diagnose the current log/run and follow the actual configuration loading path before choosing rebuild or restart.
+
+Switchable named environments are not proof of concurrent isolation. Check worktree, output directories, ports, frontend proxy, component URLs, locks and process ownership together. Stop/rebuild/cleanup must respect the selected owner. Actions and command-line entrypoints should consume one selected configuration source; do not silently mix embedded settings and an environment file. Audit-only work records gaps without changing configuration or starting services.
