@@ -21,6 +21,8 @@ Prefer an existing compatible command, API or supported Plugin reference. A one-
 
 ## Keep one source and usable boundaries
 
+When recurring feedback spans layers, keep business/API decisions and local acceptance gaps with the project owner, cross-project behavior in Global, framework/API examples in the owning Skill, packaging/install differences with the Plugin owner, and schema/client/authentication/data-boundary issues with the MCP/tool owner. Merge the correction into its existing record and link the responsible source; do not copy one project defect into every layer or invent a component failure without evidence.
+
 - Public portable source belongs in `codex-toolkit`; private `codex-setup` owns personal configuration and machine installation choices. Inspect the actual migration state before changing an owner. Do not require a private checkout or client-cache absolute path at runtime.
 - Keep independently runnable cores free of Codex configuration, accounts and MCP imports. CLI and MCP call the same versioned API; preserve existing package identities and compatible callers. Give the adapter its own authentication, allowed roots, limits and structured errors.
 - Use supported references first. Self-contained distribution may generate a mirror with source version/revision, file hashes and redistribution authority. Regenerate it from the owner; never edit a generated Skill copy independently or enable duplicate direct/Plugin sources.

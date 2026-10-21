@@ -10,6 +10,8 @@ For stage outputs, evidence freshness and local/remote/cloud recovery, use [deli
 
 ## Continue with ongoing user guidance
 
+Reuse the instructions, templates and evidence already verified for the active task, retaining a concise source/version and decision pointer. Reread affected sections when the source, version, rules or scope changes, evidence conflicts or the request requires an original-source check. Do not reload entire Skills or documents merely because another turn begins; recover missing context before depending on it.
+
 - Keep the active outcome, effective decisions, authorization, constraints and unfinished work. Same-task additions refine that outcome; a correction supersedes only conflicting decisions. Recheck affected artifacts and evidence, preserving unaffected accepted results. Separate follow-up work keeps the requested order or the existing priority; do not import the whole chat history into the current assignment.
 - Briefly answer an inserted question or status request, then resume authorized work without requiring another reminder. Explicit prioritization, pause, wait, cancellation or replacement changes the specified slice. Missing decisions or authority block only dependent work; do not revive completed or cancelled tasks.
 - For multi-stage work, retain a concise checkpoint in task context: effective goal/limits, decisions/sources, accepted versus pending work, blockers, owner/dependencies, evidence and next action. Refresh it at meaningful milestones, scope changes or handoff. Write to an existing permitted progress location only when requested or required; do not create routine reports, transcripts or progress-only Context Briefs.
