@@ -3,7 +3,7 @@ name: agent-governance
 description: Create, audit, or simplify project AGENTS.md layers, Codex subagent roles and durable goal recovery across conversations. Use for instruction-governance work, not ordinary implementation or general code review.
 metadata:
   short-description: Agent governance, role boundaries, and instruction minimization
-  version: "0.6.6"
+  version: "0.6.7"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -18,7 +18,7 @@ Create or simplify instruction layers and durable role boundaries. Keep rules th
 - Resolve applicable instruction sources, actual project/tool configuration, relevant Git status/diff and ignored guidance. Preserve concurrent work. Choose sources and acceptance from the intended outcome and effective authorization, without a fixed questionnaire or exhaustive rereading.
 - Verify current official OpenAI behavior when changing instruction discovery, configuration, model/reasoning or subagents. Distinguish project evidence and human reports from product specifications.
 - Stable cross-project preferences belong in Global, project facts and authorized record pointers at root/nested scope, role differences in roles, and conditional procedures in references. Execution state stays in the task; durable goals, decisions and acceptance use the selected authorized project record. Judge execution scope rather than the directory where guidance is authored.
-- Global/general instructions use concise Taiwan Traditional Chinese; project, role and Skill instructions/references use concise English unless explicitly overridden. Classify templates by intended use and preserve parser terms, quotations and localized outputs. User-facing language follows the user/project.
+- Global/general, project, role and Skill instructions/references use concise English unless explicitly overridden. Maintain a separate human-language Global guide when requested, keeping semantics aligned. Classify templates by intended use and preserve parser terms, quotations and localized outputs. User-facing language follows the user/project.
 - Preserve confirmed decisions, exact contractual wording, authorization, public interfaces and acceptance. Prefer existing enforcement tools over repeated prose. Replace discoverable paths, versions, role lists and routine sequences with source-selection conditions; keep exact values only when they govern safety, compatibility or an explicit decision. Examples do not become mandatory defaults, and brevity needs no fixed length/output quota.
 
 ## Select relevant detail

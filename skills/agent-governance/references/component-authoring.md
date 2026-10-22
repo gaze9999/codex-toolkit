@@ -32,7 +32,7 @@ When recurring feedback spans layers, keep business/API decisions and local acce
 
 ## Language and context budget
 
-Global/general guidance uses concise Taiwan Traditional Chinese. Project root/nested instructions, roles, Skill instructions/references and internal usage guides use concise English. User-facing reports and personal README use Taiwan Traditional Chinese unless the user/repository specifies otherwise. Preserve identifiers, parser vocabulary, quotations, legal text and intentionally localized templates/output.
+Global/general guidance, project root/nested instructions, roles, Skill instructions/references and internal usage guides use concise English. Maintain a separate human-language Global guide when requested and keep the paired meaning aligned. User-facing reports and personal README use Taiwan Traditional Chinese unless the user/repository specifies otherwise. Preserve identifiers, parser vocabulary, quotations, legal text and intentionally localized templates/output.
 
 Size follows the loaded decision scope, without local word-count targets. Inspect actual UTF-8 bytes/tokens when discovery or context limits matter. A shorter file does not itself prove better reliability, usage or speed.
 
