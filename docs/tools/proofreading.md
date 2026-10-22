@@ -4,7 +4,7 @@
 
 | 選項 | 接法 | 用途 |
 | --- | --- | --- |
-| `textlint` | [textlint 官方 MCP](https://textlint.org/docs/mcp/) 15.8.0, [prh](https://github.com/textlint-rule/textlint-rule-prh) 6.1.0, Node 20.18+ | 台灣用語詞表與繁中半形標點, 本機處理 |
+| `textlint` | [textlint CLI](https://textlint.org/docs/cli/) / MCP 15.8.0, [prh](https://github.com/textlint-rule/textlint-rule-prh) 6.1.0, Node 20.18+ | 台灣用語詞表與繁中半形標點, 本機處理 |
 | `textlint-ja` | 同一官方引擎, 獨立 [日文規則集](https://github.com/textlint-ja/textlint-rule-preset-ja-technical-writing) 12.0.2 | 助詞, 文體與日文技術寫作, 保留日文標點 |
 | `cspell` | [CSpell CLI](https://cspell.org/docs/how-it-works) 10.3.6, Node 22.18+ | 英文拼字與產品詞表, 本機處理 |
 | `languagetool` | [LanguageTool](https://dev.languagetool.org/http-server), 另選本機 Java 服務或核准的雲端服務 | 需要時補英文文法檢查, 繁中或日文拼字檢查需選用支援該語言的工具 |
@@ -17,7 +17,18 @@ Windows 使用 `launch-cli.cmd mcp`, macOS / Linux 使用 `sh launch-cli.sh mcp`
 
 textlint 先用 lint 工具檢查完整規則, 再用 fix 工具取得可自動修正的內容, 不直接覆寫原檔, 文體等無法自動修正的問題仍需依 lint 結果處理, 修正後再跑 lint 確認. 引用原文, 專有名詞與程式碼保留其來源形式, blockquote 與 code 的檢查範圍依各規則設定, inline 引用或混合語言的修正仍需逐項確認. [官方 fix 行為](https://textlint.org/docs/mcp/), [prh 規則](https://github.com/textlint-rule/textlint-rule-prh)
 
-已有 textlint CLI 時, bounded 檔案 / batch check 可沿用相同規則, 先查 `textlint --help` 與專案設定, `--fix` 可能直接寫檔. 本 setup 的既有 MCP lint / fix 工具適合 client 需要 typed result 或回傳修正內容的情境, 不因 CLI 與 MCP 都可用而重複執行整套檢查. 詳細選用條件見 [CLI / MCP 指引](selection.md)
+先區分公司與個人文件, 再選規則設定檔. 公司文件使用公司或專案核准規則, 個人文件使用個人設定, 不因共用 textlint 引擎而混用詞表、文案覆寫或備份位置. 公司設定與來源文件留在公司核准環境, 個人設定的備份留在私人儲存庫
+
+本機文件與批次校對優先使用已安裝的 textlint CLI, 明確指定與 MCP 相同的已審查設定檔及規則, 保留結束碼與問題清單, 完成後人工複核語意. MCP 用於沒有 shell 的用戶端或需要結構化 lint / fix 回傳的情境, 同一份內容不重複執行兩條路徑
+
+```sh
+textlint --config "<設定檔>" --format json "<文件.md>"
+textlint --config "<設定檔>" --fix --dry-run --format diff "<文件.md>"
+```
+
+第一個指令只檢查, 第二個預覽可修正差異, 都不改寫原檔. 使用目前版本的 `--help` 核對參數, 修改仍依來源文案與授權範圍逐項判斷
+
+MCP 因內容傳遞邊界被擋時, 先確認本機 CLI、設定檔與規則都在允許的處理環境, 再直接讀取本機文件完成檢查. 本機檔案權限與執行審查仍適用, 不為切換介面調整帳號或權限. 詳細選用條件見 [CLI / MCP 指引](selection.md)
 
 接法使用官方 textlint MCP, setup 的啟動層依官方 output schema 整理 fix 回傳內容, 保留官方工具與修正結果, 不修改安裝的上游套件
 
