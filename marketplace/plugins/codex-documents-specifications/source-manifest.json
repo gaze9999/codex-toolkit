@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "e8c2bfd6f81d1f9122ac5cff1edcb1598768842fbae0b812af61ed2cb90e4f95",
+      "sha256": "84afc7729c95b750ea8ee76b2839c4b5ecad3e17217c35568741d82d6ea5bdb6",
       "source": "plugins/documents-specifications/plugin.json"
     },
     "resources/token-count/VERSION": {
@@ -109,11 +109,11 @@
       "source": "skills/data-visualization/references/delivery-and-verification.md"
     },
     "skills/doc-updater/SKILL.md": {
-      "sha256": "105a2b3e56641f9a1528edc16dc2beee494d2a990089f66fb106e9f7250e1460",
+      "sha256": "f42f0c6ad8e01caf617bafb6037f95d86f3185d26cdec3e75931a08937180382",
       "source": "skills/doc-updater/SKILL.md"
     },
     "skills/doc-updater/agents/openai.yaml": {
-      "sha256": "75f4bbf4aa6126aa06c3d34ab24b339581c778a1220270376ece945168347991",
+      "sha256": "e5a92d42b778ddc084fb3842bf6f7e99519ca1713e4de4ec7df666d6a70b5c34",
       "source": "skills/doc-updater/agents/openai.yaml"
     },
     "skills/doc-updater/assets/icon-small.png": {
@@ -137,7 +137,7 @@
       "source": "skills/doc-updater/references/doc-update-rules.md"
     },
     "skills/doc-updater/references/notion-sync-reader-writer-contract.md": {
-      "sha256": "bcaf13d096138fe9e634701e9d2cb5f31c2020a154c7c9a64bcbf176328a5a72",
+      "sha256": "99dc6db983fe68b4d131b96186face6addb8bcb0fc13bc49ec3c3e4e2eac8c9a",
       "source": "skills/doc-updater/references/notion-sync-reader-writer-contract.md"
     },
     "skills/doc-updater/references/presentation.md": {
@@ -145,7 +145,7 @@
       "source": "skills/doc-updater/references/presentation.md"
     },
     "skills/doc-updater/references/source-and-history.md": {
-      "sha256": "50056e96f3f9a79a75c2dfd7254cad35252e7259c18c6e36b79dc32b18c967af",
+      "sha256": "7312e482813ed0a97155e79135f9c1ad63ba6cff4ea112095969ad9da444d504",
       "source": "skills/doc-updater/references/source-and-history.md"
     },
     "skills/doc-updater/scripts/inspect_markdown_sync_target.py": {
@@ -202,5 +202,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.11.5",
-  "version": "0.5.0"
+  "version": "0.5.1"
 }
