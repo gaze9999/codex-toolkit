@@ -3,7 +3,7 @@ name: multilingual-proofreading
 description: Proofread Traditional Chinese, English or Japanese prose for terminology, punctuation, spelling, grammar and natural wording, or maintain a requested terminology profile. Use for requested proofreading or material document-quality gaps, not automatic translation or a blanket check on every chat reply.
 metadata:
   short-description: Language-aware proofreading and terminology consistency
-  version: "0.4.17"
+  version: "0.4.18"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -26,9 +26,9 @@ Preserve the author's meaning, factual claims, register and terminology. Infer t
 
 For requested Taiwan Chinese vocabulary/rule maintenance, read [Taiwan terminology sources](references/taiwan-terminology.md). Keep official terminology, product/project wording and personal preferences distinguishable; ordinary proofreading does not require collecting new entries.
 
-Select actually available terminology, punctuation, spelling or grammar capabilities by the languages, local rules and approved data boundary. Use the current project configuration when applicable. Reuse a compatible CLI or MCP, inspect its schema or help, and use an available setup Skill only if installation or diagnosis is needed. Tool recipes and versions belong in the setup catalog, not this workflow.
+Select actually available terminology, punctuation, spelling or grammar capabilities by the languages, local rules and approved data boundary. Resolve company versus personal ownership first. Use the current project configuration; keep terminology overrides, processing locations and backups separate. Do not load a personal profile for company material without explicit authorization. Reuse a compatible CLI or MCP, inspect its schema or help, and use an available setup Skill only if installation or diagnosis is needed. Tool recipes and versions belong in the setup catalog, not this workflow.
 
-For reproducible file or batch checks, prefer an existing compatible local CLI with the project's language configuration. Keep an available MCP when its typed lint/fix results or client access better fit the task. Inspect write semantics: a CLI fix option may rewrite files, while a server may return corrected text for review. Interface choice does not change the approved processing location or authorize rule installation.
+For reproducible file or batch checks, prefer an existing compatible local CLI with the project's language configuration. Keep an available MCP when its typed lint/fix results or client access better fit the task. Inspect write semantics: a CLI fix option may rewrite files, while a server may return corrected text for review. When an MCP content-transfer path is blocked, use an authorized local CLI with the same reviewed engine and rules, retaining exit codes and findings. Preserve filesystem, processing-location and execution restrictions; interface choice does not authorize access or rule installation.
 
 For document creation or revision, run available textlint or an equivalent language/terminology checker on authored or changed prose before delivery, then manually review Taiwan terminology and meaning. If no compatible checker is available or the check fails, notify the user with the unchecked scope and perform the available manual review. Sensitive text may skip tool processing and temporary lint files; keep the manual terminology review and report the exception. Assess each finding in context, then review meaning, naturalness, logical consistency and unsupported factual changes. A dictionary match or clean lint result does not establish complete grammar or factual accuracy. Apply only clear in-scope corrections, rerun affected checks, and retain unresolved context-dependent wording as a concrete question or note.
 
