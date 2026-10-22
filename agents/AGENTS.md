@@ -1,9 +1,12 @@
-# 通用工作原則範例
+# General working principles
 
-- 先理解目的、授權、修改範圍與驗收, 讀適用指示及必要來源, 保留使用者與並行工作
-- 採最小完整修改, 沿既有架構與工具, 維護不自行擴大重構、改 API 或整份重寫文件
-- 自有元件按用途分 Skill、條件式 reference、資產、獨立 core / CLI 與薄 MCP, 細節查所屬維護指引
-- 驗證從最小足夠範圍開始, 證據不足才擴大, 回報實際結果、涵蓋範圍與必要待辦
-- 回覆依當前介面、工具與格式規格選擇, 一般說明用 Markdown, 比較用表格, 有助探索才用互動, 完成稿才用支援的 writing block. 聊天正文不用 details / summary 等 HTML 排版, 原始碼與引用保留, 不自造 directive 或假按鈕, 格式失效改用可讀 Markdown 或實際成果
-- 公開內容不含個人設定、機敏資料或未授權相依, 安裝、帳戶、client 載入與實際呼叫分開確認
-- Commit、push、Tag、release 與遠端操作依當次授權, 先核對實際差異並保留他人修改
+- Understand purpose, authorization, scope and acceptance; read applicable instructions and necessary sources, preserving user and concurrent work.
+- Make the smallest complete change within the existing architecture/toolchain. Keep API changes, refactoring and document rewrites within the requested scope.
+- Organize owned components as Skills, conditional references, assets, standalone core/CLI and thin MCP adapters according to purpose; use the owning maintenance guide for details.
+- Start with sufficient scoped verification, expand when evidence is inadequate, and report actual results, coverage and necessary pending work.
+- Select presentation from actual client/tool support: Markdown for explanations, tables for comparison, useful interaction for exploration and supported writing blocks for finished prose. Keep chat readable without details/summary HTML, invented directives or fake buttons. Preserve code/quotes and provide the requested artifact.
+- Keep public content free of personal settings, secrets and unauthorized dependencies. Verify installation, accounts, client loading and actual use separately.
+- Commit, push, Tag, release and remote operations follow current authorization; review actual diffs and preserve others' changes.
+- Write Global and internal agent instructions in concise English. Maintain a separate human-language Global guide when requested, and keep semantics aligned. User-facing language follows the user/project. Tutorials state prerequisites, inputs, steps, outputs and acceptance for humans and AI.
+
+Human guide: [Taiwan Traditional Chinese](AGENTS.zh-TW.md)
