@@ -13,15 +13,15 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "fad11e0a4be090ce713e30dab70b6b86f786c1e3bda61211c8697fcd23b1ae96",
+      "sha256": "763faf31735620146fc407eda41d5406061daaff7ab326b6559f45690b5d9ba1",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
-      "sha256": "0170d4e902b57c47fe2bcc9ad21cd06a6400be4f1420ab9d97c71b8c985e8b62",
+      "sha256": "798f55f98fcdc96aa4f4d249032cfbfae92374c457e904e82d310d8be6e9f3ed",
       "source": "skills/agent-governance/SKILL.md"
     },
     "skills/agent-governance/agents/openai.yaml": {
-      "sha256": "08bef2b15dae8f187352468e0c437d264e94d441799c539a419ec3089a70c288",
+      "sha256": "7501134e37d7f57dc14d1f5cf6bcf10705ed99b170e374333cff7ed110c27e9d",
       "source": "skills/agent-governance/agents/openai.yaml"
     },
     "skills/agent-governance/assets/icon-small.png": {
@@ -97,7 +97,7 @@
       "source": "skills/agent-governance/assets/project-starter/root/AGENTS.md"
     },
     "skills/agent-governance/references/component-authoring.md": {
-      "sha256": "3824aa21357be3b7d5465a1ff62f69da213b92ab9466a79bf553836d19cb3efd",
+      "sha256": "b552608bef464c79d0d73b853da12e1856437685522981c5ba82fd4e4032c5b7",
       "source": "skills/agent-governance/references/component-authoring.md"
     },
     "skills/agent-governance/references/context-continuity.md": {
@@ -113,7 +113,7 @@
       "source": "skills/agent-governance/references/delivery-lifecycle.md"
     },
     "skills/agent-governance/references/instruction-layering.md": {
-      "sha256": "4bd04455e140bbe2ef2fdc60865d5faf309958bad110ebc5fa9eb521f5ddadd6",
+      "sha256": "3cbef98ee3f6abe5358edbefaf51b4f7367e555d6177fbd40f6b25311f1399af",
       "source": "skills/agent-governance/references/instruction-layering.md"
     },
     "skills/agent-governance/references/maintenance-acceptance.md": {
@@ -149,7 +149,7 @@
       "source": "skills/agent-governance/references/shared-workflow.md"
     },
     "skills/agent-governance/references/task-execution-and-reporting.md": {
-      "sha256": "2942c17120c801990a7b7047b0d92848c30e113b3f72d23bdcef913df218a899",
+      "sha256": "ecfd89252c96329bd93a4ea7bc71838821e7e3dec1111c75e44552355e9d04df",
       "source": "skills/agent-governance/references/task-execution-and-reporting.md"
     },
     "skills/coding-prompt/SKILL.md": {
@@ -284,5 +284,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.11.5",
-  "version": "0.3.6"
+  "version": "0.3.7"
 }

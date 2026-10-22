@@ -1,6 +1,6 @@
 # Task intake, execution and reporting
 
-Read when maintaining task interpretation, source selection, Git authority or completion reporting. Keep durable principles global, project acceptance local and tool commands in their owning Skill/setup. Global/general agent guidance uses concise Taiwan Traditional Chinese. Subagent instructions, project AGENTS.md and agent guides, and Skill instructions/references use concise English. Output language follows the user or project.
+Read when maintaining task interpretation, source selection, Git authority or completion reporting. Keep durable principles global, project acceptance local and tool commands in their owning Skill/setup. Global/general agent guidance uses concise English, with a separate aligned human-language guide when requested. Subagent instructions, project AGENTS.md and agent guides, and Skill instructions/references use concise English. Output language follows the user or project.
 
 ## Understand the requested outcome
 
