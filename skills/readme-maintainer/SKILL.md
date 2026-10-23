@@ -38,7 +38,7 @@ Produce a README that is accurate, scannable and usable by its intended readers.
 
 For section order, first-use teaching, compact examples, optional screenshots/diagrams and explanation-first wording, read [README presentation](references/presentation.md) when that part of the README is being revised. Keep a short actionable reader path and link advanced tool/API details; images are useful only when they teach something current and verified.
 
-- Write to explain purpose, operation and results. Remove generic disclaimers and defensive comparisons that do not change usage. Preserve concrete dependencies, compatibility, write/overwrite behavior, data/account boundaries, unverified claims and legal notices beside the relevant operation.
+- Write the supported action or conclusion directly. Include a limitation only when it changes the reader's decision or operation, with its concrete impact and handling beside that step. Keep pending acceptance in the existing work record and relevant handoff; omit repeated disclaimers from reusable instructions and finished prose. Preserve authoritative quotations and required legal notices.
 - Choose length and layout by the audience and supported interfaces, not a universal word quota. Do not add a screenshot, badge, tutorial section or full tool catalog merely to fill a template.
 
 ## Verify and deliver

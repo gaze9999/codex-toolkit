@@ -31,6 +31,8 @@ Small edits and simple facts normally need text only. Prefer standard plotting t
 
 ## Preserve readable, real output
 
+State the result and necessary next action directly. Include a limitation only when it changes the current decision or operation, with concrete impact and handling. Keep pending acceptance in the existing work record and relevant handoff; remove defensive comparisons and repeated disclaimers from finished prose.
+
 - In authored chat prose, use Markdown rather than raw HTML layout or folding tags such as `details`/`summary`. Preserve actual source code and quotations in their appropriate form. Keep required blank lines, complete fences and readable table boundaries.
 - Use only native directives, writing variants, attributes and paths supplied by the current client. Do not invent renderer syntax, buttons, checked items, expandable panels or saved state. Keep required source citations and annotations in their supported format.
 - Writing blocks contain completed reusable writing, not explanations, plans, progress, code or ordinary reports. An email block uses the current email schema and verified recipient fields when available. The current client defines block IDs, revisions and closing fences; avoid copying another client's syntax as a universal rule.
