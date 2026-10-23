@@ -20,7 +20,7 @@ Read when restructuring a README's teaching flow, examples or visual presentatio
 - Prefer an existing current screenshot/demo or an authorized reproducible capture. Redact account names, private paths/endpoints, customer data, tokens and session information before distribution. Record relevant version/state when it changes the interpretation.
 - Keep assets repository-relative, provide informative alt text and check rendering/link closure. A small overview belongs near the introduction or relevant operation; move large walkthroughs and galleries to detailed docs. Avoid badges or decorative images without a useful verified target.
 
-## Explain instead of disclaim
+## Explain supported operations
 
 Describe supported behavior, dependencies, input/output, side effects and concrete support limits. Remove generic liability disclaimers, defensive comparisons, repeated exclusions and maintenance-history prose when they do not help the reader use the tool. Keep actual overwrite/delete risks, account/data boundaries, compatibility requirements, unverified claims and legal notices where they matter. README editing never changes a LICENSE or third-party notice without authorization.
 

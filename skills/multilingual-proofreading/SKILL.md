@@ -24,6 +24,8 @@ Preserve the author's meaning, factual claims, register and terminology. Infer t
 
 ## Check and correct
 
+For an authorized style edit, remove boilerplate disclaimers, defensive comparisons and repeated acceptance narration. Retain limits that affect the reader's decision or operation and explain their concrete impact and handling. Preserve source meaning, quotations and legal notices; keep execution status in the existing work record and relevant handoff.
+
 For requested Taiwan Chinese vocabulary/rule maintenance, read [Taiwan terminology sources](references/taiwan-terminology.md). Keep official terminology, product/project wording and personal preferences distinguishable; ordinary proofreading does not require collecting new entries.
 
 Select actually available terminology, punctuation, spelling or grammar capabilities by the languages, local rules and approved data boundary. Resolve company versus personal ownership first. Use the current project configuration; keep terminology overrides, processing locations and backups separate. Do not load a personal profile for company material without explicit authorization. Reuse a compatible CLI or MCP, inspect its schema or help, and use an available setup Skill only if installation or diagnosis is needed. Tool recipes and versions belong in the setup catalog, not this workflow.

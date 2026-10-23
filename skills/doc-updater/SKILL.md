@@ -22,7 +22,7 @@ Governing specifications and confirmed decisions retain authority. Preserve unre
 
 ## Apply the supported change
 
-Use direct explanations of purpose, behavior, steps, results and necessary conditions. Remove boilerplate disclaimers, defensive wording, self-justification and unnecessary contrasts from the edited content. State material limits through their concrete impact and handling. Apply this style to prose, captions and analysis while preserving authoritative source meaning and legal notices.
+Write the supported action or conclusion directly. Include a limitation only when it changes the reader's decision or operation, with its concrete impact and handling beside that step. Keep pending acceptance in the existing work record and relevant handoff; omit repeated disclaimers from reusable instructions and finished prose. Preserve authoritative quotations and required legal notices.
 
 - Read relevant implementation evidence and target sections, then make the smallest supported update. Recheck the destination when concurrent edits are possible, preserve unrelated changes, authoritative wording, legal notices and material limits, and keep secrets/private implementation details out of public guarantees.
 - If impact or target selection is unclear, read [documentation impact rules](references/doc-update-rules.md). The optional `scripts/scan_changed_files.py --repo <repo-root>` aids discovery with a compatible Python runtime; equivalent repository inspection needs no new tool installation.

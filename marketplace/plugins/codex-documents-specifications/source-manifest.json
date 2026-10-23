@@ -53,7 +53,7 @@
       "source": "python-tools/src/text/token_html.py"
     },
     "skills/context-brief/SKILL.md": {
-      "sha256": "4489c6134c9cffda984f297e26ceb60af9c856cdffad1e723aaf65daa2994214",
+      "sha256": "871a8b1c74e63bf04a70a5cae3eca7ec4a0b5b1a42e4d2a986ba45dd59c1d7e9",
       "source": "skills/context-brief/SKILL.md"
     },
     "skills/context-brief/agents/openai.yaml": {
@@ -109,7 +109,7 @@
       "source": "skills/data-visualization/references/delivery-and-verification.md"
     },
     "skills/doc-updater/SKILL.md": {
-      "sha256": "f42f0c6ad8e01caf617bafb6037f95d86f3185d26cdec3e75931a08937180382",
+      "sha256": "5154f46028a2413664d6e239732b1337527558effe6f8e550ffd772db093d120",
       "source": "skills/doc-updater/SKILL.md"
     },
     "skills/doc-updater/agents/openai.yaml": {
@@ -141,7 +141,7 @@
       "source": "skills/doc-updater/references/notion-sync-reader-writer-contract.md"
     },
     "skills/doc-updater/references/presentation.md": {
-      "sha256": "16f75ce4d9d0c05923ebb8b5c8b0f05a9ebfe209c5bc3e78315fd730bf900136",
+      "sha256": "b067dfbf2a9413c9ab93e8fa67de3b1ec6dd097db191445c61d5cfcb11b5ea57",
       "source": "skills/doc-updater/references/presentation.md"
     },
     "skills/doc-updater/references/source-and-history.md": {
