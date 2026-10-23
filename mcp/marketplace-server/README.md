@@ -50,6 +50,17 @@ node scripts/verify-remote.mjs https://YOUR-HOST/mcp
 驗證器亦核對匿名拒絕、OAuth 探索與來源/快照靜態路徑不可下載
 網頁版加入後另確認實際對話可呼叫工具
 
+## 請求診斷
+
+HTTP 入口回傳 `x-mcp-request-id`, 由伺服器產生 UUID, 記錄請求收到、完成或中斷, 包含處理階段、白名單方法與工具名稱、HTTP 狀態、耗時、回應位元組數及 JSON-RPC 錯誤碼
+不記錄 Authorization、Cookie、使用者身分、用戶端提供的請求 ID、工具參數、文件內容、例外訊息或堆疊, 診斷輸出失敗不改變請求結果
+
+對照同一部署與 UTC 時段的用戶端錯誤及服務端記錄, 先區分沒有收到請求、認證拒絕、處理例外、HTTP 回應與用戶端轉換, 缺少歷史記錄不能排除任一層
+重試成功只證明該次呼叫完成, 間歇性錯誤須保留原始結果與尚未確認的原因
+認證程序意外拋錯回傳 503, MCP 處理或回應讀取例外回傳 500, 輸入串流失敗回傳 400 或保留已中斷連線, 不輸出原始例外內容
+
+參考 [Vercel Function Logs](https://vercel.com/docs/functions/logs)
+
 ## 網頁版加入
 
 1. 開啟 ChatGPT Plugins, 選擇 Add custom MCP server
