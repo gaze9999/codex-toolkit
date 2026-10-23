@@ -32,7 +32,8 @@ class TokenCountPluginTests(unittest.TestCase):
                          (ROOT / "python-tools/setup/requirements-token-count.txt").read_bytes())
         self.assertEqual(files["resources/token-count/VERSION"],
                          (ROOT / "python-tools/VERSION").read_bytes())
-        self.assertEqual(provenance["version"], "0.5.0")
+        manifest = json.loads((ROOT / "plugins/documents-specifications/plugin.json").read_text(encoding="utf-8"))
+        self.assertEqual(provenance["version"], manifest["version"])
         for name in files:
             self.assertFalse(set(Path(name).parts) & {".venv", "tiktoken-cache", "__pycache__", ".git"})
 
