@@ -23,6 +23,15 @@ jobs:
           python -B tooling/package.py plan
       - run: python -B -m unittest discover -s mcp/tests -p 'test_*.py'
       - run: node --test mcp/tests/test_taiwan_style.cjs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify public marketplace MCP
+        working-directory: mcp/marketplace-server
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          npm run snapshot
+          npm test
       - name: Verify standalone Python tools
         working-directory: python-tools
         run: |

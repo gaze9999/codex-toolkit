@@ -1,0 +1,20 @@
+{
+  "name": "codex-toolkit-marketplace-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "snapshot": "node scripts/snapshot.mjs",
+    "test": "node --test test/*.test.mjs",
+    "start": "node local.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.3.1",
+    "jose": "6.2.13",
+    "mcp-handler": "2.3.0",
+    "zod": "4.6.7"
+  }
+}
