@@ -32,6 +32,8 @@ When recurring feedback spans layers, keep business/API decisions and local acce
 
 ## Language and context budget
 
+Write rules as actionable conditions, responsibilities and acceptance criteria. Remove boilerplate disclaimers and self-justification. Keep runtime gaps in the existing project record; durable instructions retain only the condition and required response. Include a restriction where it changes an operation, preserving authorization and data boundaries.
+
 Global/general guidance, project root/nested instructions, roles, Skill instructions/references and internal usage guides use concise English. Maintain a separate human-language Global guide when requested and keep the paired meaning aligned. User-facing reports and personal README use Taiwan Traditional Chinese unless the user/repository specifies otherwise. Preserve identifiers, parser vocabulary, quotations, legal text and intentionally localized templates/output.
 
 Size follows the loaded decision scope, without local word-count targets. Inspect actual UTF-8 bytes/tokens when discovery or context limits matter. A shorter file does not itself prove better reliability, usage or speed.

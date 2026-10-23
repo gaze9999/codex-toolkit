@@ -23,6 +23,8 @@ Activate only when the user explicitly requests a finished downloadable artifact
 
 ## Format and quality
 
+Write the supported action or conclusion directly. Include a limitation only when it changes the reader's decision or operation, with its concrete impact and handling beside that step. Keep pending acceptance in the existing work record and relevant handoff; omit repeated disclaimers from reusable instructions and finished prose. Preserve authoritative quotations and required legal notices.
+
 - PDF: preserve selectable text and correct Traditional Chinese or Japanese rendering; inspect contents, headings, tables, and whitespace when rendering is available.
 - DOCX: use native Heading, TOC, and page-number fields; render when needed to confirm pagination and contents.
 - Markdown: keep a continuous heading hierarchy and do not simulate pagination or fixed paper layout.
