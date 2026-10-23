@@ -51,3 +51,9 @@ python -B mcp/scripts/prepare_marketplace.py --write
 市集顯示名稱為 `🧰 Codex Toolkit v0.4.0`, Toolkit 版本以根目錄 `VERSION` 為準, 各 Plugin 使用自身 `plugin.json` 的版本. 共用圖案的可編輯來源在 `assets/branding/toolkit.svg`, PNG 隨 Plugin 封裝, 不依賴外部圖片服務
 
 市集名稱的圖案使用 emoji, Plugin 清單圖案使用官方 `logo` / `composerIcon` 欄位. 套件與來源更新後, 重新載入用戶端再核對實際畫面
+
+## 網頁版 MCP
+
+公開目錄與 Skills 可透過 [唯讀市集 MCP](../mcp/marketplace-server/README.md) 提供搜尋、來源讀取及版本核對, Git 市集維持 Plugin 安裝與更新用途
+
+桌面保留原生 Git 市集, Cloud / Web 可使用 Private MCP, 兩端以同一完整 Toolkit commit 驗收, 更新順序、檔案核對與部分失敗處理見 [同版本更新](../mcp/marketplace-server/README.md#git-市集與-private-mcp-同版本更新)

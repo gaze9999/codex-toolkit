@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "functions": {
+    "api/mcp.mjs": {
+      "includeFiles": "data/catalog.json",
+      "maxDuration": 30
+    }
+  },
+  "routes": [
+    {
+      "src": "^/\\.well-known/oauth-protected-resource(?:/mcp|/api/mcp)?$",
+      "dest": "/api/oauth.mjs"
+    },
+    {
+      "src": "^/(?:mcp|api/mcp)$",
+      "dest": "/api/mcp.mjs"
+    },
+    {
+      "src": "^/.*$",
+      "status": 404
+    }
+  ]
+}
