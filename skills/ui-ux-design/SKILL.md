@@ -2,7 +2,7 @@
 name: ui-ux-design
 description: Design or review UI/UX and check rendered interfaces against the original request before delivery. Use for layout defects, misleading displayed data, missing requirements and interaction changes, including UI work without user-provided screenshots.
 metadata:
-  version: "0.7.1"
+  version: "0.7.2"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -34,7 +34,7 @@ Jev is optional for semantic ordering of retrieved material or a finite comparis
 - Select research, editable prototype, implementation and browser/a11y capabilities from what is actually available. Reuse an authenticated integration and its required Skills; install a tool only for a demonstrated gap within authorization. Keep exact tool recipes in the maintained setup rather than fixing providers here.
 - Match component packages to the project's framework/version, license, theme, keyboard/focus and localization requirements. Library adoption and dependency upgrades need scope that includes those changes.
 
-For changed messages, locale switching or localized formatting, use the available internationalization-engineering Skill. For changed semantics, keyboard/focus, errors or assistive-technology behavior, use accessibility-engineering. Load only the affected references and preserve the existing component, data and copy contracts.
+For changed messages, locale switching or localized formatting, use the available internationalization-engineering Skill. For changed semantics, keyboard/focus, errors or assistive-technology behavior, use accessibility-engineering. Load only the affected references and preserve the existing component, data and copy contracts. Retain necessary checks when a companion Skill is unavailable.
 
 ## Verify what users experience
 
@@ -48,6 +48,6 @@ Use the project's existing table/filter/pagination and preference mechanisms whe
 
 Proofread prose by language with available checks and semantic review, preserve original quotations/code and Japanese punctuation. An automatic accessibility scan covers only detectable issues; verify the affected keyboard/focus and task behavior in the served page.
 
-Use available internationalization-engineering for changed locale/resource/formatting behavior and accessibility-engineering for changed semantics, keyboard/focus or assistive-technology behavior. Keep the UI review scoped to requirements and rendered flow; retain necessary checks when a companion Skill is unavailable.
+Keep the UI review scoped to requirements and the rendered flow.
 
 Report the changed flow, evidence, actual validation and unresolved boundaries. Static checks, design rendering and fixture/browser results each prove their exercised scope; do not claim a live account or production flow was verified without observing it.

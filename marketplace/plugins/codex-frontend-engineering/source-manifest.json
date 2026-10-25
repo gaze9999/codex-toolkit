@@ -17,7 +17,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "44c761a4ad04faeb2069aab2f565580bbfdb9c2a283dab857db559b02415f83e",
+      "sha256": "fd475f0ceb7eb04aa2181d7c22f02395783b49a3075df6c351bf735a78dc8715",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "skills/accessibility-engineering/SKILL.md": {
@@ -185,11 +185,11 @@
       "source": "skills/react-development/references/state-effects.md"
     },
     "skills/ui-ux-design/SKILL.md": {
-      "sha256": "d504e5ba071a30f034788eb0855b6c5210e77d8d1814f918eddfdfc8e0062501",
+      "sha256": "b2fee963441e4bb2b9cf193a5421add9a5873c9f005ddf51c5c4dc2e7bdc10e4",
       "source": "skills/ui-ux-design/SKILL.md"
     },
     "skills/ui-ux-design/agents/openai.yaml": {
-      "sha256": "43a695775799f4d885981b320d4a84dd6c5f5aef4d29f092e8f9464fd3cebfe8",
+      "sha256": "42fb4b541f254de0ee083add43c69621c188a520f930c590fb9557221ae67ede",
       "source": "skills/ui-ux-design/agents/openai.yaml"
     },
     "skills/ui-ux-design/assets/icon-small.png": {
@@ -268,5 +268,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.11.5",
-  "version": "0.5.1"
+  "version": "0.5.2"
 }
