@@ -3,7 +3,7 @@ name: document-production
 description: Create requested downloadable PDF, DOCX or Markdown artifacts from supplied content and sources. Use for finished document delivery, not chat-only drafts, source extraction or repository README/license maintenance.
 metadata:
   short-description: Default-PDF document production pipeline with DOCX and Markdown support
-  version: "0.4.15"
+  version: "0.4.16"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
