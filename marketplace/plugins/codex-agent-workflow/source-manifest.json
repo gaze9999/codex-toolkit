@@ -13,15 +13,15 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "b3d8180b14ad977b1b910b16b75c7efb7a2d2f16acb57082909446188d1bd071",
+      "sha256": "35c983981f6ee2653c0077c8fca313055f8ff80937553c33898e0147ce9767c8",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
-      "sha256": "e7a27259b19096a88616dbe66123c5c68e111239117f40d4f709bac7383a7758",
+      "sha256": "725b98f56631f54550dba3d5d6f422ebf30e426b536840cbfa4a8d7e7d7017b3",
       "source": "skills/agent-governance/SKILL.md"
     },
     "skills/agent-governance/agents/openai.yaml": {
-      "sha256": "f55059725bab8035eec1ae6cc90d4d0039d3687d793c4bd4c568b97ac91c67e2",
+      "sha256": "f2dbfdd0cf0b157deb839ceadbdf3ce5ce0b4392d370015a39c340a9d8cea324",
       "source": "skills/agent-governance/agents/openai.yaml"
     },
     "skills/agent-governance/assets/icon-small.png": {
@@ -133,7 +133,7 @@
       "source": "skills/agent-governance/references/project-setup.md"
     },
     "skills/agent-governance/references/public-private-delivery.md": {
-      "sha256": "358b824e55e69275bbb2088dbf1d626c7044f45a97240a6b40019ca69b873f3e",
+      "sha256": "1409de7d607eab3e15b607521bad06c83f39a90316f8e3356879f1dd81cdf628",
       "source": "skills/agent-governance/references/public-private-delivery.md"
     },
     "skills/agent-governance/references/response-presentation.md": {
@@ -149,7 +149,7 @@
       "source": "skills/agent-governance/references/shared-workflow.md"
     },
     "skills/agent-governance/references/task-execution-and-reporting.md": {
-      "sha256": "ecfd89252c96329bd93a4ea7bc71838821e7e3dec1111c75e44552355e9d04df",
+      "sha256": "34aaddcaefa8e47a9ac3ac05d94024ebb021e4661eb96ed1e8be060a66975906",
       "source": "skills/agent-governance/references/task-execution-and-reporting.md"
     },
     "skills/coding-prompt/SKILL.md": {
@@ -284,5 +284,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.11.5",
-  "version": "0.3.8"
+  "version": "0.3.9"
 }

@@ -18,9 +18,19 @@ Keep personal agent instructions, private design, diagnostic material and develo
 
 For reusable UI or other libraries, keep shared behavior with its maintained owner and business fields/rules with the consumer. Local adjacent-source access can aid development; record relevant commits and actual asset digests when it affects delivery identity. Keep uncommitted inputs distinct from a packaged release. Select loader, module, style or browser checks only for the affected integration; retain unavailable device/platform checks as pending.
 
+## Consolidate branches and stashes when requested
+
+Inspect the actual owner, current branch/HEAD, index, dirty and ignored work, linked worktrees and live remote refs. Resolve references from parent gitlinks/branch settings, active project records, Cloud recipes and CI/deployment workflows. An unused local checkout does not establish that a branch is unused everywhere. Preserve concurrent work and active acceptance boundaries.
+
+Before retiring distinct snapshots, make a recoverable private backup and verify its refs and contents. Include complete branch histories and every stash parent needed for working-tree, index and untracked content. Keep old-history bundles outside public refs. A successful backup is evidence of recoverability, not a reason to discard useful work.
+
+Compare merge bases, tip trees, patches and the currently maintained owner. Transfer still-useful missing content and validate the resulting files; retain newer independent work and explicit superseding decisions. Equal tip trees can have different identity or sensitive-path histories. Establish which lineage was intentionally cleaned rather than preferring the latest date or remote by default. Never merge retired history back into a cleaned public destination; port only reviewed allowed changes onto the current lineage. Private repositories may retain their own approved project instructions and roles.
+
+Remove only reviewed inactive or redundant refs after preserving useful content, checking current use/references and verifying the backup. Recheck exact remote SHAs before an authorized deletion. Branch/stash consolidation does not authorize resets, history rewriting, force-push, protection changes, Tag changes or deployment. A main push can trigger publication; satisfy that project gate or keep the development branch until separately authorized.
+
 ## Choose data and update methods
 
-When private structured sources produce public content, derive an explicit output schema or field allowlist from what the public consumer actually uses. Private reasons, drafts and validation notes can stay in the source owner. Inspect generated output and build inputs for unintended private dependencies. Published browser data remains readable even when its authoring source is omitted from a build.
+When private structured sources produce public content, derive an explicit output schema or field allowlist from what the public consumer actually uses. Private reasons, drafts and validation notes can stay in the source owner. Inspect the selected files/fields, generated output and build inputs for unintended private dependencies. An export allowlist does not establish that the source repository and its history are safe to publish. Published browser data remains readable even when its authoring source is omitted from a build.
 
 When maintaining content or configuration, distinguish the source, generated candidate, application and publication. Select validation from the actual schema and consumers: stable identity, localized copy, units/ranges, relationships or cycles may matter. Use candidate digests, revision-conflict checks, recoverable backups and atomic replacement when needed for reproducible or concurrent writes. Changes to persisted content need the relevant compatibility check. Authoring tools follow the approved schema and rules; new identities or behavior require the corresponding source decision.
 

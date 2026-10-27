@@ -3,7 +3,7 @@ name: agent-governance
 description: Create, audit, or simplify project AGENTS.md layers, Codex subagent roles and durable goal recovery across conversations. Use for instruction-governance work, not ordinary implementation or general code review.
 metadata:
   short-description: Agent governance, role boundaries, and instruction minimization
-  version: "0.6.8"
+  version: "0.6.9"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -32,7 +32,7 @@ Create or simplify instruction layers and durable role boundaries. Keep rules th
 | Cross-client response formats, finished writing or interactive presentation | [Response presentation](references/response-presentation.md) |
 | Delegation, worker context or supported model/reasoning choices | [Delegation routing](references/delegation-routing.md) |
 | Ongoing steering, new-conversation goal recovery, interrupted work, compaction or handoffs | [Context continuity](references/context-continuity.md) |
-| Public/private sources or planned public delivery | [Public and private delivery](references/public-private-delivery.md) |
+| Public/private sources, branch/stash consolidation or planned public delivery | [Public and private delivery](references/public-private-delivery.md) |
 | Sensitive-data exposure or history cleanup | [Sensitive-data removal](references/sensitive-data-removal.md) |
 | Canonical guidance, installed owners, Skill diagnosis or teaching synchronization | [Maintenance acceptance](references/maintenance-acceptance.md) |
 | Persistent project tracking, cross-device settings or recurring document maintenance | [Shared workflow](references/shared-workflow.md) |
