@@ -14,6 +14,14 @@ Read this section when the selected tool is denied, appears unavailable or behav
 
 Source checked 2026-10-21: [OpenAI approvals and network isolation](https://learn.chatgpt.com/docs/agent-approvals-security). Resolve current client/build and execution policy before applying configuration examples.
 
+### Auto-review and hook outcomes
+
+Read when a denied request or hook result makes execution status unclear. Auto-review examines requests that actually require approval; an already-permitted sandbox action has no such review receipt. Check the effective approval policy and reviewer separately. A review outcome does not establish execution, and Computer Use app approvals retain their own user-facing approval flow.
+
+For hooks, identify the event, synchronous/background mode, supported tool path and actual result. Background hooks cannot block, approve or rewrite their triggering operation. `PreToolUse` can stop a supported call before execution; a blocking `PostToolUse` runs afterward and cannot undo side effects. In Code Mode, a post-hook rejection can reject the nested promise after the tool ran, so inspect its operation receipt and destination before retrying. If the outcome remains unknown, retain it as unknown and stop automatic replay of that write.
+
+Sources checked 2026-10-27: [OpenAI Auto-review](https://learn.chatgpt.com/docs/sandboxing/auto-review), [Hooks](https://learn.chatgpt.com/docs/hooks). Use an authorized non-sensitive case only when runtime verification is needed; keep policy, execution and returned-result evidence distinct.
+
 ## Selected integration checks
 
 ### Project memory compatibility

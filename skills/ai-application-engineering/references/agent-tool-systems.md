@@ -2,6 +2,8 @@
 
 Use this reference only when the task includes agent decisions, tool calling, approvals, or multi-step execution.
 
+For an OpenAI Responses/Agents API task involving history replay, compaction, early stopping or deferred tool discovery, read [OpenAI state and tools](openai-state-and-tools.md). Apply only the documented API/model path; keep other providers on their own contracts.
+
 ## Boundaries
 
 - Choose the execution interface by the host's actual capabilities: CLI + Skills can serve repeatable shell/file workflows, while MCP can supply typed discovery, resources, notifications and remote client integration when the selected implementation supports them. CLI can return JSON, authenticate and retain sessions; these properties alone do not require MCP. Reuse one core behind both interfaces when both are needed, preserving authorization, errors, source provenance and side effects.
