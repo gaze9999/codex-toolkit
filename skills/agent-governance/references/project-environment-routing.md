@@ -30,6 +30,14 @@ Compare paths using each field's supported representation, including Windows ext
 
 Retire a compatibility link only after active callers are updated and relevant client/entry checks pass. Verify ownership, link type, exact target and the physical repository before removing only that link. Preserve physical data, unrelated worktrees and historical paths, then check canonical entries again.
 
+### Local managed worktree setup
+
+Read this section when a local Codex-managed worktree needs ignored setup or private instruction entries. Tracked files come from Git. A repository-root `.worktreeinclude` selects ignored files to copy; other untracked files are excluded. Codex copies an ignored `AGENTS.override.md` automatically, skips source symlinks and preserves existing destination files. These rules do not cover remote or manually created Git worktrees.
+
+Inventory only the necessary authorized files before creation. Do not copy credentials merely because an official example lists an environment file. After creation, compare required source/destination content and verify that referenced instruction directories resolve from the new checkout. In particular, an override copied without its required links is not a complete instruction setup. Use the existing project setup/checkout mapping to repair an authorized missing entry, preserving conflicts and unrelated files.
+
+Source checked 2026-10-27: [OpenAI Worktrees](https://learn.chatgpt.com/docs/environments/git-worktrees#copy-ignored-local-files-into-managed-worktrees). Validate copying and instruction adoption separately in the selected client.
+
 ## Dispatch and resources
 
 Define the owned files/modules, expected behavior and independent oracle, authorized data/environment, must-preserve constraints, acceptance, revision/diff state and stop condition. Give only context needed by the slice, preserving previous effective decisions and current user steering. A child cannot expand scope, install dependencies, run production writes or release from a role description.
