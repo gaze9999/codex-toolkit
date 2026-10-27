@@ -53,6 +53,43 @@ The snippets are alternative members, not one combined class. Retain the helper
 if it owns request cancellation, loading state, retries, caching or error
 translation. Do not detach a method as a callback if it needs its receiver.
 
+## Recover maintenance scope and actual consumers
+
+Read the existing feature work record and still-effective user decisions before
+selecting maintenance work. Track each applicable item's ID, owner, affected files,
+expected behavior and evidence in the existing record or a compact task checklist.
+Separate functional specification gaps, frontend cleanup, backend contracts and
+framework/workspace policy by their actual owners. Move or link out-of-scope work
+under the existing recording rules; preserve IDs and deferred decisions. Do not
+invent a parallel backlog, include backend changes in frontend-only work or mark
+items complete from a rename or file count.
+
+Classify references as reads, writes, template consumers, public callers and
+serialization/reflection consumers. Declaration/assignment counts alone do not
+prove useful state or dead code. A field that mirrors a canonical value but is only
+declared/written is a removal candidate after those consumers are checked. Keep
+the canonical owner and its date/null/reactive behavior. A public API or externally
+read field remains meaningful even without local reads. Report incomplete reference
+coverage rather than deleting on that assumption.
+
+For dropdown/list work, follow the input binding back through its actual callers
+and mapper to the confirmed API response or fixed constants. An option-shaped type,
+input name or a parent parameter named `options` does not establish its source.
+Scope source-specific behavior to those verified paths. If the confirmed rule is
+display-only, changing the placeholder must preserve the raw form/query/save value
+and avoid synthetic fallback rows, change events or extra lookups. Preserve static
+lists and inactive/commented feature entrypoints unless their change is authorized.
+
+Review these representative cases against actual artifacts; they are acceptance
+criteria, not claims of automated model execution:
+
+| Case | Expected evidence |
+| --- | --- |
+| A field is written twice but never consumed | Inspect template/public/serialization consumers before removing the duplicate, preserve the canonical value |
+| A helper adds cancellation or boundary validation | Keep that responsibility despite a long call chain; inline only genuine private forwarding |
+| A child input receives fixed constants from one caller and API options from another | Trace each caller and apply only the authorized source-specific behavior |
+| A frontend feature's maintenance list includes backend or workspace tasks | Preserve original IDs, route owners under existing document rules, and keep frontend completion scoped |
+
 ## Derive types when the meanings and change coupling agree
 
 Use `interface ... extends ...` for a stable object extension, `Pick` for an
@@ -122,7 +159,7 @@ without a concrete cohesion or maintenance benefit.
 
 ## Verify the changed responsibility
 
-Review callers and data shapes, then run the affected project's type check and
+Reconcile the scoped maintenance items with actual reads, writes, callers, option sources and data shapes, then run the affected project's type check and
 focused behavior checks. Exercise field whitelists, null/error paths, Promise
 handling and mutation/reactive timing when affected. Report the saved layer or
 duplicated work concretely; fewer lines alone is not performance evidence.

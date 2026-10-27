@@ -91,6 +91,8 @@ Order members by the skill's responsibility groups. Within the method area, grou
 
 Keep consecutive members in the same group together without extra blank lines and use one blank line between groups. Add one concise JSDoc heading per non-empty responsibility or feature group. Move existing decorators, JSDoc, and comments with their member, and do not rewrite, delete, merge, or reposition existing documentation relative to that member.
 
+Apply effective project conventions only within the authorized files. If explicit public visibility is required, check class members, constructors and constructor parameter properties such as `readonly code`; preserve private/protected/#private and ordinary parameters. Ordering alone does not authorize visibility normalization or unrelated maintenance work.
+
 Preserve public interfaces and field-initializer dependency order. If the preferred ordering would change initialization or runtime behavior, keep the safe order and report the exception.{signal_requirements}
 
 Review the final diff and run the smallest sufficient Angular type or compile check, relevant focused tests, and the repository's normal diff-whitespace check when available. Report changed files, ordering or migration exceptions, actual checks, blocked checks, and unverified boundaries. Do not claim unrun checks passed.
