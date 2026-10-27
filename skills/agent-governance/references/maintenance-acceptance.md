@@ -25,6 +25,12 @@ Inspect the applicable layers against the actual client and request. Resolve an 
 
 Use representative explicit, implicit, adjacent-negative and missing-dependency cases when they can resolve the changed behavior. Label source/manual case review separately from model selection, tool invocation and observed task execution. Keep only necessary version/path/hash, decisions and errors in evidence; do not save full prompts to prove loading.
 
+When catalog entries are missing or shortened, inspect the current client catalog, discovery warnings, selected paths and trigger descriptions before changing budgets. `skills.max_context_tokens` limits the available-Skills catalog, not selected Skill bodies or the AGENTS instruction chain. Its documented default is 2% of the model context window; explicit values are capped at 10,000 tokens. Treat a missing setting as the host default, not zero. Adjust only for an observed discovery gap, then compare the resulting catalog and selected-body reads.
+
+For a dependency gap, compare the content actually delivered to the agent with the required live tool schema/runtime. Metadata and `agents/openai.yaml` dependency declarations do not prove that another client delivered the requirement, authenticated a connection or authorized an operation. Keep an essential prerequisite in the conditional workflow where needed; stop only its dependent step rather than installing or enabling tools implicitly.
+
+Sources checked 2026-10-27: [OpenAI Skills](https://learn.chatgpt.com/docs/build-skills), [configuration reference](https://learn.chatgpt.com/docs/config-file/config-reference). Catalog discovery, body loading and successful tool use need separate evidence.
+
 ## Verify template application
 
 When maintaining code-convention guidance, an available or read template is not evidence that implementation follows it. Check the changed code against selected applicable conventions, distinguish inherited differences from newly introduced ones, and preserve types, string literals, public contracts and runtime behavior during authorized syntax cleanup. Keep project-specific spellings scoped; do not impose them on unrelated projects or duplicate an already complete framework template. Report focused type/template, fixture and UI checks separately from live Host/API, persistence and full production-build acceptance.

@@ -13,15 +13,15 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "35c983981f6ee2653c0077c8fca313055f8ff80937553c33898e0147ce9767c8",
+      "sha256": "57938e0bf87447bd064188cf899d66d481b45654047b1be392a9a807783e1e48",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
-      "sha256": "725b98f56631f54550dba3d5d6f422ebf30e426b536840cbfa4a8d7e7d7017b3",
+      "sha256": "478dbe59cabb7dbef9ba08f581c7ac75c8498cc504791c12ad767dae9230db64",
       "source": "skills/agent-governance/SKILL.md"
     },
     "skills/agent-governance/agents/openai.yaml": {
-      "sha256": "f2dbfdd0cf0b157deb839ceadbdf3ce5ce0b4392d370015a39c340a9d8cea324",
+      "sha256": "45328a686151006cb607f0d4efca694b1d86693aa1ca73475402962fdc2de027",
       "source": "skills/agent-governance/agents/openai.yaml"
     },
     "skills/agent-governance/assets/icon-small.png": {
@@ -117,7 +117,7 @@
       "source": "skills/agent-governance/references/instruction-layering.md"
     },
     "skills/agent-governance/references/maintenance-acceptance.md": {
-      "sha256": "038ea728cbbe08f33ef3274344eeba58332372002e8c4b3135a988544f6a9028",
+      "sha256": "794addc4329956c590a8b32b99b4ea58dfa13bd68cb473109a322690cec00f33",
       "source": "skills/agent-governance/references/maintenance-acceptance.md"
     },
     "skills/agent-governance/references/operating-efficiency.md": {
@@ -125,7 +125,7 @@
       "source": "skills/agent-governance/references/operating-efficiency.md"
     },
     "skills/agent-governance/references/project-environment-routing.md": {
-      "sha256": "204b9c895f43cd087034aaaeb038fee4fea7a4af18ae6f2276694bd05ae77361",
+      "sha256": "465c02ab17f8b20e22d574d19f534de9595666d053a20e94a97d350853494d3d",
       "source": "skills/agent-governance/references/project-environment-routing.md"
     },
     "skills/agent-governance/references/project-setup.md": {
@@ -284,5 +284,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.11.5",
-  "version": "0.3.9"
+  "version": "0.3.10"
 }
