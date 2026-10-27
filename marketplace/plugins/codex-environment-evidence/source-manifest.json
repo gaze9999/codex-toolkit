@@ -17,7 +17,7 @@
       "source": "plugins/environment-evidence/plugin.json"
     },
     "skills/test-strategy/SKILL.md": {
-      "sha256": "5768a78c47f0fdc9f052459dcfb5f2943480769c300bf29c6c530e81d604b429",
+      "sha256": "1d9cdf7727afea35d7fbbaecea171a655edf160c7a02005d5af82d1abe2436db",
       "source": "skills/test-strategy/SKILL.md"
     },
     "skills/test-strategy/agents/openai.yaml": {
