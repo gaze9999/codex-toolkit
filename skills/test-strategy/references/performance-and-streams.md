@@ -26,6 +26,8 @@ Coalesce replaceable complete-state snapshots only when the final state and requ
 - Capture CPU time and elapsed time separately. Label counter units/resolution; a zero observed increment is bounded by that resolution. Record process I/O reads/writes/other separately. Windows `IO_COUNTERS` describes process/job accounting; physical storage claims require separate storage evidence with cache conditions.
 - Define duration and stopping conditions from the risk and available resources. Keep small repeated runs descriptive; use the available evidence-review workflow for sampling/uncertainty interpretation when needed. Measure the same workload's accepted result before claiming improvement.
 
+For UI benchmarks, define each timing boundary: synchronous call return, scheduled frames, actual paint/readiness or end-to-end operation. Waiting for animation frames alone does not establish paint completion. Separate application filtering/projection, component work, browser rendering and storage operations. Record input size, mounted/rendered size and sampling budgets separately. Compare matched browser/runtime, viewport, hardware, data, cache and harness semantics; keep unmatched results descriptive instead of merging them into a ranking. Attribute a library defect only after isolating it from application logic, documented limits and environmental failures.
+
 ## Sustained diagnostics
 
 Make ongoing diagnostics opt-in within the authorized duration, data and storage scope. Prefer numeric counters and opaque version identifiers, with bounded in-memory tails, file rotation/retention and visible write failures. Exclude source contents, credentials and private request bodies. Check that diagnostic writes cannot feed the source watcher or create new collection loops.
