@@ -3,7 +3,7 @@ name: angular-member-order
 description: Organize Angular component class members by responsibility and feature flow while preserving decorators, comments, initialization behavior, and public interfaces. Use when reordering or standardizing members in one or more .component.ts files, optionally migrating decorator inputs and outputs to signal APIs when explicitly requested, or when generating a scoped handoff prompt for that work.
 metadata:
   short-description: Safe Angular component member ordering
-  version: "0.4.14"
+  version: "0.4.15"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -41,7 +41,7 @@ Use this top-level order when the corresponding members exist:
 
 Keep paired getters/setters and overloads adjacent. Order lifecycle hooks by Angular execution order: `ngOnChanges`, `ngOnInit`, `ngDoCheck`, `ngAfterContentInit`, `ngAfterContentChecked`, `ngAfterViewInit`, `ngAfterViewChecked`, then `ngOnDestroy`.
 
-Make implicit public visibility explicit with `public` on TypeScript class properties, methods, accessors and public constructors when applying the user-requested visibility normalization. Preserve private/protected/#private boundaries; never add access modifiers to interfaces or invalid syntax positions. This explicit normalization is the only access-modifier exception below. Keep local variables near first use and in dependency order; do not reorder side effects.
+Make implicit public visibility explicit with `public` on TypeScript class properties, methods, accessors, public constructors and implicitly public constructor parameter properties such as `readonly code` when visibility normalization is authorized by the request or applicable project conventions. Preserve private/protected/#private boundaries; never add access modifiers to interfaces or invalid syntax positions. This explicit normalization is the only access-modifier exception below. Keep local variables near first use and in dependency order; do not reorder side effects.
 
 ## Group methods by feature flow
 
@@ -70,7 +70,7 @@ Class field initializers execute in declaration order. Trace initializer referen
 
 - Move a member together with its decorators, existing JSDoc, and directly associated comments
 - Do not rewrite, remove, merge, or reposition existing JSDoc and comments relative to their member
-- Do not change names, types, effective visibility, initial values, parameters, return types, or method bodies; only add explicit `public` when visibility normalization is requested
+- Do not change names, types, effective visibility, initial values, parameters, return types, or method bodies; only add explicit `public` when visibility normalization is authorized
 - Do not add pass-through helpers or unrelated refactors
 - Preserve public interfaces, template bindings, Angular lifecycle behavior, and reactive state ownership
 
@@ -85,6 +85,6 @@ Class field initializers execute in declaration order. Trace initializer referen
 
 ## Verify and report
 
-Review the final diff for behavior changes, initializer-order risks, misplaced decorators, and comment loss. Run the project's smallest sufficient type check or compile check for the affected scope plus its normal diff-whitespace check when available. Do not install or upgrade dependencies merely to run validation.
+Review the final diff for behavior changes, initializer-order risks, misplaced decorators, and comment loss. If visibility normalization applies, inspect constructor parameters as well as class members; keep ordinary parameters and private/protected/#private boundaries unchanged. Run the project's smallest sufficient type check or compile check for the affected scope plus its normal diff-whitespace check when available. Do not install or upgrade dependencies merely to run validation.
 
 Report changed files, any ordering exceptions, checks actually run, and checks that remain blocked or unverified. Never report an unrun check as passed.

@@ -1,8 +1,8 @@
 ---
 name: angular-development
-description: Implement, diagnose, refactor or review Angular components, forms, templates and application integration using the detected Angular/TypeScript/RxJS versions. Use architecture guidance only when ownership, DI, routing or cross-runtime boundaries are affected.
+description: Implement, diagnose, refactor or review Angular components, forms, templates, feature models/helpers and application integration using the detected Angular/TypeScript/RxJS versions. Use architecture guidance only when ownership, DI, routing or cross-runtime boundaries are affected.
 metadata:
-  version: "0.4.18"
+  version: "0.4.19"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -19,12 +19,19 @@ Inspect the affected feature, actual Angular/TypeScript/RxJS versions, compiler/
 ## Load only the affected mode
 
 - DI/state/routing/render ownership or Host/custom elements: [architecture](references/architecture.md)
+- New/replaced generic UI, dialogs or a shared-library reuse review: [UI reuse](references/ui-reuse.md)
 - Forms, templates, async rendering or hydration: [component behavior](references/component-behavior.md)
-- Layout, member groups, compact syntax or numeric display: [Angular style example](references/angular-style.md)
-- Pass-through calls, duplicate projections or Model/type definitions: [code maintainability](references/code-maintainability.md)
+- Generation or review of class visibility, layout, member groups, compact syntax or numeric display: [Angular style example](references/angular-style.md)
+- Feature maintenance items, read/write ownership, actual option sources, pass-through calls, duplicate projections or Model/type definitions: [code maintainability](references/code-maintainability.md)
 - Explicit member reordering or Signal I/O migration: use the available angular-member-order Skill, otherwise preserve declaration order and initializer dependencies
 
 The style references are bundled with this Skill and the frontend-engineering Plugin. Load only the affected mode after checking project compatibility. Member ordering alone does not authorize logic or Model changes.
+
+Before generation or editing, recover applicable project conventions and scoped maintenance items from the existing work record. Keep a compact pointer/checklist for this task; refresh only changed or conflicting instructions. A loaded template is not compliance evidence. Apply the selected conventions to generated or changed models, Error classes and helpers as well as components. Respect recorded ownership; frontend-only maintenance does not authorize backend or framework/workspace work.
+
+For new/replaced generic UI, compare existing project capabilities before building another implementation; verify actual imports/templates and the adopted behavior or concrete mismatch before claiming reuse. Keep the selected source pointer with existing work records, not a fixed checkout path or a parallel backlog.
+
+Before delivery, compare the actual changed declarations and behavior with that checklist. When explicit `public` is required, include constructors and constructor parameter properties such as `readonly code`, not only `class.members`; keep private/protected/#private and ordinary parameters unchanged. Use the style reference's optional AST check for the reviewed file set when a compatible TypeScript is already installed. Do not substitute text counts for reference or read/write analysis, and do not report pending maintenance items as fixed.
 
 For authorized edits, choose actual project type/template/targeted tests and relevant browser interactions. For analysis, deliver decisions/evidence without editing. Use traces only for measured performance questions, symbol lookup only when relationships/language support need it. Report exercised route/state/results and specific gaps, close only owned browser sessions.
 
