@@ -13,15 +13,15 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "68c44ceb19a367c9ec7ae5eed09487d3d2e6104f2b37f740b804baca4c007512",
+      "sha256": "50c68375c1b078e20786a516470e29a88c73615a7a0a6172b525a26409ff75ce",
       "source": "plugins/environment-evidence/plugin.json"
     },
     "skills/test-strategy/SKILL.md": {
-      "sha256": "895d6eefe22142b386e15d0f5aa71235feaa90f3a5aed1f9150b79efcc94e4ef",
+      "sha256": "5768a78c47f0fdc9f052459dcfb5f2943480769c300bf29c6c530e81d604b429",
       "source": "skills/test-strategy/SKILL.md"
     },
     "skills/test-strategy/agents/openai.yaml": {
-      "sha256": "932d2a2a38decd38741dc3eb27a07d505da51597eda40d02f40e4f11864c0021",
+      "sha256": "f8e12d7c638d1b00ebb7cb331e094c2b8fe8a05c038c6d9e028c8b267d145dff",
       "source": "skills/test-strategy/agents/openai.yaml"
     },
     "skills/test-strategy/references/ai-evaluation.md": {
@@ -37,7 +37,7 @@
       "source": "skills/test-strategy/references/game-testing.md"
     },
     "skills/test-strategy/references/performance-and-streams.md": {
-      "sha256": "219c6c2933a2c12c66ba3d8c8caf4197f9e53998e79a1bd8f4e960ea55f65d07",
+      "sha256": "860e8d44755bb3ee8f277d8717e5c671ea14b5c42d93d8277460694523b97ba3",
       "source": "skills/test-strategy/references/performance-and-streams.md"
     },
     "skills/test-strategy/references/tool-selection.md": {
@@ -94,5 +94,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.11.5",
-  "version": "0.3.3"
+  "version": "0.3.4"
 }

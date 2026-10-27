@@ -10,6 +10,21 @@ Use a compatible available CLI for a repeatable preview and focused application.
 
 For installed owned Plugins, inspect the registered marketplace source before choosing an update. Read the canonical [Plugin update guidance](https://github.com/gaze9999/codex-toolkit/blob/main/docs/plugins.md#已安裝-plugin-更新), not a private setup path. A Git marketplace uses published sources and the native marketplace/Plugin update operations; preserve that source unless a switch is explicitly requested. An existing local marketplace may use `mcp/scripts/sync_local_plugins.py` for a selected working-tree snapshot. The setup alias `plugins --sync-installed` forwards to that local-only entry and is not a Git-source updater. Preserve registered IDs, enabled states and unrelated settings. Committed release gates, cache bytes, reload and actual behavior remain separate evidence.
 
+## Diagnose an affected Skill
+
+Inspect the applicable layers against the actual client and request. Resolve an observed gap before inferring a defect at a later layer; independent work may continue. This is conditional diagnosis, not a mandatory per-task preflight.
+
+| Layer | Evidence and next decision |
+|---|---|
+| Availability | Check the installed owner, relevant path/version and current client catalog; an installed directory alone does not prove discovery |
+| Selection | Compare the explicit or implicit request with the Skill trigger and actual selected entry; keep adjacent negative cases separate |
+| Reading | Verify the affected body/reference was actually read at the intended revision; catalog metadata alone does not establish content use |
+| Tool dependencies | Check the needed command/tool schema and runtime in that client; missing optional capabilities do not fail unrelated behavior |
+| Authorization | Confirm the selected operation's data scope, authentication and permissions independently; discovery grants none of them |
+| Outcome | Compare the produced artifact/action with the applicable acceptance criteria; successful general task completion does not prove every Skill behavior |
+
+Use representative explicit, implicit, adjacent-negative and missing-dependency cases when they can resolve the changed behavior. Label source/manual case review separately from model selection, tool invocation and observed task execution. Keep only necessary version/path/hash, decisions and errors in evidence; do not save full prompts to prove loading.
+
 ## Verify template application
 
 When maintaining code-convention guidance, an available or read template is not evidence that implementation follows it. Check the changed code against selected applicable conventions, distinguish inherited differences from newly introduced ones, and preserve types, string literals, public contracts and runtime behavior during authorized syntax cleanup. Keep project-specific spellings scoped; do not impose them on unrelated projects or duplicate an already complete framework template. Report focused type/template, fixture and UI checks separately from live Host/API, persistence and full production-build acceptance.

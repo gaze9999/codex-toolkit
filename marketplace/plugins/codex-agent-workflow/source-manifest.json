@@ -13,15 +13,15 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "763faf31735620146fc407eda41d5406061daaff7ab326b6559f45690b5d9ba1",
+      "sha256": "b3d8180b14ad977b1b910b16b75c7efb7a2d2f16acb57082909446188d1bd071",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
-      "sha256": "798f55f98fcdc96aa4f4d249032cfbfae92374c457e904e82d310d8be6e9f3ed",
+      "sha256": "e7a27259b19096a88616dbe66123c5c68e111239117f40d4f709bac7383a7758",
       "source": "skills/agent-governance/SKILL.md"
     },
     "skills/agent-governance/agents/openai.yaml": {
-      "sha256": "7501134e37d7f57dc14d1f5cf6bcf10705ed99b170e374333cff7ed110c27e9d",
+      "sha256": "f55059725bab8035eec1ae6cc90d4d0039d3687d793c4bd4c568b97ac91c67e2",
       "source": "skills/agent-governance/agents/openai.yaml"
     },
     "skills/agent-governance/assets/icon-small.png": {
@@ -117,7 +117,7 @@
       "source": "skills/agent-governance/references/instruction-layering.md"
     },
     "skills/agent-governance/references/maintenance-acceptance.md": {
-      "sha256": "c477ccd0c5b8f15d410f03b649993ece27d786e0ef0bc1126ac6f6ec202c5b5d",
+      "sha256": "038ea728cbbe08f33ef3274344eeba58332372002e8c4b3135a988544f6a9028",
       "source": "skills/agent-governance/references/maintenance-acceptance.md"
     },
     "skills/agent-governance/references/operating-efficiency.md": {
@@ -284,5 +284,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.11.5",
-  "version": "0.3.7"
+  "version": "0.3.8"
 }

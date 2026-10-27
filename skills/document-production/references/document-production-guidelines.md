@@ -69,6 +69,7 @@ Read for an already-selected Office/spreadsheet capability or document export wh
 | Displayed or cached value | Identify whether the value is a cache, a supplied result or an actual calculation. A refresh-on-open flag is a request, not proof of recalculation |
 | Required recalculation | Use an available authorized target client or compatible engine, record its version and observed completion, then compare representative values with independent expected results |
 | Required object preservation | Compare relevant references, formulas, named ranges, links, charts or embedded objects before and after conversion according to the requested format. Keep the original artifact available |
+| Editable calculated deliverable | When acceptance requires continued editing, change a representative input in the authorized target client, recalculate, save, close and reopen. Compare independent expected values, references/formulas and continued editability of required native charts/objects. An exported image or cached value alone does not satisfy this case |
 
 [openpyxl](https://openpyxl.readthedocs.io/en/stable/simple_formulae.html) writes formulas without evaluating them. [XlsxWriter](https://xlsxwriter.readthedocs.io/working_with_formulas.html) normally writes a zero cached result and requests recalculation when opened, unless a result is supplied. Neither write alone proves the requested values were calculated. These source mechanisms were checked 2026-10-21 and do not establish the selected target client's behavior.
 
