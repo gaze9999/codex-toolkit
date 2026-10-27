@@ -236,6 +236,53 @@ when appropriate, and preserve the API's serialization format. Monetary decimal
 precision follows the existing integer-minor-unit or decimal representation.
 Do not shorten IDs, amounts or exact counts by dropping significant digits.
 
+## Visibility and syntax acceptance
+
+Use the project's effective conventions, not a universal spelling rule. Where
+explicit public visibility is required, check generated/changed TypeScript classes
+in components, services, models, Error types and helpers. Include properties,
+methods, accessors, constructors and constructor parameter properties. A `readonly`
+constructor parameter is also a class property; visiting only `class.members`
+misses it. Preserve private/protected/#private boundaries and readonly, decorators,
+types and initialization order. Interfaces, type members and ordinary parameters
+do not accept class visibility modifiers.
+
+```ts
+// Before, when the project requires explicit public visibility
+class LookupError extends Error {
+  constructor(readonly operation: string, private readonly detail: unknown) {
+    super(operation);
+  }
+}
+// After, preserving effective visibility and runtime initialization
+class LookupError extends Error {
+  public constructor(public readonly operation: string, private readonly detail: unknown) {
+    super(operation);
+  }
+}
+```
+
+These are alternative classes. Where the project also requires `void 0`, `!0` or
+`!1`, check changed runtime expressions while preserving type-position `undefined`,
+string literals, property names, locally shadowed bindings and semantic boundaries.
+Do not apply text replacement or impose these spellings on other projects.
+
+The optional [visibility checker](../scripts/check_conventions.cjs) reports without
+editing. Pass reviewed files explicitly; resolve the project's installed TypeScript
+with `--project`, or supply its existing module via `--typescript`. It does not
+install packages, traverse directories, prove type correctness, assess unused
+state or validate maintenance decisions. Inspect the pre-existing diff first;
+distinguish inherited findings from the current change.
+
+```text
+node <skill>/scripts/check_conventions.cjs --explicit-public --project <project> <changed.ts> <changed-model.ts>
+```
+
+The Toolkit regression suite uses Node's test runner and an existing TypeScript:
+set `ANGULAR_TEST_PROJECT` to that project, then run
+`node --test mcp/tests/test_angular_conventions.cjs` from the Toolkit root. A missing
+compiler or invalid input is a failed/unavailable check, never a successful scan.
+
 ## Acceptance when adapting
 
 Read back the diff, then run the affected project's type/template check. Exercise
