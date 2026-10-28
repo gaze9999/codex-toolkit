@@ -3,7 +3,7 @@ name: development-tool-setup
 description: Install, configure, update, remove or diagnose one selected optional tool, MCP or connector and its prerequisites on Windows, macOS or Linux. Use for setup/availability gaps, not ordinary tasks that can use existing tools.
 metadata:
   short-description: Independent development-tool setup and diagnosis
-  version: "0.4.19"
+  version: "0.4.20"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

@@ -35,6 +35,18 @@ The Python entrypoints need Python 3.11+. If it is missing, the setup's `launch-
 
 If neither the checkout nor installed setup wheel is available, continue diagnosis with installed tools and the selected tool's current official documentation. Identify the approved setup location or use an individually reviewed official installation; do not assume a personal path, clone an unrelated repository, or expand into all-tool installation.
 
+## Cross-platform restoration
+
+Use the existing setup core and catalog for all supported platforms. Keep shared behavior and Skill/Plugin identity in one source; isolate executable discovery, process handling and native dependencies behind the existing platform boundary. Do not maintain separate OS copies of a Skill, role or installer.
+
+Resolve the target OS/version, hardware architecture, interpreter process architecture and native-package ABI. A translated x64 process on ARM64 is a separate runtime choice requiring vendor support and target-device validation. OS support alone does not establish architecture compatibility.
+
+Resolve each tool interpreter from its declared requirements and target-device installation, independently of project Node/Python switching. Preserve project pins and reuse the existing installer/config schema. Recreate venvs, native modules and browser binaries on the target with compatible dependency locks. Client-managed runtimes and Plugin caches are recreated by their owning client.
+
+Restore portable selections, identities and relative source references, then resolve executable paths, approved roots and authentication on the target. Preview the selected platform through the existing restore entry point; apply only on that platform. Preserve marketplace identities and enablement choices through native Plugin installation. Shared MCP registration still requires checking the source baseline against each consuming checkout.
+
+Verify preparation, process architecture, registration, client discovery and one scoped call separately. Test shared behavior and the affected platform adapter when implementation changes; simulated checks do not establish target-device execution. Keep unsupported capabilities with the affected tool rather than changing unrelated roles or application runtimes.
+
 ## Local management interface
 
 Use the maintained terminal CLI: `launch-cli.cmd`, `launch-cli.ps1` or `sh launch-cli.sh`, or the installed wheel's `codex-setup`. Read `docs/setup/cli.md` for the selected agent, Skill, Plugin or tool operation. Categories and profiles filter choices; they do not authorize a group installation. Python bootstrap follows the selected CLI entry's preview and existing authorization.
