@@ -3,12 +3,14 @@ name: doc-updater
 description: Update, align or synchronize identified existing documentation when explicitly requested and supported by verifiable implementation-change evidence. Use for maintaining current docs, not source extraction, new reports or substantial README redesign.
 metadata:
   short-description: Minimize documentation updates from implementation evidence
-  version: "0.4.19"
+  version: "0.4.20"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
 
 # Doc Updater
+
+Write AI-facing guides, briefs, indexes and handoffs in concise English. Human-facing authored Chinese uses concise Taiwan Traditional Chinese and Taiwan wording, never Simplified characters. Use halfwidth punctuation, one space after commas/colons/question/exclamation marks when text follows, allow 、 for enumeration, and omit Chinese sentence periods and semicolons. Preserve requested languages, source quotations, contractual copy, code, URLs and versions. These defaults apply even when Global is unavailable. Read relevant sections/symbols first and retain checked source/version pointers. Expand only when confidence is insufficient or the specification is unclear/conflicting; do not require whole-file/document reads by default. Preserve source-defined copy and validation/error behavior; an evidence gap is not permission to invent it.
 
 Minimally align identified existing README/Markdown, API references, changelogs, memos or context briefs with implementation evidence. Use another workflow for new documents, formal artifacts, source extraction or substantial README redesign.
 

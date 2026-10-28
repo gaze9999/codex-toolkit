@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "f1bfdc07f76cd11f06f4c0a010546df7ffcb8f07f2eac4c8eb05286ae88348f5",
+      "sha256": "fcdaa833ca7b8ed583dffb9deb1eda38003fd387fc946c9d7bce8ff5a42627e8",
       "source": "plugins/project-documentation/plugin.json"
     },
     "skills/license-maintainer/SKILL.md": {
@@ -41,11 +41,11 @@
       "source": "skills/license-maintainer/assets/icon.svg"
     },
     "skills/readme-maintainer/SKILL.md": {
-      "sha256": "e578c7147c4a9c645dac0ccb06392fd9f66fc414f57ef9e8f647f6af6dd70840",
+      "sha256": "04f4463e5bcee98731888ed291ecacc9726d5dafd3fffc2cbdb7c149a01847d3",
       "source": "skills/readme-maintainer/SKILL.md"
     },
     "skills/readme-maintainer/agents/openai.yaml": {
-      "sha256": "f3b29656d0a0fb92a9dbeaee2f2e07590691abb49d5434c186757f3fed03bdc5",
+      "sha256": "20ac07c97600292c2ad052a390374cab932a1a610ff90840df1713fa459917cd",
       "source": "skills/readme-maintainer/agents/openai.yaml"
     },
     "skills/readme-maintainer/assets/icon-small.png": {
@@ -80,5 +80,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.11.5",
-  "version": "0.1.6"
+  "version": "0.1.7"
 }

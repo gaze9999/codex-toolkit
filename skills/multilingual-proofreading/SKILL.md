@@ -3,12 +3,14 @@ name: multilingual-proofreading
 description: Proofread Traditional Chinese, English or Japanese prose for terminology, punctuation, spelling, grammar and natural wording, or maintain a requested terminology profile. Use for requested proofreading or material document-quality gaps, not automatic translation or a blanket check on every chat reply.
 metadata:
   short-description: Language-aware proofreading and terminology consistency
-  version: "0.4.18"
+  version: "0.4.19"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
 
 # Multilingual Proofreading
+
+Classify authored output by audience: AI-facing material uses concise English; human-facing Chinese uses concise Taiwan Traditional Chinese and the Chinese punctuation rules below, even without Global. Preserve originals, literal specifications and requested languages rather than translating them merely because AI reads them.
 
 Preserve the author's meaning, factual claims, register and terminology. Infer the target language and audience from the material, use the user's explicit style choices, and ask only when an ambiguity changes the correction.
 

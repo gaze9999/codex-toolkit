@@ -2,7 +2,7 @@
 name: angular-development
 description: Implement, diagnose, refactor or review Angular components, forms, templates, feature models/helpers and application integration using the detected Angular/TypeScript/RxJS versions. Use architecture guidance only when ownership, DI, routing or cross-runtime boundaries are affected.
 metadata:
-  version: "0.4.19"
+  version: "0.4.20"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -27,7 +27,7 @@ Inspect the affected feature, actual Angular/TypeScript/RxJS versions, compiler/
 
 The style references are bundled with this Skill and the frontend-engineering Plugin. Load only the affected mode after checking project compatibility. Member ordering alone does not authorize logic or Model changes.
 
-Before generation or editing, recover applicable project conventions and scoped maintenance items from the existing work record. Keep a compact pointer/checklist for this task; refresh only changed or conflicting instructions. A loaded template is not compliance evidence. Apply the selected conventions to generated or changed models, Error classes and helpers as well as components. Respect recorded ownership; frontend-only maintenance does not authorize backend or framework/workspace work.
+At each work round, recover relevant current progress, effective decisions and coding conventions. Apply formatting and member ordering to the actual generated/changed code, preserving initializer/decorator timing and unrelated work; reading a rule is not compliance. Reuse checked pointers and refresh only affected evidence. Apply the selected baseline to components, models, Error classes and helpers. Keep existing frontend-only ownership; do not expand into backend/framework/workspace work.
 
 For new/replaced generic UI, compare existing project capabilities before building another implementation; verify actual imports/templates and the adopted behavior or concrete mismatch before claiming reuse. Keep the selected source pointer with existing work records, not a fixed checkout path or a parallel backlog.
 
