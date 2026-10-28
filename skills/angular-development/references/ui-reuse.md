@@ -13,13 +13,13 @@ source pointer. Reuse it while project identity and relevant sources remain vali
 recheck affected mappings after a project/checkout/source change. Do not hardcode
 a worktree, inherit another project's paths or silently skip required discovery.
 
-Use the project's existing catalog, package aliases and public entrypoints.
-Inspect the current exported API, implementation and real consumers. A name,
-selector or shared folder alone proves neither compatibility nor actual reuse.
+Use the versioned AI capability catalog first. Each feature entry must include its exact selector/export, import/provider prerequisites, typed inputs/outputs/methods, validation behavior, minimal template/call usage and source/version. Services without selectors say so and name the callable API. Use complete checked entries directly; do not repeat source/consumer discovery. Catalog maintainers resolve missing/obsolete entries from the authoritative baseline. Investigate only affected implementation when functional tests expose a problem; a name alone never establishes compatibility.
 Do not deep import internals, import another application's private component or
 modify a read-only library. Read-only ownership still permits consuming public APIs.
 
 ## Compare responsibilities and behavior
+
+Start with specification-defined copy, layout, validation and interactions. Prefer a shared capability that covers them. Adapt the smallest documented gap or retain local behavior when coverage is insufficient; do not invent requirements or force reuse. Keep consumer-owned data, forms, requests and persistence in the consumer.
 
 Separate reusable presentation/container behavior from business content. A small
 text confirmation, editable note form and full business dialog need different

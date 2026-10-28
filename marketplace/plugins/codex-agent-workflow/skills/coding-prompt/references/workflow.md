@@ -9,6 +9,8 @@ Create a minimal handoff-ready prompt when the requested deliverable is the prom
 
 ## Prompt content
 
+- Carry relevant current progress and coding/layout/member-order conventions through precise source/version pointers, with necessary literals and acceptance. Read relevant sections/symbols first and retain checked source/version pointers. Expand only when confidence is insufficient or the specification is unclear/conflicting; do not require whole-file/document reads by default.
+
 - Describe the requested outcome, confirmed facts, decisions, actual checks and concrete unresolved items. Support comparisons with evidence and applicable conditions, and retain limitations that affect correctness, safety, compatibility, requirements or execution.
 - Understand the purpose, use case and desired outcome before selecting context. Include only task-relevant scope, feasibility, dependencies, confirmed requirements, source pointers, preservation/prohibition boundaries and observable acceptance. These are decision dimensions, not a fixed form; infer supported details from available evidence and leave material unknowns explicit.
 - Preserve the requested read-only or implementation boundary. Carry Git, installation and release authority only when the user granted it; examples and suggestions do not grant additional actions.
@@ -45,7 +47,7 @@ Create a minimal handoff-ready prompt when the requested deliverable is the prom
 
 ## Output
 
-- Use the language requested by the user or target project. Otherwise use concise Traditional Chinese for Chinese context, or concise English for English context
+- Write the agent-facing prompt in concise English unless explicitly requested otherwise. Keep human explanations/model advice in the requested language, defaulting Chinese prose to concise Taiwan Traditional Chinese with halfwidth punctuation, spaces after commas/colons and no sentence periods or semicolons. Preserve exact source copy, identifiers and quotations
 - Return the complete prompt as one uninterrupted Markdown `text` fenced code block so the app can show its code-block copy control on mobile, including for long prompts. Do not split the prompt or wrap it in a writing block, quote, list, or table. Use short sentences or compact bullets, omit empty sections, and add headings only when they improve comprehension
 - Put only task instructions inside the block. Keep the model and reasoning recommendation immediately after it
 - Outside the prompt, include the model recommendation, necessary availability/unresolved-requirement notes and any explicitly requested expected-delivery explanation or report illustration. Separate illustrations with Markdown headings, use placeholders for unobserved results, and keep them distinct from actual execution evidence

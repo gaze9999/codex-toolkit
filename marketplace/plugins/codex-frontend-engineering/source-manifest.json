@@ -17,7 +17,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "355a3ee1bee1566752584487293aac4ea3b0c5cf2e635ebcc370dbd3499737b9",
+      "sha256": "15e910118e2170dc72d029e12829459b58a0e9efeee100859f40a5b5aceead4d",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "skills/accessibility-engineering/SKILL.md": {
@@ -37,11 +37,11 @@
       "source": "skills/accessibility-engineering/references/validation.md"
     },
     "skills/angular-development/SKILL.md": {
-      "sha256": "3631989832bf4ced8aa8039270a786f90e5fb471ab73c4f3b41cb216c26583b4",
+      "sha256": "be38fdda5fc978760d58b1e0a234c81c89337d6d26404b008b8cc916ac6544f2",
       "source": "skills/angular-development/SKILL.md"
     },
     "skills/angular-development/agents/openai.yaml": {
-      "sha256": "4fb7feeb078099724ef9495b8d3f862063b161693cf3f469947a1bb1e65bc850",
+      "sha256": "35c0ef89688ac04e435dfef9cd1e7120c55cb350c466443d7a3c5f2badc8a0cb",
       "source": "skills/angular-development/agents/openai.yaml"
     },
     "skills/angular-development/assets/icon-small.png": {
@@ -77,7 +77,7 @@
       "source": "skills/angular-development/references/component-behavior.md"
     },
     "skills/angular-development/references/ui-reuse.md": {
-      "sha256": "320b494552a3014a027c0526116c316dd20214640d972aec080cd6dabe79e5a1",
+      "sha256": "759dc5ad1caa4ad1ffb6fbc781e0fd8ee46caea549ce1fc403b08bb667f468b1",
       "source": "skills/angular-development/references/ui-reuse.md"
     },
     "skills/angular-development/scripts/check_conventions.cjs": {
@@ -193,11 +193,11 @@
       "source": "skills/react-development/references/state-effects.md"
     },
     "skills/ui-ux-design/SKILL.md": {
-      "sha256": "b2fee963441e4bb2b9cf193a5421add9a5873c9f005ddf51c5c4dc2e7bdc10e4",
+      "sha256": "227f9aaeeec58169ec8c2ba8fd6f7e59832abcd1df5cdd0a559cd234b3f05168",
       "source": "skills/ui-ux-design/SKILL.md"
     },
     "skills/ui-ux-design/agents/openai.yaml": {
-      "sha256": "42fb4b541f254de0ee083add43c69621c188a520f930c590fb9557221ae67ede",
+      "sha256": "1afe9224134c0c56f5b1d0c449ec9773b71ff69bd34c9d173a494a4da18dd462",
       "source": "skills/ui-ux-design/agents/openai.yaml"
     },
     "skills/ui-ux-design/assets/icon-small.png": {
@@ -276,5 +276,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.11.5",
-  "version": "0.5.3"
+  "version": "0.5.4"
 }

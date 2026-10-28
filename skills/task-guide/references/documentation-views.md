@@ -4,6 +4,10 @@ Read when organizing reusable requirements, AI navigation, human reports or hist
 
 ## One authority, several reading views
 
+Write AI-facing guides, briefs, indexes and handoffs in concise English. Human-facing authored Chinese uses concise Taiwan Traditional Chinese and Taiwan wording, never Simplified characters. Use halfwidth punctuation, one space after commas/colons/question/exclamation marks when text follows, allow 、 for enumeration, and omit Chinese sentence periods and semicolons. Preserve requested languages, source quotations, contractual copy, code, URLs and versions. These defaults apply even when Global is unavailable.
+
+Read relevant sections/symbols first and retain checked source/version pointers. Expand only when confidence is insufficient or the specification is unclear/conflicting; do not require whole-file/document reads by default.
+
 | View | Retain | Avoid |
 |---|---|---|
 | Original sources and traceable extracts | Source identity, revision/hash, page/sheet/section, extraction coverage and unresolved differences | Replacing the original specification with a summary |
@@ -19,6 +23,10 @@ A small task may use distinct sections in an existing document; growing referenc
 Choose existing destinations by record type. Current state keeps active feature progress and unresolved issue/maintenance work; references keep API/fields/integration mappings, methods keep calculations and persistent issued-ID source/usage, and concise history keeps resolved problems and actual checks. Update only for material decisions, scope, stage, blockers, acceptance or handoffs. For cleanup or an explicitly requested new starting round, follow [current/history maintenance](https://github.com/gaze9999/codex-toolkit/blob/main/skills/doc-updater/references/source-and-history.md), including complete ZIP preservation and extracted byte comparison before replacement. Use ordinary Markdown headings and reconnect existing navigation.
 
 ## Turn identified requirements into reusable files
+
+For field validation, retain field/type, governing jurisdiction, required/empty/null rules, normalization, bounds/pattern/checksum, cross-field conditions, validation timing, exact message/key, named helper/algorithm and usage, accepted/rejected examples, source/version and unresolved decisions. Never infer an unspecified rule from an option name or current UI.
+
+For each shared capability, record every supported feature with selector/export, import/provider requirements, typed inputs/outputs/methods, minimum usage, validation/error behavior, ownership and source baseline. A service has no selector; provide its callable API. A complete checked entry is the consumption baseline, not an instruction to rediscover source each round. Functional-test failures justify affected-source investigation; maintainers repair missing/stale entries rather than consumers guessing.
 
 1. Inventory only relevant existing sources and outputs; reuse source-matched extracts. Record missing sections and conflicts before compression.
 2. Group by coherent behavior or interface owner, such as a form, approval flow or public API. Keep shared invariants and wording in one maintained source, linking from feature-specific sections.

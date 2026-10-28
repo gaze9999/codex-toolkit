@@ -20,6 +20,8 @@ Use this reference only when governance work changes subagents, roles, worker ow
 
 ## Worker loop and acceptance
 
+Use a compact English task packet instead of full history when sufficient: effective goal, owned paths, source revision/section and necessary literals, progress/decisions, coding/layout/member-order conventions, interfaces, authority, required response format, acceptance and blockers. Confirm recipient access and baseline understanding before dependent edits. Preserve exact requirements; omitted detail keeps a retrieval pointer. Refresh only changed constraints, and return changed files/checks against the same packet. Packet availability does not grant delegation or broaden tools/data permissions.
+
 - Give the worker a self-contained goal, confirmed requirements and sources, owned files/modules, must-preserve constraints, exclusions, relevant checkout and concurrent-work state, acceptance criteria and stop condition. Do not require rediscovery of supported conclusions.
 - Let the worker choose implementation details within those boundaries and complete discovery, edit, focused checks and necessary repairs. Prefer supported waiting and one final review over repeated partial handoffs or progress polling.
 - Return to Main when specifications conflict, a shared interface must change, ownership or authorization must expand, or the approach repeatedly fails. Explain facts, attempts, failure evidence and the decision needed; continue independent authorized work when possible.

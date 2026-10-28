@@ -2,7 +2,7 @@
 name: ui-ux-design
 description: Design or review UI/UX and check rendered interfaces against the original request before delivery. Use for layout defects, misleading displayed data, missing requirements and interaction changes, including UI work without user-provided screenshots.
 metadata:
-  version: "0.7.2"
+  version: "0.7.3"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -12,6 +12,8 @@ metadata:
 Start with the user's task, existing interface, project constraints and the requested deliverable. Analysis or a design reference does not authorize implementation, account changes or publication. Preserve the selected stack, design system and useful existing interactions.
 
 ## Select sources and component patterns
+
+For specification-driven work, preserve specified copy, validation and failure/recovery behavior. Do not invent messages, business defaults or error handling to fill gaps. Preserve existing compatible safeguards and identify missing decisions; an explicit owner-authorized design exception must remain scoped. Use existing shared capabilities first when they satisfy the specification; adapt only the documented gap instead of changing the requirement to fit a component.
 
 For design-system selection, accessibility targets or conflicting guidance, read [design sources](references/design-sources.md). Classify the relevant passage and its platform/version before adopting it; preserve confirmed product decisions and resolve affected conflicts explicitly.
 
@@ -29,7 +31,7 @@ Jev is optional for semantic ordering of retrieved material or a finite comparis
 
 ## Work from a representative flow
 
-- Choose a small relevant flow or section first, identify the entry, meaningful outcome, information hierarchy, empty state, failure and recovery. Expand when observed problems justify it, not to redesign every page by default.
+- Choose a small relevant flow or section first, identify the entry, meaningful outcome, information hierarchy and specified/existing empty, failure and recovery behavior; record unspecified behavior instead of inventing it. Expand when observed problems justify it, not to redesign every page by default.
 - Distinguish observed target behavior, research findings, real product examples and personal reports. Record source date and applicable population/context; popularity and a successful prototype do not prove usability or business improvement.
 - Select research, editable prototype, implementation and browser/a11y capabilities from what is actually available. Reuse an authenticated integration and its required Skills; install a tool only for a demonstrated gap within authorization. Keep exact tool recipes in the maintained setup rather than fixing providers here.
 - Match component packages to the project's framework/version, license, theme, keyboard/focus and localization requirements. Library adoption and dependency upgrades need scope that includes those changes.

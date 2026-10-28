@@ -3,7 +3,7 @@ name: context-brief
 description: Turn explicitly supplied implementation specifications into reusable Codex Markdown context briefs. Use for implementation context, not ordinary summaries, document conversion, task guides or current-progress handoffs.
 metadata:
   short-description: Create concise, traceable coding context briefs
-  version: "0.4.14"
+  version: "0.4.15"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -32,9 +32,12 @@ Use the appropriate workflow instead for generic document conversion, ordinary s
 
 ## Workflow
 
+- Write AI-facing guides, briefs, indexes and handoffs in concise English. Human-facing authored Chinese uses concise Taiwan Traditional Chinese and Taiwan wording, never Simplified characters. Use halfwidth punctuation, one space after commas/colons/question/exclamation marks when text follows, allow 、 for enumeration, and omit Chinese sentence periods and semicolons. Preserve requested languages, source quotations, contractual copy, code, URLs and versions. These defaults apply even when Global is unavailable.
+- Read relevant sections/symbols first and retain checked source/version pointers. Expand only when confidence is insufficient or the specification is unclear/conflicting; do not require whole-file/document reads by default.
+
 - Resolve source boundaries, intended use, and deliverable from the request and available material. Ask only when a gap affects correctness or coverage.
 - Locate an existing Markdown extraction from the task and available source/version metadata or pointers, without requiring fixed filenames, same-stem names or a fixed folder; start from its relevant sections. Preserve its original-source identity, locations and coverage; consult only necessary screenshots or original sections for visual evidence, missing/unclear/stale extraction, conflicts, or an explicit original-source check. A usable extraction does not require routine original-file rereading or regeneration.
-- Preserve names, paths, fields, enums, status codes, validation, security and permissions, errors, constraints, examples, and acceptance criteria.
+- Preserve names, paths, fields, enums, status codes, security/permissions and exact error/copy contracts. Describe each validation rule and its implementation method/helper, normalization, triggers, examples, source/version and unknowns. Shared-capability sections include each feature's exact selector/export and usage; do not invent missing behavior or substitute a lookup task for a complete checked entry.
 - Compress marketing copy, repeated background, boilerplate disclaimers and implementation-irrelevant narrative. Keep decision-relevant constraints with their affected behavior and route current execution status to the existing work record. Do not turn gaps, conflicts, OCR text, historical progress, or current implementation behavior into confirmed contracts. Treat them as evidence unless a governing source or explicit user decision establishes the contract.
 - Retaining secrets, credentials, private tokens, or unnecessary personal data requires an explicit user request and implementation need. Preserve only the minimum source detail required for implementation.
 - For conflicting or versioned inputs, compare document revisions, extract source hashes, relevant code history/diffs and confirmed decisions. Present verified revisions chronologically with timezone/version and dirty state where relevant, leaving unknown times explicit. Keep source revision time separate from brief verification time and preserve original precision; record unresolved differences without making the newest input authoritative by timestamp alone.

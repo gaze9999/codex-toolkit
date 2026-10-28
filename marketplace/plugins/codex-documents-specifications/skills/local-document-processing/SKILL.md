@@ -2,12 +2,14 @@
 name: local-document-processing
 description: Find source-backed Markdown extracts, convert selected local PDF/Office documents, or apply guarded Markdown edits through an installed document core or Local Documents MCP. Use for source processing, not authored reports or specification decisions.
 metadata:
-  version: "0.2.0"
+  version: "0.2.1"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
 
 # Local Document Processing
+
+Write AI-facing guides, briefs, indexes and handoffs in concise English. Human-facing authored Chinese uses concise Taiwan Traditional Chinese and Taiwan wording, never Simplified characters. Use halfwidth punctuation, one space after commas/colons/question/exclamation marks when text follows, allow 、 for enumeration, and omit Chinese sentence periods and semicolons. Preserve requested languages, source quotations, contractual copy, code, URLs and versions. These defaults apply even when Global is unavailable. Read relevant sections/symbols first and retain checked source/version pointers. Expand only when confidence is insufficient or the specification is unclear/conflicting; do not require whole-file/document reads by default. Preserve source-defined copy and validation/error behavior; an evidence gap is not permission to invent it.
 
 Resolve the explicitly selected source/output and actual CLI or live MCP schema. Prefer existing extraction/Markdown operations backed by the installed versioned document core. Do not import another checkout or install a tool during ordinary processing.
 
