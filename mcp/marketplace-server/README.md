@@ -19,12 +19,15 @@
 
 ```sh
 npm ci --ignore-scripts
-npm run snapshot
-npm test
+npm run build
 npm start
 ```
 
 啟動前須提供下方 WorkOS 環境變數, 測試使用隔離簽章 fixture, 不需要正式帳號
+
+`npm run build` 先依已提交的固定來源產生快照, 只在 runtime / 相依套件 / 快照的實際位元組變更時執行測試與建置, 相同輸入略過, 成功且輸入未變後才保存 `.state/last-build.json`, 失敗保留上一份成功狀態, 建置不會部署或更動認證
+
+可用 `node scripts/build-if-changed.mjs --check` 唯讀比較目前候選與成功建置指紋, 排程沿用相同條件, 不因日期到達而重建相同內容
 
 本機端點為 `http://127.0.0.1:8787/mcp`
 

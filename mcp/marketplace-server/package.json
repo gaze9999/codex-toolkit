@@ -9,7 +9,8 @@
   "scripts": {
     "snapshot": "node scripts/snapshot.mjs",
     "test": "node --test test/*.test.mjs",
-    "start": "node local.mjs"
+    "start": "node local.mjs",
+    "build": "node scripts/build-if-changed.mjs --build"
   },
   "dependencies": {
     "@modelcontextprotocol/server": "2.3.1",
