@@ -205,58 +205,77 @@ def table(rows: list[dict], columns: tuple[str, str], headers: tuple[str, str]) 
     ]
 
 
-def render(data: dict) -> str:
-    """Render validated content in the requested heading priority order."""
-    lines = ["# " + data["title"], "", *bullets(data["scope"])]
-    navigation = ["## 依任務讀取", ""]
+def render(data: dict, language: str = "en") -> str:
+    """Render labels by audience without translating supplied source content."""
+    labels = {
+        "en": {
+            "navigation": "Read by task", "need": "Task", "evidence": "Source and evidence",
+            "decisions": "Requirements and decisions", "decision_headers": ("ID", "Type", "Source", "Content", "Supersedes", "Status"),
+            "types": {"specification": "Specification", "user_decision": "User decision", "execution_plan": "Execution plan"},
+            "superseded": "Superseded", "active": "Active", "source_authority": "Source authority",
+            "implementation_boundaries": "Implementation boundaries", "verification": "Verification",
+            "ids": "Work item IDs", "registry": "Registry", "prefix": "Prefix", "meaning": "Purpose",
+            "format": "ID format", "serial": "serial", "digits": "minimum digits",
+            "documentation": "Documentation and records", "trigger": "Trigger", "result": "Required result",
+            "open_items": "Open items",
+        },
+        "zh-TW": {
+            "navigation": "依任務讀取", "need": "任務", "evidence": "應讀來源與證據",
+            "decisions": "需求與決策", "decision_headers": ("ID", "類型", "來源", "內容", "取代 ID", "狀態"),
+            "types": {"specification": "規格既有要求", "user_decision": "使用者決議", "execution_plan": "執行安排"},
+            "superseded": "已被取代", "active": "有效", "source_authority": "來源優先序",
+            "implementation_boundaries": "實作邊界", "verification": "驗證",
+            "ids": "工作項目 ID", "registry": "紀錄位置", "prefix": "前綴", "meaning": "用途",
+            "format": "編號格式", "serial": "序號", "digits": "最少位數",
+            "documentation": "文件與紀錄", "trigger": "觸發條件", "result": "必要結果",
+            "open_items": "未確認事項",
+        },
+    }
+    if language not in labels:
+        raise ValueError("language: expected en or zh-TW")
+    label=labels[language]
+    lines=["# "+data["title"], "", *bullets(data["scope"])]
+    navigation=["## "+label["navigation"], ""]
     if data["path_resolution"]:
         navigation.extend([*bullets(data["path_resolution"]), ""])
-    navigation.extend(table(data["read_by_task"], TABLE_FIELDS["read_by_task"],
-                            ("任務", "應讀來源與證據")))
-    sections = {"read_by_task": navigation}
-    if data['decisions']:
-        labels = {'specification':'規格既有要求', 'user_decision':'使用者決議', 'execution_plan':'執行安排'}
-        rows = [{**row, 'type':labels[row['type']], 'status':'已被取代' if row['status']=='superseded' else '有效',
-                 'supersedes':'、'.join(row['supersedes']) or '--'} for row in data['decisions']]
-        columns = ('id', 'type', 'source', 'summary', 'supersedes', 'status')
-        sections['decisions'] = ['## 需求與決策', '', '| ID | 類型 | 來源 | 內容 | 取代 ID | 狀態 |',
-                                '| --- | --- | --- | --- | --- | --- |',
-                                *['| '+' | '.join(table_cell(row[key]) for key in columns)+' |' for row in rows]]
-    for field, heading in (
-        ("source_authority", "來源優先序"),
-        ("implementation_boundaries", "實作邊界"),
-        ("verification", "驗證"),
-    ):
-        if data[field]:
-            sections[field] = ["## " + heading, "", *bullets(data[field])]
+    navigation.extend(table(data["read_by_task"], TABLE_FIELDS["read_by_task"], (label["need"],label["evidence"])))
+    sections={"read_by_task":navigation}
+    if data["decisions"]:
+        rows=[{**row,"type":label["types"][row["type"]],
+               "status":label["superseded"] if row["status"]=="superseded" else label["active"],
+               "supersedes":", ".join(row["supersedes"]) or "--"} for row in data["decisions"]]
+        columns=("id","type","source","summary","supersedes","status")
+        sections["decisions"]=["## "+label["decisions"],"","| "+" | ".join(label["decision_headers"])+" |",
+                               "| --- | --- | --- | --- | --- | --- |",
+                               *["| "+" | ".join(table_cell(row[key]) for key in columns)+" |" for row in rows]]
+    for field in ("source_authority","implementation_boundaries","verification"):
+        if data[field]: sections[field]=["## "+label[field],"",*bullets(data[field])]
     if data["work_item_ids"] or data["id_rules"]:
-        identifiers = ["## 工作項目 ID", ""]
+        identifiers=["## "+label["ids"],""]
         if data["work_item_ids"]:
-            scheme = data["work_item_ids"]
-            identifiers.extend(["紀錄位置: " + scheme["registry"], "",
-                                *table(scheme["groups"], ("prefix", "meaning"), ("前綴", "用途")), "",
-                                f"編號格式: 前綴 + {json.dumps(scheme['separator'])} + 序號; 序號至少 {scheme['digits']} 位", ""])
+            scheme=data["work_item_ids"]
+            identifiers.extend([label["registry"]+": "+scheme["registry"],"",
+                                *table(scheme["groups"],("prefix","meaning"),(label["prefix"],label["meaning"])),"",
+                                label["format"]+": "+label["prefix"]+" + "+json.dumps(scheme["separator"])+" + "+label["serial"]+", "+label["digits"]+": "+str(scheme["digits"]),""])
         identifiers.extend(bullets(data["id_rules"]))
-        sections["work_item_ids"] = identifiers
+        sections["work_item_ids"]=identifiers
     if data["documentation"] or data["documentation_triggers"] or data["closeout"]:
-        records = ["## 文件與紀錄", ""]
+        records=["## "+label["documentation"],""]
         if data["documentation_triggers"]:
-            records.extend([*table(data["documentation_triggers"], TABLE_FIELDS["documentation_triggers"],
-                                  ("觸發條件", "必要結果")), ""])
-        records.extend(bullets(data["documentation"] + data["closeout"]))
-        sections["documentation"] = records
-    if data["open_items"]:
-        sections["open_items"] = ["## 未確認事項", "", *bullets(data["open_items"])]
+            records.extend([*table(data["documentation_triggers"],TABLE_FIELDS["documentation_triggers"],(label["trigger"],label["result"])),""])
+        records.extend(bullets(data["documentation"]+data["closeout"]))
+        sections["documentation"]=records
+    if data["open_items"]: sections["open_items"]=["## "+label["open_items"],"",*bullets(data["open_items"])]
     for key in data["section_order"]:
-        if key in sections:
-            lines.extend(["", *sections[key]])
-    return "\n".join(lines).rstrip() + "\n"
+        if key in sections: lines.extend(["",*sections[key]])
+    return "\n".join(lines).rstrip()+"\n"
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("input", type=Path, help="UTF-8 JSON with confirmed task-guide content")
     parser.add_argument("--output", type=Path, help="New Markdown file; existing files are never overwritten")
+    parser.add_argument("--language", choices=("en", "zh-TW"), default="en", help="Heading language; AI guides default to concise English")
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--dry-run", action="store_true", help="Print Markdown without writing files")
     modes.add_argument("--check", action="store_true", help="Validate JSON structure without writing files")
@@ -275,7 +294,7 @@ def main() -> int:
             print(json.dumps({"status": "proposed", "registry": scheme["registry"],
                               "items": scheme["items"]}, ensure_ascii=False, indent=2))
         elif args.dry_run:
-            print(render(data), end="")
+            print(render(data, args.language), end="")
         else:
             if args.output.suffix.lower() != ".md":
                 raise ValueError("output must have a .md extension")
@@ -283,7 +302,7 @@ def main() -> int:
                 raise ValueError("output already exists; refresh affected sections directly")
             args.output.parent.mkdir(parents=True, exist_ok=True)
             with args.output.open("x", encoding="utf-8", newline="\n") as stream:
-                stream.write(render(data))
+                stream.write(render(data, args.language))
             print(f"CREATED {args.output}")
         return 0
     except (OSError, ValueError, UnicodeError) as exc:

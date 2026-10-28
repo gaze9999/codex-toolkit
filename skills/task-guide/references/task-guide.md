@@ -19,7 +19,7 @@ Use this reference when creating or refreshing a reusable guide for one project 
 
 Do not copy another feature's business fields, role codes, source precedence, directories or special verification harness. A public reusable Skill contains no private project sources. Private project guides stay local unless their release or external transfer is authorized.
 
-Generate concise Traditional Chinese headings, table labels and prose, retaining technical identifiers. The English section keys below are generator fields, not a required output language.
+AI guides use concise English narrative, headings and table labels. English renderer labels are the default; `--language zh-TW` retains the former Chinese layout for explicitly requested human output. JSON keys, IDs and supplied literal source text do not change. The renderer does not translate supplied content.
 
 Apply the document-writing rule in `SKILL.md`'s Create or refresh section to guides and snapshots; keep limitations tied to their concrete effect on source coverage, requirements or execution.
 

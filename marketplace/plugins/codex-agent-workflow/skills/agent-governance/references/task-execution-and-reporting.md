@@ -26,6 +26,12 @@ Keep the effective outcome and scope stable by default. Expand reading, changes 
 
 ## Select necessary reading
 
+Read relevant sections/symbols first and retain checked source/version pointers. Expand only when confidence is insufficient or the specification is unclear/conflicting; do not require whole-file/document reads by default.
+
+At each work round, recover relevant current progress, effective decisions and coding conventions. Apply formatting and member ordering to the actual generated/changed code, preserving initializer/decorator timing and unrelated work; reading a rule is not compliance. Reuse checked pointers and refresh only affected evidence.
+
+For specification-driven work, preserve specified copy, validation and failure/recovery behavior. Do not invent messages, business defaults or error handling to fill gaps. Preserve existing compatible safeguards and identify missing decisions; an explicit owner-authorized design exception must remain scoped.
+
 | Question | First source and conditional follow-up |
 |---|---|
 | Instructions and authority | Effective global, repository and target-directory instructions, then relevant conditional guides/Skills |
