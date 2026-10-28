@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-agent-workflow",
-  "version": "0.4.0",
-  "description": "Maintain instruction layers, task routing, coding prompts and stable decision records.",
+  "version": "0.5.0",
+  "description": "Maintain instruction layers, prompts, Markdown goals/plans and scoped review/test briefs.",
   "author": {
     "name": "gaze9999"
   },
@@ -11,7 +11,7 @@
     "com.openai": {
       "interface": {
         "displayName": "Agent 工作流程",
-        "shortDescription": "Maintain instruction layers, task routing, coding prompts and stable decision records.",
+        "shortDescription": "Plan tasks and acceptance",
         "logo": "./assets/toolkit.png",
         "composerIcon": "./assets/toolkit.png",
         "brandColor": "#E8A36D",
