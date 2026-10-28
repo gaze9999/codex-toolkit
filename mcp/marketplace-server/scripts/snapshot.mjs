@@ -1,6 +1,6 @@
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../../../', import.meta.url));
@@ -27,5 +27,7 @@ const skills = Object.keys(files).filter(path => path.endsWith('/SKILL.md')).map
 });
 const output = new URL('../data/catalog.json', import.meta.url);
 mkdirSync(new URL('../data/', import.meta.url), { recursive: true });
-writeFileSync(output, JSON.stringify({ repository: 'https://github.com/gaze9999/codex-toolkit', revision, plugins, skills, files }));
-console.log(JSON.stringify({ revision, plugins: plugins.length, skills: skills.length, files: Object.keys(files).length }));
+const payload = JSON.stringify({ repository: 'https://github.com/gaze9999/codex-toolkit', revision, plugins, skills, files });
+const changed = !existsSync(output) || readFileSync(output, 'utf8') !== payload;
+if (changed) writeFileSync(output, payload);
+console.log(JSON.stringify({ status: changed ? 'written' : 'unchanged', revision, plugins: plugins.length, skills: skills.length, files: Object.keys(files).length }));
