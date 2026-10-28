@@ -8,6 +8,10 @@ Copy the complete `task-guide/` folder into the client's active Skills directory
 
 Windows/macOS use the same Skill. Scripts require Python 3.10+ standard library, without MCP, keys or a fixed checkout. Use the actual `python` or `python3` executable and quote paths containing spaces. Without Python, the agent may edit the guide directly and report that the generator was not run.
 
+## Goals, plans, sketches and review
+
+For a Markdown Goal, execution Plan, optional sketch or review/test brief, use [planning and acceptance](references/planning-and-acceptance.md). The four linked templates share source and acceptance references without duplicating progress. Resolve existing prompt, design, review, scan and test owners only when needed; this Skill does not provide a new scanner or start Goals automatically.
+
 ## Request a guide
 
 | Need | Behavior |
