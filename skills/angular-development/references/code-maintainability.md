@@ -152,8 +152,11 @@ deep utility chains, one-use aliases and generic bases that cost more navigation
 than the duplication they remove. A type alias with real domain meaning or an
 external interface remains useful.
 
-Keep small private types near their use, feature-shared types with their owner
-and substantial form types near the form when appropriate. Use supported
+Follow the project's file-local type convention: when types belong above their
+consumer, place small file-local interfaces/type aliases before that class,
+keeping feature-shared types with their owner and substantial form types near
+the form when appropriate. Ordering-only work does not authorize type extraction
+or changes to type definitions. Use supported
 `import type` for type-only imports; do not introduce cycles or one file per type
 without a concrete cohesion or maintenance benefit.
 

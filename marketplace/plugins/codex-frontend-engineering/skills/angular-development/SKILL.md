@@ -2,7 +2,7 @@
 name: angular-development
 description: Implement, diagnose, refactor or review Angular components, forms, templates, feature models/helpers and application integration using the detected Angular/TypeScript/RxJS versions. Use architecture guidance only when ownership, DI, routing or cross-runtime boundaries are affected.
 metadata:
-  version: "0.4.20"
+  version: "0.4.21"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
