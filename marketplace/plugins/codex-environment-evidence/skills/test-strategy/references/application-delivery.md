@@ -15,6 +15,19 @@ Read for affected browser, API, storage, CLI or packaging behavior. Select by re
 
 Development: turn a concrete defect or changed requirement into a useful failing check when justified, then verify its repair. Testing: preserve scope, fixtures and source state; investigate flaky failures without hiding them. Release: apply the actual project gate, route artifact acceptance to an available packaging-acceptance Skill, and separate preparation from authorized publication.
 
+## Custom runners and isolated fixtures
+
+Read when creating or repairing a custom runner; existing test frameworks may already enforce these conditions.
+
+- Declare required scripts, fixture HTML/bundles and other inputs. Check their existence, readability and required nonempty content before opening a browser/server or starting a costly process. Missing required input fails nonzero; optional inputs are named and reported separately, never silently substituted for required checks.
+- Preserve earlier evidence before reuse, or select a fresh result location. Record a run identity/time, started state, terminal status, required selection and actually executed scripts/checks. An interrupted run or a stale success file is not a successful current run. Report errors and the original exit code even when cleanup or result writing fails.
+- Exercise a missing-input case in a temporary copy, without deleting or renaming the real input. Confirm nonzero failure, no dependent resource startup and no stale success claim. Verify the normal selected fixture too; identify the bundle/revision actually loaded rather than treating it as the current checkout.
+- Resolve compiler, bundler and framework dependencies from the selected project's existing manifest/module resolution. A helper runner's own folder or client runtime does not establish the project's package versions. Do not install or change dependencies to repair a lookup path without authorization.
+- Retain the first setup failure and diagnose compiler/resource resolution, browser errors and readiness separately. Wait for the relevant observable render/state/CSS condition with a bounded timeout; do not add product timers to satisfy the fixture.
+- Clean up owned browser, server and subprocess resources independently so one cleanup failure does not skip the rest. Retain cleanup failures and distinguish resources never started from resources closed after execution.
+
+For a scoped syntax/refactor comparison, parse with the project's compatible parser. State the reviewed normalizations and excluded imports/comments/regions; retain literal values and distinguish structural equality from full semantic equivalence. Pair this evidence with the affected type/interface and runtime checks. Fixture data, intercepted requests and a simulated host establish only those exercised boundaries, not formal API, persistence or host acceptance.
+
 ## Loaded behavior and consumer boundaries
 
 Read for changed settings, service/API behavior or shared-component integration. Select the affected links in the chain rather than treating one successful check as evidence for all of them.
