@@ -8,6 +8,14 @@ For authorized call-chain or Model changes, read [code maintainability](code-mai
 
 ## Compatibility and ownership
 
+Honor an explicit user-selected formatting/coding baseline within the authorized
+scope. Report concrete project conflicts rather than silently selecting another
+provider or style; reuse confirmed decisions. Without an explicit selection,
+follow the applicable project conventions. For formatting without an editor,
+use the [standalone TypeScript method](typescript-formatting.md). Read the
+[VS Code adapter](vscode-formatting-adapter.md) only for editor-specific provider,
+settings or output diagnosis. Save actions and extensions remain separate.
+
 The complete example uses Angular 17+ standalone components, stable Signals and
 built-in control flow. Select the compatible TypeScript/Node versions from
 [Angular's version table](https://angular.dev/reference/versions). Existing NgModule,
@@ -265,7 +273,10 @@ class LookupError extends Error {
 These are alternative classes. Where the project also requires `void 0`, `!0` or
 `!1`, check changed runtime expressions while preserving type-position `undefined`,
 string literals, property names, locally shadowed bindings and semantic boundaries.
-Do not apply text replacement or impose these spellings on other projects.
+Use `void 0` only in equivalent runtime expressions. Preserve null versus
+undefined versus an omitted field and the resulting serialization behavior.
+Ordering-only work preserves method bodies and expression spellings. Do not
+apply text replacement or impose these spellings on other projects.
 
 The optional [visibility checker](../scripts/check_conventions.cjs) reports without
 editing. Pass reviewed files explicitly; resolve the project's installed TypeScript
