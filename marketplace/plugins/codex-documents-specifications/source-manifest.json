@@ -201,6 +201,6 @@
     "local-documents"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.13.1",
+  "toolkit_version": "0.13.2",
   "version": "0.5.2"
 }
