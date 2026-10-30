@@ -2,7 +2,7 @@
 name: ui-ux-design
 description: Design or review UI/UX and check rendered interfaces against the original request before delivery. Use for layout defects, misleading displayed data, missing requirements and interaction changes, including UI work without user-provided screenshots.
 metadata:
-  version: "0.7.3"
+  version: "0.7.4"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -14,6 +14,8 @@ Start with the user's task, existing interface, project constraints and the requ
 ## Select sources and component patterns
 
 For specification-driven work, preserve specified copy, validation and failure/recovery behavior. Do not invent messages, business defaults or error handling to fill gaps. Preserve existing compatible safeguards and identify missing decisions; an explicit owner-authorized design exception must remain scoped. Use existing shared capabilities first when they satisfy the specification; adapt only the documented gap instead of changing the requirement to fit a component.
+
+For company/client work, require a specification location or explicit scoped decision for each new/changed prompt's wording and display trigger, including inline errors, alerts/toasts, loading, empty, success and recovery states. Inventory changed static and dynamic messages before delivery and inspect initial, edited, action-attempted and corrected states. A validation rule or backend field does not authorize explanatory copy. Preserve existing compatible data-protection blocks and their visible causes; unspecified copy never authorizes silent failure, truncation or bypassing invalid/overlength checks. Record unresolved wording without inventing replacements. Owner-authorized personal-project design remains outside this restriction.
 
 For design-system selection, accessibility targets or conflicting guidance, read [design sources](references/design-sources.md). Classify the relevant passage and its platform/version before adopting it; preserve confirmed product decisions and resolve affected conflicts explicitly.
 
