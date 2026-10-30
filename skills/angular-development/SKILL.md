@@ -2,7 +2,7 @@
 name: angular-development
 description: Implement, diagnose, refactor or review Angular components, forms, templates, feature models/helpers and application integration using the detected Angular/TypeScript/RxJS versions. Use architecture guidance only when ownership, DI, routing or cross-runtime boundaries are affected.
 metadata:
-  version: "0.4.21"
+  version: "0.4.22"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -36,5 +36,7 @@ Before delivery, compare the actual changed declarations and behavior with that 
 For authorized edits, choose actual project type/template/targeted tests and relevant browser interactions. For analysis, deliver decisions/evidence without editing. Use traces only for measured performance questions, symbol lookup only when relationships/language support need it. Report exercised route/state/results and specific gaps, close only owned browser sessions.
 
 For changed messages, locale switching or localized formatting, use the available internationalization-engineering Skill. For changed semantics, keyboard/focus, errors or assistive-technology behavior, use accessibility-engineering. Load only the affected references and preserve the existing component, data and copy contracts.
+
+For company/client form or message changes, apply the source and trigger checks in [component behavior](references/component-behavior.md); a validator or familiar UX pattern does not authorize new copy.
 
 For user-visible layout, copy, displayed-data or interaction changes, use the available ui-ux-design Skill for requirement comparison and rendered-flow acceptance before delivery, without waiting for user screenshots. If unavailable, compare the original request with the affected rendered states directly and identify unverified behavior.

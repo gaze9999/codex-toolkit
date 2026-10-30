@@ -74,3 +74,45 @@ test('CLI is opt-in, rejects invalid scope and leaves input bytes unchanged', ()
     fs.rmdirSync(temporary);
   }
 });
+
+test('Git discovery scopes staged, unstaged and untracked files and reports working-tree evidence', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'angular-scope-'));
+  const git = args => { const r = spawnSync('git', ['-C', dir, ...args], { encoding: 'utf8' }); assert.equal(r.status, 0, r.stderr); return r.stdout; };
+  const typescript = process.env.TYPESCRIPT_PATH || require.resolve('typescript', { paths: [process.env.ANGULAR_TEST_PROJECT || root] });
+  const run = args => spawnSync(process.execPath, [checker, '--typescript', typescript, ...args], { encoding: 'utf8' });
+  try {
+    git(['init']); fs.mkdirSync(path.join(dir, 'feature'));
+    fs.writeFileSync(path.join(dir, 'feature', 'tracked.ts'), 'export const value = 1;\n');
+    fs.writeFileSync(path.join(dir, 'outside.ts'), 'const ignored=1');
+    git(['add', '.']); git(['-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-m','fixture']);
+    fs.writeFileSync(path.join(dir, 'feature', 'tracked.ts'), 'export const value = 2;\n');
+    git(['add', 'feature/tracked.ts']);
+    fs.appendFileSync(path.join(dir, 'feature', 'tracked.ts'), 'export const next = 3;\n');
+    fs.writeFileSync(path.join(dir, 'feature', 'new file.ts'), 'export const added=1');
+    fs.writeFileSync(path.join(dir, 'feature', 'view.html'), '<div></div>');
+    fs.appendFileSync(path.join(dir, 'outside.ts'), '\nconst other=2');
+    const report = path.join(dir, 'result.json');
+    const args = ['--git-root',dir,'--scope','feature','--staged','--unstaged','--untracked','--format','--indent-size','2','--semicolons','insert'];
+    const r = run([...args,'--report',report]); assert.equal(r.status,1,r.stderr);
+    const out = JSON.parse(r.stdout); assert.equal(out.files,2); assert.equal(out.skipped.length,1);
+    assert.equal(out.formatting.length,1); assert.equal(out.checks.memberOrder,'not-run'); assert.equal(out.checks.explicitPublic,'not-run');
+    assert.equal(out.inputs[0].sha256.length,64); assert.equal(fs.readFileSync(report,'utf8'),r.stdout);
+    assert.equal(fs.readFileSync(path.join(dir,'feature','new file.ts'),'utf8'),'export const added=1');
+    assert.equal(run([...args,'--report',report]).status,2);
+    assert.equal(run(['--explicit-public','--git-root',dir,'--scope','../','--untracked']).status,2);
+    const empty=run(['--explicit-public','--git-root',dir,'--scope','missing','--unstaged']);
+    assert.equal(JSON.parse(empty.stdout).status,'no-files');
+    assert.equal(JSON.parse(empty.stdout).checks.syntax,'not-run');
+    const staged=run(['--explicit-public','--git-root',dir,'--scope','feature','--staged']);
+    assert.equal(JSON.parse(staged.stdout).files,1);
+  } finally { fs.rmSync(dir,{recursive:true,force:true}); }
+});
+
+test('formatter preserves literals, CRLF and repeated output', () => {
+  const { formatSource } = require(checker);
+  const source='export const text="keep  two spaces";\r\n';
+  const options={indentSize:2,semicolons:'insert'};
+  const result=formatSource(ts,source,'fixture.ts',options);
+  assert(result.includes('keep  two spaces')); assert(result.includes('\r\n'));
+  assert.equal(formatSource(ts,result,'fixture.ts',options),result);
+});

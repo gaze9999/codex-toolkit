@@ -17,7 +17,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "3f0149355d06f0e28b1bece8323e4fd09fe4b27a008babe845dad5f06dcf8214",
+      "sha256": "a40e6a243049476f47bcb0c666f4d5f9aff7d41f1dbb840ae3662c9f0720e814",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "skills/accessibility-engineering/SKILL.md": {
@@ -37,11 +37,11 @@
       "source": "skills/accessibility-engineering/references/validation.md"
     },
     "skills/angular-development/SKILL.md": {
-      "sha256": "16b95120daaaddb3f9307f065e5eff2af4062f443567b512a219176a3dd5a092",
+      "sha256": "6ddf9c12336e840ad661c3d7cc3801a9881ded55c22a0f5b8f1127d233f396c4",
       "source": "skills/angular-development/SKILL.md"
     },
     "skills/angular-development/agents/openai.yaml": {
-      "sha256": "83d4d95b9b946008cdc8161bc6d21b0074b77b1f67f9936e0f34d8b31f99afd8",
+      "sha256": "b9adea65fc39f291e284dec2e4e6b0095f2f9e6bec5770adc1aa31f6ab810c40",
       "source": "skills/angular-development/agents/openai.yaml"
     },
     "skills/angular-development/assets/icon-small.png": {
@@ -61,7 +61,7 @@
       "source": "skills/angular-development/assets/icon.svg"
     },
     "skills/angular-development/references/angular-style.md": {
-      "sha256": "88927bf37da9279f4c2ebaf89e69fa6b445cb421829d06bc55d80115a377ac7e",
+      "sha256": "322fd078ff94664c6daaf71a53f1dd08f803df6ef754531111985890b1901d93",
       "source": "skills/angular-development/references/angular-style.md"
     },
     "skills/angular-development/references/architecture.md": {
@@ -73,7 +73,7 @@
       "source": "skills/angular-development/references/code-maintainability.md"
     },
     "skills/angular-development/references/component-behavior.md": {
-      "sha256": "25ae03b8f0aa91eff780dcee6012b4797a007e8bc697938da8c027881d04780a",
+      "sha256": "b02740d06e5e8abf134b6b1421ac7673790d657b761ed1d16e70b4b8b44157ac",
       "source": "skills/angular-development/references/component-behavior.md"
     },
     "skills/angular-development/references/typescript-formatting.md": {
@@ -89,7 +89,7 @@
       "source": "skills/angular-development/references/vscode-formatting-adapter.md"
     },
     "skills/angular-development/scripts/check_conventions.cjs": {
-      "sha256": "5090c2aa641155616da5d4a9449c1fa05fedee5c18a26620421747a9aea7f2b7",
+      "sha256": "c6eb665753ba393910f2d6d15b682d41a8c441dc8039f2c746a630e89a808419",
       "source": "skills/angular-development/scripts/check_conventions.cjs"
     },
     "skills/angular-member-order/SKILL.md": {
@@ -201,11 +201,11 @@
       "source": "skills/react-development/references/state-effects.md"
     },
     "skills/ui-ux-design/SKILL.md": {
-      "sha256": "227f9aaeeec58169ec8c2ba8fd6f7e59832abcd1df5cdd0a559cd234b3f05168",
+      "sha256": "2959dabb331b0efe87407a402ebad8ae334bb19e38565fc12c96918e33051119",
       "source": "skills/ui-ux-design/SKILL.md"
     },
     "skills/ui-ux-design/agents/openai.yaml": {
-      "sha256": "1afe9224134c0c56f5b1d0c449ec9773b71ff69bd34c9d173a494a4da18dd462",
+      "sha256": "0b4a86e7ce42d79e6aac2f794f12fc1c69715142dbc3ccc86c23766569c571bc",
       "source": "skills/ui-ux-design/agents/openai.yaml"
     },
     "skills/ui-ux-design/assets/icon-small.png": {
@@ -283,6 +283,6 @@
     "edge-devtools"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.13.2",
-  "version": "0.5.5"
+  "toolkit_version": "0.14.0",
+  "version": "0.5.6"
 }

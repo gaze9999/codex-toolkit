@@ -279,16 +279,23 @@ Ordering-only work preserves method bodies and expression spellings. Do not
 apply text replacement or impose these spellings on other projects.
 
 The optional [visibility checker](../scripts/check_conventions.cjs) reports without
-editing. Pass reviewed files explicitly; resolve the project's installed TypeScript
+editing. Pass reviewed files explicitly or select a literal Git scope with staged, unstaged and untracked modes; resolve the project's installed TypeScript
 with `--project`, or supply its existing module via `--typescript`. It does not
 install packages, traverse directories, prove type correctness, assess unused
-state or validate maintenance decisions. Inspect the pre-existing diff first;
+state or validate maintenance decisions. Git discovery reads current working-tree bytes, including when staged paths are selected, not index blobs. Inspect the pre-existing diff first;
 distinguish inherited findings from the current change.
 
 ```text
 node <skill>/scripts/check_conventions.cjs --explicit-public --project <project> <changed.ts> <changed-model.ts>
 ```
 
+For repeated changed-file checks, use the same checker without a frozen file list:
+
+```text
+node <skill>/scripts/check_conventions.cjs --explicit-public --format --indent-size 2 --semicolons insert --project <project> --git-root <repository> --scope <feature-path> --staged --unstaged --untracked --report <new-report.json>
+```
+
+Select formatting options only from the confirmed project baseline. The report records exact selected files, SHA-256 hashes, skipped extensions, TypeScript version and separate check statuses. Empty selections are `no-files`, not a successful scan. Member ordering, type/template and diff checks remain `not-run` because this command does not execute them. Existing report files are rejected to preserve previous evidence. Keep reports local when paths or source identity are private.
 The Toolkit regression suite uses Node's test runner and an existing TypeScript:
 set `ANGULAR_TEST_PROJECT` to that project, then run
 `node --test mcp/tests/test_angular_conventions.cjs` from the Toolkit root. A missing
