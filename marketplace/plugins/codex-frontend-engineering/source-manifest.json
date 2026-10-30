@@ -17,7 +17,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "b2d8210651676d172607a47911b3e42d2a366210b3c1874909590beeb5d2b7a5",
+      "sha256": "b0d7baf1896aeaf31a04c198daf9d710dfeecb388bfcb675d2c6da750596688b",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "skills/accessibility-engineering/SKILL.md": {
@@ -37,11 +37,11 @@
       "source": "skills/accessibility-engineering/references/validation.md"
     },
     "skills/angular-development/SKILL.md": {
-      "sha256": "3fac23ebd9ac7e9bfef63447511c1f61bd9fd274d1a12ff84e616a600dd9d12f",
+      "sha256": "a3b4d0cc71cd266cd3683cf79c4a5523410d56ad2f36c895f87d7deb325702df",
       "source": "skills/angular-development/SKILL.md"
     },
     "skills/angular-development/agents/openai.yaml": {
-      "sha256": "0720daf6629b5565294b46be2108127115ad04896dcc04115b1b68798cee653b",
+      "sha256": "c68978c7a6e7e8fe30e8e7779113517b6ca53ff3dd4ade5eb62cb919ffa22f64",
       "source": "skills/angular-development/agents/openai.yaml"
     },
     "skills/angular-development/assets/icon-small.png": {
