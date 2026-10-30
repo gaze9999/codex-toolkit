@@ -349,7 +349,7 @@ def apply_plan(planned, manifest, config, prefix, *, yes=False, ui=None):
         if step["action"] == "setup_assets":
             completed += install_assets(planned["spec"], prefix)
             continue
-        if step["action"] == "register_mcp":
+        if step["action"] in {"register_mcp", "http_mcp"}:
             completed.append(register_mcp(planned["spec"]["mcp"], config))
             continue
         if step["action"] == "python_mcp":
@@ -378,7 +378,8 @@ def apply_plan(planned, manifest, config, prefix, *, yes=False, ui=None):
             completed += install_assets(planned["spec"], prefix)
         if step["action"] == "node_mcp":
             spec = planned["spec"]["mcp"]
-            entry = prefix/"node_modules"/spec["entry_suffix"].lstrip("/")
+            package_root = prefix/"node_modules" if planned["platform"] == "windows" else prefix/"lib/node_modules"
+            entry = package_root/spec["entry_suffix"].lstrip("/")
             if not entry.is_file():
                 raise ValueError("Installed MCP entrypoint is missing: " + str(entry))
             arguments = [part.format(npm_prefix=str(prefix)) for part in spec.get("args", [])]
