@@ -2,7 +2,7 @@
 name: angular-development
 description: Implement, diagnose, refactor or review Angular components, forms, templates, feature models/helpers and application integration using the detected Angular/TypeScript/RxJS versions. Use architecture guidance only when ownership, DI, routing or cross-runtime boundaries are affected.
 metadata:
-  version: "0.4.22"
+  version: "0.5.0"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -23,6 +23,7 @@ Inspect the affected feature, actual Angular/TypeScript/RxJS versions, compiler/
 - Forms, templates, async rendering or hydration: [component behavior](references/component-behavior.md)
 - Generation or review of class visibility, layout, member groups, compact syntax or numeric display: [Angular style example](references/angular-style.md)
 - Feature maintenance items, read/write ownership, actual option sources, pass-through calls, duplicate projections or Model/type definitions: [code maintainability](references/code-maintainability.md)
+- Bounded maintenance audits with independent scope/depth, candidate evidence, performance/security routing: [maintenance review](references/maintainability-review.md), using the optional read-only [Python runner](scripts/check_maintainability.py) and its [AST adapter](scripts/maintainability_ast.cjs)
 - Explicit member reordering or Signal I/O migration: use the available angular-member-order Skill, otherwise preserve declaration order and initializer dependencies
 
 The style references are bundled with this Skill and the frontend-engineering Plugin. Load only the affected mode after checking project compatibility. Member ordering alone does not authorize logic or Model changes.

@@ -17,7 +17,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "a40e6a243049476f47bcb0c666f4d5f9aff7d41f1dbb840ae3662c9f0720e814",
+      "sha256": "b2d8210651676d172607a47911b3e42d2a366210b3c1874909590beeb5d2b7a5",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "skills/accessibility-engineering/SKILL.md": {
@@ -37,11 +37,11 @@
       "source": "skills/accessibility-engineering/references/validation.md"
     },
     "skills/angular-development/SKILL.md": {
-      "sha256": "6ddf9c12336e840ad661c3d7cc3801a9881ded55c22a0f5b8f1127d233f396c4",
+      "sha256": "3fac23ebd9ac7e9bfef63447511c1f61bd9fd274d1a12ff84e616a600dd9d12f",
       "source": "skills/angular-development/SKILL.md"
     },
     "skills/angular-development/agents/openai.yaml": {
-      "sha256": "b9adea65fc39f291e284dec2e4e6b0095f2f9e6bec5770adc1aa31f6ab810c40",
+      "sha256": "0720daf6629b5565294b46be2108127115ad04896dcc04115b1b68798cee653b",
       "source": "skills/angular-development/agents/openai.yaml"
     },
     "skills/angular-development/assets/icon-small.png": {
@@ -76,6 +76,10 @@
       "sha256": "b02740d06e5e8abf134b6b1421ac7673790d657b761ed1d16e70b4b8b44157ac",
       "source": "skills/angular-development/references/component-behavior.md"
     },
+    "skills/angular-development/references/maintainability-review.md": {
+      "sha256": "71d328724e0ce3b9c017f58dddd84f2d8e38c0ea8da1a2ff1e1efe41930cc1bf",
+      "source": "skills/angular-development/references/maintainability-review.md"
+    },
     "skills/angular-development/references/typescript-formatting.md": {
       "sha256": "4df6d33a8e453dc69de17a6987705e3ccf522804d996a76b0a85d161844a3dc6",
       "source": "skills/angular-development/references/typescript-formatting.md"
@@ -91,6 +95,14 @@
     "skills/angular-development/scripts/check_conventions.cjs": {
       "sha256": "c6eb665753ba393910f2d6d15b682d41a8c441dc8039f2c746a630e89a808419",
       "source": "skills/angular-development/scripts/check_conventions.cjs"
+    },
+    "skills/angular-development/scripts/check_maintainability.py": {
+      "sha256": "5cffd1b602b6bdb235d29d4a5797c465b22335b44d4a38aa0a09b5632f3a2ec8",
+      "source": "skills/angular-development/scripts/check_maintainability.py"
+    },
+    "skills/angular-development/scripts/maintainability_ast.cjs": {
+      "sha256": "1871e35982a711f67d557801ce0baf86c0a7b734078821ddf3c20d1e06d92b50",
+      "source": "skills/angular-development/scripts/maintainability_ast.cjs"
     },
     "skills/angular-member-order/SKILL.md": {
       "sha256": "0074f40ac6603e583da9a9d0213082825938f5f1ee845d2fce35046a53313c36",
@@ -283,6 +295,6 @@
     "edge-devtools"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.14.0",
-  "version": "0.5.6"
+  "toolkit_version": "0.15.0",
+  "version": "0.6.0"
 }
