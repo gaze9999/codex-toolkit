@@ -213,6 +213,44 @@
           "target": "assets"
         }
       ]
+    },
+    {
+      "id": "decisions-evaluation",
+      "batch": "2",
+      "status": "ready",
+      "skills": [
+        "decisions-evaluation"
+      ],
+      "runtime_profiles": [],
+      "resources": [
+        {
+          "source": "assets/branding",
+          "target": "assets"
+        },
+        {
+          "source": "python-tools/packages/decisions",
+          "target": "resources/decisions"
+        }
+      ]
+    },
+    {
+      "id": "visual-development",
+      "batch": "2",
+      "status": "ready",
+      "skills": [
+        "visual-development"
+      ],
+      "runtime_profiles": [],
+      "resources": [
+        {
+          "source": "assets/branding",
+          "target": "assets"
+        },
+        {
+          "source": "python-tools/packages/visual-runtime",
+          "target": "resources/visual-runtime"
+        }
+      ]
     }
   ],
   "management": "Codex /plugins",

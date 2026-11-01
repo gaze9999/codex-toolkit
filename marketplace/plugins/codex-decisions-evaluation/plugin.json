@@ -1,0 +1,23 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "codex-decisions-evaluation",
+  "version": "0.1.1",
+  "description": "Bounded OpenAI Decisions evaluation with an optional local CLI and MCP.",
+  "author": {
+    "name": "gaze9999"
+  },
+  "repository": "https://github.com/gaze9999/codex-toolkit",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Decisions 開發評估",
+        "shortDescription": "Bounded OpenAI Decisions evaluation with an optional local CLI and MCP.",
+        "logo": "./assets/toolkit.png",
+        "composerIcon": "./assets/toolkit.png",
+        "brandColor": "#E8A36D",
+        "websiteURL": "https://github.com/gaze9999/codex-toolkit"
+      }
+    }
+  },
+  "homepage": "https://github.com/gaze9999/codex-toolkit"
+}

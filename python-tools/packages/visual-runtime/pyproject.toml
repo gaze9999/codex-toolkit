@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "codex-visual-runtime"
+version = "0.1.0"
+description = "Root-scoped project inspection and owned static preview sessions"
+requires-python = ">=3.11"
+readme = "README.md"
+license = "MIT"
+
+[project.optional-dependencies]
+mcp = ["mcp==2.2.0"]
+
+[project.scripts]
+visual-runtime = "codex_visual_runtime.cli:main"
+visual-runtime-mcp = "codex_visual_runtime.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

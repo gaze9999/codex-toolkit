@@ -1,0 +1,4 @@
+interface:
+  display_name: "Decisions Evaluation (v0.1.1)"
+  short_description: "Bounded development evaluation with Decisions"
+  default_prompt: "Use $decisions-evaluation for a bounded approved comparison when its result can change the next development step; keep Main responsible for authority and acceptance."

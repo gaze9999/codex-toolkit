@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "b0703204df2cd0d92b4bbadaa78f5803dc57d0008fdb96a90018f3e0c3f316b7",
+      "sha256": "820665a9d005d70d6705e5fa6d23a02e168ca775c79f2bc49b5b6173ff6928a7",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
@@ -269,11 +269,11 @@
       "source": "skills/task-guide/scripts/record_history.py"
     },
     "skills/task-routing/SKILL.md": {
-      "sha256": "465e1d616c4331582a8c62942c25d3458fa3e767aabeafb78058d9ef668b7b86",
+      "sha256": "9afd2d7ce77ff088faef2dcffbb4a36a634da5ab34243691079c7d90356dde5c",
       "source": "skills/task-routing/SKILL.md"
     },
     "skills/task-routing/agents/openai.yaml": {
-      "sha256": "dcf8b4073c1be384474a0cd66dc7553c8f85bb7b5285a04379986b70be375bcb",
+      "sha256": "249595a4147a1ca14629da71e5e2974a9d61151a02709c09dbd2bb5d8f4900be",
       "source": "skills/task-routing/agents/openai.yaml"
     },
     "skills/task-routing/assets/icon-small.png": {
@@ -293,7 +293,7 @@
       "source": "skills/task-routing/assets/icon.svg"
     },
     "skills/task-routing/references/workflow.md": {
-      "sha256": "684e2972178c6ac9b4ca3d12dab52759a52d6de58f929192a9f386777032bbcc",
+      "sha256": "ab62bfaec50057cbfcab7f8b9af664a2426ccd5aa1a670521de373a66ac08643",
       "source": "skills/task-routing/references/workflow.md"
     }
   },
@@ -303,6 +303,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.15.0",
-  "version": "0.5.0"
+  "toolkit_version": "0.16.0",
+  "version": "0.5.1"
 }
