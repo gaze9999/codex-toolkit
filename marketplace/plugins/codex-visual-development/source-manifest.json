@@ -1,0 +1,80 @@
+{
+  "files": {
+    "LICENSE": {
+      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
+      "source": "LICENSE"
+    },
+    "assets/toolkit.png": {
+      "sha256": "dff331901c72c163d7df0d52fbe88e8c77d6bb5e42d9940eec12be387bdb1211",
+      "source": "assets/branding/toolkit.png"
+    },
+    "assets/toolkit.svg": {
+      "sha256": "9a3a22f496588d2789ee81dd858edd59dec3c5fc7da22677aab0d50f1348a4f9",
+      "source": "assets/branding/toolkit.svg"
+    },
+    "plugin.json": {
+      "sha256": "2cc4f183c4057a15068e36caa9e5a0423fefb4cd6575f06157c45764f1ed589a",
+      "source": "plugins/visual-development/plugin.json"
+    },
+    "resources/visual-runtime/README.md": {
+      "sha256": "2a4da030611857f50d49e26ab802891102741423895bd01ce580a61cc0968851",
+      "source": "python-tools/packages/visual-runtime/README.md"
+    },
+    "resources/visual-runtime/pyproject.toml": {
+      "sha256": "17398ec090411913004fa0b733c6df46c6bc4edf4e3e86304d07f36ccff13d94",
+      "source": "python-tools/packages/visual-runtime/pyproject.toml"
+    },
+    "resources/visual-runtime/src/codex_visual_runtime/__init__.py": {
+      "sha256": "ea8423722cd345759e8254c1e80a35114b36a2303695370f4a7150e68fcc9c94",
+      "source": "python-tools/packages/visual-runtime/src/codex_visual_runtime/__init__.py"
+    },
+    "resources/visual-runtime/src/codex_visual_runtime/__main__.py": {
+      "sha256": "79ee6f134c5c5193377cf9b189cbdcc3e2095e49ba9cec310114441c15a917c4",
+      "source": "python-tools/packages/visual-runtime/src/codex_visual_runtime/__main__.py"
+    },
+    "resources/visual-runtime/src/codex_visual_runtime/cli.py": {
+      "sha256": "ceeb7561dc2196231d6d4541b8f44f9c822e9dc8a12deae5384f4ce6dfcce864",
+      "source": "python-tools/packages/visual-runtime/src/codex_visual_runtime/cli.py"
+    },
+    "resources/visual-runtime/src/codex_visual_runtime/core.py": {
+      "sha256": "27808e950bb86f30dedf8a37d4f4826db7d5f59b7594581e5875883c144e0bc5",
+      "source": "python-tools/packages/visual-runtime/src/codex_visual_runtime/core.py"
+    },
+    "resources/visual-runtime/src/codex_visual_runtime/server.py": {
+      "sha256": "707280935720613a2ac2b278332906d632ae95d65ffa4715c5324ad09fef6cca",
+      "source": "python-tools/packages/visual-runtime/src/codex_visual_runtime/server.py"
+    },
+    "skills/visual-development/SKILL.md": {
+      "sha256": "595cbe17e354165ff7982ef7427866f32ad930be3f69090abb96af0e4b34d546",
+      "source": "skills/visual-development/SKILL.md"
+    },
+    "skills/visual-development/agents/openai.yaml": {
+      "sha256": "702a8ac565adf26d0edabcb72d2ff78f54388691ad319e98bbb54343ce7c764a",
+      "source": "skills/visual-development/agents/openai.yaml"
+    },
+    "skills/visual-development/assets/example.html": {
+      "sha256": "5f4203a177116b330e8219f147a725709ceedf35df96e93038f2e8a85a5d6922",
+      "source": "skills/visual-development/assets/example.html"
+    },
+    "skills/visual-development/assets/three-scene.mjs": {
+      "sha256": "866f5e7a6797ad5a61064147b0a468d83b0aa44309ce30c6378d9a05edf8d263",
+      "source": "skills/visual-development/assets/three-scene.mjs"
+    },
+    "skills/visual-development/references/integration.md": {
+      "sha256": "17454dff3efe34c25c7a8ae51e2257a19636fcdb05ef1b1050f687300929f1ed",
+      "source": "skills/visual-development/references/integration.md"
+    },
+    "skills/visual-development/references/runtime.md": {
+      "sha256": "e1f7834456cc3e644ddebb7a406b05c37ef300b3a6d716f2012e17988548ef23",
+      "source": "skills/visual-development/references/runtime.md"
+    }
+  },
+  "license": "MIT",
+  "plugin": "codex-visual-development",
+  "producer": "codex-toolkit.marketplace.v1",
+  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
+  "runtime_profiles": [],
+  "source_state": "canonical-file-hashes",
+  "toolkit_version": "0.16.0",
+  "version": "0.1.1"
+}

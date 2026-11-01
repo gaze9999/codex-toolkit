@@ -3,7 +3,7 @@ name: task-routing
 description: Choose between continuing a Codex task, creating a separate task, forking a conversation, and using subagents, then prepare a compact handoff when needed. Use for explicit routing questions, conditional routing instructions in a user turn, or an authorized continuing coordinator, not ordinary implementation or AGENTS.md maintenance.
 metadata:
   short-description: Task routing and context handoff
-  version: "0.4.14"
+  version: "0.4.15"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
