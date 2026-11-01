@@ -15,6 +15,7 @@ visual-runtime --root /absolute/project artifacts --files index.html app.js
 visual-runtime --root /absolute/project preview --entry index.html --files index.html app.js
 ```
 
+預覽直接綁定 127.0.0.1, 啟動不執行主機名稱查詢
 preview 輸出 ready、job ID 與 loopback URL, 前景持續執行直到 Ctrl+C
 只提供清單內的檔案快照, 更新檔案後重啟預覽, 不提供 HMR、目錄瀏覽或整個專案下載
 每次至多 128 個資產、單檔 32 MiB、合計 64 MiB, 同一程序至多 8 個預覽

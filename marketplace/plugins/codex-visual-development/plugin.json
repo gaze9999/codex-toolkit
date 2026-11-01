@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-visual-development",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Project-native data visualization, 2D motion and Three.js with scoped local previews.",
   "author": {
     "name": "gaze9999"
