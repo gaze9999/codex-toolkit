@@ -30,7 +30,9 @@ from workspace_inspection_mcp import service as workspace_service
 class SourceChecks(unittest.TestCase):
     def test_public_batches_are_self_contained(self):
         packages, result = prepare(ROOT)
-        self.assertEqual(len(packages), 9)
+        self.assertEqual(len(packages), 11)
+        self.assertIn("resources/decisions/src/codex_decisions/core.py", packages["decisions-evaluation"][0])
+        self.assertIn("resources/visual-runtime/src/codex_visual_runtime/core.py", packages["visual-development"][0])
         self.assertEqual(result["blocked"], [])
         self.assertTrue(all("plugin.json" in files for files, _manifest in packages.values()))
         self.assertIn("resources/proofreading/zh-tw/protected-copy.cjs", packages["multilingual-proofreading"][0])

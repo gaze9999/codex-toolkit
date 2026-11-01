@@ -1,0 +1,23 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "codex-visual-development",
+  "version": "0.1.1",
+  "description": "Project-native data visualization, 2D motion and Three.js with scoped local previews.",
+  "author": {
+    "name": "gaze9999"
+  },
+  "repository": "https://github.com/gaze9999/codex-toolkit",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "視覺互動開發",
+        "shortDescription": "Project-native data visualization, 2D motion and Three.js with scoped local previews.",
+        "logo": "./assets/toolkit.png",
+        "composerIcon": "./assets/toolkit.png",
+        "brandColor": "#E8A36D",
+        "websiteURL": "https://github.com/gaze9999/codex-toolkit"
+      }
+    }
+  },
+  "homepage": "https://github.com/gaze9999/codex-toolkit"
+}

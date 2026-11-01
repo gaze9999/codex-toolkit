@@ -1,0 +1,68 @@
+{
+  "files": {
+    "LICENSE": {
+      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
+      "source": "LICENSE"
+    },
+    "assets/toolkit.png": {
+      "sha256": "dff331901c72c163d7df0d52fbe88e8c77d6bb5e42d9940eec12be387bdb1211",
+      "source": "assets/branding/toolkit.png"
+    },
+    "assets/toolkit.svg": {
+      "sha256": "9a3a22f496588d2789ee81dd858edd59dec3c5fc7da22677aab0d50f1348a4f9",
+      "source": "assets/branding/toolkit.svg"
+    },
+    "plugin.json": {
+      "sha256": "da69edf1a8b87c57694b4eab218ab8d4681456c92fc8b0eb779fa471a794ce25",
+      "source": "plugins/decisions-evaluation/plugin.json"
+    },
+    "resources/decisions/README.md": {
+      "sha256": "4148af861afd8f3b2858422519ce11e88169aa34664cb4974fa870064644db0e",
+      "source": "python-tools/packages/decisions/README.md"
+    },
+    "resources/decisions/pyproject.toml": {
+      "sha256": "405ad22d303f35993ddb621a93e79e52290aa2cf00d57e9cdec6d34fa7875b94",
+      "source": "python-tools/packages/decisions/pyproject.toml"
+    },
+    "resources/decisions/src/codex_decisions/__init__.py": {
+      "sha256": "8471623e3558d82ab68cbef9f57acda5dc0cef3cf9727cbd7615172cd59e6d89",
+      "source": "python-tools/packages/decisions/src/codex_decisions/__init__.py"
+    },
+    "resources/decisions/src/codex_decisions/__main__.py": {
+      "sha256": "79ee6f134c5c5193377cf9b189cbdcc3e2095e49ba9cec310114441c15a917c4",
+      "source": "python-tools/packages/decisions/src/codex_decisions/__main__.py"
+    },
+    "resources/decisions/src/codex_decisions/cli.py": {
+      "sha256": "f64c365ca5968076566a6006d4245a467cdb623fae947d8e38ec3d17712ea341",
+      "source": "python-tools/packages/decisions/src/codex_decisions/cli.py"
+    },
+    "resources/decisions/src/codex_decisions/core.py": {
+      "sha256": "bb79afcbaa5d11c49f80fca1c8febc904a779646c4f4f66f642c73868728520a",
+      "source": "python-tools/packages/decisions/src/codex_decisions/core.py"
+    },
+    "resources/decisions/src/codex_decisions/server.py": {
+      "sha256": "75c752a2d847508bedf356c8b6f22429af7427dea4ae36a41932cc61f37b4d3b",
+      "source": "python-tools/packages/decisions/src/codex_decisions/server.py"
+    },
+    "skills/decisions-evaluation/SKILL.md": {
+      "sha256": "e8fcc9b7dca0448594806278b9121599f2ea85282f9134902c6005983f25c9f4",
+      "source": "skills/decisions-evaluation/SKILL.md"
+    },
+    "skills/decisions-evaluation/agents/openai.yaml": {
+      "sha256": "1248dc8164bc543a4d9b75b14a6374b0dc3d98dee3f0eb6b437c9a2bd73c2308",
+      "source": "skills/decisions-evaluation/agents/openai.yaml"
+    },
+    "skills/decisions-evaluation/references/usage.md": {
+      "sha256": "fa9d49743b7b1b543b78d7367d9f9e197b640e6e84defdb15b57e4d4a283ab20",
+      "source": "skills/decisions-evaluation/references/usage.md"
+    }
+  },
+  "license": "MIT",
+  "plugin": "codex-decisions-evaluation",
+  "producer": "codex-toolkit.marketplace.v1",
+  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
+  "runtime_profiles": [],
+  "source_state": "canonical-file-hashes",
+  "toolkit_version": "0.16.0",
+  "version": "0.1.1"
+}

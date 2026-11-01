@@ -56,3 +56,33 @@ jobs:
         run: |
           python -B tooling/package.py build --version 0.0.0 --output dist/source-check
           python -B tooling/package.py verify --output dist/source-check
+  development-runtime:
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [windows-2022, macos-14, ubuntu-latest]
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install shared development cores and STDIO adapters
+        run: python -m pip install "./python-tools/packages/decisions[mcp]" "./python-tools/packages/visual-runtime[mcp]"
+      - name: Check offline Decisions and real local preview protocol
+        run: |
+          python -B -m unittest discover -s python-tools/packages/decisions/tests -v
+          python -B -m unittest discover -s python-tools/packages/visual-runtime/tests -v
+      - name: Check platform installation and restoration boundaries
+        run: |
+          python -B -m unittest discover -s mcp/tests -p test_install_development_tool.py
+          python -B -m unittest discover -s mcp/tests -p test_restore_profile.py
+      - name: Check installed entry points
+        run: |
+          decisions --help
+          decisions-mcp --help
+          visual-runtime --help
+          visual-runtime-mcp --help

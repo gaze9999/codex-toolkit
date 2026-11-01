@@ -1,6 +1,6 @@
 {
   "interface": {
-    "displayName": "🧰 Codex Toolkit v0.15.0"
+    "displayName": "🧰 Codex Toolkit v0.16.0"
   },
   "name": "codex-toolkit",
   "plugins": [
@@ -109,6 +109,30 @@
       },
       "source": {
         "path": "./marketplace/plugins/codex-project-documentation",
+        "source": "local"
+      }
+    },
+    {
+      "category": "Productivity",
+      "name": "codex-decisions-evaluation",
+      "policy": {
+        "authentication": "ON_USE",
+        "installation": "AVAILABLE"
+      },
+      "source": {
+        "path": "./marketplace/plugins/codex-decisions-evaluation",
+        "source": "local"
+      }
+    },
+    {
+      "category": "Productivity",
+      "name": "codex-visual-development",
+      "policy": {
+        "authentication": "ON_USE",
+        "installation": "AVAILABLE"
+      },
+      "source": {
+        "path": "./marketplace/plugins/codex-visual-development",
         "source": "local"
       }
     }

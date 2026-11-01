@@ -25,7 +25,7 @@ class DevelopmentToolInstallation(unittest.TestCase):
         self.prefix = self.root / 'npm'
         self.original = 'model = "preserved"\n[mcp_servers.existing]\ncommand = "existing-server"\n'
         self.config.write_text(self.original, encoding='utf-8')
-        self.manifest = json.loads((ROOT / 'mcp/tools/development-tools.requirements.json').read_text())
+        self.manifest = json.loads((ROOT / 'mcp/tools/development-tools.requirements.json').read_text(encoding='utf-8'))
         self.env = patch.dict(os.environ)
         self.env.start()
         self.addCleanup(self.env.stop)

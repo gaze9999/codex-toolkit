@@ -35,7 +35,7 @@ class MarketplaceTests(unittest.TestCase):
     def test_version_is_visible_without_changing_marketplace_identity(self):
         (self.root / 'VERSION').write_text('0.1.0\n', encoding='utf-8')
         market.synchronize(self.root, True)
-        value = market.json.loads((self.root / '.agents/plugins/marketplace.json').read_text())
+        value = market.json.loads((self.root / '.agents/plugins/marketplace.json').read_text(encoding='utf-8'))
         self.assertEqual(value['name'], 'codex-toolkit')
         self.assertEqual(value['interface']['displayName'], '🧰 Codex Toolkit v0.1.0')
         self.assertEqual(market.synchronize(self.root)['status'], 'pass')
@@ -45,7 +45,7 @@ class MarketplaceTests(unittest.TestCase):
         market.synchronize(self.root, True)
         (self.root / 'VERSION').write_text('0.1.1\n', encoding='utf-8')
         market.synchronize(self.root, True)
-        value = market.json.loads((self.root / '.agents/plugins/marketplace.json').read_text())
+        value = market.json.loads((self.root / '.agents/plugins/marketplace.json').read_text(encoding='utf-8'))
         self.assertEqual(value['interface']['displayName'], '🧰 Codex Toolkit v0.1.1')
         value['interface']['displayName'] = 'Manual title'
         (self.root / '.agents/plugins/marketplace.json').write_text(market.json.dumps(value))

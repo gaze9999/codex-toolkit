@@ -82,6 +82,7 @@ junit.xml
 *.whl
 
 # Local working files
+/.local/
 *.tmp
 *.temp
 

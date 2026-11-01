@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "codex-decisions"
+version = "0.1.0"
+description = "Bounded Decisions client with offline validation and optional MCP"
+requires-python = ">=3.11"
+readme = "README.md"
+license = "MIT"
+
+[project.optional-dependencies]
+mcp = ["mcp==2.2.0"]
+
+[project.scripts]
+decisions = "codex_decisions.cli:main"
+decisions-mcp = "codex_decisions.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
