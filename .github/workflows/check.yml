@@ -44,7 +44,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runner: [windows-2022, macos-14]
+        runner: [windows-2022, macos-15]
     runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v4
@@ -63,7 +63,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runner: [windows-2022, macos-14, ubuntu-latest]
+        runner: [windows-2022, macos-15, ubuntu-latest]
     runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v4

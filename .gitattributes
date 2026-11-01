@@ -28,3 +28,7 @@ python-tools/src/text/context_budget.py text eol=lf
 python-tools/src/text/context_estimates.json text eol=lf
 python-tools/src/text/token_count.py text eol=lf
 python-tools/src/text/token_html.py text eol=lf
+
+# Keep bundled development-core resource hashes stable across platforms
+python-tools/packages/decisions/** text=auto eol=lf
+python-tools/packages/visual-runtime/** text=auto eol=lf
