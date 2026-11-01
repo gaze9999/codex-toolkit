@@ -41,7 +41,7 @@
       "source": "python-tools/packages/visual-runtime/src/codex_visual_runtime/core.py"
     },
     "resources/visual-runtime/src/codex_visual_runtime/server.py": {
-      "sha256": "707280935720613a2ac2b278332906d632ae95d65ffa4715c5324ad09fef6cca",
+      "sha256": "0b0b86649df8da04766a2684d035b9f8e1f8a3da8515184a73b49bacb9fe9019",
       "source": "python-tools/packages/visual-runtime/src/codex_visual_runtime/server.py"
     },
     "skills/visual-development/SKILL.md": {
