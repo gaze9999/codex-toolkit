@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "da69edf1a8b87c57694b4eab218ab8d4681456c92fc8b0eb779fa471a794ce25",
+      "sha256": "90d5091a6d49bb23d1d200485eb72bd805607007077ad70e1b6574d91711f826",
       "source": "plugins/decisions-evaluation/plugin.json"
     },
     "resources/decisions/README.md": {

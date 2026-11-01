@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "2cc4f183c4057a15068e36caa9e5a0423fefb4cd6575f06157c45764f1ed589a",
+      "sha256": "1a559825def4eba7c7a63d0be2b6e1adfdf3123352562ecde7a8cd514a09212d",
       "source": "plugins/visual-development/plugin.json"
     },
     "resources/visual-runtime/README.md": {
@@ -45,11 +45,11 @@
       "source": "python-tools/packages/visual-runtime/src/codex_visual_runtime/server.py"
     },
     "skills/visual-development/SKILL.md": {
-      "sha256": "595cbe17e354165ff7982ef7427866f32ad930be3f69090abb96af0e4b34d546",
+      "sha256": "6a731f08816cfecd6f121c0d70ef0ed920068f31296f6e31489e4e17333f3b31",
       "source": "skills/visual-development/SKILL.md"
     },
     "skills/visual-development/agents/openai.yaml": {
-      "sha256": "702a8ac565adf26d0edabcb72d2ff78f54388691ad319e98bbb54343ce7c764a",
+      "sha256": "35daa784aeec052d31ccde1939901880208e56468b631c31b06ebe8e1dffb528",
       "source": "skills/visual-development/agents/openai.yaml"
     },
     "skills/visual-development/assets/example.html": {
