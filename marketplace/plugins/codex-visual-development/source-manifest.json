@@ -13,19 +13,19 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "1a559825def4eba7c7a63d0be2b6e1adfdf3123352562ecde7a8cd514a09212d",
+      "sha256": "96fd78fe0b52747b64245c069cd7a6523a9bcd6d3ede96edcfa047f1c5468225",
       "source": "plugins/visual-development/plugin.json"
     },
     "resources/visual-runtime/README.md": {
-      "sha256": "2a4da030611857f50d49e26ab802891102741423895bd01ce580a61cc0968851",
+      "sha256": "6a81f4f1422e669f55a4175f1e7e0ac2594760ec8651ecadf6b9710c0832bbd7",
       "source": "python-tools/packages/visual-runtime/README.md"
     },
     "resources/visual-runtime/pyproject.toml": {
-      "sha256": "17398ec090411913004fa0b733c6df46c6bc4edf4e3e86304d07f36ccff13d94",
+      "sha256": "aaab84c3fa4df59bdeb92ba0276bd0904ef4b86b1859624e49fb39ba392c45e5",
       "source": "python-tools/packages/visual-runtime/pyproject.toml"
     },
     "resources/visual-runtime/src/codex_visual_runtime/__init__.py": {
-      "sha256": "ea8423722cd345759e8254c1e80a35114b36a2303695370f4a7150e68fcc9c94",
+      "sha256": "479c427328802cab3860f6bf46996fdc57008591f7272d78669aa93556de0c6d",
       "source": "python-tools/packages/visual-runtime/src/codex_visual_runtime/__init__.py"
     },
     "resources/visual-runtime/src/codex_visual_runtime/__main__.py": {
@@ -37,7 +37,7 @@
       "source": "python-tools/packages/visual-runtime/src/codex_visual_runtime/cli.py"
     },
     "resources/visual-runtime/src/codex_visual_runtime/core.py": {
-      "sha256": "27808e950bb86f30dedf8a37d4f4826db7d5f59b7594581e5875883c144e0bc5",
+      "sha256": "ec712483990b39ed03f296dab65b90d4f323a8ea0de404a97529e0dd4a56ec6e",
       "source": "python-tools/packages/visual-runtime/src/codex_visual_runtime/core.py"
     },
     "resources/visual-runtime/src/codex_visual_runtime/server.py": {
@@ -76,5 +76,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.16.0",
-  "version": "0.1.1"
+  "version": "0.1.2"
 }

@@ -8,6 +8,7 @@ import secrets
 import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from socketserver import TCPServer
 from urllib.parse import unquote, urlsplit
 
 ALLOWED = {".html", ".css", ".js", ".mjs", ".json", ".svg", ".png", ".jpg", ".jpeg", ".webp", ".woff2", ".gltf", ".glb", ".bin"}
@@ -16,6 +17,12 @@ MAX_FILE = 32 * 1024 * 1024
 
 class Problem(ValueError):
     pass
+
+
+class LoopbackHTTPServer(ThreadingHTTPServer):
+    def server_bind(self):
+        TCPServer.server_bind(self)
+        self.server_name, self.server_port = self.server_address
 
 
 class Workspace:
@@ -136,7 +143,7 @@ class Previews:
                     if not head:
                         self.wfile.write(body)
 
-            server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+            server = LoopbackHTTPServer(("127.0.0.1", 0), Handler)
             thread = threading.Thread(target=server.serve_forever, kwargs={"poll_interval": 0.05}, daemon=True)
             job = secrets.token_hex(12)
             self.jobs[job] = (server, thread, entry, files, prefix)
