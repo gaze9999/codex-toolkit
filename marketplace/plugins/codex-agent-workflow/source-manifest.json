@@ -273,7 +273,7 @@
       "source": "skills/task-routing/SKILL.md"
     },
     "skills/task-routing/agents/openai.yaml": {
-      "sha256": "249595a4147a1ca14629da71e5e2974a9d61151a02709c09dbd2bb5d8f4900be",
+      "sha256": "ef790c1e1caac2220f58c0b818aeccdc43f741b3c38166579ec8ce441e2b055b",
       "source": "skills/task-routing/agents/openai.yaml"
     },
     "skills/task-routing/assets/icon-small.png": {
