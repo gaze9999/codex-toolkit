@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 import urllib.error
 import urllib.request
 from codex_visual_runtime.core import Workspace, Previews, Problem
@@ -29,6 +30,13 @@ class VisualTests(unittest.TestCase):
     def test_hash_matches_original(self):
         result = self.workspace.artifacts(["index.html"])
         self.assertEqual(result["artifacts"][0]["bytes"], 16)
+
+    def test_preview_start_does_not_resolve_hostnames(self):
+        with patch("socket.getfqdn", side_effect=AssertionError("Unexpected DNS lookup")):
+            job = self.previews.start("index.html", ["index.html"])
+        self.assertEqual(job["status"], "ready")
+        with urllib.request.urlopen(job["url"], timeout=2) as response:
+            self.assertEqual(response.read(), b"<h1>Preview</h1>")
 
     def test_unicode_space_root_and_relative_assets(self):
         root = self.root / "專案 with spaces"
