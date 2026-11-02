@@ -37,7 +37,7 @@ Use this reference when reorganizing agent instructions for a repository or movi
 - Search for moved headings, role names, model names, invocation parameters, runtime versions, and stale links. Confirm each surviving occurrence belongs at that layer.
 - Validate syntax and metadata, compare synchronized copies byte-for-byte when requested, and inspect Git status. Report ignored or untracked governance files explicitly.
 - For settings requiring an account, web, or app UI, provide the exact destination, proposed content or value, and remaining manual action separately. Do not invent configuration keys, copy generated memory files as mandatory guidance, or report an unapplied setting as complete.
-- Do not claim that shorter instructions reduce tokens, cost, latency, or errors without measurement. Confirm file content immediately; treat runtime reload by an already-open client as unverified unless observed.
+- Confirm file content and verify affected client loading. For an instruction-effectiveness comparison, measure the relevant quality, cost, latency or error outcomes against the baseline.
 
 ## Portable outcome
 

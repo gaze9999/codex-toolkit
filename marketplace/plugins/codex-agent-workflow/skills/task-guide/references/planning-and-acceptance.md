@@ -28,7 +28,7 @@ Use concise English for AI-facing artifacts unless requested otherwise. Human-fa
 | Test design or execution | Available test-strategy workflow and existing project runners | Use independent oracles, safe fixtures and owned resources; retain required gates |
 | Existing evidence review | Available validation-evidence-review workflow | Read-only interpretation does not rerun checks or synchronize files |
 
-This table selects responsibility, not an install list or fixed tool bundle. A reference-only MCP can supply rules, but cannot be described as a scanner. Do not infer a tool from a Plugin name, invoke all security scans automatically, send private code to external tools, or claim a specialist ran because its instructions were read. If a specialist is absent, use an authorized compatible method or retain the specific gap; do not install implicitly.
+Select the relevant responsibility from this table. A reference-only MCP can supply rules, but cannot be described as a scanner. Do not infer a tool from a Plugin name, invoke all security scans automatically, send private code to external tools, or claim a specialist ran because its instructions were read. If a specialist is absent, use an authorized compatible method or retain the specific gap; do not install implicitly.
 
 For each selected specialist record the objective, exact source/baseline, included and excluded paths, allowed operations/data, current tool/command, expected output, evidence location and remaining gaps. Main maps returned findings to requirements, validates scope and evidence, and decides accepted defect, question, false positive or pending verification. Fixing findings requires the effective implementation authority. Recheck affected findings after the candidate changes.
 

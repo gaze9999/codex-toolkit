@@ -1,9 +1,122 @@
 version: 1
-# Contextual governance wording is advisory in taiwan-style.cjs, not a global replacement.
+# Contextual governance and agent aliases are advisory in taiwan-style.cjs, not global replacements.
+# Agent terminology: skills/agent-governance/references/agent-terminology.md, reviewed 2026-11-02.
+# Preserve AI 代理程式 / AI 代理人 / AI 代理 and formal Governance, Harness, MCP/A2A/A2UI/AG-UI names.
+# Alias suggestions are project terminology choices, not nationally standardized translations.
 # Scope and source IDs: docs/tools/proofreading.md, reviewed 2026-10-05
 # Apply to authored prose; specification/UI copy needs explicit change authorization.
 # protected-copy.cjs preserves HTML and declared literal UI/specification text.
 rules:
+
+  # Official term evidence, reviewed 2026-11-02: moe-cross-strait, naer-computing.
+  # Source URLs and entry dates: docs/tools/proofreading.md.
+  # Patterns/examples are authored here; source definitions and tables are not bundled.
+  - expected: 硬體
+    patterns: [硬件]
+    specs:
+    - from: 檢查電腦硬件
+      to: 檢查電腦硬體
+    - from: 硬體需求
+      to: 硬體需求
+  - expected: 作業系統
+    patterns: [操作系統, 操作系统]
+    specs:
+    - from: 更新操作系統
+      to: 更新作業系統
+    - from: 操作系统版本
+      to: 作業系統版本
+    - from: 作業系統版本
+      to: 作業系統版本
+  - expected: 晶片
+    patterns: [芯片]
+    specs:
+    - from: 讀取晶圓與芯片資訊
+      to: 讀取晶圓與晶片資訊
+  - expected: 磁碟
+    patterns: [磁盤, 磁盘]
+    specs:
+    - from: 掛載磁盤
+      to: 掛載磁碟
+    - from: 磁盘空間
+      to: 磁碟空間
+  - expected: 人工智慧
+    patterns: [人工智能]
+    specs:
+    - from: 人工智能系統
+      to: 人工智慧系統
+  - expected: 剪貼簿
+    patterns: [剪貼板, 剪贴板]
+    specs:
+    - from: 複製到剪貼板
+      to: 複製到剪貼簿
+    - from: 清空剪贴板
+      to: 清空剪貼簿
+
+  # Context-limited editorial patterns, with official sense evidence above.
+  - expected: $1主機板
+    pattern: /((?:電腦|筆電|桌機)(?:的)?[ \t]*)主板/g
+    specs:
+    - from: 電腦主板
+      to: 電腦主機板
+    - from: 筆電的主板
+      to: 筆電的主機板
+    - from: 主板上市
+      to: 主板上市
+  - expected: $1解析度
+    pattern: /((?:螢幕|影像|圖片|顯示)(?:的)?[ \t]*)分辨率/g
+    specs:
+    - from: 螢幕分辨率
+      to: 螢幕解析度
+    - from: 影像的分辨率
+      to: 影像的解析度
+    - from: 儀器分辨率
+      to: 儀器分辨率
+  - expected: 解除安裝$1
+    pattern: /卸載([ \t]*(?:應用程式|軟體|瀏覽器|擴充套件))/g
+    specs:
+    - from: 卸載軟體
+      to: 解除安裝軟體
+    - from: 卸載擴充套件
+      to: 解除安裝擴充套件
+    - from: 卸載核心模組
+      to: 卸載核心模組
+    - from: 貨物卸載
+      to: 貨物卸載
+  - expected: $1桌布
+    pattern: /((?:電腦|桌面|手機)(?:的)?[ \t]*)壁紙/g
+    specs:
+    - from: 桌面壁紙
+      to: 桌面桌布
+    - from: 手機的壁紙
+      to: 手機的桌布
+    - from: 牆面壁紙
+      to: 牆面壁紙
+  - expected: $1簡訊
+    pattern: /((?:手機|驗證|SMS)(?:的)?[ \t]*)短信/g
+    specs:
+    - from: 手機短信
+      to: 手機簡訊
+    - from: SMS 短信
+      to: SMS 簡訊
+    - from: 寄出一封短信
+      to: 寄出一封短信
+
+  # moda-metadata, article 2026-04-02; selected authored dataset/file/API prose.
+  # Preserve product-specific 中繼資料, the metadata Symbol and quoted terminology.
+  - expected: $1詮釋資料
+    pattern: /((?:資料集|資料欄位|檔案|API)[ \t]*)元(?:數據|数据)/g
+    specs:
+    - from: 資料集元數據
+      to: 資料集詮釋資料
+    - from: API 元数据
+      to: API 詮釋資料
+    - from: 產品中繼資料
+      to: 產品中繼資料
+    - from: metadata 欄位
+      to: metadata 欄位
+    - from: 原文元數據
+      to: 原文元數據
+
 
   # Preferred authored data-processing terminology; preserve backup/math terms.
   - expected: 差異讀取

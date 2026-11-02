@@ -3,7 +3,7 @@ name: agent-governance
 description: Create, audit, or simplify project AGENTS.md layers, Codex subagent roles and durable goal recovery across conversations. Use for instruction-governance work, not ordinary implementation or general code review.
 metadata:
   short-description: Agent governance, role boundaries, and instruction minimization
-  version: "0.6.13"
+  version: "0.6.14"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -14,7 +14,7 @@ Create or simplify instruction layers and durable role boundaries. Keep rules th
 
 ## Scope
 
-- Write AI-facing guides, briefs, indexes and handoffs in concise English. Human-facing authored Chinese uses concise Taiwan Traditional Chinese and Taiwan wording, never Simplified characters. Use halfwidth punctuation, one space after commas/colons/question/exclamation marks when text follows, allow 、 for enumeration, and omit Chinese sentence periods and semicolons. Preserve requested languages, source quotations, contractual copy, code, URLs and versions. These defaults apply even when Global is unavailable.
+- Write AI-facing guides, briefs, indexes and handoffs in concise English. Human-facing authored Chinese uses concise Taiwan Traditional Chinese and Taiwan wording, never Simplified characters. Keep all authored English concise and direct. Use halfwidth punctuation, one space after commas/colons/question/exclamation marks when text follows, allow 、 for enumeration, and omit Chinese sentence periods and semicolons. Preserve requested languages, source quotations, contractual copy, code, URLs and versions. These defaults apply even when Global is unavailable.
 - Read relevant sections/symbols first and retain checked source/version pointers. Expand only when confidence is insufficient or the specification is unclear/conflicting; do not require whole-file/document reads by default.
 - At each work round, recover relevant current progress, effective decisions and coding conventions. Apply formatting and member ordering to the actual generated/changed code, preserving initializer/decorator timing and unrelated work; reading a rule is not compliance. Reuse checked pointers and refresh only affected evidence.
 
@@ -29,6 +29,7 @@ Create or simplify instruction layers and durable role boundaries. Keep rules th
 
 | Changed concern | Read |
 |---|---|
+| Agent terminology, governance versus instructions, orchestration/harness/context/observability/evaluation or protocol boundaries | [Agent terminology](references/agent-terminology.md) |
 | New project instructions, roles or code-maintenance preferences | [Project setup](references/project-setup.md); select starter assets only when useful |
 | Global/root/nested scope, discovery or exact Git exclusions | [Instruction layering](references/instruction-layering.md) |
 | Project lifecycle, workspace path migration, client adoption or shared resource ownership | [Project environment routing](references/project-environment-routing.md) |
@@ -50,4 +51,4 @@ Before retiring guidance, map live callers and unique rules, move surviving deci
 
 Start with affected content review, metadata, syntax, references and requested mirrors. Expand only for a concrete gap or required gate; text-only guidance does not require application builds/E2E. Routing changes retain direct-work, delegation and handoff authorization, unfinished work and Main's acceptance responsibility.
 
-Report the result against the effective request, changed files, actual check scope and unfinished acceptance. Keep direct checks, historical evidence and others' reports distinct. Requested mirrors need content comparison; installed bytes do not prove existing-client reload. Give useful recommendations separately from required work, and create a separate report only when requested. Shorter guidance alone does not establish better quality, cost or runtime behavior.
+Report the result against the effective request, changed files, actual check scope and unfinished acceptance. Keep direct checks, historical evidence and others' reports distinct. Requested mirrors need content comparison; installed bytes do not prove existing-client reload. Give useful recommendations separately from required work, and create a separate report only when requested.

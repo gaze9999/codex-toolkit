@@ -11,7 +11,7 @@ Read only when existing tools cannot provide the needed evidence or interface se
 
 ## Candidate research, checked 2026-10-07
 
-- [CoplayDev Unity MCP](https://github.com/CoplayDev/unity-mcp): primary project README lists editor operations and test/profile/build capabilities, MIT, approximately 14.7k GitHub stars at inspection. This is stronger visibility than a small adapter, not a safety or quality guarantee. Verify the exact release, Unity package/runtime prerequisites and discovered test tools before selecting it.
+- [CoplayDev Unity MCP](https://github.com/CoplayDev/unity-mcp): primary project README lists editor operations and test/profile/build capabilities, MIT, approximately 14.7k GitHub stars at inspection. Verify the exact release, Unity package/runtime prerequisites and discovered test tools before selecting it.
 - [ChiR24 Unreal MCP](https://github.com/ChiR24/Unreal_mcp): primary README describes a C++ editor bridge with TypeScript server, MIT, approximately 903 stars at inspection. Inspect compatible engine/plugin/server versions, operation permissions, distribution and failure recovery. It is a candidate for editor interaction, not a replacement for Unreal's own automation framework.
 - [Unity community discussion](https://www.reddit.com/r/Unity3D/comments/1vm26dn/unity_advertises_ai_everywhere_so_i_decided_to/): reports differ about adapter testing support. Treat them as version-specific anecdotes that motivate checking live capabilities, not proof of current feature absence.
 

@@ -22,7 +22,7 @@ jobs:
           python -B tooling/evaluate.py routing
           python -B tooling/package.py plan
       - run: python -B -m unittest discover -s mcp/tests -p 'test_*.py'
-      - run: node --test mcp/tests/test_taiwan_style.cjs
+      - run: node --test mcp/tests/test_taiwan_style.cjs mcp/tests/test_authored_style.cjs
       - uses: actions/setup-node@v4
         with:
           node-version: '24'

@@ -104,7 +104,7 @@ Sources checked 2026-10-10. Apply the method to the detected model/client and ta
 
 ## Evaluate instruction utility
 
-Use these findings when an instruction/Skill change needs effectiveness evaluation. Original methods and limitations were read on 2026-10-10; these are research inputs, not measured results for this Toolkit or the user's runtime.
+Use these findings when an instruction/Skill change needs effectiveness evaluation. Original methods and limitations were read on 2026-10-10.
 
 | Original study and version | Applicable method and evidence boundary |
 |---|---|

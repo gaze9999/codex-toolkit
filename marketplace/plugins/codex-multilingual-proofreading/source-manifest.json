@@ -13,12 +13,20 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "67190cfe516c3a89fe5d95147ea8cca59018c457513a1c864cd9241c521eb2ca",
+      "sha256": "286a16a82b0ad6fab4db54bd48561c208980c5acb850c28de119f0681545d8b1",
       "source": "plugins/multilingual-proofreading/plugin.json"
+    },
+    "resources/proofreading/authored-style.cjs": {
+      "sha256": "42c12b7fa5e5d7fbabc8df5547bfc90bf744ca86a5683071b39d9d30334b8fa0",
+      "source": "mcp/tools/proofreading/authored-style.cjs"
     },
     "resources/proofreading/en/cspell.json": {
       "sha256": "0fd9d50aa1c00b37e06c93005e6d356695005c8eb983c6d7c1a0fb86525e726b",
       "source": "mcp/tools/proofreading/en/cspell.json"
+    },
+    "resources/proofreading/en/english.textlintrc.cjs": {
+      "sha256": "36c6a88f69b27953f8f5e7808cd7038bb469acdb3e243ad513a2e03b517019fa",
+      "source": "mcp/tools/proofreading/en/english.textlintrc.cjs"
     },
     "resources/proofreading/ja/.textlintrc.json": {
       "sha256": "531cba62da36d1aed90e0b6e73a09055e518e5fe0abf824bb9a1b2911438e285",
@@ -29,7 +37,7 @@
       "source": "mcp/tools/proofreading/textlint-mcp.cjs"
     },
     "resources/proofreading/zh-tw/.textlintrc.cjs": {
-      "sha256": "a2166e629d72de1904c7f2e212114c2839e77081bfa104913fe05e784f71e140",
+      "sha256": "3bd65591c4abd8778ec5dcdda6948655dd772097bfd39dbff9f628b3051ca4e9",
       "source": "mcp/tools/proofreading/zh-tw/.textlintrc.cjs"
     },
     "resources/proofreading/zh-tw/protected-copy.cjs": {
@@ -37,19 +45,19 @@
       "source": "mcp/tools/proofreading/zh-tw/protected-copy.cjs"
     },
     "resources/proofreading/zh-tw/taiwan-style.cjs": {
-      "sha256": "03b4b1ac8d6681c39ff316577072dda7cd827311afb180ec625c747229b5bdea",
+      "sha256": "26d44999a36ac306d09d36b7dc452a6ab19407192a4d6187f57a3f93ee7f9453",
       "source": "mcp/tools/proofreading/zh-tw/taiwan-style.cjs"
     },
     "resources/proofreading/zh-tw/terms.yml": {
-      "sha256": "4c2efdaa9619d8d0b52de83e56b4d16c90faff9bb34749012845173ded5a2a10",
+      "sha256": "d27bcf87587527c60ae30b167deacbf986c0898f010a680c84171a40b55d966c",
       "source": "mcp/tools/proofreading/zh-tw/terms.yml"
     },
     "skills/multilingual-proofreading/SKILL.md": {
-      "sha256": "c5b960f1787fd53d1549b7cba200dadf8bef53be7f63b36b5c828dcadb580a7a",
+      "sha256": "38e68611bdcfd045397bf403409ad89312dad8fd7dc5dfc72158bf500bfe5e6e",
       "source": "skills/multilingual-proofreading/SKILL.md"
     },
     "skills/multilingual-proofreading/agents/openai.yaml": {
-      "sha256": "e9a402bc82ac54b05e2f288f5d092f1f4c9842f09d15c08366431fc0a48baac0",
+      "sha256": "c10b509716e209ee8a4b0699c851bd9da3d12981ff248e4faf4a19a740bc0312",
       "source": "skills/multilingual-proofreading/agents/openai.yaml"
     },
     "skills/multilingual-proofreading/assets/icon-small.png": {
@@ -68,8 +76,12 @@
       "sha256": "4e2e092f61a1f54a6d9831cab1a5aea92acd6dcdd8f52ead82c85c97efacc04c",
       "source": "skills/multilingual-proofreading/assets/icon.svg"
     },
+    "skills/multilingual-proofreading/references/output-style.md": {
+      "sha256": "1957646f20faa7229b459b3dbc43ae9582a90c84c2a822c361037f3ecb1cd786",
+      "source": "skills/multilingual-proofreading/references/output-style.md"
+    },
     "skills/multilingual-proofreading/references/taiwan-terminology.md": {
-      "sha256": "36240abfafbd2df269aab4dd3a010b080fa3a4bc6f4dcb1c8b329a358b1df901",
+      "sha256": "568ec624a9eb00f848385e72d50fb96b48f9ca07cdc60b5a710e5f6d8cefae2e",
       "source": "skills/multilingual-proofreading/references/taiwan-terminology.md"
     }
   },
@@ -82,6 +94,6 @@
     "cspell"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.17.0",
-  "version": "0.1.12"
+  "toolkit_version": "0.18.0",
+  "version": "0.1.13"
 }

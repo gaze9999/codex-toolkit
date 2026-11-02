@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "8b77408fcd8c35e798873975591716f99c44bad39a51d19369f41982061883ba",
+      "sha256": "8c18a3251a1e6de746b72aad9b7d6fc94b24d496c9fa30fb9a117ff78aabfaa2",
       "source": "plugins/documents-specifications/plugin.json"
     },
     "resources/token-count/VERSION": {
@@ -109,11 +109,11 @@
       "source": "skills/data-visualization/references/delivery-and-verification.md"
     },
     "skills/doc-updater/SKILL.md": {
-      "sha256": "1da4c1ea1f6438368cbeb4806e287e36e3276a4dd8a658bcbaf453f66eaedac9",
+      "sha256": "6c465dc7b8a9974cebea5f7c520bb32e522ef0653a4bf2ea0d77bf313c4025c7",
       "source": "skills/doc-updater/SKILL.md"
     },
     "skills/doc-updater/agents/openai.yaml": {
-      "sha256": "297b53c09f04e4a147be487669ad0cbcd0316ca319c312fbef7b81d773382cc4",
+      "sha256": "757bb2e0d30836728b12c5ecb7dfd181f08534daf00ec3f118f49939eff8d0bc",
       "source": "skills/doc-updater/agents/openai.yaml"
     },
     "skills/doc-updater/assets/icon-small.png": {
@@ -141,7 +141,7 @@
       "source": "skills/doc-updater/references/notion-sync-reader-writer-contract.md"
     },
     "skills/doc-updater/references/presentation.md": {
-      "sha256": "b067dfbf2a9413c9ab93e8fa67de3b1ec6dd097db191445c61d5cfcb11b5ea57",
+      "sha256": "1c790140eb0f89681acb6cdef5f25c0649632db0928bd58a7d633fbca29a76fa",
       "source": "skills/doc-updater/references/presentation.md"
     },
     "skills/doc-updater/references/source-and-history.md": {
@@ -201,6 +201,6 @@
     "local-documents"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.17.0",
-  "version": "0.5.2"
+  "toolkit_version": "0.18.0",
+  "version": "0.5.3"
 }
