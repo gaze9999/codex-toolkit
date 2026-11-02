@@ -1,7 +1,7 @@
 name: Check public toolkit sources
 on:
   push:
-    tags: ['v[0-9]+.0.0']
+    tags: ['v[0-9]+.0.0', 'v[1-9].[0-9]+.0', 'v[1-9][0-9]+.[0-9]+.0']
   workflow_dispatch:
 permissions:
   contents: read
