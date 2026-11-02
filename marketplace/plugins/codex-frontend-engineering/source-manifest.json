@@ -17,7 +17,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "7cce0aabf8f389693c3df2272b3a6d191576e47b48d969cbe41072c694cbd9b5",
+      "sha256": "27fdb627d139c4a7641538787d7c047fdbd30e88a30913f50cb3e976e2bff617",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "skills/accessibility-engineering/SKILL.md": {
@@ -37,11 +37,11 @@
       "source": "skills/accessibility-engineering/references/validation.md"
     },
     "skills/angular-development/SKILL.md": {
-      "sha256": "c91ab7bf355f3b5b52dc45a6fc4f7da6f992d8a83c922f2f577cdb6f7c2f48e6",
+      "sha256": "5d873432e98db8333e17d4e35c10ad6896e65ff49aabdc2f958a0ae5595541c9",
       "source": "skills/angular-development/SKILL.md"
     },
     "skills/angular-development/agents/openai.yaml": {
-      "sha256": "6fca9d4da95e291811337a26f3b23f78346067c4436839e3075823438cbd31b9",
+      "sha256": "50133c12002fa434af72af18b64bf8e52eb4be9e89da86c0fe65ef3cd1b3f78c",
       "source": "skills/angular-development/agents/openai.yaml"
     },
     "skills/angular-development/assets/icon-small.png": {
@@ -61,7 +61,7 @@
       "source": "skills/angular-development/assets/icon.svg"
     },
     "skills/angular-development/references/angular-style.md": {
-      "sha256": "e53b75f061a568faa0616cbffd7d9f9cf8af62d6a6b8be9f6480bf996ae8181a",
+      "sha256": "d9f51f7895e52e3909b22e512d1bb64d3c484764c4fb7214962c7a13bfe5491b",
       "source": "skills/angular-development/references/angular-style.md"
     },
     "skills/angular-development/references/architecture.md": {
@@ -89,7 +89,7 @@
       "source": "skills/angular-development/references/ui-reuse.md"
     },
     "skills/angular-development/references/vscode-formatting-adapter.md": {
-      "sha256": "2325758ecaa2e8c170ab4bb801f498d6e3d8b3250daf512617fd6bc497db6a85",
+      "sha256": "9cc2c4e9918d37d495fe3492f5dffab04232b660951eaaab730dcc9af22beb0f",
       "source": "skills/angular-development/references/vscode-formatting-adapter.md"
     },
     "skills/angular-development/scripts/check_conventions.cjs": {
