@@ -30,6 +30,12 @@ When recurring feedback spans layers, keep business/API decisions and local acce
 - Standalone Python tools may include `pyproject.toml`/requirements, README, CLI help, examples and focused `docs/` or `references/` for API/data formats and troubleshooting. Keep dependency declarations authoritative in their actual owner, distinguish required/optional or platform-specific extras, and link detailed information instead of copying it into every Skill. Do not create empty directories or require a Skill for ordinary CLI use.
 - Secrets stay outside source and artifacts. Preserve third-party licenses and attribution. Reading a private dependency does not authorize redistribution.
 
+## Naming and explanatory comments
+
+When maintaining a requested coding preference, prefer owned Symbol names of 1-3 meaningful English words, following project casing. Preserve clarity, public APIs, framework conventions, external names and identifiers outside scope; avoid opaque abbreviations and unrelated bulk renaming. Longer names remain appropriate for clear meaning or compatibility.
+
+Add explanatory comments inside a method only when multiple decisions, variables, return paths or state interactions need explanation beyond names and structure. Explain the reason or interaction directly, without defensive wording, disclaimers or narration of obvious code. Preserve required license/tool directives and existing material outside scope. Model size alone does not require new JSDoc.
+
 ## Language and context budget
 
 Write rules as actionable conditions, responsibilities and acceptance criteria. Remove boilerplate disclaimers and self-justification. Keep runtime gaps in the existing project record; durable instructions retain only the condition and required response. Include a restriction where it changes an operation, preserving authorization and data boundaries.

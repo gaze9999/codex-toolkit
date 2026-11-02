@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "90d5091a6d49bb23d1d200485eb72bd805607007077ad70e1b6574d91711f826",
+      "sha256": "11967191b5dea510e66b6a8cfd9a44a67c593595397ad6adf3b5569f7cc252f2",
       "source": "plugins/decisions-evaluation/plugin.json"
     },
     "resources/decisions/README.md": {
@@ -45,11 +45,11 @@
       "source": "python-tools/packages/decisions/src/codex_decisions/server.py"
     },
     "skills/decisions-evaluation/SKILL.md": {
-      "sha256": "e8fcc9b7dca0448594806278b9121599f2ea85282f9134902c6005983f25c9f4",
+      "sha256": "8e537ff0c062366e58b6e45927b4849efeba67ec3b75d609ec753934af76f8cf",
       "source": "skills/decisions-evaluation/SKILL.md"
     },
     "skills/decisions-evaluation/agents/openai.yaml": {
-      "sha256": "1248dc8164bc543a4d9b75b14a6374b0dc3d98dee3f0eb6b437c9a2bd73c2308",
+      "sha256": "b0aba8092d42339fa1dfcbb18c69f0d8c8446a4bc9b487dc0453b13838075d2b",
       "source": "skills/decisions-evaluation/agents/openai.yaml"
     },
     "skills/decisions-evaluation/references/usage.md": {
@@ -63,6 +63,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.16.1",
-  "version": "0.1.1"
+  "toolkit_version": "0.17.0",
+  "version": "0.1.2"
 }
