@@ -128,7 +128,7 @@ Every question has `type` and `instructions` (string, object or array):
 }
 ```
 
-Default model is `jev-latest`; `TYPESAFE_MODEL` or `--model <jev-version>` can select a model. Record the resolved response model; pin a tested version when a workflow depends on calibrated thresholds. English is the primary training language; evaluate Traditional Chinese and mixed technical terms on representative examples before relying on ranking. Confidence thresholds are workflow policies, not provider guarantees of correctness.
+Default model is `jev-latest`; `TYPESAFE_MODEL` or `--model <jev-version>` can select a model. Record the resolved response model; pin a tested version when a workflow depends on calibrated thresholds. English is the primary training language; evaluate Traditional Chinese and mixed technical terms on representative examples before relying on ranking. Calibrate workflow confidence thresholds against accepted task outcomes.
 
 ## Failures and output
 

@@ -4,6 +4,15 @@ const punctuation = new Map([
   ['［', '['], ['］', ']'],
 ]);
 
+const agentTerms = [
+  [/(?:AI|LLM)[ \t]*智能[體体]/giu, 'AI 代理程式 / AI 代理人'],
+  [/多智能[體体]系統/gu, '多代理系統 (Multi-Agent System)'],
+  [/單(?:一)?智能[體体]系統/gu, '單一代理系統 (Single-Agent System)'],
+  [/子智能[體体]/gu, '子代理程式 (Subagent)'],
+  [/智能[體体]編排/gu, '代理編排 (Agent Orchestration)'],
+  [/智能[體体]框架/gu, '代理程式框架 (Agent Framework)'],
+];
+
 function rule(context) {
   const { Syntax, RuleError, report, getSource, fixer } = context;
   let excluded = 0;
@@ -21,12 +30,21 @@ function rule(context) {
         .map(match => [match.index, match.index + match[0].length]);
       const protectedAt = index => protectedRanges.some(([start, end]) => start <= index && index < end);
       // Ambiguous governance wording needs a contextual choice, never an automatic fix.
-      const governance = /(?:AGENTS(?:\.md)?|Agent|Codex|Skills?|Plugins?|MCP|個人|工作|任務|對話|工具|設定|權限)[ \t]*治理/giu;
+      const governance = /(?:AGENTS(?:\.md)?|Codex|Skills?|Plugins?|MCP|個人|工作|任務|對話|工具|設定|權限)[ \t]*治理/giu;
       for (const match of text.matchAll(governance)) {
         if (!protectedAt(match.index)) report(node, new RuleError(
-          '依用途使用工作規範、設定管理或權限管理, 正式治理名稱保留, 需人工判讀',
+          '工作指示、來源設定或存取權限依用途採工作規範、設定管理或權限管理, 政策、權責、身分與風險的治理語意保留, 需人工判讀',
           { index: match.index },
         ));
+      }
+      // Agent aliases are scoped project advice; preserve formal names and literal sources.
+      for (const [pattern, preferred] of agentTerms) {
+        for (const match of text.matchAll(pattern)) {
+          if (!protectedAt(match.index)) report(node, new RuleError(
+            `代理系統工程用語建議採 ${preferred}, 正式名稱與來源用語保留, 需人工判讀`,
+            { index: match.index },
+          ));
+        }
       }
       // A text node can end before inline code, links or emphasis on the same line
       const remainingLine = getSource().slice(node.range[1]).split(/\r?\n/u, 1)[0];

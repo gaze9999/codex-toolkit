@@ -48,7 +48,7 @@ Main chooses supported model/effort from uncertainty, consequences and verificat
 
 Review returned work against actual source/artifact state, checks and remaining acceptance; retain unknowns. Development readiness, focused test PASS, native packaging, installed client discovery and published release are separate states. Recommendations and role availability do not authorize new chats, messages, installations or publication.
 
-Sources checked 2026-10-07: [official custom subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents) describes narrow custom roles and schema; [community setup example](https://www.reddit.com/r/codex/comments/1ujjcxh/how_i_set_up_codex_subagents_without_overusing/) illustrates selective roles, not a benchmark or required configuration. Runtime-specific decisions above are maintenance choices to verify against each project.
+Sources checked 2026-10-07: [official custom subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents) describes narrow custom roles and schema; [community setup example](https://www.reddit.com/r/codex/comments/1ujjcxh/how_i_set_up_codex_subagents_without_overusing/) illustrates selective roles. Runtime-specific decisions above are maintenance choices to verify against each project.
 
 ## Configuration and concurrent environments
 

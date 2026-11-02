@@ -99,6 +99,23 @@ Global 與 Skill 的來源及本機鏡像依 [Agent 同步說明](../agents.md) 
 
 日文採日文標點與文體, 英文採英文慣例, 混合語言依段落選擇設定. 原始引用, 程式碼, URL, Symbol 與正式名稱保留來源形式. Markdown blockquote, inline code 與 code block 依目前設定保留, inline 引用仍逐項複核
 
+## 精簡英文與中英文文體檢查
+
+自行撰寫的英文採精簡直接的句子, 保留事實、數量、單位、必要條件與技術名稱, 人類中文敘述採台灣繁體中文與台灣用語, 引文、程式碼、正式文案及法律聲明沿原來源
+
+共用 `authored-style.cjs` 對六組明確的贅詞、制式免責及冗長英文提供人工判讀提示, 不自動改寫, 繁中設定同時保留既有台灣詞表與標點規則, 英文使用 `proofreading/en/english.textlintrc.cjs`, 拼字另沿 CSpell 的專案詞表
+
+預設文體提示為 `warning`, 需要交付關卡的個人或專案設定可將同一條規則設為 `severity: "error"`, textlint 會以結束碼 1 表示仍有待處理項目, 先核對語意與保護清單, 再修正文句或保留具體來源, 檢查新增及改寫區段以保留無關內容
+
+```text
+textlint --config "<安裝目錄>/proofreading/en/english.textlintrc.cjs" --format json "<英文稿.md>"
+textlint --config "<已審查的個人或專案設定>" --format json "<新增或改寫稿.md>"
+```
+
+Global 保存個人預設, 專案保留真正例外, Skill 保存自身流程的語言備援, 外掛副本由正式來源產生, 一般回覆、進度、工具提問 / 選項及最終交付各自核對語言, 詳見 [輸出語言與文體](../../skills/multilingual-proofreading/references/output-style.md)
+
+可用的本機 Codex hook 依 [官方事件與信任流程](https://learn.chatgpt.com/docs/hooks) 選用, `Stop` 的 `decision: "block"` 會建立接續提示並繼續執行, 採用前核對事件覆蓋、實際 client 與停止條件, 檔案交付可沿既有 CLI / CI 關卡檢查
+
 ## 工作規範與設定的表述
 
 | 內容 | 表述 |
@@ -106,9 +123,30 @@ Global 與 Skill 的來源及本機鏡像依 [Agent 同步說明](../agents.md) 
 | AGENTS / Agent 指示與執行原則 | 工作規範 |
 | Skill、Plugin、MCP 的來源、版本與選用項目 | 設定管理 |
 | 存取範圍、授權與責任 | 權限管理 |
-| AI、資料或公司制度的正式術語 | 保留「AI 治理」、「資料治理」、「公司治理」 |
+| AI 代理政策、權責、身分與風險, 或資料 / 公司制度 | 保留「AI 代理治理」、「AI 治理」、「資料治理」、「公司治理」 |
 
-`taiwan-style.cjs` 對「Agent 治理」、「個人治理」、「工具治理」等有限語境提供人工判讀提示, 不自動替換. 單獨詞彙、正式名稱、引用與 Symbol 保留原意, `agent-governance` 等識別名稱不改名. 詞表不將「治理」視為禁用字, 選詞依實際責任, 這是本專案的使用者寫作偏好
+`taiwan-style.cjs` 對「AGENTS.md 治理」、「個人治理」、「工具治理」等有限語境提供人工判讀提示, 不自動替換, 「Agent 治理」及「AI 代理治理」保留其政策與權責語意, `agent-governance` 等識別名稱不改名
+
+## AI Agent 技術詞彙
+
+[Agent 技術詞彙與責任邊界](../../skills/agent-governance/references/agent-terminology.md) 保存繁中名稱、英文原詞、定義、責任歸屬與已核對來源, 供架構設計、工作規範與外掛文件按需引用, 工程建議譯名與產品正式用法分開維護
+
+| 核心名稱 | 用途 | 需分清的邊界 |
+| --- | --- | --- |
+| AI 代理治理 (Agent Governance) | 政策、權責、身分、風險與生命週期 | 工作指示仍稱工作規範, 文字規範與實際權限執行分開 |
+| 代理編排 (Agent Orchestration) | 路由、委派、執行順序與成果整合 | 委派是工作分配, runtime handoff 另涉及控制權轉移 |
+| 代理執行控制框架 (Agent Harness) | 模型、工具、上下文與復原控制 | 沙箱提供隔離執行環境, 兩者責任不同 |
+| 上下文工程 (Context Engineering) | 各步驟的資訊選取與供給 | 壓縮、記憶與檢查點依實作分別核對 |
+| 代理可觀測性 (Agent Observability) | 執行追蹤、指標與事件記錄 | 依任務條件另行判定驗收結果 |
+| 代理評估 (Agent Evaluation) | 依明確條件判斷行為與成果 | 區分任務、案例、斷言、呼叫與重試, 保留未驗範圍 |
+
+一般敘述可採「AI 代理程式」, 產品來源中的「AI 代理人」與「AI 代理」同樣保留, 上述是本工具包的工程建議用語, 正式名稱、引用、UI / 規格文案與英文協定名稱沿原來源
+
+詞庫對明確代理語境的「AI 智能體」、「多智能體系統」、「單智能體系統」、「子智能體」、「智能體編排」及「智能體框架」提供六組人工判讀提示, 不自動改寫, 可接受譯名、引文、程式碼與一般非代理語境保留
+
+MCP、A2A、A2UI 與 AG-UI 分別著重工具 / 資料、代理互通、宣告式 UI 及前後端事件 / 狀態, 可組合使用, 實作時另核對版本、擴充與 renderer / runtime 支援
+
+來源於 2026-11-02 核對: [Microsoft AI 代理治理](https://learn.microsoft.com/zh-tw/azure/cloud-adoption-framework/ai-agents/governance-security-across-organization)、[OpenAI Harness / Sandbox 邊界](https://developers.openai.com/api/docs/guides/agents/sandboxes)、[Google Agent 協定指南](https://developers.googleblog.com/en/developers-guide-to-ai-agent-protocols/) 與 [AG-UI](https://docs.ag-ui.com/introduction), 完整來源與各自發布 / 規格日期保留於詞彙參考
 
 ## 用詞來源與判斷方式
 
@@ -116,6 +154,10 @@ Global 與 Skill 的來源及本機鏡像依 [Agent 同步說明](../agents.md) 
 
 | 詞庫來源 ID | 查閱來源 | 採用依據 |
 | --- | --- | --- |
+| `moe-cross-strait` | [教育部兩岸常用詞語對照表第 4 頁](https://dict.concised.moe.edu.tw/appendix.jsp?ID=54&la=0&page=4&powerMode=0)、[第 5 頁](https://dict.concised.moe.edu.tw/appendix.jsp?ID=54&la=0&page=5&powerMode=0)及[詞義判讀說明](https://dict.concised.moe.edu.tw/qa.jsp#qg6), 2026-11-02 核對 | 依相同概念採用晶片、剪貼簿、解析度、解除安裝、主機板、桌布、簡訊與人工智慧, 多義詞限定語境 |
+| `naer-computing` | [教育百科: 電腦硬體](https://pedia.cloud.edu.tw/Entry/Detail?title=%E9%9B%BB%E8%85%A6%E7%A1%AC%E9%AB%94), 國教院教育大辭書 2000-12, [網路作業系統](https://pedia.cloud.edu.tw/Entry/Detail/?title=%E7%B6%B2%E8%B7%AF%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1), 資訊與通信術語辭典 2003-06, 2026-11-02 核對 | 硬體、作業系統、磁碟及記憶體語意, RAM / ROM 與儲存裝置分開 |
+| `moda-metadata` | [數發部: 詮釋資料](https://moda.gov.tw/press/dictionary/19328), 2026-04-02 發布 / 更新, 2026-11-02 核對 | 自撰資料集 / 檔案 / API 敘述採詮釋資料, 產品既有中繼資料與 `metadata` 識別名稱保留 |
+| `moda-concepts` | [數發部雙語詞彙](https://moda.gov.tw/information-service/bilingual-glossary/1391)、[電子簽章技術](https://moda.gov.tw/press/dictionary/12794), 2026-11-02 核對 | 正式名稱與概念辨識, 電子簽章 / 數位簽章、資安事件 / 弱點依實際意義判斷 |
 | `moe-default` | [教育部國語辭典簡編本: 默認](https://dict.concised.moe.edu.tw/dictView.jsp?ID=3778&la=0&powerMode=0) | 保留默許或認可的詞義, default 的軟體語境採預設 |
 | `moe-information` | [教育部國語辭典簡編本: 信息](https://dict.concised.moe.edu.tw/dictView.jsp?ID=27821&la=0&powerMode=0), [重編國語辭典修訂本: 資訊](https://dict.revised.moe.edu.tw/dictView.jsp?ID=137246&q=1&word=%E8%A8%8A) | 一般音訊保留, 軟體 information 採資訊 |
 | `naer-message` | [教育百科: 訊息, 國家教育研究院資訊與通信術語辭典](https://pedia.cloud.edu.tw/Entry/Detail/?search=%E8%A8%8A&title=%E8%A8%8A%E6%81%AF%EF%BC%9B%E4%BF%A1%E6%81%AF) | message 採訊息, 與資訊區分 |
@@ -133,6 +175,16 @@ Global 與 Skill 的來源及本機鏡像依 [Agent 同步說明](../agents.md) 
 | `microsoft-ports` | [Microsoft 伺服器網路連接埠](https://learn.microsoft.com/zh-tw/security-updates/security/20214371) | 通訊協定, IP 位址, 網域名稱與連接埠, 本詞表的 TCP / UDP port 採通訊埠 |
 | `cisco-video` | [Cisco 視訊裝置使用者指南](https://www.cisco.com/c/dam/en/us/td/docs/telepresence/endpoint/ce910/Localization/UG/dx70-dx80-user-guide-ce910-zh_TW.pdf) | 視訊通話的用詞 |
 | `user preference` | 本 setup 的使用者技術寫作要求 | 軟體串接, Git 儲存庫, 技術規格名稱與半形標點 |
+
+## 詞彙與工具的維護分工
+
+Global 保存跨專案輸出偏好, 校對 Skill 與參考文件負責詞義及來源判讀, `terms.yml` 保存可確定的轉換與反例, 共用文體規則處理需人工判斷的提示, 外掛由正式來源產生並記錄 hash
+
+依語意區分記憶體 / 儲存裝置、影片 / 視訊、電子簽章 / 數位簽章及資安事件 / 弱點, `清單項目`、`識別代碼`、`資源配置` 與正式名稱保留, 詳見 [來源與語境決策](../../skills/multilingual-proofreading/references/taiwan-terminology.md#context-decisions)
+
+本機批次檢查沿用 CLI 與已審查設定, 需要結構化用戶端存取時使用 MCP, 兩者共用詞庫, 個人偏好由私人設定覆寫, 公司資料採公司核准規則, 直接套用文體與用語, 影響詞義、操作或結果時再說明選詞
+
+prh 的原文保護使用既有 filter 的 `texts` 清單、程式碼或 blockquote, 一般引號本身不建立保護範圍, 執行 fix 前先指定需保留的來源文字
 
 ## 新增詞條與套用
 

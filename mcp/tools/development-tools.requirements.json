@@ -3379,6 +3379,14 @@
           {
             "source": "mcp/tools/proofreading/textlint-mcp.cjs",
             "destination": "proofreading/textlint-mcp.cjs"
+          },
+          {
+            "source": "mcp/tools/proofreading/authored-style.cjs",
+            "destination": "proofreading/authored-style.cjs"
+          },
+          {
+            "source": "mcp/tools/proofreading/en/english.textlintrc.cjs",
+            "destination": "proofreading/en/english.textlintrc.cjs"
           }
         ]
       },
