@@ -92,3 +92,6 @@ junit.xml
 # Actual project instructions stay local; public starter templates remain tracked
 /AGENTS.md
 /python-tools/AGENTS.md
+
+# Versioned public publication checks
+!/.github/workflows/public-content.yml
