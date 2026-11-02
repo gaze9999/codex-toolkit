@@ -27,6 +27,8 @@ class LoopbackHTTPServer(ThreadingHTTPServer):
 
 class Workspace:
     def __init__(self, root):
+        if isinstance(root, str) and not root.strip():
+            raise Problem("invalid_root")
         self.root = Path(root).resolve(strict=True)
         if not self.root.is_dir():
             raise Problem("invalid_root")
@@ -85,12 +87,15 @@ class Workspace:
 
 class Previews:
     """Jobs live in this process only. Closing the owner closes its listeners."""
-    def __init__(self, workspace):
+    def __init__(self, workspace=None):
         self.workspace = workspace
         self.jobs = {}
         self.lock = threading.RLock()
 
-    def start(self, entry, files):
+    def start(self, entry, files, *, workspace=None):
+        workspace = workspace if workspace is not None else self.workspace
+        if workspace is None:
+            raise Problem("invalid_root")
         if not isinstance(files, list) or not 1 <= len(files) <= 128 or entry not in files or len(set(files)) != len(files):
             raise Problem("invalid_manifest")
         # Snapshot only explicitly selected files; never serve project directories.
@@ -98,7 +103,7 @@ class Previews:
         for name in files:
             if not isinstance(name, str) or any(part.startswith(".") or part in {"node_modules", ".git"} for part in Path(name).parts) or Path(name).suffix.lower() not in ALLOWED:
                 raise Problem("unsupported_asset")
-            raw = self.workspace.read(name)
+            raw = workspace.read(name)
             total += len(raw)
             if total > 64 * 1024 * 1024:
                 raise Problem("manifest_too_large")

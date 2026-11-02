@@ -4,12 +4,11 @@ from typing import Any
 from .core import Workspace, Previews, Problem
 
 
-def build_server(root):
+def build_server():
     from mcp.server import MCPServer
     from mcp_types import ToolAnnotations
-    workspace = Workspace(root)
-    previews = Previews(workspace)
-    server = MCPServer("Visual Runtime", instructions="Inspect the selected root and preview explicitly selected static assets. No shell execution, framework migration or engine installation. Preview HTML runs in the browser; approve its source and network behavior. Main selects the project toolchain.")
+    previews = Previews()
+    server = MCPServer("Visual Runtime", instructions="Provide an authorized project root for each inspection, artifact or preview-start call. Preview jobs keep their own file snapshots and are controlled by job_id. No shell execution, framework migration or engine installation. Preview HTML runs in the browser; approve its source and network behavior. Main selects the project toolchain.")
     read = ToolAnnotations(readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False)
     write = ToolAnnotations(readOnlyHint=False, destructiveHint=False, idempotentHint=False, openWorldHint=False)
 
@@ -20,19 +19,19 @@ def build_server(root):
             return {"status": "local_error"}
 
     @server.tool(annotations=read)
-    def visual_inspect() -> dict[str, Any]:
-        """Read framework/dependency declarations in the configured project root; never run scripts."""
-        return run(workspace.inspect)
+    def visual_inspect(root: str) -> dict[str, Any]:
+        """Read framework/dependency declarations in this call's authorized project root; never run scripts."""
+        return run(lambda: Workspace(root).inspect())
 
     @server.tool(annotations=read)
-    def visual_artifacts(paths: list[str]) -> dict[str, Any]:
-        """Hash explicit relative files for evidence; no file contents returned."""
-        return run(workspace.artifacts, paths)
+    def visual_artifacts(root: str, paths: list[str]) -> dict[str, Any]:
+        """Hash explicit files relative to this call's authorized root; no file contents returned."""
+        return run(lambda: Workspace(root).artifacts(paths))
 
     @server.tool(annotations=write)
-    def visual_preview_start(entry: str, files: list[str]) -> dict[str, Any]:
-        """Start an owned loopback static snapshot from an explicit file manifest. Select only authorized public browser assets, never secrets. No directory listing or arbitrary commands."""
-        return run(previews.start, entry, files)
+    def visual_preview_start(root: str, entry: str, files: list[str]) -> dict[str, Any]:
+        """Snapshot explicit files within this call's authorized root into an owned loopback preview. Select only authorized public browser assets, never secrets. No directory listing or arbitrary commands."""
+        return run(lambda: previews.start(entry, files, workspace=Workspace(root)))
 
     @server.tool(annotations=read)
     def visual_preview_status(job_id: str) -> dict[str, Any]:
@@ -49,9 +48,8 @@ def build_server(root):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", required=True)
-    args = parser.parse_args()
-    server, previews = build_server(args.root)
+    parser.parse_args()
+    server, previews = build_server()
     try:
         server.run(transport="stdio")
     finally:
