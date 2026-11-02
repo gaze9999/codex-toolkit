@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "189d0ab33ba52f43cf3180ef7f5427e77b63c83dc9b543507e8fbfa045858aba",
+      "sha256": "ef79a39431f40e05d865e1fc22ec75a3232a06aeb716ad1dc6f255a646cccaa1",
       "source": "plugins/jev-evaluation/plugin.json"
     },
     "skills/jev-evaluation/LICENSE": {
@@ -25,11 +25,11 @@
       "source": "skills/jev-evaluation/README.md"
     },
     "skills/jev-evaluation/SKILL.md": {
-      "sha256": "1709a10dfeecb3cfb6d579df48136d039a159147ddf8702c7c6df3ff17f96efe",
+      "sha256": "d38dbcb44ad6ac19ec5b36d550cc4b4eaa1af2b617f24b73f0ba105a4c55d254",
       "source": "skills/jev-evaluation/SKILL.md"
     },
     "skills/jev-evaluation/agents/openai.yaml": {
-      "sha256": "04193d04ad3441ffeeb4c2360c208ff3ed6febbd91be3a09374a763d2c0e1a61",
+      "sha256": "dbbdbac1b691a7951522d2c71c644209852ae233532663ce26d3776e8395e943",
       "source": "skills/jev-evaluation/agents/openai.yaml"
     },
     "skills/jev-evaluation/assets/icon-small.png": {
@@ -93,6 +93,6 @@
     "jev"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.16.1",
-  "version": "0.1.6"
+  "toolkit_version": "0.17.0",
+  "version": "0.1.7"
 }

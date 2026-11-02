@@ -41,6 +41,12 @@ State the result and necessary next action directly. Include a limitation only w
 - Treat preview state and connected/live data as separate capabilities. Do not imply a control saves across chats, writes to an account or follows a source continuously without actual support and authorized execution. Keep unapproved private data out of external queries and shared artifacts.
 - Follow the client's link/media conventions, such as absolute workspace file links when required. A declared path or successful file write does not prove rendering. If formatting fails, supply readable Markdown, a simple table or the requested usable artifact rather than repeating unsupported markup.
 
+## Change reports and work summaries
+
+For implementation or guidance changes, show changed file links, concrete before/after behavior, impact, actual checks and observed problems in a compact table. Scale rows to the change; preserve requested text-only formats. Keep visible progress/work summaries to a few simple lines with statuses selected dynamically for the actual work. Additions, modifications, later user supplements, runtime/check results and discovered unexecuted follow-ups are examples, not mandatory headings. Omit empty categories and separate executed work from plans. Summarize observed facts and decisions rather than internal deliberation.
+
+Apply direct wording persistently to replies, visible work summaries, documents, code comments and revisions. Before delivery, remove disclaimers, defensive comparisons, self-justification and preemptive refusals. State purpose, behavior, results, necessary conditions and next actions. Preserve factual failures and execution status with their concrete effect and handling.
+
 ## Check the changed guidance
 
 Review an ordinary report, a requested copyable artifact, a comparison and an unsupported-interaction case. Confirm correct format choice, visible evidence, valid boundaries, preserved authorization and usable fallback. Source/link/package checks validate the instructions and distribution; actual rendering or interaction needs evidence in the selected client. Do not claim all active chats reloaded after synchronizing Global.

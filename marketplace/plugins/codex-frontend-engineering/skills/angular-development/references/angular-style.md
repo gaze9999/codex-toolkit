@@ -26,6 +26,28 @@ lifecycle with its existing Service/store, view interaction with the Component,
 and substantial pure business rules with the feature's rules/mapper/projection.
 The example performs no persistence or API request.
 
+## Angular template formatting
+
+Inspect the actual project formatter, Angular-aware parser, package versions and
+effective configuration before formatting the scoped template diff. For HTML or
+stylesheet provider discovery and editor comparisons, read the
+[VS Code adapter](vscode-formatting-adapter.md). Preserve unrelated formatting.
+
+- Keep a tag name and its first attribute together unless the effective project
+  formatter requires a different layout. Wrap remaining attributes consistently.
+- Keep short interpolations whole, with no isolated closing braces. Break long
+  expressions at operators or branches with consistent indentation, preserving
+  precedence, binding syntax, pipes and literal values.
+- Keep simple text or option content and its closing tag visually coherent. Preserve
+  literal strings, meaningful text spacing, whitespace-sensitive content, attribute
+  values and bindings; do not flatten or trim them to meet a line-length preference.
+- Verify the scoped diff and compare
+  before/after Angular-parsed expressions and text semantics for whitespace-only
+  edits, using the project's compatible parser and whitespace settings. Do not
+  compare by globally stripping whitespace, which can hide changed text or literals.
+  Check template syntax separately and exercise affected rendered behavior when
+  whitespace or layout remains uncertain. Report unavailable checks precisely.
+
 ## One component, grouped by responsibility
 
 Keep consecutive members together within each group and one blank line between

@@ -3,7 +3,7 @@ name: jev-evaluation
 description: Rank locally retrieved context or compare approved summaries with a finite rubric when semantic ordering remains useful. Use for Jev setup or diagnosis too, not routine coding preflight.
 metadata:
   short-description: Optional candidate ranking and typed semantic evaluation
-  version: "0.4.16"
+  version: "0.4.17"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -18,7 +18,7 @@ Choose the available Jev CLI or MCP route by required capability, shell/client a
 - For work-item or reusable-tool candidates, compare a stated question against explicit criteria, not the entire planning problem. Main determines readiness, dependencies and final priority. See [usage scenarios](references/usage.md#when-to-use-jev) when the boundary is unclear.
 - Main retains requirements, architecture, delegation, implementation and acceptance. Jev signals do not establish API compatibility, permissions, persistence, correctness or test coverage.
 - Keep mandatory instructions, governing specifications, acceptance criteria, confirmed decisions and unresolved blockers in Main's context. Ranking changes reading order, not source authority or required verification.
-- Supply only approved, necessary excerpts or sanitized summaries. Setup authorization and installing this Skill do not authorize uploading company source, private specifications, logs or customer data. A decision needing unapproved proprietary context stays with Main.
+- Supply only approved, necessary excerpts or sanitized summaries. Setup authorization and installing this Skill do not authorize uploading company source, private specifications, logs or customer data. A decision needing unapproved proprietary context stays with Main. When external evaluation is useful and the transfer is authorized, first construct a minimal generic or synthetic representation that preserves the decision-relevant conditions, relationships and unknowns. Review the complete outgoing question, rubric, candidates and metadata for sensitive or proprietary information and semantic drift; keep source mappings local. Name replacement alone is insufficient. If a safe representation loses decisive meaning, decide locally or request the missing scoped authority. Results about an abstraction do not verify the original implementation.
 
 ## Run without expanding context
 
