@@ -32,3 +32,6 @@ python-tools/src/text/token_html.py text eol=lf
 # Keep bundled development-core resource hashes stable across platforms
 python-tools/packages/decisions/** text=auto eol=lf
 python-tools/packages/visual-runtime/** text=auto eol=lf
+
+# Publication hooks run through a POSIX shell on every platform
+.githooks/* text eol=lf

@@ -75,3 +75,7 @@ python -B mcp/scripts/prepare_marketplace.py --check
 ## 授權
 
 第一方程式碼與文件採 [MIT](LICENSE), 第三方套件與授權聲明見 [來源索引](docs/third-party.md)
+
+## 公開內容檢查
+
+提交與推送前依 [公開內容檢查](docs/public-content.md) 設定 Git hooks, 執行暫存區與歷史檢查
