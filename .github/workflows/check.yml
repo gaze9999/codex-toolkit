@@ -1,7 +1,7 @@
 name: Check public toolkit sources
 on:
   push:
-  pull_request:
+    tags: ['v[0-9]+.[0-9]+.0']
   workflow_dispatch:
 permissions:
   contents: read
