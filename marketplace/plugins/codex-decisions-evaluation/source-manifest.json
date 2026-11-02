@@ -45,7 +45,7 @@
       "source": "python-tools/packages/decisions/src/codex_decisions/server.py"
     },
     "skills/decisions-evaluation/SKILL.md": {
-      "sha256": "8e537ff0c062366e58b6e45927b4849efeba67ec3b75d609ec753934af76f8cf",
+      "sha256": "27a1910da7dbacf9036af814c184c9e6d754fb7064111eab31bcc484ee0996d3",
       "source": "skills/decisions-evaluation/SKILL.md"
     },
     "skills/decisions-evaluation/agents/openai.yaml": {

@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "3db61d9261896beada9af08207298dc9c8120d252a4cdcbe9150b2be1825fcaa",
+      "sha256": "67190cfe516c3a89fe5d95147ea8cca59018c457513a1c864cd9241c521eb2ca",
       "source": "plugins/multilingual-proofreading/plugin.json"
     },
     "resources/proofreading/en/cspell.json": {
@@ -45,11 +45,11 @@
       "source": "mcp/tools/proofreading/zh-tw/terms.yml"
     },
     "skills/multilingual-proofreading/SKILL.md": {
-      "sha256": "f544d01f6dc9cd0b4f36fa9e57d378c1aa1ccdb0be480c9d40bb774b75364f13",
+      "sha256": "c5b960f1787fd53d1549b7cba200dadf8bef53be7f63b36b5c828dcadb580a7a",
       "source": "skills/multilingual-proofreading/SKILL.md"
     },
     "skills/multilingual-proofreading/agents/openai.yaml": {
-      "sha256": "aa44c52e9d91f9b11dfbb01b29e2a296b3a0702528d7e512fa74275a3b69b852",
+      "sha256": "e9a402bc82ac54b05e2f288f5d092f1f4c9842f09d15c08366431fc0a48baac0",
       "source": "skills/multilingual-proofreading/agents/openai.yaml"
     },
     "skills/multilingual-proofreading/assets/icon-small.png": {
