@@ -17,7 +17,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "e39b130f3ff44bc6e3e5fd3b4c8301b0adb29c5ecfa1b11336fd9378e3d896b3",
+      "sha256": "7cce0aabf8f389693c3df2272b3a6d191576e47b48d969cbe41072c694cbd9b5",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "skills/accessibility-engineering/SKILL.md": {
@@ -37,11 +37,11 @@
       "source": "skills/accessibility-engineering/references/validation.md"
     },
     "skills/angular-development/SKILL.md": {
-      "sha256": "b2ea605bb2c5954f081f63082d100efa9b82020a48e538e4c84e8b83fd13995e",
+      "sha256": "c91ab7bf355f3b5b52dc45a6fc4f7da6f992d8a83c922f2f577cdb6f7c2f48e6",
       "source": "skills/angular-development/SKILL.md"
     },
     "skills/angular-development/agents/openai.yaml": {
-      "sha256": "60c6f9b59528ee17d1fbc4b6be13cf95198ada807abfb3cec1cc285bc7bfec5b",
+      "sha256": "6fca9d4da95e291811337a26f3b23f78346067c4436839e3075823438cbd31b9",
       "source": "skills/angular-development/agents/openai.yaml"
     },
     "skills/angular-development/assets/icon-small.png": {
@@ -61,7 +61,7 @@
       "source": "skills/angular-development/assets/icon.svg"
     },
     "skills/angular-development/references/angular-style.md": {
-      "sha256": "322fd078ff94664c6daaf71a53f1dd08f803df6ef754531111985890b1901d93",
+      "sha256": "e53b75f061a568faa0616cbffd7d9f9cf8af62d6a6b8be9f6480bf996ae8181a",
       "source": "skills/angular-development/references/angular-style.md"
     },
     "skills/angular-development/references/architecture.md": {
@@ -89,7 +89,7 @@
       "source": "skills/angular-development/references/ui-reuse.md"
     },
     "skills/angular-development/references/vscode-formatting-adapter.md": {
-      "sha256": "82dc2519dbf07bfe22bbb590b10e263b1715765ddc6ec0c864009e3f3ffc4da3",
+      "sha256": "2325758ecaa2e8c170ab4bb801f498d6e3d8b3250daf512617fd6bc497db6a85",
       "source": "skills/angular-development/references/vscode-formatting-adapter.md"
     },
     "skills/angular-development/scripts/check_conventions.cjs": {
@@ -295,6 +295,6 @@
     "edge-devtools"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.16.1",
-  "version": "0.6.1"
+  "toolkit_version": "0.17.0",
+  "version": "0.6.2"
 }
