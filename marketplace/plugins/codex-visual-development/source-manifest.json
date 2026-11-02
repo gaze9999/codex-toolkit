@@ -13,19 +13,19 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "96fd78fe0b52747b64245c069cd7a6523a9bcd6d3ede96edcfa047f1c5468225",
+      "sha256": "f06358a63a2956dfd9729447d855ed5cda952d16c837b4934c15ec367a3b262d",
       "source": "plugins/visual-development/plugin.json"
     },
     "resources/visual-runtime/README.md": {
-      "sha256": "6a81f4f1422e669f55a4175f1e7e0ac2594760ec8651ecadf6b9710c0832bbd7",
+      "sha256": "abc8270daa48612346613647711bdcb159d0d0c4e8a93c4c69675b64ce64a877",
       "source": "python-tools/packages/visual-runtime/README.md"
     },
     "resources/visual-runtime/pyproject.toml": {
-      "sha256": "aaab84c3fa4df59bdeb92ba0276bd0904ef4b86b1859624e49fb39ba392c45e5",
+      "sha256": "cdcd8b054592138be8fa6ddeee1e04edb0f98ee5e0fa03c02903aea09d4e090e",
       "source": "python-tools/packages/visual-runtime/pyproject.toml"
     },
     "resources/visual-runtime/src/codex_visual_runtime/__init__.py": {
-      "sha256": "479c427328802cab3860f6bf46996fdc57008591f7272d78669aa93556de0c6d",
+      "sha256": "018787948e2258aca3cfccd975441d93c2cbaa288662104a667e9fa5481ad870",
       "source": "python-tools/packages/visual-runtime/src/codex_visual_runtime/__init__.py"
     },
     "resources/visual-runtime/src/codex_visual_runtime/__main__.py": {
@@ -37,19 +37,19 @@
       "source": "python-tools/packages/visual-runtime/src/codex_visual_runtime/cli.py"
     },
     "resources/visual-runtime/src/codex_visual_runtime/core.py": {
-      "sha256": "ec712483990b39ed03f296dab65b90d4f323a8ea0de404a97529e0dd4a56ec6e",
+      "sha256": "6058e12dc8bb62c224e44e72deb35166f1d80d80d80a223ad27498e77adc4b2b",
       "source": "python-tools/packages/visual-runtime/src/codex_visual_runtime/core.py"
     },
     "resources/visual-runtime/src/codex_visual_runtime/server.py": {
-      "sha256": "0b0b86649df8da04766a2684d035b9f8e1f8a3da8515184a73b49bacb9fe9019",
+      "sha256": "b67413e23b2b0007375b6d39901decfbae648a6d4f3c959c34fc01c8ebb28019",
       "source": "python-tools/packages/visual-runtime/src/codex_visual_runtime/server.py"
     },
     "skills/visual-development/SKILL.md": {
-      "sha256": "6a731f08816cfecd6f121c0d70ef0ed920068f31296f6e31489e4e17333f3b31",
+      "sha256": "ffe95122495ee05dcad9716dfb8822146d51e7d48ae15798f4378b74e7dba540",
       "source": "skills/visual-development/SKILL.md"
     },
     "skills/visual-development/agents/openai.yaml": {
-      "sha256": "35daa784aeec052d31ccde1939901880208e56468b631c31b06ebe8e1dffb528",
+      "sha256": "0a9e212cea13a8df9f7d004dc39b6dc708b64b3b5a6406d31e1bb8aef0716b2e",
       "source": "skills/visual-development/agents/openai.yaml"
     },
     "skills/visual-development/assets/example.html": {
@@ -65,7 +65,7 @@
       "source": "skills/visual-development/references/integration.md"
     },
     "skills/visual-development/references/runtime.md": {
-      "sha256": "e1f7834456cc3e644ddebb7a406b05c37ef300b3a6d716f2012e17988548ef23",
+      "sha256": "27482de1cd676daa3d5f36451c7d463645ea9861980fe362376d9cbd04981ea6",
       "source": "skills/visual-development/references/runtime.md"
     }
   },
@@ -76,5 +76,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.16.0",
-  "version": "0.1.2"
+  "version": "0.2.0"
 }

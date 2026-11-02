@@ -3,7 +3,7 @@ name: visual-development
 description: Integrate data visualization, 2D motion or Three.js scenes into an existing web project, selecting rendering and lifecycle tools from its actual stack. Use for interactive feature development and owned previews, not automatic video production or framework migration.
 metadata:
   short-description: Project-native visualization and Three.js development
-  version: "0.1.1"
+  version: "0.1.2"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
