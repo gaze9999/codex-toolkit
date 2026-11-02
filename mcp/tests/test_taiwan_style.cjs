@@ -72,3 +72,36 @@ test('existing punctuation behavior is preserved', () => {
   assert.equal(check('完成; 請確認')[0].fix, undefined);
   assert.equal(check('中文並列、台灣用語').length, 0);
 });
+
+test('Chinese sentence periods are reported without guessing a clause boundary', () => {
+  for (const text of ['完成. 後續說明', '完成.後續說明', '完成。後續說明']) {
+    const reports = check(text);
+    assert.equal(reports.length, 1, text);
+    assert.match(reports[0].message, /不加句號/u);
+    assert.equal(reports[0].fix, undefined);
+  }
+  for (const text of ['完成.', '完成。']) {
+    const reports = check(text);
+    assert.equal(reports.length, 1, text);
+    assert.equal(reports[0].fix.replacement, '');
+  }
+});
+
+test('Chinese punctuation spacing is checked for existing halfwidth marks', () => {
+  for (const mark of [',', ':', '?', '!']) {
+    assert.equal(check('完成' + mark + '請確認')[0].fix.replacement, mark + ' ');
+    assert.equal(check('完成' + mark + ' 請確認').length, 0);
+    for (const spaces of ['  ', '\t', '　']) {
+      assert.equal(check('完成' + mark + spaces + '請確認')[0].fix.replacement, mark + ' ');
+    }
+  }
+});
+
+test('numeric syntax, versions, filenames, URLs and source literals remain intact', () => {
+  for (const text of [
+    '版本 v0.2.0, 數量 1,000, 比例 1:2, 時間 12:30, 檔案 README.md 與 設定.json',
+    '保留 https://example.test/a?x=1,y=2 與 D:\\github\\工具.md',
+    '來源「完成。請確認」與 "版本:原文。"',
+    '保留英文縮寫 e.g. 與 i.e. 的原有語法',
+  ]) assert.equal(check(text).length, 0, text);
+});

@@ -1,8 +1,9 @@
 const punctuation = new Map([
-  ['，', ','], ['。', '.'], ['：', ':'],
+  ['，', ','], ['：', ':'],
   ['？', '?'], ['！', '!'], ['（', '('], ['）', ')'],
   ['［', '['], ['］', ']'],
 ]);
+const spaced = new Set([',', ':', '?', '!']);
 
 const agentTerms = [
   [/(?:AI|LLM)[ \t]*智能[體体]/giu, 'AI 代理程式 / AI 代理人'],
@@ -26,7 +27,7 @@ function rule(context) {
       const text = getSource(node);
       // Apply the selected Chinese profile to prose, preserve Japanese and literal URLs
       if (!/[\u3400-\u9fff]/u.test(text) || /[\u3040-\u30ff]/u.test(text)) return;
-      const protectedRanges = [...text.matchAll(/https?:\/\/\S+|「[^」]*」|『[^』]*』|“[^”]*”|"[^"\n]*"/gu)]
+      const protectedRanges = [...text.matchAll(/https?:\/\/\S+|[A-Za-z]:[\\/][^\s<>"「」『』“”]+|\b(?:[A-Za-z]\.){2,}|「[^」]*」|『[^』]*』|“[^”]*”|"[^"\n]*"/gu)]
         .map(match => [match.index, match.index + match[0].length]);
       const protectedAt = index => protectedRanges.some(([start, end]) => start <= index && index < end);
       // Ambiguous governance wording needs a contextual choice, never an automatic fix.
@@ -52,21 +53,36 @@ function rule(context) {
       for (let index = 0; index < text.length; index++) {
         const mark = text[index];
         if (protectedAt(index)) continue;
+        const next = text[index + 1] ?? remainingLine[0];
+        const follows = index + 1 < text.length || !atLineEnd;
+        const numeric = [',', ':', '，', '：'].includes(mark)
+          && /[0-9]/u.test(text[index - 1] ?? '') && /[0-9]/u.test(text[index + 1] ?? '');
+        const sentenceDot = mark === '.' && text[index - 1] !== '.' && text[index + 1] !== '.'
+          && (index + 1 === text.length || /[\s)\]」』”\u3400-\u9fff]/u.test(text[index + 1]));
         if (mark === ';' || mark === '；') {
-          report(node, new RuleError('不要用分號分段, 依語意改為逗號或句號', { index }));
+          report(node, new RuleError('不要用分號分段, 依語意改為逗號或換行', { index }));
+        } else if (mark === '。' || sentenceDot) {
+          const terminal = !text.slice(index + 1).trim() && atLineEnd;
+          report(node, new RuleError('繁中敘述不加句號, 依語意改為逗號或換行, 保留檔名、版本及其他語言語法', {
+            index,
+            ...(terminal ? { fix: fixer.replaceTextRange([index, index + 1], '') } : {}),
+          }));
         } else if (punctuation.has(mark)) {
-          let replacement = mark === '。' && !text.slice(index + 1).trim() && atLineEnd ? '' : punctuation.get(mark);
-          if (/^[,.:?!]$/u.test(replacement) && text[index + 1] && !/\s|[)\]」』”]/u.test(text[index + 1])) replacement += ' ';
+          let replacement = punctuation.get(mark);
+          if (spaced.has(replacement) && !numeric && follows && next && !/\s|[)\]」』”]/u.test(next)) replacement += ' ';
           report(node, new RuleError('繁中使用半形標點', {
             index, fix: fixer.replaceTextRange([index, index + 1], replacement),
           }));
+        } else if (spaced.has(mark) && !numeric && follows && next && !/[)\]」』”]/u.test(next)) {
+          const spaces = /^[^\S\r\n]*/u.exec(text.slice(index + 1))[0];
+          const after = text[index + 1 + spaces.length] ?? remainingLine[0];
+          const contentFollows = index + 1 + spaces.length < text.length || !atLineEnd;
+          if (contentFollows && after && !/[\r\n]/u.test(after) && spaces !== ' ') {
+            report(node, new RuleError('半形逗號、冒號、問號及驚嘆號後有文字時加一個半形空格', {
+              index, fix: fixer.replaceTextRange([index, index + 1 + spaces.length], mark + ' '),
+            }));
+          }
         }
-      }
-      const end = /(?<!\.)\.(?!\.)\s*$/u.exec(text);
-      if (end && atLineEnd && !protectedAt(end.index)) {
-        report(node, new RuleError('繁中句尾不加句號, 保留檔名, 版本與小數中的句點', {
-          index: end.index, fix: fixer.replaceTextRange([end.index, end.index + 1], ''),
-        }));
       }
     },
   };
