@@ -2,6 +2,10 @@
 
 Read when the selected formatter is TypeScript and the task runs outside an editor. This is a formatting method, not a provider-selection rule. Use the explicit user-selected baseline or applicable project conventions; report conflicting configuration rather than silently switching to Prettier.
 
+## Provider and width boundaries
+
+Use the confirmed formatter for each language. Do not apply Prettier options when the selected provider is TypeScript or HTML language services. TypeScript document formatting has no equivalent hard print-width option; editor rulers and visual word wrap do not rewrite source lines. HTML wrapLineLength and attribute wrapping belong to the HTML formatter, not TypeScript. Keep personal numeric settings in the selected local profile. Member ordering and import organization are separate semantic operations, not formatting side effects.
+
 ## Inputs and execution
 
 1. Resolve the existing `typescript` package from the target project's manifest/module resolution and record `ts.version`. Do not depend on an editor installation or install a different compiler to format files.
