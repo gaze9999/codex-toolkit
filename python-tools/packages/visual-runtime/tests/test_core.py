@@ -1,5 +1,7 @@
 import json
 from pathlib import Path
+import subprocess
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -30,6 +32,54 @@ class VisualTests(unittest.TestCase):
     def test_hash_matches_original(self):
         result = self.workspace.artifacts(["index.html"])
         self.assertEqual(result["artifacts"][0]["bytes"], 16)
+
+    def test_empty_root_rejected(self):
+        for root in ("", "   "):
+            with self.subTest(root=root), self.assertRaises(Problem):
+                Workspace(root)
+
+    def test_unbound_preview_requires_call_workspace(self):
+        previews = Previews()
+        try:
+            with self.assertRaisesRegex(Problem, "invalid_root"):
+                previews.start("index.html", ["index.html"])
+        finally:
+            previews.close()
+
+    def test_per_call_previews_are_isolated(self):
+        other = self.root / "other project"
+        other.mkdir()
+        (other / "index.html").write_text("<h1>Other</h1>", encoding="utf-8")
+        previews = Previews()
+        try:
+            first = previews.start("index.html", ["index.html"], workspace=self.workspace)
+            second = previews.start("index.html", ["index.html"], workspace=Workspace(other))
+            for job, expected in ((first, b"<h1>Preview</h1>"), (second, b"<h1>Other</h1>")):
+                with urllib.request.urlopen(job["url"], timeout=2) as response:
+                    self.assertEqual(response.read(), expected)
+            previews.stop(first["job_id"])
+            self.assertEqual(previews.status(second["job_id"])["status"], "ready")
+        finally:
+            previews.close()
+
+    def test_process_job_limit_across_roots(self):
+        other = self.root / "other"
+        other.mkdir()
+        (other / "index.html").write_text("<h1>Other</h1>", encoding="utf-8")
+        workspaces = (self.workspace, Workspace(other))
+        previews = Previews()
+        try:
+            for index in range(8):
+                previews.start("index.html", ["index.html"], workspace=workspaces[index % 2])
+            with self.assertRaisesRegex(Problem, "job_limit"):
+                previews.start("index.html", ["index.html"], workspace=workspaces[1])
+        finally:
+            previews.close()
+
+    def test_cli_keeps_explicit_root(self):
+        result = subprocess.run([sys.executable, "-B", "-m", "codex_visual_runtime", "--root", str(self.root), "inspect"], capture_output=True, text=True, encoding="utf-8")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(json.loads(result.stdout)["root"], str(self.root.resolve()))
 
     def test_preview_start_does_not_resolve_hostnames(self):
         with patch("socket.getfqdn", side_effect=AssertionError("Unexpected DNS lookup")):
