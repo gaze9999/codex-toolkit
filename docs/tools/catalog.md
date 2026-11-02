@@ -62,6 +62,7 @@ Hosted MCP 的註冊與 OAuth 是不同步驟. 登入使用 `codex mcp login <�
 | --- | --- | --- |
 | [Context7](https://context7.com/docs/clients/codex) | 官方 hosted MCP, 既有 entry 可沿用 | 公開 library resolution / docs query, 核對實際版本 |
 | [Playwright](https://github.com/microsoft/playwright-mcp) | 官方 `@playwright/mcp@0.0.83`, Node 18+ / npm, 以絕對 Node entry 註冊 | 隔離 headless Chrome profile, 需已安裝 Chrome, 與 CLI / Skill 可並存 |
+| [Safari MCP](https://webkit.org/blog/18136/introducing-the-safari-mcp-server-for-web-developers/) | macOS 內建 `safaridriver --mcp`, Safari 27+ 或 Safari Technology Preview 247+, 無需另裝 npm 套件 | 先啟用開發功能與遠端自動化, 使用 `--tool safari-mcp` 預覽既有原生執行檔註冊 |
 | [Chrome DevTools](https://github.com/ChromeDevTools/chrome-devtools-mcp) | 官方 1.10.1, 相容 Node / npm, 以絕對 entry 註冊 | 隔離 headless Chrome, trace / network / console, 此 preset 關閉 usage statistics 與 CrUX lookup |
 | [Edge DevTools](https://learn.microsoft.com/en-us/microsoft-edge/web-platform/devtools-mcp-server) | `edge-devtools`, 獨立 Python wheel 內含官方 DevTools MCP 1.10.1, 需相容 Node 與已安裝 Edge | Codex 的 `edge_devtools` entry, 隔離 headless Edge, DOM / console / network / trace, 關閉 usage statistics 與 CrUX lookup |
 | [Serena](https://github.com/oraios/serena) | Maintainer PyPI `serena-agent==1.7.0`, Python 3.11+ 的獨立 venv | 使用前明確啟用目標 repository, 依專案語言核對 language server, 查 symbol 與 references |

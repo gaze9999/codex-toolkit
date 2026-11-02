@@ -218,3 +218,19 @@ web_dashboard_interface: browser
 需要單一 tray 圖示時可在已驗證的平台選 `web_dashboard_interface: tray_manager`. Serena 1.7.0 的 manager 啟動等待約 3 秒, 本機啟動較慢時註冊可能 timeout, 先驗證共用 manager, 註冊與自動退出, 失敗時保留原因並改選 `browser`. `browser` 搭配停用自動開啟可避免 native viewer / tray 子程序, dashboard 仍可透過工具的開啟功能或已確認的 loopback URL 使用. [Serena 官方 dashboard 說明](https://oraios.github.io/serena/02-usage/060_dashboard.html)
 
 核對為殘留時只清理已確認屬於該任務的 session / 程序, 優先使用工具的原生關閉方式. 保留有效的其他任務, 一般瀏覽器, 正在執行的測試與有意常駐的 monitor, 不以名稱相同或父 launcher 結束作為全面終止的依據
+
+## Safari MCP (macOS)
+
+[Apple 官方 Safari MCP](https://webkit.org/blog/18136/introducing-the-safari-mcp-server-for-web-developers/) 內建於 Safari 27+ 與 Safari Technology Preview 247+, 使用現有瀏覽器的 `safaridriver --mcp`, 不另裝 Node 或 Python server
+
+在 Safari > Settings > Advanced 開啟開發功能, 再於 Developer 開啟 `Allow remote automation and external agents`, 工具包不變更這些系統權限
+
+先預覽單一工具, 確認註冊內容後才加 `--apply`:
+
+```sh
+python3 mcp/scripts/install_development_tool.py --tool safari-mcp --interface mcp
+```
+
+預設檢查 `/usr/bin/safaridriver`, 再檢查 `/Applications/Safari Technology Preview.app/Contents/MacOS/safaridriver`, 以 `--help` 是否提供 `--mcp` 確認能力, 可用 `--mcp-executable` 指定既有 `safaridriver`
+註冊保留 `--mcp` 參數與其他設定, 既有同名衝突需先處理, 不會更新 Safari 或啟用遠端自動化
+重新載入用戶端後檢查 tools/list, 再以獲准的本機測試頁驗證導覽、DOM 與截圖, 瀏覽器擷取內容會提供給目前的 Agent

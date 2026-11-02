@@ -17,12 +17,12 @@ if __package__:
     from .installer_language import InstallerUi, open_chinese_guide
     from .plan_guard import require_same_plan
     from .bootstrap_mcp import absolute, atomic, registration, default_data_root, digest, wheel_info
-    from .check_development_tools import ROOT, check, dependency_missing, find_command, mcp_state, native_mcp_command, npm_prefix, system_name, tool_spec, profile_tools
+    from .check_development_tools import ROOT, check, dependency_missing, find_command, mcp_state, native_mcp_command, safari_mcp_ready, npm_prefix, system_name, tool_spec, profile_tools
 else:
     from installer_language import InstallerUi, open_chinese_guide
     from plan_guard import require_same_plan
     from bootstrap_mcp import absolute, atomic, registration, default_data_root, digest, wheel_info
-    from check_development_tools import ROOT, check, dependency_missing, find_command, mcp_state, native_mcp_command, npm_prefix, system_name, tool_spec, profile_tools
+    from check_development_tools import ROOT, check, dependency_missing, find_command, mcp_state, native_mcp_command, safari_mcp_ready, npm_prefix, system_name, tool_spec, profile_tools
 
 
 def recipe_step(name, recipe, prefix):
@@ -70,12 +70,14 @@ def plan(name, manifest, system, prefix, config, browser=None, interface="native
         if not token_env_var.isidentifier() or not spec.get("mcp", {}).get("url"):
             raise ValueError("--token-env-var requires a valid environment-variable name and an HTTP MCP")
         spec["mcp"] = spec["mcp"] | {"registration": spec["mcp"].get("registration", {}) | {"bearer_token_env_var": token_env_var}}
-    if mcp_executable and name != "repoprompt":
-        raise ValueError("--mcp-executable is only available for RepoPrompt")
+    if mcp_executable and name not in {"repoprompt", "safari-mcp"}:
+        raise ValueError("--mcp-executable is only available for native RepoPrompt or Safari MCP")
     if mcp_executable:
         mcp_executable = absolute(mcp_executable)
         if not mcp_executable.is_file() or mcp_executable.name not in spec["mcp"]["native_command"]:
-            raise ValueError("Select an existing native RepoPrompt MCP executable")
+            raise ValueError("Select an existing native MCP executable")
+        if name == "safari-mcp" and not safari_mcp_ready(mcp_executable):
+            raise ValueError("Select safaridriver with --mcp support (Safari 27+ or Technology Preview 247+)")
         spec["dependencies"] = [req for req in spec["dependencies"] if "native_mcp" not in req]
     report = check(name, spec, system, config)
     result = {"tool": name, "interface": interface, "platform": system, "check": report, "steps": [], "blocked": [], "manual_checks": spec.get("manual_checks", []), "spec": spec, "read_roots": [str(absolute(root)) for root in read_roots], "mcp_executable": str(mcp_executable) if mcp_executable else None}
@@ -140,7 +142,7 @@ def plan(name, manifest, system, prefix, config, browser=None, interface="native
             add_dependency(requirement)
         result["steps"].append(recipe_step(name, recipe, prefix))
         if recipe.get("action") == "native_mcp" and not (mcp_executable or native_mcp_command(name)):
-            result["blocked"].append("Install the selected native RepoPrompt app first, then select its MCP executable")
+            result["blocked"].append("Install the selected compatible native app first, then select its MCP executable")
     if spec.get("setup_assets"):
         result["assets"] = asset_files(spec, prefix)
         if not tool_missing and any(not path.is_file() or digest(path.read_bytes()) != digest(source.read_bytes()) for source, path in result["assets"]):
@@ -358,6 +360,10 @@ def apply_plan(planned, manifest, config, prefix, *, yes=False, ui=None):
             continue
         if step["action"] == "native_mcp":
             server = {"command": planned["mcp_executable"] or native_mcp_command(planned["tool"])}
+            if not server["command"]:
+                raise ValueError("Native MCP executable is unavailable; settings were preserved")
+            if planned["spec"]["mcp"].get("args"):
+                server["args"] = planned["spec"]["mcp"]["args"]
             completed.append(register_mcp(planned["spec"]["mcp"], config, server))
             continue
         if step["action"] == "repo_node_mcp":
@@ -534,7 +540,7 @@ def main(argv=None):
     parser.add_argument("--interface", choices=["native", "mcp"], default="native")
     parser.add_argument("--server-url", help="Credential-free Home Assistant MCP endpoint")
     parser.add_argument("--token-env-var", help="Bearer token environment-variable name, never the token")
-    parser.add_argument("--mcp-executable", type=Path, help="Existing native RepoPrompt MCP executable")
+    parser.add_argument("--mcp-executable", type=Path, help="Existing native RepoPrompt or Safari MCP executable")
     parser.add_argument("--read-root", type=Path, action="append", default=[], help="Explicit RTK log read root; default is no file access")
     parser.add_argument("--feeds-path", type=Path, help="Explicit existing RSS OPML/JSON feed file")
     parser.add_argument("--lang", choices=["auto", "zh-TW", "en"], default="auto", help="Prefer Traditional Chinese; fall back to English when the output encoding cannot represent it")

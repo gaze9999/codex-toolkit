@@ -4348,6 +4348,55 @@
         "開發與驗證",
         "搜尋與研究收集"
       ]
+    },
+    "safari-mcp": {
+      "title": "Safari MCP",
+      "kind": "mcp",
+      "origin": "official",
+      "source": "https://webkit.org/blog/18136/introducing-the-safari-mcp-server-for-web-developers/",
+      "reviewed_date": "2026-11-02",
+      "group": "開發工具",
+      "categories": [
+        "開發工具",
+        "UI / UX"
+      ],
+      "platforms": [
+        "macos"
+      ],
+      "dependencies": [
+        {
+          "native_mcp": "safari-mcp"
+        }
+      ],
+      "mcp": {
+        "name": "safari-mcp",
+        "native_command": [
+          "safaridriver"
+        ],
+        "args": [
+          "--mcp"
+        ],
+        "required_args": [
+          "--mcp"
+        ]
+      },
+      "automatic_install": {
+        "macos": {
+          "action": "native_mcp",
+          "source": "https://webkit.org/blog/18136/introducing-the-safari-mcp-server-for-web-developers/",
+          "version": "Safari 27+ or Safari Technology Preview 247+",
+          "scope": "one Codex MCP entry using the existing Apple browser",
+          "commands": []
+        }
+      },
+      "install": {
+        "macos": "Use Safari 27+ or Safari Technology Preview 247+, enable developer features and Allow remote automation and external agents, then preview --tool safari-mcp"
+      },
+      "manual_checks": [
+        "Safari 27+ or Safari Technology Preview 247+ installed from Apple",
+        "Enable Safari developer features and Allow remote automation and external agents manually",
+        "Client reload, tools/list, and an authorized local page interaction; registration alone does not verify automation permission"
+      ]
     }
   },
   "optional_adapter": {

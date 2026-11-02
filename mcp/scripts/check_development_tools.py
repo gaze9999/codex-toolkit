@@ -131,6 +131,8 @@ def mcp_state(spec, config=None):
                 )
         elif spec.get("native_command"):
             matches = Path(server.get("command", "")).name in spec["native_command"]
+            if spec.get("required_args"):
+                matches = matches and all(arg in arguments for arg in spec["required_args"])
         if matches:
             return "registered", name
     provider = plugin_endpoint(home, parsed, spec["url"]) if "url" in spec else None
@@ -139,7 +141,23 @@ def mcp_state(spec, config=None):
     return ("conflict" if spec["name"] in parsed.get("mcp_servers", {}) else "missing"), None
 
 
+def safari_mcp_ready(path):
+    if not Path(path).is_file():
+        return False
+    try:
+        result = subprocess.run([str(path), "--help"], capture_output=True, text=True,
+                                encoding="utf-8", errors="replace", timeout=10, check=False)
+    except (OSError, subprocess.SubprocessError):
+        return False
+    return result.returncode == 0 and "--mcp" in result.stdout + result.stderr
+
+
 def native_mcp_command(name):
+    if name == "safari-mcp":
+        for path in ("/usr/bin/safaridriver", "/Applications/Safari Technology Preview.app/Contents/MacOS/safaridriver"):
+            if safari_mcp_ready(path):
+                return path
+        return None
     if name != "repoprompt":
         return None
     for command in ("repoprompt-mcp", "rpce-cli"):
