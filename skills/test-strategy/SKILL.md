@@ -3,7 +3,7 @@ name: test-strategy
 description: Design and execute scoped checks for behavior changes, test gaps, failures or performance and release acceptance. Use for testing strategy work, not when routine checks suffice or when only summarizing recorded results.
 metadata:
   short-description: Risk-based checks across development and delivery
-  version: "0.2.4"
+  version: "0.2.5"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -27,6 +27,8 @@ Choose the smallest evidence that can resolve the actual acceptance risk. Keep e
 5. Expand when focused evidence fails, cannot resolve an affected interface, or a required release gate demands more. State the missing evidence and added scope; do not repair unrelated dependencies or broaden application changes implicitly.
 
 ## Conditional detail
+
+- For specification-to-case workflows, amendments, failure isolation and readable reports, read [specification-driven verification](references/specification-verification.md).
 
 - For custom runners/isolated fixtures, browser, API, storage, cross-platform tools or packaging, read [application and delivery cases](references/application-delivery.md).
 - For an authorized performance comparison, streaming update regression or sustained-resource check, read [performance and streaming updates](references/performance-and-streams.md).
