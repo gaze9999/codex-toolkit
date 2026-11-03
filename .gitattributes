@@ -36,3 +36,21 @@ python-tools/packages/visual-runtime/** text=auto eol=lf
 
 # Publication hooks run through a POSIX shell on every platform
 .githooks/* text eol=lf
+
+# Portable toolbox runtime sources retain stable bytes across checkouts
+tooling/toolbox*.py text eol=lf
+mcp/pyproject.toml text eol=lf
+mcp/LICENSE text eol=lf
+mcp/mcp_servers/__init__.py text eol=lf
+mcp/mcp_servers/local_documents/** text=auto eol=lf
+mcp/mcp_servers/workspace_inspection/** text=auto eol=lf
+mcp/mcp_servers/edge_devtools/** text=auto eol=lf
+mcp/mcp_servers/development_tools/** text=auto eol=lf
+python-tools/pyproject.toml text eol=lf
+python-tools/LICENSE text eol=lf
+python-tools/docs/python-document-core.md text eol=lf
+python-tools/src/my_py_document_core/** text=auto eol=lf
+python-tools/src/documents/** text=auto eol=lf
+python-tools/src/markdown/** text=auto eol=lf
+python-tools/src/shared/** text=auto eol=lf
+python-tools/packages/workspace_core/** text=auto eol=lf
