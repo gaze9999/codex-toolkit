@@ -95,7 +95,7 @@ def load_catalog(root: Path) -> list[dict]:
     return bundles
 
 
-def payload(root: Path, bundle: dict) -> tuple[dict[str, bytes], dict]:
+def payload(root: Path, bundle: dict, *, generated_manifest: bool = False) -> tuple[dict[str, bytes], dict]:
     root = root.resolve()
     files, sources = {}, {}
 
@@ -108,7 +108,14 @@ def payload(root: Path, bundle: dict) -> tuple[dict[str, bytes], dict]:
         files[target] = raw
         sources[target] = {"source": source.relative_to(root).as_posix(), "sha256": hashlib.sha256(raw).hexdigest()}
 
-    add(safe_source(root, bundle["manifest_source"]), "plugin.json")
+    if generated_manifest:
+        if bundle.get('manifest_source'):
+            raise ValueError('Generated and source manifests cannot be combined')
+        raw = (json.dumps(bundle['manifest'], ensure_ascii=False, indent=2) + '\n').encode('utf-8')
+        files['plugin.json'] = raw
+        sources['plugin.json'] = {'source': None, 'sha256': hashlib.sha256(raw).hexdigest()}
+    else:
+        add(safe_source(root, bundle["manifest_source"]), "plugin.json")
     if safe_source(root, "LICENSE").is_file():
         add(safe_source(root, "LICENSE"), "LICENSE")
     for skill in bundle["skills"]:
