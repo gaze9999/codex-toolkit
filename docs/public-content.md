@@ -27,6 +27,6 @@ python tools/check-public-content.py --history
 
 ## 維護來源
 
-檢查器與隔離案例由 [Codex Toolkit](https://github.com/gaze9999/codex-toolkit/blob/main/tools/check-public-content.py) 維護, 各儲存庫保留相同的獨立副本, 不依賴其他 checkout 或網路下載, 更新時比對來源與 hash 並執行既有隔離案例
+檢查器由 [Codex Toolkit](https://github.com/gaze9999/codex-toolkit/blob/main/tools/check-public-content.py) 維護, 各儲存庫保留相同的獨立副本, 不依賴其他 checkout 或網路下載, 更新時比對已提交的來源並在開發端執行私人測試
 
-檢查器 SHA-256: `7035ffeca4c0eb62d46b8db52447e38bd12b65824a7452854135cd2775e9b5d6`
+目前版本的檢查器可用 `git show HEAD:tools/check-public-content.py` 讀回
