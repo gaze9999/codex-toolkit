@@ -126,6 +126,10 @@ Windows 使用 `launch-cli.cmd mcp --profile development`, macOS / Linux 使用 
 
 ## 自動檢查與單項更新
 
+需要 Playwright CLI 每次啟動解析官方 npm `latest` 時, 可選用 `mcp/tools/playwright-latest/` 的薄啟動器, 放在獨立的使用者 PATH 目錄, 優先於原 npm prefix
+啟動器沿用 npx 的快取與錯誤處理, 使用 `--prefer-online` 檢查套件資訊, 不改其他工具的更新方式
+瀏覽器選擇保存在 Playwright 的使用者或專案設定, 不寫進通用啟動器
+
 `codex-tool-update --tool <tool>` 自動查官方更新通道, 顯示目前 / 新版, runtime 條件, shared package 影響及更新步驟. 只有加 `--apply` 才更新, 已明確授權的無人值守執行可加 `--yes`. 同一入口可重跑, 沒有新版便不安裝, 不降版, 不新增未安裝工具
 
 Desktop 與獨立 CLI 的 user prefix 可能不同, 預設位置未找到套件時, updater 會從該工具已註冊的 MCP entry 核對使用者目錄內的 setup 管理位置. 自訂位置使用 `--npm-prefix <absolute-path>`, 不從任意 MCP 路徑改動其他專案的套件
