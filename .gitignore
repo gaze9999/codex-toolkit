@@ -95,3 +95,6 @@ junit.xml
 
 # Versioned public publication checks
 !/.github/workflows/public-content.yml
+**/.claude/settings.local.json
+**/.codex/config.toml
+**/.codex/auth.json

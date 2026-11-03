@@ -24,6 +24,18 @@ def git(*args):
     return result.stdout
 
 
+# User-local agent configuration, independent of the public Plugin catalog.
+PERSONAL_PATHS = {
+    ".codex": {"auth.json", "config.toml"},
+    ".claude": {"settings.local.json"},
+}
+
+
+def personal_path(name):
+    parts = name.replace(chr(92), "/").lower().split("/")
+    return len(parts) >= 2 and parts[-1] in PERSONAL_PATHS.get(parts[-2], ())
+
+
 def private_name(name):
     leaf = name.replace("\\", "/").rsplit("/", 1)[-1].lower()
     return leaf in PRIVATE_NAMES or leaf.endswith(PRIVATE_SUFFIXES)
@@ -115,6 +127,8 @@ class Checker:
             raise RuntimeError("Git object reader failed")
 
     def name(self, name, location):
+        if personal_path(name):
+            self.problems.add((location, "personal agent settings"))
         if private_name(name):
             self.problems.add((location, "private signing file or generated CRX"))
 
@@ -137,7 +151,12 @@ class Checker:
             while position < len(data):
                 space = data.index(b" ", position)
                 zero = data.index(b"\x00", space)
-                self.name(data[space + 1:zero].decode("utf-8", "replace"), location)
+                name = data[space + 1:zero].decode("utf-8", "replace")
+                self.name(name, location)
+                if data[position:space] == b"40000" and name.lower() in PERSONAL_PATHS:
+                    subtree = data[zero + 1:zero + 1 + self.hash_bytes].hex()
+                    for child in git("ls-tree", "-z", "--name-only", subtree).split(b"\0"):
+                        self.name(name + "/" + child.decode("utf-8", "replace"), location)
                 position = zero + 1 + self.hash_bytes
         else:
             for problem in content_problems(data):

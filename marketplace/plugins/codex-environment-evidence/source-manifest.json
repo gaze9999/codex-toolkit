@@ -13,15 +13,15 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "26a260163ad88e42b1f23f2c3552ff85caf52f17722ecf0889e1731433f8cea3",
+      "sha256": "bcbe6f1f444f96bd0cd2656ed6cc48cd562532c3f91e34c9f01cd855c6758254",
       "source": "plugins/environment-evidence/plugin.json"
     },
     "skills/test-strategy/SKILL.md": {
-      "sha256": "ce4cb3a7c850de93a03946c64b4bdb77d3cd42e87537c7a4f0b572b21a1a807c",
+      "sha256": "d0709bf67fbcb9eed7db3ed589ad2b451dd17b27121a12330e039913c57a62ce",
       "source": "skills/test-strategy/SKILL.md"
     },
     "skills/test-strategy/agents/openai.yaml": {
-      "sha256": "e9dfdc6d983daf554ddd91b126ad1c60c38963e472cac1bb30358bbdff7ff95b",
+      "sha256": "291a25c5bfbba2a27b81fe3934f58e878542fb984c9f874e1e1fbbc1fc085c74",
       "source": "skills/test-strategy/agents/openai.yaml"
     },
     "skills/test-strategy/references/ai-evaluation.md": {
@@ -29,7 +29,7 @@
       "source": "skills/test-strategy/references/ai-evaluation.md"
     },
     "skills/test-strategy/references/application-delivery.md": {
-      "sha256": "754234888e3660278dcec34c38f2c664deb8d1862d74f23fc4915729df44d58d",
+      "sha256": "d34ef52a2a1121b6c551f79f641a5ce437ec36d4dcc7b530cd50ec1bb216a3dd",
       "source": "skills/test-strategy/references/application-delivery.md"
     },
     "skills/test-strategy/references/game-testing.md": {
@@ -45,7 +45,7 @@
       "source": "skills/test-strategy/references/specification-verification.md"
     },
     "skills/test-strategy/references/tool-selection.md": {
-      "sha256": "d45937e8dacd761d8a9506a68e3f0c06926d661ee8421e55e918b1e4b9b87f61",
+      "sha256": "c769311a042d7a9ed47b1e9ba79433fdd47b82b7af9f3651add69ee1f15f41d3",
       "source": "skills/test-strategy/references/tool-selection.md"
     },
     "skills/validation-evidence-review/SKILL.md": {
@@ -97,6 +97,6 @@
     "workspace-inspection"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.18.1",
-  "version": "0.3.8"
+  "toolkit_version": "0.19.0",
+  "version": "0.3.9"
 }

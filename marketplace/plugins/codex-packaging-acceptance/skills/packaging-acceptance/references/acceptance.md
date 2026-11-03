@@ -23,13 +23,17 @@ Use small fixtures for changed deterministic guards. Do not start the real appli
 
 ## Native runtime acceptance
 
-For authorized native platform checks, use isolated synthetic inputs and a bounded deadline. Verify Chinese/space paths, relocation, missing dependencies, exit codes and the intended CLI/Web/GUI entry. Use actual window/browser interaction for GUI acceptance; HTTP success alone proves only the requested response.
+For authorized native platform checks, use isolated synthetic inputs and a bounded deadline. Verify Chinese/space paths, relocation, missing dependencies, exit codes and the intended CLI/Web/GUI entry. For a Windows loader failure, compare the target architecture with the executable and required native libraries, then compare declared imports with the package manifest and actual loader error. Use an existing static inspector on a scoped copy when it can distinguish competing causes. Runtime-loaded dependencies may be absent from the import table. Confirm the diagnosis through the same native entry with a known-good control. Use actual window/browser interaction for GUI acceptance; HTTP success alone proves only the requested response.
 
 Record PID, parent creation time, owning client and owned resources before lifecycle checks. Normal shutdown comes first. Confirm owned children, ports and temporary directories are released after success, failure and cancellation. Preserve user services and client-managed MCPs. A timeout remains a failure or unresolved result; larger local timeouts do not establish the production deadline.
 
 ## Release readback
 
 Check the exact source revision, native runner, artifact set and archive/asset hashes. Confirm remote assets separately after an authorized publication. A local file, successful CI upload or prepared release is not remote publication proof. Keep read-token credentials in the runner secret store; source access permission does not establish redistribution permission.
+
+## Select release gates
+
+Identify the distribution audience, approved source revision and required checks before choosing gates. If development tests live privately, run them against the intended public checkout and record its source state in the private record. The public workflow runs the checks assigned to it by project policy. Report private test results, public build results and deployment receipts separately. A build alone cannot stand in for missing test evidence. Keep operational publication guards and required public marketplace metadata in the reviewed payload; exclude personal settings, development-only fixtures and private logs. Inspect both tracked paths and the actual archive or deployed tree.
 
 ## Authorized GitHub publication
 
