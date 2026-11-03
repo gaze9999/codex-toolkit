@@ -17,7 +17,7 @@ Development: turn a concrete defect or changed requirement into a useful failing
 
 ## Custom runners and isolated fixtures
 
-Read when creating or repairing a custom runner; existing test frameworks may already enforce these conditions.
+For a recurring failure, reuse the project's existing entry point with the same fixture, expected result and observable output before introducing a runner or delegating diagnosis. Route by the observed signal: a missing prerequisite blocks dependent checks, a reproduced behavior mismatch goes to its owner, and an inconclusive result retains the first failure and the next distinguishing check. Retry only when the next run tests a specific hypothesis. Before scheduling a recurring check, exercise both unchanged input and an unavailable source so a failed read cannot report no change.
 
 - Declare required scripts, fixture HTML/bundles and other inputs. Check their existence, readability and required nonempty content before opening a browser/server or starting a costly process. Missing required input fails nonzero; optional inputs are named and reported separately, never silently substituted for required checks.
 - Preserve earlier evidence before reuse, or select a fresh result location. Record a run identity/time, started state, terminal status, required selection and actually executed scripts/checks. An interrupted run or a stale success file is not a successful current run. Report errors and the original exit code even when cleanup or result writing fails.
