@@ -47,6 +47,12 @@ function rule(context) {
           ));
         }
       }
+      for (const match of text.matchAll(/試點/gu)) {
+        if (!protectedAt(match.index)) report(node, new RuleError(
+          '此繁中 profile 偏好先行驗證、試行或試辦, 依語意選擇, 正式名稱與來源用語保留, 需人工判讀',
+          { index: match.index },
+        ));
+      }
       // A text node can end before inline code, links or emphasis on the same line
       const remainingLine = getSource().slice(node.range[1]).split(/\r?\n/u, 1)[0];
       const atLineEnd = /^[\s*_~]*$/u.test(remainingLine);
