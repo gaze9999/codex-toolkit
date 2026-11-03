@@ -1,6 +1,6 @@
 # Select testing interfaces and optional MCP adapters
 
-Read only when existing tools cannot provide the needed evidence or interface selection is requested. Choose by capability, supported version, session/data isolation, permissions and total accepted-task cost. A configured adapter is not proof of client discovery, authentication or a successful call.
+Read for optional-tool selection, a missing check capability or requested interface selection. Choose by capability, supported version, session/data isolation, permissions and total accepted-task cost. A configured adapter is not proof of client discovery, authentication or a successful call.
 
 | Need | Starting point | MCP adds value when |
 |---|---|---|
@@ -8,6 +8,21 @@ Read only when existing tools cannot provide the needed evidence or interface se
 | Browser flow or debugging | Available compatible browser/Playwright/DevTools interface | Live state, traces or native client access materially improve evidence |
 | Unity/Unreal editor state | Existing engine commands/test framework and approved editor interaction | Tool schema exposes actual scene/asset/runtime operations needed by the task |
 | AI evaluation | Existing versioned fixtures/eval runner and model API | Approved structured tool/service integration is a concrete requirement |
+
+## Optional inspection tools and required checks
+
+ESLint, Stylelint and Serena are optional aids unless the governing project, CI or explicit acceptance criteria require their checks. An installed package, editor save action or available script alone does not establish a required gate.
+
+| Evidence needed | Select when useful | Available alternative and evidence boundary |
+|---|---|---|
+| JS/TS or Angular structure and syntax | Project-matched compiler, AST and Angular parser | Parsing establishes syntax; use the project compiler for types/templates |
+| TS/JS/HTML convention rules | ESLint with the owning project's configuration and resolved plugins | Compiler/AST/manual review can continue, with the unrun lint rules identified |
+| CSS/SCSS/Sass convention rules | Stylelint with the owning project's reviewed configuration | Existing Sass compiler, selected formatter and consumer review provide different evidence |
+| Semantic symbols and cross-file references | Serena with the intended checkout and relevant language servers active | Local compiler APIs, editor navigation and bounded search can resolve the selected question |
+
+If an optional tool is missing, unconfigured or fails to start, record that tool's result and unexecuted coverage, then continue independent checks that can answer their own questions. A required check stays blocked until its prerequisite is resolved; alternate evidence does not mark it passed. Select installation or repair separately within its authorized scope. Preserve original exit codes and distinguish tooling failure from a confirmed source defect.
+
+Keep confirmed conditions, selectors and required gates. Selecting another compatible tool does not itself authorize more roles, data, state combinations, repetitions or external actions. Formatting, linting, compilation and runtime interaction remain separate results.
 
 ## Candidate research, checked 2026-10-07
 

@@ -3,7 +3,7 @@ name: test-strategy
 description: Design and execute scoped checks for behavior changes, test gaps, failures or performance and release acceptance. Use for testing strategy work, not when routine checks suffice or when only summarizing recorded results.
 metadata:
   short-description: Risk-based checks across development and delivery
-  version: "0.2.6"
+  version: "0.2.7"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -24,7 +24,7 @@ Choose the smallest evidence that can resolve the actual acceptance risk. Keep e
 2. Derive important cases from requirements and failure signals: boundaries, omission/null/clear, invalid inputs, state transitions, cancellation, retries, compatibility, authorization and recovery as relevant. Cover dangerous higher-order combinations explicitly; pairwise coverage is not a proof of all workflows.
 3. Use a known defect, independent fixture or justified invariant to establish that the check can fail for the behavior of interest. For a defect fix, compare the same focused case on the defective baseline and candidate when safely available; confirm the baseline fails for the intended defect rather than a setup error. Preserve active work through an isolated fixture or checkout. If baseline execution is unavailable, retain that gap. Avoid reproducing the implementation as the expected result or adding test infrastructure for reversible low-impact prose.
 4. Execute only authorized checks in isolated, owned resources. Preserve first failures, seeds, traces and source/artifact versions. Retry only to investigate, never erase a failure. Clean up owned processes, sessions and temporary data without disturbing other work.
-5. Expand when focused evidence fails, cannot resolve an affected interface, or a required release gate demands more. State the missing evidence and added scope; do not repair unrelated dependencies or broaden application changes implicitly.
+5. When focused evidence fails or leaves an interface gap, identify the missing evidence and smallest additional check under the governing scope. Continue independent authorized checks while an optional tool is unavailable, retaining its unexecuted scope. Dependency repair, installation and application changes keep their own authorization.
 
 ## Conditional detail
 
@@ -34,7 +34,7 @@ Choose the smallest evidence that can resolve the actual acceptance risk. Keep e
 - For an authorized performance comparison, streaming update regression or sustained-resource check, read [performance and streaming updates](references/performance-and-streams.md).
 - For game rules, Unity/Unreal lifecycle, target hardware or multiplayer, read [game cases](references/game-testing.md).
 - For LLM/RAG/agents or stochastic media/model workflows, read [AI evaluation](references/ai-evaluation.md).
-- When the required evidence needs an additional interface or engine adapter, read [tool selection](references/tool-selection.md). Existing compatible CLI/client access comes first; new MCP installation needs its own confirmed scope.
+- For optional lint/symbol tools, unavailable-tool handling or an additional interface/engine adapter, read [tool selection](references/tool-selection.md). Existing compatible CLI/client access comes first; new MCP installation needs its own confirmed scope.
 
 ## Deliver evidence
 

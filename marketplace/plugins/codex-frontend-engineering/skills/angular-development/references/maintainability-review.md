@@ -4,6 +4,10 @@ Use for an explicitly scoped maintenance audit, not as a mandatory implementatio
 gate. This helper extends the existing Angular conventions checker. It is not a
 replacement for the project's Angular compiler, security review or behavior tests.
 
+## Inspection tool selection
+
+Use the project-matched compiler/AST and relevant source review for this audit. Select ESLint, Stylelint or Serena only for a concrete rule, stylesheet or semantic-reference gap. Preserve project/CI-required checks and confirmed test conditions. When an optional tool is unavailable, continue independent checks and identify its unexecuted scope. Use the available test-strategy Skill for additional interface selection and development-tool-setup for authorized setup. Parser, formatter, lint and runtime evidence remain distinct.
+
 ## Inputs and execution
 
 Use Python 3.11+, Node and an approved installed TypeScript 4.x-6.x JavaScript API.

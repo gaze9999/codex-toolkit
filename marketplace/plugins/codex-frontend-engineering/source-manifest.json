@@ -17,7 +17,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "27fdb627d139c4a7641538787d7c047fdbd30e88a30913f50cb3e976e2bff617",
+      "sha256": "5cf1a8b864b0bc2837ab2fe639ec416a04fe5c37b96e3b2fe8646c86efe0fe9a",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "skills/accessibility-engineering/SKILL.md": {
@@ -37,11 +37,11 @@
       "source": "skills/accessibility-engineering/references/validation.md"
     },
     "skills/angular-development/SKILL.md": {
-      "sha256": "5d873432e98db8333e17d4e35c10ad6896e65ff49aabdc2f958a0ae5595541c9",
+      "sha256": "b14ea9e268b3ebe0f5a8c765685cc5c061c51e79911fcbc9ed769f4b2307ce2d",
       "source": "skills/angular-development/SKILL.md"
     },
     "skills/angular-development/agents/openai.yaml": {
-      "sha256": "50133c12002fa434af72af18b64bf8e52eb4be9e89da86c0fe65ef3cd1b3f78c",
+      "sha256": "b42a3a2cf8bfe3ae6536257615fa770c37360462d405b443769a5d6a5dadb666",
       "source": "skills/angular-development/agents/openai.yaml"
     },
     "skills/angular-development/assets/icon-small.png": {
@@ -77,7 +77,7 @@
       "source": "skills/angular-development/references/component-behavior.md"
     },
     "skills/angular-development/references/maintainability-review.md": {
-      "sha256": "71d328724e0ce3b9c017f58dddd84f2d8e38c0ea8da1a2ff1e1efe41930cc1bf",
+      "sha256": "c4bd4343e1bf81ee4cf9e80a8a9ca8fe202f1afbd100d6b5f322cb6f6aa8ae09",
       "source": "skills/angular-development/references/maintainability-review.md"
     },
     "skills/angular-development/references/typescript-formatting.md": {
@@ -296,5 +296,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.18.1",
-  "version": "0.6.2"
+  "version": "0.6.3"
 }
