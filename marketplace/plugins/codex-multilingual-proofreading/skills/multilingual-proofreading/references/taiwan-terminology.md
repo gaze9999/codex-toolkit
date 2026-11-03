@@ -31,6 +31,7 @@ Checked 2026-11-02. Use each source for its stated scope, with the original publ
 | Project, code and configuration | Use 專案 for project work and 程式碼 for code. Retain 清單項目, 識別代碼 and 資源配置. |
 | Image and mirror | Use 映像/映像檔 for container/disk images and 鏡射 for a verified mirroring operation. Keep optical mirrors and product names. Review isolated 鏡像 manually. |
 | General editing preferences | Choose 資料/數據, 支援/支持, 使用者/用戶端/用戶 and 改善/最佳化/優化 by meaning and product context. Preserve policy names such as 數據賦能. |
+| Limited rollout, profile preference | This Taiwan Chinese profile flags 試點 for contextual review and prefers 先行驗證, 試行 or 試辦 by meaning. This is a profile choice, not an official terminology claim. Preserve formal names and source quotations; never select a synonym automatically. |
 | Integration and use | Use 串接/介接 for software connections and 情境 for use cases. Express implementation as 導入, 部署, 正式上線 or 落實 by action; preserve other meanings of 對接, 場景 and 落地. Describe the actual feedback/recovery steps instead of guessing from 閉環. |
 | Agent | Keep AI Agent and Agentic AI distinct using the maintained agent glossary. Preserve official source variants such as 代理型 AI when quoting that source; choose authored terms by responsibility. |
 | Signatures and security | Keep 電子簽章/數位簽章, 資安事件 and 漏洞/弱點 distinct by the actual mechanism and event. These choices require semantic review. |

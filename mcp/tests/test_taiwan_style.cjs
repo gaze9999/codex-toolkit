@@ -73,6 +73,23 @@ test('existing punctuation behavior is preserved', () => {
   assert.equal(check('中文並列、台灣用語').length, 0);
 });
 
+test('limited rollout wording is profile advice without an automatic synonym', () => {
+  const reports = check('先做試點, 再擴大試點');
+  assert.equal(reports.length, 2);
+  for (const report of reports) {
+    assert.match(report.message, /profile.*先行驗證、試行或試辦.*人工判讀/u);
+    assert.equal(report.fix, undefined);
+  }
+  assert.equal(check('先行驗證、試行與試辦').length, 0);
+});
+
+test('limited rollout advice preserves literal sources and excluded containers', () => {
+  for (const text of ['來源「試點」', '來源『試點』', '來源 "試點"', 'https://example.test/試點', '檔案 D:\\試點\\來源.md']) {
+    assert.equal(check(text).length, 0, text);
+  }
+  for (const container of ['BlockQuote', 'Link']) assert.equal(check('試點', container).length, 0);
+});
+
 test('Chinese sentence periods are reported without guessing a clause boundary', () => {
   for (const text of ['完成. 後續說明', '完成.後續說明', '完成。後續說明']) {
     const reports = check(text);

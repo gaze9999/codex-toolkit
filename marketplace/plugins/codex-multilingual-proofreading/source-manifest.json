@@ -13,7 +13,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "5baa927378cc059de52252028dcf9bcc98328399743fa27d50301b95323b50c2",
+      "sha256": "b25d7d595def96bc4dda6572e5a683f3f809004938dc3784fb4a378876298fc3",
       "source": "plugins/multilingual-proofreading/plugin.json"
     },
     "resources/proofreading/authored-style.cjs": {
@@ -45,7 +45,7 @@
       "source": "mcp/tools/proofreading/zh-tw/protected-copy.cjs"
     },
     "resources/proofreading/zh-tw/taiwan-style.cjs": {
-      "sha256": "97472633499916338655ed099faf8401f4366bf1d59848b314a1ff449b7b2689",
+      "sha256": "2b39eeecb8bebf81d36e0552cc86d924b035edd3094e55fbd41aed1d9f5a86cb",
       "source": "mcp/tools/proofreading/zh-tw/taiwan-style.cjs"
     },
     "resources/proofreading/zh-tw/terms.yml": {
@@ -53,11 +53,11 @@
       "source": "mcp/tools/proofreading/zh-tw/terms.yml"
     },
     "skills/multilingual-proofreading/SKILL.md": {
-      "sha256": "1609e372a6e1afe958f27a9894492aec640669eddf0ad36a5b2903ad338e6c2e",
+      "sha256": "6dc35c8b678fe1d67849e0c66dcb9d908d6fc7ffb2e8f68230a02d50309764d8",
       "source": "skills/multilingual-proofreading/SKILL.md"
     },
     "skills/multilingual-proofreading/agents/openai.yaml": {
-      "sha256": "bf2dc761e28c5db092d0de38c3830eabc832e4a5fd48b75df9c74b186b3129ed",
+      "sha256": "7fd22d5743215973db47f987281275b8e29d230552198a00b7c1e02bf96d0e5a",
       "source": "skills/multilingual-proofreading/agents/openai.yaml"
     },
     "skills/multilingual-proofreading/assets/icon-small.png": {
@@ -81,7 +81,7 @@
       "source": "skills/multilingual-proofreading/references/output-style.md"
     },
     "skills/multilingual-proofreading/references/taiwan-terminology.md": {
-      "sha256": "568ec624a9eb00f848385e72d50fb96b48f9ca07cdc60b5a710e5f6d8cefae2e",
+      "sha256": "7f7adabe8d6c7832389b824d19b576e621284bdf390929946828dee820b535f9",
       "source": "skills/multilingual-proofreading/references/taiwan-terminology.md"
     }
   },
@@ -95,5 +95,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.18.1",
-  "version": "0.1.14"
+  "version": "0.1.15"
 }
