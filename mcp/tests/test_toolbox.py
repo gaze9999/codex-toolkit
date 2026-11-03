@@ -142,6 +142,16 @@ class ToolboxTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'HEAD differs'):
             toolbox.assemble(self.public, self.private, 'personal')
 
+    def test_toolbox_revision_does_not_advance_the_restore_selection(self):
+        selected = {'toolkit_revision': 'b' * 40, 'skills': ['independent'], 'plugins': ['codex-workflow']}
+        self.write(self.private, 'profiles/selection.json', selected)
+        profile = json.loads((self.private / 'profiles/personal-toolbox.json').read_text())
+        profile['toolkit_revision'] = 'a' * 40
+        self.write(self.private, 'profiles/personal-toolbox.json', profile)
+        catalog, _ = toolbox.assemble(self.public, self.private, 'personal')
+        self.assertEqual(catalog['source']['toolkit']['revision'], 'a' * 40)
+        self.assertEqual(json.loads((self.private / 'profiles/selection.json').read_text()), selected)
+
     def test_private_version_must_be_valid_before_output(self):
         profile = json.loads((self.private / 'profiles/personal-toolbox.json').read_text())
         profile['version'] = 'latest'

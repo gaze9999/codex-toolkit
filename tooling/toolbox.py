@@ -12,11 +12,13 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'mcp/scripts'))
+sys.path.insert(0, str(ROOT / 'tooling'))
 from audit_skills import FRONTMATTER_RE, METADATA_RE, scalar
 from plugin_catalog import NAME, SCHEMA, VERSION, load_catalog, payload, safe_source
+from toolbox_integrations import augment
 
 PRODUCER = 'codex-toolkit.toolbox.v1'
-ADAPTER_VERSION = '0.2.0'
+ADAPTER_VERSION = '0.3.0'
 
 
 def encoded(value):
@@ -135,7 +137,10 @@ def assemble(toolkit, private=None, audience='public'):
             raise ValueError('Private toolbox owner is required')
         selection = read_json(private, config['selection_source'])
         selected_skills, selected_plugins = set(selection['skills']), set(selection['plugins'])
-        if selection['toolkit_revision'] != identity(toolkit)['revision']:
+        reviewed_revision = config.get('toolkit_revision', selection['toolkit_revision'])
+        if not isinstance(reviewed_revision, str) or not re.fullmatch(r'[0-9a-f]{40}', reviewed_revision):
+            raise ValueError('Toolbox source requires a full reviewed Toolkit revision')
+        if reviewed_revision != identity(toolkit)['revision']:
             raise ValueError('Toolkit HEAD differs from the reviewed private selection')
         for relative in ('profiles/personal-toolbox.json', config['selection_source'], config['connector_inventory']):
             source_inputs.append({'owner': 'private', 'path': relative,
@@ -196,6 +201,12 @@ def assemble(toolkit, private=None, audience='public'):
         for relative in config['private_skills']:
             add(private, standalone(private, relative, config['repository']), 'private', 'private')
 
+    integration_rows, integration_files = {}, {}
+    if personal and config.get('integration_source'):
+        integration_path = config['integration_source']
+        integration_rows, integration_files = augment(toolkit, private, packages, read_json(private, integration_path))
+        source_inputs.append({'owner': 'private', 'path': integration_path,
+                              'sha256': digest(safe_source(private, integration_path).read_bytes())})
     files, mappings = {}, {}
 
     def put(name, raw, owner='generated', source=None):
@@ -208,11 +219,23 @@ def assemble(toolkit, private=None, audience='public'):
     for item in packages:
         for name, raw in item['files'].items():
             origin = item['provenance'].get(name, {}).get('source')
-            put('plugins/' + item['name'] + '/' + name, raw, item['owner'], origin)
+            owner = item['provenance'].get(name, {}).get('owner', item['owner'])
+            put('plugins/' + item['name'] + '/' + name, raw, owner, origin)
+    for name, raw in integration_files.items():
+        put(name, raw)
     inputs = {'toolkit': identity(toolkit)}
     if personal:
         inputs['private'] = identity(private)
     connector_data = connector_catalog(read_json(private, config['connector_inventory'])) if personal else {'items': [], 'verification_scope': 'Add selected runtime connectors in a private profile.'}
+    for row in connector_data['items']:
+        row['integration'] = integration_rows.get(row['name'], {'state': 'not-bundled', 'loaded': None, 'authenticated': None})
+    recorded_names = {row['name'] for row in connector_data['items']}
+    for name, row in integration_rows.items():
+        if name not in recorded_names:
+            connector_data['items'].append({'name': name, 'owner': 'selected-integration', 'transport': row['transport'],
+                'observed_enabled': None, 'credential_env_names': [], 'evidence': 'reviewed-integration-profile',
+                'loaded': None, 'authenticated': None, 'integration': row})
+    connector_data['integration_scope'] = 'Prepared declarations and resources; target-client loading and authentication remain separate.'
     plugin_rows = [{key: value for key, value in item.items() if key not in {'files', 'provenance'}} for item in packages]
     catalog = {'schema_version': 1, 'name': config['name'] if personal else 'codex-toolkit',
                'version': config['version'] if personal else safe_source(toolkit, 'VERSION').read_text(encoding='utf-8').strip(),
@@ -233,7 +256,11 @@ def assemble(toolkit, private=None, audience='public'):
     skill_rows = '\n'.join(f"| [{row['name']}](../{row['path']}) | {row['version']} | {row['visibility']} | `{row['plugin']}` |" for row in skills)
     put('skills/README.md', ('# Skills\n\n每項保留正式來源內容, 由單一外掛提供, 依任務讀取所需的參照與腳本\n\n| Skill | 版本 | 範圍 | 外掛來源 |\n| --- | --- | --- | --- |\n' + skill_rows + '\n').encode('utf-8'))
     connector_rows = '\n'.join(f"| `{row['name']}` | {row['owner']} | {row['transport']} | {row['observed_enabled']} |" for row in connector_data['items'])
-    put('connectors/README.md', ('# 連接器\n\n此處是既有盤點的參考目錄, 每筆保留記錄中的啟用選擇, 實際連線與登入狀態需在目的用戶端確認\n本機 stdio 工具需要目的裝置的執行環境與資料權限, Claude 網頁對話使用可連線的遠端服務\n用戶端內建工具由原用戶端供應, 外部服務沿其官方連線入口\n\n| 名稱 | owner | 傳輸類型 | 盤點啟用值 |\n| --- | --- | --- | --- |\n' + connector_rows + '\n').encode('utf-8'))
+    connector_help = '# 連接器\n\n盤點值保留原觀察日期, 實際宣告與準備步驟另列如下, 載入與登入需在目的用戶端確認\n本機 stdio 工具需要目的裝置的執行環境與資料權限, Claude 網頁對話使用可連線的遠端服務\n用戶端內建工具由原用戶端供應, 外部服務沿其官方連線入口\n\n| 名稱 | owner | 傳輸類型 | 盤點啟用值 |\n| --- | --- | --- | --- |\n' + connector_rows + '\n'
+    if integration_rows:
+        connector_help += '\n| 已準備宣告 | 外掛與設定步驟 |\n| --- | --- |\n'
+        connector_help += '\n'.join(f"| `{key}` | [{row['plugin']}](../{row['setup']}) |" for key, row in integration_rows.items()) + '\n'
+    put('connectors/README.md', connector_help.encode('utf-8'))
     plugin_rows_md = '\n'.join(f"| [{row['name']}]({row['name']}/) | {row['version']} | {row['visibility']} | {len(row['skills'])} |" for row in packages)
     put('plugins/README.md', ('# 外掛程式\n\n每個資料夾保留 Codex manifest 與 Claude manifest, Skills 與資源共用同一份產生結果\nClaude 網頁版 / Desktop 每次上傳一個外掛, 本輪保留資料夾格式, 後續上傳時再依原生介面準備套件\n各工作流程所需的工具、帳戶、原生功能與常駐指示依目的端分別設定及驗收\n\n| 外掛 | 版本 | 範圍 | Skills |\n| --- | --- | --- | --- |\n' + plugin_rows_md + '\n').encode('utf-8'))
     if personal:
@@ -268,6 +295,8 @@ Claude 網頁版 / Desktop 的上傳單位為每個 plugins/ 下的獨立外掛�
 維護時修改正式來源, 再執行 prepare 產生新目錄, 使用 verify 檢查原目錄
 source-manifest.json 記錄來源提交、檔案映射與 SHA-256, 平台驗收狀態見 catalog.json
 '''
+    if integration_rows:
+        readme += '\n## 執行環境與雙平台設定\n\n[設定指南](SETUP.md) 包含 Codex / Claude 操作、必要條件與驗收方式\n各外掛的 mcp.json 提供 Codex 原生宣告, .mcp.json 提供 Claude 宣告, 工具程式與版本來源共用\n個人整合外掛的版本由私人 profile 管理, source_version 保留原元件版本, 安裝後依需求選擇單一來源\n'
     if personal:
         readme += '''
 ## 私人散布方式
@@ -284,7 +313,8 @@ repo、來源與平台檢查狀態見 [發布計畫](publication-plan.json), 產
     manifest = {'schema_version': 1, 'producer': PRODUCER, 'adapter_version': ADAPTER_VERSION,
                 'audience': audience, 'source': inputs, 'inputs': source_inputs, 'files': mappings}
     manifest['generator_hashes'] = {name: digest((ROOT / name).read_bytes()) for name in
-        ('tooling/toolbox.py', 'mcp/scripts/plugin_catalog.py', 'mcp/scripts/audit_skills.py')}
+        ('tooling/toolbox.py', 'tooling/toolbox_integrations.py', 'tooling/toolbox_runtime.py',
+         'tooling/toolbox_codex.py', 'mcp/scripts/plugin_catalog.py', 'mcp/scripts/audit_skills.py')}
     files['source-manifest.json'] = encoded(manifest)
     return catalog, files
 
@@ -328,6 +358,9 @@ def prepare(toolkit, private, audience, output):
 
 
 def main(argv=None):
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, 'reconfigure'):
+            stream.reconfigure(encoding='utf-8')
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('action', choices=('plan', 'publication-plan', 'prepare', 'verify'))
     parser.add_argument('--toolkit-root', type=Path, default=ROOT)
