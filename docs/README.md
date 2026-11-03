@@ -4,6 +4,7 @@
 
 | 分類 | 文件 | 內容 |
 |---|---|---|
+| 整合 | [三類整合目錄](toolbox.md) | Skills、連接器、Codex / Claude 外掛與來源雜湊 |
 | 操作 | [打包與評估](operating-model.md) | 產品來源、建置選項、路由觀察與 metrics 欄位 |
 | 操作 | [打包與評估](operating-model.md) | 產品來源、建置選項、路由觀察與 metrics 欄位 |
 | 設定分類 | [Agents](agents.md) | Global、Desktop、Git、ChatGPT / Work 與跨電腦同步 |

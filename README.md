@@ -13,6 +13,7 @@
 | 不使用 Codex, 直接執行工具 | [Python CLI](python-tools/README.md) |
 | 在自己的 Python 程式使用核心 | [文件核心](python-tools/docs/python-document-core.md), [工作區核心](python-tools/docs/python-workspace-core.md) |
 | 在 Codex 選用工作流程 | [Plugin 市集](docs/marketplace.md) 或 [獨立 Skills](docs/skills.md) |
+| 整理 Skills、連接器與跨平台外掛 | [三類整合目錄](docs/toolbox.md) |
 | 用戶端需要結構化工具與受控存取 | [MCP 安裝與驗證](docs/mcp.md) |
 
 ## 快速開始
