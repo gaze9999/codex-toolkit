@@ -7,7 +7,6 @@ git config --local --get core.hooksPath
 git config --local core.hooksPath .githooks
 python tools/check-public-content.py --index
 python tools/check-public-content.py --history
-python -m unittest discover -s tests -p test_public_content.py
 ```
 
 `pre-commit` 檢查暫存區的實際位元組, 工作目錄後續修改不會取代已暫存內容, `pre-push` 檢查每個待推送分支與 Tag 的完整可達歷史及註記, detached HEAD 也會納入, shallow clone 須先取得完整歷史, 檢查失敗會停止 commit 或 push
