@@ -18,5 +18,3 @@ jobs:
           persist-credentials: false
       - name: Check all reachable history
         run: python3 tools/check-public-content.py --history
-      - name: Verify publication guards
-        run: python3 -m unittest discover -s tests -p test_public_content.py

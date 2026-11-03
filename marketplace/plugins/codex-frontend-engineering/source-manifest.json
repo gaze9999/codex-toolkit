@@ -295,6 +295,6 @@
     "edge-devtools"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.19.0",
+  "toolkit_version": "0.19.1",
   "version": "0.6.3"
 }

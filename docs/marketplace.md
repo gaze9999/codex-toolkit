@@ -57,3 +57,5 @@ python -B mcp/scripts/prepare_marketplace.py --write
 公開目錄與 Skills 可透過 [唯讀市集 MCP](../mcp/marketplace-server/README.md) 提供搜尋、來源讀取及版本核對, Git 市集維持 Plugin 安裝與更新用途
 
 桌面保留原生 Git 市集, Cloud / Web 可使用 Private MCP, 兩端以同一完整 Toolkit commit 驗收, 更新順序、檔案核對與部分失敗處理見 [同版本更新](../mcp/marketplace-server/README.md#git-市集與-private-mcp-同版本更新)
+
+選單技能名稱的 vX.Y.Z 是 Skill 版本, 懸停路徑中的版本是安裝的 Plugin 版本, 整包版本另見根目錄 VERSION, 三者獨立更新

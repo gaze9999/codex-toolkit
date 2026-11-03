@@ -27,13 +27,15 @@ def git(*args):
 # User-local agent configuration, independent of the public Plugin catalog.
 PERSONAL_PATHS = {
     ".codex": {"auth.json", "config.toml"},
-    ".claude": {"settings.local.json"},
+    ".claude": {"settings.local.json", "worktrees"},
 }
 
 
 def personal_path(name):
     parts = name.replace(chr(92), "/").lower().split("/")
-    return len(parts) >= 2 and parts[-1] in PERSONAL_PATHS.get(parts[-2], ())
+    return (parts[-1] == "claude.local.md" or any(
+        child in PERSONAL_PATHS.get(parent, ()) for parent, child in zip(parts, parts[1:])
+    ))
 
 
 def private_name(name):
