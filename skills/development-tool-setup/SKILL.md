@@ -3,7 +3,7 @@ name: development-tool-setup
 description: Install, configure, update, remove or diagnose one selected optional tool, MCP or connector and its prerequisites on Windows, macOS or Linux. Use for setup/availability gaps, not ordinary tasks that can use existing tools.
 metadata:
   short-description: Independent development-tool setup and diagnosis
-  version: "0.4.20"
+  version: "0.4.21"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -18,6 +18,8 @@ Resolve the missing capability, selected tool, target machine, current installat
 - Source changes do not authorize unrelated local installs, remote publication or provider replacement. Never store credential values in code/docs/reports.
 
 For checkout/wheel/wizard installation, Python bootstrap, updates or purpose/language-specific recipes, read [maintained setup](references/maintained-setup.md). It preserves exact entry points, flags, conflict/backup handling and source-doc routing.
+
+For selected Serena JS/TS, Angular, HTML or stylesheet support, read [frontend language servers](references/serena-frontend.md).
 
 After selecting an integration, read only its relevant sections in [integration verification](references/integration-verification.md), including lifecycle cleanup when diagnosing stuck servers/viewers. Preserve tool-specific boundaries and separate registration/package checks, authentication, client discovery and actual use.
 
