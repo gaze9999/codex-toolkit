@@ -8,6 +8,7 @@ import os
 import shutil
 import stat
 import tempfile
+import tomllib
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -60,6 +61,7 @@ def main() -> int:
     parser.add_argument("--codex-home", type=Path, help="Override CODEX_HOME or ~/.codex.")
     parser.add_argument("--install", action="store_true", help="Install missing files and optional references/*.md, preserving relative paths.")
     parser.add_argument("--replace", action="store_true", help="Back up and replace different files; requires --install.")
+    parser.add_argument("--select", action="append", default=[], metavar="PATH", help="Select a relative instruction/reference/role file; repeat to restrict the default set.")
     args = parser.parse_args()
     if args.replace and not args.install:
         parser.error("--replace requires --install")
@@ -78,19 +80,39 @@ def main() -> int:
     pending = []
     conflicts = []
     try:
-        sources = [source_root / name for name in ARTIFACTS]
-        sources.extend(reference_paths(source_root / "references"))
+        if args.select:
+            sources = []
+            for name in args.select:
+                relative = Path(name)
+                allowed = name in (*ARTIFACTS, "AGENTS.zh-TW.md") or (
+                    relative.parts and relative.parts[0] in ("references", "agents")
+                    and relative.suffix == (".md" if relative.parts[0] == "references" else ".toml")
+                )
+                if not allowed or relative.is_absolute() or ".." in relative.parts or "\\" in name or ":" in name:
+                    raise ValueError(f"Select a unique relative instruction/reference/role path: {name}")
+                source = source_root / relative
+                check_target(source, source_root)
+                if source in sources:
+                    raise ValueError(f"Duplicate selected source: {name}")
+                sources.append(source)
+        else:
+            sources = [source_root / name for name in ARTIFACTS]
+            sources.extend(reference_paths(source_root / "references"))
         for source in sources:
             target = home / source.relative_to(source_root)
             if is_link(source) or not source.is_file():
                 raise ValueError(f"source missing or linked: {source}")
             check_target(target, home)
             content = source.read_bytes()
+            if source.relative_to(source_root).parts[0] == "agents":
+                role = tomllib.loads(content.decode("utf-8"))
+                if any(not isinstance(role.get(key), str) or not role[key].strip() for key in ("name", "description", "developer_instructions")):
+                    raise ValueError(f"Role is missing required strings: {source}")
             if target.is_file() and target.read_bytes() == content:
                 print(f"CURRENT {target}")
                 continue
             print(f"{'DIFFERENT' if target.exists() else 'MISSING'} {target}")
-            pending.append((target, content))
+            pending.append((source, target, content, target.read_bytes() if target.exists() else None))
             if target.exists():
                 conflicts.append(target)
     except ValueError as error:
@@ -112,11 +134,16 @@ def main() -> int:
     except ValueError as error:
         parser.error(str(error))
     home.mkdir(parents=True, exist_ok=True)
-    for target, content in pending:
+    for source, target, content, previous in pending:
+        check_target(target, home)
+        if source.read_bytes() != content or (target.read_bytes() if target.exists() else None) != previous:
+            raise ValueError(f"File changed during installation: {target}")
         if target.exists():
             backup = backup_root / target.relative_to(home)
             backup.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(target, backup)
+            if backup.read_bytes() != previous:
+                raise ValueError(f"Backup verification failed: {backup}")
             print(f"BACKUP {backup}")
         target.parent.mkdir(parents=True, exist_ok=True)
         with tempfile.NamedTemporaryFile(dir=target.parent, prefix=target.name + ".", suffix=".tmp", delete=False) as file:
@@ -127,6 +154,8 @@ def main() -> int:
         finally:
             temporary.unlink(missing_ok=True)
         print(f"INSTALLED {target}")
+        if target.read_bytes() != content:
+            raise ValueError(f"Installed content differs: {target}")
     return 0
 
 

@@ -111,5 +111,43 @@ class GlobalReferenceChecks(unittest.TestCase):
         with patch.object(Path, "lstat", return_value=metadata):
             self.assertTrue(installer.is_link(self.source))
 
+    def test_select_installs_only_requested_human_guide(self):
+        (self.source / "AGENTS.zh-TW.md").write_bytes(b"human guide")
+        result, output = self.run_installer("--select", "AGENTS.zh-TW.md", "--install")
+        self.assertEqual(result, 0, output)
+        self.assertEqual((self.home / "AGENTS.zh-TW.md").read_bytes(), b"human guide")
+        self.assertFalse((self.home / "AGENTS.md").exists())
+        self.assertEqual(self.run_installer("--select", "AGENTS.zh-TW.md")[0], 0)
+
+    def test_selected_role_validates_before_any_write(self):
+        (self.source / "agents").mkdir()
+        role = self.source / "agents/reviewer.toml"
+        role.write_text('name = "reviewer"', encoding="utf-8")
+        options = ("--select", "AGENTS.md", "--select", "agents/reviewer.toml", "--install")
+        self.assertEqual(self.run_installer(*options)[0], 2)
+        self.assertFalse(self.home.exists())
+        role.write_text('name = "reviewer"\ndescription = "Review"\ndeveloper_instructions = "Read only"\n', encoding="utf-8")
+        result, output = self.run_installer(*options)
+        self.assertEqual(result, 0, output)
+        self.assertEqual((self.home / "agents/reviewer.toml").read_bytes(), role.read_bytes())
+
+    def test_select_rejects_escape_config_duplicates_and_missing(self):
+        for name in ("../AGENTS.md", "references/../AGENTS.md", "config.toml", "C:/AGENTS.md", "references/missing.md"):
+            with self.subTest(name=name):
+                self.assertEqual(self.run_installer("--select", name, "--install")[0], 2)
+                self.assertFalse(self.home.exists())
+        self.assertEqual(self.run_installer("--select", "AGENTS.md", "--select", "AGENTS.md", "--install")[0], 2)
+
+    def test_select_conflict_keeps_unselected_files(self):
+        self.home.mkdir()
+        (self.home / "AGENTS.md").write_bytes(b"old")
+        (self.home / "config.toml").write_bytes(b"preserve")
+        self.assertEqual(self.run_installer("--select", "AGENTS.md", "--install")[0], 1)
+        self.assertEqual((self.home / "AGENTS.md").read_bytes(), b"old")
+        result, output = self.run_installer("--select", "AGENTS.md", "--install", "--replace")
+        self.assertEqual(result, 0, output)
+        self.assertEqual((self.home / "config.toml").read_bytes(), b"preserve")
+        self.assertFalse((self.home / "subagents.config.toml").exists())
+
 if __name__ == "__main__":
     unittest.main()

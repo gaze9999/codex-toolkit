@@ -23,6 +23,16 @@ python mcp/scripts/install_global_agents.py --source-root /path/to/private/agent
 
 預覽不寫入, 任何內容衝突都會停止整批套用. 已核對後用 `--install --replace` 先備份再取代, 備份保留相對路徑. 來源參考文件或目標路徑含 symbolic link / junction 時停止並列出位置, 避免沿連結讀寫其他目錄
 
+選擇性同步使用重複的 `--select`, 限定來源根目錄下的 `AGENTS.md`、`AGENTS.zh-TW.md`、`subagents.config.toml`、`references/` Markdown 或 `agents/` 角色 TOML, 未選檔案保持原狀
+角色會先解析並確認 name、description 與 developer_instructions, 整批來源檢查通過後才寫入, 備份與安裝內容均讀回核對
+
+```text
+python mcp/scripts/install_global_agents.py --source-root /path/to/instructions --select AGENTS.md --select AGENTS.zh-TW.md
+python mcp/scripts/install_global_agents.py --source-root /path/to/project/.codex --select agents/reviewer.toml
+```
+
+預覽 exit 0 表示相同, 1 表示待同步, 2 表示輸入錯誤, 確認選擇後加上 `--install --replace`, 再以原預覽命令核對 CURRENT, 不會合併或改寫主設定 config.toml
+
 ```text
 launch-cli.cmd agents --list
 launch-cli.cmd agents global
