@@ -52,6 +52,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -B -m unittest discover -s mcp/tests -p test_packaging_workflow.py
+      - run: python -B -m unittest discover -s mcp/tests -p test_agent_hooks.py -v
       - name: Assemble and read back source products
         run: |
           python -B tooling/package.py build --version 0.0.0 --output dist/source-check
