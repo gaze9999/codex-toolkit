@@ -1,5 +1,7 @@
 # CLI 安裝與管理
 
+Claude / Codex 的跨平台事件自動化使用 [共用 Hooks 安裝入口](../agent-hooks.md), 保留預覽、備份、選擇性合併及原生信任審閱
+
 ## 四類設定入口
 
 從儲存庫根目錄執行, Windows 使用 `launch-cli.cmd` 或 PowerShell 的 `./launch-cli.ps1`, macOS / Linux 使用 `sh launch-cli.sh`
