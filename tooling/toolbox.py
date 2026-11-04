@@ -268,15 +268,17 @@ def assemble(toolkit, private=None, audience='public'):
         external = [{'id': row['id'], 'owner': row['owner'], 'evidence': 'recorded-inventory', 'loaded': None}
                     for row in recorded['plugins'] if row.get('owner') not in {'codex-toolkit', 'private-authorized-source'}]
         put('plugins/external-sources.json', encoded({'items': external, 'policy': 'Install from the original provider.'}))
+    selected = client_packages(packages, config.get('client_exclusions', {}) if personal else {})
+    catalog['client_plugins'] = {client: [p['name'] for p in rows] for client, rows in selected.items()}
     marketplace = {'name': catalog['name'], 'owner': {'name': config['owner'] if personal else 'Codex Toolkit'},
                    'description': 'Source-backed Skills, connectors and Plugins', 'version': catalog['version'],
-                   'plugins': [{'name': p['name'], 'source': './plugins/' + p['name'], 'description': p['description']} for p in packages]}
+                   'plugins': [{'name': p['name'], 'source': './plugins/' + p['name'], 'description': p['description']} for p in selected['claude']]}
     put('.claude-plugin/marketplace.json', encoded(marketplace))
     interface = marketplace_interface(catalog['version'], config.get('display_name', catalog['name']) if personal else 'Codex Toolkit',
                                       config.get('display_icon', '🧰') if personal else '🧰')
     put('.agents/plugins/marketplace.json', encoded({'name': catalog['name'], 'interface': interface, 'plugins': [
         {'name': p['name'], 'source': {'source': 'local', 'path': './plugins/' + p['name']},
-         'policy': {'installation': 'AVAILABLE', 'authentication': 'ON_USE'}, 'category': 'Productivity'} for p in packages]}))
+         'policy': {'installation': 'AVAILABLE', 'authentication': 'ON_USE'}, 'category': 'Productivity'} for p in selected['codex']]}))
     put('catalog.json', encoded(catalog))
     readme = f'''# 個人工具整合包
 
@@ -319,6 +321,20 @@ repo、來源與平台檢查狀態見 [發布計畫](publication-plan.json), 產
          'tooling/toolbox_codex.py', 'mcp/scripts/plugin_catalog.py', 'mcp/scripts/audit_skills.py')}
     files['source-manifest.json'] = encoded(manifest)
     return catalog, files
+
+
+def client_packages(packages, exclusions):
+    if not isinstance(exclusions, dict) or set(exclusions) - {'codex', 'claude'}:
+        raise ValueError('Client exclusions must name codex or claude')
+    names = {p['name'] for p in packages}
+    result = {}
+    for client in ('codex', 'claude'):
+        omitted = exclusions.get(client, [])
+        if (not isinstance(omitted, list) or any(not isinstance(name, str) for name in omitted)
+                or len(omitted) != len(set(omitted)) or set(omitted) - names):
+            raise ValueError('Client exclusions need unique existing plugin names: ' + client)
+        result[client] = [p for p in packages if p['name'] not in omitted]
+    return result
 
 
 def verify(output):

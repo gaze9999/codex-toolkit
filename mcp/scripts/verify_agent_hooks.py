@@ -11,6 +11,7 @@ import subprocess
 import sys
 import threading
 import time
+import uuid
 
 from install_agent_hooks import read_json
 
@@ -72,6 +73,14 @@ def discover(cli, cwd):
         process.stdout.close()
 
 
+def command_evidence(client, event, output):
+    if not isinstance(output, dict) or output.get("decision") == "block" or output.get("continue") is False:
+        raise ValueError("Unexpected hook output: " + event)
+    return {"client": client, "event": event, "command": "passed", "json_output": "valid",
+            "output_kind": "message" if output else "silent",
+            "hook_output": output, "project_checks": "not_verified", "native_event": "not_verified"}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--client", choices=("codex", "claude"), required=True)
@@ -83,6 +92,7 @@ def main():
         home, cwd = args.home.expanduser().resolve(), args.cwd.resolve(strict=True)
         manifest = read_json(home / "managed-agent-hooks/manifest.json")
         config = read_json(home / ("hooks.json" if args.client == "codex" else "settings.json"))
+        session = "installed-command-verification-" + uuid.uuid4().hex
         for event, group in manifest["groups"].items():
             if config.get("hooks", {}).get(event, []).count(group) != 1:
                 raise ValueError("Missing or changed installed event: " + event)
@@ -92,14 +102,12 @@ def main():
             else:
                 command = handler.get("commandWindows", handler["command"]) if os.name == "nt" else handler["command"]
                 argv = shlex.split(command)
-            payload = {"hook_event_name": event, "cwd": str(cwd), "session_id": "installed-command-verification", "source": "compact"}
+            payload = {"hook_event_name": event, "cwd": str(cwd), "session_id": session, "source": "compact"}
             result = subprocess.run(argv, input=json.dumps(payload).encode(), capture_output=True, timeout=20)
             if result.returncode:
                 raise ValueError(f"{event}: command exit {result.returncode}")
             output = json.loads(result.stdout)
-            if not isinstance(output, dict) or output.get("decision") == "block" or output.get("continue") is False:
-                raise ValueError("Unexpected hook output: " + event)
-            print(f"PASS {args.client} {event}: installed command and JSON output")
+            print(json.dumps(command_evidence(args.client, event, output), ensure_ascii=False))
         if args.codex_cli:
             result = discover(args.codex_cli, cwd)
             selected = selected_hooks(result, manifest["groups"], home / "hooks.json")

@@ -41,6 +41,17 @@ class AgentHooksTests(unittest.TestCase):
     def event(self, event, client="codex", **values):
         return hooks.handle(dict(self.payload, hook_event_name=event, **values), self.policy, client, self.state)
 
+    def test_command_evidence_does_not_promote_silence_or_warning(self):
+        for output in ({}, {"systemMessage": "tracked whitespace check failed"}):
+            row = verifier.command_evidence("claude", "Stop", output)
+            self.assertEqual("passed", row["command"])
+            self.assertEqual("not_verified", row["project_checks"])
+            self.assertEqual("not_verified", row["native_event"])
+            self.assertEqual(output, row["hook_output"])
+        for output in ([], {"decision": "block"}, {"continue": False}):
+            with self.assertRaises(ValueError):
+                verifier.command_evidence("codex", "Stop", output)
+
     def test_route_compaction_and_client_isolation(self):
         for client in ("codex", "claude"):
             result = self.event("SessionStart", client)

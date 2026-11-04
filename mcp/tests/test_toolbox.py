@@ -57,6 +57,27 @@ class ToolboxTests(unittest.TestCase):
         return {'$schema': toolbox.SCHEMA, 'name': name, 'version': '1.0.0', 'description': 'Example workflow',
                 'repository': 'https://example.test/owner/toolkit', 'author': {'name': 'Example'}}
 
+    def test_client_exclusion_changes_only_selected_marketplace(self):
+        profile = json.loads((self.private / 'profiles/personal-toolbox.json').read_text())
+        profile['client_exclusions'] = {'claude': ['codex-workflow']}
+        self.write(self.private, 'profiles/personal-toolbox.json', profile)
+        catalog, files = toolbox.assemble(self.public, self.private, 'personal')
+        claude = json.loads(files['.claude-plugin/marketplace.json'])
+        codex = json.loads(files['.agents/plugins/marketplace.json'])
+        self.assertNotIn('codex-workflow', {p['name'] for p in claude['plugins']})
+        self.assertIn('codex-workflow', {p['name'] for p in codex['plugins']})
+        self.assertIn('plugins/codex-workflow/.claude-plugin/plugin.json', files)
+        self.assertNotIn('codex-workflow', catalog['client_plugins']['claude'])
+        self.assertIn('codex-workflow', catalog['client_plugins']['codex'])
+
+    def test_client_exclusions_reject_unknown_or_ambiguous_selection(self):
+        packages = [{'name': 'example'}]
+        for exclusions in ({'other': []}, {'claude': ['missing']},
+                           {'claude': ['example', 'example']}, {'claude': 'example'},
+                           {'claude': [None]}):
+            with self.subTest(exclusions=exclusions), self.assertRaises(ValueError):
+                toolbox.client_packages(packages, exclusions)
+
     def test_public_output_excludes_private_content_and_identity(self):
         catalog, files = toolbox.assemble(self.public, self.private, 'public')
         self.assertEqual({s['name'] for s in catalog['categories']['skills']}, {'grouped', 'independent'})

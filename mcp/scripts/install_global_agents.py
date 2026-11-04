@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check or install Codex global instructions, model profile and Markdown references."""
+"""Preview or install shared global instructions for Codex or Claude."""
 
 from __future__ import annotations
 
@@ -58,6 +58,8 @@ def check_target(path: Path, home: Path) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source-root", type=Path, help="Explicit personal agent source directory; defaults to neutral repository examples.")
+    parser.add_argument("--client", choices=("codex", "claude"), default="codex")
+    parser.add_argument("--claude-home", type=Path, help="Override CLAUDE_CONFIG_DIR or ~/.claude.")
     parser.add_argument("--codex-home", type=Path, help="Override CODEX_HOME or ~/.codex.")
     parser.add_argument("--install", action="store_true", help="Install missing files and optional references/*.md, preserving relative paths.")
     parser.add_argument("--replace", action="store_true", help="Back up and replace different files; requires --install.")
@@ -66,14 +68,18 @@ def main() -> int:
     if args.replace and not args.install:
         parser.error("--replace requires --install")
 
+    if (args.client == "claude" and args.codex_home) or (args.client == "codex" and args.claude_home):
+        parser.error("Use the home option matching --client")
     repo = Path(__file__).resolve().parents[2]
-    home = (args.codex_home or Path(os.environ.get("CODEX_HOME") or Path.home() / ".codex")).expanduser().resolve()
+    selected_home = args.claude_home if args.client == "claude" else args.codex_home
+    variable = "CLAUDE_CONFIG_DIR" if args.client == "claude" else "CODEX_HOME"
+    home = (selected_home or Path(os.environ.get(variable) or Path.home() / ("." + args.client))).expanduser().resolve()
     if home == Path(home.anchor) or home == repo or repo in home.parents:
-        parser.error("Codex home must not be a filesystem root or inside this repository")
+        parser.error("Client home must not be a filesystem root or inside this repository")
 
     source_root = (args.source_root or repo / "agents").expanduser().resolve()
     if source_root == Path(source_root.anchor) or source_root == home or source_root.is_relative_to(home):
-        parser.error("Use an independent agent source directory outside Codex home")
+        parser.error("Use an independent agent source directory outside client home")
     if source_root.is_symlink():
         parser.error("Agent source must not be a symlink")
 
@@ -90,16 +96,22 @@ def main() -> int:
                 )
                 if not allowed or relative.is_absolute() or ".." in relative.parts or "\\" in name or ":" in name:
                     raise ValueError(f"Select a unique relative instruction/reference/role path: {name}")
+                if args.client == "claude" and (name == "subagents.config.toml" or relative.parts[0] == "agents"):
+                    raise ValueError("Codex role/profile files are not Claude instructions: " + name)
                 source = source_root / relative
                 check_target(source, source_root)
                 if source in sources:
                     raise ValueError(f"Duplicate selected source: {name}")
                 sources.append(source)
         else:
-            sources = [source_root / name for name in ARTIFACTS]
+            names = ("AGENTS.md", "AGENTS.zh-TW.md") if args.client == "claude" else ARTIFACTS
+            sources = [source_root / name for name in names if name != "AGENTS.zh-TW.md" or (source_root / name).exists()]
             sources.extend(reference_paths(source_root / "references"))
         for source in sources:
-            target = home / source.relative_to(source_root)
+            relative = source.relative_to(source_root)
+            if args.client == "claude" and relative.as_posix() in ("AGENTS.md", "AGENTS.zh-TW.md"):
+                relative = Path(relative.name.replace("AGENTS", "CLAUDE", 1))
+            target = home / relative
             if is_link(source) or not source.is_file():
                 raise ValueError(f"source missing or linked: {source}")
             check_target(target, home)

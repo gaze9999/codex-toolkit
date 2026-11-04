@@ -26,13 +26,43 @@ class GlobalReferenceChecks(unittest.TestCase):
 
     def run_installer(self, *options):
         output = io.StringIO()
-        args = ["installer", "--source-root", str(self.source), "--codex-home", str(self.home), *options]
+        home_option = "--claude-home" if "claude" in options else "--codex-home"
+        args = ["installer", "--source-root", str(self.source), home_option, str(self.home), *options]
         with patch.object(sys, "argv", args), contextlib.redirect_stdout(output), contextlib.redirect_stderr(output):
             try:
                 result = installer.main()
             except SystemExit as error:
                 result = error.code
         return result, output.getvalue()
+
+    def test_claude_global_matches_source_and_keeps_settings(self):
+        self.home.mkdir()
+        (self.home / "settings.json").write_bytes(b'{"enabledPlugins": {}}')
+        (self.source / "AGENTS.zh-TW.md").write_bytes(b"human guide")
+        options = ("--client", "claude")
+        self.assertEqual(self.run_installer(*options)[0], 1)
+        self.assertFalse((self.home / "CLAUDE.md").exists())
+        result, output = self.run_installer(*options, "--install")
+        self.assertEqual(result, 0, output)
+        self.assertEqual((self.home / "CLAUDE.md").read_bytes(), (self.source / "AGENTS.md").read_bytes())
+        self.assertEqual((self.home / "CLAUDE.zh-TW.md").read_bytes(), b"human guide")
+        self.assertEqual((self.home / "references/nested/AGENTS.md").read_bytes(), b"reference")
+        self.assertEqual((self.home / "settings.json").read_bytes(), b'{"enabledPlugins": {}}')
+        self.assertFalse((self.home / "subagents.config.toml").exists())
+        self.assertFalse((self.home / "AGENTS.md").exists())
+        self.assertEqual(self.run_installer(*options)[0], 0)
+
+    def test_claude_conflict_backup_and_role_rejection(self):
+        self.home.mkdir()
+        (self.home / "CLAUDE.md").write_bytes(b"local customization")
+        options = ("--client", "claude", "--select", "AGENTS.md", "--install")
+        self.assertEqual(self.run_installer(*options)[0], 1)
+        self.assertEqual((self.home / "CLAUDE.md").read_bytes(), b"local customization")
+        self.assertEqual(self.run_installer(*options, "--replace")[0], 0)
+        backups = list((self.home / "backups/codex-setup").glob("*/CLAUDE.md"))
+        self.assertEqual(len(backups), 1)
+        self.assertEqual(backups[0].read_bytes(), b"local customization")
+        self.assertEqual(self.run_installer("--client", "claude", "--select", "subagents.config.toml")[0], 2)
 
     def test_preview_includes_nested_markdown_without_writing(self):
         result, output = self.run_installer()

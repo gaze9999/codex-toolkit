@@ -14,6 +14,9 @@ import shlex
 import shutil
 import sys
 import uuid
+import subprocess
+
+import project_checks
 
 from agent_hooks import VERSION, atomic_write, digest
 from install_global_agents import check_target
@@ -33,8 +36,11 @@ def read_json(path):
 
 
 def validate_profile(value):
-    if set(value) != {"schema_version", "entries", "start_note", "stop_note"} or value["schema_version"] != 1:
+    required = {"schema_version", "entries", "start_note", "stop_note"}
+    if not required.issubset(value) or set(value) - required - {"codex_token_usage"} or value["schema_version"] != 1:
         raise ValueError("Unsupported hook profile")
+    if "codex_token_usage" in value and type(value["codex_token_usage"]) is not bool:
+        raise ValueError("codex_token_usage must be a boolean")
     entries = value["entries"]
     if not isinstance(entries, list) or len(entries) > 12:
         raise ValueError("Profile entries must contain at most 12 relative paths")
@@ -68,7 +74,7 @@ def handlers(client, executable, runner, policy, state, platform):
     return groups
 
 
-def plan(client, home, profile, operations, executable, git, platform):
+def plan(client, home, profile, operations, executable, git, platform, projects=None):
     config = home / ("hooks.json" if client == "codex" else "settings.json")
     managed = home / "managed-agent-hooks"
     manifest = managed / "manifest.json"
@@ -77,12 +83,28 @@ def plan(client, home, profile, operations, executable, git, platform):
     original = config.read_bytes() if config.exists() else None
     value = read_json(config)
     prior = read_json(manifest)
+    if projects is None and prior.get("bundle"):
+        prior_policy = managed / prior["bundle"] / "policy.json"
+        check_target(prior_policy, home)
+        projects = read_json(prior_policy).get("project_checks")
     policy = dict(profile, operations=str(operations), git=str(git))
+    if client == "codex" and profile.get("codex_token_usage"):
+        policy["transcript_root"] = str(home.resolve() / "sessions")
+    if projects:
+        policy["project_checks"] = projects
+        policy["node"] = shutil.which("node")
     runner_bytes = Path(__file__).with_name("agent_hooks.py").read_bytes()
+    checks_bytes = Path(__file__).with_name("project_checks.py").read_bytes()
+    scanner = Path(__file__).with_name("public_content.py")
+    if not scanner.exists():
+        scanner = Path(__file__).resolve().parents[2] / "tools/check-public-content.py"
+    scanner_bytes = scanner.read_bytes()
     policy_bytes = encoded(policy)
-    bundle = managed / (VERSION + "-" + digest(runner_bytes + policy_bytes)[:16])
+    bundle = managed / (VERSION + "-" + digest(runner_bytes + checks_bytes + scanner_bytes + policy_bytes)[:16])
     runner, settings = bundle / "agent_hooks.py", bundle / "policy.json"
     groups = handlers(client, executable, runner, settings, managed / "state", platform)
+    if projects:
+        groups["PostToolUse"]["matcher"] = "^(Edit|Write|MultiEdit|apply_patch|Bash)$"
     hooks = value.setdefault("hooks", {})
     if not isinstance(hooks, dict):
         raise ValueError(f"hooks must be an object: {config}")
@@ -99,13 +121,13 @@ def plan(client, home, profile, operations, executable, git, platform):
             raise ValueError("An unowned identical hook exists; review ownership before installing")
         existing.append(group)
     data = original if original is not None and read_json(config) == value else encoded(value)
-    files = {runner: runner_bytes, settings: policy_bytes,
+    files = {runner: runner_bytes, bundle / "project_checks.py": checks_bytes, bundle / "public_content.py": scanner_bytes, settings: policy_bytes,
              manifest: encoded({"version": VERSION, "groups": groups, "bundle": bundle.name}), config: data}
     expected = {}
     for path in files:
         check_target(path, home)
         expected[path] = path.read_bytes() if path.exists() else None
-        if path in (runner, settings) and expected[path] not in (None, files[path]):
+        if path.parent == bundle and expected[path] not in (None, files[path]):
             raise ValueError(f"Installed immutable bundle differs: {path}")
     return files, expected
 
@@ -146,6 +168,29 @@ def apply_plan(files, expected, home):
         raise
 
 
+
+def bind_projects(registry, checkouts):
+    if registry is None:
+        if checkouts:
+            raise ValueError("Checkouts require --projects")
+        return None
+    value = project_checks.expand_registry(read_json(registry))
+    entries = {project_checks.identity(row["repository"]): row for row in value["projects"]}
+    selected = []
+    for checkout in dict.fromkeys(checkouts):
+        root = checkout.resolve(strict=True)
+        actual = Path(os.fsdecode(project_checks.git(root, "rev-parse", "--show-toplevel")).strip()).resolve()
+        if root != actual:
+            raise ValueError("Use exact checkout roots")
+        origin = project_checks.identity(os.fsdecode(project_checks.git(root, "remote", "get-url", "origin")).strip())
+        if origin not in entries:
+            raise ValueError("Checkout is not an approved registry identity")
+        selected.append({"root": str(root), "project": entries[origin]})
+    if not selected:
+        raise ValueError("Projects require explicit --checkout selections")
+    return selected
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--client", choices=("codex", "claude"), action="append", required=True)
@@ -153,6 +198,8 @@ def main():
     parser.add_argument("--operations", type=Path, required=True)
     parser.add_argument("--codex-home", type=Path, default=Path(os.environ.get("CODEX_HOME") or Path.home() / ".codex"))
     parser.add_argument("--claude-home", type=Path, default=Path(os.environ.get("CLAUDE_CONFIG_DIR") or Path.home() / ".claude"))
+    parser.add_argument("--projects", type=Path)
+    parser.add_argument("--checkout", type=Path, action="append", default=[])
     parser.add_argument("--apply", action="store_true")
     args = parser.parse_args()
     try:
@@ -164,6 +211,7 @@ def main():
         git = shutil.which("git")
         if not git:
             raise ValueError("Git is required")
+        projects = bind_projects(args.projects, args.checkout)
         plans = []
         homes = set()
         for client in dict.fromkeys(args.client):
@@ -171,7 +219,7 @@ def main():
             if home in homes or home == Path(home.anchor) or home == Path.home():
                 raise ValueError("Use distinct client configuration directories")
             homes.add(home)
-            files, expected = plan(client, home, profile, operations, Path(sys.executable), Path(git), sys.platform)
+            files, expected = plan(client, home, profile, operations, Path(sys.executable), Path(git), sys.platform, projects)
             plans.append((home, files, expected))
         pending = False
         for home, files, expected in plans:
