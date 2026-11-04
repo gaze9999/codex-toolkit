@@ -1,5 +1,9 @@
 {
   "files": {
+    ".claude-plugin/plugin.json": {
+      "sha256": "9ca3a694fd2776b41ab3f21202d0d5636fd25903df6678bf127c83a2a689fff7",
+      "source": null
+    },
     "LICENSE": {
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
@@ -17,7 +21,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "5cf1a8b864b0bc2837ab2fe639ec416a04fe5c37b96e3b2fe8646c86efe0fe9a",
+      "sha256": "09b4ecf5bae210d2a46db5d4213499fb69e30314129569c23501433bf0ac88cd",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "skills/accessibility-engineering/SKILL.md": {
@@ -295,6 +299,6 @@
     "edge-devtools"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.19.1",
-  "version": "0.6.3"
+  "toolkit_version": "0.22.0",
+  "version": "0.6.4"
 }

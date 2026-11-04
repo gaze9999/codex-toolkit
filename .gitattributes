@@ -18,6 +18,7 @@ assets/**/*.svg text eol=lf
 assets/**/*.png -text
 VERSION text eol=lf
 .agents/plugins/marketplace.json text eol=lf
+.claude-plugin/marketplace.json text eol=lf
 
 # Preserve canonical Token Count resource hashes across platforms
 python-tools/VERSION text eol=lf

@@ -1,0 +1,65 @@
+{
+  "description": "Source-backed Skills and optional tool setup workflows",
+  "name": "codex-toolkit",
+  "owner": {
+    "name": "Codex Toolkit"
+  },
+  "plugins": [
+    {
+      "description": "Maintain instruction layers, prompts, Markdown goals/plans and scoped review/test briefs.",
+      "name": "codex-agent-workflow",
+      "source": "./marketplace/plugins/codex-agent-workflow"
+    },
+    {
+      "description": "Bounded OpenAI Decisions evaluation with an optional local CLI and MCP.",
+      "name": "codex-decisions-evaluation",
+      "source": "./marketplace/plugins/codex-decisions-evaluation"
+    },
+    {
+      "description": "Process documents, maintain specifications, visualize sources and count text tokens.",
+      "name": "codex-documents-specifications",
+      "source": "./marketplace/plugins/codex-documents-specifications"
+    },
+    {
+      "description": "Select risk-based checks, compare scoped environments and interpret existing validation evidence with explicit coverage and sampling limits.",
+      "name": "codex-environment-evidence",
+      "source": "./marketplace/plugins/codex-environment-evidence"
+    },
+    {
+      "description": "Build Angular, React and Vue interfaces with UI/UX, i18n, accessibility and scoped browser checks.",
+      "name": "codex-frontend-engineering",
+      "source": "./marketplace/plugins/codex-frontend-engineering"
+    },
+    {
+      "description": "Rank approved optional context and perform bounded typed semantic evaluation.",
+      "name": "codex-jev-evaluation",
+      "source": "./marketplace/plugins/codex-jev-evaluation"
+    },
+    {
+      "description": "Query bounded local activity counts and source health without conversation content.",
+      "name": "codex-local-activity",
+      "source": "./marketplace/plugins/codex-local-activity"
+    },
+    {
+      "description": "Proofread Taiwan Traditional Chinese, English and Japanese while preserving authoritative copy.",
+      "name": "codex-multilingual-proofreading",
+      "source": "./marketplace/plugins/codex-multilingual-proofreading"
+    },
+    {
+      "description": "Assemble selected Plugin/application products and validate package sources and lifecycle.",
+      "name": "codex-packaging-acceptance",
+      "source": "./marketplace/plugins/codex-packaging-acceptance"
+    },
+    {
+      "description": "Maintain repository README and licensing documents with separate evidence and authorization boundaries.",
+      "name": "codex-project-documentation",
+      "source": "./marketplace/plugins/codex-project-documentation"
+    },
+    {
+      "description": "Project-native data visualization, 2D motion and Three.js with scoped local previews.",
+      "name": "codex-visual-development",
+      "source": "./marketplace/plugins/codex-visual-development"
+    }
+  ],
+  "version": "0.22.0"
+}
