@@ -8,10 +8,11 @@ import re
 from pathlib import Path
 import sys
 
-from plugin_catalog import load_catalog, payload, safe_source
+from plugin_catalog import claude_manifest, load_catalog, marketplace_interface as display_interface, payload, safe_source
 
 ROOT = Path(__file__).resolve().parents[2]
 PRODUCER = 'codex-toolkit.marketplace.v1'
+CLAUDE_INDEX = '.claude-plugin/marketplace.json'
 
 def encode(value):
     return (json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + '\n').encode('utf-8')
@@ -23,11 +24,23 @@ def marketplace_interface(root):
     version = path.read_text(encoding='utf-8').strip()
     if not re.fullmatch(r'\d+\.\d+\.\d+', version):
         raise ValueError('Invalid Toolkit version')
-    return {'displayName': f'🧰 Codex Toolkit v{version}'}
+    return display_interface(version)
+
+
+def claude_index(packages, version):
+    index = {'name': 'codex-toolkit', 'owner': {'name': 'Codex Toolkit'},
+             'description': 'Source-backed Skills and optional tool setup workflows',
+             'plugins': [{'name': name, 'source': './marketplace/plugins/' + name,
+                          'description': manifest['description']}
+                         for name, manifest in sorted(packages.items())]}
+    if version is not None:
+        index['version'] = version
+    return index
 
 
 def prepare(root):
     files = {}
+    packages = {}
     index = {'name': 'codex-toolkit', 'interface': marketplace_interface(root), 'plugins': []}
     license_bytes = safe_source(root, 'LICENSE').read_bytes()
     for bundle in load_catalog(root):
@@ -35,6 +48,12 @@ def prepare(root):
             continue
         package, provenance = payload(root, bundle)
         name = provenance['plugin']
+        adapter = claude_manifest(bundle['manifest'], package)
+        adapter['license'] = 'MIT'
+        relative = '.claude-plugin/plugin.json'
+        package[relative] = encode(adapter)
+        provenance['files'][relative] = {'source': None, 'sha256': hashlib.sha256(package[relative]).hexdigest()}
+        packages[name] = adapter
         prefix = 'marketplace/plugins/' + name + '/'
         package['LICENSE'] = license_bytes
         provenance['files']['LICENSE'] = {'source': 'LICENSE', 'sha256': hashlib.sha256(license_bytes).hexdigest()}
@@ -47,11 +66,15 @@ def prepare(root):
     if not index['plugins']:
         raise ValueError('No ready Plugin payloads')
     files['.agents/plugins/marketplace.json'] = encode(index)
+    files[CLAUDE_INDEX] = encode(claude_index(packages, provenance['toolkit_version']))
     return files
 
 def existing(root):
-    index = safe_source(root, '.agents/plugins/marketplace.json')
-    result = {'.agents/plugins/marketplace.json': index.read_bytes()} if index.is_file() else {}
+    result = {}
+    for name in ('.agents/plugins/marketplace.json', CLAUDE_INDEX):
+        index = safe_source(root, name)
+        if index.is_file():
+            result[name] = index.read_bytes()
     base = safe_source(root, 'marketplace/plugins')
     if base.is_dir():
         for path in base.rglob('*'):
@@ -64,6 +87,7 @@ def owned_before(root, before):
     """Only overwrite intact generated packages, never arbitrary files or hand edits."""
     prefixes = {Path(name).parts[2] for name in before if name.startswith('marketplace/plugins/')}
     previous_versions = set()
+    previous_packages = {}
     for plugin in prefixes:
         prefix = f'marketplace/plugins/{plugin}/'
         raw = before.get(prefix + 'source-manifest.json')
@@ -77,6 +101,7 @@ def owned_before(root, before):
         actual = {name[len(prefix):]: raw for name, raw in before.items() if name.startswith(prefix) and name != prefix + 'source-manifest.json'}
         if set(actual) != set(expected) or any(hashlib.sha256(raw).hexdigest() != expected[name]['sha256'] for name, raw in actual.items()):
             raise ValueError('Generated payload was edited; preserve and review it: ' + plugin)
+        previous_packages[plugin] = json.loads(actual['plugin.json'])
     if '.agents/plugins/marketplace.json' in before:
         expected_index = {'name': 'codex-toolkit', 'interface': marketplace_interface(root), 'plugins': []}
         for plugin in sorted(prefixes):
@@ -98,6 +123,14 @@ def owned_before(root, before):
             actual_index['plugins'] = sorted(actual_entries, key=lambda row: row.get('name', ''))
         if actual_index != expected_index:
             raise ValueError('Marketplace catalog was edited or is unmanaged')
+    if CLAUDE_INDEX in before:
+        if len(previous_versions) != 1:
+            raise ValueError('Claude marketplace needs one previous Toolkit version')
+        actual_index = json.loads(before[CLAUDE_INDEX])
+        if isinstance(actual_index.get('plugins'), list):
+            actual_index['plugins'] = sorted(actual_index['plugins'], key=lambda row: row.get('name', ''))
+        if actual_index != claude_index(previous_packages, next(iter(previous_versions))):
+            raise ValueError('Claude marketplace catalog was edited or is unmanaged')
 
 def synchronize(root, write=False):
     root = root.resolve()

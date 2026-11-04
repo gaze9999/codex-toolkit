@@ -1,5 +1,9 @@
 {
   "files": {
+    ".claude-plugin/plugin.json": {
+      "sha256": "ed333b0de2b8cedbd616b0f3ae7693e9fd9fedb0fbada59e1f1c7b89a22c6c72",
+      "source": null
+    },
     "LICENSE": {
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
@@ -13,7 +17,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "72e4122415095e44bd130d0095f9eeb6bcd82d7b65edc229c5a5d6b8b794d6f7",
+      "sha256": "2f211f28590e1d422e72fc06fc0cee555a9ce23924d2e175745c1a74ce6f3abf",
       "source": "plugins/jev-evaluation/plugin.json"
     },
     "skills/jev-evaluation/LICENSE": {
@@ -93,6 +97,6 @@
     "jev"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.19.1",
-  "version": "0.1.8"
+  "toolkit_version": "0.22.0",
+  "version": "0.1.9"
 }

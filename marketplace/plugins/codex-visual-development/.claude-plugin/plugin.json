@@ -1,0 +1,13 @@
+{
+  "author": {
+    "name": "gaze9999"
+  },
+  "description": "Project-native data visualization, 2D motion and Three.js with scoped local previews.",
+  "displayName": "視覺互動開發",
+  "homepage": "https://github.com/gaze9999/codex-toolkit",
+  "icon": "./assets/toolkit.png",
+  "license": "MIT",
+  "name": "codex-visual-development",
+  "repository": "https://github.com/gaze9999/codex-toolkit",
+  "version": "0.2.1"
+}

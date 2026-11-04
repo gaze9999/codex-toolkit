@@ -142,6 +142,24 @@ class ToolboxTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'HEAD differs'):
             toolbox.assemble(self.public, self.private, 'personal')
 
+    def test_marketplace_branding_tracks_the_profile_version_only(self):
+        profile = json.loads((self.private / 'profiles/personal-toolbox.json').read_bytes())
+        profile.update({'display_name': 'Personal Toolbox', 'display_icon': '🧰', 'version': '0.2.6'})
+        self.write(self.private, 'profiles/personal-toolbox.json', profile)
+        _, files = toolbox.assemble(self.public, self.private, 'personal')
+        native = json.loads(files['.agents/plugins/marketplace.json'])
+        self.assertEqual(native['name'], 'personal-tools')
+        self.assertEqual(native['interface'], {'displayName': '🧰 Personal Toolbox v0.2.6'})
+        claude = json.loads(files['.claude-plugin/marketplace.json'])
+        self.assertEqual(claude['version'], '0.2.6')
+        plugin = json.loads(files['plugins/codex-workflow/.claude-plugin/plugin.json'])
+        self.assertEqual(plugin['version'], '1.0.0')
+        profile['version'] = '0.2.7'
+        self.write(self.private, 'profiles/personal-toolbox.json', profile)
+        _, updated = toolbox.assemble(self.public, self.private, 'personal')
+        self.assertEqual(json.loads(updated['.agents/plugins/marketplace.json'])['interface']['displayName'],
+                         '🧰 Personal Toolbox v0.2.7')
+
     def test_toolbox_revision_does_not_advance_the_restore_selection(self):
         selected = {'toolkit_revision': 'b' * 40, 'skills': ['independent'], 'plugins': ['codex-workflow']}
         self.write(self.private, 'profiles/selection.json', selected)

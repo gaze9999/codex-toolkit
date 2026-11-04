@@ -13,12 +13,13 @@ class MarketplaceTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         (self.root / 'LICENSE').write_text('MIT fixture', encoding='utf-8')
-        self.bundles = [{'status': 'ready', 'manifest': {'name': 'codex-example'}}]
+        self.bundles = [{'status': 'ready', 'manifest': {'name': 'codex-example', 'version': '1.0.0', 'description': 'Example workflow'}}]
         self.raw = b'original Skill'
         def payload(root, bundle):
-            return ({'plugin.json': b'{"name":"codex-example"}', 'skills/example/SKILL.md': self.raw},
+            manifest = market.encode(bundle['manifest'])
+            return ({'plugin.json': manifest, 'skills/example/SKILL.md': self.raw},
                     {'plugin': 'codex-example', 'version': '1.0.0', 'files': {
-                        'plugin.json': {'source': 'plugins/example/plugin.json', 'sha256': market.hashlib.sha256(b'{"name":"codex-example"}').hexdigest()},
+                        'plugin.json': {'source': 'plugins/example/plugin.json', 'sha256': market.hashlib.sha256(manifest).hexdigest()},
                         'skills/example/SKILL.md': {'source': 'skills/example/SKILL.md', 'sha256': market.hashlib.sha256(self.raw).hexdigest()}}})
         self.catalog = patch.object(market, 'load_catalog', side_effect=lambda root: self.bundles)
         self.payload = patch.object(market, 'payload', side_effect=payload)
@@ -31,6 +32,46 @@ class MarketplaceTests(unittest.TestCase):
         self.assertEqual(market.synchronize(self.root, True)['status'], 'written')
         self.assertEqual(market.synchronize(self.root)['status'], 'pass')
         self.assertTrue((self.root / 'marketplace/plugins/codex-example/LICENSE').is_file())
+
+    def test_claude_marketplace_resolves_the_same_payload_and_component_version(self):
+        (self.root / 'VERSION').write_text('0.2.0\n', encoding='utf-8')
+        market.synchronize(self.root, True)
+        index = market.json.loads((self.root / market.CLAUDE_INDEX).read_bytes())
+        self.assertEqual(index['name'], 'codex-toolkit')
+        self.assertEqual(index['version'], '0.2.0')
+        entry = index['plugins'][0]
+        plugin = self.root / entry['source']
+        adapter = market.json.loads((plugin / '.claude-plugin/plugin.json').read_bytes())
+        self.assertEqual(adapter['version'], '1.0.0')
+        self.assertNotIn('version', entry)
+        self.assertEqual((plugin / 'skills/example/SKILL.md').read_bytes(), self.raw)
+        provenance = market.json.loads((plugin / 'source-manifest.json').read_bytes())
+        self.assertIsNone(provenance['files']['.claude-plugin/plugin.json']['source'])
+
+    def test_manual_claude_catalog_is_not_overwritten(self):
+        market.synchronize(self.root, True)
+        path = self.root / market.CLAUDE_INDEX
+        index = market.json.loads(path.read_bytes())
+        index['plugins'][0]['source'] = './unreviewed'
+        path.write_bytes(market.encode(index))
+        with self.assertRaisesRegex(ValueError, 'Claude marketplace catalog was edited'):
+            market.synchronize(self.root, True)
+        self.assertEqual(market.json.loads(path.read_bytes()), index)
+
+    def test_icon_and_reference_only_agents_use_supported_claude_fields(self):
+        manifest = {'name': 'example', 'version': '1.0.0', 'extensions': {'com.openai': {'interface': {
+            'displayName': 'Example', 'logo': './assets/logo.png', 'composerIcon': './assets/logo.png'}}}}
+        files = {'assets/logo.png': b'image', 'agents/references/style.md': b'reference'}
+        adapter = market.claude_manifest(manifest, files)
+        self.assertEqual(adapter['icon'], './assets/logo.png')
+        self.assertEqual(adapter['displayName'], 'Example')
+        self.assertEqual(adapter['agents'], [])
+        self.assertNotIn('extensions', adapter)
+        files['agents/reviewer.md'] = b'actual agent'
+        self.assertNotIn('agents', market.claude_manifest(manifest, files))
+        del files['assets/logo.png']
+        with self.assertRaisesRegex(ValueError, 'Unbundled Plugin icon'):
+            market.claude_manifest(manifest, files)
 
     def test_version_is_visible_without_changing_marketplace_identity(self):
         (self.root / 'VERSION').write_text('0.1.0\n', encoding='utf-8')
@@ -47,6 +88,8 @@ class MarketplaceTests(unittest.TestCase):
         market.synchronize(self.root, True)
         value = market.json.loads((self.root / '.agents/plugins/marketplace.json').read_text(encoding='utf-8'))
         self.assertEqual(value['interface']['displayName'], '🧰 Codex Toolkit v0.1.1')
+        claude = market.json.loads((self.root / market.CLAUDE_INDEX).read_bytes())
+        self.assertEqual(claude['version'], '0.1.1')
         value['interface']['displayName'] = 'Manual title'
         (self.root / '.agents/plugins/marketplace.json').write_text(market.json.dumps(value))
         with self.assertRaisesRegex(ValueError, 'edited'):
@@ -105,8 +148,10 @@ class MarketplaceTests(unittest.TestCase):
         market.synchronize(self.root, True)
         unrelated = self.root / 'notes.txt'
         unrelated.write_text('keep', encoding='utf-8')
-        self.bundles = [{'status': 'ready', 'manifest': {'name': 'codex-another'}}]
-        with patch.object(market, 'payload', return_value=({'plugin.json': b'new'}, {'plugin': 'codex-another', 'version': '1.0.0', 'files': {'plugin.json': {'source': 'plugin.json', 'sha256': market.hashlib.sha256(b'new').hexdigest()}}})):
+        manifest = {'name': 'codex-another', 'description': 'Another workflow'}
+        raw = market.encode(manifest)
+        self.bundles = [{'status': 'ready', 'manifest': manifest}]
+        with patch.object(market, 'payload', return_value=({'plugin.json': raw}, {'plugin': 'codex-another', 'version': '1.0.0', 'files': {'plugin.json': {'source': 'plugin.json', 'sha256': market.hashlib.sha256(raw).hexdigest()}}})):
             market.synchronize(self.root, True)
         self.assertFalse((self.root / 'marketplace/plugins/codex-example').exists())
         self.assertEqual(unrelated.read_text(encoding='utf-8'), 'keep')

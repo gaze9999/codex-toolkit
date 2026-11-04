@@ -1,5 +1,9 @@
 {
   "files": {
+    ".claude-plugin/plugin.json": {
+      "sha256": "d62ef0a5d3acb5fdc1c97546d4cdd30aded47ad981eb0924601c20e5f3140ab6",
+      "source": null
+    },
     "LICENSE": {
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
@@ -13,7 +17,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "8eda30418d4f607a51d6c70f9911ddf8425cd61d216bdac83749650e8f46e633",
+      "sha256": "3289952caa8b8e5773f878141505971e09bce523f25e362a577f24ef639b8e89",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
@@ -307,6 +311,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.19.1",
-  "version": "0.5.4"
+  "toolkit_version": "0.22.0",
+  "version": "0.5.5"
 }

@@ -14,11 +14,11 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'mcp/scripts'))
 sys.path.insert(0, str(ROOT / 'tooling'))
 from audit_skills import FRONTMATTER_RE, METADATA_RE, scalar
-from plugin_catalog import NAME, SCHEMA, VERSION, load_catalog, payload, safe_source
+from plugin_catalog import NAME, SCHEMA, VERSION, claude_manifest, load_catalog, marketplace_interface, payload, safe_source
 from toolbox_integrations import augment
 
 PRODUCER = 'codex-toolkit.toolbox.v1'
-ADAPTER_VERSION = '0.3.0'
+ADAPTER_VERSION = '0.3.1'
 
 
 def encoded(value):
@@ -166,7 +166,7 @@ def assemble(toolkit, private=None, audience='public'):
                                'path': 'plugins/' + name + '/' + path, 'sha256': digest(raw)})
         if not members:
             raise ValueError('A workflow Plugin needs at least one Skill')
-        adapter = {key: manifest[key] for key in ('name', 'version', 'description', 'author', 'repository', 'homepage', 'license') if key in manifest}
+        adapter = claude_manifest(manifest, files)
         if visibility == 'public':
             adapter['license'] = 'MIT'
         files['.claude-plugin/plugin.json'] = encoded(adapter)
@@ -272,7 +272,9 @@ def assemble(toolkit, private=None, audience='public'):
                    'description': 'Source-backed Skills, connectors and Plugins', 'version': catalog['version'],
                    'plugins': [{'name': p['name'], 'source': './plugins/' + p['name'], 'description': p['description']} for p in packages]}
     put('.claude-plugin/marketplace.json', encoded(marketplace))
-    put('.agents/plugins/marketplace.json', encoded({'name': catalog['name'], 'plugins': [
+    interface = marketplace_interface(catalog['version'], config.get('display_name', catalog['name']) if personal else 'Codex Toolkit',
+                                      config.get('display_icon', '🧰') if personal else '🧰')
+    put('.agents/plugins/marketplace.json', encoded({'name': catalog['name'], 'interface': interface, 'plugins': [
         {'name': p['name'], 'source': {'source': 'local', 'path': './plugins/' + p['name']},
          'policy': {'installation': 'AVAILABLE', 'authentication': 'ON_USE'}, 'category': 'Productivity'} for p in packages]}))
     put('catalog.json', encoded(catalog))

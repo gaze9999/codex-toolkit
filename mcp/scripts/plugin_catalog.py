@@ -14,6 +14,33 @@ LINK = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
 SKIP = {"__pycache__", ".git", ".venv", "venv", "node_modules", "build", "dist", ".cache", ".tmp", "tmp", "temp", "tests", "test", "test-results", ".pytest_cache", ".mypy_cache", ".ruff_cache", "_workbench"}
 
 
+def marketplace_interface(version, title='Codex Toolkit', icon='🧰'):
+    if version is not None and (not isinstance(version, str) or not VERSION.fullmatch(version)):
+        raise ValueError('Invalid marketplace version')
+    if not isinstance(title, str) or not title.strip() or not isinstance(icon, str):
+        raise ValueError('Invalid marketplace branding')
+    return {'displayName': (icon + ' ' if icon else '') + title + (' v' + version if version else '')}
+
+
+def claude_manifest(manifest, files):
+    """Adapt supported metadata while retaining one shared Plugin payload."""
+    adapter = {key: manifest[key] for key in
+               ('name', 'version', 'description', 'author', 'repository', 'homepage', 'license') if key in manifest}
+    interface = manifest.get('extensions', {}).get('com.openai', {}).get('interface', {})
+    if interface.get('displayName'):
+        adapter['displayName'] = interface['displayName']
+    logo = interface.get('logo')
+    if logo:
+        if not isinstance(logo, str) or not logo.startswith('./') or logo[2:] not in files:
+            raise ValueError('Unbundled Plugin icon')
+        adapter['icon'] = logo
+    agents = [name for name in files if name.startswith('agents/') and name.endswith('.md')]
+    if agents and all(name.startswith('agents/references/') for name in agents):
+        # Reference documents are not executable agent definitions.
+        adapter['agents'] = []
+    return adapter
+
+
 def safe_source(root: Path, relative: str) -> Path:
     parts = PurePosixPath(relative)
     if not relative or relative != parts.as_posix() or parts.is_absolute() or ".." in parts.parts or "\\" in relative or ":" in relative:
