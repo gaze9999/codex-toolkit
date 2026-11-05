@@ -19,6 +19,7 @@ EVENTS = ("SessionStart", "PostToolUse", "Stop")
 MAX_INPUT = 2 * 1024 * 1024
 MAX_DIFF = 8 * 1024 * 1024
 MAX_TRANSCRIPT = 16 * 1024 * 1024
+FILE_KEYS = ("file_path", "notebook_path", "path")
 USAGE_FIELDS = ("input_tokens", "cached_input_tokens", "output_tokens", "total_tokens")
 
 
@@ -194,12 +195,66 @@ def usage_message(payload, policy, client, state_dir):
         return None
 
 
+def edited_dir(payload):
+    """Return the directory of the file a tool changed, when the tool input names one."""
+    tool = payload.get("tool_input")
+    if not isinstance(tool, dict):
+        return None
+    for key in FILE_KEYS:
+        value = tool.get(key)
+        if isinstance(value, str) and Path(value).is_absolute():
+            parent = Path(value).parent
+            return parent if parent.is_dir() else None
+    return None
+
+
+def repo_root(git, directory):
+    code, output = git_run(git, directory, "rev-parse", "--show-toplevel")
+    return None if code else Path(os.fsdecode(output).strip()).resolve()
+
+
+def touched_roots(state_dir, client, session):
+    index = state_dir / ("roots-" + digest((client + "\0" + session).encode()) + ".json")
+    try:
+        known = json.loads(index.read_text(encoding="utf-8")) if index.exists() else []
+    except (ValueError, OSError):
+        known = []
+    return index, [item for item in known if isinstance(item, str)] if isinstance(known, list) else []
+
+
+def hook_roots(payload, policy, client, state_dir):
+    """Select the repositories an event covers; edits record their repository for the session's Stop."""
+    event, cwd = payload.get("hook_event_name"), payload.get("cwd")
+    if not isinstance(cwd, str) or not Path(cwd).is_absolute() or not Path(cwd).is_dir():
+        raise ValueError("Hook cwd must be an existing absolute directory")
+    session = payload.get("session_id")
+    if not isinstance(session, str) or not session:
+        raise ValueError("Hook session_id is required")
+    git = policy["git"]
+    if event == "PostToolUse":
+        root = repo_root(git, edited_dir(payload) or cwd)
+        if root is None:
+            return []
+        index, known = touched_roots(state_dir, client, session)
+        if str(root) not in known:
+            atomic_write(index, json.dumps([*known, str(root)]).encode())
+        return [root]
+    roots = [root] if (root := repo_root(git, cwd)) else []
+    if event == "Stop":
+        known = touched_roots(state_dir, client, session)[1]
+        roots += [Path(item) for item in known if Path(item) not in roots and Path(item).is_dir()]
+    return roots
+
+
 def handle(payload, policy, client, state_dir):
-    result = workspace_event(payload, policy, client, state_dir)
-    if policy.get("project_checks"):
+    if payload.get("hook_event_name") not in EVENTS:
+        raise ValueError("Unsupported lifecycle event")
+    roots = hook_roots(payload, policy, client, state_dir)
+    result = workspace_event(payload, policy, client, state_dir, roots)
+    if policy.get("project_checks") and roots:
         module = runpy.run_path(str(Path(__file__).with_name("project_checks.py")))
         try:
-            message = module["lifecycle"](payload, policy, client, state_dir)
+            message = module["lifecycle"](payload, policy, client, state_dir, roots)
         except (OSError, ValueError, KeyError, subprocess.TimeoutExpired):
             message = "Project checks unavailable; use the maintained project check CLI"
         if message:
@@ -211,61 +266,79 @@ def handle(payload, policy, client, state_dir):
     return result
 
 
-def workspace_event(payload, policy, client, state_dir):
+def workspace_event(payload, policy, client, state_dir, roots):
     event = payload.get("hook_event_name")
-    if event not in EVENTS:
-        raise ValueError("Unsupported lifecycle event")
     if event == "Stop" and payload.get("stop_hook_active"):
         return {}
-    cwd = payload.get("cwd")
-    if not isinstance(cwd, str) or not Path(cwd).is_absolute() or not Path(cwd).is_dir():
-        raise ValueError("Hook cwd must be an existing absolute directory")
-    git = policy["git"]
-    code, output = git_run(git, cwd, "rev-parse", "--show-toplevel")
-    if code and event != "SessionStart":
-        return {}
-    root = Path(cwd).resolve() if code else Path(os.fsdecode(output).strip()).resolve()
-    session = payload.get("session_id")
-    if not isinstance(session, str) or not session:
-        raise ValueError("Hook session_id is required")
-    key = digest((client + "\0" + str(root) + "\0" + session).encode())
-    state = state_dir / (key + ".json")
+    git, session = policy["git"], payload["session_id"]
+    if event == "SessionStart":
+        return session_start(payload, policy, client, state_dir, roots[0] if roots else None)
+    if event == "PostToolUse":
+        return post_tool(git, root_state(state_dir, client, roots[0], session)) if roots else {}
+    cwd_root = roots[0] if roots and repo_root(git, payload["cwd"]) == roots[0] else None
+    notes = []
+    for root in roots:
+        reasons = stop_reasons(git, root_state(state_dir, client, root, session))
+        if reasons:
+            label = "" if root == cwd_root else root.name + ": "
+            notes.append(label + "; ".join(reasons))
+    if notes:
+        return {"systemMessage": "Hook evidence: " + " | ".join(notes) + ". " + policy["stop_note"]}
+    return {}
+
+
+def root_state(state_dir, client, root, session):
+    state = state_dir / (digest((client + "\0" + str(root) + "\0" + session).encode()) + ".json")
     try:
         previous = json.loads(state.read_text(encoding="utf-8")) if state.exists() else {}
     except (ValueError, OSError):
         previous = {}
-    if event == "SessionStart":
-        entries = [name for name in policy["entries"] if (root / name).is_file()]
+    return root, state, previous
+
+
+def session_start(payload, policy, client, state_dir, root):
+    git = policy["git"]
+    if root is None:
+        root, label = Path(payload["cwd"]).resolve(), "not a Git repository"
+    else:
         code, branch = git_run(git, root, "symbolic-ref", "--quiet", "--short", "HEAD")
         label = branch.decode("utf-8", errors="replace").strip() if code == 0 else "detached/unborn"
-        message = f"Workspace: {root}\nBranch: {label}\nExisting entrypoints: {', '.join(entries) or 'none found'}"
-        message += "\n" + policy["start_note"]
-        message += "\nOperations: " + policy["operations"]
-        token = digest(message.encode())
-        if previous.get("route") == token and payload.get("source") != "compact":
-            return {}
-        previous["route"] = token
-        atomic_write(state, json.dumps(previous).encode())
-        return context(event, message)
-    revision, changed, untracked, base = snapshot(git, root)
-    if event == "PostToolUse":
-        if not changed or previous.get("checked") == revision:
-            return {}
-        code, _ = git_run(git, root, "diff", "--no-ext-diff", "--no-textconv", "--check", *base, "--")
-        if base == ["--cached"]:
-            unstaged_code, _ = git_run(git, root, "diff", "--no-ext-diff", "--no-textconv", "--check", "--")
-            code = code or unstaged_code
-        if snapshot(git, root)[0] != revision:
-            return context(event, "Files changed during the whitespace check; receipt deferred until the next event")
-        previous.update(checked=revision, check_exit=code, check="git diff --check (tracked files only)")
-        atomic_write(state, json.dumps(previous).encode())
-        if code:
-            return context(event, "git diff --check found a tracked-file issue; run that command for locations")
+    _, state, previous = root_state(state_dir, client, root, payload["session_id"])
+    entries = [name for name in policy["entries"] if (root / name).is_file()]
+    message = f"Workspace: {root}\nBranch: {label}\nExisting entrypoints: {', '.join(entries) or 'none found'}"
+    message += "\n" + policy["start_note"]
+    message += "\nOperations: " + policy["operations"]
+    token = digest(message.encode())
+    if previous.get("route") == token and payload.get("source") != "compact":
         return {}
-    if not changed and not untracked:
+    previous["route"] = token
+    atomic_write(state, json.dumps(previous).encode())
+    return context("SessionStart", message)
+
+
+def post_tool(git, target):
+    root, state, previous = target
+    revision, changed, _, base = snapshot(git, root)
+    if not changed or previous.get("checked") == revision:
         return {}
-    if previous.get("reported") == revision:
-        return {}
+    code, _ = git_run(git, root, "diff", "--no-ext-diff", "--no-textconv", "--check", *base, "--")
+    if base == ["--cached"]:
+        unstaged_code, _ = git_run(git, root, "diff", "--no-ext-diff", "--no-textconv", "--check", "--")
+        code = code or unstaged_code
+    if snapshot(git, root)[0] != revision:
+        return context("PostToolUse", "Files changed during the whitespace check; receipt deferred until the next event")
+    previous.update(checked=revision, check_exit=code, check="git diff --check (tracked files only)")
+    atomic_write(state, json.dumps(previous).encode())
+    if code:
+        return context("PostToolUse", f"git diff --check found a tracked-file issue in {root.name}; run that command for locations")
+    return {}
+
+
+def stop_reasons(git, target):
+    root, state, previous = target
+    revision, changed, untracked, _ = snapshot(git, root)
+    if not changed and not untracked or previous.get("reported") == revision:
+        return []
     reasons = []
     if changed and previous.get("checked") != revision:
         reasons.append("tracked changes have no current whitespace-check receipt")
@@ -275,9 +348,7 @@ def workspace_event(payload, policy, client, state_dir):
         reasons.append("untracked files require the project's selected checks")
     previous["reported"] = revision
     atomic_write(state, json.dumps(previous).encode())
-    if reasons:
-        return {"systemMessage": "Hook evidence: " + "; ".join(reasons) + ". " + policy["stop_note"]}
-    return {}
+    return reasons
 
 
 def main():

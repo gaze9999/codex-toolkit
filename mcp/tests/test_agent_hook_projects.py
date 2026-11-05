@@ -93,6 +93,19 @@ class ProjectChecksTests(unittest.TestCase):
         self.git('remote','set-url','origin','https://github.com/other/project.git')
         self.assertIsNone(checks.selected(self.policy,self.root)[1])
 
+    def test_outside_git_and_nested_roots(self):
+        outside = self.base / "plain"
+        outside.mkdir()
+        payload = {'cwd': str(outside), 'session_id': 'one', 'hook_event_name': 'Stop'}
+        self.assertEqual((None, None), checks.selected(self.policy, outside))
+        self.assertEqual('', checks.lifecycle(payload, self.policy, 'codex', self.state))
+        self.git('remote', 'remove', 'origin')
+        self.assertEqual((self.root.resolve(), None), checks.selected(self.policy, self.root))
+        self.git('remote', 'add', 'origin', 'https://github.com/example/project.git')
+        (self.root / 'data.json').write_text('bad')
+        message = checks.lifecycle(payload, self.policy, 'codex', self.state, [outside, self.root])
+        self.assertTrue(message.startswith('Project checks: repo: '), message)
+
     def test_reentrant_stop_and_duplicate_report_are_quiet(self):
         (self.root/'data.json').write_text('bad')
         payload={'cwd':str(self.root),'session_id':'one','hook_event_name':'Stop'}

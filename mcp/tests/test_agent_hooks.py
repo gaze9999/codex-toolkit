@@ -101,9 +101,22 @@ class AgentHooksTests(unittest.TestCase):
     def test_no_repository_and_invalid_event(self):
         self.payload["cwd"] = str(self.base)
         self.assertEqual({}, self.event("Stop"))
-        self.assertTrue(self.event("SessionStart"))
+        self.assertIn("Branch: not a Git repository", self.event("SessionStart")["hookSpecificOutput"]["additionalContext"])
+        self.policy["project_checks"] = [{"root": str(self.repo), "project": {}}]
+        self.assertEqual({}, self.event("PostToolUse", tool_name="Bash", tool_input={"command": "dir"}))
+        self.assertEqual({}, self.event("Stop"))
         with self.assertRaises(ValueError):
             self.event("PermissionRequest")
+
+    def test_edited_file_selects_its_repository_from_parent_cwd(self):
+        self.payload["cwd"] = str(self.base)
+        file = self.repo / "AGENTS.md"
+        file.write_bytes(b"# Changed  \n")
+        result = self.event("PostToolUse", tool_name="Edit", tool_input={"file_path": str(file)})
+        self.assertIn("issue in project", result["hookSpecificOutput"]["additionalContext"])
+        self.assertIn("project: tracked whitespace check failed", self.event("Stop")["systemMessage"])
+        self.assertEqual({}, self.event("Stop"))
+        self.assertEqual({}, self.event("Stop", client="claude"))
 
     def test_native_discovery_matches_encoded_command_and_owner(self):
         config = self.base / "hooks.json"

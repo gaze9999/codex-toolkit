@@ -109,8 +109,15 @@ def expand_registry(value):
 
 
 def selected(policy, cwd):
-    root = Path(os.fsdecode(git(cwd, "rev-parse", "--show-toplevel")).strip()).resolve()
-    origin = identity(os.fsdecode(git(root, "remote", "get-url", "origin")).strip())
+    """Return the checkout root and its installed project; a directory outside Git or without origin has none."""
+    try:
+        root = Path(os.fsdecode(git(cwd, "rev-parse", "--show-toplevel")).strip()).resolve()
+    except ValueError:
+        return None, None
+    try:
+        origin = identity(os.fsdecode(git(root, "remote", "get-url", "origin")).strip())
+    except ValueError:
+        return root, None
     for item in policy.get("project_checks", []):
         if Path(item["root"]).resolve() == root and identity(item["project"]["repository"]) == origin:
             return root, item["project"]
@@ -279,16 +286,27 @@ def evaluate(root, project, policy, state, client, session, run=False):
     return report, path
 
 
-def lifecycle(payload, policy, client, state):
+def lifecycle(payload, policy, client, state, roots=None):
+    """Report each installed project among roots; roots defaults to the hook cwd."""
     if not policy.get("project_checks") or payload.get("stop_hook_active"):
         return ""
     event = payload.get("hook_event_name")
     if event not in ("PostToolUse", "Stop"):
         return ""
-    root, project = selected(policy, payload["cwd"])
-    if not project:
-        return ""
-    report, path = evaluate(root, project, policy, state, client, payload["session_id"], event == "PostToolUse")
+    messages, seen = [], set()
+    for directory in roots if roots is not None else [payload["cwd"]]:
+        root, project = selected(policy, directory)
+        if not project or root in seen:
+            continue
+        seen.add(root)
+        message = project_message(root, project, policy, state, client, payload["session_id"], event)
+        if message:
+            messages.append(message if Path(payload["cwd"]).resolve().is_relative_to(root) else root.name + ": " + message)
+    return ("Project checks: " + " | ".join(messages))[:1100] if messages else ""
+
+
+def project_message(root, project, policy, state, client, session, event):
+    report, path = evaluate(root, project, policy, state, client, session, event == "PostToolUse")
     failures = [row["id"] + ":" + row["status"] for row in report["checks"] if row["status"] != "passed"]
     if report["private_paths"]:
         failures.append("private paths require publication review")
@@ -302,7 +320,7 @@ def lifecycle(payload, policy, client, state):
         return ""
     value["reported"] = token
     write_json(path, value)
-    return "Project checks: " + "; ".join(failures)[:1100]
+    return "; ".join(failures)
 
 
 def main():
