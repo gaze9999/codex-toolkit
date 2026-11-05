@@ -202,6 +202,10 @@ def main(argv=None) -> int:
     parser.add_argument("--refresh", action="store_true", help="With --apply, refresh the marketplace listing before planning updates.")
     parser.add_argument("--apply", action="store_true")
     args = parser.parse_args(argv)
+    # Native CLI output can contain symbols a legacy Windows console code page cannot encode.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(errors="replace")
     home = (args.claude_home or Path(os.environ.get("CLAUDE_CONFIG_DIR") or Path.home() / ".claude")).expanduser().resolve()
     try:
         if home == Path(home.anchor) or home == Path.home().resolve():
