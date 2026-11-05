@@ -10,3 +10,7 @@
 - Use focused checks for the changed contract, with expected success/invalid/async/race/teardown states where meaningful. Real navigation, overlays/focus and host integration require the corresponding runner/browser evidence.
 
 Authoritative starting points, select the matching documentation version: [RxJS interop](https://angular.dev/ecosystem/rxjs-interop), [Angular forms](https://angular.dev/guide/forms), [dependency injection](https://angular.dev/guide/di).
+
+## Structural refactor acceptance
+
+When moving members into a base class or extracting services, compare initializer order, injected dependencies, constructor/super timing, lifecycle overrides, reactive subscriptions and state ownership. Text or normalized-member equality supports preservation but cannot prove runtime equivalence. Reuse affected existing checks for the real caller and lifecycle; report unexercised paths. Barrel exports must preserve public imports and avoid internal cycles; fewer imports or lines alone do not justify inheritance or splitting.

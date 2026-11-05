@@ -16,3 +16,11 @@
 - Verify archive CRC, unique complete members and byte-for-byte expected contents before promotion. Verify output ownership and refuse replacement of existing/unmanaged output. Recheck relevant sources before accepting the build.
 - Run native builds on their supported runner with the pinned standalone runtime and authorized UI assets. Reuse existing smoke checks for relocated startup/exit. Separate syntax, package readback, runtime startup, real authenticated calls and client reload in the report.
 - Public submission, GitHub Release, client installation and activation require their own authorization. A read token proves source access, not redistribution rights.
+
+## Cross-client compatibility changes
+
+Before repairing a Plugin, identify the exact client/version, loaded manifest and runtime path, configuration source, and synchronization mechanism. A CLI installation or settings file does not establish Desktop adoption. Keep account-synchronized copies separate from local CLI caches; update canonical sources and regenerate owned outputs, not client-managed copies.
+
+For settings or launcher changes, apply the owning package's version policy and verify generated manifests plus source provenance. Treat stale same-version synchronization as a hypothesis until receipts or loaded bytes support it. Test the actual selected interpreter and package prerequisites; shell PATH and GUI PATH may differ. An optional executable or root setting needs explicit empty-value behavior, never an implicit expansion of filesystem access. Preserve required settings and use only supported runtime registration/dispatch paths without automatic installation or repeated handoff loops.
+
+Keep manifest validation, package generation, process startup, tool invocation, account synchronization and native client reload as separate evidence. Record native platform coverage independently. Prepare candidate output in a verified new directory and promote only after validation; a failed temporary-directory operation must not redirect writes into an existing candidate.

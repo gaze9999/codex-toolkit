@@ -20,6 +20,9 @@ class IntegrationTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.base = Path(self.temp.name)
+        registry = patch.dict(runtime.os.environ, {'TOOLBOX_RUNTIMES': str(self.base / 'runtimes.json')})
+        registry.start()
+        self.addCleanup(registry.stop)
         self.public = self.base / 'public'
         self.private = self.base / 'private'
         (self.public / 'tooling').mkdir(parents=True)
@@ -73,16 +76,52 @@ class IntegrationTests(unittest.TestCase):
         project.mkdir(parents=True)
         (project / 'pyproject.toml').write_text('[project]\nname="fixture"\n', encoding='utf-8')
         destination = self.base / 'environment'
-        component = {'kind': 'python', 'projects': ['resources/core'], 'requirements': []}
-        with patch.object(runtime.subprocess, 'run') as run:
-            runtime.install(root, 'example', component, destination)
+        component = {'kind': 'python', 'projects': ['resources/core'], 'requirements': [], 'module': 'fixture.server'}
+        executable = Path(runtime.plan(root, component, destination)['executable'])
+
+        def fake_run(command, **kwargs):
+            if command[1:3] == ['-m', 'venv']:
+                executable.parent.mkdir(parents=True, exist_ok=True)
+                executable.write_bytes(b'')
+        with patch.object(runtime.subprocess, 'run', side_effect=fake_run) as run:
+            result = runtime.install(root, 'example', component, destination)
         install = run.call_args_list[1].args[0]
         self.assertIn(str(destination / '.sources/0'), install)
         self.assertNotIn(str(project), install)
         self.assertEqual(len(list(project.iterdir())), 1)
         self.assertEqual(json.loads((destination / '.toolbox-runtime.json').read_text())['status'], 'installed-not-client-verified')
+        self.assertEqual(runtime.registered_python('example'), executable)
+        self.assertEqual(result['registry'], str(self.base / 'runtimes.json'))
         with self.assertRaisesRegex(ValueError, 'existing environments'):
             runtime.install(root, 'example', component, destination)
+
+    def test_registry_preserves_other_components_and_rejects_missing_runtime(self):
+        runtime.record_runtime('first', sys.executable)
+        runtime.record_runtime('second', sys.executable)
+        self.assertEqual(set(json.loads((self.base / 'runtimes.json').read_text())), {'first', 'second'})
+        with self.assertRaisesRegex(ValueError, 'existing absolute'):
+            runtime.record_runtime('third', 'python')
+        (self.base / 'runtimes.json').write_text(json.dumps({'gone': {'python': str(self.base / 'missing.exe')}}))
+        with self.assertRaisesRegex(ValueError, 'register it again'):
+            runtime.registered_python('gone')
+        self.assertIsNone(runtime.registered_python('unregistered'))
+
+    def test_delegation_uses_registered_runtime_once(self):
+        other = self.base / 'python.exe'
+        other.write_bytes(b'')
+        runtime.record_runtime('example', other)
+        with patch.object(runtime.subprocess, 'run') as run:
+            run.return_value.returncode = 0
+            self.assertEqual(runtime.delegate('example', ['serve', '--component', 'example']), 0)
+        command = run.call_args.args[0]
+        self.assertEqual(command[0], str(other))
+        self.assertEqual(command[-3:], ['serve', '--component', 'example'])
+        self.assertEqual(run.call_args.kwargs['env'][runtime.DELEGATED], '1')
+        with patch.dict(runtime.os.environ, {runtime.DELEGATED: '1'}):
+            self.assertIsNone(runtime.delegate('example', ['serve']))
+        runtime.record_runtime('self', sys.executable)
+        self.assertIsNone(runtime.delegate('self', ['serve']))
+        self.assertIsNone(runtime.delegate('unregistered', ['serve']))
 
     def test_runtime_destination_cannot_modify_plugin(self):
         root = self.base / 'plugin'
@@ -90,16 +129,54 @@ class IntegrationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'immutable'):
             runtime.plan(root, {'kind': 'python'}, root / 'venv')
 
-    def test_serve_refuses_missing_or_relative_roots_before_module_execution(self):
+    def test_serve_refuses_relative_or_missing_roots_before_module_execution(self):
         component = {'module': 'synthetic.never_run', 'read_root': True}
-        for root in (None, 'relative'):
+        for root in ('relative', str(self.base / 'missing')):
             with self.subTest(root=root), self.assertRaisesRegex(ValueError, 'absolute read root'):
                 runtime.serve(self.base, component, root)
 
-    def test_serve_rejects_unapproved_write_capability(self):
+    def test_empty_read_root_starts_status_only_server_without_file_access(self):
+        component = {'module': 'synthetic.never_run', 'read_root': True, 'write_root': True}
+        with patch.object(runtime, 'serve_unconfigured') as unconfigured, \
+                patch.object(runtime.runpy, 'run_module') as module:
+            for root in (None, ''):
+                runtime.serve(self.base, component, root, name='example')
+        self.assertEqual(unconfigured.call_count, 2)
+        unconfigured.assert_called_with('example')
+        module.assert_not_called()
+        with self.assertRaisesRegex(ValueError, 'read root before a write root'):
+            runtime.serve(self.base, component, '', str(self.base))
+
+    def test_valid_roots_are_passed_to_the_server(self):
+        component = {'module': 'synthetic.server', 'read_root': True, 'write_root': True}
+        with patch.object(runtime.runpy, 'run_module') as module, \
+                patch.object(runtime.sys, 'argv', []):
+            runtime.serve(self.base, component, str(self.base), str(self.base))
+            self.assertEqual(runtime.sys.argv, ['synthetic.server', '--read-root', str(self.base), '--write-root', str(self.base)])
+        module.assert_called_once()
+
+    def test_serve_rejects_unapproved_write_and_read_capability(self):
         component = {'module': 'synthetic.never_run'}
         with self.assertRaisesRegex(ValueError, 'write root'):
             runtime.serve(self.base, component, write_root=str(self.base))
+        with self.assertRaisesRegex(ValueError, 'does not accept a read root'):
+            runtime.serve(self.base, component, str(self.base))
+
+    def test_serve_reports_unprepared_runtime(self):
+        component = {'module': 'synthetic.never_run', 'versions': {'synthetic-missing-distribution': '1.0'}}
+        with self.assertRaisesRegex(ValueError, 'register the declared runtime'):
+            runtime.serve(self.base, component, name='example')
+
+    def test_main_passes_server_arguments_after_separator(self):
+        root = self.base / 'plugin'
+        (root / 'runtime').mkdir(parents=True)
+        (root / 'runtime/components.json').write_text(json.dumps({'example': {'kind': 'python', 'module': 'synthetic'}}))
+        with patch.object(runtime, '__file__', str(root / 'runtime/setup.py')), \
+                patch.object(runtime, 'serve') as serve:
+            self.assertEqual(runtime.main(['serve', '--component', 'example', '--', '--tool', 'rtk']), 0)
+        self.assertEqual(serve.call_args.args[4], ['--tool', 'rtk'])
+        with patch.object(runtime, '__file__', str(root / 'runtime/setup.py')):
+            self.assertEqual(runtime.main(['doctor', '--component', 'example', '--', '--tool']), 2)
 
     def test_codex_resolves_only_declared_local_settings_without_a_shell(self):
         root = self.base / 'connector'
@@ -119,6 +196,26 @@ class IntegrationTests(unittest.TestCase):
         self.assertEqual(overridden, ['--context', 'codex'])
         with self.assertRaisesRegex(ValueError, 'unknown field'):
             codex.resolve(root, 'example', {'example': {'shell': 'unexpected'}})
+
+    def test_codex_optional_executable_and_root_defaults(self):
+        root = self.base / 'optional'
+        (root / '.claude-plugin').mkdir(parents=True)
+        (root / '.claude-plugin/plugin.json').write_text(json.dumps({'userConfig': {
+            'python_executable': {'type': 'string', 'required': False, 'default': 'python'},
+            'read_root': {'type': 'directory', 'required': False, 'default': ''}}}), encoding='utf-8')
+        (root / '.mcp.json').write_text(json.dumps({'mcpServers': {'example': {
+            'command': '${user_config.python_executable}', 'args': ['--read-root', '${user_config.read_root}']}}}), encoding='utf-8')
+        with patch.object(codex.shutil, 'which', side_effect=lambda name: sys.executable if name == 'python' else None):
+            for settings in ({}, {'example': {'python_executable': ''}}, {'example': {'python_executable': '', 'read_root': ''}}):
+                with self.subTest(settings=settings):
+                    executable, args, _ = codex.resolve(root, 'example', settings)
+                    self.assertEqual((executable, args), (sys.executable, ['--read-root', '']))
+            with self.assertRaisesRegex(ValueError, 'command name on PATH'):
+                codex.resolve(root, 'example', {'example': {'python_executable': 'bin/python'}})
+            with self.assertRaisesRegex(ValueError, 'existing absolute directory'):
+                codex.resolve(root, 'example', {'example': {'read_root': str(self.base / 'missing')}})
+        with patch.object(codex.shutil, 'which', return_value=None), self.assertRaisesRegex(ValueError, 'native Python'):
+            codex.resolve(root, 'example', {'example': {'python_executable': 'missing-python'}})
 
     def test_workflow_integrations_do_not_create_unselected_owners(self):
         self.profile['plugins'][0]['requires_plugin'] = True

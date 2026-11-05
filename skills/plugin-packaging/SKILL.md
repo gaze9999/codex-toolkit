@@ -3,7 +3,7 @@ name: plugin-packaging
 description: Design or automate clean Plugin and application packages from selected Skills, MCP servers, registered app mappings and runtime resources. Use for package assembly or build pipelines, not installation, publication or verification-only acceptance.
 metadata:
   short-description: Clean Plugin and application package assembly
-  version: "0.1.0"
+  version: "0.1.1"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

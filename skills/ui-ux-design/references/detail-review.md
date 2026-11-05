@@ -9,6 +9,12 @@ Use this mode for user-visible changes and requests to find layout defects, inco
 - Determine the actual served revision, component/library version, locale, supported viewport/input modes and relevant data source. Preserve the project's theme, terminology, density and saved preferences. Historical examples guide what to inspect; their exact pixel sizes, row counts and refresh intervals are not universal defaults.
 - Follow existing shared-component ownership. Diagnose whether a defect belongs to data/configuration, application composition, shared implementation or unsupported usage. Fix within the authorized owner; provide a minimal reproduction and required upstream change when another owner is needed. Do not conceal a shared defect with conflicting global CSS or edit another owner's work.
 
+## Visibility, editing and actions
+
+For affected permission or workflow UI, derive visibility, editability and executable actions separately from the governing source. Distinguish role, current stage, assigned operator, readonly context and pending requests. Do not infer hidden from disabled, or permission to act from visible content. Apply confirmed rules to both button bindings and callable handlers; retain unresolved viewing rules as questions rather than imposing uniform behavior.
+
+For style-preserving refactors, compare the same revision inputs, viewport and state before and after. Map changed selectors/elements to actually rendered coverage, including affected conditional dialogs or disclosures within the approved test scope. Name the compared computed properties; matching selected properties does not prove complete visual equivalence. Check cascade, specificity and source order where inline styles become classes. Record unrendered targets separately instead of extending a passing count to them.
+
 ## Observe, diagnose, fix and retest
 
 1. Select representative affected flows and their realistic states. Add long content, narrow layout, loading/empty/error, refresh or locale cases when they exercise the changed behavior. Expand beyond those flows only for a demonstrated dependency or regression.
