@@ -81,3 +81,17 @@ python codex-toolkit/mcp/scripts/render_desktop_settings.py --source-root /path/
 ```
 
 套用完成後重新載入 Codex, 分開確認 Skill、工具探索、帳戶授權與代表性呼叫. 裝置路徑、帳戶與允許的 roots 在各台電腦設定, macOS 原生結果需在 Mac 驗證
+
+## Claude Code 外掛
+
+`mcp/scripts/install_claude_plugins.py` 依選擇 profile 還原單一 Git 市集的 Claude Code 外掛, 預覽只讀 Claude 設定與市集檔案, 不需要 CLI:
+
+```text
+python codex-toolkit/mcp/scripts/install_claude_plugins.py --profile /path/to/private/claude-plugins.json --options /path/to/device-options.json --claude-home /path/to/.claude
+```
+
+Profile 需要 `marketplace.name` 與 `marketplace.url`, 可選 `plugins`、`exclude`、`auto_update`、`disable_inline`, 省略 `plugins` 時選取市集全部外掛
+選項檔為 `{"外掛": {"選項": "值"}}`, 或含 `pluginConfigs` 的 settings.json 備份, 只接受單行字串, sensitive 選項由原生介面輸入
+加 `--claude <executable> --apply` 後依序執行原生 `plugin marketplace add`、`install --config`、`update`、`configure --values-stdin`, 每項保留結束碼, 再備份並合併 settings.json 的 `extraKnownMarketplaces.<市集>.autoUpdate` 與 `<外掛>@inline: false`
+預覽結束碼 0 表示 CURRENT, 1 表示有待處理項目, 2 表示輸入無效或指令失敗, UNSET 列出未填的必填選項
+新版本與設定在下一個工作階段載入, Desktop 需另開工作階段確認 MCP 由 CLI 安裝版啟動
