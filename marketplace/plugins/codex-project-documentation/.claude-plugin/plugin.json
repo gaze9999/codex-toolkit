@@ -5,9 +5,8 @@
   "description": "Maintain repository README and licensing documents with separate evidence and authorization boundaries.",
   "displayName": "專案文件維護",
   "homepage": "https://github.com/gaze9999/codex-toolkit",
-  "icon": "./assets/toolkit.png",
   "license": "MIT",
   "name": "codex-project-documentation",
   "repository": "https://github.com/gaze9999/codex-toolkit",
-  "version": "0.1.8"
+  "version": "0.1.9"
 }

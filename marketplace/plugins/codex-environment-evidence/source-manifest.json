@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "f05a8550e2150b10d2936328347e1233906df8cc4cc36e29bc78df1d2de559a8",
+      "sha256": "b78df95c9ebc1ad6d4c2dbf9db7daa88440a6d7ca84bb7a64b14379ee0ec407e",
       "source": null
     },
     "LICENSE": {
@@ -17,7 +17,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "d14fd199537679183c505b23923ba983447d3512cb0ce5dc6e474cfd95dd2f42",
+      "sha256": "893a73060bea7802432471871ba2a429e8c1eae489f27d8110a93fd362c280e0",
       "source": "plugins/environment-evidence/plugin.json"
     },
     "skills/test-strategy/SKILL.md": {
@@ -102,5 +102,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.23.0",
-  "version": "0.3.10"
+  "version": "0.3.11"
 }

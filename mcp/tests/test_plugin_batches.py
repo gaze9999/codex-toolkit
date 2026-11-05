@@ -34,6 +34,9 @@ class SourceChecks(unittest.TestCase):
         self.assertIn("resources/decisions/src/codex_decisions/core.py", packages["decisions-evaluation"][0])
         self.assertIn("resources/visual-runtime/src/codex_visual_runtime/core.py", packages["visual-development"][0])
         self.assertEqual(result["blocked"], [])
+        frontend = packages["frontend-engineering"][0]
+        self.assertIn("resources/references/angular-style.md", frontend)
+        self.assertFalse(any(path.startswith("agents/") for path in frontend))
         self.assertTrue(all("plugin.json" in files for files, _manifest in packages.values()))
         self.assertIn("resources/proofreading/zh-tw/protected-copy.cjs", packages["multilingual-proofreading"][0])
         documentation, manifest = packages["project-documentation"]

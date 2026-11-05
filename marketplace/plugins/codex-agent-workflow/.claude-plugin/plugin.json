@@ -5,9 +5,8 @@
   "description": "Maintain instruction layers, prompts, Markdown goals/plans and scoped review/test briefs.",
   "displayName": "Agent 工作流程",
   "homepage": "https://github.com/gaze9999/codex-toolkit",
-  "icon": "./assets/toolkit.png",
   "license": "MIT",
   "name": "codex-agent-workflow",
   "repository": "https://github.com/gaze9999/codex-toolkit",
-  "version": "0.5.5"
+  "version": "0.5.6"
 }

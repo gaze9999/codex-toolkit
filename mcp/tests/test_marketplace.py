@@ -63,15 +63,13 @@ class MarketplaceTests(unittest.TestCase):
             'displayName': 'Example', 'logo': './assets/logo.png', 'composerIcon': './assets/logo.png'}}}}
         files = {'assets/logo.png': b'image', 'agents/references/style.md': b'reference'}
         adapter = market.claude_manifest(manifest, files)
-        self.assertEqual(adapter['icon'], './assets/logo.png')
+        self.assertNotIn('icon', adapter)
         self.assertEqual(adapter['displayName'], 'Example')
-        self.assertEqual(adapter['agents'], [])
+        self.assertNotIn('agents', adapter)
         self.assertNotIn('extensions', adapter)
         files['agents/reviewer.md'] = b'actual agent'
         self.assertNotIn('agents', market.claude_manifest(manifest, files))
-        del files['assets/logo.png']
-        with self.assertRaisesRegex(ValueError, 'Unbundled Plugin icon'):
-            market.claude_manifest(manifest, files)
+        self.assertEqual(manifest['extensions']['com.openai']['interface']['logo'], './assets/logo.png')
 
     def test_version_is_visible_without_changing_marketplace_identity(self):
         (self.root / 'VERSION').write_text('0.1.0\n', encoding='utf-8')

@@ -5,9 +5,8 @@
   "description": "Bounded OpenAI Decisions evaluation with an optional local CLI and MCP.",
   "displayName": "Decisions 開發評估",
   "homepage": "https://github.com/gaze9999/codex-toolkit",
-  "icon": "./assets/toolkit.png",
   "license": "MIT",
   "name": "codex-decisions-evaluation",
   "repository": "https://github.com/gaze9999/codex-toolkit",
-  "version": "0.1.3"
+  "version": "0.1.4"
 }

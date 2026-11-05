@@ -29,15 +29,6 @@ def claude_manifest(manifest, files):
     interface = manifest.get('extensions', {}).get('com.openai', {}).get('interface', {})
     if interface.get('displayName'):
         adapter['displayName'] = interface['displayName']
-    logo = interface.get('logo')
-    if logo:
-        if not isinstance(logo, str) or not logo.startswith('./') or logo[2:] not in files:
-            raise ValueError('Unbundled Plugin icon')
-        adapter['icon'] = logo
-    agents = [name for name in files if name.startswith('agents/') and name.endswith('.md')]
-    if agents and all(name.startswith('agents/references/') for name in agents):
-        # Reference documents are not executable agent definitions.
-        adapter['agents'] = []
     return adapter
 
 

@@ -5,9 +5,8 @@
   "description": "Process documents, maintain specifications, visualize sources and count text tokens.",
   "displayName": "文件與規格處理",
   "homepage": "https://github.com/gaze9999/codex-toolkit",
-  "icon": "./assets/toolkit.png",
   "license": "MIT",
   "name": "codex-documents-specifications",
   "repository": "https://github.com/gaze9999/codex-toolkit",
-  "version": "0.5.5"
+  "version": "0.5.6"
 }

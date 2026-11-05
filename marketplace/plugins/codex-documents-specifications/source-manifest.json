@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "8534a55cb84937cf1b9b6cad8fd805678f22ecff45c22f83c09898d662c33b8a",
+      "sha256": "c97690741214b25ba30dece0c3e1089d7d3da17b7d56920a0321b4cd81b4e093",
       "source": null
     },
     "LICENSE": {
@@ -17,7 +17,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "67a6514a2c7f94afec9f032636813b1ce7e4878e9ef6fd27f6f59a1a89083d64",
+      "sha256": "8926f5dc8f496ea423b0233f8581d750a4f4aa7938c6f8c5d8f0ba174d6fadd1",
       "source": "plugins/documents-specifications/plugin.json"
     },
     "resources/token-count/VERSION": {
@@ -206,5 +206,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.23.0",
-  "version": "0.5.5"
+  "version": "0.5.6"
 }

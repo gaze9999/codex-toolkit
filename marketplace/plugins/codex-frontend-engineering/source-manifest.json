@@ -1,16 +1,12 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "ba91749908eb14aa35f9b765d289f47d7074370826e28a1f331a4594ba3dbf3a",
+      "sha256": "7112f4365b0839171b07b77f1f949a45a8c5820395286298f75e25943c579ea9",
       "source": null
     },
     "LICENSE": {
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
-    },
-    "agents/references/angular-style.md": {
-      "sha256": "5892e4814c575f0b8a3e05a36173d26f2a657cfa9c3f6da531987fbac451315d",
-      "source": "agents/references/angular-style.md"
     },
     "assets/toolkit.png": {
       "sha256": "dff331901c72c163d7df0d52fbe88e8c77d6bb5e42d9940eec12be387bdb1211",
@@ -21,8 +17,12 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "85a3e57e2dbd33f4964bf6eb07af32b070e66b97b37a039e3f496687e563474a",
+      "sha256": "948ad1ada1cf0be66fdef355c0d64992c0a0895fec6500410066e61374233439",
       "source": "plugins/frontend-engineering/plugin.json"
+    },
+    "resources/references/angular-style.md": {
+      "sha256": "5892e4814c575f0b8a3e05a36173d26f2a657cfa9c3f6da531987fbac451315d",
+      "source": "agents/references/angular-style.md"
     },
     "skills/accessibility-engineering/SKILL.md": {
       "sha256": "8fc13ecedfc38ac9cb43c2ae738bc35368470119f10722fafdaac8b27fa342c2",
@@ -300,5 +300,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.23.0",
-  "version": "0.6.5"
+  "version": "0.6.6"
 }

@@ -139,7 +139,7 @@
       "components": [
         {
           "source": "agents/references/angular-style.md",
-          "target": "agents/references/angular-style.md"
+          "target": "resources/references/angular-style.md"
         }
       ]
     },

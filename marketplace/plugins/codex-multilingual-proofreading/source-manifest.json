@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "f8c17d542bf4fc5ded925f94d29179c7ef8dd76f60ed0d772f7f1c9a0965b0ae",
+      "sha256": "acfce3ed7cd0ce637abe1db7fef510a945bac8c317fea71c0500570332bf9eb0",
       "source": null
     },
     "LICENSE": {
@@ -17,7 +17,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "ed734f4c2ef9d2fd70ce96d34719f18c2aec2e567bce803207db35c7e39faf9c",
+      "sha256": "7e1fe8ddb84e4ed7c0551c6c70edd0337a0721cfed76047ed6def511811ebdef",
       "source": "plugins/multilingual-proofreading/plugin.json"
     },
     "resources/proofreading/authored-style.cjs": {
@@ -99,5 +99,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.23.0",
-  "version": "0.1.16"
+  "version": "0.1.17"
 }
