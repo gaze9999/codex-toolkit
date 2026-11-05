@@ -172,7 +172,7 @@ class PackagingChecks(unittest.TestCase):
             self.assertEqual(standalone_files["skills/" + target], raw)
             self.assertEqual(source_files[target], raw)
             self.assertEqual(legacy_files[target][1], raw)
-        self.assertIn("agents/references/angular-style.md", plugin_files)
+        self.assertIn("resources/references/angular-style.md", plugin_files)
 
     def test_mcp_requires_transport_and_empty_plugins_fail(self):
         with self.assertRaises(ValueError):
