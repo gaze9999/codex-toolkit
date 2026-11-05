@@ -161,9 +161,9 @@ def augment(toolkit, private, packages, profile):
         else:
             body = '# ' + name + '\n\n' + entry['setup'] + '\n'
             if runtime:
-                body += '\n在這個外掛資料夾執行, 選擇需要的元件, 每個元件使用套件外尚不存在的 RUNTIME_DIR:\n\n```sh\n'
+                body += '\n在這個外掛資料夾執行, 選擇需要的元件, plan 使用套件外尚不存在的 RUNTIME_DIR, prepare 使用套件外的 RUNTIME_ROOT 並重用版本符合的環境:\n\n```sh\n'
                 for key in runtime:
-                    body += f'python runtime/setup.py plan --component {key} --destination RUNTIME_DIR\npython runtime/setup.py install --component {key} --destination RUNTIME_DIR\n'
+                    body += f'python runtime/setup.py plan --component {key} --destination RUNTIME_DIR\npython runtime/setup.py prepare --component {key} --destination RUNTIME_ROOT\n'
                 body += '```\n\n將回傳的 Python 執行檔或 Node 安裝目錄填入 Claude Code 的外掛設定, 準備環境不會修改 Claude 帳戶或用戶端設定\n'
             body += '\n本機 MCP 由 Claude Code 或本機 Cowork 執行, chat 使用遠端連接器, 每項仍需在目的用戶端確認載入與代表操作\n'
             put(item, 'SETUP.md', body.encode('utf-8'))

@@ -2,11 +2,13 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import importlib.metadata
 import json
 import os
 from pathlib import Path
 import runpy
+import re
 import shutil
 import subprocess
 import sys
@@ -145,12 +147,71 @@ def install(root, name, component, destination, python=None):
             result['server_executable'] = str(destination / ('Scripts' if os.name == 'nt' else 'bin') /
                                             (component['entry_command'] + ('.exe' if os.name == 'nt' else '')))
         if component['kind'] == 'python' and component.get('module'):
+            if not matches_at(component, destination):
+                raise ValueError('Installed package versions do not match: ' + name)
             result['registry'] = str(record_runtime(name, prepared['executable']))
         marker.write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
         return result
     except BaseException:
         marker.write_text(json.dumps({'component': name, 'status': 'incomplete'}, indent=2) + '\n', encoding='utf-8')
         raise
+
+
+def matches_at(component, destination, python=None):
+    if not component.get('versions'):
+        return False
+    try:
+        if component['kind'] == 'python':
+            executable = python or destination / ('Scripts/python.exe' if os.name == 'nt' else 'bin/python')
+            actual, matches = probe_versions(str(executable), component)
+            return matches and all(actual.get(key) is not None for key in component.get('checks', []))
+        if component['kind'] == 'node':
+            return all(json.loads((destination / 'node_modules' / name / 'package.json').read_text(encoding='utf-8'))['version'] == expected
+                       for name, expected in component['versions'].items())
+    except (OSError, ValueError, KeyError, subprocess.SubprocessError):
+        return False
+    return False
+
+
+def prepare(root, names, catalog, destination, python=None):
+    if not names or any(name not in catalog or not re.fullmatch(r'[A-Za-z0-9_-]+', name) for name in names):
+        raise ValueError('Select components returned by list')
+    destination = destination.absolute()
+    if destination.resolve().is_relative_to(root.resolve()):
+        raise ValueError('Keep installed runtimes outside the immutable plugin')
+    results = []
+    for name in dict.fromkeys(names):
+        component = catalog[name]
+        try:
+            if component['kind'] == 'python' and component.get('module'):
+                try:
+                    registered = registered_python(name)
+                except ValueError as error:
+                    if not str(error).startswith('Registered runtime is missing;'):
+                        raise
+                    registered = None
+                if registered and matches_at(component, destination, registered):
+                    results.append({'component': name, 'status': 'reused', 'executable': str(registered)})
+                    continue
+            fingerprint = hashlib.sha256(json.dumps(component, sort_keys=True).encode()).hexdigest()[:12]
+            target = destination / (name + '-' + fingerprint)
+            suffix = 0
+            while target.exists() and not matches_at(component, target):
+                suffix += 1
+                target = destination / (name + '-' + fingerprint + '-' + str(suffix))
+            if target.exists():
+                executable = target / ('Scripts/python.exe' if os.name == 'nt' else 'bin/python')
+                if component['kind'] == 'python' and component.get('module'):
+                    record_runtime(name, executable)
+                results.append({'component': name, 'status': 'reused', 'destination': str(target)})
+                continue
+            result = install(root, name, component, target, python)
+            if not matches_at(component, target):
+                raise ValueError('Installed package versions do not match: ' + name)
+            results.append(result)
+        except (OSError, ValueError, KeyError, TypeError, ImportError, subprocess.SubprocessError) as error:
+            results.append({'component': name, 'status': 'failed', 'error': str(error)})
+    return {'results': results, 'success': all(row['status'] != 'failed' for row in results)}
 
 
 def serve(root, component, read_root=None, write_root=None, extra=(), name='toolbox'):
@@ -209,8 +270,8 @@ def main(argv=None):
         if hasattr(stream, 'reconfigure'):
             stream.reconfigure(encoding='utf-8')
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=('list', 'plan', 'install', 'doctor', 'register', 'serve'))
-    parser.add_argument('--component')
+    parser.add_argument('action', choices=('list', 'plan', 'install', 'doctor', 'register', 'serve', 'prepare'))
+    parser.add_argument('--component', action='append')
     parser.add_argument('--destination', type=Path)
     parser.add_argument('--python')
     parser.add_argument('--read-root')
@@ -221,6 +282,15 @@ def main(argv=None):
     root = Path(__file__).resolve().parent.parent
     try:
         catalog = json.loads((root / 'runtime/components.json').read_text(encoding='utf-8'))
+        if args.action == 'prepare':
+            if args.destination is None or extra:
+                raise ValueError('prepare requires --destination and no server arguments')
+            result = prepare(root, args.component, catalog, args.destination, args.python)
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0 if result['success'] else 1
+        if args.component and len(args.component) != 1:
+            raise ValueError('Multiple components are only accepted by prepare')
+        args.component = args.component[0] if args.component else None
         if args.action == 'list':
             result = {'components': {key: {k: value[k] for k in ('kind', 'description') if k in value}
                                       for key, value in catalog.items()}}

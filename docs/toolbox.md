@@ -73,6 +73,17 @@ connectors 的 server 使用已核對的 Claude MCP 宣告, user_config 保存�
 遠端入口使用固定 HTTPS URL, 只允許經選取的非機敏標頭, 不輸出原裝置認證
 
 runtime/setup.py 的 list / plan / doctor 是唯讀檢查, install 僅準備明確選定元件的新環境
+prepare 可一次準備明確選取的多個元件, 重複傳入 --component, --destination 指向外掛外的環境根目錄
+
+```sh
+python runtime/setup.py prepare --component decisions --component jev --destination RUNTIME_ROOT
+```
+
+先核對已登記 Python 的套件版本, 符合就重用, 否則核對以元件規格命名的環境, 缺少或不符才建立新環境, Node 核對 prefix 內的 package.json
+既有環境與未完成目錄保留, 單一元件失敗仍繼續其他選定元件, 結果逐項列出 reused、installed-not-client-verified 或 failed, 任一失敗時命令結束碼為 1
+Python 安裝完成且版本符合後才登記, prepare 不下載 Python/Node 本身、不設定帳密或資料 roots, 不修改用戶端設定
+整包 runtime/components.json 可選取多個外掛的元件, 單一外掛只能選自己的 list 結果, serve 維持不自動安裝
+
 Python 建置來源先複製到環境內的 .sources, 不讓套件建置改寫外掛原檔, 既有環境及不完整安裝均保留
 安裝不修改 Codex 或 Claude 設定, server 啟動不安裝相依套件, 目的用戶端載入與操作另行驗收
 

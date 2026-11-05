@@ -83,7 +83,8 @@ class IntegrationTests(unittest.TestCase):
             if command[1:3] == ['-m', 'venv']:
                 executable.parent.mkdir(parents=True, exist_ok=True)
                 executable.write_bytes(b'')
-        with patch.object(runtime.subprocess, 'run', side_effect=fake_run) as run:
+        with patch.object(runtime.subprocess, 'run', side_effect=fake_run) as run, \
+                patch.object(runtime, 'matches_at', return_value=True):
             result = runtime.install(root, 'example', component, destination)
         install = run.call_args_list[1].args[0]
         self.assertIn(str(destination / '.sources/0'), install)
@@ -94,6 +95,52 @@ class IntegrationTests(unittest.TestCase):
         self.assertEqual(result['registry'], str(self.base / 'runtimes.json'))
         with self.assertRaisesRegex(ValueError, 'existing environments'):
             runtime.install(root, 'example', component, destination)
+
+    def test_prepare_reuses_matching_registered_runtime_without_install(self):
+        runtime.record_runtime('example', sys.executable)
+        component = {'kind': 'python', 'module': 'fixture', 'versions': {'fixture': '1'}}
+        with patch.object(runtime, 'probe_versions', return_value=({'fixture': '1'}, True)), \
+                patch.object(runtime, 'install') as install:
+            result = runtime.prepare(self.public, ['example', 'example'], {'example': component}, self.base / 'envs')
+        self.assertEqual([row['status'] for row in result['results']], ['reused'])
+        install.assert_not_called()
+
+    def test_prepare_preserves_old_environment_and_continues_after_failure(self):
+        runtime.record_runtime('first', sys.executable)
+        before = (self.base / 'runtimes.json').read_bytes()
+        component = {'kind': 'python', 'module': 'fixture', 'versions': {'fixture': '2'}}
+        def fake_install(root, name, spec, destination, python):
+            if name == 'first':
+                raise OSError('fixture install failed')
+            return {'component': name, 'status': 'installed-not-client-verified'}
+        with patch.object(runtime, 'matches_at', side_effect=[False, True]), \
+                patch.object(runtime, 'install', side_effect=fake_install) as install:
+            result = runtime.prepare(self.public, ['first', 'second'], {'first': component, 'second': component}, self.base / 'envs')
+        self.assertFalse(result['success'])
+        self.assertEqual([row['status'] for row in result['results']], ['failed', 'installed-not-client-verified'])
+        self.assertEqual(install.call_count, 2)
+        self.assertEqual((self.base / 'runtimes.json').read_bytes(), before)
+
+    def test_prepare_rejects_unknown_selection_before_install(self):
+        with patch.object(runtime, 'install') as install, self.assertRaises(ValueError):
+            runtime.prepare(self.public, ['valid', 'missing'], {'valid': {}}, self.base / 'envs')
+        install.assert_not_called()
+
+    def test_prepare_reuses_node_prefix_and_preserves_incomplete_destination(self):
+        component = {'kind': 'node', 'versions': {'fixture': '1'}}
+        destination = self.base / 'envs'
+        fingerprint = runtime.hashlib.sha256(json.dumps(component, sort_keys=True).encode()).hexdigest()[:12]
+        old = destination / ('node-' + fingerprint)
+        old.mkdir(parents=True)
+        good = destination / ('node-' + fingerprint + '-1') / 'node_modules/fixture'
+        good.mkdir(parents=True)
+        (good / 'package.json').write_text('{"version":"1"}')
+        with patch.object(runtime, 'install') as install:
+            result = runtime.prepare(self.public, ['node'], {'node': component}, destination)
+        self.assertTrue(result['success'])
+        self.assertEqual(result['results'][0]['status'], 'reused')
+        self.assertTrue(old.is_dir())
+        install.assert_not_called()
 
     def test_registry_preserves_other_components_and_rejects_missing_runtime(self):
         runtime.record_runtime('first', sys.executable)
