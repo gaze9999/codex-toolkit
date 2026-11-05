@@ -41,7 +41,9 @@ def resolve(root, connector, settings):
         raise ValueError('Settings contain an unknown field for ' + connector)
     values = {}
     for key, field in declared.items():
-        value = supplied.get(key, field.get('default', ''))
+        value = supplied.get(key, '')
+        if value == '':
+            value = field.get('default', '')
         if not isinstance(value, str) or '\x00' in value:
             raise ValueError('Local settings must be NUL-free strings: ' + key)
         if field.get('sensitive'):
@@ -63,6 +65,10 @@ def resolve(root, connector, settings):
         return text
 
     command = expand(server['command'])
+    if Path(command).name != command:
+        command = str(Path(command).expanduser())
+        if not Path(command).is_absolute():
+            raise ValueError('Use a command name on PATH or an absolute executable path')
     executable = shutil.which(command) or (command if Path(command).is_file() else None)
     if not executable or Path(executable).suffix.lower() in {'.cmd', '.bat', '.ps1'}:
         raise ValueError('Select an existing native Python, Node or MCP executable')
