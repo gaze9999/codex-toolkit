@@ -5,9 +5,8 @@
   "description": "Proofread Taiwan Traditional Chinese, English and Japanese while preserving authoritative copy.",
   "displayName": "多語校對",
   "homepage": "https://github.com/gaze9999/codex-toolkit",
-  "icon": "./assets/toolkit.png",
   "license": "MIT",
   "name": "codex-multilingual-proofreading",
   "repository": "https://github.com/gaze9999/codex-toolkit",
-  "version": "0.1.16"
+  "version": "0.1.17"
 }

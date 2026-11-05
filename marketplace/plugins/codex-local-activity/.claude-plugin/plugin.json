@@ -5,9 +5,8 @@
   "description": "Query bounded local activity counts and source health without conversation content.",
   "displayName": "本機活動觀察",
   "homepage": "https://github.com/gaze9999/codex-toolkit",
-  "icon": "./assets/toolkit.png",
   "license": "MIT",
   "name": "codex-local-activity",
   "repository": "https://github.com/gaze9999/codex-toolkit",
-  "version": "0.1.4"
+  "version": "0.1.5"
 }

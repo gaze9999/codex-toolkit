@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "f745759d459c6a5415bfa9f20bc10d7a2385b42dc4b62c5e43e13169cbd04d1a",
+      "sha256": "158b1f4b74b43067749cce8e76f702757101483218424c617dfd5c3dc64bfac6",
       "source": null
     },
     "LICENSE": {
@@ -17,7 +17,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "1079f0066858aaf95d20a52edb6f56c0bbae218d0b3754f820e65fa8cd6dcd73",
+      "sha256": "41707b66124cef2a8c0d38511dda5e1300ea25bc984eda82619eb3c909293723",
       "source": "plugins/project-documentation/plugin.json"
     },
     "skills/license-maintainer/SKILL.md": {
@@ -84,5 +84,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.23.0",
-  "version": "0.1.8"
+  "version": "0.1.9"
 }

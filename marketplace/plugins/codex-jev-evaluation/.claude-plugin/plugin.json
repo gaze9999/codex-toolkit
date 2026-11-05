@@ -5,9 +5,8 @@
   "description": "Rank approved optional context and perform bounded typed semantic evaluation.",
   "displayName": "Jev 評估",
   "homepage": "https://github.com/gaze9999/codex-toolkit",
-  "icon": "./assets/toolkit.png",
   "license": "MIT",
   "name": "codex-jev-evaluation",
   "repository": "https://github.com/gaze9999/codex-toolkit",
-  "version": "0.1.9"
+  "version": "0.1.10"
 }
