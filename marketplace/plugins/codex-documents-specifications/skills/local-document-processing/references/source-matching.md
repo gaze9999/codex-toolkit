@@ -17,3 +17,7 @@ For multiple versions, distinguish original revision time from file modification
 The original PDF, Office file or other source remains authoritative. Start from relevant usable extract sections. Reopen needed original sections for visual evidence, missing or unclear content, stale/conflicting versions, or an explicit original-source check. Distinguish extract-only evidence from inspected originals.
 
 Return the matched candidates and concrete evidence limits. Regeneration, replacement, synchronization and deletion require their own authorized processing scope.
+
+## Revision marks and effective text
+
+When a supplied page or revision contains strikethrough, revision colors, annotations or overlaid corrections, inspect the relevant original rendering before interpreting extracted text as effective requirements. Separate deleted text, proposed text and confirmed replacements; visual emphasis alone does not establish acceptance. Preserve page/cell references and unresolved code-to-label conflicts. Reuse unaffected verified extracts rather than rerendering the whole source.

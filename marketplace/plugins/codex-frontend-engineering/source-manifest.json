@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "9ca3a694fd2776b41ab3f21202d0d5636fd25903df6678bf127c83a2a689fff7",
+      "sha256": "ba91749908eb14aa35f9b765d289f47d7074370826e28a1f331a4594ba3dbf3a",
       "source": null
     },
     "LICENSE": {
@@ -21,7 +21,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "09b4ecf5bae210d2a46db5d4213499fb69e30314129569c23501433bf0ac88cd",
+      "sha256": "85a3e57e2dbd33f4964bf6eb07af32b070e66b97b37a039e3f496687e563474a",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "skills/accessibility-engineering/SKILL.md": {
@@ -41,11 +41,11 @@
       "source": "skills/accessibility-engineering/references/validation.md"
     },
     "skills/angular-development/SKILL.md": {
-      "sha256": "b14ea9e268b3ebe0f5a8c765685cc5c061c51e79911fcbc9ed769f4b2307ce2d",
+      "sha256": "cfa66ea53daffdac9d5d8558e175b7b3f542bdb18245d35193ca811bb80c1033",
       "source": "skills/angular-development/SKILL.md"
     },
     "skills/angular-development/agents/openai.yaml": {
-      "sha256": "b42a3a2cf8bfe3ae6536257615fa770c37360462d405b443769a5d6a5dadb666",
+      "sha256": "fb347775b08eb35a0b71e024466f6d21b16780b8aff001f166efc357e609789c",
       "source": "skills/angular-development/agents/openai.yaml"
     },
     "skills/angular-development/assets/icon-small.png": {
@@ -77,7 +77,7 @@
       "source": "skills/angular-development/references/code-maintainability.md"
     },
     "skills/angular-development/references/component-behavior.md": {
-      "sha256": "b02740d06e5e8abf134b6b1421ac7673790d657b761ed1d16e70b4b8b44157ac",
+      "sha256": "eb61f072bd35622d251ef059320804af5a28503e9fc03437c99f1226549e4442",
       "source": "skills/angular-development/references/component-behavior.md"
     },
     "skills/angular-development/references/maintainability-review.md": {
@@ -217,11 +217,11 @@
       "source": "skills/react-development/references/state-effects.md"
     },
     "skills/ui-ux-design/SKILL.md": {
-      "sha256": "2959dabb331b0efe87407a402ebad8ae334bb19e38565fc12c96918e33051119",
+      "sha256": "184ba1b0367d3c0986b3e2124c3d5f9a287ca3185be0a9a95d85889b2353683e",
       "source": "skills/ui-ux-design/SKILL.md"
     },
     "skills/ui-ux-design/agents/openai.yaml": {
-      "sha256": "0b4a86e7ce42d79e6aac2f794f12fc1c69715142dbc3ccc86c23766569c571bc",
+      "sha256": "c39ae7f2461b37a74d15ccb38b98766e88691788693f47a7d119e6fb97d06da4",
       "source": "skills/ui-ux-design/agents/openai.yaml"
     },
     "skills/ui-ux-design/assets/icon-small.png": {
@@ -253,7 +253,7 @@
       "source": "skills/ui-ux-design/references/design-sources.md"
     },
     "skills/ui-ux-design/references/detail-review.md": {
-      "sha256": "e146eae476b87ed352d1f0dfcd15ddec4769498b78f960c8eaf7a24ee31b5991",
+      "sha256": "684bd034a39b9ace2546c98961a68cb178492483efc8a1bd2643ca3d13f32b00",
       "source": "skills/ui-ux-design/references/detail-review.md"
     },
     "skills/vue-development/SKILL.md": {
@@ -300,5 +300,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.23.0",
-  "version": "0.6.4"
+  "version": "0.6.5"
 }

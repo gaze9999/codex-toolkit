@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "f9611e12539f886f3cf9535239ace1868a580d36e9ab6ee0057ee6e9b074a37c",
+      "sha256": "b7af03f7208457e9803bfd7c5adab796a22dc33548fa36a3803630d1dc5c0a33",
       "source": null
     },
     "LICENSE": {
@@ -17,7 +17,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "062b879d2af479b4034e3f9ceb99dc2e891bc79f91490dfa6788f0b5b835d41f",
+      "sha256": "30e121cc3ddc2bcc849d745bf2a3a61b82ea2c364ce9124707d9a2e3b61d3752",
       "source": "plugins/packaging-acceptance/plugin.json"
     },
     "skills/packaging-acceptance/SKILL.md": {
@@ -37,15 +37,15 @@
       "source": "skills/packaging-acceptance/references/version-tags.md"
     },
     "skills/plugin-packaging/SKILL.md": {
-      "sha256": "a012e4f55a546835c33ca6a9c84474bd716b7e37752f7ccc7f170deeac435537",
+      "sha256": "b1c3e7ca2bd9ed52581db8d9bddcd22512faf7fb36c166ac5dc9764da26383fc",
       "source": "skills/plugin-packaging/SKILL.md"
     },
     "skills/plugin-packaging/agents/openai.yaml": {
-      "sha256": "87d92c3c7c36c5dcfd514eb19b8f68c36fae3b0b556ec352d28240532b04c2c5",
+      "sha256": "43b1e10061748f3213970d9edf316f64582fc1e672853899b6eab5c6cf39348f",
       "source": "skills/plugin-packaging/agents/openai.yaml"
     },
     "skills/plugin-packaging/references/assembly.md": {
-      "sha256": "ed5a2dac8a3b8556b502b306cd8fe3b112bc56088d591070a1a8c2c3a8984b05",
+      "sha256": "95df90bee6acf179889abdc92ecc0d69cffadc383b355c4adc7c536422d0efe3",
       "source": "skills/plugin-packaging/references/assembly.md"
     }
   },
@@ -56,5 +56,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.23.0",
-  "version": "0.2.3"
+  "version": "0.2.4"
 }

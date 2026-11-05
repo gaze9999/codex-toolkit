@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "32284eaf42b11d39ae4e420248c912b4ae1df32780a67d1e9c0bf32aad2628e3",
+      "sha256": "8534a55cb84937cf1b9b6cad8fd805678f22ecff45c22f83c09898d662c33b8a",
       "source": null
     },
     "LICENSE": {
@@ -17,7 +17,7 @@
       "source": "assets/branding/toolkit.svg"
     },
     "plugin.json": {
-      "sha256": "43e1edc9bd2c749421476ae16bc1da2cf6b848a3de5907e0f2f8a72e4531c217",
+      "sha256": "67a6514a2c7f94afec9f032636813b1ce7e4878e9ef6fd27f6f59a1a89083d64",
       "source": "plugins/documents-specifications/plugin.json"
     },
     "resources/token-count/VERSION": {
@@ -169,15 +169,15 @@
       "source": "skills/doc-updater/scripts/write_markdown_sync_target.py"
     },
     "skills/local-document-processing/SKILL.md": {
-      "sha256": "dce5c5bcf6dc493516c06e2060c7ce0d20dc34814acd4c901f543af506812fee",
+      "sha256": "9aee89dc0079369b61edccdfaaecd6e6b6e33b6ddaf29971b5562a60700bee2c",
       "source": "skills/local-document-processing/SKILL.md"
     },
     "skills/local-document-processing/agents/openai.yaml": {
-      "sha256": "2017bba8970d1978b983a7b9997a0c1c4be562eef93371b447506a81e43e5cf2",
+      "sha256": "efd4fcbe758328cf39b2638a4186608405e9ae9361c6544f5eeb2bc78d11f8a4",
       "source": "skills/local-document-processing/agents/openai.yaml"
     },
     "skills/local-document-processing/references/source-matching.md": {
-      "sha256": "038edfd9d6ff0c442936a3bef767298e9528e7a719841776dc5facabd08f2000",
+      "sha256": "dbb92239ec91e2509a5864a264503a0bbd844d827f98efb44a8fb7c1e4bcbf0a",
       "source": "skills/local-document-processing/references/source-matching.md"
     },
     "skills/token-count/SKILL.md": {
@@ -206,5 +206,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.23.0",
-  "version": "0.5.4"
+  "version": "0.5.5"
 }
