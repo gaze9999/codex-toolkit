@@ -3428,7 +3428,8 @@
       ],
       "packages": {
         "textlint": "15.8.0",
-        "textlint-rule-preset-ja-technical-writing": "12.0.2"
+        "textlint-rule-preset-ja-technical-writing": "12.0.2",
+        "textlint-rule-prh": "6.1.0"
       },
       "mcp": {
         "name": "textlint_ja",
@@ -3473,7 +3474,8 @@
         "source": "mcp/tools/proofreading/ja",
         "destination": "proofreading/ja",
         "files": [
-          ".textlintrc.json"
+          ".textlintrc.json",
+          "terms.yml"
         ],
         "shared_files": [
           {

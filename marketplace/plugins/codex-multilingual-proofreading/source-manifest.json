@@ -21,7 +21,7 @@
       "source": "mcp/tools/proofreading/authored-style.cjs"
     },
     "resources/proofreading/en/cspell.json": {
-      "sha256": "0fd9d50aa1c00b37e06c93005e6d356695005c8eb983c6d7c1a0fb86525e726b",
+      "sha256": "7a763e4ad42e9c7834120ffcd241ab86e4a046a67a0c02193089481eba4c1643",
       "source": "mcp/tools/proofreading/en/cspell.json"
     },
     "resources/proofreading/en/english.textlintrc.cjs": {
@@ -29,8 +29,12 @@
       "source": "mcp/tools/proofreading/en/english.textlintrc.cjs"
     },
     "resources/proofreading/ja/.textlintrc.json": {
-      "sha256": "531cba62da36d1aed90e0b6e73a09055e518e5fe0abf824bb9a1b2911438e285",
+      "sha256": "b7f00bd3b9eb01622c9839e0aabaf0566e2240179407c97687b65f5406a43cc5",
       "source": "mcp/tools/proofreading/ja/.textlintrc.json"
+    },
+    "resources/proofreading/ja/terms.yml": {
+      "sha256": "8dd14d06ddf343937f1316a3656c7f80be40c19b98cde535b9457d68c8fee80d",
+      "source": "mcp/tools/proofreading/ja/terms.yml"
     },
     "resources/proofreading/textlint-mcp.cjs": {
       "sha256": "824f4e808d0463f9583e23c41ec23d7a1caa23d631a7b86477350c241e1980da",
