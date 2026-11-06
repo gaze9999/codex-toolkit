@@ -18,8 +18,8 @@ URL = "https://example.invalid/toolbox.git"
 class FakeClaude:
     """Mimic marketplace add, install, update and configure on a synthetic home."""
 
-    def __init__(self, home: Path, versions: dict, schema: dict):
-        self.home, self.versions, self.schema, self.calls = home, versions, schema, []
+    def __init__(self, home: Path, versions: dict, schema: dict, servers: dict | None = None):
+        self.home, self.versions, self.schema, self.calls, self.servers, self.cwds = home, versions, schema, [], servers or {}, []
 
     def publish(self):
         root = self.home / "plugins/marketplaces" / MARKET
@@ -28,6 +28,8 @@ class FakeClaude:
             manifest = root / name / ".claude-plugin/plugin.json"
             manifest.parent.mkdir(parents=True, exist_ok=True)
             manifest.write_text(json.dumps({"name": name, "version": version, "userConfig": self.schema.get(name, {})}))
+            if name in self.servers:
+                (root / name / ".mcp.json").write_text(json.dumps({"mcpServers": {name: {"command": self.servers[name]}}}))
             entries.append({"name": name, "source": f"./{name}"})
         (root / ".claude-plugin").mkdir(parents=True, exist_ok=True)
         (root / ".claude-plugin/marketplace.json").write_text(json.dumps({"plugins": entries}))
@@ -39,8 +41,9 @@ class FakeClaude:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(value))
 
-    def __call__(self, claude, args, stdin=None):
+    def __call__(self, claude, args, stdin=None, cwd=None):
         self.calls.append(args)
+        self.cwds.append(cwd)
         if args[:3] == ["plugin", "marketplace", "add"]:
             self.publish()
             self.edit("settings.json", lambda s: s.setdefault("extraKnownMarketplaces", {}).update({MARKET: {"source": {"source": "git", "url": URL}}}))
@@ -50,7 +53,8 @@ class FakeClaude:
         plugin = args[2]
         name = plugin.split("@")[0]
         if args[1] in ("install", "update"):
-            self.edit("plugins/installed_plugins.json", lambda d: d.setdefault("plugins", {}).update({plugin: [{"version": self.versions[name]}]}))
+            scope = args[args.index("--scope") + 1]
+            self.edit("plugins/installed_plugins.json", lambda d: d.setdefault("plugins", {}).update({plugin: [{"scope": scope, "version": self.versions[name]}]}))
         values = dict(item.split("=", 1) for item in args[args.index("--config") + 1::2]) if "--config" in args else {}
         if args[1] == "configure":
             values = json.loads(stdin)
@@ -168,6 +172,44 @@ class ClaudePluginRestore(unittest.TestCase):
         self.assertEqual((code, output.strip()), (1, f"ADD marketplace {MARKET}"))
         self.assertEqual(self.run_tool("--apply")[0], 0)
         self.assertEqual(2, sum(call[:3] == ["plugin", "marketplace", "add"] for call in self.fake.calls))
+
+    def test_missing_runtime_is_reported_and_installed_only_after_yes(self):
+        self.fake.servers = {"runner": "probe-runtime-missing"}
+        recipe = [[sys.executable, "-c", "pass"]]
+        self.profile.write_text(json.dumps({"marketplace": {"name": MARKET, "url": URL}, "exclude": ["company"],
+                                            "runtimes": {"probe-runtime-missing": {installer.PLATFORM: recipe}}}))
+        with patch.object(installer, "ask", return_value=False):
+            self.run_tool("--apply")
+        code, output = self.run_tool()
+        self.assertEqual(code, 1)
+        self.assertIn("RUNTIME probe-runtime-missing missing for runner@toolbox; --apply asks", output)
+        with patch.object(installer, "ask", return_value=False) as asked, patch.object(installer, "install_runtime") as run:
+            self.run_tool("--apply")
+        asked.assert_called_once()
+        run.assert_not_called()
+        with patch.object(installer, "ask", return_value=True), patch.object(installer, "install_runtime", return_value=0) as run:
+            self.run_tool("--apply")
+        run.assert_called_once_with("probe-runtime-missing", recipe)
+
+    def test_local_scope_plugin_skips_user_scope_and_installs_in_located_checkout(self):
+        self.profile.write_text(json.dumps({"marketplace": {"name": MARKET, "url": URL},
+                                            "local_scope": {"company": {"repository": "https://example.invalid/company.git"}}}))
+        self.run_tool("--apply")
+        installed = json.loads((self.home / "plugins/installed_plugins.json").read_text())["plugins"]
+        self.assertNotIn(f"company@{MARKET}", installed)
+        self.assertIn(f"LOCAL company@{MARKET}", self.run_tool()[1])
+        project = self.base / "work" / "company"
+        project.mkdir(parents=True)
+        with patch.object(installer, "checkout_origin", side_effect=lambda path: "https://example.invalid/company" if path == project.resolve() else None), \
+                patch.object(installer, "ask", return_value=True):
+            (project / ".git").mkdir()
+            code, output = self.run_tool("--apply", "--local", "company", "--search-root", str(self.base / "work"))
+        self.assertEqual(code, 0, output)
+        local = next(call for call in self.fake.calls if call[:3] == ["plugin", "install", f"company@{MARKET}"])
+        self.assertEqual(local[local.index("--scope") + 1], "local")
+        self.assertEqual(self.fake.cwds[self.fake.calls.index(local)], project.resolve())
+        with self.assertRaises(ValueError):
+            installer.locate_project({"repository": "https://example.invalid/company.git"}, self.base, [])
 
     def test_preview_needs_no_cli_and_rejects_home_root(self):
         self.claude.unlink()

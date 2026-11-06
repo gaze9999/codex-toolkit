@@ -91,6 +91,8 @@ python codex-toolkit/mcp/scripts/install_claude_plugins.py --profile /path/to/pr
 ```
 
 Profile 需要 `marketplace.name` 與 `marketplace.url`, 可選 `plugins`、`exclude`、`auto_update`、`disable_inline`, 省略 `plugins` 時選取市集全部外掛
+可選 `runtimes` 以 `{命令: {windows|macos|linux: [[argv], ...]}}` 記錄 MCP 指令的安裝步驟, `{toolkit}` 代入 Toolkit 根目錄, 以 `?命令` 開頭的步驟只在該命令仍缺少時執行, 預覽列出 PATH 上找不到的指令為 `RUNTIME`, `--apply` 只在互動終端機回答 y 後執行對應步驟
+可選 `local_scope` 以 `{外掛: {repository: <Git URL>}}` 標記只能裝在專案的外掛, 這些外掛不會裝在使用者範圍, 預覽顯示 `LOCAL`, `--apply --local <外掛>` 依 Git origin 在 `--search-root` 下尋找 checkout, 或用 `--project-dir` 指定, 確認後在該 checkout 執行 `claude plugin install --scope local`
 選項檔為 `{"外掛": {"選項": "值"}}`, 或含 `pluginConfigs` 的 settings.json 備份, 只接受單行字串, sensitive 選項由原生介面輸入
 加 `--claude <executable> --apply` 後依序執行原生 `plugin marketplace add`、`install --config`、`update`、`configure --values-stdin`, 每項保留結束碼, 再備份並合併 settings.json 的 `extraKnownMarketplaces.<市集>.autoUpdate` 與 `<外掛>@inline: false`
 預覽結束碼 0 表示 CURRENT, 1 表示有待處理項目, 2 表示輸入無效或指令失敗, UNSET 列出未填的必填選項

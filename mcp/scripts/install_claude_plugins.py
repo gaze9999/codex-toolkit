@@ -3,6 +3,10 @@
 
 Preview reads Claude files only. --apply runs native `claude plugin` commands, then merges
 marketplace auto-update and `<plugin>@inline` disables into settings.json with a backup.
+
+Preview also reports MCP commands missing from PATH. With --apply, a profile `runtimes` recipe
+runs only after an interactive yes for that command. Plugins listed in `local_scope` never install
+at user scope; `--local <plugin>` installs one into a located project checkout with `--scope local`.
 """
 
 from __future__ import annotations
@@ -17,6 +21,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 SCOPE = "user"
+TOOLKIT = Path(__file__).resolve().parents[2]
+PLATFORM = "windows" if os.name == "nt" else ("macos" if sys.platform == "darwin" else "linux")
 
 
 def read_json(path: Path, default=None):
@@ -41,6 +47,13 @@ def load_profile(path: Path) -> dict:
     for key in ("auto_update", "disable_inline"):
         if not isinstance(value.get(key, False), bool):
             raise ValueError(f"Profile {key} must be true or false")
+    for command, recipe in value.get("runtimes", {}).items():
+        steps = recipe.get(PLATFORM, []) if isinstance(recipe, dict) else None
+        if not isinstance(steps, list) or not all(isinstance(step, list) and step and all(isinstance(part, str) for part in step) for step in steps):
+            raise ValueError(f"Runtime recipe for {command} needs per-platform argv lists")
+    for name, rule in value.get("local_scope", {}).items():
+        if not isinstance(rule, dict) or not str(rule.get("repository", "")).startswith(("https://", "git@")):
+            raise ValueError(f"local_scope {name} needs the project repository URL")
     return value
 
 
@@ -110,7 +123,12 @@ def catalog(home: Path, profile: dict) -> dict | None:
         if not isinstance(source, str):
             continue
         plugin = read_json(root / source / ".claude-plugin" / "plugin.json")
-        plugins[entry["name"]] = {"version": plugin.get("version") or entry.get("version"), "options": plugin.get("userConfig") or {}}
+        servers = read_json(root / source / ".mcp.json").get("mcpServers", {})
+        # Commands from userConfig placeholders are device options, not PATH lookups.
+        commands = sorted({server["command"] for server in servers.values()
+                           if isinstance(server, dict) and isinstance(server.get("command"), str) and "${" not in server["command"]})
+        plugins[entry["name"]] = {"version": plugin.get("version") or entry.get("version"), "options": plugin.get("userConfig") or {},
+                                  "commands": commands}
     return plugins
 
 
@@ -119,8 +137,23 @@ def select(profile: dict, available: dict) -> list[str]:
     unknown = sorted(set(names) - set(available))
     if unknown:
         raise ValueError("Profile selects plugins missing from the marketplace: " + ", ".join(unknown))
-    excluded = set(profile.get("exclude", []))
+    excluded = set(profile.get("exclude", [])) | set(profile.get("local_scope", {}))
     return [name for name in names if name not in excluded]
+
+
+def search_path() -> str:
+    """PATH plus the user tool directories installers commonly add before a new shell starts."""
+    extra = [Path.home() / ".cargo/bin", Path.home() / ".local/bin"]
+    return os.pathsep.join([os.environ.get("PATH", ""), *map(str, extra)])
+
+
+def missing_runtimes(available: dict, names: list[str]) -> dict[str, list[str]]:
+    missing = {}
+    for name in names:
+        for command in available[name].get("commands", []):
+            if shutil.which(command, path=search_path()) is None:
+                missing.setdefault(command, []).append(name)
+    return missing
 
 
 def plan(home: Path, profile: dict, options: dict) -> tuple[list, list[str]]:
@@ -133,7 +166,8 @@ def plan(home: Path, profile: dict, options: dict) -> tuple[list, list[str]]:
         available = None
     if available is None:
         return [("add", market, None)], [f"ADD marketplace {market}"]
-    installed = {key: rows[0].get("version") for key, rows in read_json(home / "plugins" / "installed_plugins.json").get("plugins", {}).items() if rows}
+    installed = {key: user[0].get("version") for key, rows in read_json(home / "plugins" / "installed_plugins.json").get("plugins", {}).items()
+                 if (user := [row for row in rows if row.get("scope", SCOPE) == SCOPE])}
     configs = settings.get("pluginConfigs", {})
     actions, lines = [], []
     names = select(profile, available)
@@ -164,8 +198,16 @@ def plan(home: Path, profile: dict, options: dict) -> tuple[list, list[str]]:
                  if spec.get("required") and "default" not in spec and key not in wanted and key not in current]
         if unset:
             lines.append(f"UNSET {plugin} {', '.join(unset)}")
+    for command, owners in sorted(missing_runtimes(available, names).items()):
+        recipe = profile.get("runtimes", {}).get(command, {}).get(PLATFORM)
+        owners = ", ".join(f"{name}@{market}" for name in owners)
+        if recipe:
+            actions.append(("runtime", command, recipe))
+            lines.append(f"RUNTIME {command} missing for {owners}; --apply asks before installing")
+        else:
+            lines.append(f"RUNTIME {command} missing for {owners}; no recipe for {PLATFORM}, see the plugin SETUP.md")
     for name in sorted(set(available) - set(names)):
-        lines.append(f"SKIP {name}@{market}")
+        lines.append(f"{'LOCAL' if name in profile.get('local_scope', {}) else 'SKIP'} {name}@{market}")
     patch = settings_patch(settings, profile, names)
     if patch:
         actions.append(("settings", market, patch))
@@ -207,9 +249,83 @@ def write_settings(home: Path, profile: dict, names: list[str]) -> Path | None:
     return backup if backup.exists() else None
 
 
-def run_cli(claude: list[str], args: list[str], stdin: str | None = None) -> tuple[int, str]:
-    result = subprocess.run([*claude, *args], input=stdin, capture_output=True, text=True, encoding="utf-8", timeout=600)
+def run_cli(claude: list[str], args: list[str], stdin: str | None = None, cwd: Path | None = None) -> tuple[int, str]:
+    result = subprocess.run([*claude, *args], input=stdin, capture_output=True, text=True, encoding="utf-8", timeout=600, cwd=cwd)
     return result.returncode, (result.stdout + result.stderr).strip()
+
+
+def ask(question: str) -> bool:
+    """Confirm on an interactive terminal only; anything else declines."""
+    if not sys.stdin.isatty():
+        print(question + " skipped: confirmation needs an interactive terminal")
+        return False
+    return input(question + " [y/N] ").strip().lower() in {"y", "yes"}
+
+
+def install_runtime(command: str, recipe: list[list[str]]) -> int:
+    env = dict(os.environ, PATH=search_path())
+    for step in recipe:
+        argv = [part.replace("{toolkit}", str(TOOLKIT)) for part in step]
+        # A leading "?command" runs the step only when that command is still missing.
+        if argv[0].startswith("?"):
+            if shutil.which(argv[0][1:], path=env["PATH"]):
+                continue
+            argv = argv[1:]
+        executable = shutil.which(argv[0], path=env["PATH"])
+        if executable is None:
+            print(f"RUNTIME {command} step needs {argv[0]}, which is not on PATH")
+            return 2
+        result = subprocess.run([executable, *argv[1:]], env=env, timeout=1800, check=False)
+        print(f"RUNTIME {command} step {argv[0]} exit={result.returncode}")
+        if result.returncode:
+            return result.returncode
+    return 0 if shutil.which(command, path=search_path()) else 2
+
+
+def checkout_origin(path: Path) -> str | None:
+    result = subprocess.run(["git", "-C", str(path), "remote", "get-url", "origin"], capture_output=True, text=True, check=False)
+    return git_address(result.stdout) if result.returncode == 0 else None
+
+
+def locate_project(rule: dict, explicit: Path | None, roots: list[Path]) -> list[Path]:
+    """Return checkouts whose origin matches the rule; an explicit directory must match too."""
+    wanted = git_address(rule["repository"])
+    if explicit is not None:
+        path = explicit.expanduser().resolve()
+        if checkout_origin(path) != wanted:
+            raise ValueError(f"{path} is not a checkout of {rule['repository']}")
+        return [path]
+    found = []
+    for root in roots:
+        if not root.is_dir():
+            continue
+        for git_dir in [root / ".git", *root.glob("*/.git"), *root.glob("*/*/.git"), *root.glob("*/*/*/.git")]:
+            parent = git_dir.parent.resolve()
+            if git_dir.exists() and parent not in found and checkout_origin(parent) == wanted:
+                found.append(parent)
+    return found
+
+
+def install_local(claude: list[str], home: Path, profile: dict, options: dict, name: str, explicit: Path | None, roots: list[Path]) -> int:
+    market = profile["marketplace"]["name"]
+    rule = profile.get("local_scope", {}).get(name)
+    if rule is None:
+        raise ValueError(f"{name} is not listed in the profile local_scope")
+    candidates = locate_project(rule, explicit, roots)
+    if not candidates and sys.stdin.isatty():
+        typed = input(f"Project checkout for {name} ({rule['repository']}), empty to skip: ").strip()
+        candidates = locate_project(rule, Path(typed), roots) if typed else []
+    if len(candidates) != 1:
+        listed = ", ".join(map(str, candidates)) or "none found"
+        print(f"LOCAL {name}@{market} needs one project checkout ({listed}); pass --project-dir")
+        return 2
+    project = candidates[0]
+    if not ask(f"Install {name}@{market} with --scope local in {project}?"):
+        return 1
+    configs = [part for key, value in options.get(f"{name}@{market}", {}).items() for part in ("--config", f"{key}={value}")]
+    code, output = run_cli(claude, ["plugin", "install", f"{name}@{market}", "--scope", "local", "--json", *configs], cwd=project)
+    print(f"LOCAL {name}@{market} {project} exit={code}" + (f" {output[-300:]}" if code else ""))
+    return code
 
 
 def execute(claude: list[str], action: tuple, profile: dict) -> tuple[int, str]:
@@ -240,6 +356,9 @@ def main(argv=None) -> int:
     parser.add_argument("--claude-home", type=Path, help="Override CLAUDE_CONFIG_DIR or ~/.claude.")
     parser.add_argument("--claude", type=Path, help="Claude Code executable used by --apply; defaults to claude on PATH.")
     parser.add_argument("--refresh", action="store_true", help="With --apply, refresh the marketplace listing before planning updates.")
+    parser.add_argument("--local", action="append", default=[], help="With --apply, install this local_scope plugin into its project checkout.")
+    parser.add_argument("--project-dir", type=Path, help="Project checkout for a single --local plugin; otherwise search --search-root.")
+    parser.add_argument("--search-root", type=Path, action="append", default=[], help="Directories searched up to three levels for --local checkouts.")
     parser.add_argument("--apply", action="store_true")
     args = parser.parse_args(argv)
     # Native CLI output can contain symbols a legacy Windows console code page cannot encode.
@@ -271,12 +390,22 @@ def main(argv=None) -> int:
         for action in actions:
             if action[0] == "settings":
                 continue
+            if action[0] == "runtime":
+                if ask(f"Install the missing runtime {action[1]}?"):
+                    code = install_runtime(action[1], action[2])
+                    failed |= code != 0
+                continue
             code, output = execute(claude, action, profile)
             print(f"{action[0].upper()} {action[1]} exit={code}" + (f" {output[-300:]}" if code else ""))
             failed |= code != 0
         backup = write_settings(home, profile, select(profile, catalog(home, profile)))
         if backup:
             print(f"BACKUP {backup}")
+        if len(args.local) > 1 and args.project_dir:
+            raise ValueError("--project-dir applies to one --local plugin")
+        roots = args.search_root or [TOOLKIT.parent.parent]
+        for name in args.local:
+            failed |= install_local(claude, home, profile, options, name, args.project_dir, roots) == 2
         actions, lines = plan(home, profile, options)
         print("\n".join(lines))
         return 2 if failed else (1 if actions else 0)
