@@ -4,7 +4,11 @@
   "useGitignore": true,
   "words": [
     "API", "MCP", "Codex", "Context7", "Serena", "textlint", "CSpell",
-    "TypeScript", "JavaScript", "Markdown", "OAuth", "ECharts", "Playwright"
+    "TypeScript", "JavaScript", "Markdown", "OAuth", "ECharts", "Playwright",
+    "Anthropic", "Claude", "ChatGPT", "OpenAI", "Firecrawl", "Tavily", "Exa", "Excalidraw", "Penpot", "Jupyter",
+    "npm", "pnpm", "npx", "winget", "rustup", "Homebrew", "PowerShell", "macOS", "Vite", "Nuxt", "Vue", "RxJS", "ComfyUI",
+    "worktree", "worktrees", "gitlink", "gitlinks", "submodule", "submodules", "subagent", "subagents", "frontmatter",
+    "stdio", "JSONL", "TOML", "YAML", "LLM", "RAG", "repo", "repos", "dedupe", "prh", "CJK"
   ],
   "ignoreRegExpList": [
     "/https?:\\/\\/\\S+/g"
