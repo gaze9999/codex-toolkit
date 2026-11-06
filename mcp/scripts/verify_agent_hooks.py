@@ -106,7 +106,8 @@ def main():
             result = subprocess.run(argv, input=json.dumps(payload).encode(), capture_output=True, timeout=20)
             if result.returncode:
                 raise ValueError(f"{event}: command exit {result.returncode}")
-            output = json.loads(result.stdout)
+            # Claude reads PreCompact stdout as plain-text summary instructions.
+            output = {"compactInstructions": result.stdout.decode("utf-8")} if event == "PreCompact" else json.loads(result.stdout)
             print(json.dumps(command_evidence(args.client, event, output), ensure_ascii=False))
         if args.codex_cli:
             result = discover(args.codex_cli, cwd)

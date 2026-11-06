@@ -17,25 +17,24 @@ import subprocess
 import sys
 import tempfile
 
-VERSION = "0.5.0"
-EVENTS = ("SessionStart", "PreToolUse", "PostToolUse", "SubagentStart", "Stop", "SubagentStop")
+VERSION = "0.6.0"
+EVENTS = ("SessionStart", "UserPromptSubmit", "PreToolUse", "PostToolUse", "SubagentStart", "PreCompact",
+          "InstructionsLoaded", "ConfigChange", "Stop")
+# Claude uses PreCompact stdout as plain-text summary instructions; every other event prints JSON.
+TEXT_OUTPUT = "plainText"
+DELIVERY = re.compile(r"^\s*(cpr|cpt|cp)\b", re.I)
+CJK = re.compile("[㐀-鿿]")
+DOC_LINT_FILES = 5
+MAX_DOC = 1024 * 1024
 MAX_INPUT = 2 * 1024 * 1024
 MAX_DIFF = 8 * 1024 * 1024
 MAX_TRANSCRIPT = 16 * 1024 * 1024
 FILE_KEYS = ("file_path", "notebook_path", "path")
 USAGE_FIELDS = ("input_tokens", "cached_input_tokens", "output_tokens", "total_tokens")
-MAX_REPLY = 256 * 1024
-REPLY_LOCATIONS = 20
-REPLY_CONTEXT = 12
-# Fullwidth and CJK punctuation plus fullwidth ASCII forms; the enumeration comma and ideographic marks stay allowed.
-FULLWIDTH = re.compile("[‘’“”　。-〄〈-〿！-･]")
-# Code, inline code and URLs are preserved syntax and are not offered for review.
-PRESERVED = re.compile(r"```.*?(?:```|\Z)|~~~.*?(?:~~~|\Z)|`[^`\n]*`|https?://\S+", re.S)
 EDIT_TOOLS = ("Edit", "Write", "MultiEdit", "NotebookEdit", "apply_patch")
 SHELL_SEPARATOR = re.compile(r"&&|\|\||[;|\n]")
 PATCH_FILE = re.compile(r"^\*\*\* (?:Add|Update|Delete) File: (.+)$|^\*\*\* Move to: (.+)$", re.M)
 AI_TRAILER = re.compile(r"co-authored-by:[^\n]*(?:claude|codex|chatgpt|openai|anthropic|copilot|\bgpt)", re.I)
-FORCE_PUSH = ("-f", "--force", "--force-with-lease", "--force-if-includes", "--mirror", "--delete", "-d", "--prune")
 
 
 def digest(data):
@@ -210,52 +209,6 @@ def usage_message(payload, policy, client, state_dir):
         return None
 
 
-def fullwidth_findings(text):
-    """Select fullwidth punctuation outside code and URLs; each finding keeps its line, column and nearby text."""
-    masked = PRESERVED.sub(lambda match: re.sub(r"[^\n]", " ", match.group()), text)
-    findings = []
-    for match in FULLWIDTH.finditer(masked):
-        start = match.start()
-        line = text.count("\n", 0, start) + 1
-        column = start - (text.rfind("\n", 0, start) + 1) + 1
-        before = text[max(0, start - REPLY_CONTEXT):start].rpartition("\n")[2]
-        after = text[start + 1:start + 1 + REPLY_CONTEXT].partition("\n")[0]
-        findings.append((line, column, match.group(), before + "[[" + match.group() + "]]" + after))
-    return findings
-
-
-def reply_review(payload, policy, client, state_dir):
-    """Ask the agent once to keep or fix each fullwidth candidate; the receipt keeps only a digest and a count."""
-    text = payload.get("last_assistant_message")
-    if policy.get("reply_punctuation") is not True or payload.get("stop_hook_active"):
-        return {}
-    if not isinstance(text, str) or not text.strip():
-        return {}
-    event = payload.get("hook_event_name")
-    agent = payload.get("agent_type") or payload.get("agent_id") or ""
-    data = text.encode("utf-8")
-    key = digest("\0".join((client, payload["session_id"], event, str(payload.get("agent_id", "")), digest(data))).encode())
-    receipt = state_dir / ("reply-" + key + ".json")
-    if receipt.exists():
-        return {}
-    if len(data) > MAX_REPLY:
-        atomic_write(receipt, json.dumps({"version": VERSION, "checked": False, "count": 0}).encode())
-        label = f"子代理 {agent} " if event == "SubagentStop" else ""
-        return {"systemMessage": f"{label}最終回覆超過 {MAX_REPLY // 1024} KiB, 未檢查全形標點"}
-    findings = fullwidth_findings(text)
-    atomic_write(receipt, json.dumps({"version": VERSION, "checked": True, "count": len(findings)}).encode())
-    if not findings:
-        return {}
-    items = "\n".join(f"- {line}:{column} U+{ord(mark):04X} near: {near}" for line, column, mark, near in findings[:REPLY_LOCATIONS])
-    more = f"\n- {len(findings) - REPLY_LOCATIONS} more candidates follow the same rule" if len(findings) > REPLY_LOCATIONS else ""
-    owner = f" from subagent {agent}" if event == "SubagentStop" else ""
-    reason = (f"Fullwidth punctuation review: {len(findings)} candidate(s) in the final reply{owner}, marked [[ ]]. "
-              "Keep a mark only inside preserved originals: quotations, official names, code or other-language syntax. "
-              "Otherwise apply the Global punctuation rule. If anything changes, send only the corrected lines; "
-              "if every mark stays, reply with one short line saying so. Do not repeat the whole reply.\n" + items + more)
-    return {"decision": "block", "reason": reason}
-
-
 def edited_dir(payload):
     """Return the directory of the file a tool changed, when the tool input names one."""
     tool = payload.get("tool_input")
@@ -373,17 +326,6 @@ def commit_identity_reason(git, directory, rule):
     return None
 
 
-def history_reason(subcommand, arguments):
-    if subcommand == "push" and any(argument in FORCE_PUSH or argument.startswith("--force") or
-                                    (argument[:1] in "+:" and len(argument) > 1) for argument in arguments):
-        return "git push would force, mirror or delete remote refs; published history and Tags stay fixed"
-    if subcommand == "tag" and any(argument in ("-d", "--delete", "-f", "--force") for argument in arguments):
-        return "git tag would delete or move a Tag; published Tags stay fixed"
-    if subcommand in ("filter-branch", "filter-repo"):
-        return f"git {subcommand} rewrites history and needs separate authorization"
-    return None
-
-
 def edited_paths(payload, cwd):
     tool = payload.get("tool_input")
     if not isinstance(tool, dict):
@@ -415,27 +357,20 @@ def generated_reason(git, path, generated):
     return None
 
 
-def guard(payload, policy, client):
-    """Stop selected Git and edit operations before they run; other tool calls pass without output.
-
-    History rewrites ask the user in Claude's native dialog; Codex does not support "ask" and would run the
-    call, so it denies and the user runs the command or disables the hook natively for that change.
-    """
+def guard(payload, policy):
+    """Deny selected commits and generated-file edits before they run; other tool calls pass without output."""
     rules = policy.get("guards")
     tool = payload.get("tool_input")
     if not isinstance(rules, dict) or not isinstance(tool, dict):
         return {}
     git, cwd = policy["git"], Path(payload["cwd"])
-    reasons, history = [], []
+    reasons = []
     if payload.get("tool_name") == "Bash" and isinstance(tool.get("command"), str):
         command = tool["command"]
         calls = list(shell_git(command, cwd)) if "git" in command else []
         if rules.get("ai_coauthor") and AI_TRAILER.search(command) and any(sub == "commit" for _, sub, _ in calls):
             reasons.append("the commit message carries an AI co-author trailer; keep human authorship only")
-        for directory, subcommand, arguments in calls:
-            reason = history_reason(subcommand, arguments) if rules.get("history") else None
-            if reason and reason not in history:
-                history.append(reason)
+        for directory, subcommand, _ in calls:
             reason = commit_identity_reason(git, directory, rules["identity"]) if subcommand == "commit" and rules.get("identity") else None
             if reason and reason not in reasons:
                 reasons.append(reason)
@@ -444,15 +379,10 @@ def guard(payload, policy, client):
             reason = generated_reason(git, path, rules["generated"])
             if reason and reason not in reasons:
                 reasons.append(reason)
-    if not reasons and not history:
+    if not reasons:
         return {}
-    if not reasons and client == "claude":
-        return {"hookSpecificOutput": {"hookEventName": "PreToolUse", "permissionDecision": "ask",
-                                       "permissionDecisionReason": "Agent hook: " + "; ".join(history) + "; approve only if you authorized it"}}
-    if history and client == "codex":
-        history.append("ask the user to run it or to disable this hook in /hooks for that change")
     return {"hookSpecificOutput": {"hookEventName": "PreToolUse", "permissionDecision": "deny",
-                                   "permissionDecisionReason": "Blocked by agent hook: " + "; ".join(reasons + history)}}
+                                   "permissionDecisionReason": "Blocked by agent hook: " + "; ".join(reasons)}}
 
 
 def environment_line(policy, root):
@@ -466,6 +396,140 @@ def environment_line(policy, root):
     return line
 
 
+def data_root():
+    """Mirror Toolkit's maintained tool data root so device paths never enter the profile."""
+    if os.name == "nt":
+        local = Path(os.environ.get("LOCALAPPDATA", ""))
+        base = local if local.is_absolute() else Path.home() / "AppData/Local"
+    elif sys.platform == "darwin":
+        base = Path.home() / "Library/Application Support"
+    else:
+        xdg = Path(os.environ.get("XDG_DATA_HOME", ""))
+        base = xdg if xdg.is_absolute() else Path.home() / ".local/share"
+    return base / "codex-setup"
+
+
+def textlint_tools(policy):
+    """Find the maintained npm textlint and zh-TW profile; Windows and POSIX npm prefixes differ."""
+    prefix = data_root() / "tools/npm"
+    config = prefix / "proofreading/zh-tw/.textlintrc.cjs"
+    node = policy.get("node") or shutil.which("node")
+    for runner in (prefix / "lib/node_modules/textlint/bin/textlint.js", prefix / "node_modules/textlint/bin/textlint.js"):
+        if runner.is_file() and config.is_file() and node:
+            return node, runner, config
+    return None
+
+
+def doc_lint(payload, policy, client, state_dir):
+    """Lint edited Markdown that contains Chinese once per content; receipts keep only a digest and a count."""
+    if policy.get("doc_lint") is not True or payload.get("tool_name") not in EDIT_TOOLS:
+        return None
+    paths = [path for path in edited_paths(payload, Path(payload["cwd"])) if path.suffix.lower() == ".md" and path.is_file()]
+    if not paths:
+        return None
+    tools = textlint_tools(policy)
+    session = payload["session_id"]
+    if tools is None:
+        missing = state_dir / ("doc-missing-" + digest((client + "\0" + session).encode()) + ".json")
+        if missing.exists():
+            return None
+        atomic_write(missing, json.dumps({"version": VERSION}).encode())
+        return "Doc lint skipped: install textlint with the maintained development tool installer"
+    node, runner, config = tools
+    notes = []
+    for path in paths[:DOC_LINT_FILES]:
+        data = path.read_bytes()
+        if len(data) > MAX_DOC or not CJK.search(data.decode("utf-8", errors="replace")):
+            continue
+        receipt = state_dir / ("doc-" + digest("\0".join((client, session, str(path), digest(data))).encode()) + ".json")
+        if receipt.exists():
+            continue
+        try:
+            result = subprocess.run([node, str(runner), "--config", str(config), "--format", "json", str(path)], cwd=path.parent,
+                                    stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, timeout=8, check=False)
+            if result.returncode not in (0, 1) or len(result.stdout) > MAX_INPUT:
+                raise ValueError("textlint failed")
+            places = [f"{item.get('line', 0)}:{item.get('column', 0)}" for document in json.loads(result.stdout)
+                      for item in document.get("messages", [])]
+        except (OSError, ValueError, subprocess.TimeoutExpired):
+            notes.append(f"{path.name}: textlint did not complete")
+            continue
+        atomic_write(receipt, json.dumps({"version": VERSION, "count": len(places)}).encode())
+        if places:
+            notes.append(f"{path.name}: {len(places)} issue(s) at {', '.join(places[:6])}" + (" ..." if len(places) > 6 else ""))
+    if not notes:
+        return None
+    return "textlint zh-TW on edited docs: " + "; ".join(notes) + ". Fix authored prose; keep quotations, code and preserved originals."
+
+
+def delivery_context(payload, policy):
+    note, prompt = policy.get("delivery_note"), payload.get("prompt")
+    if not note or not isinstance(prompt, str) or len(prompt) > 200 or not (match := DELIVERY.match(prompt)):
+        return {}
+    root = repo_root(policy["git"], payload["cwd"])
+    entries = [name for name in policy.get("delivery_entries", []) if root and (root / name).is_file()]
+    message = f"Delivery request '{match.group(1).lower()}': {note}"
+    if entries:
+        message += "\nPolicy files in this repository: " + ", ".join(entries)
+    return context("UserPromptSubmit", message)
+
+
+def compact_instructions(payload, policy):
+    note = policy.get("compact_note")
+    if not note:
+        return {}
+    root = repo_root(policy["git"], payload["cwd"])
+    entries = [name for name in policy["entries"] if root and (root / name).is_file()]
+    text = note + ("\nCurrent entrypoints: " + ", ".join(entries) if entries else "")
+    return {TEXT_OUTPUT: text[:4000]}
+
+
+def session_log(state_dir, prefix, client, session):
+    path = state_dir / (prefix + digest((client + "\0" + session).encode()) + ".json")
+    try:
+        value = json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
+    except (ValueError, OSError):
+        value = []
+    return path, value if isinstance(value, list) else []
+
+
+def record_instructions(payload, policy, client, state_dir):
+    """Keep which instruction files Claude loaded, with digests, for later load verification."""
+    name = payload.get("file_path")
+    if policy.get("instruction_log") is not True or not isinstance(name, str) or not Path(name).is_absolute():
+        return {}
+    path = Path(name)
+    entry = {"file": name, "memory_type": payload.get("memory_type"), "load_reason": payload.get("load_reason"),
+             "sha256": digest(path.read_bytes()) if path.is_file() else None}
+    log, entries = session_log(state_dir, "instructions-", client, payload["session_id"])
+    if entry not in entries:
+        atomic_write(log, json.dumps([*entries, entry][-200:]).encode())
+    return {}
+
+
+def record_config_change(payload, policy, client, state_dir):
+    """Claude discards ConfigChange messages, so changes are queued for the session's next Stop."""
+    if policy.get("config_change_note") is not True:
+        return {}
+    source = payload.get("source") if isinstance(payload.get("source"), str) else "unknown"
+    name = Path(payload["file_path"]).name if isinstance(payload.get("file_path"), str) else ""
+    item = source + (f" ({name})" if name else "")
+    log, entries = session_log(state_dir, "config-", client, payload["session_id"])
+    if item not in entries:
+        atomic_write(log, json.dumps([*entries, item]).encode())
+    return {}
+
+
+def config_change_message(payload, policy, client, state_dir):
+    if policy.get("config_change_note") is not True:
+        return None
+    log, entries = session_log(state_dir, "config-", client, payload["session_id"])
+    if not entries:
+        return None
+    log.unlink(missing_ok=True)
+    return "Claude 設定在本工作階段變更: " + "、".join(entries) + ", 依賴新設定前先讀回確認"
+
+
 def require_session(payload):
     if not isinstance(payload.get("session_id"), str) or not payload["session_id"]:
         raise ValueError("Hook session_id is required")
@@ -475,19 +539,25 @@ def handle(payload, policy, client, state_dir):
     event = payload.get("hook_event_name")
     if event not in EVENTS:
         raise ValueError("Unsupported lifecycle event")
-    if event in ("PreToolUse", "SubagentStart", "SubagentStop"):
+    if event in ("UserPromptSubmit", "PreToolUse", "SubagentStart", "PreCompact", "InstructionsLoaded", "ConfigChange"):
         require_session(payload)
-    if event == "PreToolUse":
+    if event in ("UserPromptSubmit", "PreToolUse", "PreCompact"):
         cwd = payload.get("cwd")
         if not isinstance(cwd, str) or not Path(cwd).is_absolute() or not Path(cwd).is_dir():
             raise ValueError("Hook cwd must be an existing absolute directory")
-        return guard(payload, policy, client)
+    if event == "UserPromptSubmit":
+        return delivery_context(payload, policy)
+    if event == "PreToolUse":
+        return guard(payload, policy)
+    if event == "PreCompact":
+        return compact_instructions(payload, policy)
+    if event == "InstructionsLoaded":
+        return record_instructions(payload, policy, client, state_dir)
+    if event == "ConfigChange":
+        return record_config_change(payload, policy, client, state_dir)
     if event == "SubagentStart":
         note = policy.get("subagent_note")
         return context("SubagentStart", note) if note else {}
-    if event == "SubagentStop":
-        # A child reply receives only the final-text review; repository evidence stays with the parent's Stop.
-        return reply_review(payload, policy, client, state_dir)
     roots = hook_roots(payload, policy, client, state_dir)
     result = workspace_event(payload, policy, client, state_dir, roots)
     if policy.get("project_checks") and roots:
@@ -498,12 +568,13 @@ def handle(payload, policy, client, state_dir):
             message = "Project checks unavailable; use the maintained project check CLI"
         if message:
             result["systemMessage"] = "\n".join(filter(None, (result.get("systemMessage"), message)))
+    if event == "PostToolUse" and (note := doc_lint(payload, policy, client, state_dir)):
+        previous = result.get("hookSpecificOutput", {}).get("additionalContext")
+        result.update(context("PostToolUse", "\n".join(filter(None, (previous, note)))))
     if event == "Stop":
-        review = reply_review(payload, policy, client, state_dir)
-        for message in (review.pop("systemMessage", None), usage_message(payload, policy, client, state_dir)):
+        for message in (usage_message(payload, policy, client, state_dir), config_change_message(payload, policy, client, state_dir)):
             if message:
                 result["systemMessage"] = "\n".join(filter(None, (result.get("systemMessage"), message)))
-        result.update(review)
     return result
 
 
@@ -550,6 +621,9 @@ def session_start(payload, policy, client, state_dir, root):
     if policy.get("session_environment"):
         message += "\n" + environment_line(policy, None if label == "not a Git repository" else root)
     message += "\n" + policy["start_note"]
+    if payload.get("source") == "compact" and policy.get("compact_note"):
+        # Codex has no compaction-prompt hook; it runs SessionStart(compact) before the next model request instead.
+        message += "\nAfter compaction, restore from the summary and sources: " + policy["compact_note"]
     message += "\nOperations: " + policy["operations"]
     token = digest(message.encode())
     if previous.get("route") == token and payload.get("source") != "compact":
@@ -609,7 +683,10 @@ def main():
             raise ValueError("Hook input must be an object")
         policy = json.loads(args.policy.read_text(encoding="utf-8"))
         result = handle(payload, policy, args.client, args.state_dir)
-        print(json.dumps(result, ensure_ascii=True))
+        if TEXT_OUTPUT in result:
+            sys.stdout.buffer.write(result[TEXT_OUTPUT].encode("utf-8") + b"\n")
+        else:
+            print(json.dumps(result, ensure_ascii=True))
         return 0
     except (OSError, ValueError, KeyError, subprocess.TimeoutExpired) as error:
         # The client retains this as a hook failure, without requesting continuation.

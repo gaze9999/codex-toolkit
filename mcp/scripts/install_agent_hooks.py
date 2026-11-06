@@ -23,7 +23,10 @@ from install_global_agents import check_target
 
 EVENTS = {"SessionStart": "startup|resume|clear|compact|fork", "PostToolUse": "^(Edit|Write|MultiEdit|apply_patch)$", "Stop": None}
 GUARD_MATCHER = "^(Bash|Edit|Write|MultiEdit|NotebookEdit|apply_patch)$"
-OPTIONAL_KEYS = {"codex_token_usage", "reply_punctuation", "session_environment", "subagent_note", "guards"}
+OPTIONAL_KEYS = {"codex_token_usage", "session_environment", "subagent_note", "guards", "delivery_note",
+                 "delivery_entries", "compact_note", "doc_lint", "instruction_log", "config_change_note"}
+# These events exist only in Claude Code; Codex ignores PreCompact text and lacks the other two.
+CLAUDE_ONLY = {"PreCompact", "InstructionsLoaded", "ConfigChange"}
 
 
 def encoded(value):
@@ -38,11 +41,10 @@ def read_json(path):
 
 
 def validate_guards(value):
-    if not isinstance(value, dict) or not value or set(value) - {"identity", "ai_coauthor", "history", "generated"}:
-        raise ValueError("guards selects identity, ai_coauthor, history or generated")
-    for key in ("ai_coauthor", "history"):
-        if key in value and type(value[key]) is not bool:
-            raise ValueError("guards." + key + " must be a boolean")
+    if not isinstance(value, dict) or not value or set(value) - {"identity", "ai_coauthor", "generated"}:
+        raise ValueError("guards selects identity, ai_coauthor or generated")
+    if "ai_coauthor" in value and type(value["ai_coauthor"]) is not bool:
+        raise ValueError("guards.ai_coauthor must be a boolean")
     identity = value.get("identity")
     if identity is not None:
         owners = identity.get("owners") if isinstance(identity, dict) else None
@@ -61,22 +63,31 @@ def validate_profile(value):
     required = {"schema_version", "entries", "start_note", "stop_note"}
     if not required.issubset(value) or set(value) - required - OPTIONAL_KEYS or value["schema_version"] != 1:
         raise ValueError("Unsupported hook profile")
-    for key in ("codex_token_usage", "reply_punctuation", "session_environment"):
+    for key in ("codex_token_usage", "session_environment", "doc_lint", "instruction_log", "config_change_note"):
         if key in value and type(value[key]) is not bool:
             raise ValueError(key + " must be a boolean")
     if "subagent_note" in value and (not isinstance(value["subagent_note"], str) or not value["subagent_note"] or len(value["subagent_note"]) > 400):
         raise ValueError("subagent_note must be a string of at most 400 characters")
     if "guards" in value:
         validate_guards(value["guards"])
-    entries = value["entries"]
+    for key, limit in (("delivery_note", 400), ("compact_note", 1000)):
+        if key in value and (not isinstance(value[key], str) or not value[key] or len(value[key]) > limit):
+            raise ValueError(f"{key} must be a string of at most {limit} characters")
+    if "delivery_entries" in value and "delivery_note" not in value:
+        raise ValueError("delivery_entries requires delivery_note")
+    for entries in (value["entries"], value.get("delivery_entries", [])):
+        validate_entries(entries)
+    for key in ("start_note", "stop_note"):
+        if not isinstance(value[key], str) or len(value[key]) > 400:
+            raise ValueError("Hook notes must be strings of at most 400 characters")
+
+
+def validate_entries(entries):
     if not isinstance(entries, list) or len(entries) > 12:
         raise ValueError("Profile entries must contain at most 12 relative paths")
     for name in entries:
         if not isinstance(name, str) or not name or "\\" in name or ":" in name or PurePosixPath(name).is_absolute() or ".." in PurePosixPath(name).parts:
             raise ValueError("Hook entrypoints must be relative paths inside the project")
-    for key in ("start_note", "stop_note"):
-        if not isinstance(value[key], str) or len(value[key]) > 400:
-            raise ValueError("Hook notes must be strings of at most 400 characters")
 
 
 def handlers(client, executable, runner, policy, state, platform, events=EVENTS):
@@ -92,7 +103,7 @@ def handlers(client, executable, runner, policy, state, platform, events=EVENTS)
     groups = {}
     for event, matcher in events.items():
         item = copy.deepcopy(handler)
-        if client == "codex" and event in ("SessionStart", "PostToolUse", "SubagentStart"):
+        if client == "codex" and event in ("SessionStart", "UserPromptSubmit", "PostToolUse", "SubagentStart"):
             item["additionalContextLimit"] = 600
         group = {"hooks": [item]}
         if matcher:
@@ -101,19 +112,24 @@ def handlers(client, executable, runner, policy, state, platform, events=EVENTS)
     return groups
 
 
-def selected_events(profile):
+def selected_events(profile, client):
     """Register only the events a profile uses; the order follows a turn's lifecycle."""
     events = {"SessionStart": EVENTS["SessionStart"]}
+    if profile.get("delivery_note"):
+        events["UserPromptSubmit"] = None
     if profile.get("guards"):
         events["PreToolUse"] = GUARD_MATCHER
     events["PostToolUse"] = EVENTS["PostToolUse"]
     if profile.get("subagent_note"):
         events["SubagentStart"] = None
+    if profile.get("compact_note"):
+        events["PreCompact"] = None
+    if profile.get("instruction_log"):
+        events["InstructionsLoaded"] = None
+    if profile.get("config_change_note"):
+        events["ConfigChange"] = None
     events["Stop"] = None
-    if profile.get("reply_punctuation"):
-        # Final child replies receive the same review without repeating repository evidence.
-        events["SubagentStop"] = None
-    return events
+    return {event: matcher for event, matcher in events.items() if client == "claude" or event not in CLAUDE_ONLY}
 
 
 def plan(client, home, profile, operations, executable, git, platform, projects=None):
@@ -135,7 +151,7 @@ def plan(client, home, profile, operations, executable, git, platform, projects=
     if projects:
         policy["project_checks"] = projects
         policy["node"] = shutil.which("node")
-    events = selected_events(profile)
+    events = selected_events(profile, client)
     runner_bytes = Path(__file__).with_name("agent_hooks.py").read_bytes()
     checks_bytes = Path(__file__).with_name("project_checks.py").read_bytes()
     scanner = Path(__file__).with_name("public_content.py")
