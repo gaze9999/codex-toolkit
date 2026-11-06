@@ -179,5 +179,62 @@ class GlobalReferenceChecks(unittest.TestCase):
         self.assertEqual((self.home / "config.toml").read_bytes(), b"preserve")
         self.assertFalse((self.home / "subagents.config.toml").exists())
 
+    def write_role(self, name, description="Review sources", instructions="Keep review read-only.\nReturn gaps."):
+        (self.source / "agents").mkdir(exist_ok=True)
+        path = self.source / "agents" / (name + ".toml")
+        escaped = description.replace('"', '\\"')
+        path.write_text(f'name = "{name}"\ndescription = "{escaped}"\ndeveloper_instructions = """\n{instructions}\n"""\n', encoding="utf-8")
+        return path
+
+    def test_claude_roles_render_from_shared_toml(self):
+        self.write_role("geo-reviewer", 'Review AI index: "attribution"')
+        self.write_role("codex_workspace_manager", "Manage work")
+        (self.source / "claude-agents.json").write_text(
+            '{"schema_version": 1, "roles": {"geo-reviewer": {"disallowedTools": ["Edit", "Write", "NotebookEdit"]}}}', encoding="utf-8")
+        result, output = self.run_installer("--client", "claude", "--install")
+        self.assertEqual(result, 0, output)
+        geo = (self.home / "agents/geo-reviewer.md").read_text(encoding="utf-8")
+        self.assertEqual(geo, '---\nname: geo-reviewer\ndescription: "Review AI index: \\"attribution\\""\n'
+                              'disallowedTools: Edit, Write, NotebookEdit\n---\n\nKeep review read-only.\nReturn gaps.\n')
+        manager = (self.home / "agents/codex_workspace_manager.md").read_text(encoding="utf-8")
+        self.assertNotIn("Tools", manager)
+        self.assertFalse(list(self.home.rglob("*.toml")))
+        self.assertFalse((self.home / "claude-agents.json").exists())
+        result, output = self.run_installer("--client", "claude")
+        self.assertEqual(result, 0, output)
+        self.assertIn("CURRENT " + str(self.home / "agents/geo-reviewer.md"), output)
+
+    def test_claude_role_edits_follow_the_toml_and_back_up(self):
+        role = self.write_role("geo-reviewer")
+        self.assertEqual(self.run_installer("--client", "claude", "--install")[0], 0)
+        role.write_text(role.read_text(encoding="utf-8").replace("Return gaps.", "Return gaps and owners."), encoding="utf-8")
+        self.assertEqual(self.run_installer("--client", "claude", "--install")[0], 1)
+        self.assertEqual(self.run_installer("--client", "claude", "--install", "--replace")[0], 0)
+        self.assertIn("Return gaps and owners.", (self.home / "agents/geo-reviewer.md").read_text(encoding="utf-8"))
+        self.assertEqual(len(list((self.home / "backups/codex-setup").glob("*/agents/geo-reviewer.md"))), 1)
+        result, output = self.run_installer("--client", "claude", "--select", "agents/geo-reviewer.toml")
+        self.assertEqual(result, 0, output)
+
+    def test_claude_role_options_and_names_are_validated_before_writes(self):
+        self.write_role("geo-reviewer")
+        cases = [
+            '{"schema_version": 1, "roles": {"missing-role": {"tools": ["Read"]}}}',
+            '{"schema_version": 1, "roles": {"geo-reviewer": {"model": "opus"}}}',
+            '{"schema_version": 1, "roles": {"geo-reviewer": {"tools": "Read"}}}',
+            '{"schema_version": 1, "roles": {"geo-reviewer": {"tools": ["Read; rm"]}}}',
+            '{"schema_version": 2, "roles": {}}',
+            'not json',
+        ]
+        for text in cases:
+            with self.subTest(text=text):
+                (self.source / "claude-agents.json").write_text(text, encoding="utf-8")
+                self.assertEqual(self.run_installer("--client", "claude", "--install")[0], 2)
+                self.assertFalse(self.home.exists())
+        (self.source / "claude-agents.json").unlink()
+        self.write_role("bad.name")
+        self.assertEqual(self.run_installer("--client", "claude", "--install")[0], 2)
+        self.assertFalse(self.home.exists())
+
+
 if __name__ == "__main__":
     unittest.main()

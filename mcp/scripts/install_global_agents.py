@@ -4,7 +4,9 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
+import re
 import shutil
 import stat
 import tempfile
@@ -13,6 +15,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ARTIFACTS = ("AGENTS.md", "subagents.config.toml")
+CLAUDE_ROLE_OPTIONS = "claude-agents.json"
+CLAUDE_TOOL_KEYS = ("tools", "disallowedTools")
+ROLE_NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9_-]{0,63}")
 
 
 def is_link(path: Path) -> bool:
@@ -53,6 +58,35 @@ def check_target(path: Path, home: Path) -> None:
         raise ValueError(f"target is a link; review it manually: {path}")
     if path.exists() and not path.is_file():
         raise ValueError(f"target is not a file: {path}")
+
+
+def claude_role_options(source_root: Path) -> dict:
+    """Read the optional Claude-native tool settings; role text always comes from the shared TOML."""
+    path = source_root / CLAUDE_ROLE_OPTIONS
+    if not path.exists():
+        return {}
+    check_target(path, source_root)
+    value = json.loads(path.read_text(encoding="utf-8"))
+    roles = value.get("roles") if isinstance(value, dict) and value.get("schema_version") == 1 and set(value) == {"schema_version", "roles"} else None
+    if not isinstance(roles, dict):
+        raise ValueError(f"Unsupported Claude role options: {path}")
+    for name, options in roles.items():
+        if not isinstance(options, dict) or not options or set(options) - set(CLAUDE_TOOL_KEYS) or any(
+            not isinstance(tools, list) or not tools or any(not isinstance(tool, str) or not re.fullmatch(r"[A-Za-z][A-Za-z0-9_*()-]*", tool) for tool in tools)
+            for tools in options.values()
+        ):
+            raise ValueError(f"Claude role options accept only nonempty tools/disallowedTools name lists: {name}")
+    return roles
+
+
+def claude_role(role: dict, options: dict | None) -> bytes:
+    """Render a Claude Code subagent Markdown file from the shared role definition."""
+    lines = ["---", "name: " + role["name"], "description: " + json.dumps(role["description"].strip(), ensure_ascii=False)]
+    for key in CLAUDE_TOOL_KEYS:
+        if options and key in options:
+            lines.append(f"{key}: " + ", ".join(options[key]))
+    lines += ["---", "", role["developer_instructions"].strip(), ""]
+    return "\n".join(lines).encode("utf-8")
 
 
 def main() -> int:
@@ -96,7 +130,7 @@ def main() -> int:
                 )
                 if not allowed or relative.is_absolute() or ".." in relative.parts or "\\" in name or ":" in name:
                     raise ValueError(f"Select a unique relative instruction/reference/role path: {name}")
-                if args.client == "claude" and (name == "subagents.config.toml" or relative.parts[0] == "agents"):
+                if args.client == "claude" and name == "subagents.config.toml":
                     raise ValueError("Codex role/profile files are not Claude instructions: " + name)
                 source = source_root / relative
                 check_target(source, source_root)
@@ -107,6 +141,14 @@ def main() -> int:
             names = ("AGENTS.md", "AGENTS.zh-TW.md") if args.client == "claude" else ARTIFACTS
             sources = [source_root / name for name in names if name != "AGENTS.zh-TW.md" or (source_root / name).exists()]
             sources.extend(reference_paths(source_root / "references"))
+            roles = source_root / "agents"
+            if is_link(roles):
+                raise ValueError(f"Role source directory is a link: {roles}")
+            for role in sorted(roles.glob("*.toml")):
+                check_target(role, source_root)
+                sources.append(role)
+        role_options = claude_role_options(source_root) if args.client == "claude" else {}
+        rendered_roles = set()
         for source in sources:
             relative = source.relative_to(source_root)
             if args.client == "claude" and relative.as_posix() in ("AGENTS.md", "AGENTS.zh-TW.md"):
@@ -114,20 +156,29 @@ def main() -> int:
             target = home / relative
             if is_link(source) or not source.is_file():
                 raise ValueError(f"source missing or linked: {source}")
-            check_target(target, home)
-            content = source.read_bytes()
+            source_bytes = content = source.read_bytes()
             if source.relative_to(source_root).parts[0] == "agents":
                 role = tomllib.loads(content.decode("utf-8"))
                 if any(not isinstance(role.get(key), str) or not role[key].strip() for key in ("name", "description", "developer_instructions")):
                     raise ValueError(f"Role is missing required strings: {source}")
+                if args.client == "claude":
+                    # Claude reads Markdown roles; the shared TOML remains the only editable role text.
+                    if not ROLE_NAME.fullmatch(role["name"]) or role["name"] in rendered_roles:
+                        raise ValueError(f"Role name must be a unique file-safe identifier: {source}")
+                    rendered_roles.add(role["name"])
+                    content = claude_role(role, role_options.get(role["name"]))
+                    target = home / "agents" / (role["name"] + ".md")
+            check_target(target, home)
             if target.is_file() and target.read_bytes() == content:
                 print(f"CURRENT {target}")
                 continue
             print(f"{'DIFFERENT' if target.exists() else 'MISSING'} {target}")
-            pending.append((source, target, content, target.read_bytes() if target.exists() else None))
+            pending.append((source, source_bytes, target, content, target.read_bytes() if target.exists() else None))
             if target.exists():
                 conflicts.append(target)
-    except ValueError as error:
+        if args.client == "claude" and not args.select and set(role_options) - rendered_roles:
+            raise ValueError("Claude role options name missing roles: " + ", ".join(sorted(set(role_options) - rendered_roles)))
+    except (ValueError, json.JSONDecodeError) as error:
         parser.error(str(error))
 
     if not pending:
@@ -146,9 +197,9 @@ def main() -> int:
     except ValueError as error:
         parser.error(str(error))
     home.mkdir(parents=True, exist_ok=True)
-    for source, target, content, previous in pending:
+    for source, source_bytes, target, content, previous in pending:
         check_target(target, home)
-        if source.read_bytes() != content or (target.read_bytes() if target.exists() else None) != previous:
+        if source.read_bytes() != source_bytes or (target.read_bytes() if target.exists() else None) != previous:
             raise ValueError(f"File changed during installation: {target}")
         if target.exists():
             backup = backup_root / target.relative_to(home)

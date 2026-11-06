@@ -25,6 +25,7 @@ python mcp/scripts/install_global_agents.py --source-root /path/to/private/agent
 
 選擇性同步使用重複的 `--select`, 限定來源根目錄下的 `AGENTS.md`、`AGENTS.zh-TW.md`、`subagents.config.toml`、`references/` Markdown 或 `agents/` 角色 TOML, 未選檔案保持原狀
 角色會先解析並確認 name、description 與 developer_instructions, 整批來源檢查通過後才寫入, 備份與安裝內容均讀回核對
+`--client claude` 將同一份角色 TOML 產生為 Claude home 的 `agents/<name>.md`, 來源根目錄的選用 `claude-agents.json` 只能加上 Claude 的 `tools` 或 `disallowedTools`, 角色文字只在 TOML 修改, `subagents.config.toml` 不安裝到 Claude
 
 ```text
 python mcp/scripts/install_global_agents.py --source-root /path/to/instructions --select AGENTS.md --select AGENTS.zh-TW.md
