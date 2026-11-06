@@ -255,5 +255,40 @@ class ToolboxTests(unittest.TestCase):
         self.assertIn(b'cr-at-eol', (output / '.gitattributes').read_bytes())
 
 
+
+class PluginIconTests(unittest.TestCase):
+    def setUp(self):
+        temp = tempfile.TemporaryDirectory()
+        self.addCleanup(temp.cleanup)
+        self.private = Path(temp.name)
+        (self.private / 'icons').mkdir()
+        self.png = b'\x89PNG\r\n\x1a\n' + b'icon'
+        (self.private / 'icons/tool.png').write_bytes(self.png)
+        (self.private / 'icons/fake.png').write_bytes(b'not a png')
+
+    def package(self, name='tool', interface=None):
+        manifest = {'name': name, 'version': '0.1.0'}
+        if interface:
+            manifest['extensions'] = {'com.openai': {'interface': interface}}
+        return {'name': name, 'files': {'plugin.json': toolbox.encoded(manifest)}, 'provenance': {}}
+
+    def test_icon_is_copied_and_referenced_once(self):
+        package = self.package(interface={'displayName': 'Tool'})
+        toolbox.apply_icons(self.private, [package], {'tool': 'icons/tool.png'})
+        manifest = json.loads(package['files']['plugin.json'])
+        interface = manifest['extensions']['com.openai']['interface']
+        self.assertEqual(('./assets/tool.png', './assets/tool.png', 'Tool'), (interface['logo'], interface['composerIcon'], interface['displayName']))
+        self.assertEqual(self.png, package['files']['assets/tool.png'])
+        self.assertEqual({'source': 'icons/tool.png', 'owner': 'private'}, {k: package['provenance']['assets/tool.png'][k] for k in ('source', 'owner')})
+
+    def test_invalid_icon_selection_stops(self):
+        cases = [({'other': 'icons/tool.png'}, self.package()), ({'tool': 'icons/fake.png'}, self.package()),
+                 ({'tool': '../tool.png'}, self.package()), ({'tool': 'icons/tool.png'}, self.package(interface={'logo': './assets/owner.png'})),
+                 (['tool'], self.package())]
+        for icons, package in cases:
+            with self.subTest(icons=icons), self.assertRaises(ValueError):
+                toolbox.apply_icons(self.private, [package], icons)
+
+
 if __name__ == '__main__':
     unittest.main()

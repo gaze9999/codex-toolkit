@@ -115,6 +115,30 @@ def publication_plan(catalog, settings=None):
                                    'assets_verified': False}}}
 
 
+def apply_icons(private, packages, icons):
+    """Attach one private PNG per selected plugin; a plugin that already ships an icon keeps its owner's asset."""
+    if not isinstance(icons, dict) or any(not isinstance(name, str) or not isinstance(path, str) for name, path in icons.items()):
+        raise ValueError('plugin_icons must map plugin names to private PNG paths')
+    indexed = {item['name']: item for item in packages}
+    for name, relative in sorted(icons.items()):
+        item = indexed.get(name)
+        if item is None:
+            raise ValueError('Icon names an unselected plugin: ' + name)
+        raw = safe_source(private, relative).read_bytes()
+        if not relative.lower().endswith('.png') or raw[:8] != b'\x89PNG\r\n\x1a\n':
+            raise ValueError('Plugin icons must be PNG files: ' + relative)
+        manifest = json.loads(item['files']['plugin.json'])
+        interface = manifest.setdefault('extensions', {}).setdefault('com.openai', {}).setdefault('interface', {})
+        target = 'assets/' + name + '.png'
+        if interface.get('logo') or interface.get('composerIcon') or target in item['files']:
+            raise ValueError('Plugin already ships an icon: ' + name)
+        item['files'][target] = raw
+        item['provenance'][target] = {'source': relative, 'owner': 'private', 'sha256': digest(raw)}
+        interface['logo'] = interface['composerIcon'] = './' + target
+        item['files']['plugin.json'] = encoded(manifest)
+        item['provenance']['plugin.json'] = {'source': None}
+
+
 def assemble(toolkit, private=None, audience='public'):
     if audience not in {'public', 'private', 'personal'}:
         raise ValueError('Invalid audience')
@@ -208,6 +232,8 @@ def assemble(toolkit, private=None, audience='public'):
         integration_rows, integration_files = augment(toolkit, private, packages, read_json(private, integration_path))
         source_inputs.append({'owner': 'private', 'path': integration_path,
                               'sha256': digest(safe_source(private, integration_path).read_bytes())})
+    if personal and 'plugin_icons' in config:
+        apply_icons(private, packages, config['plugin_icons'])
     files, mappings = {}, {}
 
     def put(name, raw, owner='generated', source=None):
