@@ -14,6 +14,7 @@ Windows 使用 `launch-cli.cmd mcp`, macOS / Linux 使用 `sh launch-cli.sh mcp`
 設定集中於 [tools/proofreading](../../mcp/tools/proofreading), 安裝後複製到所選 npm prefix 的 `proofreading/zh-tw`, `proofreading/ja` 或 `proofreading/en`, 各 profile 獨立保存, 既有專案規則仍可沿用, 本機自行修改的設定不會被 installer 靜默覆寫
 
 繁中詞表涵蓋軟體, 硬碟, 滑鼠, 記憶體, 資料夾與資料庫等用語, 標點規則保留中文並列的頓號及檔名, 版本與小數的句點, 中文句中與句尾不加句號, 句中句號及分號只提示依語意改為逗號或換行, 不自動猜測分句, 半形逗號、冒號、問號及驚嘆號後接文字時核對一個半形空格, 保留數值與時間語法, 日文段落不套繁中規則
+行內程式碼、粗體或連結後面單獨出現的標點沿用所在段落、標題或表格儲存格的語言判斷, 自撰文字使用半形引號 `"`, 直角或彎引號只提示人工判讀, 引號內文字仍視為原文不檢查標點, 原文自帶引號時改放引用區塊、程式碼或 `texts` 保留清單
 
 textlint 先用 lint 工具檢查完整規則, 再用 fix 工具取得可自動修正的內容, 不直接覆寫原檔, 文體等無法自動修正的問題仍需依 lint 結果處理, 修正後再跑 lint 確認. 引用原文, 專有名詞與程式碼保留其來源形式, blockquote 與 code 的檢查範圍依各規則設定, inline 引用或混合語言的修正仍需逐項確認. [官方 fix 行為](https://textlint.org/docs/mcp/), [prh 規則](https://github.com/textlint-rule/textlint-rule-prh)
 

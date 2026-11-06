@@ -14,22 +14,50 @@ const agentTerms = [
   [/智能[體体]框架/gu, '代理程式框架 (Agent Framework)'],
 ];
 
+const han = /[\u3400-\u9fff]/u;
+const kana = /[\u3040-\u30ff]/u;
+const quoteOpenings = new Set(['「', '『', '“']);
+
 function rule(context) {
   const { Syntax, RuleError, report, getSource, fixer } = context;
   let excluded = 0;
+  const blocks = [];
+  const enter = node => { blocks.push(getSource(node)); };
+  const leave = () => { blocks.pop(); };
   return {
     [Syntax.BlockQuote]() { excluded++; },
     [`${Syntax.BlockQuote}:exit`]() { excluded--; },
     [Syntax.Link]() { excluded++; },
     [`${Syntax.Link}:exit`]() { excluded--; },
+    // Punctuation separated from its sentence by inline code, emphasis or a link follows the block's language
+    ...Object.fromEntries(['Paragraph', 'Header', 'TableCell'].filter(name => Syntax[name])
+      .flatMap(name => [[Syntax[name], enter], [`${Syntax[name]}:exit`, leave]])),
     [Syntax.Str](node) {
       if (excluded) return;
       const text = getSource(node);
       // Apply the selected Chinese profile to prose, preserve Japanese and literal URLs
-      if (!/[\u3400-\u9fff]/u.test(text) || /[\u3040-\u30ff]/u.test(text)) return;
-      const protectedRanges = [...text.matchAll(/https?:\/\/\S+|[A-Za-z]:[\\/][^\s<>"「」『』“”]+|\b(?:[A-Za-z]\.){2,}|「[^」]*」|『[^』]*』|“[^”]*”|"[^"\n]*"/gu)]
+      if (kana.test(text)) return;
+      // Text without Chinese characters is checked only for the punctuation that follows a Chinese inline element
+      let limit = text.length;
+      if (!han.test(text)) {
+        const block = blocks.at(-1);
+        limit = /^[\s\p{P}\p{S}]*/u.exec(text)[0].trimEnd().length;
+        if (!limit || !block || !han.test(block) || kana.test(block)) return;
+      }
+      const literalRanges = [...text.matchAll(/https?:\/\/\S+|[A-Za-z]:[\\/][^\s<>"「」『』“”]+|\b(?:[A-Za-z]\.){2,}/gu)]
         .map(match => [match.index, match.index + match[0].length]);
-      const protectedAt = index => protectedRanges.some(([start, end]) => start <= index && index < end);
+      const quoteRanges = [...text.matchAll(/「[^」]*」|『[^』]*』|“[^”]*”|"[^"\n]*"/gu)]
+        .map(match => [match.index, match.index + match[0].length]);
+      const literalAt = index => literalRanges.some(([start, end]) => start <= index && index < end);
+      const protectedAt = index => literalAt(index) || quoteRanges.some(([start, end]) => start <= index && index < end);
+      // Quote marks are authored punctuation even when the quoted words are original.
+      // Original passages that carry their own marks belong in a blockquote, code or the protected-copy list.
+      for (const [start] of quoteRanges) {
+        if (quoteOpenings.has(text[start]) && !literalAt(start)) report(node, new RuleError(
+          '繁中自撰文字使用半形引號 "...", 原文自帶的引號改放引用區塊、程式碼或保留清單, 需人工判讀',
+          { index: start },
+        ));
+      }
       // Ambiguous governance wording needs a contextual choice, never an automatic fix.
       const governance = /(?:AGENTS(?:\.md)?|Codex|Skills?|Plugins?|MCP|個人|工作|任務|對話|工具|設定|權限)[ \t]*治理/giu;
       for (const match of text.matchAll(governance)) {
@@ -56,7 +84,7 @@ function rule(context) {
       // A text node can end before inline code, links or emphasis on the same line
       const remainingLine = getSource().slice(node.range[1]).split(/\r?\n/u, 1)[0];
       const atLineEnd = /^[\s*_~]*$/u.test(remainingLine);
-      for (let index = 0; index < text.length; index++) {
+      for (let index = 0; index < limit; index++) {
         const mark = text[index];
         if (protectedAt(index)) continue;
         const next = text[index + 1] ?? remainingLine[0];
