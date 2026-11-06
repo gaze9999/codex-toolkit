@@ -12,7 +12,7 @@
       "runtime_profiles": [],
       "resources": [
         {
-          "source": "assets/branding",
+          "source": "assets/branding/plugins/codex-packaging-acceptance.png",
           "target": "assets"
         }
       ]
@@ -29,7 +29,7 @@
       ],
       "resources": [
         {
-          "source": "assets/branding",
+          "source": "assets/branding/plugins/codex-jev-evaluation.png",
           "target": "assets"
         }
       ]
@@ -88,7 +88,7 @@
       ],
       "resources": [
         {
-          "source": "assets/branding",
+          "source": "assets/branding/plugins/codex-documents-specifications.png",
           "target": "assets"
         }
       ]
@@ -106,7 +106,7 @@
       ],
       "resources": [
         {
-          "source": "assets/branding",
+          "source": "assets/branding/plugins/codex-environment-evidence.png",
           "target": "assets"
         }
       ]
@@ -132,7 +132,7 @@
       ],
       "resources": [
         {
-          "source": "assets/branding",
+          "source": "assets/branding/plugins/codex-frontend-engineering.png",
           "target": "assets"
         }
       ],
@@ -156,7 +156,7 @@
       "runtime_profiles": [],
       "resources": [
         {
-          "source": "assets/branding",
+          "source": "assets/branding/plugins/codex-agent-workflow.png",
           "target": "assets"
         }
       ]
@@ -174,12 +174,12 @@
       ],
       "resources": [
         {
-          "source": "mcp/tools/proofreading",
-          "target": "resources/proofreading"
+          "source": "assets/branding/plugins/codex-multilingual-proofreading.png",
+          "target": "assets"
         },
         {
-          "source": "assets/branding",
-          "target": "assets"
+          "source": "mcp/tools/proofreading",
+          "target": "resources/proofreading"
         }
       ]
     },
@@ -193,7 +193,7 @@
       "runtime_profiles": [],
       "resources": [
         {
-          "source": "assets/branding",
+          "source": "assets/branding/plugins/codex-local-activity.png",
           "target": "assets"
         }
       ]
@@ -209,7 +209,7 @@
       "runtime_profiles": [],
       "resources": [
         {
-          "source": "assets/branding",
+          "source": "assets/branding/plugins/codex-project-documentation.png",
           "target": "assets"
         }
       ]
@@ -224,7 +224,7 @@
       "runtime_profiles": [],
       "resources": [
         {
-          "source": "assets/branding",
+          "source": "assets/branding/plugins/codex-decisions-evaluation.png",
           "target": "assets"
         },
         {
@@ -243,7 +243,7 @@
       "runtime_profiles": [],
       "resources": [
         {
-          "source": "assets/branding",
+          "source": "assets/branding/plugins/codex-visual-development.png",
           "target": "assets"
         },
         {
