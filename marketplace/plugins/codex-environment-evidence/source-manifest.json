@@ -1,23 +1,19 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "b78df95c9ebc1ad6d4c2dbf9db7daa88440a6d7ca84bb7a64b14379ee0ec407e",
+      "sha256": "5c8cd23c7c04cf6c4f6feef38f1e3fe530a287192abc1e069b65befcdb3c90c9",
       "source": null
     },
     "LICENSE": {
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
     },
-    "assets/toolkit.png": {
-      "sha256": "dff331901c72c163d7df0d52fbe88e8c77d6bb5e42d9940eec12be387bdb1211",
-      "source": "assets/branding/toolkit.png"
-    },
-    "assets/toolkit.svg": {
-      "sha256": "9a3a22f496588d2789ee81dd858edd59dec3c5fc7da22677aab0d50f1348a4f9",
-      "source": "assets/branding/toolkit.svg"
+    "assets/codex-environment-evidence.png": {
+      "sha256": "d5750edba382858139bc70e8f192f59348b98291f778015bb36b953a2e3d35b7",
+      "source": "assets/branding/plugins/codex-environment-evidence.png"
     },
     "plugin.json": {
-      "sha256": "893a73060bea7802432471871ba2a429e8c1eae489f27d8110a93fd362c280e0",
+      "sha256": "ac4b5f6ac66ed5abf6f29ee292bfc32b162d0ff0d76254944ca0be45bc353510",
       "source": "plugins/environment-evidence/plugin.json"
     },
     "skills/test-strategy/SKILL.md": {
@@ -101,6 +97,6 @@
     "workspace-inspection"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.24.0",
-  "version": "0.3.11"
+  "toolkit_version": "0.25.0",
+  "version": "0.3.12"
 }

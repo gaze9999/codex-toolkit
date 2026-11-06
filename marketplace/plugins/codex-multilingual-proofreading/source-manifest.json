@@ -1,23 +1,19 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "acfce3ed7cd0ce637abe1db7fef510a945bac8c317fea71c0500570332bf9eb0",
+      "sha256": "caf97a589028e66e7e84cafbb2c17ca5b00df7a149f04fa3f1b7f9dbc90dc0c6",
       "source": null
     },
     "LICENSE": {
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
     },
-    "assets/toolkit.png": {
-      "sha256": "dff331901c72c163d7df0d52fbe88e8c77d6bb5e42d9940eec12be387bdb1211",
-      "source": "assets/branding/toolkit.png"
-    },
-    "assets/toolkit.svg": {
-      "sha256": "9a3a22f496588d2789ee81dd858edd59dec3c5fc7da22677aab0d50f1348a4f9",
-      "source": "assets/branding/toolkit.svg"
+    "assets/codex-multilingual-proofreading.png": {
+      "sha256": "dd1bcf46e611b8d1f57e9385367751d8f199dbb75db037d78d94ba35aae508c3",
+      "source": "assets/branding/plugins/codex-multilingual-proofreading.png"
     },
     "plugin.json": {
-      "sha256": "7e1fe8ddb84e4ed7c0551c6c70edd0337a0721cfed76047ed6def511811ebdef",
+      "sha256": "b1e75af612f5f2f0b4088212fe28ac73ed9b12c750befd01d29dfac1490cc051",
       "source": "plugins/multilingual-proofreading/plugin.json"
     },
     "resources/proofreading/authored-style.cjs": {
@@ -49,7 +45,7 @@
       "source": "mcp/tools/proofreading/zh-tw/protected-copy.cjs"
     },
     "resources/proofreading/zh-tw/taiwan-style.cjs": {
-      "sha256": "2b39eeecb8bebf81d36e0552cc86d924b035edd3094e55fbd41aed1d9f5a86cb",
+      "sha256": "99f38df4c83f8c4e61dcbdd9ef5766f728bdbcb45195352c4e4e7ffb77762c7d",
       "source": "mcp/tools/proofreading/zh-tw/taiwan-style.cjs"
     },
     "resources/proofreading/zh-tw/terms.yml": {
@@ -57,11 +53,11 @@
       "source": "mcp/tools/proofreading/zh-tw/terms.yml"
     },
     "skills/multilingual-proofreading/SKILL.md": {
-      "sha256": "3eadec2393d03fddbfcc58860f16da80557f79f2e0a77a9bca2db95ea17cfd8d",
+      "sha256": "91c72fa98cfde90785321e29763e65fbbe5f50f938da7cfeef35d894c523255d",
       "source": "skills/multilingual-proofreading/SKILL.md"
     },
     "skills/multilingual-proofreading/agents/openai.yaml": {
-      "sha256": "612eaf15de122597e59bb2461f4d05c1817307c84e3a1a5b0ff581404aec1889",
+      "sha256": "09a4869e7589142935386c60b5ec66b667570ab735f8b906e92c7e2edd13b4ee",
       "source": "skills/multilingual-proofreading/agents/openai.yaml"
     },
     "skills/multilingual-proofreading/assets/icon-small.png": {
@@ -98,6 +94,6 @@
     "cspell"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.24.0",
-  "version": "0.1.17"
+  "toolkit_version": "0.25.0",
+  "version": "0.1.18"
 }

@@ -1,23 +1,19 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "fe2a5d35f7544ae86bcd3b791baeec64973dcfc97ef1922d23e6c588f294e7cc",
+      "sha256": "884d7f5a76b49f38a51240568f4b14efdd511bfdf265acc98ea11231ed44d45e",
       "source": null
     },
     "LICENSE": {
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
     },
-    "assets/toolkit.png": {
-      "sha256": "dff331901c72c163d7df0d52fbe88e8c77d6bb5e42d9940eec12be387bdb1211",
-      "source": "assets/branding/toolkit.png"
-    },
-    "assets/toolkit.svg": {
-      "sha256": "9a3a22f496588d2789ee81dd858edd59dec3c5fc7da22677aab0d50f1348a4f9",
-      "source": "assets/branding/toolkit.svg"
+    "assets/codex-visual-development.png": {
+      "sha256": "e2bcc6715307ef93b6e82932a32810bf81362998fda1e3bd2830ed260776baf0",
+      "source": "assets/branding/plugins/codex-visual-development.png"
     },
     "plugin.json": {
-      "sha256": "ab82f0dfb44c8a7093ff248ad46b3b06ecfb64b13b5224796494b7591600df78",
+      "sha256": "898c97d0b7bf7aa71a0617c13a276a17a86243f7fdfe1fe41dd9fc55544bc18a",
       "source": "plugins/visual-development/plugin.json"
     },
     "resources/visual-runtime/README.md": {
@@ -79,6 +75,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.24.0",
-  "version": "0.2.2"
+  "toolkit_version": "0.25.0",
+  "version": "0.2.3"
 }

@@ -1,23 +1,19 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "9bf8c474a8e17dddebcc76cc7167363a67cc1e9539c7caa2f5bd4e758c4b7596",
+      "sha256": "656f5fd253cf6d2e3bd4be38e781b226b0b7e69674ee0174829082edb461d303",
       "source": null
     },
     "LICENSE": {
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
     },
-    "assets/toolkit.png": {
-      "sha256": "dff331901c72c163d7df0d52fbe88e8c77d6bb5e42d9940eec12be387bdb1211",
-      "source": "assets/branding/toolkit.png"
-    },
-    "assets/toolkit.svg": {
-      "sha256": "9a3a22f496588d2789ee81dd858edd59dec3c5fc7da22677aab0d50f1348a4f9",
-      "source": "assets/branding/toolkit.svg"
+    "assets/codex-packaging-acceptance.png": {
+      "sha256": "07212bde672d2d7738506f7cf2345b188a4d3c982bb5301ec55949e53e641f0d",
+      "source": "assets/branding/plugins/codex-packaging-acceptance.png"
     },
     "plugin.json": {
-      "sha256": "a1a31255f5745b2aebbab5b0cf127569a162f57247040e41ba6693a6adf855da",
+      "sha256": "bf407462c12d03d8b9757bce8bb245e9887c97b6e2bd9abe6be2ed53aefea73f",
       "source": "plugins/packaging-acceptance/plugin.json"
     },
     "skills/packaging-acceptance/SKILL.md": {
@@ -55,6 +51,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.24.0",
-  "version": "0.2.5"
+  "toolkit_version": "0.25.0",
+  "version": "0.2.6"
 }

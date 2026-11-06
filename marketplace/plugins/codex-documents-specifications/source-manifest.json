@@ -1,23 +1,19 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "c97690741214b25ba30dece0c3e1089d7d3da17b7d56920a0321b4cd81b4e093",
+      "sha256": "b0e3307cc19984061c3b9ef416a8bd886579d57646541889c1e61907a84119e0",
       "source": null
     },
     "LICENSE": {
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
     },
-    "assets/toolkit.png": {
-      "sha256": "dff331901c72c163d7df0d52fbe88e8c77d6bb5e42d9940eec12be387bdb1211",
-      "source": "assets/branding/toolkit.png"
-    },
-    "assets/toolkit.svg": {
-      "sha256": "9a3a22f496588d2789ee81dd858edd59dec3c5fc7da22677aab0d50f1348a4f9",
-      "source": "assets/branding/toolkit.svg"
+    "assets/codex-documents-specifications.png": {
+      "sha256": "42f5cb38b68f0a0a9fb4ec2611e4437a529b694f32557664ca0f5604978fd278",
+      "source": "assets/branding/plugins/codex-documents-specifications.png"
     },
     "plugin.json": {
-      "sha256": "8926f5dc8f496ea423b0233f8581d750a4f4aa7938c6f8c5d8f0ba174d6fadd1",
+      "sha256": "c5ddf4749188cd5d411170b40ccddaddc60527cfe36122b5158922a2861e54b8",
       "source": "plugins/documents-specifications/plugin.json"
     },
     "resources/token-count/VERSION": {
@@ -205,6 +201,6 @@
     "local-documents"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.24.0",
-  "version": "0.5.6"
+  "toolkit_version": "0.25.0",
+  "version": "0.5.7"
 }
