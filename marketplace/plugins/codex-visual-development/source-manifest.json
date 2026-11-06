@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "884d7f5a76b49f38a51240568f4b14efdd511bfdf265acc98ea11231ed44d45e",
+      "sha256": "0efe2c2cff75c28b9d523f8bc19cabc67d8013cd56a5097363916768a47b889b",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-visual-development.png"
     },
     "plugin.json": {
-      "sha256": "898c97d0b7bf7aa71a0617c13a276a17a86243f7fdfe1fe41dd9fc55544bc18a",
+      "sha256": "01765dede8edb8e977693727d74b025498f023aa1b011b8ecae8632818e2954a",
       "source": "plugins/visual-development/plugin.json"
     },
     "resources/visual-runtime/README.md": {
@@ -43,6 +43,22 @@
     "resources/visual-runtime/src/codex_visual_runtime/server.py": {
       "sha256": "b67413e23b2b0007375b6d39901decfbae648a6d4f3c959c34fc01c8ebb28019",
       "source": "python-tools/packages/visual-runtime/src/codex_visual_runtime/server.py"
+    },
+    "skills/data-visualization/SKILL.md": {
+      "sha256": "7330a127163fa527b1e0426dacd6e36d9d91700cbf9e9443efcc927376bf8602",
+      "source": "skills/data-visualization/SKILL.md"
+    },
+    "skills/data-visualization/agents/openai.yaml": {
+      "sha256": "2fa709665e1adbb708ed02b8da40cc6884edd2c0294e8196db13c65cd897f042",
+      "source": "skills/data-visualization/agents/openai.yaml"
+    },
+    "skills/data-visualization/references/chart-selection.md": {
+      "sha256": "273ef2ea90a238058073b4ebb6706931c99547806ca32962cdaa70d168a91974",
+      "source": "skills/data-visualization/references/chart-selection.md"
+    },
+    "skills/data-visualization/references/delivery-and-verification.md": {
+      "sha256": "b33d6b0d576b2abde7c6210860cd59828a17c8c659ad06a698d12e079f03f2d9",
+      "source": "skills/data-visualization/references/delivery-and-verification.md"
     },
     "skills/visual-development/SKILL.md": {
       "sha256": "ffe95122495ee05dcad9716dfb8822146d51e7d48ae15798f4378b74e7dba540",
@@ -76,5 +92,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.27.0",
-  "version": "0.2.3"
+  "version": "0.3.0"
 }

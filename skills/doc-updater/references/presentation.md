@@ -22,7 +22,7 @@ Keep lengthy instructions and format-specific procedures in the existing relevan
 
 ## Charts and diagrams
 
-Keep the document's question, narrative and governing sources with its owner. Use the independently callable [data-visualization Skill](../../data-visualization/SKILL.md) when a chart, diagram or interactive explanation helps the reader compare, explore or understand relationships. It handles visual selection, data mapping, rendering and export checks. Reference one maintained figure source from the document and include a useful caption, units, filters and source revision. Frontend visuals cover interaction, request/state behavior and maintainability.
+Keep the document's question, narrative and governing sources with its owner. Use the independently callable `data-visualization` Skill from the visual development Plugin, when available, when a chart, diagram or interactive explanation helps the reader compare, explore or understand relationships. It handles visual selection, data mapping, rendering and export checks. Reference one maintained figure source from the document and include a useful caption, units, filters and source revision. Frontend visuals cover interaction, request/state behavior and maintainability.
 
 ## Reading experience
 

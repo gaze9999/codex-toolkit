@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "b0e3307cc19984061c3b9ef416a8bd886579d57646541889c1e61907a84119e0",
+      "sha256": "de3b6d112ea37385132d6b92dc15e6582710485736c89b1d7258955d942aa183",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-documents-specifications.png"
     },
     "plugin.json": {
-      "sha256": "c5ddf4749188cd5d411170b40ccddaddc60527cfe36122b5158922a2861e54b8",
+      "sha256": "546e0c62b4baae120b785cb79daa83540891bd19f190c604e60e57744e7ddce6",
       "source": "plugins/documents-specifications/plugin.json"
     },
     "resources/token-count/VERSION": {
@@ -92,22 +92,6 @@
       "sha256": "5ad26def4afb187587f67ea3354f80c3931a76067933d92df5ed11ceaa9c15fa",
       "source": "skills/context-brief/scripts/validate_context_brief.py"
     },
-    "skills/data-visualization/SKILL.md": {
-      "sha256": "7330a127163fa527b1e0426dacd6e36d9d91700cbf9e9443efcc927376bf8602",
-      "source": "skills/data-visualization/SKILL.md"
-    },
-    "skills/data-visualization/agents/openai.yaml": {
-      "sha256": "2fa709665e1adbb708ed02b8da40cc6884edd2c0294e8196db13c65cd897f042",
-      "source": "skills/data-visualization/agents/openai.yaml"
-    },
-    "skills/data-visualization/references/chart-selection.md": {
-      "sha256": "273ef2ea90a238058073b4ebb6706931c99547806ca32962cdaa70d168a91974",
-      "source": "skills/data-visualization/references/chart-selection.md"
-    },
-    "skills/data-visualization/references/delivery-and-verification.md": {
-      "sha256": "b33d6b0d576b2abde7c6210860cd59828a17c8c659ad06a698d12e079f03f2d9",
-      "source": "skills/data-visualization/references/delivery-and-verification.md"
-    },
     "skills/doc-updater/SKILL.md": {
       "sha256": "6c465dc7b8a9974cebea5f7c520bb32e522ef0653a4bf2ea0d77bf313c4025c7",
       "source": "skills/doc-updater/SKILL.md"
@@ -141,7 +125,7 @@
       "source": "skills/doc-updater/references/notion-sync-reader-writer-contract.md"
     },
     "skills/doc-updater/references/presentation.md": {
-      "sha256": "1c790140eb0f89681acb6cdef5f25c0649632db0928bd58a7d633fbca29a76fa",
+      "sha256": "83d7528eabd5a3354b41b0f75b26c5c1b1d7687954a1887dde47e7f45c3247dd",
       "source": "skills/doc-updater/references/presentation.md"
     },
     "skills/doc-updater/references/source-and-history.md": {
@@ -202,5 +186,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.27.0",
-  "version": "0.5.7"
+  "version": "0.6.0"
 }
