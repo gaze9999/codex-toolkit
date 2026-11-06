@@ -9,8 +9,8 @@ Plugin 由 `skills/` 的工作流程、`plugins/catalog.json` 的來源映射及
 | `packaging-acceptance` | `packaging-acceptance`、`plugin-packaging` | 無 |
 | `jev-evaluation` | `jev-evaluation` | `jev` |
 | `decisions-evaluation` | `decisions-evaluation` | 獨立 `codex-decisions`, MCP 為選配 |
-| `visual-development` | `visual-development` | 獨立 `codex-visual-runtime`, Three.js 由專案選用 |
-| `documents-specifications` | `context-brief`、`data-visualization`、`doc-updater`、`local-document-processing`、`token-count` | `local-documents`, Token 計數另需 Python 3.10+ 與 `tiktoken` |
+| `visual-development` | `data-visualization`、`visual-development` | 獨立 `codex-visual-runtime`, Three.js 由專案選用 |
+| `documents-specifications` | `context-brief`、`doc-updater`、`local-document-processing`、`token-count` | `local-documents`, Token 計數另需 Python 3.10+ 與 `tiktoken` |
 | `environment-evidence` | `validation-evidence-review`、`test-strategy` | `workspace-inspection` |
 | `frontend-engineering` | `angular-development`、`angular-member-order`、`react-development`、`vue-development`、`ui-ux-design`、`internationalization-engineering`、`accessibility-engineering`、`playwright-cli` | `playwright`、`serena`、`edge-devtools` |
 | `agent-workflow` | `agent-governance`、`coding-prompt`、`task-routing`、`task-guide` | 無 |

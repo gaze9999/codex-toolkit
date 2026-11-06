@@ -40,7 +40,6 @@
       "status": "ready",
       "skills": [
         "context-brief",
-        "data-visualization",
         "doc-updater",
         "local-document-processing",
         "token-count"
@@ -238,6 +237,7 @@
       "batch": "2",
       "status": "ready",
       "skills": [
+        "data-visualization",
         "visual-development"
       ],
       "runtime_profiles": [],
