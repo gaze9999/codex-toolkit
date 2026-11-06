@@ -1,6 +1,6 @@
 # Claude / Codex 共用 Hooks
 
-版本 0.3.0, 需要 Python 3.11 以上與 Git
+版本 0.4.0, 需要 Python 3.11 以上與 Git
 共用核心為 `mcp/scripts/agent_hooks.py`, 安裝入口為 `mcp/scripts/install_agent_hooks.py`
 個人選項放在工具來源以外的 JSON profile, 執行時不依賴原 checkout
 
@@ -9,6 +9,7 @@
 | SessionStart | 找出 Git 根目錄、分支與 profile 指定且實際存在的入口, 壓縮後重新提供索引 | 最多 1,600 個字元, 同工作階段相同索引略過 |
 | PostToolUse | Edit / Write / MultiEdit / apply_patch 後, 啟用專案檢查時也包含 Bash, 對有變化的已追蹤 diff 執行 `git diff --check` | 成功安靜, 失敗提示執行原命令取得位置 |
 | Stop | 核對目前 diff 是否有本工作階段的空白檢查收據, 提示尚未檢查的新增檔案 | 同一份變更只提醒一次, 不阻擋或重新開啟對話 |
+| SubagentStop | 選用回覆標點檢查時才登記, 只檢查子代理最終回覆 | 標示子代理類型, 不重複父工作階段的 diff 提醒 |
 
 收據按 client、工作階段及實際 worktree 隔離, 只保存內容雜湊與檢查狀態
 預設不讀取對話紀錄, 不保存 diff 內容, 不執行 profile 或工具輸入中的任意命令
@@ -35,6 +36,26 @@ Codex 本輪用量: 總計 80 tokens (輸入 70, 輸出 10, 快取輸入 50)
 缺少 transcript、收據尚未寫完、格式不符、計數器重設、回合不符或無法證明完整時不顯示用量, 不輸出部分總量或估算值
 例如 ephemeral 工作階段可能沒有 transcript, 這不影響其他 Hooks
 統計透過 systemMessage 顯示於原生介面或事件串流, 不要求模型延長回合或改寫已完成的回覆
+
+## 最終回覆標點
+
+profile 可加入 `"reply_punctuation": true`, 預設關閉, Stop 與 SubagentStop 以 `last_assistant_message` 執行與文件相同的繁中 textlint 設定
+回覆經 stdin 傳給 textlint, 不寫入暫存檔, 收據 `reply-<hash>.json` 只保存版本、是否完成檢查與各類型數量
+
+```text
+最終回覆標點: 共 3 處, 句號 1:5、7:11, 引號 3:1
+```
+
+位置為回覆內的行:欄, 類型取自共用規則訊息, 包含句號、全形標點、分號、空格與引號, 最多列 8 處
+同一則回覆只回報一次, 缺少或空白的回覆不回報, 超過 256 KiB 或 textlint 執行失敗時回報未檢查
+結果透過 systemMessage 顯示, 不使用 `decision: "block"`, 不要求模型續行或改寫已顯示的回覆
+Windows 實測單次 textlint 約 0.6 到 1.0 秒, 子程序上限 8 秒, 仍在 Hook 的 20 秒內
+
+安裝時另外指定該電腦已安裝的 textlint 與已審查設定, Node 由 PATH 解析
+
+```text
+python mcp/scripts/install_agent_hooks.py ... --textlint /absolute/node_modules/textlint/bin/textlint.js --textlint-config /absolute/proofreading/zh-tw/.textlintrc.cjs
+```
 
 ## 安裝與更新
 

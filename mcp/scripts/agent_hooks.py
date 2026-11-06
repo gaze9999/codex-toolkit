@@ -14,13 +14,17 @@ import subprocess
 import sys
 import tempfile
 
-VERSION = "0.3.0"
-EVENTS = ("SessionStart", "PostToolUse", "Stop")
+VERSION = "0.4.0"
+EVENTS = ("SessionStart", "PostToolUse", "Stop", "SubagentStop")
 MAX_INPUT = 2 * 1024 * 1024
 MAX_DIFF = 8 * 1024 * 1024
 MAX_TRANSCRIPT = 16 * 1024 * 1024
 FILE_KEYS = ("file_path", "notebook_path", "path")
 USAGE_FIELDS = ("input_tokens", "cached_input_tokens", "output_tokens", "total_tokens")
+MAX_REPLY = 256 * 1024
+REPLY_LOCATIONS = 8
+# Labels follow the shared Taiwan punctuation rule messages; other findings are counted as "其他".
+REPLY_KINDS = (("不加句號", "句號"), ("分號", "分號"), ("半形引號", "引號"), ("半形空格", "空格"), ("半形標點", "全形標點"))
 
 
 def digest(data):
@@ -195,6 +199,58 @@ def usage_message(payload, policy, client, state_dir):
         return None
 
 
+def reply_findings(text, check):
+    """Run the shared textlint profile through stdin; the reply is never written to disk."""
+    command = [check["node"], check["textlint"], "--config", check["config"], "--format", "json",
+               "--stdin", "--stdin-filename", "reply.md"]
+    result = subprocess.run(command, input=text.encode("utf-8"), stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
+                            timeout=check.get("timeout", 8), check=False)
+    if result.returncode not in (0, 1) or len(result.stdout) > MAX_INPUT:
+        raise ValueError("Reply punctuation check failed")
+    findings = []
+    for document in json.loads(result.stdout):
+        for item in document.get("messages", []):
+            message = item.get("message", "")
+            kind = next((label for key, label in REPLY_KINDS if key in message), "其他")
+            findings.append((int(item.get("line", 0)), int(item.get("column", 0)), kind))
+    return sorted(findings)
+
+
+def reply_message(payload, policy, client, state_dir):
+    """Report punctuation locations and kinds in a final reply once; the receipt keeps only a digest and counts."""
+    check = policy.get("reply_check")
+    text = payload.get("last_assistant_message")
+    if not isinstance(check, dict) or not isinstance(text, str) or not text.strip():
+        return None
+    event = payload.get("hook_event_name")
+    agent = payload.get("agent_type") or payload.get("agent_id") or ""
+    label = f"子代理 {agent} " if event == "SubagentStop" else ""
+    data = text.encode("utf-8")
+    key = digest("\0".join((client, payload["session_id"], event, str(payload.get("agent_id", "")), digest(data))).encode())
+    receipt = state_dir / ("reply-" + key + ".json")
+    if receipt.exists():
+        return None
+    if len(data) > MAX_REPLY:
+        findings, note = None, f"{label}最終回覆超過 {MAX_REPLY // 1024} KiB, 未檢查標點"
+    else:
+        try:
+            findings, note = reply_findings(text, check), None
+        except (OSError, ValueError, TypeError, KeyError, subprocess.TimeoutExpired):
+            findings, note = None, f"{label}最終回覆標點檢查無法執行, 請用已安裝的 textlint CLI 檢查"
+    counts = {}
+    for _, _, kind in findings or ():
+        counts[kind] = counts.get(kind, 0) + 1
+    atomic_write(receipt, json.dumps({"version": VERSION, "checked": findings is not None, "counts": counts}).encode())
+    if note or not findings:
+        return note
+    groups = {}
+    for line, column, kind in findings[:REPLY_LOCATIONS]:
+        groups.setdefault(kind, []).append(f"{line}:{column}")
+    detail = ", ".join(kind + " " + "、".join(places) for kind, places in groups.items())
+    more = f", 另有 {len(findings) - REPLY_LOCATIONS} 處" if len(findings) > REPLY_LOCATIONS else ""
+    return f"{label}最終回覆標點: 共 {len(findings)} 處, {detail}{more}"
+
+
 def edited_dir(payload):
     """Return the directory of the file a tool changed, when the tool input names one."""
     tool = payload.get("tool_input")
@@ -249,6 +305,12 @@ def hook_roots(payload, policy, client, state_dir):
 def handle(payload, policy, client, state_dir):
     if payload.get("hook_event_name") not in EVENTS:
         raise ValueError("Unsupported lifecycle event")
+    if payload.get("hook_event_name") == "SubagentStop":
+        # A child reply receives only the final-text check; repository evidence stays with the parent's Stop.
+        if not isinstance(payload.get("session_id"), str) or not payload["session_id"]:
+            raise ValueError("Hook session_id is required")
+        message = reply_message(payload, policy, client, state_dir)
+        return {"systemMessage": message} if message else {}
     roots = hook_roots(payload, policy, client, state_dir)
     result = workspace_event(payload, policy, client, state_dir, roots)
     if policy.get("project_checks") and roots:
@@ -260,9 +322,9 @@ def handle(payload, policy, client, state_dir):
         if message:
             result["systemMessage"] = "\n".join(filter(None, (result.get("systemMessage"), message)))
     if payload.get("hook_event_name") == "Stop":
-        message = usage_message(payload, policy, client, state_dir)
-        if message:
-            result["systemMessage"] = "\n".join(filter(None, (result.get("systemMessage"), message)))
+        for message in (reply_message(payload, policy, client, state_dir), usage_message(payload, policy, client, state_dir)):
+            if message:
+                result["systemMessage"] = "\n".join(filter(None, (result.get("systemMessage"), message)))
     return result
 
 

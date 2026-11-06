@@ -37,10 +37,11 @@ def read_json(path):
 
 def validate_profile(value):
     required = {"schema_version", "entries", "start_note", "stop_note"}
-    if not required.issubset(value) or set(value) - required - {"codex_token_usage"} or value["schema_version"] != 1:
+    if not required.issubset(value) or set(value) - required - {"codex_token_usage", "reply_punctuation"} or value["schema_version"] != 1:
         raise ValueError("Unsupported hook profile")
-    if "codex_token_usage" in value and type(value["codex_token_usage"]) is not bool:
-        raise ValueError("codex_token_usage must be a boolean")
+    for key in ("codex_token_usage", "reply_punctuation"):
+        if key in value and type(value[key]) is not bool:
+            raise ValueError(key + " must be a boolean")
     entries = value["entries"]
     if not isinstance(entries, list) or len(entries) > 12:
         raise ValueError("Profile entries must contain at most 12 relative paths")
@@ -52,7 +53,7 @@ def validate_profile(value):
             raise ValueError("Hook notes must be strings of at most 400 characters")
 
 
-def handlers(client, executable, runner, policy, state, platform):
+def handlers(client, executable, runner, policy, state, platform, events=EVENTS):
     argv = [str(executable), "-I", "-B", str(runner), "--client", client, "--policy", str(policy), "--state-dir", str(state)]
     if client == "claude":
         handler = {"type": "command", "command": argv[0], "args": argv[1:], "timeout": 20}
@@ -63,7 +64,7 @@ def handlers(client, executable, runner, policy, state, platform):
     else:
         handler = {"type": "command", "command": shlex.join(argv), "timeout": 20}
     groups = {}
-    for event, matcher in EVENTS.items():
+    for event, matcher in events.items():
         item = copy.deepcopy(handler)
         if client == "codex" and event in ("SessionStart", "PostToolUse"):
             item["additionalContextLimit"] = 600
@@ -74,7 +75,7 @@ def handlers(client, executable, runner, policy, state, platform):
     return groups
 
 
-def plan(client, home, profile, operations, executable, git, platform, projects=None):
+def plan(client, home, profile, operations, executable, git, platform, projects=None, reply_check=None):
     config = home / ("hooks.json" if client == "codex" else "settings.json")
     managed = home / "managed-agent-hooks"
     manifest = managed / "manifest.json"
@@ -93,6 +94,13 @@ def plan(client, home, profile, operations, executable, git, platform, projects=
     if projects:
         policy["project_checks"] = projects
         policy["node"] = shutil.which("node")
+    events = EVENTS
+    if profile.get("reply_punctuation"):
+        if not reply_check:
+            raise ValueError("reply_punctuation requires --textlint and --textlint-config")
+        policy["reply_check"] = reply_check
+        # Final child replies use the same advisory check without repeating repository evidence.
+        events = dict(EVENTS, SubagentStop=None)
     runner_bytes = Path(__file__).with_name("agent_hooks.py").read_bytes()
     checks_bytes = Path(__file__).with_name("project_checks.py").read_bytes()
     scanner = Path(__file__).with_name("public_content.py")
@@ -102,7 +110,7 @@ def plan(client, home, profile, operations, executable, git, platform, projects=
     policy_bytes = encoded(policy)
     bundle = managed / (VERSION + "-" + digest(runner_bytes + checks_bytes + scanner_bytes + policy_bytes)[:16])
     runner, settings = bundle / "agent_hooks.py", bundle / "policy.json"
-    groups = handlers(client, executable, runner, settings, managed / "state", platform)
+    groups = handlers(client, executable, runner, settings, managed / "state", platform, events)
     if projects:
         groups["PostToolUse"]["matcher"] = "^(Edit|Write|MultiEdit|apply_patch|Bash)$"
     hooks = value.setdefault("hooks", {})
@@ -200,6 +208,8 @@ def main():
     parser.add_argument("--claude-home", type=Path, default=Path(os.environ.get("CLAUDE_CONFIG_DIR") or Path.home() / ".claude"))
     parser.add_argument("--projects", type=Path)
     parser.add_argument("--checkout", type=Path, action="append", default=[])
+    parser.add_argument("--textlint", type=Path, help="Installed textlint.js for the reply punctuation check")
+    parser.add_argument("--textlint-config", type=Path, help="Reviewed Taiwan Chinese textlint configuration")
     parser.add_argument("--apply", action="store_true")
     args = parser.parse_args()
     try:
@@ -212,6 +222,15 @@ def main():
         if not git:
             raise ValueError("Git is required")
         projects = bind_projects(args.projects, args.checkout)
+        reply_check = None
+        if profile.get("reply_punctuation"):
+            node = shutil.which("node")
+            if not node or not args.textlint or not args.textlint_config:
+                raise ValueError("reply_punctuation requires Node, --textlint and --textlint-config")
+            textlint, config = (path.expanduser().resolve(strict=True) for path in (args.textlint, args.textlint_config))
+            if textlint.name != "textlint.js" or not textlint.is_file() or not config.is_file():
+                raise ValueError("Select the installed textlint.js and a reviewed configuration file")
+            reply_check = {"node": str(Path(node).resolve()), "textlint": str(textlint), "config": str(config)}
         plans = []
         homes = set()
         for client in dict.fromkeys(args.client):
@@ -219,7 +238,7 @@ def main():
             if home in homes or home == Path(home.anchor) or home == Path.home():
                 raise ValueError("Use distinct client configuration directories")
             homes.add(home)
-            files, expected = plan(client, home, profile, operations, Path(sys.executable), Path(git), sys.platform, projects)
+            files, expected = plan(client, home, profile, operations, Path(sys.executable), Path(git), sys.platform, projects, reply_check)
             plans.append((home, files, expected))
         pending = False
         for home, files, expected in plans:
