@@ -160,6 +160,15 @@ class ClaudePluginRestore(unittest.TestCase):
         self.assertIn(f"INSTALL runner@{MARKET} 0.2.0", output)
         self.assertNotIn("ADD marketplace", output)
 
+    def test_leftover_clone_without_registration_is_added_again(self):
+        self.run_tool("--apply")
+        (self.home / "plugins/known_marketplaces.json").write_text("{}")
+        (self.home / "plugins/installed_plugins.json").write_text('{"plugins": {}}')
+        code, output = self.run_tool()
+        self.assertEqual((code, output.strip()), (1, f"ADD marketplace {MARKET}"))
+        self.assertEqual(self.run_tool("--apply")[0], 0)
+        self.assertEqual(2, sum(call[:3] == ["plugin", "marketplace", "add"] for call in self.fake.calls))
+
     def test_preview_needs_no_cli_and_rejects_home_root(self):
         self.claude.unlink()
         self.assertEqual(self.run_tool()[0], 1)

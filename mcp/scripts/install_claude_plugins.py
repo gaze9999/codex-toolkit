@@ -128,6 +128,9 @@ def plan(home: Path, profile: dict, options: dict) -> tuple[list, list[str]]:
     market = profile["marketplace"]["name"]
     settings = read_json(home / "settings.json")
     available = catalog(home, profile)
+    # A leftover clone without a registration entry is not usable by native install.
+    if market not in read_json(home / "plugins" / "known_marketplaces.json"):
+        available = None
     if available is None:
         return [("add", market, None)], [f"ADD marketplace {market}"]
     installed = {key: rows[0].get("version") for key, rows in read_json(home / "plugins" / "installed_plugins.json").get("plugins", {}).items() if rows}
