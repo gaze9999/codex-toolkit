@@ -1,23 +1,19 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "158b1f4b74b43067749cce8e76f702757101483218424c617dfd5c3dc64bfac6",
+      "sha256": "58bcbbb7bc469ad2e1e5cb2739925e1e771df24dd5496b985899c2730930e274",
       "source": null
     },
     "LICENSE": {
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
     },
-    "assets/toolkit.png": {
-      "sha256": "dff331901c72c163d7df0d52fbe88e8c77d6bb5e42d9940eec12be387bdb1211",
-      "source": "assets/branding/toolkit.png"
-    },
-    "assets/toolkit.svg": {
-      "sha256": "9a3a22f496588d2789ee81dd858edd59dec3c5fc7da22677aab0d50f1348a4f9",
-      "source": "assets/branding/toolkit.svg"
+    "assets/codex-project-documentation.png": {
+      "sha256": "aba000b82e73aaf0fa44bd4060385b851e9718877edbec9024f179a46d3c0169",
+      "source": "assets/branding/plugins/codex-project-documentation.png"
     },
     "plugin.json": {
-      "sha256": "41707b66124cef2a8c0d38511dda5e1300ea25bc984eda82619eb3c909293723",
+      "sha256": "607b6b42041bb2490bcc2f379781f81f61359982a91c20335ba5d3df30a0de64",
       "source": "plugins/project-documentation/plugin.json"
     },
     "skills/license-maintainer/SKILL.md": {
@@ -83,6 +79,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.24.0",
-  "version": "0.1.9"
+  "toolkit_version": "0.25.0",
+  "version": "0.1.10"
 }

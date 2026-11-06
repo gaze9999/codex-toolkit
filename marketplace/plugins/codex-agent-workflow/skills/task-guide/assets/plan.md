@@ -5,6 +5,8 @@ Current baseline and relevant changes: <verified source/diff/environment>
 
 ## Execution
 
+For UI/UX, DX, AX and GEO, state the decision, owner and observable acceptance condition, or a concrete reason it does not apply. Include affected findings in the steps below.
+
 | Order | Action and dependency | Owner and authorized scope | Input -> output | Checkpoint / acceptance reference |
 | --- | --- | --- | --- | --- |
 | <step> | <concrete action and prerequisite> | <actual owner> | <required source and produced artifact> | <observable check> |

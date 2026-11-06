@@ -1,23 +1,19 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "e3b699bb758639ca68fc56a9232e983226ac6eb2e4d896bebb38295996554970",
+      "sha256": "1c4b9511316adb3984369b743dfb61015b17a50e1984ed04562b9e853a1b1ec6",
       "source": null
     },
     "LICENSE": {
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
     },
-    "assets/toolkit.png": {
-      "sha256": "dff331901c72c163d7df0d52fbe88e8c77d6bb5e42d9940eec12be387bdb1211",
-      "source": "assets/branding/toolkit.png"
-    },
-    "assets/toolkit.svg": {
-      "sha256": "9a3a22f496588d2789ee81dd858edd59dec3c5fc7da22677aab0d50f1348a4f9",
-      "source": "assets/branding/toolkit.svg"
+    "assets/codex-agent-workflow.png": {
+      "sha256": "43f22061975e536144caa971a6a043bc78e39f44e5b9bf2f146ab83dab1a0928",
+      "source": "assets/branding/plugins/codex-agent-workflow.png"
     },
     "plugin.json": {
-      "sha256": "efcdf7d72ab40087bb823e17bdf1417a8bddabbbbfaec17beb1adb12cbd72558",
+      "sha256": "c480c01f9fee868b094a7bd80982a503cf1790d37710130742aa78c34d871c4c",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
@@ -197,11 +193,11 @@
       "source": "skills/task-guide/README.md"
     },
     "skills/task-guide/SKILL.md": {
-      "sha256": "dbc347e364db39f4ae66357bb0c9d753ddad2275108be56146d34340a71b3be0",
+      "sha256": "526f325bf1f79cbb9073e23c0128dcd56a5f0b2a73842bfda83582dd1185eaf5",
       "source": "skills/task-guide/SKILL.md"
     },
     "skills/task-guide/agents/openai.yaml": {
-      "sha256": "a03b6f66a2d981dbc1a41d8187512342dd7b3bb3462de73d19bd930766a1f665",
+      "sha256": "041303673c5defc0299c76d183db0e1dabd26751772c4dfa09d0ccca94d2e2ce",
       "source": "skills/task-guide/agents/openai.yaml"
     },
     "skills/task-guide/assets/goal.md": {
@@ -233,7 +229,7 @@
       "source": "skills/task-guide/assets/icon.svg"
     },
     "skills/task-guide/assets/plan.md": {
-      "sha256": "3194c1b055ca06cd91c80cba40eb742f421869c01ca4ee3904b89ae5ccd129f3",
+      "sha256": "f7185ca83f54332dfc16d7e56b8b2323df43cdd145702c912a859242f1a9bae9",
       "source": "skills/task-guide/assets/plan.md"
     },
     "skills/task-guide/assets/review-and-tests.md": {
@@ -257,7 +253,7 @@
       "source": "skills/task-guide/references/documentation-views.md"
     },
     "skills/task-guide/references/planning-and-acceptance.md": {
-      "sha256": "af852d028589554ac968037e6940cb5672498ac93100f15692434bfac07491f1",
+      "sha256": "c3c37dee8235d9f551bc1594b2245bf319635cab664374b011c7f41eec1e6739",
       "source": "skills/task-guide/references/planning-and-acceptance.md"
     },
     "skills/task-guide/references/task-guide.md": {
@@ -311,6 +307,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.24.0",
-  "version": "0.5.6"
+  "toolkit_version": "0.25.0",
+  "version": "0.5.7"
 }

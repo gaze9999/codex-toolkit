@@ -1,23 +1,19 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "e1f3c90e2f3e0a2e210adc000c140bd8539d0e8a3d07cb488cd507e369dc2e2a",
+      "sha256": "02d334ccf368b842073cd10bb06d5e031d632df81b19620226ef3827a5c8214d",
       "source": null
     },
     "LICENSE": {
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
     },
-    "assets/toolkit.png": {
-      "sha256": "dff331901c72c163d7df0d52fbe88e8c77d6bb5e42d9940eec12be387bdb1211",
-      "source": "assets/branding/toolkit.png"
-    },
-    "assets/toolkit.svg": {
-      "sha256": "9a3a22f496588d2789ee81dd858edd59dec3c5fc7da22677aab0d50f1348a4f9",
-      "source": "assets/branding/toolkit.svg"
+    "assets/codex-jev-evaluation.png": {
+      "sha256": "9e437aa3b30cb00c9cb265ff3062c884e28050a53ceab82a3f76a1a8ff80d370",
+      "source": "assets/branding/plugins/codex-jev-evaluation.png"
     },
     "plugin.json": {
-      "sha256": "fb434a79abc7d9f1687b865ca028733c55ba8eea348c93338294830c50aa07fb",
+      "sha256": "80feb8db9bf48d6fbd42eff62ffddfecc4fb6fa03906dfbd14b1e9edb069c015",
       "source": "plugins/jev-evaluation/plugin.json"
     },
     "skills/jev-evaluation/LICENSE": {
@@ -97,6 +93,6 @@
     "jev"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.24.0",
-  "version": "0.1.10"
+  "toolkit_version": "0.25.0",
+  "version": "0.1.11"
 }
