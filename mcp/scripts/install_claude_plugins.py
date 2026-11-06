@@ -62,8 +62,45 @@ def load_options(path: Path | None, market: str) -> dict:
     return options
 
 
-def catalog(home: Path, market: str) -> dict | None:
-    root = home / "plugins" / "marketplaces" / market
+def git_address(value: str) -> str:
+    """Compare Git addresses without a trailing slash or .git, and with git@host:path as https."""
+    value = value.strip().rstrip("/")
+    if value.startswith("git@") and ":" in value:
+        host, path = value[4:].split(":", 1)
+        value = f"https://{host}/{path}"
+    return value[:-4] if value.endswith(".git") else value
+
+
+def source_matches(source: dict, url: str) -> bool:
+    kind = source.get("source")
+    if kind == "git":
+        return git_address(source.get("url", "")) == git_address(url)
+    if kind == "github":
+        return git_address(f"https://github.com/{source.get('repo', '')}") == git_address(url)
+    return False
+
+
+def describe_source(source: dict) -> str:
+    detail = source.get("url") or source.get("repo") or source.get("path") or ""
+    return f"{source.get('source', 'unknown')} {detail}".strip()
+
+
+def marketplace_root(home: Path, profile: dict) -> Path:
+    """Locate the profile marketplace; stop when the same name is registered from another source."""
+    market, url = profile["marketplace"]["name"], profile["marketplace"]["url"]
+    known = read_json(home / "plugins" / "known_marketplaces.json").get(market)
+    declared = read_json(home / "settings.json").get("extraKnownMarketplaces", {}).get(market)
+    for entry in (known, declared):
+        source = entry.get("source") if isinstance(entry, dict) else None
+        if isinstance(source, dict) and not source_matches(source, url):
+            raise ValueError(f"Marketplace {market} is registered from {describe_source(source)}, not {url}; "
+                             f"run `claude plugin marketplace remove {market}` before restoring this profile")
+    location = known.get("installLocation") if isinstance(known, dict) else None
+    return Path(location) if location else home / "plugins" / "marketplaces" / market
+
+
+def catalog(home: Path, profile: dict) -> dict | None:
+    root = marketplace_root(home, profile)
     manifest = root / ".claude-plugin" / "marketplace.json"
     if not manifest.is_file():
         return None
@@ -90,7 +127,7 @@ def plan(home: Path, profile: dict, options: dict) -> tuple[list, list[str]]:
     """Return pending actions and report lines; an absent marketplace yields only its add action."""
     market = profile["marketplace"]["name"]
     settings = read_json(home / "settings.json")
-    available = catalog(home, market)
+    available = catalog(home, profile)
     if available is None:
         return [("add", market, None)], [f"ADD marketplace {market}"]
     installed = {key: rows[0].get("version") for key, rows in read_json(home / "plugins" / "installed_plugins.json").get("plugins", {}).items() if rows}
@@ -218,7 +255,7 @@ def main(argv=None) -> int:
             return 1 if actions else 0
         claude = claude_command(args.claude)
         failed = False
-        if args.refresh and catalog(home, profile["marketplace"]["name"]) is not None:
+        if args.refresh and catalog(home, profile) is not None:
             code, output = run_cli(claude, ["plugin", "marketplace", "update", profile["marketplace"]["name"]])
             print(f"REFRESH exit={code} {output[-300:]}")
             failed |= code != 0
@@ -234,7 +271,7 @@ def main(argv=None) -> int:
             code, output = execute(claude, action, profile)
             print(f"{action[0].upper()} {action[1]} exit={code}" + (f" {output[-300:]}" if code else ""))
             failed |= code != 0
-        backup = write_settings(home, profile, select(profile, catalog(home, profile["marketplace"]["name"])))
+        backup = write_settings(home, profile, select(profile, catalog(home, profile)))
         if backup:
             print(f"BACKUP {backup}")
         actions, lines = plan(home, profile, options)

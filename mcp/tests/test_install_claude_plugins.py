@@ -44,6 +44,8 @@ class FakeClaude:
         if args[:3] == ["plugin", "marketplace", "add"]:
             self.publish()
             self.edit("settings.json", lambda s: s.setdefault("extraKnownMarketplaces", {}).update({MARKET: {"source": {"source": "git", "url": URL}}}))
+            location = str(self.home / "plugins/marketplaces" / MARKET)
+            self.edit("plugins/known_marketplaces.json", lambda k: k.update({MARKET: {"source": {"source": "git", "url": URL}, "installLocation": location}}))
             return 0, "ok"
         plugin = args[2]
         name = plugin.split("@")[0]
@@ -125,6 +127,38 @@ class ClaudePluginRestore(unittest.TestCase):
             code, _ = self.run_tool("--apply")
             self.assertEqual(code, 2)
         self.assertEqual((self.home / "settings.json").read_bytes(), before)
+
+    def test_same_name_from_another_source_stops_before_changes(self):
+        local = {"source": "directory", "path": str(self.base / "checkout")}
+        for target in ("plugins/known_marketplaces.json", "settings.json"):
+            with self.subTest(target=target):
+                self.fake.calls.clear()
+                (self.home / "plugins").mkdir(exist_ok=True)
+                (self.home / "plugins/known_marketplaces.json").write_text("{}")
+                (self.home / "settings.json").write_text(json.dumps({"hooks": {"Stop": ["keep"]}}))
+                if target == "settings.json":
+                    self.fake.edit(target, lambda s: s.setdefault("extraKnownMarketplaces", {}).update({MARKET: {"source": local}}))
+                else:
+                    self.fake.edit(target, lambda k: k.update({MARKET: {"source": local, "installLocation": local["path"]}}))
+                before = (self.home / "settings.json").read_bytes()
+                code, output = self.run_tool("--apply")
+                self.assertEqual(code, 2)
+                self.assertIn(f"registered from directory {local['path']}", output)
+                self.assertIn(f"claude plugin marketplace remove {MARKET}", output)
+                self.assertEqual(self.fake.calls, [])
+                self.assertEqual((self.home / "settings.json").read_bytes(), before)
+
+    def test_matching_source_reads_recorded_install_location(self):
+        self.fake.publish()
+        moved = self.base / "cache-copy"
+        (self.home / "plugins/marketplaces" / MARKET).rename(moved)
+        recorded = {"source": "github", "repo": "example/toolbox"}
+        self.profile.write_text(json.dumps({"marketplace": {"name": MARKET, "url": "git@github.com:example/toolbox.git"}}))
+        self.fake.edit("plugins/known_marketplaces.json", lambda k: k.update({MARKET: {"source": recorded, "installLocation": str(moved)}}))
+        code, output = self.run_tool()
+        self.assertEqual(code, 1)
+        self.assertIn(f"INSTALL runner@{MARKET} 0.2.0", output)
+        self.assertNotIn("ADD marketplace", output)
 
     def test_preview_needs_no_cli_and_rejects_home_root(self):
         self.claude.unlink()
