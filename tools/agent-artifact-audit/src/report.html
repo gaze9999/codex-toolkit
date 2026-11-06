@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-Hant-TW"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>產出物盤點</title>
+<style>
+*{box-sizing:border-box}body{font:16px/1.55 system-ui,sans-serif;color:#192e31;background:#f6f6f2;margin:0}main{max-width:72rem;margin:auto;padding:clamp(1rem,4vw,3rem)}h1{margin:0;font-size:2rem}h2{font-size:1.2rem;margin:1.5rem 0 .5rem}section,article{padding:1rem;margin:.6rem 0;background:white;border:1px solid #cad4d1;border-radius:.45rem}label{display:inline-block;margin-right:1rem}select,button{font:inherit;padding:.4rem}button{background:#245952;color:white;border:0;border-radius:.25rem}button:disabled{background:#515d5b}li,p,summary,h3{overflow-wrap:anywhere}article p{margin:.2rem 0}input{inline-size:1.2rem;block-size:1.2rem;vertical-align:middle}summary,button,label{cursor:pointer}:focus-visible{outline:3px solid #a54000;outline-offset:3px}output{display:block;font-weight:600}
+</style><main><h1 id="title"></h1><p id="batch"></p><section id="scope"></section><section id="filters"></section><div id="rows"></div><section id="selection" hidden><h2>匯出前核對全部選取</h2><output aria-live="polite" id="total"></output><ul id="chosen"></ul><button id="download" disabled>匯出勾選清單</button></section></main>
+<script type="application/json" id="data">__AUDIT_JSON__</script>
+<script>
+const report=JSON.parse(document.querySelector('#data').textContent)
+const scan=report.mode==='scan', selected=new Set(), conditions=new Map()
+const grouped=[...report.items].sort((a,b)=>a.project.localeCompare(b.project)||a.tree.localeCompare(b.tree)||a.path.localeCompare(b.path))
+const get=id=>document.getElementById(id)
+function element(parent,tag,text){const e=document.createElement(tag);e.textContent=text;parent.append(e);return e}
+const statuses={deleted:'已刪除',partial:'部分刪除',failed:'失敗',unknown:'結果未確認',skipped:'跳過',not_started:'未開始'}
+const title=scan?'工作區產出物盤點':'永久刪除變更報表'
+get('title').textContent=document.title=title
+get('batch').textContent='批次 '+report.batch+(scan?'':' / 來源 '+report.source)
+const scope=get('scope')
+if(scan){
+element(scope,'h2','掃描範圍與缺口')
+for(const path of report.roots)element(scope,'p',path)
+element(scope,'p',report.gaps.length?'部分範圍未完成':'掃描完成')
+for(const gap of report.gaps)element(scope,'p',gap)
+}else{
+element(scope,'h2','實作結果')
+element(scope,'p',report.finished?'執行已結束':'執行記錄尚未完成')
+element(scope,'p','已刪除檔案邏輯大小 '+report.deleted_bytes+' B')
+for(const [status,count] of Object.entries(report.counts))element(scope,'p',statuses[status]+' '+count)
+}
+element(scope,'p','項目數 '+report.items.length)
+for(const [key,name] of [['project','專案'],['tree','工作樹'],[scan?'kind':'status',scan?'分類':'結果']]){
+const label=element(get('filters'),'label',name+' '), select=element(label,'select','')
+element(select,'option','全部').value=''
+for(const value of [...new Set(report.items.map(i=>i[key]))].sort())element(select,'option',statuses[value]||value).value=value
+select.onchange=()=>{conditions.set(key,select.value);render()}
+}
+function render(){const rows=get('rows');rows.replaceChildren();let group='',count=0
+for(const item of grouped){if([...conditions].some(([k,v])=>v&&item[k]!==v))continue
+count++;const current=item.project+' / '+item.tree;if(group!==current){element(rows,'h2',current);group=current}
+const row=element(rows,'article',''), label=element(row,'label','')
+if(scan&&item.selectable){const box=element(label,'input','');box.type='checkbox';box.checked=selected.has(item.id);box.setAttribute('aria-label','選取 '+item.path);box.onchange=()=>{if(box.checked)selected.add(item.id);else selected.delete(item.id);summary()}}
+element(label,'strong',item.relative)
+element(row,'p',[item.kind,statuses[item.status]||item.status,scan?item.size+' B':'永久刪除',item.reason].filter(Boolean).join(' · '))
+const detail=element(row,'details','');element(detail,'summary','完整位置與依據');element(detail,'p',item.path);element(detail,'p',item.rule+' v'+item.rule_version)
+if(scan){element(detail,'p','修改時間 '+new Date(Number(BigInt(item.stamp.modified_ns)/1000000n)).toLocaleString())}
+else{for(const m of item.members)element(detail,'p',[statuses[m.status],m.path,m.reason,m.status==='unknown'?m.recovery_entry:''].filter(Boolean).join(' · '))}
+}if(!count)element(rows,'p',scan&&report.gaps.length?'目前可讀範圍或篩選條件內沒有項目':'沒有符合條件的項目')}
+function summary(){get('chosen').replaceChildren();let bytes=0
+for(const i of report.items.filter(i=>selected.has(i.id))){bytes+=i.size;element(get('chosen'),'li',i.path)}
+get('total').textContent='已選 '+selected.size+' 項, 邏輯大小 '+bytes+' B';get('download').disabled=!selected.size}
+if(scan){get('selection').hidden=false;summary();get('download').onclick=()=>{
+const json=JSON.stringify({batch:report.batch,ids:[...selected]})
+const url=URL.createObjectURL(new Blob([json],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='selection-'+report.batch+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}}
+render()
+</script></html>

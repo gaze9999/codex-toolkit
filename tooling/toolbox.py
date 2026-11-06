@@ -137,6 +137,7 @@ def assemble(toolkit, private=None, audience='public'):
             raise ValueError('Private toolbox owner is required')
         selection = read_json(private, config['selection_source'])
         selected_skills, selected_plugins = set(selection['skills']), set(selection['plugins'])
+        selected_skills.update(config.get('toolbox_skills', []))
         reviewed_revision = config.get('toolkit_revision', selection['toolkit_revision'])
         if not isinstance(reviewed_revision, str) or not re.fullmatch(r'[0-9a-f]{40}', reviewed_revision):
             raise ValueError('Toolbox source requires a full reviewed Toolkit revision')

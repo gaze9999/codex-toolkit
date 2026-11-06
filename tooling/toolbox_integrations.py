@@ -123,6 +123,8 @@ def augment(toolkit, private, packages, profile):
             for key, server in servers.items():
                 if 'url' in server:
                     portable[key] = {**server, 'type': 'streamable-http'}
+                elif entry.get('native_stdio') and not config:
+                    portable[key] = {**server, 'type': 'stdio'}
                 else:
                     portable[key] = {'type': 'stdio', 'command': 'python',
                                      'args': ['runtime/codex.py', key], 'cwd': './'}
