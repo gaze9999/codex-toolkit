@@ -16,6 +16,7 @@
 | 安裝與管理 | [版本與發布](releases.md) | 整包 / 元件版本、來源 Tag、手動建置及草稿資產 |
 | 安裝與管理 | [安裝結果指引](setup/installer-guide.html) | 缺項、帳戶設定與實際操作驗證 |
 | 工具 | [來源清單](tools/catalog.md) | MCP、connector、API 與領域候選 |
+| 工具 | [跨工作區產出物盤點](../tools/agent-artifact-audit/README.md) | 備份辨識、可刪規則、選取清單與中斷復原 |
 | 工具 | [開發工具](tools/development.md) | runtime、Context7、Playwright、RTK 與工作台 |
 | 工具 | [用途與更新](tools/workflows.md) | 電腦用途、單項更新、UI / UX、遊戲與模擬 |
 | 工具 | [文字校對](tools/proofreading.md) | 繁中、日文 textlint、英文 CSpell 與文案保護 |
