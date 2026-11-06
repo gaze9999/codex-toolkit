@@ -87,6 +87,19 @@ class AgentHooksTests(unittest.TestCase):
         self.assertIn("untracked", self.event("Stop")["systemMessage"])
         self.assertEqual({}, self.event("Stop", stop_hook_active=True))
 
+    def test_silent_stop_records_receipts_without_user_notice(self):
+        self.policy["silent"] = True
+        file = self.repo / "AGENTS.md"
+        file.write_bytes(b"# Changed  \n")
+        self.assertIn("issue", self.event("PostToolUse")["hookSpecificOutput"]["additionalContext"])
+        (self.repo / "new.txt").write_text("new", encoding="utf-8")
+        self.assertEqual({}, self.event("Stop"))
+        self.policy["silent"] = False
+        self.assertEqual({}, self.event("Stop"))
+        installer.validate_profile(dict(self.profile, silent=True))
+        with self.assertRaises(ValueError):
+            installer.validate_profile(dict(self.profile, silent="yes"))
+
     def test_subdirectory_and_worktree_identity(self):
         nested = self.repo / "nested"
         nested.mkdir()

@@ -17,13 +17,15 @@ import subprocess
 import sys
 import tempfile
 
-VERSION = "0.6.0"
+VERSION = "0.7.0"
 EVENTS = ("SessionStart", "UserPromptSubmit", "PreToolUse", "PostToolUse", "SubagentStart", "PreCompact",
           "InstructionsLoaded", "ConfigChange", "Stop")
 # Claude uses PreCompact stdout as plain-text summary instructions; every other event prints JSON.
 TEXT_OUTPUT = "plainText"
 DELIVERY = re.compile(r"^\s*(cpr|cpt|cp)\b", re.I)
 CJK = re.compile("[㐀-鿿]")
+KANA = re.compile("[぀-ヿ]")
+LATIN = re.compile("[A-Za-z]{3}")
 DOC_LINT_FILES = 5
 MAX_DOC = 1024 * 1024
 MAX_INPUT = 2 * 1024 * 1024
@@ -409,19 +411,46 @@ def data_root():
     return base / "codex-setup"
 
 
+LINT_CONFIGS = {"zh-TW": "proofreading/zh-tw/.textlintrc.cjs", "ja": "proofreading/ja/.textlintrc.json",
+                "en": "proofreading/en/english.textlintrc.cjs"}
+
+
 def textlint_tools(policy):
-    """Find the maintained npm textlint and zh-TW profile; Windows and POSIX npm prefixes differ."""
-    prefix = data_root() / "tools/npm"
-    config = prefix / "proofreading/zh-tw/.textlintrc.cjs"
+    """Find the maintained npm prefix; an installer-recorded prefix covers clients whose app data is virtualized."""
+    recorded = policy.get("npm_prefix")
+    prefix = Path(recorded) if recorded else data_root() / "tools/npm"
     node = policy.get("node") or shutil.which("node")
-    for runner in (prefix / "lib/node_modules/textlint/bin/textlint.js", prefix / "node_modules/textlint/bin/textlint.js"):
-        if runner.is_file() and config.is_file() and node:
-            return node, runner, config
+    for modules in (prefix / "lib/node_modules", prefix / "node_modules"):
+        runner = modules / "textlint/bin/textlint.js"
+        if runner.is_file() and node:
+            return node, runner, prefix
     return None
 
 
+def doc_language(text):
+    """Kana marks Japanese, other Han text zh-TW and remaining prose English."""
+    if KANA.search(text):
+        return "ja"
+    if CJK.search(text):
+        return "zh-TW"
+    return "en" if LATIN.search(text) else None
+
+
+def spelling(node, runner, prefix, path):
+    """Return CSpell issue positions with the maintained English dictionary, or None when unavailable."""
+    config = prefix / "proofreading/en/cspell.json"
+    binary = runner.parents[2] / "cspell/bin.mjs"
+    if not config.is_file() or not binary.is_file():
+        return None
+    result = subprocess.run([node, str(binary), "lint", "--no-progress", "--no-summary", "--no-color", "--config", str(config), str(path)],
+                            cwd=path.parent, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, timeout=8, check=False)
+    if result.returncode not in (0, 1) or len(result.stdout) > MAX_INPUT:
+        raise ValueError("cspell failed")
+    return re.findall(r":(\d+:\d+) - Unknown word", result.stdout.decode("utf-8", errors="replace"))
+
+
 def doc_lint(payload, policy, client, state_dir):
-    """Lint edited Markdown that contains Chinese once per content; receipts keep only a digest and a count."""
+    """Lint edited zh-TW, Japanese or English Markdown once per content; receipts keep only a digest and a count."""
     if policy.get("doc_lint") is not True or payload.get("tool_name") not in EDIT_TOOLS:
         return None
     paths = [path for path in edited_paths(payload, Path(payload["cwd"])) if path.suffix.lower() == ".md" and path.is_file()]
@@ -435,31 +464,39 @@ def doc_lint(payload, policy, client, state_dir):
             return None
         atomic_write(missing, json.dumps({"version": VERSION}).encode())
         return "Doc lint skipped: install textlint with the maintained development tool installer"
-    node, runner, config = tools
+    node, runner, prefix = tools
     notes = []
     for path in paths[:DOC_LINT_FILES]:
         data = path.read_bytes()
-        if len(data) > MAX_DOC or not CJK.search(data.decode("utf-8", errors="replace")):
+        language = doc_language(data.decode("utf-8", errors="replace")) if len(data) <= MAX_DOC else None
+        config = prefix / LINT_CONFIGS[language] if language else None
+        if not config or not config.is_file():
             continue
         receipt = state_dir / ("doc-" + digest("\0".join((client, session, str(path), digest(data))).encode()) + ".json")
         if receipt.exists():
             continue
+        # Profile rule files are copied into this bundle and add to the shared language profile.
+        extra = [part for name in policy.get("doc_lint_rules", {}).get(language, [])
+                 if (rule := Path(__file__).parent / name).is_file() for part in ("--rule", str(rule))]
         try:
-            result = subprocess.run([node, str(runner), "--config", str(config), "--format", "json", str(path)], cwd=path.parent,
+            result = subprocess.run([node, str(runner), "--config", str(config), *extra, "--format", "json", str(path)], cwd=path.parent,
                                     stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, timeout=8, check=False)
             if result.returncode not in (0, 1) or len(result.stdout) > MAX_INPUT:
                 raise ValueError("textlint failed")
             places = [f"{item.get('line', 0)}:{item.get('column', 0)}" for document in json.loads(result.stdout)
                       for item in document.get("messages", [])]
+            words = spelling(node, runner, prefix, path) if language == "en" else None
         except (OSError, ValueError, subprocess.TimeoutExpired):
-            notes.append(f"{path.name}: textlint did not complete")
+            notes.append(f"{path.name} ({language}): textlint did not complete")
             continue
-        atomic_write(receipt, json.dumps({"version": VERSION, "count": len(places)}).encode())
+        atomic_write(receipt, json.dumps({"version": VERSION, "count": len(places) + len(words or [])}).encode())
         if places:
-            notes.append(f"{path.name}: {len(places)} issue(s) at {', '.join(places[:6])}" + (" ..." if len(places) > 6 else ""))
+            notes.append(f"{path.name} ({language}): {len(places)} issue(s) at {', '.join(places[:6])}" + (" ..." if len(places) > 6 else ""))
+        if words:
+            notes.append(f"{path.name} (spelling): {len(words)} unknown word(s) at {', '.join(words[:6])}" + (" ..." if len(words) > 6 else ""))
     if not notes:
         return None
-    return "textlint zh-TW on edited docs: " + "; ".join(notes) + ". Fix authored prose; keep quotations, code and preserved originals."
+    return "textlint on edited docs: " + "; ".join(notes) + ". Fix authored prose; keep quotations, code and preserved originals."
 
 
 def delivery_context(payload, policy):
@@ -566,13 +603,22 @@ def handle(payload, policy, client, state_dir):
             message = module["lifecycle"](payload, policy, client, state_dir, roots)
         except (OSError, ValueError, KeyError, subprocess.TimeoutExpired):
             message = "Project checks unavailable; use the maintained project check CLI"
-        if message:
+        if message and not policy.get("silent"):
             result["systemMessage"] = "\n".join(filter(None, (result.get("systemMessage"), message)))
+        elif message and event == "PostToolUse":
+            # Silent mode keeps check results with the model instead of showing them to the user.
+            previous = result.get("hookSpecificOutput", {}).get("additionalContext")
+            result.update(context("PostToolUse", "\n".join(filter(None, (previous, message)))))
+    if event == "Stop" and policy.get("silent"):
+        # Receipts are still recorded; only the user-facing reminders are dropped.
+        result.pop("systemMessage", None)
     if event == "PostToolUse" and (note := doc_lint(payload, policy, client, state_dir)):
         previous = result.get("hookSpecificOutput", {}).get("additionalContext")
         result.update(context("PostToolUse", "\n".join(filter(None, (previous, note)))))
     if event == "Stop":
-        for message in (usage_message(payload, policy, client, state_dir), config_change_message(payload, policy, client, state_dir)):
+        notes = (usage_message(payload, policy, client, state_dir),
+                 None if policy.get("silent") else config_change_message(payload, policy, client, state_dir))
+        for message in notes:
             if message:
                 result["systemMessage"] = "\n".join(filter(None, (result.get("systemMessage"), message)))
     return result

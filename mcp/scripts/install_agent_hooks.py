@@ -24,7 +24,7 @@ from install_global_agents import check_target
 EVENTS = {"SessionStart": "startup|resume|clear|compact|fork", "PostToolUse": "^(Edit|Write|MultiEdit|apply_patch)$", "Stop": None}
 GUARD_MATCHER = "^(Bash|Edit|Write|MultiEdit|NotebookEdit|apply_patch)$"
 OPTIONAL_KEYS = {"codex_token_usage", "session_environment", "subagent_note", "guards", "delivery_note",
-                 "delivery_entries", "compact_note", "doc_lint", "instruction_log", "config_change_note"}
+                 "delivery_entries", "compact_note", "doc_lint", "instruction_log", "config_change_note", "silent", "doc_lint_rules"}
 # These events exist only in Claude Code; Codex ignores PreCompact text and lacks the other two.
 CLAUDE_ONLY = {"PreCompact", "InstructionsLoaded", "ConfigChange"}
 
@@ -63,13 +63,15 @@ def validate_profile(value):
     required = {"schema_version", "entries", "start_note", "stop_note"}
     if not required.issubset(value) or set(value) - required - OPTIONAL_KEYS or value["schema_version"] != 1:
         raise ValueError("Unsupported hook profile")
-    for key in ("codex_token_usage", "session_environment", "doc_lint", "instruction_log", "config_change_note"):
+    for key in ("codex_token_usage", "session_environment", "doc_lint", "instruction_log", "config_change_note", "silent"):
         if key in value and type(value[key]) is not bool:
             raise ValueError(key + " must be a boolean")
     if "subagent_note" in value and (not isinstance(value["subagent_note"], str) or not value["subagent_note"] or len(value["subagent_note"]) > 400):
         raise ValueError("subagent_note must be a string of at most 400 characters")
     if "guards" in value:
         validate_guards(value["guards"])
+    if "doc_lint_rules" in value:
+        validate_doc_rules(value["doc_lint_rules"])
     for key, limit in (("delivery_note", 400), ("compact_note", 1000)):
         if key in value and (not isinstance(value[key], str) or not value[key] or len(value[key]) > limit):
             raise ValueError(f"{key} must be a string of at most {limit} characters")
@@ -80,6 +82,29 @@ def validate_profile(value):
     for key in ("start_note", "stop_note"):
         if not isinstance(value[key], str) or len(value[key]) > 400:
             raise ValueError("Hook notes must be strings of at most 400 characters")
+
+
+def validate_doc_rules(value):
+    """Rule files are paths relative to the profile, per doc_lint language."""
+    if not isinstance(value, dict) or set(value) - {"zh-TW", "ja", "en"}:
+        raise ValueError("doc_lint_rules maps zh-TW, ja or en to rule files")
+    for names in value.values():
+        if not isinstance(names, list) or not 0 < len(names) <= 5 or not all(
+                isinstance(name, str) and name.endswith((".cjs", ".js", ".mjs")) and "\\" not in name and ":" not in name
+                and not PurePosixPath(name).is_absolute() and ".." not in PurePosixPath(name).parts for name in names):
+            raise ValueError("doc_lint_rules entries need at most five relative .cjs/.js/.mjs paths inside the profile folder")
+
+
+def read_doc_rules(profile, folder):
+    """Return bundle-relative names and bytes for the selected textlint rule files."""
+    rules = {}
+    for language, names in profile.get("doc_lint_rules", {}).items():
+        for name in names:
+            source = (folder / name).resolve(strict=True)
+            if not source.is_relative_to(folder.resolve()):
+                raise ValueError("doc_lint_rules must stay inside the profile folder")
+            rules[f"doc-lint/{language}-{PurePosixPath(name).name}"] = (language, source.read_bytes())
+    return rules
 
 
 def validate_entries(entries):
@@ -132,7 +157,7 @@ def selected_events(profile, client):
     return {event: matcher for event, matcher in events.items() if client == "claude" or event not in CLAUDE_ONLY}
 
 
-def plan(client, home, profile, operations, executable, git, platform, projects=None):
+def plan(client, home, profile, operations, executable, git, platform, projects=None, npm_prefix=None, doc_rules=None):
     config = home / ("hooks.json" if client == "codex" else "settings.json")
     managed = home / "managed-agent-hooks"
     manifest = managed / "manifest.json"
@@ -145,12 +170,23 @@ def plan(client, home, profile, operations, executable, git, platform, projects=
         prior_policy = managed / prior["bundle"] / "policy.json"
         check_target(prior_policy, home)
         projects = read_json(prior_policy).get("project_checks")
+    if npm_prefix is None and prior.get("bundle"):
+        npm_prefix = read_json(managed / prior["bundle"] / "policy.json").get("npm_prefix")
     policy = dict(profile, operations=str(operations), git=str(git))
     if client == "codex" and profile.get("codex_token_usage"):
         policy["transcript_root"] = str(home.resolve() / "sessions")
     if projects:
         policy["project_checks"] = projects
         policy["node"] = shutil.which("node")
+    if npm_prefix:
+        policy["npm_prefix"] = str(npm_prefix)
+    doc_rules = doc_rules or {}
+    if doc_rules:
+        policy["doc_lint_rules"] = {}
+        for name, (language, _) in doc_rules.items():
+            policy["doc_lint_rules"].setdefault(language, []).append(name)
+    else:
+        policy.pop("doc_lint_rules", None)
     events = selected_events(profile, client)
     runner_bytes = Path(__file__).with_name("agent_hooks.py").read_bytes()
     checks_bytes = Path(__file__).with_name("project_checks.py").read_bytes()
@@ -159,7 +195,8 @@ def plan(client, home, profile, operations, executable, git, platform, projects=
         scanner = Path(__file__).resolve().parents[2] / "tools/check-public-content.py"
     scanner_bytes = scanner.read_bytes()
     policy_bytes = encoded(policy)
-    bundle = managed / (VERSION + "-" + digest(runner_bytes + checks_bytes + scanner_bytes + policy_bytes)[:16])
+    rule_bytes = b"".join(data for _, data in doc_rules.values())
+    bundle = managed / (VERSION + "-" + digest(runner_bytes + checks_bytes + scanner_bytes + policy_bytes + rule_bytes)[:16])
     runner, settings = bundle / "agent_hooks.py", bundle / "policy.json"
     groups = handlers(client, executable, runner, settings, managed / "state", platform, events)
     if projects:
@@ -182,6 +219,7 @@ def plan(client, home, profile, operations, executable, git, platform, projects=
     data = original if original is not None and read_json(config) == value else encoded(value)
     files = {runner: runner_bytes, bundle / "project_checks.py": checks_bytes, bundle / "public_content.py": scanner_bytes, settings: policy_bytes,
              manifest: encoded({"version": VERSION, "groups": groups, "bundle": bundle.name}), config: data}
+    files.update({bundle / name: data for name, (_, data) in doc_rules.items()})
     expected = {}
     for path in files:
         check_target(path, home)
@@ -259,6 +297,7 @@ def main():
     parser.add_argument("--claude-home", type=Path, default=Path(os.environ.get("CLAUDE_CONFIG_DIR") or Path.home() / ".claude"))
     parser.add_argument("--projects", type=Path)
     parser.add_argument("--checkout", type=Path, action="append", default=[])
+    parser.add_argument("--npm-prefix", type=Path, help="Maintained npm prefix for doc_lint when the client cannot see the default data root")
     parser.add_argument("--apply", action="store_true")
     args = parser.parse_args()
     try:
@@ -271,6 +310,8 @@ def main():
         if not git:
             raise ValueError("Git is required")
         projects = bind_projects(args.projects, args.checkout)
+        npm_prefix = args.npm_prefix.expanduser().resolve(strict=True) if args.npm_prefix else None
+        doc_rules = read_doc_rules(profile, args.profile.expanduser().resolve().parent)
         plans = []
         homes = set()
         for client in dict.fromkeys(args.client):
@@ -278,7 +319,7 @@ def main():
             if home in homes or home == Path(home.anchor) or home == Path.home():
                 raise ValueError("Use distinct client configuration directories")
             homes.add(home)
-            files, expected = plan(client, home, profile, operations, Path(sys.executable), Path(git), sys.platform, projects)
+            files, expected = plan(client, home, profile, operations, Path(sys.executable), Path(git), sys.platform, projects, npm_prefix, doc_rules)
             plans.append((home, files, expected))
         pending = False
         for home, files, expected in plans:

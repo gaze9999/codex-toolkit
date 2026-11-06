@@ -92,11 +92,23 @@ class SessionEventTests(unittest.TestCase):
         doc.write_text("完成同步。\n", encoding="utf-8")
         english = self.repo / "docs/en.md"
         english.write_text("Done.\n", encoding="utf-8")
-        with patch.object(hooks, "textlint_tools", return_value=(sys.executable, runner, runner)):
+        prefix = self.base / "npm"
+        for config in hooks.LINT_CONFIGS.values():
+            (prefix / config).parent.mkdir(parents=True, exist_ok=True)
+            (prefix / config).write_text("{}", encoding="utf-8")
+        japanese = self.repo / "docs/ja.md"
+        japanese.write_text("同期が完了しました。\n", encoding="utf-8")
+        with patch.object(hooks, "textlint_tools", return_value=(sys.executable, runner, prefix)), \
+                patch.object(hooks, "spelling", return_value=["1:1"]):
             result = self.event("PostToolUse", tool_name="Write", tool_input={"file_path": str(doc)})
-            self.assertIn("guide.md: 1 issue(s) at 1:5", result["hookSpecificOutput"]["additionalContext"])
+            self.assertIn("guide.md (zh-TW): 1 issue(s) at 1:5", result["hookSpecificOutput"]["additionalContext"])
             self.assertEqual({}, self.event("PostToolUse", tool_name="Write", tool_input={"file_path": str(doc)}))
-            self.assertEqual({}, self.event("PostToolUse", tool_name="Edit", tool_input={"file_path": str(english)}))
+            note = self.event("PostToolUse", tool_name="Edit", tool_input={"file_path": str(english)})["hookSpecificOutput"]["additionalContext"]
+            self.assertNotIn("en.md (en)", note)
+            self.assertIn("en.md (spelling): 1 unknown word(s) at 1:1", note)
+            note = self.event("PostToolUse", tool_name="Edit", tool_input={"file_path": str(japanese)})["hookSpecificOutput"]["additionalContext"]
+            self.assertIn("ja.md (ja): 1 issue(s)", note)
+        self.assertEqual(["ja", "zh-TW", "en", None], [hooks.doc_language(t) for t in ("テスト", "測試", "Test", "12")])
         with patch.object(hooks, "textlint_tools", return_value=None):
             doc.write_text("改過。\n", encoding="utf-8")
             note = self.event("PostToolUse", "codex", tool_name="Write", tool_input={"file_path": str(doc)})
@@ -119,6 +131,22 @@ class SessionInstallTests(unittest.TestCase):
         installer.validate_profile(self.profile)
         files, _ = installer.plan(client, self.base / client, self.profile, self.operations, Path(sys.executable), Path("git"), sys.platform, None)
         return next(json.loads(data) for path, data in files.items() if path.name == "manifest.json")["groups"]
+
+    def test_doc_lint_rules_are_bundled_and_passed_to_textlint(self):
+        folder = self.base / "profile"
+        (folder / "proofreading").mkdir(parents=True)
+        (folder / "proofreading/personal.cjs").write_text("module.exports = () => ({});\n", encoding="utf-8")
+        profile = dict(self.profile, doc_lint_rules={"zh-TW": ["proofreading/personal.cjs"]})
+        installer.validate_profile(profile)
+        rules = installer.read_doc_rules(profile, folder)
+        files, _ = installer.plan("claude", self.base / "claude", profile, self.operations, Path(sys.executable), Path("git"), sys.platform, None, None, rules)
+        bundled = [path for path in files if path.name == "zh-TW-personal.cjs"]
+        self.assertEqual(1, len(bundled))
+        policy = json.loads(next(data for path, data in files.items() if path.name == "policy.json"))
+        self.assertEqual({"zh-TW": ["doc-lint/zh-TW-personal.cjs"]}, policy["doc_lint_rules"])
+        for bad in ({"fr": ["a.cjs"]}, {"zh-TW": ["../a.cjs"]}, {"zh-TW": ["a.txt"]}):
+            with self.assertRaises(ValueError):
+                installer.validate_profile(dict(self.profile, doc_lint_rules=bad))
 
     def test_claude_only_events_stay_out_of_codex(self):
         self.assertEqual(["SessionStart", "UserPromptSubmit", "PostToolUse", "PreCompact", "InstructionsLoaded", "ConfigChange", "Stop"],
