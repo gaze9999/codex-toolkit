@@ -1,15 +1,17 @@
 # Claude / Codex 共用 Hooks
 
-版本 0.4.0, 需要 Python 3.11 以上與 Git
+版本 0.5.0, 需要 Python 3.11 以上與 Git
 共用核心為 `mcp/scripts/agent_hooks.py`, 安裝入口為 `mcp/scripts/install_agent_hooks.py`
 個人選項放在工具來源以外的 JSON profile, 執行時不依賴原 checkout
 
 | 事件 | 行為 | 輸出 |
 | --- | --- | --- |
-| SessionStart | 找出 Git 根目錄、分支與 profile 指定且實際存在的入口, 壓縮後重新提供索引 | 最多 1,600 個字元, 同工作階段相同索引略過 |
+| SessionStart | 找出 Git 根目錄、分支與 profile 指定且實際存在的入口, 壓縮後重新提供索引, 選用時加一行環境摘要 | 最多 1,600 個字元, 同工作階段相同索引略過 |
+| PreToolUse | 選用 `guards` 時才登記, 在 Bash 與檔案編輯執行前檢查提交身分、AI 共同作者、改寫歷史與產生檔案 | 違規時回傳 deny 與原因, 其他呼叫安靜通過 |
 | PostToolUse | Edit / Write / MultiEdit / apply_patch 後, 啟用專案檢查時也包含 Bash, 對有變化的已追蹤 diff 執行 `git diff --check` | 成功安靜, 失敗提示執行原命令取得位置 |
-| Stop | 核對目前 diff 是否有本工作階段的空白檢查收據, 提示尚未檢查的新增檔案 | 同一份變更只提醒一次, 不阻擋或重新開啟對話 |
-| SubagentStop | 選用回覆標點檢查時才登記, 只檢查子代理最終回覆 | 標示子代理類型, 不重複父工作階段的 diff 提醒 |
+| SubagentStart | 選用 `subagent_note` 時才登記, 把同一段約束交給每個子代理 | 子代理的額外上下文 |
+| Stop | 核對目前 diff 是否有本工作階段的空白檢查收據, 提示尚未檢查的新增檔案, 選用時審閱最終回覆的全形標點 | 證據提醒只出現一次, 全形標點有候選時要求 AI 判斷一次 |
+| SubagentStop | 選用回覆標點審閱時才登記, 只檢查子代理最終回覆 | 標示子代理類型, 不重複父工作階段的 diff 提醒 |
 
 收據按 client、工作階段及實際 worktree 隔離, 只保存內容雜湊與檢查狀態
 預設不讀取對話紀錄, 不保存 diff 內容, 不執行 profile 或工具輸入中的任意命令
@@ -37,25 +39,49 @@ Codex 本輪用量: 總計 80 tokens (輸入 70, 輸出 10, 快取輸入 50)
 例如 ephemeral 工作階段可能沒有 transcript, 這不影響其他 Hooks
 統計透過 systemMessage 顯示於原生介面或事件串流, 不要求模型延長回合或改寫已完成的回覆
 
-## 最終回覆標點
+## 最終回覆全形標點
 
-profile 可加入 `"reply_punctuation": true`, 預設關閉, Stop 與 SubagentStop 以 `last_assistant_message` 執行與文件相同的繁中 textlint 設定
-回覆經 stdin 傳給 textlint, 不寫入暫存檔, 收據 `reply-<hash>.json` 只保存版本、是否完成檢查與各類型數量
+profile 加入 `"reply_punctuation": true` 後, Stop 與 SubagentStop 以 regex 選出最終回覆中的全形標點, 交給 AI 判斷是否保留
+範圍是全形與 CJK 標點、全形 ASCII 及彎引號, 保留頓號 `、` 與 `々〆〇`, 程式碼區塊、行內程式碼與網址不列入
+不需要 Node 或 textlint, 回覆不寫入暫存檔, 收據 `reply-<hash>.json` 只保存版本、是否檢查與候選數量
 
-```text
-最終回覆標點: 共 3 處, 句號 1:5、7:11, 引號 3:1
-```
-
-位置為回覆內的行:欄, 類型取自共用規則訊息, 包含句號、全形標點、分號、空格與引號, 最多列 8 處
-同一則回覆只回報一次, 缺少或空白的回覆不回報, 超過 256 KiB 或 textlint 執行失敗時回報未檢查
-結果透過 systemMessage 顯示, 不使用 `decision: "block"`, 不要求模型續行或改寫已顯示的回覆
-Windows 實測單次 textlint 約 0.6 到 1.0 秒, 子程序上限 8 秒, 仍在 Hook 的 20 秒內
-
-安裝時另外指定該電腦已安裝的 textlint 與已審查設定, Node 由 PATH 解析
+有候選時回傳 `decision: "block"`, `reason` 列出行與欄、碼位與前後 12 個字元, 最多 20 處
+Codex 以 `reason` 建立續行提示, Claude 將其交回模型, AI 只保留原文引用、正式名稱、程式碼或其他語言語法中的標點, 其餘依 Global 標點規則修正, 只回覆修正的行或一行確認
+同一則回覆只審閱一次, `stop_hook_active` 的續行回覆不再檢查, 避免連續延長回合, 超過 256 KiB 時只回報未檢查
 
 ```text
-python mcp/scripts/install_agent_hooks.py ... --textlint /absolute/node_modules/textlint/bin/textlint.js --textlint-config /absolute/proofreading/zh-tw/.textlintrc.cjs
+Fullwidth punctuation review: 2 candidate(s) in the final reply, marked [[ ]]. ...
+- 1:5 U+3002 near: 完成同步[[。]]
+- 3:1 U+300C near: [[「]]SFAP 決定」改成排除
 ```
+
+## 執行前防護
+
+profile 的 `guards` 選擇 PreToolUse 規則, 只用 repository identity 判斷, 不寫入裝置路徑, Windows 與 macOS 使用同一份設定
+
+```json
+"guards": {
+  "identity": {"owners": ["https://github.com/<owner>"], "email": "<personal commit email>"},
+  "ai_coauthor": true,
+  "history": true,
+  "generated": [{"repository": "https://github.com/<owner>/<distribution>", "allow": ["AGENTS.override.md", ".codex/*"]}]
+}
+```
+
+| 規則 | 拒絕條件 |
+| --- | --- |
+| `identity` | origin 屬於 `owners` 的 repo 以其他 email 提交, 或其他 repo 沒有 repository-local `user.email`, 改用全域的個人身分 |
+| `ai_coauthor` | 提交命令含 Claude、Codex、ChatGPT、OpenAI、Anthropic、Copilot 或 GPT 的 Co-Authored-By trailer |
+| `history` | `git push` 的 force、mirror、delete、prune、`+` 或 `:` refspec, `git tag -d/-f`, `filter-branch` 與 `filter-repo` |
+| `generated` | 在指定散布 repo 以 Edit、Write、MultiEdit、NotebookEdit 或 apply_patch 修改 `allow` 以外的檔案 |
+
+`history` 在 Claude 改用原生核准視窗 (`ask`), 由使用者決定是否執行, Codex 目前把 `ask` 視為失敗並照常執行, 因此維持 deny, 需要改寫歷史時由使用者在終端機執行, 或在 `/hooks` 暫時停用該定義, 完成後重新啟用並信任
+其他規則在兩端都 deny, 與 `history` 同時命中時也 deny, 使用者自己在終端機執行的命令不經過 Hooks
+Bash 依 `&&`、`||`、`;`、`|` 與換行拆段, 追蹤 `cd` 與 `git -C`, 從檔案讀取的提交訊息與 Shell 間接呼叫不在範圍內
+防護是編輯前的提醒邊界, 不是完整權限控制, 遠端的 Secret scanning、Push protection 與分支保護仍各自設定
+
+`"session_environment": true` 在 SessionStart 加一行作業系統、架構、Python 版本與 PATH 上的 Python 指令名稱, 選用 `identity` 時另標示 repo 是否屬於個人
+`subagent_note` 是 400 字元內的子代理約束, 例如精簡英文、只處理委派範圍與不自行提交或安裝, 由 SubagentStart 交給每個子代理
 
 ## 安裝與更新
 
@@ -94,7 +120,7 @@ python mcp/scripts/install_agent_hooks.py --client codex --client claude --profi
 
 每台電腦重新執行安裝器, 不複製另一台電腦產生的絕對路徑或原生設定
 Claude 需要支援 exec-form Hooks 的版本, Codex 需要具備目前 Hooks 設定與信任介面的版本
-Codex 安裝後用 `/hooks` 或 Desktop Settings > Hooks 審閱並信任三個新定義, 更新定義後重新審閱
+Codex 安裝後用 `/hooks` 或 Desktop Settings > Hooks 審閱並信任新定義, 數量依 profile 選用的事件而定, 更新定義後重新審閱
 不使用跳過 Hook 信任的參數, 既有 `notify`、權限管理與登入設定保留
 Claude 在新工作階段以 `/hooks` 核對, 各產品的載入與事件觸發分別驗證
 

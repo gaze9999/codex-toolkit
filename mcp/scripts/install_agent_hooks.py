@@ -22,6 +22,8 @@ from agent_hooks import VERSION, atomic_write, digest
 from install_global_agents import check_target
 
 EVENTS = {"SessionStart": "startup|resume|clear|compact|fork", "PostToolUse": "^(Edit|Write|MultiEdit|apply_patch)$", "Stop": None}
+GUARD_MATCHER = "^(Bash|Edit|Write|MultiEdit|NotebookEdit|apply_patch)$"
+OPTIONAL_KEYS = {"codex_token_usage", "reply_punctuation", "session_environment", "subagent_note", "guards"}
 
 
 def encoded(value):
@@ -35,13 +37,37 @@ def read_json(path):
     return value
 
 
+def validate_guards(value):
+    if not isinstance(value, dict) or not value or set(value) - {"identity", "ai_coauthor", "history", "generated"}:
+        raise ValueError("guards selects identity, ai_coauthor, history or generated")
+    for key in ("ai_coauthor", "history"):
+        if key in value and type(value[key]) is not bool:
+            raise ValueError("guards." + key + " must be a boolean")
+    identity = value.get("identity")
+    if identity is not None:
+        owners = identity.get("owners") if isinstance(identity, dict) else None
+        if (set(identity) != {"owners", "email"} or not isinstance(owners, list) or not owners or
+                not all(isinstance(owner, str) and owner.startswith("https://") for owner in owners) or
+                not isinstance(identity["email"], str) or "@" not in identity["email"]):
+            raise ValueError("guards.identity needs https owner prefixes and the personal commit email")
+    for rule in value.get("generated", []):
+        if (not isinstance(rule, dict) or set(rule) - {"repository", "allow"} or not str(rule.get("repository", "")).startswith("https://") or
+                not all(isinstance(name, str) and name and not PurePosixPath(name).is_absolute() and ".." not in PurePosixPath(name).parts
+                        for name in rule.get("allow", []))):
+            raise ValueError("guards.generated entries need an https repository and relative allow patterns")
+
+
 def validate_profile(value):
     required = {"schema_version", "entries", "start_note", "stop_note"}
-    if not required.issubset(value) or set(value) - required - {"codex_token_usage", "reply_punctuation"} or value["schema_version"] != 1:
+    if not required.issubset(value) or set(value) - required - OPTIONAL_KEYS or value["schema_version"] != 1:
         raise ValueError("Unsupported hook profile")
-    for key in ("codex_token_usage", "reply_punctuation"):
+    for key in ("codex_token_usage", "reply_punctuation", "session_environment"):
         if key in value and type(value[key]) is not bool:
             raise ValueError(key + " must be a boolean")
+    if "subagent_note" in value and (not isinstance(value["subagent_note"], str) or not value["subagent_note"] or len(value["subagent_note"]) > 400):
+        raise ValueError("subagent_note must be a string of at most 400 characters")
+    if "guards" in value:
+        validate_guards(value["guards"])
     entries = value["entries"]
     if not isinstance(entries, list) or len(entries) > 12:
         raise ValueError("Profile entries must contain at most 12 relative paths")
@@ -66,7 +92,7 @@ def handlers(client, executable, runner, policy, state, platform, events=EVENTS)
     groups = {}
     for event, matcher in events.items():
         item = copy.deepcopy(handler)
-        if client == "codex" and event in ("SessionStart", "PostToolUse"):
+        if client == "codex" and event in ("SessionStart", "PostToolUse", "SubagentStart"):
             item["additionalContextLimit"] = 600
         group = {"hooks": [item]}
         if matcher:
@@ -75,7 +101,22 @@ def handlers(client, executable, runner, policy, state, platform, events=EVENTS)
     return groups
 
 
-def plan(client, home, profile, operations, executable, git, platform, projects=None, reply_check=None):
+def selected_events(profile):
+    """Register only the events a profile uses; the order follows a turn's lifecycle."""
+    events = {"SessionStart": EVENTS["SessionStart"]}
+    if profile.get("guards"):
+        events["PreToolUse"] = GUARD_MATCHER
+    events["PostToolUse"] = EVENTS["PostToolUse"]
+    if profile.get("subagent_note"):
+        events["SubagentStart"] = None
+    events["Stop"] = None
+    if profile.get("reply_punctuation"):
+        # Final child replies receive the same review without repeating repository evidence.
+        events["SubagentStop"] = None
+    return events
+
+
+def plan(client, home, profile, operations, executable, git, platform, projects=None):
     config = home / ("hooks.json" if client == "codex" else "settings.json")
     managed = home / "managed-agent-hooks"
     manifest = managed / "manifest.json"
@@ -94,13 +135,7 @@ def plan(client, home, profile, operations, executable, git, platform, projects=
     if projects:
         policy["project_checks"] = projects
         policy["node"] = shutil.which("node")
-    events = EVENTS
-    if profile.get("reply_punctuation"):
-        if not reply_check:
-            raise ValueError("reply_punctuation requires --textlint and --textlint-config")
-        policy["reply_check"] = reply_check
-        # Final child replies use the same advisory check without repeating repository evidence.
-        events = dict(EVENTS, SubagentStop=None)
+    events = selected_events(profile)
     runner_bytes = Path(__file__).with_name("agent_hooks.py").read_bytes()
     checks_bytes = Path(__file__).with_name("project_checks.py").read_bytes()
     scanner = Path(__file__).with_name("public_content.py")
@@ -208,8 +243,6 @@ def main():
     parser.add_argument("--claude-home", type=Path, default=Path(os.environ.get("CLAUDE_CONFIG_DIR") or Path.home() / ".claude"))
     parser.add_argument("--projects", type=Path)
     parser.add_argument("--checkout", type=Path, action="append", default=[])
-    parser.add_argument("--textlint", type=Path, help="Installed textlint.js for the reply punctuation check")
-    parser.add_argument("--textlint-config", type=Path, help="Reviewed Taiwan Chinese textlint configuration")
     parser.add_argument("--apply", action="store_true")
     args = parser.parse_args()
     try:
@@ -222,15 +255,6 @@ def main():
         if not git:
             raise ValueError("Git is required")
         projects = bind_projects(args.projects, args.checkout)
-        reply_check = None
-        if profile.get("reply_punctuation"):
-            node = shutil.which("node")
-            if not node or not args.textlint or not args.textlint_config:
-                raise ValueError("reply_punctuation requires Node, --textlint and --textlint-config")
-            textlint, config = (path.expanduser().resolve(strict=True) for path in (args.textlint, args.textlint_config))
-            if textlint.name != "textlint.js" or not textlint.is_file() or not config.is_file():
-                raise ValueError("Select the installed textlint.js and a reviewed configuration file")
-            reply_check = {"node": str(Path(node).resolve()), "textlint": str(textlint), "config": str(config)}
         plans = []
         homes = set()
         for client in dict.fromkeys(args.client):
@@ -238,7 +262,7 @@ def main():
             if home in homes or home == Path(home.anchor) or home == Path.home():
                 raise ValueError("Use distinct client configuration directories")
             homes.add(home)
-            files, expected = plan(client, home, profile, operations, Path(sys.executable), Path(git), sys.platform, projects, reply_check)
+            files, expected = plan(client, home, profile, operations, Path(sys.executable), Path(git), sys.platform, projects)
             plans.append((home, files, expected))
         pending = False
         for home, files, expected in plans:

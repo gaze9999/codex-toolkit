@@ -7,24 +7,35 @@ import argparse
 import hashlib
 import json
 import os
-from pathlib import Path
+from pathlib import Path, PurePosixPath
+import platform
 import re
 import runpy
+import shlex
+import shutil
 import subprocess
 import sys
 import tempfile
 
-VERSION = "0.4.0"
-EVENTS = ("SessionStart", "PostToolUse", "Stop", "SubagentStop")
+VERSION = "0.5.0"
+EVENTS = ("SessionStart", "PreToolUse", "PostToolUse", "SubagentStart", "Stop", "SubagentStop")
 MAX_INPUT = 2 * 1024 * 1024
 MAX_DIFF = 8 * 1024 * 1024
 MAX_TRANSCRIPT = 16 * 1024 * 1024
 FILE_KEYS = ("file_path", "notebook_path", "path")
 USAGE_FIELDS = ("input_tokens", "cached_input_tokens", "output_tokens", "total_tokens")
 MAX_REPLY = 256 * 1024
-REPLY_LOCATIONS = 8
-# Labels follow the shared Taiwan punctuation rule messages; other findings are counted as "其他".
-REPLY_KINDS = (("不加句號", "句號"), ("分號", "分號"), ("半形引號", "引號"), ("半形空格", "空格"), ("半形標點", "全形標點"))
+REPLY_LOCATIONS = 20
+REPLY_CONTEXT = 12
+# Fullwidth and CJK punctuation plus fullwidth ASCII forms; the enumeration comma and ideographic marks stay allowed.
+FULLWIDTH = re.compile("[‘’“”　。-〄〈-〿！-･]")
+# Code, inline code and URLs are preserved syntax and are not offered for review.
+PRESERVED = re.compile(r"```.*?(?:```|\Z)|~~~.*?(?:~~~|\Z)|`[^`\n]*`|https?://\S+", re.S)
+EDIT_TOOLS = ("Edit", "Write", "MultiEdit", "NotebookEdit", "apply_patch")
+SHELL_SEPARATOR = re.compile(r"&&|\|\||[;|\n]")
+PATCH_FILE = re.compile(r"^\*\*\* (?:Add|Update|Delete) File: (.+)$|^\*\*\* Move to: (.+)$", re.M)
+AI_TRAILER = re.compile(r"co-authored-by:[^\n]*(?:claude|codex|chatgpt|openai|anthropic|copilot|\bgpt)", re.I)
+FORCE_PUSH = ("-f", "--force", "--force-with-lease", "--force-if-includes", "--mirror", "--delete", "-d", "--prune")
 
 
 def digest(data):
@@ -199,56 +210,50 @@ def usage_message(payload, policy, client, state_dir):
         return None
 
 
-def reply_findings(text, check):
-    """Run the shared textlint profile through stdin; the reply is never written to disk."""
-    command = [check["node"], check["textlint"], "--config", check["config"], "--format", "json",
-               "--stdin", "--stdin-filename", "reply.md"]
-    result = subprocess.run(command, input=text.encode("utf-8"), stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
-                            timeout=check.get("timeout", 8), check=False)
-    if result.returncode not in (0, 1) or len(result.stdout) > MAX_INPUT:
-        raise ValueError("Reply punctuation check failed")
+def fullwidth_findings(text):
+    """Select fullwidth punctuation outside code and URLs; each finding keeps its line, column and nearby text."""
+    masked = PRESERVED.sub(lambda match: re.sub(r"[^\n]", " ", match.group()), text)
     findings = []
-    for document in json.loads(result.stdout):
-        for item in document.get("messages", []):
-            message = item.get("message", "")
-            kind = next((label for key, label in REPLY_KINDS if key in message), "其他")
-            findings.append((int(item.get("line", 0)), int(item.get("column", 0)), kind))
-    return sorted(findings)
+    for match in FULLWIDTH.finditer(masked):
+        start = match.start()
+        line = text.count("\n", 0, start) + 1
+        column = start - (text.rfind("\n", 0, start) + 1) + 1
+        before = text[max(0, start - REPLY_CONTEXT):start].rpartition("\n")[2]
+        after = text[start + 1:start + 1 + REPLY_CONTEXT].partition("\n")[0]
+        findings.append((line, column, match.group(), before + "[[" + match.group() + "]]" + after))
+    return findings
 
 
-def reply_message(payload, policy, client, state_dir):
-    """Report punctuation locations and kinds in a final reply once; the receipt keeps only a digest and counts."""
-    check = policy.get("reply_check")
+def reply_review(payload, policy, client, state_dir):
+    """Ask the agent once to keep or fix each fullwidth candidate; the receipt keeps only a digest and a count."""
     text = payload.get("last_assistant_message")
-    if not isinstance(check, dict) or not isinstance(text, str) or not text.strip():
-        return None
+    if policy.get("reply_punctuation") is not True or payload.get("stop_hook_active"):
+        return {}
+    if not isinstance(text, str) or not text.strip():
+        return {}
     event = payload.get("hook_event_name")
     agent = payload.get("agent_type") or payload.get("agent_id") or ""
-    label = f"子代理 {agent} " if event == "SubagentStop" else ""
     data = text.encode("utf-8")
     key = digest("\0".join((client, payload["session_id"], event, str(payload.get("agent_id", "")), digest(data))).encode())
     receipt = state_dir / ("reply-" + key + ".json")
     if receipt.exists():
-        return None
+        return {}
     if len(data) > MAX_REPLY:
-        findings, note = None, f"{label}最終回覆超過 {MAX_REPLY // 1024} KiB, 未檢查標點"
-    else:
-        try:
-            findings, note = reply_findings(text, check), None
-        except (OSError, ValueError, TypeError, KeyError, subprocess.TimeoutExpired):
-            findings, note = None, f"{label}最終回覆標點檢查無法執行, 請用已安裝的 textlint CLI 檢查"
-    counts = {}
-    for _, _, kind in findings or ():
-        counts[kind] = counts.get(kind, 0) + 1
-    atomic_write(receipt, json.dumps({"version": VERSION, "checked": findings is not None, "counts": counts}).encode())
-    if note or not findings:
-        return note
-    groups = {}
-    for line, column, kind in findings[:REPLY_LOCATIONS]:
-        groups.setdefault(kind, []).append(f"{line}:{column}")
-    detail = ", ".join(kind + " " + "、".join(places) for kind, places in groups.items())
-    more = f", 另有 {len(findings) - REPLY_LOCATIONS} 處" if len(findings) > REPLY_LOCATIONS else ""
-    return f"{label}最終回覆標點: 共 {len(findings)} 處, {detail}{more}"
+        atomic_write(receipt, json.dumps({"version": VERSION, "checked": False, "count": 0}).encode())
+        label = f"子代理 {agent} " if event == "SubagentStop" else ""
+        return {"systemMessage": f"{label}最終回覆超過 {MAX_REPLY // 1024} KiB, 未檢查全形標點"}
+    findings = fullwidth_findings(text)
+    atomic_write(receipt, json.dumps({"version": VERSION, "checked": True, "count": len(findings)}).encode())
+    if not findings:
+        return {}
+    items = "\n".join(f"- {line}:{column} U+{ord(mark):04X} near: {near}" for line, column, mark, near in findings[:REPLY_LOCATIONS])
+    more = f"\n- {len(findings) - REPLY_LOCATIONS} more candidates follow the same rule" if len(findings) > REPLY_LOCATIONS else ""
+    owner = f" from subagent {agent}" if event == "SubagentStop" else ""
+    reason = (f"Fullwidth punctuation review: {len(findings)} candidate(s) in the final reply{owner}, marked [[ ]]. "
+              "Keep a mark only inside preserved originals: quotations, official names, code or other-language syntax. "
+              "Otherwise apply the Global punctuation rule. If anything changes, send only the corrected lines; "
+              "if every mark stays, reply with one short line saying so. Do not repeat the whole reply.\n" + items + more)
+    return {"decision": "block", "reason": reason}
 
 
 def edited_dir(payload):
@@ -302,15 +307,187 @@ def hook_roots(payload, policy, client, state_dir):
     return roots
 
 
+def git_value(git, root, *args):
+    code, output = git_run(git, root, *args)
+    return os.fsdecode(output).strip() if code == 0 else ""
+
+
+def repository_identity(git, root):
+    """Normalize the origin URL; repositories without an origin have no identity."""
+    origin = git_value(git, root, "remote", "get-url", "origin")
+    return origin.removesuffix(".git").replace("git@github.com:", "https://github.com/").lower() if origin else ""
+
+
+def personal_repository(git, root, rule):
+    identity = repository_identity(git, root)
+    return bool(identity) and any(identity.startswith(owner.rstrip("/").lower() + "/") for owner in rule["owners"])
+
+
+def existing_directory(path):
+    for candidate in (path, *path.parents):
+        if candidate.is_dir():
+            return candidate
+    return None
+
+
+def shell_git(command, cwd):
+    """Yield (directory, subcommand, arguments) for Git calls in a shell line; cd and -C select the directory."""
+    directory = cwd
+    for segment in SHELL_SEPARATOR.split(command):
+        try:
+            words = shlex.split(segment)
+        except ValueError:
+            words = segment.split()
+        while words and re.match(r"^[A-Za-z_][A-Za-z0-9_]*=", words[0]):
+            words = words[1:]
+        if len(words) > 1 and words[0] == "cd":
+            directory = directory / Path(words[1]).expanduser()
+            continue
+        if not words or Path(words[0]).name.lower() not in ("git", "git.exe"):
+            continue
+        target, arguments = directory, words[1:]
+        while arguments and arguments[0].startswith("-"):
+            option = arguments.pop(0)
+            if option == "-C" and arguments:
+                target = target / Path(arguments.pop(0)).expanduser()
+            elif option in ("-c", "--git-dir", "--work-tree", "--namespace") and arguments:
+                arguments.pop(0)
+        if arguments:
+            yield target, arguments[0], arguments[1:]
+
+
+def commit_identity_reason(git, directory, rule):
+    """Personal repositories commit as the personal identity; other repositories need their own local identity."""
+    base = existing_directory(directory)
+    root = repo_root(git, base) if base else None
+    if root is None:
+        return None
+    if personal_repository(git, root, rule):
+        email = git_value(git, root, "config", "user.email")
+        if email != rule["email"]:
+            return f"{root.name} is a personal repository but commits as {email or 'no email'}; set the personal identity in this repository"
+        return None
+    if not git_value(git, root, "config", "--local", "user.email"):
+        return (f"{root.name} is not a personal repository and has no repository-local user.email; "
+                "set the owner's identity there instead of inheriting the personal global identity")
+    return None
+
+
+def history_reason(subcommand, arguments):
+    if subcommand == "push" and any(argument in FORCE_PUSH or argument.startswith("--force") or
+                                    (argument[:1] in "+:" and len(argument) > 1) for argument in arguments):
+        return "git push would force, mirror or delete remote refs; published history and Tags stay fixed"
+    if subcommand == "tag" and any(argument in ("-d", "--delete", "-f", "--force") for argument in arguments):
+        return "git tag would delete or move a Tag; published Tags stay fixed"
+    if subcommand in ("filter-branch", "filter-repo"):
+        return f"git {subcommand} rewrites history and needs separate authorization"
+    return None
+
+
+def edited_paths(payload, cwd):
+    tool = payload.get("tool_input")
+    if not isinstance(tool, dict):
+        return []
+    if payload.get("tool_name") == "apply_patch":
+        patch = tool.get("command") if isinstance(tool.get("command"), str) else tool.get("input", "")
+        names = [first or second for first, second in PATCH_FILE.findall(patch if isinstance(patch, str) else "")]
+    else:
+        names = [tool[key] for key in FILE_KEYS if isinstance(tool.get(key), str)]
+    return [path if path.is_absolute() else cwd / path for path in (Path(name.strip()).expanduser() for name in names)]
+
+
+def generated_reason(git, path, generated):
+    directory = existing_directory(path.parent)
+    root = repo_root(git, directory) if directory else None
+    if root is None:
+        return None
+    identity = repository_identity(git, root)
+    for rule in generated:
+        if identity != rule["repository"].removesuffix(".git").lower():
+            continue
+        try:
+            name = PurePosixPath(path.resolve().relative_to(root).as_posix())
+        except ValueError:
+            return None
+        if any(name.match(pattern) or str(name) == pattern for pattern in rule.get("allow", [])):
+            return None
+        return f"{root.name}/{name} is generated output; change its canonical source and regenerate"
+    return None
+
+
+def guard(payload, policy, client):
+    """Stop selected Git and edit operations before they run; other tool calls pass without output.
+
+    History rewrites ask the user in Claude's native dialog; Codex does not support "ask" and would run the
+    call, so it denies and the user runs the command or disables the hook natively for that change.
+    """
+    rules = policy.get("guards")
+    tool = payload.get("tool_input")
+    if not isinstance(rules, dict) or not isinstance(tool, dict):
+        return {}
+    git, cwd = policy["git"], Path(payload["cwd"])
+    reasons, history = [], []
+    if payload.get("tool_name") == "Bash" and isinstance(tool.get("command"), str):
+        command = tool["command"]
+        calls = list(shell_git(command, cwd)) if "git" in command else []
+        if rules.get("ai_coauthor") and AI_TRAILER.search(command) and any(sub == "commit" for _, sub, _ in calls):
+            reasons.append("the commit message carries an AI co-author trailer; keep human authorship only")
+        for directory, subcommand, arguments in calls:
+            reason = history_reason(subcommand, arguments) if rules.get("history") else None
+            if reason and reason not in history:
+                history.append(reason)
+            reason = commit_identity_reason(git, directory, rules["identity"]) if subcommand == "commit" and rules.get("identity") else None
+            if reason and reason not in reasons:
+                reasons.append(reason)
+    elif payload.get("tool_name") in EDIT_TOOLS and rules.get("generated"):
+        for path in edited_paths(payload, cwd):
+            reason = generated_reason(git, path, rules["generated"])
+            if reason and reason not in reasons:
+                reasons.append(reason)
+    if not reasons and not history:
+        return {}
+    if not reasons and client == "claude":
+        return {"hookSpecificOutput": {"hookEventName": "PreToolUse", "permissionDecision": "ask",
+                                       "permissionDecisionReason": "Agent hook: " + "; ".join(history) + "; approve only if you authorized it"}}
+    if history and client == "codex":
+        history.append("ask the user to run it or to disable this hook in /hooks for that change")
+    return {"hookSpecificOutput": {"hookEventName": "PreToolUse", "permissionDecision": "deny",
+                                   "permissionDecisionReason": "Blocked by agent hook: " + "; ".join(reasons + history)}}
+
+
+def environment_line(policy, root):
+    system = platform.system()
+    release = {"Darwin": "macOS " + platform.mac_ver()[0], "Windows": "Windows " + platform.release()}.get(system, system + " " + platform.release())
+    python = next((name for name in ("python3", "python", "py") if shutil.which(name)), "unavailable")
+    line = f"Environment: {release.strip()} {platform.machine()}; Python {platform.python_version()} via '{python}'"
+    rule = (policy.get("guards") or {}).get("identity")
+    if rule and root is not None:
+        line += "; repository: " + ("personal" if personal_repository(policy["git"], root, rule) else "not personal")
+    return line
+
+
+def require_session(payload):
+    if not isinstance(payload.get("session_id"), str) or not payload["session_id"]:
+        raise ValueError("Hook session_id is required")
+
+
 def handle(payload, policy, client, state_dir):
-    if payload.get("hook_event_name") not in EVENTS:
+    event = payload.get("hook_event_name")
+    if event not in EVENTS:
         raise ValueError("Unsupported lifecycle event")
-    if payload.get("hook_event_name") == "SubagentStop":
-        # A child reply receives only the final-text check; repository evidence stays with the parent's Stop.
-        if not isinstance(payload.get("session_id"), str) or not payload["session_id"]:
-            raise ValueError("Hook session_id is required")
-        message = reply_message(payload, policy, client, state_dir)
-        return {"systemMessage": message} if message else {}
+    if event in ("PreToolUse", "SubagentStart", "SubagentStop"):
+        require_session(payload)
+    if event == "PreToolUse":
+        cwd = payload.get("cwd")
+        if not isinstance(cwd, str) or not Path(cwd).is_absolute() or not Path(cwd).is_dir():
+            raise ValueError("Hook cwd must be an existing absolute directory")
+        return guard(payload, policy, client)
+    if event == "SubagentStart":
+        note = policy.get("subagent_note")
+        return context("SubagentStart", note) if note else {}
+    if event == "SubagentStop":
+        # A child reply receives only the final-text review; repository evidence stays with the parent's Stop.
+        return reply_review(payload, policy, client, state_dir)
     roots = hook_roots(payload, policy, client, state_dir)
     result = workspace_event(payload, policy, client, state_dir, roots)
     if policy.get("project_checks") and roots:
@@ -321,10 +498,12 @@ def handle(payload, policy, client, state_dir):
             message = "Project checks unavailable; use the maintained project check CLI"
         if message:
             result["systemMessage"] = "\n".join(filter(None, (result.get("systemMessage"), message)))
-    if payload.get("hook_event_name") == "Stop":
-        for message in (reply_message(payload, policy, client, state_dir), usage_message(payload, policy, client, state_dir)):
+    if event == "Stop":
+        review = reply_review(payload, policy, client, state_dir)
+        for message in (review.pop("systemMessage", None), usage_message(payload, policy, client, state_dir)):
             if message:
                 result["systemMessage"] = "\n".join(filter(None, (result.get("systemMessage"), message)))
+        result.update(review)
     return result
 
 
@@ -368,6 +547,8 @@ def session_start(payload, policy, client, state_dir, root):
     _, state, previous = root_state(state_dir, client, root, payload["session_id"])
     entries = [name for name in policy["entries"] if (root / name).is_file()]
     message = f"Workspace: {root}\nBranch: {label}\nExisting entrypoints: {', '.join(entries) or 'none found'}"
+    if policy.get("session_environment"):
+        message += "\n" + environment_line(policy, None if label == "not a Git repository" else root)
     message += "\n" + policy["start_note"]
     message += "\nOperations: " + policy["operations"]
     token = digest(message.encode())
