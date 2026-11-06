@@ -17,6 +17,8 @@ Use concise English for AI-facing artifacts unless requested otherwise. Human-fa
 
 ## Route existing capabilities
 
+Before finalizing a plan, check all four perspectives. UI/UX covers human understanding, control, accessibility and recovery. DX covers entry points, ownership, setup and reproducibility. AX covers discovery, authorization, observable outcomes and safe retry. GEO follows the existing index to the authoritative source and tests attribution. Tie applicable findings to an action, owner and observable acceptance condition; give a brief reason for each inapplicable perspective. Repeat affected checks after scope changes. Main can perform the review directly.
+
 | Need | Existing owner to resolve | Boundary |
 | --- | --- | --- |
 | A copyable coding/handoff prompt | Available coding-prompt workflow | Prompt creation only; model advice outside the uninterrupted prompt |
