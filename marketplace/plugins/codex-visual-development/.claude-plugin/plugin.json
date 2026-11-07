@@ -2,11 +2,11 @@
   "author": {
     "name": "gaze9999"
   },
-  "description": "在專案中建立資料視覺化、2D 動態與 Three.js 場景, 搭配 ECharts",
+  "description": "在專案中建立資料視覺化、2D 動態與 Three.js 場景, 搭配 ECharts 與 Excalidraw",
   "displayName": "視覺開發",
   "homepage": "https://github.com/gaze9999/codex-toolkit",
   "license": "MIT",
   "name": "codex-visual-development",
   "repository": "https://github.com/gaze9999/codex-toolkit",
-  "version": "0.4.1"
+  "version": "0.4.2"
 }

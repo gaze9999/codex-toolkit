@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-ai-engineering",
-  "version": "0.1.1",
-  "description": "建構 LLM、Agent、工具呼叫、RAG 與 Embedding 應用",
+  "version": "0.1.2",
+  "description": "建構 LLM、Agent、工具呼叫、RAG 與 Embedding 應用, 搭配 OpenAI 文件查詢",
   "author": {
     "name": "gaze9999"
   },
@@ -11,7 +11,7 @@
     "com.openai": {
       "interface": {
         "displayName": "模型應用",
-        "shortDescription": "建構 LLM、Agent、工具呼叫、RAG 與 Embedding 應用",
+        "shortDescription": "建構 LLM、Agent、工具呼叫、RAG 與 Embedding 應用, 搭配 OpenAI 文件查詢",
         "brandColor": "#E8A36D",
         "websiteURL": "https://github.com/gaze9999/codex-toolkit"
       }
