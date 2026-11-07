@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "624f55704f86d92b987647276d2a8a25d412b88515292a0db681ccc91ca890da",
+      "sha256": "e83ae30c2782ff410603fbb468fd2303abf50c6ab9d3a52e6f998355266104d4",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-multilingual-proofreading.png"
     },
     "plugin.json": {
-      "sha256": "036769b6c1707304444a58521f5bcc017126e5abf060dcb518c006fb2fbe13fe",
+      "sha256": "51baf6f1f97605b4bda1b814fa6b18764fe8d88d82a695463fecc6eb1137a493",
       "source": "plugins/multilingual-proofreading/plugin.json"
     },
     "resources/proofreading/authored-style.cjs": {
@@ -21,7 +21,7 @@
       "source": "mcp/tools/proofreading/authored-style.cjs"
     },
     "resources/proofreading/en/cspell.json": {
-      "sha256": "7a763e4ad42e9c7834120ffcd241ab86e4a046a67a0c02193089481eba4c1643",
+      "sha256": "6a878ba65c3b017b92a38ecb8514f1ea38f2d6c82841258f880b707d8967f7d6",
       "source": "mcp/tools/proofreading/en/cspell.json"
     },
     "resources/proofreading/en/english.textlintrc.cjs": {
@@ -98,6 +98,6 @@
     "cspell"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.29.0",
-  "version": "0.2.0"
+  "toolkit_version": "0.29.1",
+  "version": "0.2.1"
 }
