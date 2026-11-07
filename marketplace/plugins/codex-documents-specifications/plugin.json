@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-documents-specifications",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "擷取本機文件、維護規格與既有文件、產出 PDF/DOCX/Markdown 交付物、維護 README 與授權檔, 並計算 Token",
   "author": {
     "name": "gaze9999"
