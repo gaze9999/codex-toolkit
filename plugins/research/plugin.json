@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-research",
-  "version": "0.1.0",
-  "description": "綜合研究資料與學習路徑, 搭配網頁搜尋、網頁擷取、arXiv、Reddit 與函式庫文件查詢",
+  "version": "0.1.1",
+  "description": "綜合研究資料與學習路徑, 搭配網頁搜尋、網頁擷取、arXiv 與 Reddit",
   "author": {
     "name": "gaze9999"
   },
@@ -11,7 +11,7 @@
     "com.openai": {
       "interface": {
         "displayName": "研究查證",
-        "shortDescription": "綜合研究資料與學習路徑, 搭配網頁搜尋、網頁擷取、arXiv、Reddit 與函式庫文件查詢",
+        "shortDescription": "綜合研究資料與學習路徑, 搭配網頁搜尋、網頁擷取、arXiv 與 Reddit",
         "brandColor": "#E8A36D",
         "websiteURL": "https://github.com/gaze9999/codex-toolkit"
       }

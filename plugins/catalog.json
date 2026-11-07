@@ -185,12 +185,9 @@
         "research-learning-synthesis"
       ],
       "runtime_profiles": [
-        "tavily",
         "exa",
-        "firecrawl",
         "arxiv",
-        "reddit",
-        "context7"
+        "reddit"
       ],
       "resources": []
     },
@@ -247,8 +244,7 @@
         "visual-development"
       ],
       "runtime_profiles": [
-        "echarts",
-        "excalidraw"
+        "echarts"
       ],
       "resources": [
         {
@@ -290,9 +286,7 @@
       "skills": [
         "ai-application-engineering"
       ],
-      "runtime_profiles": [
-        "openai-docs"
-      ],
+      "runtime_profiles": [],
       "resources": []
     },
     {

@@ -16,7 +16,7 @@
       "source": "./marketplace/plugins/codex-agent-workflow"
     },
     {
-      "description": "建構 LLM、Agent、工具呼叫、RAG 與 Embedding 應用, 搭配 OpenAI 文件查詢",
+      "description": "建構 LLM、Agent、工具呼叫、RAG 與 Embedding 應用",
       "name": "codex-ai-engineering",
       "source": "./marketplace/plugins/codex-ai-engineering"
     },
@@ -66,7 +66,7 @@
       "source": "./marketplace/plugins/codex-packaging-acceptance"
     },
     {
-      "description": "綜合研究資料與學習路徑, 搭配網頁搜尋、網頁擷取、arXiv、Reddit 與函式庫文件查詢",
+      "description": "綜合研究資料與學習路徑, 搭配網頁搜尋、網頁擷取、arXiv 與 Reddit",
       "name": "codex-research",
       "source": "./marketplace/plugins/codex-research"
     },
@@ -76,10 +76,10 @@
       "source": "./marketplace/plugins/codex-system-design"
     },
     {
-      "description": "在專案中建立資料視覺化、2D 動態與 Three.js 場景, 搭配 ECharts 與 Excalidraw",
+      "description": "在專案中建立資料視覺化、2D 動態與 Three.js 場景, 搭配 ECharts",
       "name": "codex-visual-development",
       "source": "./marketplace/plugins/codex-visual-development"
     }
   ],
-  "version": "0.29.1"
+  "version": "0.29.2"
 }
