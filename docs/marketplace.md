@@ -55,7 +55,7 @@ python -B mcp/scripts/prepare_marketplace.py --check
 python -B mcp/scripts/prepare_marketplace.py --write
 ```
 
-來源更新後生成並核對市集副本. GitHub 安裝來源在發布後使用原生市集 / Plugin 管理入口更新, 已註冊的本機市集使用限定快照同步, 操作見 [Plugin 更新](plugins.md#已安裝-plugin-更新). 重新載入 Codex 後確認啟用狀態與 Skill discovery
+來源更新後生成並核對市集副本. GitHub 安裝來源在發布後使用原生市集 / Plugin 管理入口更新, 已註冊的本機市集使用限定快照同步, 操作見 [Plugin 更新](plugins.md#updating-installed-plugins). 重新載入 Codex 後確認啟用狀態與 Skill discovery
 
 參考 [OpenAI Plugin 封裝與市集](https://developers.openai.com/plugins/build/plugins)
 
@@ -84,10 +84,6 @@ claude plugin list --json
 Codex GUI 的市集列可使用升級, Claude GUI 使用 Check for updates
 更新後重新載入目的用戶端, 比對原生清單與 manifest, 以實際 Skills 探索確認載入, 顯示名稱與快取路徑作為辨識用途
 
-## 網頁版 MCP
-
-公開目錄與 Skills 可透過 [唯讀市集 MCP](../mcp/marketplace-server/README.md) 提供搜尋、來源讀取及版本核對, Git 市集維持 Plugin 安裝與更新用途
-
-桌面保留原生 Git 市集, Cloud / Web 可使用 Private MCP, 兩端以同一完整 Toolkit commit 驗收, 更新順序、檔案核對與部分失敗處理見 [同版本更新](../mcp/marketplace-server/README.md#git-市集與-private-mcp-同版本更新)
+## 版本辨識
 
 選單技能名稱的 vX.Y.Z 是 Skill 版本, 懸停路徑中的版本是安裝的 Plugin 版本, 整包版本另見根目錄 VERSION, 三者獨立更新
