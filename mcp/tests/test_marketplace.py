@@ -111,6 +111,12 @@ class MarketplaceTests(unittest.TestCase):
     def test_source_change_updates_intact_mirror(self):
         market.synchronize(self.root, True)
         self.raw = b'changed Skill'
+        self.assertEqual(market.synchronize(self.root)['unbumped'], ['codex-example'])
+        with self.assertRaisesRegex(ValueError, 'Bump plugin.json version'):
+            market.synchronize(self.root, True)
+        self.assertEqual((self.root / 'marketplace/plugins/codex-example/skills/example/SKILL.md').read_bytes(), b'original Skill')
+        self.bundles[0]['manifest']['version'] = '1.0.1'
+        self.assertEqual(market.synchronize(self.root)['unbumped'], [])
         market.synchronize(self.root, True)
         self.assertEqual((self.root / 'marketplace/plugins/codex-example/skills/example/SKILL.md').read_bytes(), self.raw)
 

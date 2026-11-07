@@ -121,6 +121,27 @@ class RestoreChecks(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'credential-free'):
             self.preview(('plugins',))
 
+    def test_retired_items_are_removed_before_installs(self):
+        self.value['retired'] = {'skills': ['readme-maintainer'], 'plugins': ['codex-old-pack']}
+        self.value['skills'] = []
+        self.profile.write_text(json.dumps(self.value))
+        self.home.mkdir()
+        (self.home / 'skills/readme-maintainer').mkdir(parents=True)
+        (self.home / 'skills/readme-maintainer/SKILL.md').write_text('example')
+        (self.home / 'config.toml').write_text('[plugins."codex-old-pack@codex-toolkit"]\nenabled = true\n')
+        result = self.preview(('skills', 'plugins'))
+        removals = [row for row in result['steps'] if row.get('action') == 'remove']
+        self.assertEqual([row['item'] for row in removals], ['readme-maintainer', 'codex-old-pack'])
+        self.assertIn('--remove', removals[0]['command'])
+        self.assertEqual(removals[1]['command'][1:4], ['plugin', 'remove', 'codex-old-pack@codex-toolkit'])
+        self.assertEqual(result['blocked'], [])
+        self.value['retired'] = {'skills': ['agent-governance']}
+        self.value['plugins'] = ['codex-agent-workflow']
+        self.profile.write_text(json.dumps(self.value))
+        (self.home / 'skills/agent-governance').mkdir(parents=True)
+        (self.home / 'skills/agent-governance/SKILL.md').write_text('old copy')
+        self.assertEqual(self.preview(('plugins',))['blocked'], [])
+
     def test_explicit_plugin_subset_cannot_expand_profile(self):
         with self.git:
             with self.assertRaisesRegex(ValueError, 'outside the profile'):

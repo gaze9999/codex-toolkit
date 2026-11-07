@@ -1,7 +1,7 @@
 # 三類工具整合目錄
 
 `tooling/toolbox.py` 從正式來源產生 Skills、連接器與外掛程式三類目錄, 支援 Codex 與 Claude 的 manifest
-既有 Plugin 分組保持原樣, 獨立 Skills 產生各自的單一 Skill 外掛, 各資料夾都由相同來源生成
+Plugin 依工作領域分組, 目前每個 Skill 都有分組, 未歸入分組的 Skill 才會產生單一 Skill 外掛, 各資料夾都由相同來源生成
 
 ## 公開來源
 

@@ -244,6 +244,19 @@ class IntegrationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'unknown field'):
             codex.resolve(root, 'example', {'example': {'shell': 'unexpected'}})
 
+    def test_codex_resolves_only_fields_the_connector_references(self):
+        root = self.base / 'shared'
+        (root / '.claude-plugin').mkdir(parents=True)
+        (root / '.claude-plugin/plugin.json').write_text(json.dumps({'userConfig': {
+            'first_executable': {'type': 'file', 'required': True}, 'second_executable': {'type': 'file', 'required': True}}}), encoding='utf-8')
+        (root / '.mcp.json').write_text(json.dumps({'mcpServers': {
+            'first': {'command': '${user_config.first_executable}', 'args': []},
+            'second': {'command': '${user_config.second_executable}', 'args': []}}}), encoding='utf-8')
+        executable, args, _ = codex.resolve(root, 'first', {'first': {'first_executable': sys.executable}})
+        self.assertEqual((executable, args), (sys.executable, []))
+        with self.assertRaisesRegex(ValueError, 'Set second.second_executable'):
+            codex.resolve(root, 'second', {'second': {'first_executable': sys.executable}})
+
     def test_codex_optional_executable_and_root_defaults(self):
         root = self.base / 'optional'
         (root / '.claude-plugin').mkdir(parents=True)

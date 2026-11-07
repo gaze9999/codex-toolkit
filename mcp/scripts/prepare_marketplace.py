@@ -132,14 +132,33 @@ def owned_before(root, before):
         if actual_index != claude_index(previous_packages, next(iter(previous_versions))):
             raise ValueError('Claude marketplace catalog was edited or is unmanaged')
 
+def unbumped(before, expected):
+    """Plugins whose payload changed while plugin.json kept its version; the marketplace would not update them."""
+    stale = []
+    for plugin in sorted({Path(name).parts[2] for name in expected if name.startswith('marketplace/plugins/')}):
+        prefix = f'marketplace/plugins/{plugin}/'
+        previous = before.get(prefix + 'plugin.json')
+        if previous is None:
+            continue
+        if json.loads(previous)['version'] != json.loads(expected[prefix + 'plugin.json'])['version']:
+            continue
+        payload_names = {name for name in expected.keys() | before.keys() if name.startswith(prefix) and name != prefix + 'source-manifest.json'}
+        if any(expected.get(name) != before.get(name) for name in payload_names):
+            stale.append(plugin)
+    return stale
+
+
 def synchronize(root, write=False):
     root = root.resolve()
     expected = prepare(root)
     before = existing(root)
     changed = sorted(name for name in expected.keys() | before.keys() if expected.get(name) != before.get(name))
+    stale = unbumped(before, expected)
     if not write:
-        return {'status': 'pass' if not changed else 'stale', 'changed_files': changed}
+        return {'status': 'pass' if not changed else 'stale', 'changed_files': changed, 'unbumped': stale}
     owned_before(root, before)
+    if stale:
+        raise ValueError('Bump plugin.json version before regenerating changed payloads: ' + ', '.join(stale))
     if prepare(root) != expected or existing(root) != before:
         raise ValueError('Source or generated target changed after preview')
     for name in changed:

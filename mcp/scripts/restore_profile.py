@@ -57,7 +57,7 @@ def plan(root, profile, home, sections, apply=False, replace_agents=False,
     if home == Path(home.anchor) or home == root or home.is_relative_to(root):
         raise ValueError('Use a dedicated Codex home outside the toolkit checkout')
     value = json.loads(profile.read_text(encoding='utf-8'))
-    allowed = {'schema_version', 'toolkit_revision', 'agents_source', 'skills', 'plugins', 'tools', 'manual', 'marketplace'}
+    allowed = {'schema_version', 'toolkit_revision', 'agents_source', 'skills', 'plugins', 'tools', 'manual', 'marketplace', 'retired'}
     if set(value) - allowed or value.get('schema_version') != 1:
         raise ValueError('Unsupported profile fields or schema')
     revision = value.get('toolkit_revision', '')
@@ -81,6 +81,13 @@ def plan(root, profile, home, sections, apply=False, replace_agents=False,
         raise ValueError('Profile enables duplicate direct/Plugin Skills')
     if any(not (root / 'skills' / name / 'SKILL.md').is_file() for name in skills):
         raise ValueError('Profile refers to an unavailable Skill')
+    retired = value.get('retired', {})
+    if not isinstance(retired, dict) or set(retired) - {'skills', 'plugins'}:
+        raise ValueError('retired lists skills and plugins only')
+    retired_skills = names(retired.get('skills', []), 'retired skills')
+    retired_plugins = names(retired.get('plugins', []), 'retired plugins')
+    if set(retired_skills) & set(skills) or set(retired_plugins) & set(plugins):
+        raise ValueError('A retired item cannot also be selected')
     scripts = root / 'mcp/scripts'
     base = [sys.executable, '-X', 'utf8', '-B']
     steps, blocked, preserved = [], [], []
@@ -98,6 +105,12 @@ def plan(root, profile, home, sections, apply=False, replace_agents=False,
             command += ['--install'] + (['--replace'] if replace_agents else [])
         steps.append({'section': 'agents', 'command': command})
     if 'skills' in selected:
+        for name in retired_skills:
+            if (home / 'skills' / name / 'SKILL.md').is_file():
+                command = base + [str(scripts / 'manage_categories.py'), 'skills', name, '--codex-home', str(home), '--remove']
+                if apply:
+                    command += ['--apply', '--yes']
+                steps.append({'section': 'skills', 'item': name, 'action': 'remove', 'command': command})
         for name in skills:
             command = base + [str(scripts / 'manage_categories.py'), 'skills', name, '--codex-home', str(home)]
             if apply:
@@ -110,7 +123,7 @@ def plan(root, profile, home, sections, apply=False, replace_agents=False,
         duplicate = [key for key in enabled if key.split('@')[0] in plugins and not key.endswith('@codex-toolkit')]
         if duplicate:
             blocked.append('Existing Plugin owner must be migrated first: ' + ', '.join(sorted(duplicate)))
-        direct = {path.parent.name for path in (home / 'skills').glob('*/SKILL.md')}
+        direct = {path.parent.name for path in (home / 'skills').glob('*/SKILL.md')} - set(retired_skills)
         if direct & plugin_skills:
             blocked.append('Existing direct Skills overlap selected Plugins: ' + ', '.join(sorted(direct & plugin_skills)))
         market = settings.get('marketplaces', {}).get('codex-toolkit')
@@ -129,6 +142,10 @@ def plan(root, profile, home, sections, apply=False, replace_agents=False,
         if market and not matching:
             blocked.append('Review the existing codex-toolkit marketplace source before restoring')
         cli = shutil.which('codex') or 'codex'
+        for name in retired_plugins:
+            key = name + '@codex-toolkit'
+            if key in settings.get('plugins', {}):
+                steps.append({'section': 'plugins', 'item': name, 'action': 'remove', 'command': [cli, 'plugin', 'remove', key, '--json']})
         if not market:
             command = [cli, 'plugin', 'marketplace', 'add', wanted['source'], '--json']
             if wanted['source_type'] == 'git':

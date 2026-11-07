@@ -19,6 +19,31 @@ else:
 ROOT = Path(__file__).resolve().parents[2]
 
 
+def remove_skill(entry, home, apply, yes):
+    """Delete one installed managed Skill folder; custom files stop the removal."""
+    import shutil
+    target = Path(entry['installed_path']).parent
+    source = Path(entry['path']).parent
+    if not (target / 'SKILL.md').is_file():
+        print(json.dumps({'status': 'absent', 'name': entry['name'], 'path': str(target)}, ensure_ascii=False, indent=2))
+        return 0
+    if target.is_symlink() or not target.resolve().is_relative_to((home / 'skills').resolve()) or target.resolve() == (home / 'skills').resolve():
+        raise ValueError('只移除 Codex home 內的 Skill 鏡像')
+    managed = {p.relative_to(source).as_posix() for p in source.rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix not in {'.pyc', '.pyo'}}
+    present = {p.relative_to(target).as_posix() for p in target.rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix not in {'.pyc', '.pyo'}}
+    if present - managed:
+        raise ValueError('鏡像含自訂檔案, 請先另存: ' + ', '.join(sorted(present - managed)[:5]))
+    plan = {'kind': 'skill-remove', 'name': entry['name'], 'path': str(target), 'status': 'preview', 'files': len(present)}
+    print(json.dumps(plan, ensure_ascii=False, indent=2))
+    if not apply:return 0
+    if not yes and (not sys.stdin.isatty() or input('移除此 Skill 鏡像? [y/N] ').lower() not in {'y', 'yes'}):
+        print('未移除, 保留預覽')
+        return 0
+    shutil.rmtree(target)
+    print(json.dumps({**plan, 'status': 'removed', 'reload_required': True}, ensure_ascii=False, indent=2))
+    return 0
+
+
 def main(argv=None) -> int:
     arguments = sys.argv[1:] if argv is None else argv
     if arguments and arguments[0] == 'agents' and len(arguments) > 1 and arguments[1] in {'global', 'desktop'}:
@@ -37,7 +62,9 @@ def main(argv=None) -> int:
     parser.add_argument('--codex-home', type=Path)
     parser.add_argument('--apply', action='store_true', help='Apply the selected item after preview and confirmation')
     parser.add_argument('--yes', action='store_true', help='Confirm the selected --apply operation')
+    parser.add_argument('--remove', action='store_true', help='Remove the installed mirror of the selected managed Skill')
     args = parser.parse_args(arguments)
+    if args.remove and (args.category != 'skills' or not args.item):parser.error('--remove selects one managed Skill')
     if args.yes and not args.apply:parser.error('--yes requires --apply')
     if args.list and args.item:parser.error('Choose either --list or an item')
     if args.apply and not args.item:parser.error('--apply requires one selected item')
@@ -69,6 +96,8 @@ def main(argv=None) -> int:
         item = args.item
         selected = next((entry for entry in rows if entry['id'] == item or entry['name'] == item), None)
         if selected is None:raise ValueError('找不到選定項目, 請先使用 --list')
+        if args.remove:
+            return remove_skill(selected, home, args.apply, args.yes)
         plan = file_plan(selected, sync=True)
         print(json.dumps({key:value for key,value in plan.items() if not key.startswith('_')}, ensure_ascii=False, indent=2))
         if not args.apply or not plan['changed']:return 0

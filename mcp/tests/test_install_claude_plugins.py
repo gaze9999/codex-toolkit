@@ -55,6 +55,8 @@ class FakeClaude:
         if args[1] in ("install", "update"):
             scope = args[args.index("--scope") + 1]
             self.edit("plugins/installed_plugins.json", lambda d: d.setdefault("plugins", {}).update({plugin: [{"scope": scope, "version": self.versions[name]}]}))
+        if args[1] == "uninstall":
+            self.edit("plugins/installed_plugins.json", lambda d: d.get("plugins", {}).pop(plugin, None))
         values = dict(item.split("=", 1) for item in args[args.index("--config") + 1::2]) if "--config" in args else {}
         if args[1] == "configure":
             values = json.loads(stdin)
@@ -210,6 +212,21 @@ class ClaudePluginRestore(unittest.TestCase):
         self.assertEqual(self.fake.cwds[self.fake.calls.index(local)], project.resolve())
         with self.assertRaises(ValueError):
             installer.locate_project({"repository": "https://example.invalid/company.git"}, self.base, [])
+
+    def test_retired_plugin_is_uninstalled_from_user_scope(self):
+        self.profile.write_text(json.dumps({"marketplace": {"name": MARKET, "url": URL}, "plugins": ["runner"], "retired": ["skills"]}))
+        self.fake(None, ["plugin", "marketplace", "add", URL, "--scope", "user", "--json"])
+        self.fake(None, ["plugin", "install", f"skills@{MARKET}", "--scope", "user", "--json"])
+        code, output = self.run_tool()
+        self.assertEqual(code, 1)
+        self.assertIn(f"UNINSTALL skills@{MARKET} 1.0.0", output)
+        self.assertNotIn(f"CURRENT skills@{MARKET}", output)
+        code, output = self.run_tool("--apply")
+        self.assertEqual(code, 0)
+        self.assertIn(["plugin", "uninstall", f"skills@{MARKET}", "--scope", "user"], self.fake.calls)
+        self.assertNotIn(f"skills@{MARKET}", json.loads((self.home / "plugins/installed_plugins.json").read_text())["plugins"])
+        self.profile.write_text(json.dumps({"marketplace": {"name": MARKET, "url": URL}, "plugins": ["runner"], "retired": ["runner"]}))
+        self.assertEqual(self.run_tool()[0], 2)
 
     def test_preview_needs_no_cli_and_rejects_home_root(self):
         self.claude.unlink()

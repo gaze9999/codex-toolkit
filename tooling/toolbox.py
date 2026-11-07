@@ -288,8 +288,16 @@ def assemble(toolkit, private=None, audience='public'):
         connector_help += '\n| 已準備宣告 | 外掛與設定步驟 |\n| --- | --- |\n'
         connector_help += '\n'.join(f"| `{key}` | [{row['plugin']}](../{row['setup']}) |" for key, row in integration_rows.items()) + '\n'
     put('connectors/README.md', connector_help.encode('utf-8'))
-    plugin_rows_md = '\n'.join(f"| [{row['name']}]({row['name']}/) | {row['version']} | {row['visibility']} | {len(row['skills'])} |" for row in packages)
-    put('plugins/README.md', ('# 外掛程式\n\n每個資料夾保留 Codex manifest 與 Claude manifest, Skills 與資源共用同一份產生結果\nClaude 網頁版 / Desktop 每次上傳一個外掛, 本輪保留資料夾格式, 後續上傳時再依原生介面準備套件\n各工作流程所需的工具、帳戶、原生功能與常駐指示依目的端分別設定及驗收\n\n| 外掛 | 版本 | 範圍 | Skills |\n| --- | --- | --- | --- |\n' + plugin_rows_md + '\n').encode('utf-8'))
+    connectors_by_plugin = {}
+    for key, row in integration_rows.items():
+        connectors_by_plugin.setdefault(row['plugin'], []).append(key)
+
+    def plugin_row(item):
+        interface = json.loads(item['files']['plugin.json']).get('extensions', {}).get('com.openai', {}).get('interface', {})
+        return (f"| [{item['name']}]({item['name']}/) | {interface.get('displayName', '')} | {item['description']} | "
+                f"{'、'.join(f'`{s}`' for s in item['skills']) or '—'} | {'、'.join(f'`{c}`' for c in connectors_by_plugin.get(item['name'], [])) or '—'} | {item['version']} |")
+    plugin_rows_md = '\n'.join(plugin_row(item) for item in packages)
+    put('plugins/README.md', ('# 外掛程式\n\n外掛依工作領域分組, 每包同時含 Skill 與其呼叫的 MCP 連接器, 先依專案 AGENTS.md 指名的外掛選用, 未指名時依說明對應任務領域\n每個資料夾保留 Codex manifest 與 Claude manifest, Skills 與資源共用同一份產生結果\n各工作流程所需的工具、帳戶、原生功能與常駐指示依目的端分別設定及驗收\n\n| 外掛 | 標題 | 說明 | Skills | 連接器 | 版本 |\n| --- | --- | --- | --- | --- | --- |\n' + plugin_rows_md + '\n').encode('utf-8'))
     if personal:
         recorded = read_json(private, config['connector_inventory'])
         external = [{'id': row['id'], 'owner': row['owner'], 'evidence': 'recorded-inventory', 'loaded': None}
@@ -381,11 +389,35 @@ def verify(output):
     return {'status': 'verified', 'files': len(actual), 'audience': manifest['audience']}
 
 
-def prepare(toolkit, private, audience, output):
+def unbumped(previous, catalog, files):
+    """Plugins whose files changed while keeping the version recorded in the previous toolbox output."""
+    previous = previous.absolute()
+    manifest = read_json(previous, 'source-manifest.json')
+    if manifest.get('producer') != PRODUCER:
+        raise ValueError('Previous output is not a toolbox')
+    versions = {row['name']: row['version'] for row in read_json(previous, 'plugins/catalog.json')['items']}
+    stale = []
+    for row in catalog['categories']['plugins']:
+        name = row['name']
+        if versions.get(name) != row['version']:
+            continue
+        prefix = 'plugins/' + name + '/'
+        before = {path: entry['sha256'] for path, entry in manifest['files'].items() if path.startswith(prefix)}
+        after = {path: digest(raw) for path, raw in files.items() if path.startswith(prefix)}
+        if before != after:
+            stale.append(name)
+    return stale
+
+
+def prepare(toolkit, private, audience, output, previous=None):
     output = output.absolute()
     if output.exists() or any(p.is_symlink() or getattr(p, 'is_junction', lambda: False)() for p in (output, *output.parents)):
         raise ValueError('Use a new unlinked output directory')
     catalog, files = assemble(toolkit, private, audience)
+    if previous is not None:
+        stale = unbumped(previous, catalog, files)
+        if stale:
+            raise ValueError('Bump the plugin version before publishing changed content: ' + ', '.join(stale))
     output.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='.toolbox-', dir=output.parent) as temporary:
         staged = Path(temporary) / 'payload'
@@ -412,6 +444,7 @@ def main(argv=None):
     parser.add_argument('--private-root', type=Path)
     parser.add_argument('--audience', choices=('public', 'private', 'personal'), default='public')
     parser.add_argument('--output', type=Path)
+    parser.add_argument('--previous', type=Path, help='Last published toolbox; prepare stops when a plugin changed without a version bump')
     args = parser.parse_args(argv)
     try:
         if args.action in {'plan', 'publication-plan'}:
@@ -422,7 +455,7 @@ def main(argv=None):
         else:
             if args.output is None:
                 parser.error(args.action + ' requires --output')
-            result = verify(args.output) if args.action == 'verify' else prepare(args.toolkit_root, args.private_root, args.audience, args.output)
+            result = verify(args.output) if args.action == 'verify' else prepare(args.toolkit_root, args.private_root, args.audience, args.output, args.previous)
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0
     except (OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError) as error:

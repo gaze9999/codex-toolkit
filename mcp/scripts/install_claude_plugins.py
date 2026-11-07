@@ -7,6 +7,7 @@ marketplace auto-update and `<plugin>@inline` disables into settings.json with a
 Preview also reports MCP commands missing from PATH. With --apply, a profile `runtimes` recipe
 runs only after an interactive yes for that command. Plugins listed in `local_scope` never install
 at user scope; `--local <plugin>` installs one into a located project checkout with `--scope local`.
+Plugins listed in `retired` are uninstalled from user scope when still present.
 """
 
 from __future__ import annotations
@@ -41,9 +42,11 @@ def load_profile(path: Path) -> dict:
         raise ValueError("Profile needs marketplace.name and marketplace.url")
     if not market["url"].startswith(("https://", "git@")):
         raise ValueError("Marketplace url must be an https or git@ Git source")
-    for key in ("plugins", "exclude"):
+    for key in ("plugins", "exclude", "retired"):
         if key in value and not (isinstance(value[key], list) and all(isinstance(item, str) for item in value[key])):
             raise ValueError(f"Profile {key} must be a list of plugin names")
+    if set(value.get("retired", [])) & set(value.get("plugins", [])):
+        raise ValueError("A retired plugin cannot also be selected")
     for key in ("auto_update", "disable_inline"):
         if not isinstance(value.get(key, False), bool):
             raise ValueError(f"Profile {key} must be true or false")
@@ -137,7 +140,7 @@ def select(profile: dict, available: dict) -> list[str]:
     unknown = sorted(set(names) - set(available))
     if unknown:
         raise ValueError("Profile selects plugins missing from the marketplace: " + ", ".join(unknown))
-    excluded = set(profile.get("exclude", [])) | set(profile.get("local_scope", {}))
+    excluded = set(profile.get("exclude", [])) | set(profile.get("local_scope", {})) | set(profile.get("retired", []))
     return [name for name in names if name not in excluded]
 
 
@@ -171,6 +174,10 @@ def plan(home: Path, profile: dict, options: dict) -> tuple[list, list[str]]:
     configs = settings.get("pluginConfigs", {})
     actions, lines = [], []
     names = select(profile, available)
+    for name in profile.get("retired", []):
+        if f"{name}@{market}" in installed:
+            actions.append(("uninstall", f"{name}@{market}", None))
+            lines.append(f"UNINSTALL {name}@{market} {installed[f'{name}@{market}']}")
     for name in names:
         plugin, info = f"{name}@{market}", available[name]
         wanted = options.get(plugin, {})
@@ -337,6 +344,8 @@ def execute(claude: list[str], action: tuple, profile: dict) -> tuple[int, str]:
         return run_cli(claude, ["plugin", "install", target, "--scope", SCOPE, "--json", *configs])
     if kind == "update":
         return run_cli(claude, ["plugin", "update", target, "--scope", SCOPE, "--json"])
+    if kind == "uninstall":
+        return run_cli(claude, ["plugin", "uninstall", target, "--scope", SCOPE])
     if kind == "configure":
         return run_cli(claude, ["plugin", "configure", target, "--values-stdin"], json.dumps(data))
     raise ValueError(f"Unknown action: {kind}")

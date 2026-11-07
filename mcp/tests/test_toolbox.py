@@ -230,6 +230,19 @@ class ToolboxTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'hash mismatch'):
             toolbox.verify(output)
 
+    def test_previous_output_requires_a_version_bump_for_changed_plugins(self):
+        previous = self.base / 'previous'
+        toolbox.prepare(self.public, self.private, 'personal', previous)
+        self.write(self.public, 'skills/grouped/SKILL.md', self.skill('grouped') + '\nchanged\n')
+        with self.assertRaisesRegex(ValueError, 'codex-workflow'):
+            toolbox.prepare(self.public, self.private, 'personal', self.base / 'next', previous)
+        self.assertFalse((self.base / 'next').exists())
+        manifest = json.loads((self.public / 'plugins/workflow/plugin.json').read_text(encoding='utf-8'))
+        manifest['version'] = '0.1.1'
+        self.write(self.public, 'plugins/workflow/plugin.json', manifest)
+        toolbox.prepare(self.public, self.private, 'personal', self.base / 'next', previous)
+        self.assertTrue((self.base / 'next/plugins/codex-workflow/plugin.json').is_file())
+
     def test_existing_output_is_preserved(self):
         output = self.base / 'existing'
         output.mkdir()

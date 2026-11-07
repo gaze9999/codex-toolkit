@@ -39,8 +39,12 @@ def resolve(root, connector, settings):
     supplied = settings.get(connector, {})
     if not isinstance(supplied, dict) or set(supplied) - set(declared):
         raise ValueError('Settings contain an unknown field for ' + connector)
+    # userConfig is plugin-wide; only the fields this connector's declaration references are resolved.
+    referenced = set(re.findall(r'\$\{user_config\.([A-Za-z0-9_]+)\}', json.dumps(server)))
     values = {}
     for key, field in declared.items():
+        if key not in referenced:
+            continue
         value = supplied.get(key, '')
         if value == '':
             value = field.get('default', '')

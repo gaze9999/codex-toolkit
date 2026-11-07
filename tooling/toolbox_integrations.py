@@ -37,9 +37,16 @@ def augment(toolkit, private, packages, profile):
         if name not in indexed:
             manifest = {'name': name, 'version': version, 'description': entry['description'],
                         'author': {'name': profile['owner']}}
+            title = entry.get('title')
+            if title is not None and (not isinstance(title, str) or not title.strip()):
+                raise ValueError('Integration plugin title must be a non-empty string')
+            portable_manifest = {'$schema': SCHEMA, **manifest}
+            if title:
+                portable_manifest['extensions'] = {'com.openai': {'interface': {'displayName': title, 'shortDescription': entry['description']}}}
+                manifest = {**manifest, 'displayName': title}
             item = {'name': name, 'version': version, 'description': entry['description'],
                     'visibility': 'private', 'owner': 'private', 'skills': [], 'runtime_profiles': [],
-                    'files': {'plugin.json': encoded({'$schema': SCHEMA, **manifest}), '.claude-plugin/plugin.json': encoded(manifest)},
+                    'files': {'plugin.json': encoded(portable_manifest), '.claude-plugin/plugin.json': encoded(manifest)},
                     'provenance': {}}
             packages.append(item)
             indexed[name] = item
@@ -134,7 +141,8 @@ def augment(toolkit, private, packages, profile):
             manifest = json.loads(item['files']['.claude-plugin/plugin.json'])
             manifest['userConfig'] = config
             item['files']['.claude-plugin/plugin.json'] = encoded(manifest)
-            example = {key: {field: value.get('default', '') for field, value in config.items()}
+            example = {key: {field: config[field].get('default', '')
+                             for field in sorted(set(re.findall(r'\$\{user_config\.([A-Za-z0-9_]+)\}', json.dumps(server))), key=list(config).index)}
                        for key, server in servers.items() if 'command' in server}
             put(item, 'runtime/settings.example.json', encoded(example))
             put(item, 'runtime/codex.py', (toolkit / 'tooling/toolbox_codex.py').read_bytes(), 'toolkit', 'tooling/toolbox_codex.py')

@@ -68,6 +68,7 @@ python codex-toolkit/mcp/scripts/restore_profile.py --profile /path/to/private/p
 python codex-toolkit/mcp/scripts/restore_profile.py --profile /path/to/private/profiles/workstation.json --section tools --apply
 ```
 
+Profile 可選 `retired`: `{"skills": [...], "plugins": [...]}` 列出已併入 Plugin 的獨立 Skill 與已退役的 Plugin, 預覽先列出移除步驟 (`manage_categories.py skills NAME --remove`、`codex plugin remove`), 只處理仍存在的項目, 鏡像含自訂檔案時停止
 預設範圍是 agents、skills、plugins, 工具需明選 `--section tools`. 可重複 `--section` 限定處理範圍, `--codex-home` 可指定獨立安裝位置. Profile 是使用者審查的套用範圍, 安裝器逐項處理其選用項目
 
 Global、subagent 設定或參考文件內容不同時, agents 安裝器停止整批寫入, 明確取代使用 `--apply --replace-agents`, 安裝器先按相對路徑保存備份. 來源參考文件及目標路徑拒絕 symbolic link / junction, 目標其他檔案保留. Skill 使用既有 preview、備份與內容衝突檢查, Plugin 使用原生管理入口. 既有市集來源、其他 Plugin owner 或直接 Skill 重複時先處理衝突, 不自動開啟另一份來源
@@ -90,7 +91,7 @@ python codex-toolkit/mcp/scripts/render_desktop_settings.py --source-root /path/
 python codex-toolkit/mcp/scripts/install_claude_plugins.py --profile /path/to/private/claude-plugins.json --options /path/to/device-options.json --claude-home /path/to/.claude
 ```
 
-Profile 需要 `marketplace.name` 與 `marketplace.url`, 可選 `plugins`、`exclude`、`auto_update`、`disable_inline`, 省略 `plugins` 時選取市集全部外掛
+Profile 需要 `marketplace.name` 與 `marketplace.url`, 可選 `plugins`、`exclude`、`retired`、`auto_update`、`disable_inline`, 省略 `plugins` 時選取市集全部外掛, `retired` 列出的外掛若仍裝在使用者範圍則先 `UNINSTALL`
 可選 `runtimes` 以 `{命令: {windows|macos|linux: [[argv], ...]}}` 記錄 MCP 指令的安裝步驟, `{toolkit}` 代入 Toolkit 根目錄, 以 `?命令` 開頭的步驟只在該命令仍缺少時執行, 預覽列出 PATH 上找不到的指令為 `RUNTIME`, `--apply` 只在互動終端機回答 y 後執行對應步驟
 可選 `local_scope` 以 `{外掛: {repository: <Git URL>}}` 標記只能裝在專案的外掛, 這些外掛不會裝在使用者範圍, 預覽顯示 `LOCAL`, `--apply --local <外掛>` 依 Git origin 在 `--search-root` 下尋找 checkout, 或用 `--project-dir` 指定, 確認後在該 checkout 執行 `claude plugin install --scope local`
 選項檔為 `{"外掛": {"選項": "值"}}`, 或含 `pluginConfigs` 的 settings.json 備份, 只接受單行字串, sensitive 選項由原生介面輸入
