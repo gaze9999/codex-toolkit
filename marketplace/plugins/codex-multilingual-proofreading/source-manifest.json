@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "caf97a589028e66e7e84cafbb2c17ca5b00df7a149f04fa3f1b7f9dbc90dc0c6",
+      "sha256": "624f55704f86d92b987647276d2a8a25d412b88515292a0db681ccc91ca890da",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-multilingual-proofreading.png"
     },
     "plugin.json": {
-      "sha256": "b1e75af612f5f2f0b4088212fe28ac73ed9b12c750befd01d29dfac1490cc051",
+      "sha256": "036769b6c1707304444a58521f5bcc017126e5abf060dcb518c006fb2fbe13fe",
       "source": "plugins/multilingual-proofreading/plugin.json"
     },
     "resources/proofreading/authored-style.cjs": {
@@ -98,6 +98,6 @@
     "cspell"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.28.0",
-  "version": "0.1.18"
+  "toolkit_version": "0.29.0",
+  "version": "0.2.0"
 }

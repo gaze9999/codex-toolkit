@@ -1,0 +1,12 @@
+{
+  "author": {
+    "name": "gaze9999"
+  },
+  "description": "綜合研究資料與學習路徑, 搭配網頁搜尋、網頁擷取、arXiv、Reddit 與函式庫文件查詢",
+  "displayName": "研究查證",
+  "homepage": "https://github.com/gaze9999/codex-toolkit",
+  "license": "MIT",
+  "name": "codex-research",
+  "repository": "https://github.com/gaze9999/codex-toolkit",
+  "version": "0.1.0"
+}

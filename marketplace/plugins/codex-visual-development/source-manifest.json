@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "0efe2c2cff75c28b9d523f8bc19cabc67d8013cd56a5097363916768a47b889b",
+      "sha256": "904ffaeaf4abfa7271df62e8eb93f0098646115130868befc35c41cd4bd76b72",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-visual-development.png"
     },
     "plugin.json": {
-      "sha256": "01765dede8edb8e977693727d74b025498f023aa1b011b8ecae8632818e2954a",
+      "sha256": "76dceeb6a16bb309d8de10603ce0af267775bff01d73d5f63b057e2875068137",
       "source": "plugins/visual-development/plugin.json"
     },
     "resources/visual-runtime/README.md": {
@@ -89,8 +89,11 @@
   "plugin": "codex-visual-development",
   "producer": "codex-toolkit.marketplace.v1",
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
-  "runtime_profiles": [],
+  "runtime_profiles": [
+    "echarts",
+    "excalidraw"
+  ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.28.0",
-  "version": "0.3.0"
+  "toolkit_version": "0.29.0",
+  "version": "0.4.0"
 }

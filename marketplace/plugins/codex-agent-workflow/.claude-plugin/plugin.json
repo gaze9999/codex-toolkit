@@ -2,11 +2,11 @@
   "author": {
     "name": "gaze9999"
   },
-  "description": "Maintain instruction layers, prompts, Markdown goals/plans and scoped review/test briefs.",
-  "displayName": "Agent 工作流程",
+  "description": "維護 Agent 指示層級、提示詞、Markdown 目標與計畫, 以及審查與測試簡報",
+  "displayName": "代理流程",
   "homepage": "https://github.com/gaze9999/codex-toolkit",
   "license": "MIT",
   "name": "codex-agent-workflow",
   "repository": "https://github.com/gaze9999/codex-toolkit",
-  "version": "0.5.7"
+  "version": "0.6.0"
 }

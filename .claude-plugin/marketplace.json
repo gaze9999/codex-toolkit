@@ -6,60 +6,80 @@
   },
   "plugins": [
     {
-      "description": "Maintain instruction layers, prompts, Markdown goals/plans and scoped review/test briefs.",
+      "description": "查詢本機 Agent 活動統計, 盤點與清理 Codex 和 Claude 的本機產物, 並提供 RTK 工具",
+      "name": "codex-agent-operations",
+      "source": "./marketplace/plugins/codex-agent-operations"
+    },
+    {
+      "description": "維護 Agent 指示層級、提示詞、Markdown 目標與計畫, 以及審查與測試簡報",
       "name": "codex-agent-workflow",
       "source": "./marketplace/plugins/codex-agent-workflow"
     },
     {
-      "description": "Bounded OpenAI Decisions evaluation with an optional local CLI and MCP.",
-      "name": "codex-decisions-evaluation",
-      "source": "./marketplace/plugins/codex-decisions-evaluation"
+      "description": "建構 LLM、Agent、工具呼叫、RAG 與 Embedding 應用, 搭配 OpenAI 文件查詢",
+      "name": "codex-ai-engineering",
+      "source": "./marketplace/plugins/codex-ai-engineering"
     },
     {
-      "description": "Process documents, maintain specifications, visualize sources and count text tokens.",
+      "description": "產生編輯風格插圖, 建立與調整 Stable Diffusion 與 ComfyUI 工作流",
+      "name": "codex-creative-imaging",
+      "source": "./marketplace/plugins/codex-creative-imaging"
+    },
+    {
+      "description": "擷取本機文件、維護規格與既有文件、產出 PDF/DOCX/Markdown 交付物、維護 README 與授權檔, 並計算 Token",
       "name": "codex-documents-specifications",
       "source": "./marketplace/plugins/codex-documents-specifications"
     },
     {
-      "description": "Select risk-based checks, compare scoped environments and interpret existing validation evidence with explicit coverage and sampling limits.",
+      "description": "選擇測試策略、比對環境與既有驗證證據, 安裝與診斷開發工具",
       "name": "codex-environment-evidence",
       "source": "./marketplace/plugins/codex-environment-evidence"
     },
     {
-      "description": "Build Angular, React and Vue interfaces with UI/UX, i18n, accessibility and scoped browser checks.",
+      "description": "以 Jev 排序候選內容, 以 OpenAI Decisions 做有限範圍的語意判定",
+      "name": "codex-evaluation",
+      "source": "./marketplace/plugins/codex-evaluation"
+    },
+    {
+      "description": "實作 Angular、React 與 Vue 介面, 含 UI/UX、i18n、無障礙與瀏覽器診斷工具",
       "name": "codex-frontend-engineering",
       "source": "./marketplace/plugins/codex-frontend-engineering"
     },
     {
-      "description": "Rank approved optional context and perform bounded typed semantic evaluation.",
-      "name": "codex-jev-evaluation",
-      "source": "./marketplace/plugins/codex-jev-evaluation"
+      "description": "實作 Unity 專案, 模擬與調整遊戲經濟與進度平衡",
+      "name": "codex-game-development",
+      "source": "./marketplace/plugins/codex-game-development"
     },
     {
-      "description": "Query bounded local activity counts and source health without conversation content.",
-      "name": "codex-local-activity",
-      "source": "./marketplace/plugins/codex-local-activity"
-    },
-    {
-      "description": "Proofread Taiwan Traditional Chinese, English and Japanese while preserving authoritative copy.",
+      "description": "校對繁體中文、英文與日文文件的用語、標點、拼字與語法",
       "name": "codex-multilingual-proofreading",
       "source": "./marketplace/plugins/codex-multilingual-proofreading"
     },
     {
-      "description": "Assemble selected Plugin/application products and validate package sources and lifecycle.",
+      "description": "維護 AdGuard、uBlock、DNS 與 hosts 的封鎖與改寫規則",
+      "name": "codex-network-filters",
+      "source": "./marketplace/plugins/codex-network-filters"
+    },
+    {
+      "description": "組裝 Plugin 與應用程式套件, 驗收來源、版本與發布生命週期",
       "name": "codex-packaging-acceptance",
       "source": "./marketplace/plugins/codex-packaging-acceptance"
     },
     {
-      "description": "Maintain repository README and licensing documents with separate evidence and authorization boundaries.",
-      "name": "codex-project-documentation",
-      "source": "./marketplace/plugins/codex-project-documentation"
+      "description": "綜合研究資料與學習路徑, 搭配網頁搜尋、網頁擷取、arXiv、Reddit 與函式庫文件查詢",
+      "name": "codex-research",
+      "source": "./marketplace/plugins/codex-research"
     },
     {
-      "description": "Project-native data visualization, 2D motion and Three.js with scoped local previews.",
+      "description": "分析系統邊界、資料擁有權、介面、品質需求與架構取捨",
+      "name": "codex-system-design",
+      "source": "./marketplace/plugins/codex-system-design"
+    },
+    {
+      "description": "在專案中建立資料視覺化、2D 動態與 Three.js 場景, 搭配 ECharts 與 Excalidraw",
       "name": "codex-visual-development",
       "source": "./marketplace/plugins/codex-visual-development"
     }
   ],
-  "version": "0.28.0"
+  "version": "0.29.0"
 }

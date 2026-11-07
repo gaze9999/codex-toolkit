@@ -2,11 +2,11 @@
   "author": {
     "name": "gaze9999"
   },
-  "description": "Build Angular, React and Vue interfaces with UI/UX, i18n, accessibility and scoped browser checks.",
-  "displayName": "前端工程與瀏覽器診斷",
+  "description": "實作 Angular、React 與 Vue 介面, 含 UI/UX、i18n、無障礙與瀏覽器診斷工具",
+  "displayName": "前端工程",
   "homepage": "https://github.com/gaze9999/codex-toolkit",
   "license": "MIT",
   "name": "codex-frontend-engineering",
   "repository": "https://github.com/gaze9999/codex-toolkit",
-  "version": "0.6.7"
+  "version": "0.7.0"
 }

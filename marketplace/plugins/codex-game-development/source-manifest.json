@@ -1,0 +1,72 @@
+{
+  "files": {
+    ".claude-plugin/plugin.json": {
+      "sha256": "bd0e02e70dca91585012031ed6def5d2d61af8b8487f6fa6383e69dd0076b8d4",
+      "source": null
+    },
+    "LICENSE": {
+      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
+      "source": "LICENSE"
+    },
+    "plugin.json": {
+      "sha256": "550fd0d9fc9be639c490c80c18973891c6c0dfbdc71648f54b5b3f55233337c0",
+      "source": "plugins/game-development/plugin.json"
+    },
+    "skills/game-balance-simulation/SKILL.md": {
+      "sha256": "737506dac5cefee7f2830f051db59304d137926828a0fad614a4a10e689c98e3",
+      "source": "skills/game-balance-simulation/SKILL.md"
+    },
+    "skills/game-balance-simulation/agents/openai.yaml": {
+      "sha256": "1346aefc2c35b686592b9669dd2f4a8aeb9ee0a891a731db34dcbdac6dc4a6fb",
+      "source": "skills/game-balance-simulation/agents/openai.yaml"
+    },
+    "skills/game-balance-simulation/assets/icon-small.png": {
+      "sha256": "e0ac06495f9a2dce486cc0ea16769a94073254edb98b739f773dbbe9bee97321",
+      "source": "skills/game-balance-simulation/assets/icon-small.png"
+    },
+    "skills/game-balance-simulation/assets/icon-small.svg": {
+      "sha256": "f81c3ae26c5e7b7f4d8718afb2db67837bb505600011af4381ca6bc98f3df5b3",
+      "source": "skills/game-balance-simulation/assets/icon-small.svg"
+    },
+    "skills/game-balance-simulation/assets/icon.png": {
+      "sha256": "8ffd734bbffbaaea5f42a06965eee74d10ba91eff1f08137f378ec5ce20cf4ec",
+      "source": "skills/game-balance-simulation/assets/icon.png"
+    },
+    "skills/game-balance-simulation/assets/icon.svg": {
+      "sha256": "f81c3ae26c5e7b7f4d8718afb2db67837bb505600011af4381ca6bc98f3df5b3",
+      "source": "skills/game-balance-simulation/assets/icon.svg"
+    },
+    "skills/unity-development/SKILL.md": {
+      "sha256": "2e02feab407324ac86dbf51cb45cb62aa908629a2f2b82738bc94cf605690fa0",
+      "source": "skills/unity-development/SKILL.md"
+    },
+    "skills/unity-development/agents/openai.yaml": {
+      "sha256": "d7de3b37b7c09704770861f870ff16dfda6efc734d7d21ab93a61f3907aa23e6",
+      "source": "skills/unity-development/agents/openai.yaml"
+    },
+    "skills/unity-development/assets/icon-small.png": {
+      "sha256": "f67982d481012a3c6d6dbb79b9621ebb8fc8bc55aad6998800f30755cc1d455e",
+      "source": "skills/unity-development/assets/icon-small.png"
+    },
+    "skills/unity-development/assets/icon-small.svg": {
+      "sha256": "0a17e279ee67fc2bb9dd8f4631f98aca1f76d3e55adc86571ea4d76a8601e6e2",
+      "source": "skills/unity-development/assets/icon-small.svg"
+    },
+    "skills/unity-development/assets/icon.png": {
+      "sha256": "745de262c2e2d6be15b2dd94eb4a42fdbe03205421fed77ab0bef9ea43df75b0",
+      "source": "skills/unity-development/assets/icon.png"
+    },
+    "skills/unity-development/assets/icon.svg": {
+      "sha256": "469b144bcf143c45e43412f3353dc79627757f987d3a48b5d204e24d496b05ec",
+      "source": "skills/unity-development/assets/icon.svg"
+    }
+  },
+  "license": "MIT",
+  "plugin": "codex-game-development",
+  "producer": "codex-toolkit.marketplace.v1",
+  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
+  "runtime_profiles": [],
+  "source_state": "canonical-file-hashes",
+  "toolkit_version": "0.29.0",
+  "version": "0.1.0"
+}

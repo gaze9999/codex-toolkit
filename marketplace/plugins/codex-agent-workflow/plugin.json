@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-agent-workflow",
-  "version": "0.5.7",
-  "description": "Maintain instruction layers, prompts, Markdown goals/plans and scoped review/test briefs.",
+  "version": "0.6.0",
+  "description": "維護 Agent 指示層級、提示詞、Markdown 目標與計畫, 以及審查與測試簡報",
   "author": {
     "name": "gaze9999"
   },
@@ -10,8 +10,8 @@
   "extensions": {
     "com.openai": {
       "interface": {
-        "displayName": "Agent 工作流程",
-        "shortDescription": "Plan tasks and acceptance",
+        "displayName": "代理流程",
+        "shortDescription": "維護 Agent 指示層級、提示詞、Markdown 目標與計畫, 以及審查與測試簡報",
         "logo": "./assets/codex-agent-workflow.png",
         "composerIcon": "./assets/codex-agent-workflow.png",
         "brandColor": "#E8A36D",

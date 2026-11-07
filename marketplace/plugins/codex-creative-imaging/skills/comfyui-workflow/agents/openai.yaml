@@ -1,0 +1,9 @@
+interface:
+  display_name: "ComfyUI Workflow (v0.4.12)"
+  short_description: "Engineer reproducible Stable Diffusion workflows"
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon.png"
+  default_prompt: "Use $comfyui-workflow to inspect the current ComfyUI graph, model and custom-node versions, and hardware limits, then make and verify the smallest reproducible workflow change requested."
+
+policy:
+  allow_implicit_invocation: true

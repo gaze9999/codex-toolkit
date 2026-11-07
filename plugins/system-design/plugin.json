@@ -1,0 +1,21 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "codex-system-design",
+  "version": "0.1.0",
+  "description": "分析系統邊界、資料擁有權、介面、品質需求與架構取捨",
+  "author": {
+    "name": "gaze9999"
+  },
+  "repository": "https://github.com/gaze9999/codex-toolkit",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "系統設計",
+        "shortDescription": "分析系統邊界、資料擁有權、介面、品質需求與架構取捨",
+        "brandColor": "#E8A36D",
+        "websiteURL": "https://github.com/gaze9999/codex-toolkit"
+      }
+    }
+  },
+  "homepage": "https://github.com/gaze9999/codex-toolkit"
+}

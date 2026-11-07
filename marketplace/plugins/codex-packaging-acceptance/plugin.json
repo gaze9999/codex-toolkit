@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-packaging-acceptance",
-  "version": "0.2.6",
-  "description": "Assemble selected Plugin/application products and validate package sources and lifecycle.",
+  "version": "0.3.0",
+  "description": "組裝 Plugin 與應用程式套件, 驗收來源、版本與發布生命週期",
   "author": {
     "name": "gaze9999"
   },
@@ -10,8 +10,8 @@
   "extensions": {
     "com.openai": {
       "interface": {
-        "displayName": "封裝與發布驗收",
-        "shortDescription": "Assemble selected Plugin/application products and validate package sources and lifecycle.",
+        "displayName": "封裝驗收",
+        "shortDescription": "組裝 Plugin 與應用程式套件, 驗收來源、版本與發布生命週期",
         "logo": "./assets/codex-packaging-acceptance.png",
         "composerIcon": "./assets/codex-packaging-acceptance.png",
         "brandColor": "#E8A36D",

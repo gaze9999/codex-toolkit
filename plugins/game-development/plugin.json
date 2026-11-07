@@ -1,0 +1,21 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "codex-game-development",
+  "version": "0.1.0",
+  "description": "實作 Unity 專案, 模擬與調整遊戲經濟與進度平衡",
+  "author": {
+    "name": "gaze9999"
+  },
+  "repository": "https://github.com/gaze9999/codex-toolkit",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "遊戲開發",
+        "shortDescription": "實作 Unity 專案, 模擬與調整遊戲經濟與進度平衡",
+        "brandColor": "#E8A36D",
+        "websiteURL": "https://github.com/gaze9999/codex-toolkit"
+      }
+    }
+  },
+  "homepage": "https://github.com/gaze9999/codex-toolkit"
+}

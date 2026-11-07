@@ -1,0 +1,21 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "codex-creative-imaging",
+  "version": "0.1.0",
+  "description": "產生編輯風格插圖, 建立與調整 Stable Diffusion 與 ComfyUI 工作流",
+  "author": {
+    "name": "gaze9999"
+  },
+  "repository": "https://github.com/gaze9999/codex-toolkit",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "影像生成",
+        "shortDescription": "產生編輯風格插圖, 建立與調整 Stable Diffusion 與 ComfyUI 工作流",
+        "brandColor": "#E8A36D",
+        "websiteURL": "https://github.com/gaze9999/codex-toolkit"
+      }
+    }
+  },
+  "homepage": "https://github.com/gaze9999/codex-toolkit"
+}

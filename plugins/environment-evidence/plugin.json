@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-environment-evidence",
-  "version": "0.3.12",
-  "description": "Select risk-based checks, compare scoped environments and interpret existing validation evidence with explicit coverage and sampling limits.",
+  "version": "0.4.0",
+  "description": "選擇測試策略、比對環境與既有驗證證據, 安裝與診斷開發工具",
   "author": {
     "name": "gaze9999"
   },
@@ -10,8 +10,8 @@
   "extensions": {
     "com.openai": {
       "interface": {
-        "displayName": "環境與驗證證據",
-        "shortDescription": "Select risk-based checks, compare scoped environments and interpret existing validation evidence with explicit coverage and sampling limits.",
+        "displayName": "環境驗證",
+        "shortDescription": "選擇測試策略、比對環境與既有驗證證據, 安裝與診斷開發工具",
         "logo": "./assets/codex-environment-evidence.png",
         "composerIcon": "./assets/codex-environment-evidence.png",
         "brandColor": "#E8A36D",

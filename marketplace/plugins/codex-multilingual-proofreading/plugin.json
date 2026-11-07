@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-multilingual-proofreading",
-  "version": "0.1.18",
-  "description": "Proofread Taiwan Traditional Chinese, English and Japanese while preserving authoritative copy.",
+  "version": "0.2.0",
+  "description": "校對繁體中文、英文與日文文件的用語、標點、拼字與語法",
   "author": {
     "name": "gaze9999"
   },
@@ -11,7 +11,7 @@
     "com.openai": {
       "interface": {
         "displayName": "多語校對",
-        "shortDescription": "Proofread Taiwan Traditional Chinese, English and Japanese while preserving authoritative copy.",
+        "shortDescription": "校對繁體中文、英文與日文文件的用語、標點、拼字與語法",
         "logo": "./assets/codex-multilingual-proofreading.png",
         "composerIcon": "./assets/codex-multilingual-proofreading.png",
         "brandColor": "#E8A36D",

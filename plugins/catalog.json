@@ -2,35 +2,60 @@
   "schema_version": 1,
   "bundles": [
     {
-      "id": "packaging-acceptance",
-      "batch": "0",
+      "id": "agent-workflow",
+      "batch": "2",
       "status": "ready",
       "skills": [
-        "packaging-acceptance",
-        "plugin-packaging"
+        "agent-governance",
+        "coding-prompt",
+        "task-routing",
+        "task-guide"
       ],
       "runtime_profiles": [],
       "resources": [
         {
-          "source": "assets/branding/plugins/codex-packaging-acceptance.png",
+          "source": "assets/branding/plugins/codex-agent-workflow.png",
           "target": "assets"
         }
       ]
     },
     {
-      "id": "jev-evaluation",
-      "batch": "1A",
+      "id": "agent-operations",
+      "batch": "5",
       "status": "ready",
       "skills": [
-        "jev-evaluation"
+        "local-activity-query",
+        "agent-artifact-audit"
+      ],
+      "runtime_profiles": [
+        "rtk"
+      ],
+      "resources": [
+        {
+          "source": "assets/branding/plugins/codex-agent-operations.png",
+          "target": "assets"
+        }
+      ]
+    },
+    {
+      "id": "evaluation",
+      "batch": "5",
+      "status": "ready",
+      "skills": [
+        "jev-evaluation",
+        "decisions-evaluation"
       ],
       "runtime_profiles": [
         "jev"
       ],
       "resources": [
         {
-          "source": "assets/branding/plugins/codex-jev-evaluation.png",
+          "source": "assets/branding/plugins/codex-evaluation.png",
           "target": "assets"
+        },
+        {
+          "source": "python-tools/packages/decisions",
+          "target": "resources/decisions"
         }
       ]
     },
@@ -42,7 +67,10 @@
         "context-brief",
         "doc-updater",
         "local-document-processing",
-        "token-count"
+        "token-count",
+        "readme-maintainer",
+        "license-maintainer",
+        "document-production"
       ],
       "runtime_profiles": [
         "local-documents"
@@ -93,74 +121,6 @@
       ]
     },
     {
-      "id": "environment-evidence",
-      "batch": "1B",
-      "status": "ready",
-      "skills": [
-        "validation-evidence-review",
-        "test-strategy"
-      ],
-      "runtime_profiles": [
-        "workspace-inspection"
-      ],
-      "resources": [
-        {
-          "source": "assets/branding/plugins/codex-environment-evidence.png",
-          "target": "assets"
-        }
-      ]
-    },
-    {
-      "id": "frontend-engineering",
-      "batch": "1C",
-      "status": "ready",
-      "skills": [
-        "angular-development",
-        "angular-member-order",
-        "react-development",
-        "vue-development",
-        "ui-ux-design",
-        "internationalization-engineering",
-        "accessibility-engineering",
-        "playwright-cli"
-      ],
-      "runtime_profiles": [
-        "playwright",
-        "serena",
-        "edge-devtools"
-      ],
-      "resources": [
-        {
-          "source": "assets/branding/plugins/codex-frontend-engineering.png",
-          "target": "assets"
-        }
-      ],
-      "components": [
-        {
-          "source": "agents/references/angular-style.md",
-          "target": "resources/references/angular-style.md"
-        }
-      ]
-    },
-    {
-      "id": "agent-workflow",
-      "batch": "2",
-      "status": "ready",
-      "skills": [
-        "agent-governance",
-        "coding-prompt",
-        "task-routing",
-        "task-guide"
-      ],
-      "runtime_profiles": [],
-      "resources": [
-        {
-          "source": "assets/branding/plugins/codex-agent-workflow.png",
-          "target": "assets"
-        }
-      ]
-    },
-    {
       "id": "multilingual-proofreading",
       "batch": "2",
       "status": "ready",
@@ -183,52 +143,98 @@
       ]
     },
     {
-      "id": "local-activity",
-      "batch": "3",
+      "id": "environment-evidence",
+      "batch": "1B",
       "status": "ready",
       "skills": [
-        "local-activity-query"
+        "validation-evidence-review",
+        "test-strategy",
+        "development-tool-setup"
       ],
-      "runtime_profiles": [],
+      "runtime_profiles": [
+        "workspace-inspection"
+      ],
       "resources": [
         {
-          "source": "assets/branding/plugins/codex-local-activity.png",
+          "source": "assets/branding/plugins/codex-environment-evidence.png",
           "target": "assets"
         }
       ]
     },
     {
-      "id": "project-documentation",
-      "batch": "4",
+      "id": "packaging-acceptance",
+      "batch": "0",
       "status": "ready",
       "skills": [
-        "readme-maintainer",
-        "license-maintainer"
+        "packaging-acceptance",
+        "plugin-packaging"
       ],
       "runtime_profiles": [],
       "resources": [
         {
-          "source": "assets/branding/plugins/codex-project-documentation.png",
+          "source": "assets/branding/plugins/codex-packaging-acceptance.png",
           "target": "assets"
         }
       ]
     },
     {
-      "id": "decisions-evaluation",
-      "batch": "2",
+      "id": "research",
+      "batch": "5",
       "status": "ready",
       "skills": [
-        "decisions-evaluation"
+        "research-learning-synthesis"
+      ],
+      "runtime_profiles": [
+        "tavily",
+        "exa",
+        "firecrawl",
+        "arxiv",
+        "reddit",
+        "context7"
+      ],
+      "resources": []
+    },
+    {
+      "id": "system-design",
+      "batch": "5",
+      "status": "ready",
+      "skills": [
+        "system-design-analysis"
       ],
       "runtime_profiles": [],
+      "resources": []
+    },
+    {
+      "id": "frontend-engineering",
+      "batch": "1C",
+      "status": "ready",
+      "skills": [
+        "angular-development",
+        "angular-member-order",
+        "react-development",
+        "vue-development",
+        "ui-ux-design",
+        "internationalization-engineering",
+        "accessibility-engineering",
+        "playwright-cli"
+      ],
+      "runtime_profiles": [
+        "playwright",
+        "serena",
+        "edge-devtools",
+        "chrome-devtools",
+        "spartan"
+      ],
+      "components": [
+        {
+          "source": "agents/references/angular-style.md",
+          "target": "resources/references/angular-style.md"
+        }
+      ],
       "resources": [
         {
-          "source": "assets/branding/plugins/codex-decisions-evaluation.png",
+          "source": "assets/branding/plugins/codex-frontend-engineering.png",
           "target": "assets"
-        },
-        {
-          "source": "python-tools/packages/decisions",
-          "target": "resources/decisions"
         }
       ]
     },
@@ -240,7 +246,10 @@
         "data-visualization",
         "visual-development"
       ],
-      "runtime_profiles": [],
+      "runtime_profiles": [
+        "echarts",
+        "excalidraw"
+      ],
       "resources": [
         {
           "source": "assets/branding/plugins/codex-visual-development.png",
@@ -251,6 +260,50 @@
           "target": "resources/visual-runtime"
         }
       ]
+    },
+    {
+      "id": "creative-imaging",
+      "batch": "5",
+      "status": "ready",
+      "skills": [
+        "editorial-illustration",
+        "comfyui-workflow"
+      ],
+      "runtime_profiles": [],
+      "resources": []
+    },
+    {
+      "id": "game-development",
+      "batch": "5",
+      "status": "ready",
+      "skills": [
+        "unity-development",
+        "game-balance-simulation"
+      ],
+      "runtime_profiles": [],
+      "resources": []
+    },
+    {
+      "id": "ai-engineering",
+      "batch": "5",
+      "status": "ready",
+      "skills": [
+        "ai-application-engineering"
+      ],
+      "runtime_profiles": [
+        "openai-docs"
+      ],
+      "resources": []
+    },
+    {
+      "id": "network-filters",
+      "batch": "5",
+      "status": "ready",
+      "skills": [
+        "network-filter-rules"
+      ],
+      "runtime_profiles": [],
+      "resources": []
     }
   ],
   "management": "Codex /plugins",

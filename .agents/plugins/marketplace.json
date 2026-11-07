@@ -1,30 +1,42 @@
 {
   "interface": {
-    "displayName": "🧰 Codex Toolkit v0.28.0"
+    "displayName": "🧰 Codex Toolkit v0.29.0"
   },
   "name": "codex-toolkit",
   "plugins": [
     {
       "category": "Productivity",
-      "name": "codex-packaging-acceptance",
+      "name": "codex-agent-workflow",
       "policy": {
         "authentication": "ON_USE",
         "installation": "AVAILABLE"
       },
       "source": {
-        "path": "./marketplace/plugins/codex-packaging-acceptance",
+        "path": "./marketplace/plugins/codex-agent-workflow",
         "source": "local"
       }
     },
     {
       "category": "Productivity",
-      "name": "codex-jev-evaluation",
+      "name": "codex-agent-operations",
       "policy": {
         "authentication": "ON_USE",
         "installation": "AVAILABLE"
       },
       "source": {
-        "path": "./marketplace/plugins/codex-jev-evaluation",
+        "path": "./marketplace/plugins/codex-agent-operations",
+        "source": "local"
+      }
+    },
+    {
+      "category": "Productivity",
+      "name": "codex-evaluation",
+      "policy": {
+        "authentication": "ON_USE",
+        "installation": "AVAILABLE"
+      },
+      "source": {
+        "path": "./marketplace/plugins/codex-evaluation",
         "source": "local"
       }
     },
@@ -42,6 +54,18 @@
     },
     {
       "category": "Productivity",
+      "name": "codex-multilingual-proofreading",
+      "policy": {
+        "authentication": "ON_USE",
+        "installation": "AVAILABLE"
+      },
+      "source": {
+        "path": "./marketplace/plugins/codex-multilingual-proofreading",
+        "source": "local"
+      }
+    },
+    {
+      "category": "Productivity",
       "name": "codex-environment-evidence",
       "policy": {
         "authentication": "ON_USE",
@@ -49,6 +73,42 @@
       },
       "source": {
         "path": "./marketplace/plugins/codex-environment-evidence",
+        "source": "local"
+      }
+    },
+    {
+      "category": "Productivity",
+      "name": "codex-packaging-acceptance",
+      "policy": {
+        "authentication": "ON_USE",
+        "installation": "AVAILABLE"
+      },
+      "source": {
+        "path": "./marketplace/plugins/codex-packaging-acceptance",
+        "source": "local"
+      }
+    },
+    {
+      "category": "Productivity",
+      "name": "codex-research",
+      "policy": {
+        "authentication": "ON_USE",
+        "installation": "AVAILABLE"
+      },
+      "source": {
+        "path": "./marketplace/plugins/codex-research",
+        "source": "local"
+      }
+    },
+    {
+      "category": "Productivity",
+      "name": "codex-system-design",
+      "policy": {
+        "authentication": "ON_USE",
+        "installation": "AVAILABLE"
+      },
+      "source": {
+        "path": "./marketplace/plugins/codex-system-design",
         "source": "local"
       }
     },
@@ -66,66 +126,6 @@
     },
     {
       "category": "Productivity",
-      "name": "codex-agent-workflow",
-      "policy": {
-        "authentication": "ON_USE",
-        "installation": "AVAILABLE"
-      },
-      "source": {
-        "path": "./marketplace/plugins/codex-agent-workflow",
-        "source": "local"
-      }
-    },
-    {
-      "category": "Productivity",
-      "name": "codex-multilingual-proofreading",
-      "policy": {
-        "authentication": "ON_USE",
-        "installation": "AVAILABLE"
-      },
-      "source": {
-        "path": "./marketplace/plugins/codex-multilingual-proofreading",
-        "source": "local"
-      }
-    },
-    {
-      "category": "Productivity",
-      "name": "codex-local-activity",
-      "policy": {
-        "authentication": "ON_USE",
-        "installation": "AVAILABLE"
-      },
-      "source": {
-        "path": "./marketplace/plugins/codex-local-activity",
-        "source": "local"
-      }
-    },
-    {
-      "category": "Productivity",
-      "name": "codex-project-documentation",
-      "policy": {
-        "authentication": "ON_USE",
-        "installation": "AVAILABLE"
-      },
-      "source": {
-        "path": "./marketplace/plugins/codex-project-documentation",
-        "source": "local"
-      }
-    },
-    {
-      "category": "Productivity",
-      "name": "codex-decisions-evaluation",
-      "policy": {
-        "authentication": "ON_USE",
-        "installation": "AVAILABLE"
-      },
-      "source": {
-        "path": "./marketplace/plugins/codex-decisions-evaluation",
-        "source": "local"
-      }
-    },
-    {
-      "category": "Productivity",
       "name": "codex-visual-development",
       "policy": {
         "authentication": "ON_USE",
@@ -133,6 +133,54 @@
       },
       "source": {
         "path": "./marketplace/plugins/codex-visual-development",
+        "source": "local"
+      }
+    },
+    {
+      "category": "Productivity",
+      "name": "codex-creative-imaging",
+      "policy": {
+        "authentication": "ON_USE",
+        "installation": "AVAILABLE"
+      },
+      "source": {
+        "path": "./marketplace/plugins/codex-creative-imaging",
+        "source": "local"
+      }
+    },
+    {
+      "category": "Productivity",
+      "name": "codex-game-development",
+      "policy": {
+        "authentication": "ON_USE",
+        "installation": "AVAILABLE"
+      },
+      "source": {
+        "path": "./marketplace/plugins/codex-game-development",
+        "source": "local"
+      }
+    },
+    {
+      "category": "Productivity",
+      "name": "codex-ai-engineering",
+      "policy": {
+        "authentication": "ON_USE",
+        "installation": "AVAILABLE"
+      },
+      "source": {
+        "path": "./marketplace/plugins/codex-ai-engineering",
+        "source": "local"
+      }
+    },
+    {
+      "category": "Productivity",
+      "name": "codex-network-filters",
+      "policy": {
+        "authentication": "ON_USE",
+        "installation": "AVAILABLE"
+      },
+      "source": {
+        "path": "./marketplace/plugins/codex-network-filters",
         "source": "local"
       }
     }

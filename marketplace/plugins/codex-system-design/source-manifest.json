@@ -1,0 +1,48 @@
+{
+  "files": {
+    ".claude-plugin/plugin.json": {
+      "sha256": "30a1a6bff01569e50927de72e81898ecad922b398bfb83dc00b0648e041c4aa6",
+      "source": null
+    },
+    "LICENSE": {
+      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
+      "source": "LICENSE"
+    },
+    "plugin.json": {
+      "sha256": "4048b88b4eff9255e814cfb265658fb2636987b7d9c321086bde5b1804693ceb",
+      "source": "plugins/system-design/plugin.json"
+    },
+    "skills/system-design-analysis/SKILL.md": {
+      "sha256": "feb5b54c3822177ee3247ccdc3c1f8c61c68890e53179eac8c95add135653273",
+      "source": "skills/system-design-analysis/SKILL.md"
+    },
+    "skills/system-design-analysis/agents/openai.yaml": {
+      "sha256": "653a78c5abe4983174275a907c82f64bc120e5cfc21eac056dd1eea68738653a",
+      "source": "skills/system-design-analysis/agents/openai.yaml"
+    },
+    "skills/system-design-analysis/assets/icon-small.png": {
+      "sha256": "223683fb5f6d33984b0af40f1dc71f582f10fde25948bc0921329bae18d6e6da",
+      "source": "skills/system-design-analysis/assets/icon-small.png"
+    },
+    "skills/system-design-analysis/assets/icon-small.svg": {
+      "sha256": "a1abb6a79310c651083b22bb1370f74836868d1f3d0095a686eb1bf59cb2ddc8",
+      "source": "skills/system-design-analysis/assets/icon-small.svg"
+    },
+    "skills/system-design-analysis/assets/icon.png": {
+      "sha256": "2445d3e35f3f715aebcf1339307067e366ea7ca16dcfc52bee6c14a438526c52",
+      "source": "skills/system-design-analysis/assets/icon.png"
+    },
+    "skills/system-design-analysis/assets/icon.svg": {
+      "sha256": "a1abb6a79310c651083b22bb1370f74836868d1f3d0095a686eb1bf59cb2ddc8",
+      "source": "skills/system-design-analysis/assets/icon.svg"
+    }
+  },
+  "license": "MIT",
+  "plugin": "codex-system-design",
+  "producer": "codex-toolkit.marketplace.v1",
+  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
+  "runtime_profiles": [],
+  "source_state": "canonical-file-hashes",
+  "toolkit_version": "0.29.0",
+  "version": "0.1.0"
+}

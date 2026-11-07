@@ -1,0 +1,59 @@
+{
+  "files": {
+    ".claude-plugin/plugin.json": {
+      "sha256": "0112bf76b2e8409614f047308c873332b5137937f86156fd58f4a949d1a0cbcf",
+      "source": null
+    },
+    "LICENSE": {
+      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
+      "source": "LICENSE"
+    },
+    "plugin.json": {
+      "sha256": "bffa992e36d44b68e56524914fa64fdeeebb50ffe36a60bfe3d55f9e4b17b272",
+      "source": "plugins/research/plugin.json"
+    },
+    "skills/research-learning-synthesis/SKILL.md": {
+      "sha256": "2919e45e0c48c6c6c6e63976f718ed3e822bf5dd707cbc3d2709f7e814590401",
+      "source": "skills/research-learning-synthesis/SKILL.md"
+    },
+    "skills/research-learning-synthesis/agents/openai.yaml": {
+      "sha256": "402ae1dc30bf384aea75c105a65a10f87f2266a7bf6b58d0efe4f1efb2ed10cd",
+      "source": "skills/research-learning-synthesis/agents/openai.yaml"
+    },
+    "skills/research-learning-synthesis/assets/icon-small.png": {
+      "sha256": "430434f6946b84e10776443789c45b177621c3fce4f381c531d99c1411047738",
+      "source": "skills/research-learning-synthesis/assets/icon-small.png"
+    },
+    "skills/research-learning-synthesis/assets/icon-small.svg": {
+      "sha256": "b6df1fbef267f59971c4b883d2385cf5b9714267214f65df385c56f0c3a3eb95",
+      "source": "skills/research-learning-synthesis/assets/icon-small.svg"
+    },
+    "skills/research-learning-synthesis/assets/icon.png": {
+      "sha256": "aa52ffec0100bfadbaa4c71846b432b4a60e06dcc25b9529fcad0a57dc35a0a5",
+      "source": "skills/research-learning-synthesis/assets/icon.png"
+    },
+    "skills/research-learning-synthesis/assets/icon.svg": {
+      "sha256": "b6df1fbef267f59971c4b883d2385cf5b9714267214f65df385c56f0c3a3eb95",
+      "source": "skills/research-learning-synthesis/assets/icon.svg"
+    },
+    "skills/research-learning-synthesis/references/source-selection.md": {
+      "sha256": "48ad55f72a9f3ff4aefedf783ec460143455725509a3d9529b7f64fd3c369be1",
+      "source": "skills/research-learning-synthesis/references/source-selection.md"
+    }
+  },
+  "license": "MIT",
+  "plugin": "codex-research",
+  "producer": "codex-toolkit.marketplace.v1",
+  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
+  "runtime_profiles": [
+    "tavily",
+    "exa",
+    "firecrawl",
+    "arxiv",
+    "reddit",
+    "context7"
+  ],
+  "source_state": "canonical-file-hashes",
+  "toolkit_version": "0.29.0",
+  "version": "0.1.0"
+}

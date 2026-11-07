@@ -2,11 +2,11 @@
   "author": {
     "name": "gaze9999"
   },
-  "description": "Process documents, maintain specifications, visualize sources and count text tokens.",
-  "displayName": "文件與規格處理",
+  "description": "擷取本機文件、維護規格與既有文件、產出 PDF/DOCX/Markdown 交付物、維護 README 與授權檔, 並計算 Token",
+  "displayName": "文件規格",
   "homepage": "https://github.com/gaze9999/codex-toolkit",
   "license": "MIT",
   "name": "codex-documents-specifications",
   "repository": "https://github.com/gaze9999/codex-toolkit",
-  "version": "0.6.0"
+  "version": "0.7.0"
 }
