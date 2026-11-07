@@ -2,11 +2,11 @@
   "author": {
     "name": "gaze9999"
   },
-  "description": "建構 LLM、Agent、工具呼叫、RAG 與 Embedding 應用, 搭配 OpenAI 文件查詢",
+  "description": "建構 LLM、Agent、工具呼叫、RAG 與 Embedding 應用",
   "displayName": "模型應用",
   "homepage": "https://github.com/gaze9999/codex-toolkit",
   "license": "MIT",
   "name": "codex-ai-engineering",
   "repository": "https://github.com/gaze9999/codex-toolkit",
-  "version": "0.1.0"
+  "version": "0.1.1"
 }
