@@ -1,0 +1,12 @@
+{
+  "author": {
+    "name": "gaze9999"
+  },
+  "description": "查詢本機 Agent 活動統計, 盤點與清理 Codex 和 Claude 的本機產物, 並提供 RTK 工具",
+  "displayName": "代理維運",
+  "homepage": "https://github.com/gaze9999/codex-toolkit",
+  "license": "MIT",
+  "name": "codex-agent-operations",
+  "repository": "https://github.com/gaze9999/codex-toolkit",
+  "version": "0.1.0"
+}

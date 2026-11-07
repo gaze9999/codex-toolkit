@@ -2,7 +2,7 @@
 
 每個子目錄是一個可獨立安裝的 Skill, `SKILL.md` 定義啟用條件, `agents/openai.yaml` 保存介面資訊, 詳細流程依任務載入 `references/` 或 `scripts/`
 
-依獨立用途、輸入與驗收邊界選用 Skill, 同一流程的小型判斷放在條件式 references. Plugin 依用途與相依分組交付, 同一 Skill 選擇單一啟用來源. 分組與選用條件見 [Plugins](plugins.md#skill-邊界與選擇性啟用)
+依獨立用途、輸入與驗收邊界選用 Skill, 同一流程的小型判斷放在條件式 references. Plugin 依用途與相依分組交付, 同一 Skill 選擇單一啟用來源. 分組與選用條件見 [Plugins](plugins.md#skill-boundaries)
 
 調整指示時, 依 [代表任務比較](../skills/agent-governance/references/component-authoring.md#evaluate-instruction-utility) 核對版本相容、實際使用、必要行為及交付結果. 安裝數量、篇幅與單一 benchmark 平均值各有不同意義, 保留任務所需規則, 效益由相符的驗收與完整用量判斷
 

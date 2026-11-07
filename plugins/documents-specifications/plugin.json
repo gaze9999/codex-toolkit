@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-documents-specifications",
-  "version": "0.6.0",
-  "description": "Process documents, maintain specifications, visualize sources and count text tokens.",
+  "version": "0.7.0",
+  "description": "擷取本機文件、維護規格與既有文件、產出 PDF/DOCX/Markdown 交付物、維護 README 與授權檔, 並計算 Token",
   "author": {
     "name": "gaze9999"
   },
@@ -10,8 +10,8 @@
   "extensions": {
     "com.openai": {
       "interface": {
-        "displayName": "文件與規格處理",
-        "shortDescription": "Process documents, maintain specifications, visualize sources and count text tokens.",
+        "displayName": "文件規格",
+        "shortDescription": "擷取本機文件、維護規格與既有文件、產出 PDF/DOCX/Markdown 交付物、維護 README 與授權檔, 並計算 Token",
         "logo": "./assets/codex-documents-specifications.png",
         "composerIcon": "./assets/codex-documents-specifications.png",
         "brandColor": "#E8A36D",

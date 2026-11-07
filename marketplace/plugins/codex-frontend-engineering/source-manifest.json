@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "d102b4e78a664df29b091366baf500b33ae535881ee0e0e157ab75f4aa0e1df8",
+      "sha256": "b79bc3702bf4baddede7889c7f00e4dc0b5a16e867ba64b695f6d2509ae8947a",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-frontend-engineering.png"
     },
     "plugin.json": {
-      "sha256": "cff64a3fc7bd0d53c25d2ab0271fc02aff4f6a841d39666ad8deb08134a6acbc",
+      "sha256": "bf769ab5ff7c980dea558977ef0f135e6dfaea161a9e84c52ff9f2b529d6989b",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "resources/references/angular-style.md": {
@@ -292,9 +292,11 @@
   "runtime_profiles": [
     "playwright",
     "serena",
-    "edge-devtools"
+    "edge-devtools",
+    "chrome-devtools",
+    "spartan"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.28.0",
-  "version": "0.6.7"
+  "toolkit_version": "0.29.0",
+  "version": "0.7.0"
 }

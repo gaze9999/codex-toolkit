@@ -1,0 +1,12 @@
+{
+  "author": {
+    "name": "gaze9999"
+  },
+  "description": "產生編輯風格插圖, 建立與調整 Stable Diffusion 與 ComfyUI 工作流",
+  "displayName": "影像生成",
+  "homepage": "https://github.com/gaze9999/codex-toolkit",
+  "license": "MIT",
+  "name": "codex-creative-imaging",
+  "repository": "https://github.com/gaze9999/codex-toolkit",
+  "version": "0.1.0"
+}

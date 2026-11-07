@@ -30,8 +30,9 @@ from workspace_inspection_mcp import service as workspace_service
 class SourceChecks(unittest.TestCase):
     def test_public_batches_are_self_contained(self):
         packages, result = prepare(ROOT)
-        self.assertEqual(len(packages), 11)
-        self.assertIn("resources/decisions/src/codex_decisions/core.py", packages["decisions-evaluation"][0])
+        self.assertEqual(len(packages), 15)
+        self.assertIn("resources/decisions/src/codex_decisions/core.py", packages["evaluation"][0])
+        self.assertIn("skills/jev-evaluation/SKILL.md", packages["evaluation"][0])
         self.assertIn("resources/visual-runtime/src/codex_visual_runtime/core.py", packages["visual-development"][0])
         self.assertEqual(result["blocked"], [])
         frontend = packages["frontend-engineering"][0]
@@ -39,10 +40,13 @@ class SourceChecks(unittest.TestCase):
         self.assertFalse(any(path.startswith("agents/") for path in frontend))
         self.assertTrue(all("plugin.json" in files for files, _manifest in packages.values()))
         self.assertIn("resources/proofreading/zh-tw/protected-copy.cjs", packages["multilingual-proofreading"][0])
-        documentation, manifest = packages["project-documentation"]
+        documentation, manifest = packages["documents-specifications"]
         self.assertIn("skills/readme-maintainer/SKILL.md", documentation)
         self.assertIn("skills/license-maintainer/SKILL.md", documentation)
-        self.assertEqual(manifest["runtime_profiles"], [])
+        self.assertIn("skills/document-production/SKILL.md", documentation)
+        self.assertEqual(manifest["runtime_profiles"], ["local-documents"])
+        self.assertIn("skills/unity-development/SKILL.md", packages["game-development"][0])
+        self.assertEqual(json.loads(documentation["plugin.json"])["extensions"]["com.openai"]["interface"]["displayName"], "文件規格")
 
     def test_blocked_selection_is_rejected(self):
         with self.assertRaisesRegex(ValueError, "Unknown plugin"):
@@ -54,8 +58,8 @@ class SourceChecks(unittest.TestCase):
                 plugin_catalog.safe_source(ROOT, path)
 
     def test_config_does_not_claim_loaded_plugins(self):
-        rows = plugin_catalog.inventory(ROOT, {"plugins": {"codex-jev-evaluation@example": {"enabled": False}}, "_direct_skills": ["jev-evaluation"]})
-        row = next(row for row in rows if row["id"] == "jev-evaluation")
+        rows = plugin_catalog.inventory(ROOT, {"plugins": {"codex-evaluation@example": {"enabled": False}}, "_direct_skills": ["jev-evaluation"]})
+        row = next(row for row in rows if row["id"] == "evaluation")
         self.assertFalse(row["enabled"])
         self.assertIsNone(row["loaded"])
         self.assertEqual(row["direct_skills"], ["jev-evaluation"])

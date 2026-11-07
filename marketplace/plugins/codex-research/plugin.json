@@ -1,0 +1,21 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "codex-research",
+  "version": "0.1.0",
+  "description": "綜合研究資料與學習路徑, 搭配網頁搜尋、網頁擷取、arXiv、Reddit 與函式庫文件查詢",
+  "author": {
+    "name": "gaze9999"
+  },
+  "repository": "https://github.com/gaze9999/codex-toolkit",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "研究查證",
+        "shortDescription": "綜合研究資料與學習路徑, 搭配網頁搜尋、網頁擷取、arXiv、Reddit 與函式庫文件查詢",
+        "brandColor": "#E8A36D",
+        "websiteURL": "https://github.com/gaze9999/codex-toolkit"
+      }
+    }
+  },
+  "homepage": "https://github.com/gaze9999/codex-toolkit"
+}

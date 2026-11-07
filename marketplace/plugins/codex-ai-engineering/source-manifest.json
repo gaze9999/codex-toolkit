@@ -1,0 +1,66 @@
+{
+  "files": {
+    ".claude-plugin/plugin.json": {
+      "sha256": "2dafd96574abfaca61e8c52d09e94b9ce5b29e114ea344b3cb8b29467d390df0",
+      "source": null
+    },
+    "LICENSE": {
+      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
+      "source": "LICENSE"
+    },
+    "plugin.json": {
+      "sha256": "8c9486e1f156a88a428439bf32c79cf86d41c5afc4590fe72645cba5ed50a237",
+      "source": "plugins/ai-engineering/plugin.json"
+    },
+    "skills/ai-application-engineering/SKILL.md": {
+      "sha256": "aeba280c4f510e099b4b661a8f8932e422ff4d98f08bb69bd0818755252e18f6",
+      "source": "skills/ai-application-engineering/SKILL.md"
+    },
+    "skills/ai-application-engineering/agents/openai.yaml": {
+      "sha256": "4095987c2c2c2348123c5f27d950a1d6bf2f01ce4c53bcdf04f1f1c9e0e3f8ba",
+      "source": "skills/ai-application-engineering/agents/openai.yaml"
+    },
+    "skills/ai-application-engineering/assets/icon-small.png": {
+      "sha256": "acfe740e518be154ccac6c2f94365cf696d71e3e0c95dd0dcbad71ff16c68dcb",
+      "source": "skills/ai-application-engineering/assets/icon-small.png"
+    },
+    "skills/ai-application-engineering/assets/icon-small.svg": {
+      "sha256": "84e3728c3528f8bfbbfb276c624182d91f18fe4308aafa6047bc747a2b85b2c4",
+      "source": "skills/ai-application-engineering/assets/icon-small.svg"
+    },
+    "skills/ai-application-engineering/assets/icon.png": {
+      "sha256": "39580f03830ada5ca13a3cc4efeefc8278f1887d7917248c445ece9636f65785",
+      "source": "skills/ai-application-engineering/assets/icon.png"
+    },
+    "skills/ai-application-engineering/assets/icon.svg": {
+      "sha256": "845cbffb535d6c8c6565a77be783d79f709d4aa920f01e598c7f502622cc8047",
+      "source": "skills/ai-application-engineering/assets/icon.svg"
+    },
+    "skills/ai-application-engineering/references/agent-tool-systems.md": {
+      "sha256": "5d9e05855dd0cd70b3943a3a8712728cd498d6da13f1498242c3b97c9caad7d1",
+      "source": "skills/ai-application-engineering/references/agent-tool-systems.md"
+    },
+    "skills/ai-application-engineering/references/model-runtime.md": {
+      "sha256": "ea338c443727c347c773af3feda533e7536d000816fe3cc9ed24969fe02f8343",
+      "source": "skills/ai-application-engineering/references/model-runtime.md"
+    },
+    "skills/ai-application-engineering/references/openai-state-and-tools.md": {
+      "sha256": "5785b08427924840112f55b5bd02e1e66eba94e1c3cf3988ba51366b8ab4454d",
+      "source": "skills/ai-application-engineering/references/openai-state-and-tools.md"
+    },
+    "skills/ai-application-engineering/references/rag-systems.md": {
+      "sha256": "6f18bb057f5c1f77334872ae91294121a9ce5d3911c861abc4be94c0f5918563",
+      "source": "skills/ai-application-engineering/references/rag-systems.md"
+    }
+  },
+  "license": "MIT",
+  "plugin": "codex-ai-engineering",
+  "producer": "codex-toolkit.marketplace.v1",
+  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
+  "runtime_profiles": [
+    "openai-docs"
+  ],
+  "source_state": "canonical-file-hashes",
+  "toolkit_version": "0.29.0",
+  "version": "0.1.0"
+}

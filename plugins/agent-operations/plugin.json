@@ -1,0 +1,23 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "codex-agent-operations",
+  "version": "0.1.0",
+  "description": "查詢本機 Agent 活動統計, 盤點與清理 Codex 和 Claude 的本機產物, 並提供 RTK 工具",
+  "author": {
+    "name": "gaze9999"
+  },
+  "repository": "https://github.com/gaze9999/codex-toolkit",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "代理維運",
+        "shortDescription": "查詢本機 Agent 活動統計, 盤點與清理 Codex 和 Claude 的本機產物, 並提供 RTK 工具",
+        "logo": "./assets/codex-agent-operations.png",
+        "composerIcon": "./assets/codex-agent-operations.png",
+        "brandColor": "#E8A36D",
+        "websiteURL": "https://github.com/gaze9999/codex-toolkit"
+      }
+    }
+  },
+  "homepage": "https://github.com/gaze9999/codex-toolkit"
+}

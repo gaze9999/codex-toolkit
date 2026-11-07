@@ -1,0 +1,138 @@
+{
+  "files": {
+    ".claude-plugin/plugin.json": {
+      "sha256": "04f771a0acb0f0b2abd8d1c6fc852320f8c1bb7ba0778d42b10375dc9a25f3de",
+      "source": null
+    },
+    "LICENSE": {
+      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
+      "source": "LICENSE"
+    },
+    "assets/codex-evaluation.png": {
+      "sha256": "9e437aa3b30cb00c9cb265ff3062c884e28050a53ceab82a3f76a1a8ff80d370",
+      "source": "assets/branding/plugins/codex-evaluation.png"
+    },
+    "plugin.json": {
+      "sha256": "89f0814f91af17814c6daabe6ae58aaff7754321179e8235b7f0548a19dbe7a4",
+      "source": "plugins/evaluation/plugin.json"
+    },
+    "resources/decisions/README.md": {
+      "sha256": "4148af861afd8f3b2858422519ce11e88169aa34664cb4974fa870064644db0e",
+      "source": "python-tools/packages/decisions/README.md"
+    },
+    "resources/decisions/pyproject.toml": {
+      "sha256": "405ad22d303f35993ddb621a93e79e52290aa2cf00d57e9cdec6d34fa7875b94",
+      "source": "python-tools/packages/decisions/pyproject.toml"
+    },
+    "resources/decisions/src/codex_decisions/__init__.py": {
+      "sha256": "8471623e3558d82ab68cbef9f57acda5dc0cef3cf9727cbd7615172cd59e6d89",
+      "source": "python-tools/packages/decisions/src/codex_decisions/__init__.py"
+    },
+    "resources/decisions/src/codex_decisions/__main__.py": {
+      "sha256": "79ee6f134c5c5193377cf9b189cbdcc3e2095e49ba9cec310114441c15a917c4",
+      "source": "python-tools/packages/decisions/src/codex_decisions/__main__.py"
+    },
+    "resources/decisions/src/codex_decisions/cli.py": {
+      "sha256": "f64c365ca5968076566a6006d4245a467cdb623fae947d8e38ec3d17712ea341",
+      "source": "python-tools/packages/decisions/src/codex_decisions/cli.py"
+    },
+    "resources/decisions/src/codex_decisions/core.py": {
+      "sha256": "3a6aa26c6b145679f77274d6c3bfafe7a2b099464ff2ea3172c18cdb45492cd2",
+      "source": "python-tools/packages/decisions/src/codex_decisions/core.py"
+    },
+    "resources/decisions/src/codex_decisions/server.py": {
+      "sha256": "665cdc3c40698a3932e8366b68fe610b9ba78f760daf90f8249e5f03f7ed828e",
+      "source": "python-tools/packages/decisions/src/codex_decisions/server.py"
+    },
+    "skills/decisions-evaluation/SKILL.md": {
+      "sha256": "27a1910da7dbacf9036af814c184c9e6d754fb7064111eab31bcc484ee0996d3",
+      "source": "skills/decisions-evaluation/SKILL.md"
+    },
+    "skills/decisions-evaluation/agents/openai.yaml": {
+      "sha256": "b0aba8092d42339fa1dfcbb18c69f0d8c8446a4bc9b487dc0453b13838075d2b",
+      "source": "skills/decisions-evaluation/agents/openai.yaml"
+    },
+    "skills/decisions-evaluation/references/usage.md": {
+      "sha256": "fa9d49743b7b1b543b78d7367d9f9e197b640e6e84defdb15b57e4d4a283ab20",
+      "source": "skills/decisions-evaluation/references/usage.md"
+    },
+    "skills/jev-evaluation/LICENSE": {
+      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
+      "source": "skills/jev-evaluation/LICENSE"
+    },
+    "skills/jev-evaluation/README.md": {
+      "sha256": "42bf1079be481a28ff302c7d7c05cc84302b92f9daa43b1255eb51d50ed613f5",
+      "source": "skills/jev-evaluation/README.md"
+    },
+    "skills/jev-evaluation/SKILL.md": {
+      "sha256": "a33d9f9412d9ae9bd118fc98854b12039a6ed7c5bc14d605dad005b0742ebddc",
+      "source": "skills/jev-evaluation/SKILL.md"
+    },
+    "skills/jev-evaluation/agents/openai.yaml": {
+      "sha256": "68dd266ab2c7be0dc6a16f3ffd17995b0d855fa3b85630ab7b97c3820de4a5e3",
+      "source": "skills/jev-evaluation/agents/openai.yaml"
+    },
+    "skills/jev-evaluation/assets/icon-small.png": {
+      "sha256": "bb4d1c753ca258e1f49f69db1941267817c78288d01caea81a785e71700c1a0a",
+      "source": "skills/jev-evaluation/assets/icon-small.png"
+    },
+    "skills/jev-evaluation/assets/icon-small.svg": {
+      "sha256": "cc9ca20a8450f2cdb5cf4e0cdd3375667e4b73abbb48f16f14b54db7da976ec9",
+      "source": "skills/jev-evaluation/assets/icon-small.svg"
+    },
+    "skills/jev-evaluation/assets/icon.png": {
+      "sha256": "45eff36d92fac7632207e309abeaf3becaf022fc35d8b31fe0dd210c3de1564e",
+      "source": "skills/jev-evaluation/assets/icon.png"
+    },
+    "skills/jev-evaluation/assets/icon.svg": {
+      "sha256": "cc9ca20a8450f2cdb5cf4e0cdd3375667e4b73abbb48f16f14b54db7da976ec9",
+      "source": "skills/jev-evaluation/assets/icon.svg"
+    },
+    "skills/jev-evaluation/pyproject.toml": {
+      "sha256": "1d27c0b995553ccbb338c0b9b7e208d8885b0301ede6080bda797427819745b3",
+      "source": "skills/jev-evaluation/pyproject.toml"
+    },
+    "skills/jev-evaluation/references/usage.md": {
+      "sha256": "a3800d08110a55460bb6e713c61587e1f6647db6b70c2a6859b32e2fba294962",
+      "source": "skills/jev-evaluation/references/usage.md"
+    },
+    "skills/jev-evaluation/requirements.txt": {
+      "sha256": "896c7070ceadcc75e5174315eb778a393c426cac84a27834f7788c8103534898",
+      "source": "skills/jev-evaluation/requirements.txt"
+    },
+    "skills/jev-evaluation/scripts/__init__.py": {
+      "sha256": "d73e53b1134fc7a0cbe96cda0f050bbacac0e6cf7491034bd42eb2471edefbfe",
+      "source": "skills/jev-evaluation/scripts/__init__.py"
+    },
+    "skills/jev-evaluation/scripts/install_mcp.py": {
+      "sha256": "ca54c446a226e735c96c1136d28d25ce7b79298b5d8efe82e0e7a5e58bb00cdf",
+      "source": "skills/jev-evaluation/scripts/install_mcp.py"
+    },
+    "skills/jev-evaluation/scripts/jev.py": {
+      "sha256": "38bd590d4b7cef9bac2d576fe65437bf2a9cb87f260eca7f9c8bbc14a67b718d",
+      "source": "skills/jev-evaluation/scripts/jev.py"
+    },
+    "skills/jev-evaluation/scripts/jev_telemetry.py": {
+      "sha256": "e36d4c192499d53b2a7daf92a5a938981b569720cdc2130b4d2ce9b157ba719a",
+      "source": "skills/jev-evaluation/scripts/jev_telemetry.py"
+    },
+    "skills/jev-evaluation/scripts/mcp_server.py": {
+      "sha256": "7d9b05195edad6a6c5f80d5db0070ccc6bc72b0d984fa6fe1a3011fe2fed9e6c",
+      "source": "skills/jev-evaluation/scripts/mcp_server.py"
+    },
+    "skills/jev-evaluation/scripts/verify_mcp.py": {
+      "sha256": "bfa089305fccaeda99ef8035151318c649d726eecccc625e199c7e40d6e3b5a1",
+      "source": "skills/jev-evaluation/scripts/verify_mcp.py"
+    }
+  },
+  "license": "MIT",
+  "plugin": "codex-evaluation",
+  "producer": "codex-toolkit.marketplace.v1",
+  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
+  "runtime_profiles": [
+    "jev"
+  ],
+  "source_state": "canonical-file-hashes",
+  "toolkit_version": "0.29.0",
+  "version": "0.1.0"
+}

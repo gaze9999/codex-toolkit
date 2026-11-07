@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "de3b6d112ea37385132d6b92dc15e6582710485736c89b1d7258955d942aa183",
+      "sha256": "d0492215480eda18dbe043f3abd8f0767fc072f099fcf9c808dfd778a5a24830",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-documents-specifications.png"
     },
     "plugin.json": {
-      "sha256": "546e0c62b4baae120b785cb79daa83540891bd19f190c604e60e57744e7ddce6",
+      "sha256": "87d84917e57f8aa50fbe4ccfbdeede5983f99941035ee9448998bf4632e70339",
       "source": "plugins/documents-specifications/plugin.json"
     },
     "resources/token-count/VERSION": {
@@ -148,6 +148,82 @@
       "sha256": "a6b3d387db47029e3a01598306038013adc96a1c427dee274daba898fecef9dd",
       "source": "skills/doc-updater/scripts/write_markdown_sync_target.py"
     },
+    "skills/document-production/SKILL.md": {
+      "sha256": "769a6ed2410ce8d95ca8c6dc289952f6aebdef9fc15a9c1b1c919f63c1ad2adb",
+      "source": "skills/document-production/SKILL.md"
+    },
+    "skills/document-production/agents/openai.yaml": {
+      "sha256": "d66b35dac0be61f8c996d784a1e0f780003b945fcfd38841ef7f571eab5db124",
+      "source": "skills/document-production/agents/openai.yaml"
+    },
+    "skills/document-production/assets/icon-small.png": {
+      "sha256": "567ffb938c0e14d385b5b707232cd1a0b2dac9577f5ecb710e596f96b94ff8b5",
+      "source": "skills/document-production/assets/icon-small.png"
+    },
+    "skills/document-production/assets/icon-small.svg": {
+      "sha256": "b8375e95f1e603b83a64c19cd27a011ad3416db3988a52cfdd95ca404648cc20",
+      "source": "skills/document-production/assets/icon-small.svg"
+    },
+    "skills/document-production/assets/icon.png": {
+      "sha256": "e524f8b4e35610688e4b464cdaece6cf357642eb19d7461c4ab1d6cad128fd5d",
+      "source": "skills/document-production/assets/icon.png"
+    },
+    "skills/document-production/assets/icon.svg": {
+      "sha256": "912a8b228af5ee62941c67e02598f4e59426141c7fffc8e2a62417a9ca8ef74e",
+      "source": "skills/document-production/assets/icon.svg"
+    },
+    "skills/document-production/references/document-production-guidelines.md": {
+      "sha256": "5ce43c233d825b1eb81215d26a90f7e68f96b0593aec66e91c707fd133c7bb48",
+      "source": "skills/document-production/references/document-production-guidelines.md"
+    },
+    "skills/document-production/references/presentation.md": {
+      "sha256": "abf831e9d2a6d64898fdb799cb7a1cb75543cd8122a44120bf0f1c0ac5fa88b8",
+      "source": "skills/document-production/references/presentation.md"
+    },
+    "skills/document-production/requirements.txt": {
+      "sha256": "dce059bb39d30bb83f4c5c798e2396245b27b78f510054277e5b6a92391e8adf",
+      "source": "skills/document-production/requirements.txt"
+    },
+    "skills/document-production/scripts/validate_apa7.py": {
+      "sha256": "483aad04245700335c2f5c88c7c017c3999cd415901cb63aff81dc55ae598956",
+      "source": "skills/document-production/scripts/validate_apa7.py"
+    },
+    "skills/document-production/scripts/validate_docx.py": {
+      "sha256": "fdd8beed8ba86435e2101f6b47e928a1eef011ac51412ab44541e33e2ac59047",
+      "source": "skills/document-production/scripts/validate_docx.py"
+    },
+    "skills/document-production/scripts/validate_markdown.py": {
+      "sha256": "8195a3b0fc77f0a7a122bb54112dfbb4d65bfa07bf37a31e09b68fde3b1766e4",
+      "source": "skills/document-production/scripts/validate_markdown.py"
+    },
+    "skills/document-production/scripts/validate_pdf.py": {
+      "sha256": "78854d0408f9f0c7ba98648a82c8b40ae45273a6165d7e526786726a19f51439",
+      "source": "skills/document-production/scripts/validate_pdf.py"
+    },
+    "skills/license-maintainer/SKILL.md": {
+      "sha256": "03ab9ce88a229a4a1a99c16bf8172b54089bf28d95767da3cd364b4a4db33383",
+      "source": "skills/license-maintainer/SKILL.md"
+    },
+    "skills/license-maintainer/agents/openai.yaml": {
+      "sha256": "47adf94531949ee6e3d82bc5784e11783df891c04c53baa5b2153c0d79d25076",
+      "source": "skills/license-maintainer/agents/openai.yaml"
+    },
+    "skills/license-maintainer/assets/icon-small.png": {
+      "sha256": "def29a0eb50efdf3b6803e78d24406983786c71f937b98a7606b5adacf780be1",
+      "source": "skills/license-maintainer/assets/icon-small.png"
+    },
+    "skills/license-maintainer/assets/icon-small.svg": {
+      "sha256": "6bd43b6e786fef1ffd819f475d9602d1695b5f8b9843d86036f5be5eb167e8a9",
+      "source": "skills/license-maintainer/assets/icon-small.svg"
+    },
+    "skills/license-maintainer/assets/icon.png": {
+      "sha256": "7c4f83860912f47942a1e6fe7e687aea792c9372f3c546220026e60529a717ef",
+      "source": "skills/license-maintainer/assets/icon.png"
+    },
+    "skills/license-maintainer/assets/icon.svg": {
+      "sha256": "6bd43b6e786fef1ffd819f475d9602d1695b5f8b9843d86036f5be5eb167e8a9",
+      "source": "skills/license-maintainer/assets/icon.svg"
+    },
     "skills/local-document-processing/SKILL.md": {
       "sha256": "9aee89dc0079369b61edccdfaaecd6e6b6e33b6ddaf29971b5562a60700bee2c",
       "source": "skills/local-document-processing/SKILL.md"
@@ -159,6 +235,38 @@
     "skills/local-document-processing/references/source-matching.md": {
       "sha256": "dbb92239ec91e2509a5864a264503a0bbd844d827f98efb44a8fb7c1e4bcbf0a",
       "source": "skills/local-document-processing/references/source-matching.md"
+    },
+    "skills/readme-maintainer/SKILL.md": {
+      "sha256": "04f4463e5bcee98731888ed291ecacc9726d5dafd3fffc2cbdb7c149a01847d3",
+      "source": "skills/readme-maintainer/SKILL.md"
+    },
+    "skills/readme-maintainer/agents/openai.yaml": {
+      "sha256": "20ac07c97600292c2ad052a390374cab932a1a610ff90840df1713fa459917cd",
+      "source": "skills/readme-maintainer/agents/openai.yaml"
+    },
+    "skills/readme-maintainer/assets/icon-small.png": {
+      "sha256": "40fa7a14785cf08b528eb773fa15ed36433df6601024a47f0f706a2d8a0c545c",
+      "source": "skills/readme-maintainer/assets/icon-small.png"
+    },
+    "skills/readme-maintainer/assets/icon-small.svg": {
+      "sha256": "9c464980d56e1b32d8d0352a246a3b292d082a60d2c901a0123ef9d909fd7665",
+      "source": "skills/readme-maintainer/assets/icon-small.svg"
+    },
+    "skills/readme-maintainer/assets/icon.png": {
+      "sha256": "35fae5aacfed52b1c235c221ac5a3ce1887e731b7d53d2844fe29b07aeb91bec",
+      "source": "skills/readme-maintainer/assets/icon.png"
+    },
+    "skills/readme-maintainer/assets/icon.svg": {
+      "sha256": "4991987c662526729b0517efb8a683c7863198908dcd3fa12676191c4ece11ff",
+      "source": "skills/readme-maintainer/assets/icon.svg"
+    },
+    "skills/readme-maintainer/references/presentation.md": {
+      "sha256": "62d1022820074a8b2badc752c7301a8a1387b0e9f39f60a28419da7235c3440f",
+      "source": "skills/readme-maintainer/references/presentation.md"
+    },
+    "skills/readme-maintainer/references/release-readiness.md": {
+      "sha256": "4b1aacdba35e0f375c8c7497a35ee41fd362ea3e4ae7837286e41b91ae0bdd12",
+      "source": "skills/readme-maintainer/references/release-readiness.md"
     },
     "skills/token-count/SKILL.md": {
       "sha256": "f0ce5800b50846ad69115058754f03ab96c26b605f75ca277746b23715dc182c",
@@ -185,6 +293,6 @@
     "local-documents"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.28.0",
-  "version": "0.6.0"
+  "toolkit_version": "0.29.0",
+  "version": "0.7.0"
 }
