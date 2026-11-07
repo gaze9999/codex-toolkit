@@ -115,6 +115,70 @@ class SessionEventTests(unittest.TestCase):
             self.assertIn("Doc lint skipped", note["hookSpecificOutput"]["additionalContext"])
             self.assertEqual({}, self.event("PostToolUse", "codex", tool_name="Write", tool_input={"file_path": str(doc)}))
 
+    def fake_textlint(self):
+        runner = self.base / "fake_textlint.py"
+        runner.write_text(FAKE_TEXTLINT, encoding="utf-8")
+        prefix = self.base / "npm"
+        for config in hooks.LINT_CONFIGS.values():
+            (prefix / config).parent.mkdir(parents=True, exist_ok=True)
+            (prefix / config).write_text("{}", encoding="utf-8")
+        return patch.object(hooks, "textlint_tools", return_value=(sys.executable, runner, prefix))
+
+    def test_shell_edits_in_a_nested_repository_are_linted_after_the_turn_baseline(self):
+        nested = self.base / "nested"
+        (nested / "docs").mkdir(parents=True)
+        subprocess.run([self.git, "init", "-q"], cwd=nested, check=True)
+        older = nested / "docs/older.md"
+        older.write_text("早就改過。\n", encoding="utf-8")
+        with self.fake_textlint():
+            self.event("UserPromptSubmit", prompt="寫文件", cwd=str(self.base))
+            # A repository first entered by a shell command has no baseline, so its existing change is linted once.
+            note = self.event("PostToolUse", tool_name="Bash", cwd=str(self.base), tool_input={"command": f'cd "{nested}" && git status'})
+            self.assertIn("older.md (zh-TW)", note["hookSpecificOutput"]["additionalContext"])
+            self.event("UserPromptSubmit", prompt="再寫", cwd=str(self.base))
+            doc = nested / "docs/new.md"
+            doc.write_text("新增內容。\n", encoding="utf-8")
+            note = self.event("PostToolUse", tool_name="PowerShell", cwd=str(self.base),
+                              tool_input={"command": f"Set-Location '{nested}'; python write.py"})["hookSpecificOutput"]["additionalContext"]
+            self.assertIn("new.md (zh-TW): 1 issue(s)", note)
+            self.assertNotIn("older.md", note)
+            named = self.repo / "docs/named.md"
+            named.write_text("點名。\n", encoding="utf-8")
+            note = self.event("PostToolUse", tool_name="Bash", tool_input={"command": "python -c 'x' > docs/named.md"})
+            self.assertIn("named.md (zh-TW)", note["hookSpecificOutput"]["additionalContext"])
+        self.assertEqual({}, self.event("PostToolUse", tool_name="Read", tool_input={"file_path": str(named)}))
+
+    def test_stop_asks_once_to_fix_this_turns_documents(self):
+        self.policy["doc_lint_stop"] = True
+        self.policy["silent"] = True
+        doc = self.repo / "docs/guide.md"
+        with self.fake_textlint():
+            self.event("UserPromptSubmit", prompt="寫文件")
+            doc.write_text("完成同步。\n", encoding="utf-8")
+            result = self.event("Stop", stop_hook_active=False)
+            self.assertEqual("block", result["decision"])
+            self.assertIn("guide.md (1)", result["reason"])
+            self.assertNotIn("decision", self.event("Stop", stop_hook_active=False))
+            doc.write_text("完成同步, 另有一處。\n", encoding="utf-8")
+            self.assertNotIn("decision", self.event("Stop", stop_hook_active=True))
+            doc.write_text("完成同步\n", encoding="utf-8")
+            self.assertNotIn("decision", self.event("Stop", stop_hook_active=False))
+            self.event("UserPromptSubmit", prompt="下一輪")
+            self.assertNotIn("decision", self.event("Stop", stop_hook_active=False))
+        self.policy["doc_lint_stop"] = False
+        doc.write_text("又改了。\n", encoding="utf-8")
+        with self.fake_textlint():
+            self.assertNotIn("decision", self.event("Stop", stop_hook_active=False))
+
+    def test_shell_targets_read_directories_and_markdown_names(self):
+        directories, files = hooks.shell_targets({"tool_name": "Bash", "tool_input": {
+            "command": "cd sub && git -C other diff; cat \"a b.md\" docs/x.md https://e.test/y.mdx"}}, self.base)
+        self.assertEqual([self.base, self.base / "sub", self.base / "sub/other"], directories)
+        self.assertEqual([self.base / "sub/docs/x.md"], files[-1:])
+        self.assertEqual(([], []), hooks.shell_targets({"tool_name": "Edit", "tool_input": {"command": "cd x"}}, self.base))
+        if hooks.os.name == "nt":
+            self.assertEqual(Path("D:/work"), hooks.native_path("/d/work", self.base))
+
 
 class SessionInstallTests(unittest.TestCase):
     def setUp(self):
@@ -163,6 +227,22 @@ class SessionInstallTests(unittest.TestCase):
         without_note = {key: value for key, value in self.profile.items() if key != "delivery_note"}
         with self.assertRaises(ValueError):
             installer.validate_profile(without_note)
+        for change in ({"doc_lint_stop": "yes"}, {"doc_lint": False, "doc_lint_stop": True}):
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                installer.validate_profile(dict(self.profile, **change))
+
+    def test_doc_lint_registers_shell_tools_and_the_turn_baseline(self):
+        self.profile = {key: value for key, value in self.profile.items() if key not in ("delivery_note", "delivery_entries")}
+        self.profile["doc_lint_stop"] = True
+        for client in ("claude", "codex"):
+            groups = self.groups(client)
+            self.assertIn("UserPromptSubmit", groups)
+            self.assertEqual(installer.SHELL_MATCHER, groups["PostToolUse"]["matcher"])
+        self.profile["doc_lint"] = False
+        self.profile.pop("doc_lint_stop")
+        groups = self.groups("claude")
+        self.assertNotIn("UserPromptSubmit", groups)
+        self.assertEqual(installer.EVENTS["PostToolUse"], groups["PostToolUse"]["matcher"])
 
 
 if __name__ == "__main__":

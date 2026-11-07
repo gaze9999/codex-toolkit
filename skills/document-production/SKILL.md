@@ -3,7 +3,7 @@ name: document-production
 description: Create requested downloadable PDF, DOCX or Markdown artifacts from supplied content and sources. Use for finished document delivery, not chat-only drafts, source extraction or repository README/license maintenance.
 metadata:
   short-description: Default-PDF document production pipeline with DOCX and Markdown support
-  version: "0.4.18"
+  version: "0.4.19"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -31,7 +31,7 @@ Write the supported action or conclusion directly. Include a limitation only whe
 - DOCX: use native Heading, TOC, and page-number fields; render when needed to confirm pagination and contents.
 - Markdown: keep a continuous heading hierarchy and do not simulate pagination or fixed paper layout.
 - Across formats, keep facts, sections, and citations consistent while allowing format-specific layout differences.
-- Check authored prose with available textlint or an equivalent language checker, then review meaning and Taiwan terminology manually. Preserve source quotes, legal text, code, identifiers and English/Japanese conventions. Check PDF/DOCX source prose before rendering. Report unavailable, failed or unchecked coverage. Sensitive content may skip tool processing and temporary files; review it manually and report the exception.
+- Before delivery, check every authored or changed passage with the available textlint MCP (`lintText` / `lintFile`) or local textlint CLI using the maintained language profile, whatever wrote the file: editor tools, shell commands, scripts or generators. Lifecycle hooks may cover only some of these writes and are not a substitute. Check PDF/DOCX/HTML source prose before rendering. Resolve style findings such as filler prefaces and boilerplate disclaimers by stating the concrete condition or removing the phrase, then review meaning and Taiwan terminology manually. Preserve source quotes, legal text, code, identifiers and English/Japanese conventions. Report unavailable, failed or unchecked coverage. Sensitive content may skip tool processing and temporary files; review it manually and report the exception.
 
 For scientific, medical, health, pharmaceutical, or psychological content, use APA 7 in-text citations and references. All other factual claims also require traceable sources that directly support them.
 

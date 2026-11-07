@@ -17,7 +17,7 @@ import subprocess
 import sys
 import tempfile
 
-VERSION = "0.7.0"
+VERSION = "0.8.0"
 EVENTS = ("SessionStart", "UserPromptSubmit", "PreToolUse", "PostToolUse", "SubagentStart", "PreCompact",
           "InstructionsLoaded", "ConfigChange", "Stop")
 # Claude uses PreCompact stdout as plain-text summary instructions; every other event prints JSON.
@@ -27,6 +27,7 @@ CJK = re.compile("[㐀-鿿]")
 KANA = re.compile("[぀-ヿ]")
 LATIN = re.compile("[A-Za-z]{3}")
 DOC_LINT_FILES = 5
+DOC_SCAN_FILES = 50
 MAX_DOC = 1024 * 1024
 MAX_INPUT = 2 * 1024 * 1024
 MAX_DIFF = 8 * 1024 * 1024
@@ -34,6 +35,8 @@ MAX_TRANSCRIPT = 16 * 1024 * 1024
 FILE_KEYS = ("file_path", "notebook_path", "path")
 USAGE_FIELDS = ("input_tokens", "cached_input_tokens", "output_tokens", "total_tokens")
 EDIT_TOOLS = ("Edit", "Write", "MultiEdit", "NotebookEdit", "apply_patch")
+SHELL_DIRECTORY = ("cd", "chdir", "pushd", "set-location", "sl")
+MD_TOKEN = re.compile(r"[^\s'\"`<>|;&()=,]+\.md\b", re.I)
 SHELL_SEPARATOR = re.compile(r"&&|\|\||[;|\n]")
 PATCH_FILE = re.compile(r"^\*\*\* (?:Add|Update|Delete) File: (.+)$|^\*\*\* Move to: (.+)$", re.M)
 AI_TRAILER = re.compile(r"co-authored-by:[^\n]*(?:claude|codex|chatgpt|openai|anthropic|copilot|\bgpt)", re.I)
@@ -449,32 +452,106 @@ def spelling(node, runner, prefix, path):
     return re.findall(r":(\d+:\d+) - Unknown word", result.stdout.decode("utf-8", errors="replace"))
 
 
-def doc_lint(payload, policy, client, state_dir):
-    """Lint edited zh-TW, Japanese or English Markdown once per content; receipts keep only a digest and a count."""
-    if policy.get("doc_lint") is not True or payload.get("tool_name") not in EDIT_TOOLS:
-        return None
-    paths = [path for path in edited_paths(payload, Path(payload["cwd"])) if path.suffix.lower() == ".md" and path.is_file()]
-    if not paths:
-        return None
+def doc_state(state_dir, client, session):
+    path = state_dir / ("docs-" + digest((client + "\0" + session).encode()) + ".json")
+    try:
+        value = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+    except (ValueError, OSError):
+        value = {}
+    value = value if isinstance(value, dict) else {}
+    for key in ("baseline", "files"):
+        value[key] = value.get(key) if isinstance(value.get(key), dict) else {}
+    value["roots"] = [item for item in value.get("roots", []) if isinstance(item, str)] if isinstance(value.get("roots"), list) else []
+    return path, value
+
+
+def native_path(word, base):
+    """Resolve a shell word; Git Bash drive paths such as /d/work become D:/work on Windows."""
+    word = word.strip().strip("'\"")
+    if os.name == "nt" and (match := re.match(r"^/([A-Za-z])(/.*)?$", word)):
+        word = match.group(1) + ":" + (match.group(2) or "/")
+    path = Path(word).expanduser()
+    return path if path.is_absolute() else base / path
+
+
+def shell_targets(payload, cwd):
+    """Return directories a shell command enters and Markdown paths it names; the command itself is never run."""
+    tool = payload.get("tool_input")
+    command = tool.get("command") if isinstance(tool, dict) else None
+    if payload.get("tool_name") in EDIT_TOOLS or not isinstance(command, str) or len(command) > MAX_INPUT:
+        return [], []
+    directory, directories, files = cwd, [cwd], []
+    for segment in SHELL_SEPARATOR.split(command):
+        try:
+            words = shlex.split(segment, posix=False)
+        except ValueError:
+            words = segment.split()
+        words = [word.strip("'\"") for word in words]
+        if words and words[0].lower() in SHELL_DIRECTORY:
+            target = next((word for word in words[1:] if not word.startswith("-") and word.lower() != "/d"), None)
+            if target:
+                directory = native_path(target, directory)
+                directories.append(directory)
+            continue
+        for index, word in enumerate(words[:-2]):
+            if Path(word).name.lower() in ("git", "git.exe") and words[index + 1] == "-C":
+                directories.append(native_path(words[index + 2], directory))
+        files += [native_path(match, directory) for word in words for match in MD_TOKEN.findall(word)]
+    return directories, files
+
+
+def changed_docs(git, root):
+    """List tracked and untracked Markdown changes under a repository; contents are read later."""
+    code, _ = git_run(git, root, "rev-parse", "--verify", "HEAD")
+    names = []
+    for args in ((["diff", "--name-only", "-z", "HEAD", "--"] if code == 0 else ["diff", "--name-only", "-z", "--cached", "--"]),
+                 ["diff", "--name-only", "-z", "--"], ["ls-files", "--others", "--exclude-standard", "-z"]):
+        result, output = git_run(git, root, "-c", "core.quotepath=off", *args)
+        if result:
+            raise ValueError("Cannot list changed documents")
+        names += [os.fsdecode(name) for name in output.split(b"\0") if name]
+    paths = []
+    for name in dict.fromkeys(names):
+        path = (root / name).resolve()
+        if path.suffix.lower() == ".md" and path.is_file() and path not in paths:
+            paths.append(path)
+    return paths[:DOC_SCAN_FILES]
+
+
+def content_digest(path):
+    data = path.read_bytes()
+    return digest(data) if len(data) <= MAX_DOC else None
+
+
+def lint_docs(paths, policy, client, session, state_dir, state):
+    """Lint each Markdown content once; results stay in the per-turn document state for Stop."""
     tools = textlint_tools(policy)
-    session = payload["session_id"]
     if tools is None:
         missing = state_dir / ("doc-missing-" + digest((client + "\0" + session).encode()) + ".json")
         if missing.exists():
-            return None
+            return []
         atomic_write(missing, json.dumps({"version": VERSION}).encode())
-        return "Doc lint skipped: install textlint with the maintained development tool installer"
+        return ["Doc lint skipped: install textlint with the maintained development tool installer"]
     node, runner, prefix = tools
-    notes = []
-    for path in paths[:DOC_LINT_FILES]:
+    notes, linted = [], 0
+    for path in paths:
         data = path.read_bytes()
         language = doc_language(data.decode("utf-8", errors="replace")) if len(data) <= MAX_DOC else None
         config = prefix / LINT_CONFIGS[language] if language else None
         if not config or not config.is_file():
             continue
-        receipt = state_dir / ("doc-" + digest("\0".join((client, session, str(path), digest(data))).encode()) + ".json")
+        sha = digest(data)
+        receipt = state_dir / ("doc-" + digest("\0".join((client, session, str(path), sha)).encode()) + ".json")
         if receipt.exists():
+            try:
+                count = json.loads(receipt.read_text(encoding="utf-8")).get("count", 0)
+            except (ValueError, OSError, AttributeError):
+                count = 0
+            state["files"][str(path)] = [sha, count if type(count) is int else 0]
             continue
+        if linted >= DOC_LINT_FILES:
+            break
+        linted += 1
         # Profile rule files are copied into this bundle and add to the shared language profile.
         extra = [part for name in policy.get("doc_lint_rules", {}).get(language, [])
                  if (rule := Path(__file__).parent / name).is_file() for part in ("--rule", str(rule))]
@@ -489,14 +566,90 @@ def doc_lint(payload, policy, client, state_dir):
         except (OSError, ValueError, subprocess.TimeoutExpired):
             notes.append(f"{path.name} ({language}): textlint did not complete")
             continue
-        atomic_write(receipt, json.dumps({"version": VERSION, "count": len(places) + len(words or [])}).encode())
+        count = len(places) + len(words or [])
+        atomic_write(receipt, json.dumps({"version": VERSION, "count": count}).encode())
+        state["files"][str(path)] = [sha, count]
         if places:
             notes.append(f"{path.name} ({language}): {len(places)} issue(s) at {', '.join(places[:6])}" + (" ..." if len(places) > 6 else ""))
         if words:
             notes.append(f"{path.name} (spelling): {len(words)} unknown word(s) at {', '.join(words[:6])}" + (" ..." if len(words) > 6 else ""))
+    return notes
+
+
+def doc_roots(git, items):
+    roots = []
+    for item in items:
+        if Path(item).is_dir() and (root := repo_root(git, item)) and root not in roots:
+            roots.append(root)
+    return roots
+
+
+def turn_docs(git, roots, state):
+    """Markdown changed since this turn's baseline in the selected repositories."""
+    found = []
+    for root in roots:
+        for path in changed_docs(git, root):
+            if state["baseline"].get(str(path)) != content_digest(path) and path not in found:
+                found.append(path)
+    return found
+
+
+def doc_baseline(payload, policy, client, state_dir):
+    """At each prompt, remember existing Markdown changes so later checks cover only this turn's documents."""
+    if policy.get("doc_lint") is not True:
+        return
+    git, session = policy["git"], payload["session_id"]
+    path, state = doc_state(state_dir, client, session)
+    baseline = {}
+    for root in doc_roots(git, [payload["cwd"], *state["roots"]]):
+        for doc in changed_docs(git, root):
+            baseline[str(doc)] = content_digest(doc)
+    atomic_write(path, json.dumps({"baseline": baseline, "files": {}, "roots": state["roots"]}).encode())
+
+
+def doc_lint(payload, policy, client, state_dir):
+    """Lint Markdown changed by file edits or shell commands once per content; receipts keep only a digest and a count."""
+    if policy.get("doc_lint") is not True:
+        return None
+    cwd, git, session = Path(payload["cwd"]), policy["git"], payload["session_id"]
+    explicit = edited_paths(payload, cwd) if payload.get("tool_name") in EDIT_TOOLS else []
+    directories, named = shell_targets(payload, cwd)
+    if not explicit and not directories:
+        return None
+    path, state = doc_state(state_dir, client, session)
+    roots = doc_roots(git, directories)
+    state["roots"] = list(dict.fromkeys([*state["roots"], *map(str, roots)]))
+    candidates = [doc.resolve() for doc in [*explicit, *named] if doc.suffix.lower() == ".md" and doc.is_file()]
+    candidates = list(dict.fromkeys([*candidates, *turn_docs(git, roots, state)]))
+    notes = lint_docs(candidates, policy, client, session, state_dir, state) if candidates else []
+    atomic_write(path, json.dumps(state).encode())
     if not notes:
         return None
     return "textlint on edited docs: " + "; ".join(notes) + ". Fix authored prose; keep quotations, code and preserved originals."
+
+
+def doc_stop(payload, policy, client, state_dir):
+    """Ask once per pending set to fix this turn's Markdown issues before finishing; no loop after the client's retry."""
+    if policy.get("doc_lint") is not True or policy.get("doc_lint_stop") is not True or payload.get("stop_hook_active"):
+        return None
+    git, session = policy["git"], payload["session_id"]
+    path, state = doc_state(state_dir, client, session)
+    tracked = [Path(name) for name in state["files"] if Path(name).is_file()]
+    candidates = list(dict.fromkeys([*tracked, *turn_docs(git, doc_roots(git, [payload["cwd"], *state["roots"]]), state)]))
+    lint_docs(candidates, policy, client, session, state_dir, state)
+    pending = sorted((name, sha, count) for name, (sha, count) in state["files"].items()
+                     if count and Path(name).is_file() and content_digest(Path(name)) == sha)
+    token = digest(json.dumps(pending).encode()) if pending else None
+    blocked = bool(token) and state.get("blocked") != token
+    if blocked:
+        state["blocked"] = token
+    atomic_write(path, json.dumps(state).encode())
+    if not blocked:
+        return None
+    listing = ", ".join(f"{Path(name).name} ({count})" for name, _, count in pending[:6]) + (" ..." if len(pending) > 6 else "")
+    return {"decision": "block", "reason": "textlint still reports issues in Markdown changed this turn: " + listing +
+            ". Fix authored prose, or keep flagged text that is a quotation, code, specification literal or another owner's content"
+            " and say so in the reply."}
 
 
 def delivery_context(payload, policy):
@@ -583,6 +736,7 @@ def handle(payload, policy, client, state_dir):
         if not isinstance(cwd, str) or not Path(cwd).is_absolute() or not Path(cwd).is_dir():
             raise ValueError("Hook cwd must be an existing absolute directory")
     if event == "UserPromptSubmit":
+        doc_baseline(payload, policy, client, state_dir)
         return delivery_context(payload, policy)
     if event == "PreToolUse":
         return guard(payload, policy)
@@ -615,6 +769,8 @@ def handle(payload, policy, client, state_dir):
     if event == "PostToolUse" and (note := doc_lint(payload, policy, client, state_dir)):
         previous = result.get("hookSpecificOutput", {}).get("additionalContext")
         result.update(context("PostToolUse", "\n".join(filter(None, (previous, note)))))
+    if event == "Stop" and (block := doc_stop(payload, policy, client, state_dir)):
+        result.update(block)
     if event == "Stop":
         notes = (usage_message(payload, policy, client, state_dir),
                  None if policy.get("silent") else config_change_message(payload, policy, client, state_dir))

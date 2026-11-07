@@ -1,25 +1,25 @@
 # Claude / Codex 共用 Hooks
 
-版本 0.7.0, 需要 Python 3.11 以上與 Git
+版本 0.8.0, 需要 Python 3.11 以上與 Git
 共用核心為 `mcp/scripts/agent_hooks.py`, 安裝入口為 `mcp/scripts/install_agent_hooks.py`
 個人選項放在工具來源以外的 JSON profile, 執行時不依賴原 checkout
 
 | 事件 | 行為 | 輸出 |
 | --- | --- | --- |
 | SessionStart | 找出 Git 根目錄、分支與 profile 指定且實際存在的入口, 壓縮後重新提供索引並附上 `compact_note`, 選用時加一行環境摘要 | 最多 1,600 個字元, 同工作階段相同索引略過 |
-| UserPromptSubmit | 選用 `delivery_note` 時才登記, 提示以 `cp`、`cpt`、`cpr` 開頭且不超過 200 字元時, 帶入交付約束與 repo 中實際存在的政策檔 | 額外上下文 |
+| UserPromptSubmit | 選用 `delivery_note` 或 `doc_lint` 時才登記, 提示以 `cp`、`cpt`、`cpr` 開頭且不超過 200 字元時, 帶入交付約束與 repo 中實際存在的政策檔, 選用 `doc_lint` 時記錄這一輪開始前已有變更的 Markdown 雜湊 | 額外上下文 |
 | PreToolUse | 選用 `guards` 時才登記, 在 Bash 與檔案編輯執行前檢查提交身分、AI 共同作者與產生檔案 | 違規時回傳 deny 與原因, 其他呼叫安靜通過 |
-| PostToolUse | Edit / Write / MultiEdit / apply_patch 後, 啟用專案檢查時也包含 Bash, 對有變化的已追蹤 diff 執行 `git diff --check`, 選用 `doc_lint` 時另以 textlint 依語言檢查 Markdown | 成功安靜, 失敗提示位置, `silent` 時專案檢查結果也只交給模型 |
+| PostToolUse | Edit / Write / MultiEdit / apply_patch 後, 啟用專案檢查或 `doc_lint` 時也包含 Bash 與 PowerShell, 對有變化的已追蹤 diff 執行 `git diff --check`, 選用 `doc_lint` 時另以 textlint 依語言檢查 Markdown | 成功安靜, 失敗提示位置, `silent` 時專案檢查結果也只交給模型 |
 | SubagentStart | 選用 `subagent_note` 時才登記, 把同一段約束交給每個子代理 | 子代理的額外上下文 |
 | PreCompact | 只登記於 Claude, 選用 `compact_note` 時以純文字提供壓縮摘要要保留的項目與現有入口 | stdout 純文字 |
 | InstructionsLoaded | 只登記於 Claude, 選用 `instruction_log` 時記錄載入的 `CLAUDE.md` 與 rules 路徑、範圍、原因與 SHA-256 | 只寫收據, Claude 不顯示輸出 |
 | ConfigChange | 只登記於 Claude, 選用 `config_change_note` 時記錄變更的設定來源 | 下一次 Stop 提醒一次 |
-| Stop | 核對目前 diff 是否有本工作階段的空白檢查收據, 提示尚未檢查的新增檔案 | 同一份變更只提醒一次, 不阻擋或重新開啟對話, `silent` 時只記錄收據不顯示 |
+| Stop | 核對目前 diff 是否有本工作階段的空白檢查收據, 提示尚未檢查的新增檔案, 選用 `doc_lint_stop` 時檢查這一輪變更的 Markdown | 空白檢查同一份變更只提醒一次, 不阻擋, `silent` 時只記錄收據不顯示, 文件仍有 textlint 問題時回傳一次 `decision: "block"` |
 
 收據按 client、工作階段及實際 worktree 隔離, 只保存內容雜湊與檢查狀態
 預設不讀取對話紀錄, 不保存 diff 內容, 不執行 profile 或工具輸入中的任意命令
 新檔、產品行為、測試與驗收仍使用專案選定的檢查, 空白檢查不宣告這些項目通過
-Shell 或 MCP 寫入可能沒有觸發 PostToolUse, Stop 會提示已追蹤差異缺少本輪收據
+MCP 工具的寫入不在 PostToolUse 的比對範圍, Stop 會提示已追蹤差異缺少本輪收據
 
 ## Codex 每輪原生用量
 
@@ -73,7 +73,8 @@ Bash 依 `&&`、`||`、`;`、`|` 與換行拆段, 追蹤 `cd` 與 `git -C`, 從�
 | --- | --- | --- |
 | `delivery_note`、`delivery_entries` | 交付關鍵字帶入 400 字元內的約束, `delivery_entries` 列出 repo 相對路徑, 只回報實際存在的檔案 | Codex、Claude |
 | `compact_note` | 1,000 字元內的壓縮重點, 例如保留原始需求、決定、權限、檔案、提交與待驗收, Claude 壓縮前由 PreCompact 當成摘要指示, 兩端壓縮後再由 `source: "compact"` 的 SessionStart 補進上下文 | Codex、Claude, Codex 沒有自訂壓縮提示的設定, 只用壓縮後的補充 |
-| `doc_lint` | 編輯 Markdown 後依內容選擇規則, 含假名用日文規則與詞表, 其他含漢字用繁中規則, 其餘用英文文體規則並以 CSpell 檢查拼字, 每份內容只檢查一次, 單檔 1 MiB 內、每次最多 5 份 | Codex、Claude |
+| `doc_lint` | 編輯 Markdown 後依內容選擇規則, 含假名用日文規則與詞表, 其他含漢字用繁中規則, 其餘用英文文體規則並以 CSpell 檢查拼字, 每份內容只檢查一次, 單檔 1 MiB 內、每次最多 5 份<br>Bash 與 PowerShell 執行後, 從 cwd、`cd`、`Set-Location`、`git -C` 找出 Git repo, 檢查這一輪新增或修改的 Markdown, 命令中直接寫出的 `.md` 路徑也會檢查, 不在 Git repo 或被 `.gitignore` 排除的檔案只能靠直接寫出路徑 | Codex、Claude |
+| `doc_lint_stop` | 需要 `doc_lint`, 結束一輪時若這一輪變更的 Markdown 仍有 textlint 問題, 回傳 `decision: "block"` 請模型修正, 或在回覆說明保留的是引文、程式碼、規格原文或他人內容, 同一組問題只擋一次, `stop_hook_active` 時不再擋 | Codex、Claude |
 | `doc_lint_rules` | 以 `{"zh-TW": ["相對路徑.cjs"]}` 指定 profile 資料夾內的額外 textlint 規則檔, 安裝時複製進受管 bundle, 執行時以 `--rule` 加在該語言的共用設定上, 例如私人用語詞庫, 每種語言最多 5 個 | Codex、Claude |
 | `instruction_log` | 記錄指示檔實際載入, 收據在 `managed-agent-hooks/state/instructions-<hash>.json`, 只保存路徑、範圍、原因與雜湊 | Claude |
 | `config_change_note` | Claude 會丟棄 ConfigChange 的訊息, 因此先記錄來源, 在同一工作階段的下一次 Stop 提醒讀回設定 | Claude |

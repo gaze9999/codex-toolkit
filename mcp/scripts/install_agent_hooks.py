@@ -23,8 +23,11 @@ from install_global_agents import check_target
 
 EVENTS = {"SessionStart": "startup|resume|clear|compact|fork", "PostToolUse": "^(Edit|Write|MultiEdit|apply_patch)$", "Stop": None}
 GUARD_MATCHER = "^(Bash|Edit|Write|MultiEdit|NotebookEdit|apply_patch)$"
+# Shell tools can write files too; doc_lint and project checks inspect their Git changes.
+SHELL_MATCHER = "^(Edit|Write|MultiEdit|apply_patch|Bash|PowerShell)$"
 OPTIONAL_KEYS = {"codex_token_usage", "session_environment", "subagent_note", "guards", "delivery_note",
-                 "delivery_entries", "compact_note", "doc_lint", "instruction_log", "config_change_note", "silent", "doc_lint_rules"}
+                 "delivery_entries", "compact_note", "doc_lint", "doc_lint_stop", "instruction_log", "config_change_note", "silent",
+                 "doc_lint_rules"}
 # These events exist only in Claude Code; Codex ignores PreCompact text and lacks the other two.
 CLAUDE_ONLY = {"PreCompact", "InstructionsLoaded", "ConfigChange"}
 
@@ -63,13 +66,15 @@ def validate_profile(value):
     required = {"schema_version", "entries", "start_note", "stop_note"}
     if not required.issubset(value) or set(value) - required - OPTIONAL_KEYS or value["schema_version"] != 1:
         raise ValueError("Unsupported hook profile")
-    for key in ("codex_token_usage", "session_environment", "doc_lint", "instruction_log", "config_change_note", "silent"):
+    for key in ("codex_token_usage", "session_environment", "doc_lint", "doc_lint_stop", "instruction_log", "config_change_note", "silent"):
         if key in value and type(value[key]) is not bool:
             raise ValueError(key + " must be a boolean")
     if "subagent_note" in value and (not isinstance(value["subagent_note"], str) or not value["subagent_note"] or len(value["subagent_note"]) > 400):
         raise ValueError("subagent_note must be a string of at most 400 characters")
     if "guards" in value:
         validate_guards(value["guards"])
+    if value.get("doc_lint_stop") and value.get("doc_lint") is not True:
+        raise ValueError("doc_lint_stop requires doc_lint")
     if "doc_lint_rules" in value:
         validate_doc_rules(value["doc_lint_rules"])
     for key, limit in (("delivery_note", 400), ("compact_note", 1000)):
@@ -140,11 +145,12 @@ def handlers(client, executable, runner, policy, state, platform, events=EVENTS)
 def selected_events(profile, client):
     """Register only the events a profile uses; the order follows a turn's lifecycle."""
     events = {"SessionStart": EVENTS["SessionStart"]}
-    if profile.get("delivery_note"):
+    if profile.get("delivery_note") or profile.get("doc_lint"):
+        # doc_lint records each turn's existing Markdown changes as its baseline.
         events["UserPromptSubmit"] = None
     if profile.get("guards"):
         events["PreToolUse"] = GUARD_MATCHER
-    events["PostToolUse"] = EVENTS["PostToolUse"]
+    events["PostToolUse"] = SHELL_MATCHER if profile.get("doc_lint") else EVENTS["PostToolUse"]
     if profile.get("subagent_note"):
         events["SubagentStart"] = None
     if profile.get("compact_note"):
@@ -200,7 +206,7 @@ def plan(client, home, profile, operations, executable, git, platform, projects=
     runner, settings = bundle / "agent_hooks.py", bundle / "policy.json"
     groups = handlers(client, executable, runner, settings, managed / "state", platform, events)
     if projects:
-        groups["PostToolUse"]["matcher"] = "^(Edit|Write|MultiEdit|apply_patch|Bash)$"
+        groups["PostToolUse"]["matcher"] = SHELL_MATCHER
     hooks = value.setdefault("hooks", {})
     if not isinstance(hooks, dict):
         raise ValueError(f"hooks must be an object: {config}")
