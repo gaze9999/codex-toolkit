@@ -1,3 +1,5 @@
+# Check out text as LF so Windows builds hash the committed bytes; later rules override
+* text=auto eol=lf
 skills/document-production/scripts/validate_markdown.py text eol=lf
 *.sh text eol=lf
 mcp/tools/playwright-latest/playwright-cli text eol=lf
