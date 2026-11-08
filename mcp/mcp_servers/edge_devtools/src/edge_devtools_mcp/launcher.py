@@ -39,7 +39,7 @@ def unpack_runtime(directory):
     resources = Path(__file__).parent
     pin = json.loads((resources / "upstream.json").read_text(encoding="utf-8"))
     data = (resources / "runtime.tgz").read_bytes()
-    if pin.get("name") != "chrome-devtools-mcp" or pin.get("version") != "1.10.1" or len(data) > 10_000_000 or hashlib.sha256(data).hexdigest() != pin.get("sha256"):
+    if pin.get("name") != "chrome-devtools-mcp" or pin.get("version") != "1.12.0" or len(data) > 10_000_000 or hashlib.sha256(data).hexdigest() != pin.get("sha256"):
         raise ValueError("Bundled official runtime checksum or version mismatch")
     target = Path(directory)
     with tarfile.open(fileobj=io.BytesIO(data), mode="r:gz") as package:
@@ -68,7 +68,7 @@ def command(args, runtime=None):
     upstream = runtime or Path(__file__).parent / "upstream"
     entry = upstream / "build/src/bin/chrome-devtools-mcp.js"
     metadata = json.loads((upstream / "package.json").read_text(encoding="utf-8"))
-    if metadata.get("name") != "chrome-devtools-mcp" or metadata.get("version") != "1.10.1" or not entry.is_file():
+    if metadata.get("name") != "chrome-devtools-mcp" or metadata.get("version") != "1.12.0" or not entry.is_file():
         raise ValueError("Bundled official DevTools MCP is missing or has an unexpected version")
     flags = ["--no-usage-statistics", "--no-performance-crux"]
     if args.browser_url:
@@ -78,6 +78,8 @@ def command(args, runtime=None):
         flags += ["--browserUrl", args.browser_url]
     else:
         flags += ["--executablePath", str(edge_path(args.executable_path)), "--isolated"]
+        if sys.platform == "win32":
+            flags.append("--chromeArg=--edge-skip-compat-layer-relaunch")
         if not args.headed:
             flags.append("--headless")
     return [str(Path(node).resolve()), str(entry), *flags]
@@ -95,7 +97,7 @@ def main(argv=None):
         with tempfile.TemporaryDirectory(prefix="edg-") as directory:
             selected = command(args, unpack_runtime(directory))
             if args.check:
-                print(json.dumps({"status": "ready", "upstream": "chrome-devtools-mcp", "version": "1.10.1", "node": selected[0], "browser": args.browser_url or selected[selected.index("--executablePath") + 1]}))
+                print(json.dumps({"status": "ready", "upstream": "chrome-devtools-mcp", "version": "1.12.0", "node": selected[0], "browser": args.browser_url or selected[selected.index("--executablePath") + 1]}))
                 return 0
             env = dict(os.environ, CHROME_DEVTOOLS_MCP_NO_UPDATE_CHECKS="1")
             process = subprocess.Popen(selected, env=env)

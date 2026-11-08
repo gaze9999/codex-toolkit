@@ -1,11 +1,11 @@
 # Edge DevTools MCP
 
-提供 Codex 使用的 Edge 網頁除錯工具, 包含 DOM / JavaScript 檢查, console 訊息, network request 與效能 trace. Wheel 內含固定版本 `chrome-devtools-mcp@1.10.1` 的官方 JavaScript runtime, Apache-2.0 授權與第三方 notices, 啟動時不下載 npm 套件
+提供 Codex 使用的 Edge 網頁除錯工具, 包含 DOM / JavaScript 檢查, console 訊息, network request 與效能 trace. Wheel 內含固定版本 `chrome-devtools-mcp@1.12.0` 的官方 JavaScript runtime, Apache-2.0 授權與第三方 notices, 啟動時不下載 npm 套件
 
 需要 Python 3.11+, 已安裝 Microsoft Edge, 以及符合 `^20.19.0`, `^22.12.0` 或 `>=23` 的 Node.js. 各電腦使用自己的 Edge 執行檔與獨立 Python 環境
 
 ```text
-python -m pip install codex_edge_devtools_mcp-0.1.0-py3-none-any.whl
+python -m pip install codex_edge_devtools_mcp-0.1.1-py3-none-any.whl
 edge-devtools-mcp --check
 edge-devtools-mcp
 ```
@@ -24,3 +24,5 @@ python mcp/scripts/install_development_tool.py --tool edge-devtools --interface 
 建置 wheel 時依 `upstream.json` 的官方來源與 SHA-256 下載 runtime, 可用 `CODEX_EDGE_MCP_ARCHIVE` 指定已下載的相同 `.tgz` 供離線建置, checksum 必須相符
 
 [Microsoft Edge 官方設定](https://learn.microsoft.com/en-us/microsoft-edge/web-platform/devtools-mcp-server), [官方 MCP 原始碼](https://github.com/ChromeDevTools/chrome-devtools-mcp)
+
+Windows 啟動時加入 `--edge-skip-compat-layer-relaunch`, 避免 Edge 相容層重新啟動時切斷 DevTools 通道

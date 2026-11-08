@@ -1,8 +1,8 @@
 {
   "name": "chrome-devtools-mcp",
-  "version": "1.10.1",
+  "version": "1.12.0",
   "source": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
-  "url": "https://registry.npmjs.org/chrome-devtools-mcp/-/chrome-devtools-mcp-1.10.1.tgz",
-  "sha256": "012cbcf6e832d4f6709dad0c21d7bef17089e94adee9cf33179d15ea0a9adf2b",
+  "url": "https://registry.npmjs.org/chrome-devtools-mcp/-/chrome-devtools-mcp-1.12.0.tgz",
+  "sha256": "4aade3167c3e781c797d6109ed603a0ca5b8cb363a289e2eaacaa9b0c5d2a360",
   "license": "Apache-2.0"
 }
