@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "b6dfe22cfac0c95d736748cddff88a468ba6e4f793391685ffd215a9ffaec92d",
+      "sha256": "753581b7f7104ddf99cad35700ae0e8b8f48f8ba38f4e04c8709448d07bdaf39",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-visual-development.png"
     },
     "plugin.json": {
-      "sha256": "9e1e1129663e225cf6e10aa808fe25c212d6f4ee3ba290738fdeaf7bf309eaf0",
+      "sha256": "0688328e25db4e7f0c175697aab4fdcab2187ef8ebd5635e9d18cca04c6e8931",
       "source": "plugins/visual-development/plugin.json"
     },
     "resources/visual-runtime/README.md": {
@@ -77,11 +77,11 @@
       "source": "skills/data-visualization/references/delivery-and-verification.md"
     },
     "skills/visual-development/SKILL.md": {
-      "sha256": "93e0a3a5cf4d55995672802f4ae52d156148d4ebf7b42ce095bdea9a32b57b11",
+      "sha256": "aa603d7388961aedca8f7dff1a92713ab79b92f350008506960d642777c5582f",
       "source": "skills/visual-development/SKILL.md"
     },
     "skills/visual-development/agents/openai.yaml": {
-      "sha256": "bc3a819900cbdf19aa88563c5cba0bff304ed9eab4d346cadfa608564dbb788b",
+      "sha256": "a11bc3805c889eb00ef3614623da3f6e0c136254ee02899411b6a6dd565e3f59",
       "source": "skills/visual-development/agents/openai.yaml"
     },
     "skills/visual-development/assets/example.html": {
@@ -112,6 +112,10 @@
       "sha256": "17454dff3efe34c25c7a8ae51e2257a19636fcdb05ef1b1050f687300929f1ed",
       "source": "skills/visual-development/references/integration.md"
     },
+    "skills/visual-development/references/renderer-selection.md": {
+      "sha256": "0e1cc88e7668527bd2f1623b141bfbedaf4443692e759eae5c4fcfc17a081471",
+      "source": "skills/visual-development/references/renderer-selection.md"
+    },
     "skills/visual-development/references/runtime.md": {
       "sha256": "27482de1cd676daa3d5f36451c7d463645ea9861980fe362376d9cbd04981ea6",
       "source": "skills/visual-development/references/runtime.md"
@@ -127,5 +131,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.32.0",
-  "version": "0.4.3"
+  "version": "0.5.0"
 }

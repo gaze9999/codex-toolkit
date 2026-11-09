@@ -76,7 +76,7 @@
       "source": "./marketplace/plugins/codex-system-design"
     },
     {
-      "description": "在專案中建立資料視覺化、2D 動態與 Three.js 場景, 搭配 ECharts 與 Excalidraw",
+      "description": "在專案中建立資料視覺化、2D 動態與 Three.js、PixiJS 等 2D/3D 網頁渲染, 搭配 ECharts 與 Excalidraw",
       "name": "codex-visual-development",
       "source": "./marketplace/plugins/codex-visual-development"
     }
