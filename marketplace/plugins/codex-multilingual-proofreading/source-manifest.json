@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "e83ae30c2782ff410603fbb468fd2303abf50c6ab9d3a52e6f998355266104d4",
+      "sha256": "29e86fc45aeedcfe596edc0d5e26c8f1ea00415874b04211b96bfcef863153bd",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-multilingual-proofreading.png"
     },
     "plugin.json": {
-      "sha256": "51baf6f1f97605b4bda1b814fa6b18764fe8d88d82a695463fecc6eb1137a493",
+      "sha256": "7b52026f1f787f96c4726a15f37a8937bc447cf588da497cbcf8b94c2758a2d7",
       "source": "plugins/multilingual-proofreading/plugin.json"
     },
     "resources/proofreading/authored-style.cjs": {
@@ -43,6 +43,10 @@
     "resources/proofreading/zh-tw/.textlintrc.cjs": {
       "sha256": "3bd65591c4abd8778ec5dcdda6948655dd772097bfd39dbff9f628b3051ca4e9",
       "source": "mcp/tools/proofreading/zh-tw/.textlintrc.cjs"
+    },
+    "resources/proofreading/zh-tw/personal-overlay.textlintrc.cjs": {
+      "sha256": "8d8d12b8b5e164dea3b9d1be34f57651278e0f3a308de70c7194e4eb315b5b18",
+      "source": "mcp/tools/proofreading/zh-tw/personal-overlay.textlintrc.cjs"
     },
     "resources/proofreading/zh-tw/protected-copy.cjs": {
       "sha256": "937d5ea0154024f7d8604a9dac677af81dfb001c1fcc0a9f4774978c5e6fc8a0",
@@ -98,6 +102,6 @@
     "cspell"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.30.6",
-  "version": "0.2.1"
+  "toolkit_version": "0.31.0",
+  "version": "0.2.2"
 }
