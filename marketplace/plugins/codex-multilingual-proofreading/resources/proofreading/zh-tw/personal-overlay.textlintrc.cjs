@@ -1,3 +1,5 @@
+'use strict';
+// Keep the directive first: textlint tries YAML before JS for --config, and this body is otherwise valid YAML.
 const path = require('node:path');
 
 // Optional personal rules layered on the Toolkit zh-TW config.
