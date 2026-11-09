@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-visual-development",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "在專案中建立資料視覺化、2D 動態與 Three.js 場景, 搭配 ECharts 與 Excalidraw",
   "author": {
     "name": "gaze9999"
@@ -14,7 +14,7 @@
         "shortDescription": "在專案中建立資料視覺化、2D 動態與 Three.js 場景, 搭配 ECharts 與 Excalidraw",
         "logo": "./assets/codex-visual-development.png",
         "composerIcon": "./assets/codex-visual-development.png",
-        "brandColor": "#E8A36D",
+        "brandColor": "#EF8A3C",
         "websiteURL": "https://github.com/gaze9999/codex-toolkit"
       }
     }

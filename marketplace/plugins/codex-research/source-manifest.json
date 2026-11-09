@@ -1,39 +1,43 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "1215acb44959de6a16f3b71defd85262d34a3ec6cc0f0b8208e291a007ff6d1e",
+      "sha256": "8913f31778cf511a01ccbae9923936fc29144fffd57150ce84c554307f28fbd4",
       "source": null
     },
     "LICENSE": {
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
     },
+    "assets/codex-research.png": {
+      "sha256": "22b213e5ca8829e827e6ca94d68cbc0115b5e00e8f48267816bc2f7c526d8fdc",
+      "source": "assets/branding/plugins/codex-research.png"
+    },
     "plugin.json": {
-      "sha256": "ad488ae95bdf1a4379c5db97ddc5ccef5d3f0e713b629a6e61acb046cb217b96",
+      "sha256": "8ea93cb2f1e0198f286ae7337772e0e654a5da1935d3de83dc57500ce19b88cb",
       "source": "plugins/research/plugin.json"
     },
     "skills/research-learning-synthesis/SKILL.md": {
-      "sha256": "2919e45e0c48c6c6c6e63976f718ed3e822bf5dd707cbc3d2709f7e814590401",
+      "sha256": "3a55a1c784cf4d5ffaeed3c55bb0f8a334465adf8bfe6367cf289e3de9f35f54",
       "source": "skills/research-learning-synthesis/SKILL.md"
     },
     "skills/research-learning-synthesis/agents/openai.yaml": {
-      "sha256": "402ae1dc30bf384aea75c105a65a10f87f2266a7bf6b58d0efe4f1efb2ed10cd",
+      "sha256": "4f5fbdc7da3aa014f0b7e66d552addd216e48e93bf240dd3c6f7c504736de538",
       "source": "skills/research-learning-synthesis/agents/openai.yaml"
     },
     "skills/research-learning-synthesis/assets/icon-small.png": {
-      "sha256": "430434f6946b84e10776443789c45b177621c3fce4f381c531d99c1411047738",
+      "sha256": "c47a669086ef65dab37cb277dea23b3def6b16f1eedf22fa010765a29ac05e0e",
       "source": "skills/research-learning-synthesis/assets/icon-small.png"
     },
     "skills/research-learning-synthesis/assets/icon-small.svg": {
-      "sha256": "b6df1fbef267f59971c4b883d2385cf5b9714267214f65df385c56f0c3a3eb95",
+      "sha256": "6c280573c06f8a74165c91c4ead7d1a65d5a412bdc4dd5c47ad3fe3c723c4d96",
       "source": "skills/research-learning-synthesis/assets/icon-small.svg"
     },
     "skills/research-learning-synthesis/assets/icon.png": {
-      "sha256": "aa52ffec0100bfadbaa4c71846b432b4a60e06dcc25b9529fcad0a57dc35a0a5",
+      "sha256": "22b213e5ca8829e827e6ca94d68cbc0115b5e00e8f48267816bc2f7c526d8fdc",
       "source": "skills/research-learning-synthesis/assets/icon.png"
     },
     "skills/research-learning-synthesis/assets/icon.svg": {
-      "sha256": "b6df1fbef267f59971c4b883d2385cf5b9714267214f65df385c56f0c3a3eb95",
+      "sha256": "6c280573c06f8a74165c91c4ead7d1a65d5a412bdc4dd5c47ad3fe3c723c4d96",
       "source": "skills/research-learning-synthesis/assets/icon.svg"
     },
     "skills/research-learning-synthesis/references/source-selection.md": {
@@ -54,6 +58,6 @@
     "context7"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.31.0",
-  "version": "0.1.2"
+  "toolkit_version": "0.32.0",
+  "version": "0.1.3"
 }

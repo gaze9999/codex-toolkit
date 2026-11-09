@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "81596764f532b016d32407e7fe540325a9cf7902fe09a755426237483b46ffcb",
+      "sha256": "270d20e0c81ddb1bbcdf9a048b8d0f060ea6867359a39b5a100436cad3442287",
       "source": null
     },
     "LICENSE": {
@@ -9,28 +9,60 @@
       "source": "LICENSE"
     },
     "assets/codex-agent-operations.png": {
-      "sha256": "e111164989af755fd7e37790664a14ab0d76dd7019078d6d355786ed9771a71a",
+      "sha256": "716c5311ffdb1adc0f4c789b35ed9dd219384c61871de96f2c1bc01c111b4e36",
       "source": "assets/branding/plugins/codex-agent-operations.png"
     },
     "plugin.json": {
-      "sha256": "fc4d6bf8fd4fdcb9003003151786334074ca8f2dc24297c5c51ad141106180b6",
+      "sha256": "a588f4eca6b070258c2654fef9504cf32759b5a02f72bd85a481968cba64728c",
       "source": "plugins/agent-operations/plugin.json"
     },
     "skills/agent-artifact-audit/SKILL.md": {
-      "sha256": "a783d2584bcc8698fd79db1584213b46a8b7f971c4edc11fe5d6169be740a04a",
+      "sha256": "3701a96d20cd9caf1ca86aaf8313fae5d5f4d4f92dc967525b49a43618076d3d",
       "source": "skills/agent-artifact-audit/SKILL.md"
     },
     "skills/agent-artifact-audit/agents/openai.yaml": {
-      "sha256": "b553d2fc89e02b279d91e499f8b31f9912d96498849cd7be6e1b58fbaccf062b",
+      "sha256": "a3d56395c71cdf4b902ede1e54f52d7823873528f2628b5a9a9b1cb19a8f4c84",
       "source": "skills/agent-artifact-audit/agents/openai.yaml"
     },
+    "skills/agent-artifact-audit/assets/icon-small.png": {
+      "sha256": "38a488996ba624117180ff21d1f86c1efa60a3648c3f20bfa7cb8709dae6064c",
+      "source": "skills/agent-artifact-audit/assets/icon-small.png"
+    },
+    "skills/agent-artifact-audit/assets/icon-small.svg": {
+      "sha256": "09032d6e2601a2c98abe819e4b6f0833888723a9f35e58bcb4de08ba84b03f20",
+      "source": "skills/agent-artifact-audit/assets/icon-small.svg"
+    },
+    "skills/agent-artifact-audit/assets/icon.png": {
+      "sha256": "fd0cb3fedc09959e467de3d68df2a6d5311dc0d112a46d7e0aeddf014558b982",
+      "source": "skills/agent-artifact-audit/assets/icon.png"
+    },
+    "skills/agent-artifact-audit/assets/icon.svg": {
+      "sha256": "09032d6e2601a2c98abe819e4b6f0833888723a9f35e58bcb4de08ba84b03f20",
+      "source": "skills/agent-artifact-audit/assets/icon.svg"
+    },
     "skills/local-activity-query/SKILL.md": {
-      "sha256": "a2b66fde9b5b789210c9dbf65958bcf74b3815ee07d6dd41caf47c559919416d",
+      "sha256": "afafd840b1c1f872c8b7edf821a86b88964ac8f5bfc94dbb09feb4c776eea8a2",
       "source": "skills/local-activity-query/SKILL.md"
     },
     "skills/local-activity-query/agents/openai.yaml": {
-      "sha256": "fe3e45b7de9eac7f003439b9d5ba2e6f47c5f474cb4e346d9846ea03d26e6070",
+      "sha256": "f207b42845cdf9c929e727395347fb214b6113a628c873c8b7dbeb8b32e3f9aa",
       "source": "skills/local-activity-query/agents/openai.yaml"
+    },
+    "skills/local-activity-query/assets/icon-small.png": {
+      "sha256": "a1ff62a5e6b954121427c5714ef8b1ce3cd3e4a07668bad0e70bf50f99830dea",
+      "source": "skills/local-activity-query/assets/icon-small.png"
+    },
+    "skills/local-activity-query/assets/icon-small.svg": {
+      "sha256": "ef424c5307bd04d368885aad6dc557c07793939293710776a6a68873e677a6ef",
+      "source": "skills/local-activity-query/assets/icon-small.svg"
+    },
+    "skills/local-activity-query/assets/icon.png": {
+      "sha256": "716c5311ffdb1adc0f4c789b35ed9dd219384c61871de96f2c1bc01c111b4e36",
+      "source": "skills/local-activity-query/assets/icon.png"
+    },
+    "skills/local-activity-query/assets/icon.svg": {
+      "sha256": "ef424c5307bd04d368885aad6dc557c07793939293710776a6a68873e677a6ef",
+      "source": "skills/local-activity-query/assets/icon.svg"
     },
     "skills/local-activity-query/scripts/activity_summary.py": {
       "sha256": "3b857100c9f5c7a45bd194694b350ddc1a4a1e9533c4b447ced9ee34cdaaa967",
@@ -45,6 +77,6 @@
     "rtk"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.31.0",
-  "version": "0.1.0"
+  "toolkit_version": "0.32.0",
+  "version": "0.1.1"
 }

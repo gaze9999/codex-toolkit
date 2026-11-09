@@ -2,7 +2,7 @@
 name: game-balance-simulation
 description: Design, simulate, tune or review game economies, progression, resource loops and stochastic rewards using the actual game's rules. Use for balance and simulation questions across engines, including idle games, not ordinary UI or engine setup.
 metadata:
-  version: "0.4.13"
+  version: "0.4.14"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

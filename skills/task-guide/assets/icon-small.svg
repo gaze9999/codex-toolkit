@@ -1,1 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" rx="28" fill="#20445c"/><path d="M24 36h80M24 94h80" stroke="#8dd8ee" stroke-width="4"/><text x="64" y="78" text-anchor="middle" font-family="sans-serif" font-size="40" fill="#e4edf7">TG</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <rect x="3" y="3" width="122" height="122" rx="28" fill="#FFF3E4"/>
+  <circle cx="91" cy="38" r="23" fill="#F7B56B"/>
+  <g fill="none" stroke="#9A431D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="34" y="27" width="60" height="76" rx="7"/><path d="M49 46h30 M49 62h22 M49 78h14 M46 27v-3 M82 27v-3"/></g>
+</svg>

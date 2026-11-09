@@ -2,7 +2,7 @@
 name: packaging-acceptance
 description: Verify source or portable package release evidence, including requested version/Tag strategy, manifests, artifact provenance, relocation and lifecycle. Follow actual project entry points and platform workflow, not routine commit/push or automatic publication.
 metadata:
-  version: "0.1.5"
+  version: "0.1.6"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

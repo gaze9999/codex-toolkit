@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "e33250bfb6e55f0088dec929ba2b03ab3d065a813d6388c48e02ed8233eab005",
+      "sha256": "98dc479f6f1a5f78fa10081cddc413d7c78cfbfe66ffb3ba1aae6e516151ea45",
       "source": null
     },
     "LICENSE": {
@@ -9,20 +9,36 @@
       "source": "LICENSE"
     },
     "assets/codex-packaging-acceptance.png": {
-      "sha256": "07212bde672d2d7738506f7cf2345b188a4d3c982bb5301ec55949e53e641f0d",
+      "sha256": "00e7e9397b88be73f698d4053d3c79a438cf3fd2072da6cad33557bd0a6d7a31",
       "source": "assets/branding/plugins/codex-packaging-acceptance.png"
     },
     "plugin.json": {
-      "sha256": "32dfea4367eb8d4a3eea24de8cf3396b53de447a5f362b5a6232173cf3d13020",
+      "sha256": "6d40697b3216ef689095063ac2a68c265721830f99a7685647aa293b307e3eba",
       "source": "plugins/packaging-acceptance/plugin.json"
     },
     "skills/packaging-acceptance/SKILL.md": {
-      "sha256": "931e468290765f9f991440351d5f5cd3d839cb44128ce19c82e83b98d6e980f8",
+      "sha256": "398831d53fd2678790968666050b156a01d5a7cbcd00c4397c7d11b02838cfbb",
       "source": "skills/packaging-acceptance/SKILL.md"
     },
     "skills/packaging-acceptance/agents/openai.yaml": {
-      "sha256": "1700f298abbf595155210f6ee5acf11de893716cb10c04f75d730bef3e22742c",
+      "sha256": "dd90adf72666fb81f860164eb9f937d661be771a1f2728ef0f2113f79d2a2935",
       "source": "skills/packaging-acceptance/agents/openai.yaml"
+    },
+    "skills/packaging-acceptance/assets/icon-small.png": {
+      "sha256": "23a04adbcd616543eb3b1e47935180e6135e00990ecd859cf33bf79b00d25cc3",
+      "source": "skills/packaging-acceptance/assets/icon-small.png"
+    },
+    "skills/packaging-acceptance/assets/icon-small.svg": {
+      "sha256": "34a10d6deeaa60aea278eb401932fd9a6be283bc30bd82ebf50ae310d582b8a9",
+      "source": "skills/packaging-acceptance/assets/icon-small.svg"
+    },
+    "skills/packaging-acceptance/assets/icon.png": {
+      "sha256": "80874ba35590f2981ebefedd35c99f45fa62e6043c5d1131e785cc48b494cb6e",
+      "source": "skills/packaging-acceptance/assets/icon.png"
+    },
+    "skills/packaging-acceptance/assets/icon.svg": {
+      "sha256": "34a10d6deeaa60aea278eb401932fd9a6be283bc30bd82ebf50ae310d582b8a9",
+      "source": "skills/packaging-acceptance/assets/icon.svg"
     },
     "skills/packaging-acceptance/references/acceptance.md": {
       "sha256": "4d64b57b0f876dbe111a01ddce4a85cfc648127ea0e67c19d042e4c87149a638",
@@ -33,12 +49,28 @@
       "source": "skills/packaging-acceptance/references/version-tags.md"
     },
     "skills/plugin-packaging/SKILL.md": {
-      "sha256": "b1c3e7ca2bd9ed52581db8d9bddcd22512faf7fb36c166ac5dc9764da26383fc",
+      "sha256": "fb991c3dc662cb3586ca9a79998476f5b40f0f8c014351ad18613622616703d3",
       "source": "skills/plugin-packaging/SKILL.md"
     },
     "skills/plugin-packaging/agents/openai.yaml": {
-      "sha256": "43b1e10061748f3213970d9edf316f64582fc1e672853899b6eab5c6cf39348f",
+      "sha256": "530956a699d1dbf7b340424f9174912f809678afad97f3a5c3fd7d4cc7dd6ebf",
       "source": "skills/plugin-packaging/agents/openai.yaml"
+    },
+    "skills/plugin-packaging/assets/icon-small.png": {
+      "sha256": "3e77887772f5792b7ebf4df3b8314ef6767c86cf4e7d61c1adae1f0b6c2bb503",
+      "source": "skills/plugin-packaging/assets/icon-small.png"
+    },
+    "skills/plugin-packaging/assets/icon-small.svg": {
+      "sha256": "b23dfcb477e2fcf85878f7d631710551f78e9544ec6acbef105e5a4532b3f33d",
+      "source": "skills/plugin-packaging/assets/icon-small.svg"
+    },
+    "skills/plugin-packaging/assets/icon.png": {
+      "sha256": "00e7e9397b88be73f698d4053d3c79a438cf3fd2072da6cad33557bd0a6d7a31",
+      "source": "skills/plugin-packaging/assets/icon.png"
+    },
+    "skills/plugin-packaging/assets/icon.svg": {
+      "sha256": "b23dfcb477e2fcf85878f7d631710551f78e9544ec6acbef105e5a4532b3f33d",
+      "source": "skills/plugin-packaging/assets/icon.svg"
     },
     "skills/plugin-packaging/references/assembly.md": {
       "sha256": "95df90bee6acf179889abdc92ecc0d69cffadc383b355c4adc7c536422d0efe3",
@@ -51,6 +83,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.31.0",
-  "version": "0.3.0"
+  "toolkit_version": "0.32.0",
+  "version": "0.3.1"
 }

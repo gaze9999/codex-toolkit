@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "04f771a0acb0f0b2abd8d1c6fc852320f8c1bb7ba0778d42b10375dc9a25f3de",
+      "sha256": "bf8d7dc3631ede68d213fb4227ddf348e8ae2528cbc80f660003444e495e2c18",
       "source": null
     },
     "LICENSE": {
@@ -9,11 +9,11 @@
       "source": "LICENSE"
     },
     "assets/codex-evaluation.png": {
-      "sha256": "9e437aa3b30cb00c9cb265ff3062c884e28050a53ceab82a3f76a1a8ff80d370",
+      "sha256": "64a59097ca3308219e644fbf96ba5b58e20b4163b751e435f1ee26b2c3430bb2",
       "source": "assets/branding/plugins/codex-evaluation.png"
     },
     "plugin.json": {
-      "sha256": "89f0814f91af17814c6daabe6ae58aaff7754321179e8235b7f0548a19dbe7a4",
+      "sha256": "b87c6716884932bdf8558cacf31564bafd796e18100cbd134d34fd0252426fec",
       "source": "plugins/evaluation/plugin.json"
     },
     "resources/decisions/README.md": {
@@ -45,12 +45,28 @@
       "source": "python-tools/packages/decisions/src/codex_decisions/server.py"
     },
     "skills/decisions-evaluation/SKILL.md": {
-      "sha256": "27a1910da7dbacf9036af814c184c9e6d754fb7064111eab31bcc484ee0996d3",
+      "sha256": "ca36e07b1f0af5bbea0308336d60684cbde24493de7c9ca315b8776ce720334a",
       "source": "skills/decisions-evaluation/SKILL.md"
     },
     "skills/decisions-evaluation/agents/openai.yaml": {
-      "sha256": "b0aba8092d42339fa1dfcbb18c69f0d8c8446a4bc9b487dc0453b13838075d2b",
+      "sha256": "6713473d6268c1e21de3a0b498ef9c354461027028acdc9562571e03e6a7f7ef",
       "source": "skills/decisions-evaluation/agents/openai.yaml"
+    },
+    "skills/decisions-evaluation/assets/icon-small.png": {
+      "sha256": "ceb1812dc76de3bd8aa439651872812c7062606b71f760dda334b8b7f21e551a",
+      "source": "skills/decisions-evaluation/assets/icon-small.png"
+    },
+    "skills/decisions-evaluation/assets/icon-small.svg": {
+      "sha256": "c20bc8a7b21b9c3a898dc842d92156ef3596120e2f5707b01730ac328e5c4388",
+      "source": "skills/decisions-evaluation/assets/icon-small.svg"
+    },
+    "skills/decisions-evaluation/assets/icon.png": {
+      "sha256": "64a59097ca3308219e644fbf96ba5b58e20b4163b751e435f1ee26b2c3430bb2",
+      "source": "skills/decisions-evaluation/assets/icon.png"
+    },
+    "skills/decisions-evaluation/assets/icon.svg": {
+      "sha256": "c20bc8a7b21b9c3a898dc842d92156ef3596120e2f5707b01730ac328e5c4388",
+      "source": "skills/decisions-evaluation/assets/icon.svg"
     },
     "skills/decisions-evaluation/references/usage.md": {
       "sha256": "fa9d49743b7b1b543b78d7367d9f9e197b640e6e84defdb15b57e4d4a283ab20",
@@ -65,27 +81,27 @@
       "source": "skills/jev-evaluation/README.md"
     },
     "skills/jev-evaluation/SKILL.md": {
-      "sha256": "a33d9f9412d9ae9bd118fc98854b12039a6ed7c5bc14d605dad005b0742ebddc",
+      "sha256": "e2c93b3ce7ff79faf07aa4fd04a4c40eca17bcd17a0cb59cffd3d58dad8f69f4",
       "source": "skills/jev-evaluation/SKILL.md"
     },
     "skills/jev-evaluation/agents/openai.yaml": {
-      "sha256": "68dd266ab2c7be0dc6a16f3ffd17995b0d855fa3b85630ab7b97c3820de4a5e3",
+      "sha256": "fe88f4c40bb422e5870672d0bd72730089e7d5051b453a6c14b0d82cc1067241",
       "source": "skills/jev-evaluation/agents/openai.yaml"
     },
     "skills/jev-evaluation/assets/icon-small.png": {
-      "sha256": "bb4d1c753ca258e1f49f69db1941267817c78288d01caea81a785e71700c1a0a",
+      "sha256": "ca9d1be82f3f0a7bd7476d20c76bb673354adf01aa2ddce5acb9ac4657fa15f6",
       "source": "skills/jev-evaluation/assets/icon-small.png"
     },
     "skills/jev-evaluation/assets/icon-small.svg": {
-      "sha256": "cc9ca20a8450f2cdb5cf4e0cdd3375667e4b73abbb48f16f14b54db7da976ec9",
+      "sha256": "8204aec235dcd8bf2624343482803368124c910653a13194b4ccbf5f94a3ae16",
       "source": "skills/jev-evaluation/assets/icon-small.svg"
     },
     "skills/jev-evaluation/assets/icon.png": {
-      "sha256": "45eff36d92fac7632207e309abeaf3becaf022fc35d8b31fe0dd210c3de1564e",
+      "sha256": "2bb3091876cb0266824e1c43f44898a0d1307ecb5456f30674f6965753f52ebd",
       "source": "skills/jev-evaluation/assets/icon.png"
     },
     "skills/jev-evaluation/assets/icon.svg": {
-      "sha256": "cc9ca20a8450f2cdb5cf4e0cdd3375667e4b73abbb48f16f14b54db7da976ec9",
+      "sha256": "8204aec235dcd8bf2624343482803368124c910653a13194b4ccbf5f94a3ae16",
       "source": "skills/jev-evaluation/assets/icon.svg"
     },
     "skills/jev-evaluation/pyproject.toml": {
@@ -133,6 +149,6 @@
     "jev"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.31.0",
-  "version": "0.1.0"
+  "toolkit_version": "0.32.0",
+  "version": "0.1.1"
 }

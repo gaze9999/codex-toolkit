@@ -2,7 +2,7 @@
 name: internationalization-engineering
 description: Implement, diagnose or review internationalization (i18n), translation resources, locale switching, plural rules, localized formatting and bidirectional UI in the detected application stack. Use for programming behavior involving multiple languages or regions, not ordinary prose proofreading or translating a document.
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

@@ -2,7 +2,7 @@
 name: comfyui-workflow
 description: Build, modify, diagnose, or document local Stable Diffusion and ComfyUI workflows with reproducible graph, model, custom-node, and hardware settings. Do not use for ordinary image generation that does not require workflow engineering.
 metadata:
-  version: "0.4.12"
+  version: "0.4.13"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

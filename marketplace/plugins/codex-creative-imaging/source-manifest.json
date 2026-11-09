@@ -1,63 +1,67 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "31dbf398f7d97190609c5c1c10a495fd7848dc0b167e16ef4d98f9c3dfe35e32",
+      "sha256": "17be74849a291e10e60aa9c9e86a6e49d5e41e6544cec93b3eee3d1effc76a44",
       "source": null
     },
     "LICENSE": {
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
     },
+    "assets/codex-creative-imaging.png": {
+      "sha256": "184cae50781e678d21657998f8f1a25b57456e73e5ac629092ae0577ede484ec",
+      "source": "assets/branding/plugins/codex-creative-imaging.png"
+    },
     "plugin.json": {
-      "sha256": "b6c2e73d90490d7764297f611da4b9230211d164a6dc5dc47c2cd5f092b367a6",
+      "sha256": "dc996b8556747a5a3a0e8e6f45c8ed65c7d121f3551b6eaca5467b89fe516162",
       "source": "plugins/creative-imaging/plugin.json"
     },
     "skills/comfyui-workflow/SKILL.md": {
-      "sha256": "81c90fb23ed9185a53114a1a548e23c0d24afef5c48609f46e429502ea44e719",
+      "sha256": "8aca5ac289dbd3adc23eb833dc56c31da6962c0fa4faf8b6a7fe262bef9ad2a5",
       "source": "skills/comfyui-workflow/SKILL.md"
     },
     "skills/comfyui-workflow/agents/openai.yaml": {
-      "sha256": "51374ae82055e603cadb15ee2faf0ae4e95c07fd4b55798362851ea4741b4c15",
+      "sha256": "ab89db9b14f0173f5b49e407fbe3bf0a3bb90213d508a2ed9d8f191ab9e0a493",
       "source": "skills/comfyui-workflow/agents/openai.yaml"
     },
     "skills/comfyui-workflow/assets/icon-small.png": {
-      "sha256": "69d53d78f0a123745c88690a1e7b3fd84fbd21a6cbb6e184947b82a2cff6b345",
+      "sha256": "f2e2f649e479b334bbbe7badb143146778223561e91dd0c705ad5a4e8911314a",
       "source": "skills/comfyui-workflow/assets/icon-small.png"
     },
     "skills/comfyui-workflow/assets/icon-small.svg": {
-      "sha256": "a900a7756cb0ef7231f48a0016bb9c10ccfadfef9db414aa0384f625ce254e21",
+      "sha256": "2985ec3d93f8f91b627f2e8ba40b7a790736a4d82900857aea97e4792e011154",
       "source": "skills/comfyui-workflow/assets/icon-small.svg"
     },
     "skills/comfyui-workflow/assets/icon.png": {
-      "sha256": "6bd86ae62f6e31ce8bc1e7fc2eb1535bb6cd635af891909f76e1a1f0beb46e3c",
+      "sha256": "409346b4d751924f26fc1df8cae9d51a70afca1cc1f1e6190de7af1b48161a79",
       "source": "skills/comfyui-workflow/assets/icon.png"
     },
     "skills/comfyui-workflow/assets/icon.svg": {
-      "sha256": "074b770ef551d529020ba1215cecfe3f3e388c52c6d3ab21a0f89826ff5a1e4f",
+      "sha256": "2985ec3d93f8f91b627f2e8ba40b7a790736a4d82900857aea97e4792e011154",
       "source": "skills/comfyui-workflow/assets/icon.svg"
     },
     "skills/editorial-illustration/SKILL.md": {
-      "sha256": "44bac321e85ba9c0409774de85db623754a85fffe9ccc61f1ca310f8a8bd4e9c",
+      "sha256": "0c7ef58e2545484cee84f1c2a0136ce2f5e79a4dd6db79cd6c1e1f0d08055d65",
       "source": "skills/editorial-illustration/SKILL.md"
     },
     "skills/editorial-illustration/agents/openai.yaml": {
-      "sha256": "9d1179889ce6f561c3ab6c2ecec3716110d4f8b52a4423d64af4caaac8f6e4bc",
+      "sha256": "4147684f9b9aa3a2241145739979d9b1c075a3c18a57b5dcfb99f3ae73e68c95",
       "source": "skills/editorial-illustration/agents/openai.yaml"
     },
     "skills/editorial-illustration/assets/icon-small.png": {
-      "sha256": "05ab2237f0bd7c6c74b1de8cce806392d1df592ee0c93eea2d20e81d0718e85c",
+      "sha256": "553a6f093cbfff263dfce54b87d2d5f7bafc6fe0a4846d1a7f4ac34810bb218a",
       "source": "skills/editorial-illustration/assets/icon-small.png"
     },
     "skills/editorial-illustration/assets/icon-small.svg": {
-      "sha256": "606e57f084b9c8f3933e1101925839998025644668ae2668960aff4b1306df67",
+      "sha256": "c8817ea185c35df1dc570f452731d715672fe553a702395d6bbea0b3dfa5665b",
       "source": "skills/editorial-illustration/assets/icon-small.svg"
     },
     "skills/editorial-illustration/assets/icon.png": {
-      "sha256": "0d17a7f0f59a51cee00d11535bb8181e33cbf042721e53c33214dfee7e670b6e",
+      "sha256": "06f66a005b5410414d99adf524475945a1816d6864fa8cad67aa3d55faca436f",
       "source": "skills/editorial-illustration/assets/icon.png"
     },
     "skills/editorial-illustration/assets/icon.svg": {
-      "sha256": "33d40ffd04863a43aea4035eec2f344d714c916a067694717b235dc29dd8c290",
+      "sha256": "c8817ea185c35df1dc570f452731d715672fe553a702395d6bbea0b3dfa5665b",
       "source": "skills/editorial-illustration/assets/icon.svg"
     },
     "skills/editorial-illustration/references/base-prompt.md": {
@@ -71,6 +75,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.31.0",
-  "version": "0.1.0"
+  "toolkit_version": "0.32.0",
+  "version": "0.1.1"
 }

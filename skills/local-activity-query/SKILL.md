@@ -2,7 +2,7 @@
 name: local-activity-query
 description: Read bounded tool counts, Jev usage and source health from an explicitly selected local activity monitor. Use for a named time window or diagnostic summary, not conversation extraction, account totals, monitoring activation or process cleanup.
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

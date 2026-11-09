@@ -3,7 +3,7 @@ name: angular-member-order
 description: Organize Angular component class members by responsibility and feature flow while preserving decorators, comments, initialization behavior, and public interfaces. Use when reordering or standardizing members in one or more .component.ts files, optionally migrating decorator inputs and outputs to signal APIs when explicitly requested, or when generating a scoped handoff prompt for that work.
 metadata:
   short-description: Safe Angular component member ordering
-  version: "0.4.16"
+  version: "0.4.17"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

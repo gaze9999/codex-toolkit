@@ -2,7 +2,7 @@
 name: agent-artifact-audit
 description: Inventory Codex and Claude Code artifacts across selected local workspaces and linked worktrees, review offline reports, apply a human-exported permanent deletion selection, or recover a prior run.
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
   author: gaze9999
   repository: https://github.com/gaze9999/codex-toolkit
 ---

@@ -3,7 +3,7 @@ name: editorial-illustration
 description: Generate editorial illustrations from user-provided images using optional adjustments and the bundled editorial-illustration base prompt.
 metadata:
   short-description: Direct editorial-illustration generation from images and optional adjustments
-  version: "0.4.12"
+  version: "0.4.13"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

@@ -1,5 +1,5 @@
 interface:
-  display_name: "Editorial Illustration (v0.4.12)"
+  display_name: "Editorial Illustration (v0.4.13)"
   short_description: "Generate editorial illustrations from uploaded images"
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"

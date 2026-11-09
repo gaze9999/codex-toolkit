@@ -2,7 +2,7 @@
 name: token-count
 description: Count and color exact text tokens, compare encodings or estimate Codex context from Global/Project Agent instructions, Skills, tools and dated community profiles. Use for token budgets and reports, not API credentials, account usage or pricing.
 metadata:
-  version: "0.2.0"
+  version: "0.2.1"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

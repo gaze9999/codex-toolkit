@@ -192,7 +192,12 @@
         "reddit",
         "context7"
       ],
-      "resources": []
+      "resources": [
+        {
+          "source": "assets/branding/plugins/codex-research.png",
+          "target": "assets"
+        }
+      ]
     },
     {
       "id": "system-design",
@@ -202,7 +207,12 @@
         "system-design-analysis"
       ],
       "runtime_profiles": [],
-      "resources": []
+      "resources": [
+        {
+          "source": "assets/branding/plugins/codex-system-design.png",
+          "target": "assets"
+        }
+      ]
     },
     {
       "id": "frontend-engineering",
@@ -270,7 +280,12 @@
         "comfyui-workflow"
       ],
       "runtime_profiles": [],
-      "resources": []
+      "resources": [
+        {
+          "source": "assets/branding/plugins/codex-creative-imaging.png",
+          "target": "assets"
+        }
+      ]
     },
     {
       "id": "game-development",
@@ -281,7 +296,12 @@
         "game-balance-simulation"
       ],
       "runtime_profiles": [],
-      "resources": []
+      "resources": [
+        {
+          "source": "assets/branding/plugins/codex-game-development.png",
+          "target": "assets"
+        }
+      ]
     },
     {
       "id": "ai-engineering",
@@ -293,7 +313,12 @@
       "runtime_profiles": [
         "openai-docs"
       ],
-      "resources": []
+      "resources": [
+        {
+          "source": "assets/branding/plugins/codex-ai-engineering.png",
+          "target": "assets"
+        }
+      ]
     },
     {
       "id": "network-filters",
@@ -303,7 +328,12 @@
         "network-filter-rules"
       ],
       "runtime_profiles": [],
-      "resources": []
+      "resources": [
+        {
+          "source": "assets/branding/plugins/codex-network-filters.png",
+          "target": "assets"
+        }
+      ]
     }
   ],
   "management": "Codex /plugins",

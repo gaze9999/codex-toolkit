@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "80c72b8b0971a41e35298d44e4b6d67f381c16e5ff84b1a2b03c67d9bbac34d0",
+      "sha256": "05912a177d247df988adf1de48e13059362cf727d593ab53234ee8bf8000b31e",
       "source": null
     },
     "LICENSE": {
@@ -9,35 +9,35 @@
       "source": "LICENSE"
     },
     "assets/codex-environment-evidence.png": {
-      "sha256": "d5750edba382858139bc70e8f192f59348b98291f778015bb36b953a2e3d35b7",
+      "sha256": "61a3e0a03cbe84a61dba6055ae6a092704c41eedcadff7a306c58b05a3b1192d",
       "source": "assets/branding/plugins/codex-environment-evidence.png"
     },
     "plugin.json": {
-      "sha256": "fd78ac9131862f13215d2356e3399a1370a6d4972b59ecb6e91869789cf862db",
+      "sha256": "93f48aa292587cd7973f019356fbf7bb3709402b898c3b205911bc0bf88047a5",
       "source": "plugins/environment-evidence/plugin.json"
     },
     "skills/development-tool-setup/SKILL.md": {
-      "sha256": "d8519b781dcdfb7b0ff889d1a8987b49f688d2ef743a36721c351a8f31300fff",
+      "sha256": "8c73d77e0f7ca75771e7234a2b43b9cf65d7dceddbe48438449fa6e9405b5bbb",
       "source": "skills/development-tool-setup/SKILL.md"
     },
     "skills/development-tool-setup/agents/openai.yaml": {
-      "sha256": "fb080a4263b10e574c67e96b49da62e88dc6114028f6b5b02181b844ddc17295",
+      "sha256": "9c0358046eb2a942c55e8a46a38948c3905818423d66c99455b5feb426fda903",
       "source": "skills/development-tool-setup/agents/openai.yaml"
     },
     "skills/development-tool-setup/assets/icon-small.png": {
-      "sha256": "f1e10037ac9555ac51cbb93b35dfdbd8c619034c43945cb349af4d4d8068cbb5",
+      "sha256": "f2212d95afb37e584a917ade297dadfb2bf157d5c8c99c346d61af1a8f14d75b",
       "source": "skills/development-tool-setup/assets/icon-small.png"
     },
     "skills/development-tool-setup/assets/icon-small.svg": {
-      "sha256": "77f1c382b5776fe192d2d9ea90fc584b39a95d43132ddd0abe168a9365fe1cb8",
+      "sha256": "1f23e296f69664ed9cac7345ac126228dc6b571f8864d17b97dd0e7d3762bcab",
       "source": "skills/development-tool-setup/assets/icon-small.svg"
     },
     "skills/development-tool-setup/assets/icon.png": {
-      "sha256": "e41d624a7da9c53babd648ab14316405339813b4ab9704f6fbb27d83a4515616",
+      "sha256": "baea7fab9df5172ac3dd79e83d6afd7d4362e69cc680fc676c28048f260a9905",
       "source": "skills/development-tool-setup/assets/icon.png"
     },
     "skills/development-tool-setup/assets/icon.svg": {
-      "sha256": "77f1c382b5776fe192d2d9ea90fc584b39a95d43132ddd0abe168a9365fe1cb8",
+      "sha256": "1f23e296f69664ed9cac7345ac126228dc6b571f8864d17b97dd0e7d3762bcab",
       "source": "skills/development-tool-setup/assets/icon.svg"
     },
     "skills/development-tool-setup/references/integration-verification.md": {
@@ -53,12 +53,28 @@
       "source": "skills/development-tool-setup/references/serena-frontend.md"
     },
     "skills/test-strategy/SKILL.md": {
-      "sha256": "d0709bf67fbcb9eed7db3ed589ad2b451dd17b27121a12330e039913c57a62ce",
+      "sha256": "8fa2ea0f7336eb5eccb279a9a4103879236ee079ca21398dc80d69ae5d724f8c",
       "source": "skills/test-strategy/SKILL.md"
     },
     "skills/test-strategy/agents/openai.yaml": {
-      "sha256": "291a25c5bfbba2a27b81fe3934f58e878542fb984c9f874e1e1fbbc1fc085c74",
+      "sha256": "5dfb671d36268be93a2de0d145e8c932eebdef86e8c30feaa5977895a86c837f",
       "source": "skills/test-strategy/agents/openai.yaml"
+    },
+    "skills/test-strategy/assets/icon-small.png": {
+      "sha256": "21437245ae1b24ff5ee85b0d050068b066e19efd0fb897e3e362d63abcc23c5a",
+      "source": "skills/test-strategy/assets/icon-small.png"
+    },
+    "skills/test-strategy/assets/icon-small.svg": {
+      "sha256": "63a954b6c60b3d265508d2eda96f23cfd48173aea89c4b59e6dd2f8c613fc7ed",
+      "source": "skills/test-strategy/assets/icon-small.svg"
+    },
+    "skills/test-strategy/assets/icon.png": {
+      "sha256": "61a3e0a03cbe84a61dba6055ae6a092704c41eedcadff7a306c58b05a3b1192d",
+      "source": "skills/test-strategy/assets/icon.png"
+    },
+    "skills/test-strategy/assets/icon.svg": {
+      "sha256": "63a954b6c60b3d265508d2eda96f23cfd48173aea89c4b59e6dd2f8c613fc7ed",
+      "source": "skills/test-strategy/assets/icon.svg"
     },
     "skills/test-strategy/references/ai-evaluation.md": {
       "sha256": "36943a4869c35d95ed35f032eb99396cefc5c218051a3ee656caa720d8e3d11e",
@@ -85,27 +101,27 @@
       "source": "skills/test-strategy/references/tool-selection.md"
     },
     "skills/validation-evidence-review/SKILL.md": {
-      "sha256": "7b06f5703b3fd6af075e01a9c1fc6f5135a3db4f345ad31660a1197fc30ae690",
+      "sha256": "51f21599bd8fa5b8de67df060d4985bc2bdffcaaf50582c669310fc0a61282c5",
       "source": "skills/validation-evidence-review/SKILL.md"
     },
     "skills/validation-evidence-review/agents/openai.yaml": {
-      "sha256": "f5b32d26eec6771a7f9687f4d6ae7c8c9e1ebbc6d28171cf246f64de3cfdb7a5",
+      "sha256": "1e0c23c6f846da8825e2641d886fddfcbe355e27372f59a8cafd255e9cffd245",
       "source": "skills/validation-evidence-review/agents/openai.yaml"
     },
     "skills/validation-evidence-review/assets/icon-small.png": {
-      "sha256": "afcbf2e66ba656bb0b5787500d379a303dc908b2e61a4500b49e8133778c14b5",
+      "sha256": "0b47a4c111eefed26a32251a56ea837faafad82fb662e567141dab382d3eb014",
       "source": "skills/validation-evidence-review/assets/icon-small.png"
     },
     "skills/validation-evidence-review/assets/icon-small.svg": {
-      "sha256": "f9c530265a1d10fdb704102dc5ef261c4b88e7318568f7cd7eff4198ed2b2a51",
+      "sha256": "e9cb90aa493842ab8a1e36ab1d4494c12b12291e6c7600a90a3e0a17ef453c4f",
       "source": "skills/validation-evidence-review/assets/icon-small.svg"
     },
     "skills/validation-evidence-review/assets/icon.png": {
-      "sha256": "2026e7bdb78cc1af37bb72316b9d8eda9fa5594d698e990246a7e9d4d305b359",
+      "sha256": "219122e8c8cc2d44edc6c6a4eed6c4ba047eb846843a054cbb472e03b2edd0f7",
       "source": "skills/validation-evidence-review/assets/icon.png"
     },
     "skills/validation-evidence-review/assets/icon.svg": {
-      "sha256": "f9c530265a1d10fdb704102dc5ef261c4b88e7318568f7cd7eff4198ed2b2a51",
+      "sha256": "e9cb90aa493842ab8a1e36ab1d4494c12b12291e6c7600a90a3e0a17ef453c4f",
       "source": "skills/validation-evidence-review/assets/icon.svg"
     },
     "skills/validation-evidence-review/references/environment-comparison.md": {
@@ -133,6 +149,6 @@
     "workspace-inspection"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.31.0",
-  "version": "0.4.0"
+  "toolkit_version": "0.32.0",
+  "version": "0.4.1"
 }

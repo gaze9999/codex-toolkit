@@ -1,12 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
-  <title id="title">Component Member Order icon</title>
-  <desc id="desc">Grouped component members arranged in a clear order</desc>
-  <rect width="128" height="128" rx="28" fill="#F8D6C9"/>
-<rect x="32" y="17" width="77" height="94" rx="12" fill="#FFF5EB"/>
-<path d="M46 34h35" stroke="#A77074" stroke-width="5" stroke-linecap="round"/>
-<rect x="44" y="46" width="53" height="14" rx="4" fill="#C87970"/>
-<rect x="44" y="66" width="53" height="14" rx="4" fill="#E6A078"/>
-<rect x="44" y="86" width="53" height="14" rx="4" fill="#C87970"/>
-<path d="M57 53h28M57 73h20M57 93h28" stroke="#70474F" stroke-width="3" stroke-linecap="round"/>
-<path d="M19 37v50m-7-8 7 8 7-8" fill="none" stroke="#C87970" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <rect x="3" y="3" width="122" height="122" rx="28" fill="#FFF3E4"/>
+  <circle cx="91" cy="38" r="23" fill="#F7B56B"/>
+  <g fill="none" stroke="#9A431D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="28" y="29" width="47" height="72" rx="5"/><path d="M40 44h23 M40 61h23 M40 78h23 M95 33v64 M86 86l9 11 9-11"/></g>
 </svg>

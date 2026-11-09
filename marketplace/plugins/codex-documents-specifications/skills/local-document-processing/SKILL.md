@@ -2,7 +2,7 @@
 name: local-document-processing
 description: Find source-backed Markdown extracts, convert selected local PDF/Office documents, or apply guarded Markdown edits through an installed document core or Local Documents MCP. Use for source processing, not authored reports or specification decisions.
 metadata:
-  version: "0.2.2"
+  version: "0.2.3"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

@@ -2,7 +2,7 @@
 name: network-filter-rules
 description: Add, modify, diagnose, or verify AdGuard, uBlock Origin, DNS filter, hosts, proxy, or similar blocking and rewrite rules with parser-aware minimal matching and false-positive control. Do not use for generic YAML, JSON, or TOML editing.
 metadata:
-  version: "0.4.13"
+  version: "0.4.14"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

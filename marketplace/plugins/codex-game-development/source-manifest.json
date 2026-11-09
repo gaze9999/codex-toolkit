@@ -1,63 +1,67 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "bd0e02e70dca91585012031ed6def5d2d61af8b8487f6fa6383e69dd0076b8d4",
+      "sha256": "79b2d238aeeff7aa48474a9d87a056898f3c3f8e58c0deb83edd7f5c408c25c4",
       "source": null
     },
     "LICENSE": {
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
     },
+    "assets/codex-game-development.png": {
+      "sha256": "4a00f0e80af093d023781afc75f8514276a6dd846a5d0f567203b44cb6fbd0af",
+      "source": "assets/branding/plugins/codex-game-development.png"
+    },
     "plugin.json": {
-      "sha256": "550fd0d9fc9be639c490c80c18973891c6c0dfbdc71648f54b5b3f55233337c0",
+      "sha256": "e3c8fd44f86981e6212301045b97135076c017b9838b6f1bfb9fbe7b784d8699",
       "source": "plugins/game-development/plugin.json"
     },
     "skills/game-balance-simulation/SKILL.md": {
-      "sha256": "737506dac5cefee7f2830f051db59304d137926828a0fad614a4a10e689c98e3",
+      "sha256": "801d6f8e7e4732cc22f51f126e8b657abc8f14b9c5ad49ff9612990b78905c42",
       "source": "skills/game-balance-simulation/SKILL.md"
     },
     "skills/game-balance-simulation/agents/openai.yaml": {
-      "sha256": "1346aefc2c35b686592b9669dd2f4a8aeb9ee0a891a731db34dcbdac6dc4a6fb",
+      "sha256": "9a7435220b73fdd539eab8288a9d4d75e54a5d99f7cda7b61dedaf3648c25464",
       "source": "skills/game-balance-simulation/agents/openai.yaml"
     },
     "skills/game-balance-simulation/assets/icon-small.png": {
-      "sha256": "e0ac06495f9a2dce486cc0ea16769a94073254edb98b739f773dbbe9bee97321",
+      "sha256": "fd5f73067d39b9b3989b99b06404637c9e9c2b1c572208c3299f946e76b5c065",
       "source": "skills/game-balance-simulation/assets/icon-small.png"
     },
     "skills/game-balance-simulation/assets/icon-small.svg": {
-      "sha256": "f81c3ae26c5e7b7f4d8718afb2db67837bb505600011af4381ca6bc98f3df5b3",
+      "sha256": "f2c733c9b0f3bfb4c58cf51521fd2c085127c78ffebfee82a84a933cf5bf8298",
       "source": "skills/game-balance-simulation/assets/icon-small.svg"
     },
     "skills/game-balance-simulation/assets/icon.png": {
-      "sha256": "8ffd734bbffbaaea5f42a06965eee74d10ba91eff1f08137f378ec5ce20cf4ec",
+      "sha256": "484dcd081b262e75c9aa7133fb03420b16636bb5c3c9eb4526badd430a11ae9f",
       "source": "skills/game-balance-simulation/assets/icon.png"
     },
     "skills/game-balance-simulation/assets/icon.svg": {
-      "sha256": "f81c3ae26c5e7b7f4d8718afb2db67837bb505600011af4381ca6bc98f3df5b3",
+      "sha256": "f2c733c9b0f3bfb4c58cf51521fd2c085127c78ffebfee82a84a933cf5bf8298",
       "source": "skills/game-balance-simulation/assets/icon.svg"
     },
     "skills/unity-development/SKILL.md": {
-      "sha256": "2e02feab407324ac86dbf51cb45cb62aa908629a2f2b82738bc94cf605690fa0",
+      "sha256": "903ba0823e33e1d43126b3cd35303a594828da67e984931e79daee8b9ba44755",
       "source": "skills/unity-development/SKILL.md"
     },
     "skills/unity-development/agents/openai.yaml": {
-      "sha256": "d7de3b37b7c09704770861f870ff16dfda6efc734d7d21ab93a61f3907aa23e6",
+      "sha256": "96d345abfc035c7038deddfeb6101658c94fc0c424a979e043b33b25a03ceff7",
       "source": "skills/unity-development/agents/openai.yaml"
     },
     "skills/unity-development/assets/icon-small.png": {
-      "sha256": "f67982d481012a3c6d6dbb79b9621ebb8fc8bc55aad6998800f30755cc1d455e",
+      "sha256": "9715b1611e5d2aebfe05ea3dd8ebcdff0c8556fef497f97bb209312917ebaa8f",
       "source": "skills/unity-development/assets/icon-small.png"
     },
     "skills/unity-development/assets/icon-small.svg": {
-      "sha256": "0a17e279ee67fc2bb9dd8f4631f98aca1f76d3e55adc86571ea4d76a8601e6e2",
+      "sha256": "790fc6bd42927aed8146432218c6af3634a0b6c057dec12e803030c2301124bc",
       "source": "skills/unity-development/assets/icon-small.svg"
     },
     "skills/unity-development/assets/icon.png": {
-      "sha256": "745de262c2e2d6be15b2dd94eb4a42fdbe03205421fed77ab0bef9ea43df75b0",
+      "sha256": "4a00f0e80af093d023781afc75f8514276a6dd846a5d0f567203b44cb6fbd0af",
       "source": "skills/unity-development/assets/icon.png"
     },
     "skills/unity-development/assets/icon.svg": {
-      "sha256": "469b144bcf143c45e43412f3353dc79627757f987d3a48b5d204e24d496b05ec",
+      "sha256": "790fc6bd42927aed8146432218c6af3634a0b6c057dec12e803030c2301124bc",
       "source": "skills/unity-development/assets/icon.svg"
     }
   },
@@ -67,6 +71,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.31.0",
-  "version": "0.1.0"
+  "toolkit_version": "0.32.0",
+  "version": "0.1.1"
 }

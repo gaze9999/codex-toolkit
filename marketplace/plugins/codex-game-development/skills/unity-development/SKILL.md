@@ -2,7 +2,7 @@
 name: unity-development
 description: Implement, refactor, diagnose, or review Unity projects while preserving the repository's Unity version, packages, scenes, prefabs, serialized assets, render/input pipelines, and build targets. Use for Unity project work, not general C# outside Unity.
 metadata:
-  version: "0.4.14"
+  version: "0.4.15"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

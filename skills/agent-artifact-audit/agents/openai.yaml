@@ -1,4 +1,6 @@
 interface:
-  display_name: "Agent Artifact Audit (v0.1.0)"
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon.png"
+  display_name: "Agent Artifact Audit (v0.1.1)"
   short_description: "Review local artifacts and recover cleanup reports"
   default_prompt: "Use $agent-artifact-audit to inventory my selected workspaces and report the batch, gaps and offline report paths."

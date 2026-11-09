@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-creative-imaging",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "產生編輯風格插圖, 建立與調整 Stable Diffusion 與 ComfyUI 工作流",
   "author": {
     "name": "gaze9999"
@@ -12,8 +12,10 @@
       "interface": {
         "displayName": "影像生成",
         "shortDescription": "產生編輯風格插圖, 建立與調整 Stable Diffusion 與 ComfyUI 工作流",
-        "brandColor": "#E8A36D",
-        "websiteURL": "https://github.com/gaze9999/codex-toolkit"
+        "brandColor": "#EF8A3C",
+        "websiteURL": "https://github.com/gaze9999/codex-toolkit",
+        "logo": "./assets/codex-creative-imaging.png",
+        "composerIcon": "./assets/codex-creative-imaging.png"
       }
     }
   },

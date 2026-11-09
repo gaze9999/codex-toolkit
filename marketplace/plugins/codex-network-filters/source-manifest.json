@@ -1,39 +1,43 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "a069536f59aaf3f7c65955d91065c3294bd157c919536d2d8a18b85ac668c9c9",
+      "sha256": "09d7349e2f0a71d56adb96835b33b427a0a6fd13707a0eabe40c5741cded3744",
       "source": null
     },
     "LICENSE": {
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
     },
+    "assets/codex-network-filters.png": {
+      "sha256": "1679f3a3a820c3558afd9ac6e673ecb648b082ce2ae85f2ce82614bc6b4ce4b5",
+      "source": "assets/branding/plugins/codex-network-filters.png"
+    },
     "plugin.json": {
-      "sha256": "51254b88309dd8393d666c3ba7ccbd793272a4478b0c27a14888710f5f5a6e25",
+      "sha256": "f7f0deac37d0ce4318a70da1cd8c9f91e8a56707915c720c017757455aa43051",
       "source": "plugins/network-filters/plugin.json"
     },
     "skills/network-filter-rules/SKILL.md": {
-      "sha256": "93485b1dbf003deb0f2baed282d6606424f766c102bf08f4b5e99607574fc9a2",
+      "sha256": "04fa0a7239fe78fbf873aae6707e2015c1ed2cf7f828a0e3b66429e315dfe01d",
       "source": "skills/network-filter-rules/SKILL.md"
     },
     "skills/network-filter-rules/agents/openai.yaml": {
-      "sha256": "2366ecbecf107364dc9d4dbda65edcfc729f44e0ba2ba37a5712527a59ea788f",
+      "sha256": "8ed60c61f62433131dce7eb728a70479180ef665e776e93f73205c94f983a8e8",
       "source": "skills/network-filter-rules/agents/openai.yaml"
     },
     "skills/network-filter-rules/assets/icon-small.png": {
-      "sha256": "7117f78b9660fe0e023bfc5b6ecee341de04bfa332725b92d766e711764b7240",
+      "sha256": "305f8e497d02f78b7502ff3424d4337a49e4014a68caa6b447b0fef4944da725",
       "source": "skills/network-filter-rules/assets/icon-small.png"
     },
     "skills/network-filter-rules/assets/icon-small.svg": {
-      "sha256": "3e88b58e13f35a22eb4de57484e28a15a97e16bb143eeb7c3badd23ece1b56a6",
+      "sha256": "3939c5e171f990d5885b6038b1a184c09e9e7095c886de4d201dcb3e8300d7c7",
       "source": "skills/network-filter-rules/assets/icon-small.svg"
     },
     "skills/network-filter-rules/assets/icon.png": {
-      "sha256": "f202dd69651a8c7fd6954fcc2fa26ae8463c889706d3978d5b421c6b4c6bad1a",
+      "sha256": "1679f3a3a820c3558afd9ac6e673ecb648b082ce2ae85f2ce82614bc6b4ce4b5",
       "source": "skills/network-filter-rules/assets/icon.png"
     },
     "skills/network-filter-rules/assets/icon.svg": {
-      "sha256": "fa72ca95ef6148319388d2ea092eec88bdbef6dab1e3b24e337129e468752b1d",
+      "sha256": "3939c5e171f990d5885b6038b1a184c09e9e7095c886de4d201dcb3e8300d7c7",
       "source": "skills/network-filter-rules/assets/icon.svg"
     }
   },
@@ -43,6 +47,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.31.0",
-  "version": "0.1.0"
+  "toolkit_version": "0.32.0",
+  "version": "0.1.1"
 }

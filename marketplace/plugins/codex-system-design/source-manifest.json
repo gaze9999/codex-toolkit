@@ -1,39 +1,43 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "30a1a6bff01569e50927de72e81898ecad922b398bfb83dc00b0648e041c4aa6",
+      "sha256": "c4888e3eb5161ecbbe5003411754f9c46a16cacb1994475f7f4ea45534874c65",
       "source": null
     },
     "LICENSE": {
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
     },
+    "assets/codex-system-design.png": {
+      "sha256": "b6f2615d167d8c59bc165bc9cd1e519edbcee7c2ee50e13d7781a8809d4f3532",
+      "source": "assets/branding/plugins/codex-system-design.png"
+    },
     "plugin.json": {
-      "sha256": "4048b88b4eff9255e814cfb265658fb2636987b7d9c321086bde5b1804693ceb",
+      "sha256": "371fee33a0471f270dd77314c73a396f9bcde9e928e245ac1669b003ed4bddd7",
       "source": "plugins/system-design/plugin.json"
     },
     "skills/system-design-analysis/SKILL.md": {
-      "sha256": "feb5b54c3822177ee3247ccdc3c1f8c61c68890e53179eac8c95add135653273",
+      "sha256": "bf15c718566eb81ff14c92164e7f8f61fc1c2759dd317f6b285bfc908f7c597d",
       "source": "skills/system-design-analysis/SKILL.md"
     },
     "skills/system-design-analysis/agents/openai.yaml": {
-      "sha256": "653a78c5abe4983174275a907c82f64bc120e5cfc21eac056dd1eea68738653a",
+      "sha256": "9061d094454694eebcfa38cc67c148ff43f7ffe89df9756a9528b7f67873134b",
       "source": "skills/system-design-analysis/agents/openai.yaml"
     },
     "skills/system-design-analysis/assets/icon-small.png": {
-      "sha256": "223683fb5f6d33984b0af40f1dc71f582f10fde25948bc0921329bae18d6e6da",
+      "sha256": "e3f31c435697821ab79f30083ac390cb4e4e7af4a01ff04c7dc114a136c86ed7",
       "source": "skills/system-design-analysis/assets/icon-small.png"
     },
     "skills/system-design-analysis/assets/icon-small.svg": {
-      "sha256": "a1abb6a79310c651083b22bb1370f74836868d1f3d0095a686eb1bf59cb2ddc8",
+      "sha256": "5b5b58a16e53ad0116af54809298fbb66e292d4e556bba561735ea463b2b7924",
       "source": "skills/system-design-analysis/assets/icon-small.svg"
     },
     "skills/system-design-analysis/assets/icon.png": {
-      "sha256": "2445d3e35f3f715aebcf1339307067e366ea7ca16dcfc52bee6c14a438526c52",
+      "sha256": "b6f2615d167d8c59bc165bc9cd1e519edbcee7c2ee50e13d7781a8809d4f3532",
       "source": "skills/system-design-analysis/assets/icon.png"
     },
     "skills/system-design-analysis/assets/icon.svg": {
-      "sha256": "a1abb6a79310c651083b22bb1370f74836868d1f3d0095a686eb1bf59cb2ddc8",
+      "sha256": "5b5b58a16e53ad0116af54809298fbb66e292d4e556bba561735ea463b2b7924",
       "source": "skills/system-design-analysis/assets/icon.svg"
     }
   },
@@ -43,6 +47,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.31.0",
-  "version": "0.1.0"
+  "toolkit_version": "0.32.0",
+  "version": "0.1.1"
 }

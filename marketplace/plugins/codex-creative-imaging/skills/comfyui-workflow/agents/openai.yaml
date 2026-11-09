@@ -1,5 +1,5 @@
 interface:
-  display_name: "ComfyUI Workflow (v0.4.12)"
+  display_name: "ComfyUI Workflow (v0.4.13)"
   short_description: "Engineer reproducible Stable Diffusion workflows"
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"

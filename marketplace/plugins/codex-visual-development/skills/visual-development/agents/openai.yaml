@@ -1,4 +1,6 @@
 interface:
-  display_name: "Visual Development (v0.1.2)"
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon.png"
+  display_name: "Visual Development (v0.1.3)"
   short_description: "Project-native visualization and Three.js development"
   default_prompt: "Use $visual-development to select and integrate data visualization, 2D motion or Three.js with this project's existing framework and verify lifecycle and browser behavior."

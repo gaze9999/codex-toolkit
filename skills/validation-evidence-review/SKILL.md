@@ -3,7 +3,7 @@ name: validation-evidence-review
 description: Review existing local validation evidence or compare scoped environment mirrors without writes or command reruns. Use for recorded run/baseline/coverage checks, file drift and remaining verification gaps, not test execution or synchronization.
 metadata:
   short-description: Review recorded evidence and scoped environment drift
-  version: "0.5.0"
+  version: "0.5.1"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

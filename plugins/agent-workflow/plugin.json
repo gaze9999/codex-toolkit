@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-agent-workflow",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "維護 Agent 指示層級、提示詞、Markdown 目標與計畫, 以及審查與測試簡報",
   "author": {
     "name": "gaze9999"
@@ -14,7 +14,7 @@
         "shortDescription": "維護 Agent 指示層級、提示詞、Markdown 目標與計畫, 以及審查與測試簡報",
         "logo": "./assets/codex-agent-workflow.png",
         "composerIcon": "./assets/codex-agent-workflow.png",
-        "brandColor": "#E8A36D",
+        "brandColor": "#EF8A3C",
         "websiteURL": "https://github.com/gaze9999/codex-toolkit"
       }
     }

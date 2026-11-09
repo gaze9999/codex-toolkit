@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "9a3b458e82f1effd817e1d75ce4a000e43e1d005cc02e9d99504ab68256179ca",
+      "sha256": "3387655746e03beabdd7e8c5d35024d6f3c22291a70e45dfb1b066b51ee31367",
       "source": null
     },
     "LICENSE": {
@@ -9,35 +9,35 @@
       "source": "LICENSE"
     },
     "assets/codex-agent-workflow.png": {
-      "sha256": "43f22061975e536144caa971a6a043bc78e39f44e5b9bf2f146ab83dab1a0928",
+      "sha256": "696159255160b92f6b8deec0284e9a6e56e40c45288eb0331548411ff3ce4e3f",
       "source": "assets/branding/plugins/codex-agent-workflow.png"
     },
     "plugin.json": {
-      "sha256": "20d1342a1fc61fa072b2252c683233045f195f6e0961982b407d18a88e1cb544",
+      "sha256": "e8dca3c23336708c193905baf8c558206bd31d378a8a2c913c715762b3345eee",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
-      "sha256": "95d448957646d7c380632a6cdd04e20d791a841679541c753665c9877dde6e9d",
+      "sha256": "b5c921b55ddd1d44c6bdb133ebc65b38eeabdd2fbf262329e7b59abb5c722dd9",
       "source": "skills/agent-governance/SKILL.md"
     },
     "skills/agent-governance/agents/openai.yaml": {
-      "sha256": "249e4a9d2e5d9532a98d0fe29e4caca1a990543a04503dad312313ca5df8b970",
+      "sha256": "4a51595c841bf78bc58bcc174b32dadc75b71835da88aa8917b9c4da90155a3e",
       "source": "skills/agent-governance/agents/openai.yaml"
     },
     "skills/agent-governance/assets/icon-small.png": {
-      "sha256": "5752e55c1e7440d24f344611ade405ca908bc6460e552201a38fd6f5443a31a7",
+      "sha256": "546e8d16476fcb474fa072c529d9bf3db40213deae8f15462a72ac832aa70c90",
       "source": "skills/agent-governance/assets/icon-small.png"
     },
     "skills/agent-governance/assets/icon-small.svg": {
-      "sha256": "8ae2e9bc034e22c6a2b29a16002e0ecc0e44f4d395e9e80f368a5b1c9dccae9b",
+      "sha256": "5a6893edd2827a61dc700f0eadfc690bab3093c387fa88759089e9b57f96beb5",
       "source": "skills/agent-governance/assets/icon-small.svg"
     },
     "skills/agent-governance/assets/icon.png": {
-      "sha256": "12abffeebce1421147275e1245bf50245639e8dcf856a3a1672c8287f882d99e",
+      "sha256": "181bfcea7bf45081b38c9003a9d1115792679ff88b3ba7951d1a0a5602b496b3",
       "source": "skills/agent-governance/assets/icon.png"
     },
     "skills/agent-governance/assets/icon.svg": {
-      "sha256": "44e4bb9b5e420bcfa30b1ed006c0a2bbe4f90bce8c65a4e6b1d6fea6b3f5ecda",
+      "sha256": "5a6893edd2827a61dc700f0eadfc690bab3093c387fa88759089e9b57f96beb5",
       "source": "skills/agent-governance/assets/icon.svg"
     },
     "skills/agent-governance/assets/project-starter/README.md": {
@@ -157,27 +157,27 @@
       "source": "skills/agent-governance/references/task-execution-and-reporting.md"
     },
     "skills/coding-prompt/SKILL.md": {
-      "sha256": "73d5314a85a116bf8b01a8055e891c5abce987d4c334a79a2b7a7667f74da696",
+      "sha256": "80cbe0d0b18f8085bdacd0e54c665b2099f9be07be33bdc902cee144069856cb",
       "source": "skills/coding-prompt/SKILL.md"
     },
     "skills/coding-prompt/agents/openai.yaml": {
-      "sha256": "b53a7ab2e394b73644673e4865fd8a3e696ce8531118d36b08dad4128a9b518f",
+      "sha256": "6a3df61f9d511be318ce9a2f50cead3dda85d6470d5fe4812ca4d3d7f27286fc",
       "source": "skills/coding-prompt/agents/openai.yaml"
     },
     "skills/coding-prompt/assets/icon-small.png": {
-      "sha256": "9ae62010b1c982ffcc6a5c6b2f0c0efcdfef0dc1cd211f52bcc6b244dd12ca9b",
+      "sha256": "59be3c7b00ca5bc3c304dcf6beaa6de0d22585d308e1994aab49f2bb3f6c27e1",
       "source": "skills/coding-prompt/assets/icon-small.png"
     },
     "skills/coding-prompt/assets/icon-small.svg": {
-      "sha256": "0f7def57001a132c3dbe0812378c1f223c340ee9a1fc67d55907f590479e64bd",
+      "sha256": "2d6eefc9037150db33191e3b6ee959f16694777fa0a86a3d12b41c6b42dc9e45",
       "source": "skills/coding-prompt/assets/icon-small.svg"
     },
     "skills/coding-prompt/assets/icon.png": {
-      "sha256": "0c191061df0c45f186f066a5a164ffb6ca1ea56ef9ba4717373b9688165106aa",
+      "sha256": "be468554d2939afa0c51f1b7ef4132ee6fd0b2b0a9ca4b37381669e7312345e6",
       "source": "skills/coding-prompt/assets/icon.png"
     },
     "skills/coding-prompt/assets/icon.svg": {
-      "sha256": "ee0123198b3c3567737de7a3057d455df2729e5bb29b75fd9e42da8aa1b66c7d",
+      "sha256": "2d6eefc9037150db33191e3b6ee959f16694777fa0a86a3d12b41c6b42dc9e45",
       "source": "skills/coding-prompt/assets/icon.svg"
     },
     "skills/coding-prompt/references/prompt-patterns.md": {
@@ -193,11 +193,11 @@
       "source": "skills/task-guide/README.md"
     },
     "skills/task-guide/SKILL.md": {
-      "sha256": "526f325bf1f79cbb9073e23c0128dcd56a5f0b2a73842bfda83582dd1185eaf5",
+      "sha256": "0fd28089a23ef072b2113b45106cfb429a7f60da6c8c5fa40137d24f3ca7bced",
       "source": "skills/task-guide/SKILL.md"
     },
     "skills/task-guide/agents/openai.yaml": {
-      "sha256": "041303673c5defc0299c76d183db0e1dabd26751772c4dfa09d0ccca94d2e2ce",
+      "sha256": "874d21a43abe293addc1b0c3dfc91c99e1c431209d7b0195fd2e0bd31fc2c38d",
       "source": "skills/task-guide/agents/openai.yaml"
     },
     "skills/task-guide/assets/goal.md": {
@@ -213,19 +213,19 @@
       "source": "skills/task-guide/assets/history.example.json"
     },
     "skills/task-guide/assets/icon-small.png": {
-      "sha256": "2eaf6c7ff383eae750e31a60125b9180877632d2e0eecfa716384be235308d83",
+      "sha256": "91fc938ae34b0817db8c5d22247fff14f4f2f4e90216141dcbf3c7f2e08ee43b",
       "source": "skills/task-guide/assets/icon-small.png"
     },
     "skills/task-guide/assets/icon-small.svg": {
-      "sha256": "d8d9df77d857352725f752aed0ef345baa5422bbc67036bf7bd7f22e74c67235",
+      "sha256": "45bfc78089f7e9482e41f7aa15b13988e8f8e08bc4139769377c5a615b711c22",
       "source": "skills/task-guide/assets/icon-small.svg"
     },
     "skills/task-guide/assets/icon.png": {
-      "sha256": "49df503d9345bcddeb9e4349c5f6385490bc21c5a8814c1a8ba49776d3a18657",
+      "sha256": "fe9c4724e5012c36f1a2c3fe33e80448a063f47b6d96028bcd06bad520262adc",
       "source": "skills/task-guide/assets/icon.png"
     },
     "skills/task-guide/assets/icon.svg": {
-      "sha256": "d8d9df77d857352725f752aed0ef345baa5422bbc67036bf7bd7f22e74c67235",
+      "sha256": "45bfc78089f7e9482e41f7aa15b13988e8f8e08bc4139769377c5a615b711c22",
       "source": "skills/task-guide/assets/icon.svg"
     },
     "skills/task-guide/assets/plan.md": {
@@ -273,27 +273,27 @@
       "source": "skills/task-guide/scripts/record_history.py"
     },
     "skills/task-routing/SKILL.md": {
-      "sha256": "9afd2d7ce77ff088faef2dcffbb4a36a634da5ab34243691079c7d90356dde5c",
+      "sha256": "ead616bc37907cc349368e0d3552ebf3d77d329246adb2198ebf99d5c4ac8476",
       "source": "skills/task-routing/SKILL.md"
     },
     "skills/task-routing/agents/openai.yaml": {
-      "sha256": "ef790c1e1caac2220f58c0b818aeccdc43f741b3c38166579ec8ce441e2b055b",
+      "sha256": "7b81226040e62a9eae7a7cd96ccd53c36e3ff424e9da6a3f7083bcb12bd56cf0",
       "source": "skills/task-routing/agents/openai.yaml"
     },
     "skills/task-routing/assets/icon-small.png": {
-      "sha256": "fdc0e969ee3366d7ef6006bf5bc78aff8470636c333a353bccb829e8af56c997",
+      "sha256": "6ff03e80e9d972966837a5328de67ffe330b1db8b234f3e6654e476adbec80c0",
       "source": "skills/task-routing/assets/icon-small.png"
     },
     "skills/task-routing/assets/icon-small.svg": {
-      "sha256": "afe98fdff167500b651602fd8580ab07de6d4229100a55e14a6f525226286435",
+      "sha256": "21318ea28ccc9a6551c860bc92a3fd145de4d4f7bf8e2ff4d34ee88c5dc6d778",
       "source": "skills/task-routing/assets/icon-small.svg"
     },
     "skills/task-routing/assets/icon.png": {
-      "sha256": "bd624dda9bd190c8b429f93aa36594ab4c912eb67556ae8ac2d97a19aa9a983e",
+      "sha256": "9c8891874c3e2c9b30ce0a2a490c14c0c3318c8c4856c9a2caa26fa6c0bd42fc",
       "source": "skills/task-routing/assets/icon.png"
     },
     "skills/task-routing/assets/icon.svg": {
-      "sha256": "bef1bc5a0e57eb1c45ea415ccd890f63916917a4bd88d9e582dfa134dd3209e6",
+      "sha256": "21318ea28ccc9a6551c860bc92a3fd145de4d4f7bf8e2ff4d34ee88c5dc6d778",
       "source": "skills/task-routing/assets/icon.svg"
     },
     "skills/task-routing/references/workflow.md": {
@@ -307,6 +307,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.31.0",
-  "version": "0.6.0"
+  "toolkit_version": "0.32.0",
+  "version": "0.6.1"
 }

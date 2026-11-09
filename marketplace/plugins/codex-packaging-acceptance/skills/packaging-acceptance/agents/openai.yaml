@@ -1,4 +1,6 @@
 interface:
-  display_name: "Packaging Acceptance (v0.1.5)"
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon.png"
+  display_name: "Packaging Acceptance (v0.1.6)"
   short_description: "Check portable inputs, lifecycle and release evidence"
   default_prompt: "Use $packaging-acceptance to verify this package against the actual source and permitted test scope."

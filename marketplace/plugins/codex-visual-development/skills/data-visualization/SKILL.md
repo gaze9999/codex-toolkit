@@ -3,7 +3,7 @@ name: data-visualization
 description: Create or revise source-backed charts, diagrams and interactive visual explanations for data analysis, documentation or standalone delivery. Select visual forms from the reader's question and verify data mappings and rendered output.
 metadata:
   short-description: Source-backed charts and visual explanations
-  version: "0.1.0"
+  version: "0.1.1"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

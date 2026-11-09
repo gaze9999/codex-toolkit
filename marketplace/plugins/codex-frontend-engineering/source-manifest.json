@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "b79bc3702bf4baddede7889c7f00e4dc0b5a16e867ba64b695f6d2509ae8947a",
+      "sha256": "3819fdaaceb7ebba7e380064012178aae37e89e4b5e10ea02a66e8c6ca22a205",
       "source": null
     },
     "LICENSE": {
@@ -9,11 +9,11 @@
       "source": "LICENSE"
     },
     "assets/codex-frontend-engineering.png": {
-      "sha256": "e83ee8ea49d4719c70b4ada17fadd80f64640f1600d02da33e091fefeed8be66",
+      "sha256": "1023fa9bf39b2f1f7b719b931f01893310ec03dd9fef02231909ed8d5eb0f380",
       "source": "assets/branding/plugins/codex-frontend-engineering.png"
     },
     "plugin.json": {
-      "sha256": "bf769ab5ff7c980dea558977ef0f135e6dfaea161a9e84c52ff9f2b529d6989b",
+      "sha256": "6778394b43340988a77020b0a93445abf2a3f8f209a3a05c073257ea7cdc5495",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "resources/references/angular-style.md": {
@@ -21,12 +21,28 @@
       "source": "agents/references/angular-style.md"
     },
     "skills/accessibility-engineering/SKILL.md": {
-      "sha256": "8fc13ecedfc38ac9cb43c2ae738bc35368470119f10722fafdaac8b27fa342c2",
+      "sha256": "f1c2ebc3d951335593a20801aaac30e08bc4e2b386a8672080fbc9164a290a14",
       "source": "skills/accessibility-engineering/SKILL.md"
     },
     "skills/accessibility-engineering/agents/openai.yaml": {
-      "sha256": "d172c596bc61b1c8838d24972c3fd3c7fca045f1b541d380ad1f824fe5ba0ac6",
+      "sha256": "002034e3143a6bfc177986a2dfe7206729fba6c1f0d5eb1dc56deb94f012cf91",
       "source": "skills/accessibility-engineering/agents/openai.yaml"
+    },
+    "skills/accessibility-engineering/assets/icon-small.png": {
+      "sha256": "c3a35c4c74ec0ba17667645092fe43da1e35b85c39b2f3b154b833d7d082c031",
+      "source": "skills/accessibility-engineering/assets/icon-small.png"
+    },
+    "skills/accessibility-engineering/assets/icon-small.svg": {
+      "sha256": "e4a1761ae47cb03bc544b52149961117e964c8f2a2eecdf97b151bc73b25be45",
+      "source": "skills/accessibility-engineering/assets/icon-small.svg"
+    },
+    "skills/accessibility-engineering/assets/icon.png": {
+      "sha256": "0d7c9f37a524eeb1651e06d3d17185a44bd6875ab278e01ebd3aee73d4f7ae38",
+      "source": "skills/accessibility-engineering/assets/icon.png"
+    },
+    "skills/accessibility-engineering/assets/icon.svg": {
+      "sha256": "e4a1761ae47cb03bc544b52149961117e964c8f2a2eecdf97b151bc73b25be45",
+      "source": "skills/accessibility-engineering/assets/icon.svg"
     },
     "skills/accessibility-engineering/references/platform-integration.md": {
       "sha256": "40cb1be16d1b05143e15952af258bb8fd31a9f136014d58cad70836b269047d6",
@@ -37,27 +53,27 @@
       "source": "skills/accessibility-engineering/references/validation.md"
     },
     "skills/angular-development/SKILL.md": {
-      "sha256": "cfa66ea53daffdac9d5d8558e175b7b3f542bdb18245d35193ca811bb80c1033",
+      "sha256": "f4230663a26bf3bfaa34251b6508c08f2bafdb197ab45a9de0c79e08757820ff",
       "source": "skills/angular-development/SKILL.md"
     },
     "skills/angular-development/agents/openai.yaml": {
-      "sha256": "fb347775b08eb35a0b71e024466f6d21b16780b8aff001f166efc357e609789c",
+      "sha256": "907aa5def14e7210c964caf78e3ff5692b3e83a9540c9337489a0841782af317",
       "source": "skills/angular-development/agents/openai.yaml"
     },
     "skills/angular-development/assets/icon-small.png": {
-      "sha256": "328e4c9cec94aad16587c8a8c03ad3d2f278f3241d77503b1e7e4cf4f04a2aef",
+      "sha256": "183862818edb63c0d7b73d2605fcb0c49c6e609c8bf8957cedc794be5a96281e",
       "source": "skills/angular-development/assets/icon-small.png"
     },
     "skills/angular-development/assets/icon-small.svg": {
-      "sha256": "cbe2480397138742daae96ddca07c2d11751d6c055ff0fa3e2a45b79b7a55155",
+      "sha256": "d7e21352d96996fc3342f14a843466d72231295e2014f1dcf1730e4b3658d081",
       "source": "skills/angular-development/assets/icon-small.svg"
     },
     "skills/angular-development/assets/icon.png": {
-      "sha256": "46a3edb1551968ab559d5062e270ec1d7a242b357aaf6035edac4e8ae8d07581",
+      "sha256": "ced8b333df1f16a8668eec40f36d97ee25756e47aa3e46fe3481c7fcf1e2c749",
       "source": "skills/angular-development/assets/icon.png"
     },
     "skills/angular-development/assets/icon.svg": {
-      "sha256": "cbe2480397138742daae96ddca07c2d11751d6c055ff0fa3e2a45b79b7a55155",
+      "sha256": "d7e21352d96996fc3342f14a843466d72231295e2014f1dcf1730e4b3658d081",
       "source": "skills/angular-development/assets/icon.svg"
     },
     "skills/angular-development/references/angular-style.md": {
@@ -105,27 +121,27 @@
       "source": "skills/angular-development/scripts/maintainability_ast.cjs"
     },
     "skills/angular-member-order/SKILL.md": {
-      "sha256": "0074f40ac6603e583da9a9d0213082825938f5f1ee845d2fce35046a53313c36",
+      "sha256": "56f859857e25f3f7987a98aede3666edeb52c4c75edb3ecaf51aa5ca73805ec8",
       "source": "skills/angular-member-order/SKILL.md"
     },
     "skills/angular-member-order/agents/openai.yaml": {
-      "sha256": "376e38fd1f076de84b119029f51663f58506b304cd97d9346053aa6067b235e7",
+      "sha256": "f8ac42008e6c01430b92bf20a09e9c94841e2f4819833251386e1c74241ac64f",
       "source": "skills/angular-member-order/agents/openai.yaml"
     },
     "skills/angular-member-order/assets/icon-small.png": {
-      "sha256": "86caf1cf7b9345391160dcaeac239e9527f2f8624c15386afc1159fdbc2eb717",
+      "sha256": "66c0ec9b3f6e6dfda74cfd3a32f600bd740415200413ce0f7c3f8cf39cbe18b5",
       "source": "skills/angular-member-order/assets/icon-small.png"
     },
     "skills/angular-member-order/assets/icon-small.svg": {
-      "sha256": "d8eac6b1a1de3c569ecaef5b67bf600af36b566b512aabb88ce0957ca099a734",
+      "sha256": "c7a8474e8845a4016eb7f5a94fda0956e5fd4b585913d0b9cbf1d755cc4a009f",
       "source": "skills/angular-member-order/assets/icon-small.svg"
     },
     "skills/angular-member-order/assets/icon.png": {
-      "sha256": "c0563466b2c009b2faaa5b4266905720c51cb39aa4d71fc650f4503a08bab189",
+      "sha256": "18a5eba03d115552cc6a35896d78b94f2bf47e69f33d7ebb35c35d83933afdb8",
       "source": "skills/angular-member-order/assets/icon.png"
     },
     "skills/angular-member-order/assets/icon.svg": {
-      "sha256": "584f72134212ee9e471e975a8769a72bbfbaa7eabe3d82c12d15a603fa28a270",
+      "sha256": "c7a8474e8845a4016eb7f5a94fda0956e5fd4b585913d0b9cbf1d755cc4a009f",
       "source": "skills/angular-member-order/assets/icon.svg"
     },
     "skills/angular-member-order/references/signal-io-migration.md": {
@@ -137,12 +153,28 @@
       "source": "skills/angular-member-order/scripts/generate_component_member_order_prompt.py"
     },
     "skills/internationalization-engineering/SKILL.md": {
-      "sha256": "98a246b7f16c4183aaf510c05c317a191ab6a46582a5d7ee3cb8fdff4057319d",
+      "sha256": "7a4d92414878a99dfa171a9b56bf6f945d54ced9d5e2ee2a6cf0ab45c315306a",
       "source": "skills/internationalization-engineering/SKILL.md"
     },
     "skills/internationalization-engineering/agents/openai.yaml": {
-      "sha256": "6bf9c2d5d380fc48d39422d8826c354d8390a6d621a15e7bf3049d98158334d2",
+      "sha256": "ebb5d3a7c638296610810e456690bdfd6d6f2fb7dc6d39ffd80b2f50a01b4af6",
       "source": "skills/internationalization-engineering/agents/openai.yaml"
+    },
+    "skills/internationalization-engineering/assets/icon-small.png": {
+      "sha256": "cb5f981f5e0558efdc3a0ad4dd2c34e2bbab65e8bb0c1c6a14ea0b5821e7afb1",
+      "source": "skills/internationalization-engineering/assets/icon-small.png"
+    },
+    "skills/internationalization-engineering/assets/icon-small.svg": {
+      "sha256": "2eae601ebc1de17c6b62f86a2a27ff5e52750a432d0b2d24048e07f8640b0152",
+      "source": "skills/internationalization-engineering/assets/icon-small.svg"
+    },
+    "skills/internationalization-engineering/assets/icon.png": {
+      "sha256": "514a496c7af9219b44ea7aedfda39332e878046f30ff3900484d0d2e57087771",
+      "source": "skills/internationalization-engineering/assets/icon.png"
+    },
+    "skills/internationalization-engineering/assets/icon.svg": {
+      "sha256": "2eae601ebc1de17c6b62f86a2a27ff5e52750a432d0b2d24048e07f8640b0152",
+      "source": "skills/internationalization-engineering/assets/icon.svg"
     },
     "skills/internationalization-engineering/references/platform-integration.md": {
       "sha256": "7f91014e57b143130fbdf51d1c9b697c7ef5a1209a1c63951f1d6ce73dc2401f",
@@ -153,27 +185,27 @@
       "source": "skills/internationalization-engineering/references/validation.md"
     },
     "skills/playwright-cli/SKILL.md": {
-      "sha256": "1b8a93ab5ffdac0ebbba7a32fac1f551d9d6aaeb4eabcd1db1597b7dfde94d2b",
+      "sha256": "2796ed0afd64c81a835eec92c0143780b01021f73881ba7be113b95ed867c597",
       "source": "skills/playwright-cli/SKILL.md"
     },
     "skills/playwright-cli/agents/openai.yaml": {
-      "sha256": "273c38022ba20e9982ec2880eb2b594b58b6a997e2c4a26215938c409010d697",
+      "sha256": "ae609354579f229f7e7821c6663fd4df7c16a10665dd28bd69d4b9a6201d4a14",
       "source": "skills/playwright-cli/agents/openai.yaml"
     },
     "skills/playwright-cli/assets/icon-small.png": {
-      "sha256": "ead0765a85c7e2735dc349b858c633d1e65b6856c5b7582bd01a2dc8a32b8ef8",
+      "sha256": "fd99b6a988cb8948eb921509e0e398023633fed7e0af8912ce831bac6f659496",
       "source": "skills/playwright-cli/assets/icon-small.png"
     },
     "skills/playwright-cli/assets/icon-small.svg": {
-      "sha256": "848bdda8c6262cb5550b4548c690fc754ca4e13f24ee0e17e3262f1a2f346669",
+      "sha256": "3cd25aee252039190604e3592c57242dcf13404fd5065c0853913c482b764900",
       "source": "skills/playwright-cli/assets/icon-small.svg"
     },
     "skills/playwright-cli/assets/icon.png": {
-      "sha256": "a46781a92c69f9c149122b5a58ed3b265a1aede878b129f7330b241d657c4061",
+      "sha256": "f2ab4d53481746670bf3e84637cc6de7f00f6971a1ffbd1a5e47a15b52d92fa8",
       "source": "skills/playwright-cli/assets/icon.png"
     },
     "skills/playwright-cli/assets/icon.svg": {
-      "sha256": "848bdda8c6262cb5550b4548c690fc754ca4e13f24ee0e17e3262f1a2f346669",
+      "sha256": "3cd25aee252039190604e3592c57242dcf13404fd5065c0853913c482b764900",
       "source": "skills/playwright-cli/assets/icon.svg"
     },
     "skills/playwright-cli/references/commands.md": {
@@ -181,27 +213,27 @@
       "source": "skills/playwright-cli/references/commands.md"
     },
     "skills/react-development/SKILL.md": {
-      "sha256": "490e54ad042f9dfe68db6b873da29f72a010de6acb0d900e2a9bd836c2024d45",
+      "sha256": "f45cd4e151222f0850cec4901f2714c28f4b1037674299a81a483fa45cff943f",
       "source": "skills/react-development/SKILL.md"
     },
     "skills/react-development/agents/openai.yaml": {
-      "sha256": "260aedac7c974e3f1d0269a15c6fac6f5312f70589d3fc36232a2beca9aba9d8",
+      "sha256": "4e78fd61df031a95ac1bc2ff2763962c331d2c2420815acdc77437263ff650e1",
       "source": "skills/react-development/agents/openai.yaml"
     },
     "skills/react-development/assets/icon-small.png": {
-      "sha256": "9957e3c69320d5c675a866a78dd8fa433b64b3152252e4590729eff1a19dbe75",
+      "sha256": "9b576070399538dafcf5f3c31c71728d33550594188f6abca4cff3a4ca93fdc2",
       "source": "skills/react-development/assets/icon-small.png"
     },
     "skills/react-development/assets/icon-small.svg": {
-      "sha256": "5867bc401380711d9f8cfddc70e09d76a9c745ec32dd8255fbbd5ded384bacb5",
+      "sha256": "a9ef3c445ad7ef25ffc91aaa29c2dfa401eedf4f2fccf93fa4c8318fae9806cc",
       "source": "skills/react-development/assets/icon-small.svg"
     },
     "skills/react-development/assets/icon.png": {
-      "sha256": "03a14f5fd1f0ed80c34960b645d6df5c716fd85804207fa249030230515ca285",
+      "sha256": "1a16e890088c8ced28a89f7e997067aef0cf8f2635a0442d2f9bf44773049500",
       "source": "skills/react-development/assets/icon.png"
     },
     "skills/react-development/assets/icon.svg": {
-      "sha256": "5867bc401380711d9f8cfddc70e09d76a9c745ec32dd8255fbbd5ded384bacb5",
+      "sha256": "a9ef3c445ad7ef25ffc91aaa29c2dfa401eedf4f2fccf93fa4c8318fae9806cc",
       "source": "skills/react-development/assets/icon.svg"
     },
     "skills/react-development/references/server-hydration.md": {
@@ -213,27 +245,27 @@
       "source": "skills/react-development/references/state-effects.md"
     },
     "skills/ui-ux-design/SKILL.md": {
-      "sha256": "184ba1b0367d3c0986b3e2124c3d5f9a287ca3185be0a9a95d85889b2353683e",
+      "sha256": "8b2116216d3325bdad3e8dd7ab374d4469e2b532f904ccfe7d3873a19141b6f2",
       "source": "skills/ui-ux-design/SKILL.md"
     },
     "skills/ui-ux-design/agents/openai.yaml": {
-      "sha256": "c39ae7f2461b37a74d15ccb38b98766e88691788693f47a7d119e6fb97d06da4",
+      "sha256": "46e2c39078134d151b5d38f7ede24644c035f6f3759a5fe44cdf2abe881680fb",
       "source": "skills/ui-ux-design/agents/openai.yaml"
     },
     "skills/ui-ux-design/assets/icon-small.png": {
-      "sha256": "f9fc86cd7ee2808dfaa43fc96b00c23afd29ebd7beeee2953bf5d72445071da5",
+      "sha256": "7a3dd9e707c1e204e197aca34bfe47c230890713b52664617efe27ef9adc2c39",
       "source": "skills/ui-ux-design/assets/icon-small.png"
     },
     "skills/ui-ux-design/assets/icon-small.svg": {
-      "sha256": "5a3797d5deb504bcefec784eb189a3a1d656a829dbf20356f5ab17ebb1c8a40a",
+      "sha256": "95cb2a0831b7ff8f83a79e6f67d4285bb59b772d89533e3be16d810a708daf26",
       "source": "skills/ui-ux-design/assets/icon-small.svg"
     },
     "skills/ui-ux-design/assets/icon.png": {
-      "sha256": "a4a044a48411f24072caa5a428b69edfe58aa2bb7f50435402769a0c9a0c21fd",
+      "sha256": "21e3ef8c035f472f961aff89c366776af99ec400214a79366aec65ed261c86e0",
       "source": "skills/ui-ux-design/assets/icon.png"
     },
     "skills/ui-ux-design/assets/icon.svg": {
-      "sha256": "5a3797d5deb504bcefec784eb189a3a1d656a829dbf20356f5ab17ebb1c8a40a",
+      "sha256": "95cb2a0831b7ff8f83a79e6f67d4285bb59b772d89533e3be16d810a708daf26",
       "source": "skills/ui-ux-design/assets/icon.svg"
     },
     "skills/ui-ux-design/references/component-patterns.md": {
@@ -253,27 +285,27 @@
       "source": "skills/ui-ux-design/references/detail-review.md"
     },
     "skills/vue-development/SKILL.md": {
-      "sha256": "7f3e517308c794333bcfd239084091690400d8ba2675fb1f4726f02a3b9ae386",
+      "sha256": "147fa98be415eddf64a9b8a7671c889037f4b8efd513e004b13ad0cd1b5ded86",
       "source": "skills/vue-development/SKILL.md"
     },
     "skills/vue-development/agents/openai.yaml": {
-      "sha256": "32b3134e4f0a12ec0615519041e84c5460cf1a68caeb2eb08545e8a5e04a8a44",
+      "sha256": "4e6568cf855ebcb34b32a1d70e46973f88eef373d9680c1f9c9efefa5974ce9e",
       "source": "skills/vue-development/agents/openai.yaml"
     },
     "skills/vue-development/assets/icon-small.png": {
-      "sha256": "b26a7378366574e38baeeb109b5d6eecb1af15278ad9e84e5244dc22d84efc54",
+      "sha256": "72ebaa7a77603b91888f6b5e87542a6b2888a478504a7f9875d82d8672def17d",
       "source": "skills/vue-development/assets/icon-small.png"
     },
     "skills/vue-development/assets/icon-small.svg": {
-      "sha256": "d54e0353ef1afde11aa7d7aa41aa9d5788e9a5b2e56f3a7802f024b2bc3df62f",
+      "sha256": "9b21e08b12feddc063e87d910f2a11a521396acc816f124f85a0f2ae1c2f9db5",
       "source": "skills/vue-development/assets/icon-small.svg"
     },
     "skills/vue-development/assets/icon.png": {
-      "sha256": "81783ae05f29cf53ca14fcd5394c78788456536d3076184e9850a49c1cc836f9",
+      "sha256": "4dd5af0cc4009a5fef629c454975357324449a725604e86e0afc5bdc5c6661f9",
       "source": "skills/vue-development/assets/icon.png"
     },
     "skills/vue-development/assets/icon.svg": {
-      "sha256": "6dbfcaec5cc25c7986538bd4d0bf7d50d34dc5e250bf7fb4b4e9326bcdeb1b2e",
+      "sha256": "9b21e08b12feddc063e87d910f2a11a521396acc816f124f85a0f2ae1c2f9db5",
       "source": "skills/vue-development/assets/icon.svg"
     },
     "skills/vue-development/references/nuxt-ssr.md": {
@@ -297,6 +329,6 @@
     "spartan"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.31.0",
-  "version": "0.7.0"
+  "toolkit_version": "0.32.0",
+  "version": "0.7.1"
 }

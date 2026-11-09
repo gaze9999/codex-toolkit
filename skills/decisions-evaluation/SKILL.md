@@ -3,7 +3,7 @@ name: decisions-evaluation
 description: Evaluate authorized text, JSON or image evidence with OpenAI Decisions for a bounded predicate, finite choice or ordered rubric during development. Use when uncertainty can change the next action, not for routine coding or exact checks.
 metadata:
   short-description: Bounded development evaluation with Decisions
-  version: "0.1.2"
+  version: "0.1.3"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

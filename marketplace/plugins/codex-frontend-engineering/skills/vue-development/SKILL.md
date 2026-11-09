@@ -2,7 +2,7 @@
 name: vue-development
 description: Implement, diagnose, refactor or review Vue components, composables, stores and routes using the detected Vue ecosystem. Load Nuxt/SSR guidance only for server rendering, hydration, deployment or Nuxt integration.
 metadata:
-  version: "0.4.16"
+  version: "0.4.17"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

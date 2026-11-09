@@ -1,5 +1,7 @@
 interface:
-  display_name: "Internationalization Engineering (v0.1.0)"
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon.png"
+  display_name: "Internationalization Engineering (v0.1.1)"
   short_description: "Implement locale, messages and formatting contracts"
   default_prompt: "Use $internationalization-engineering to inspect the detected stack and locale/resource contracts, implement the authorized change, and verify affected messages, formatting and rendered states."
 

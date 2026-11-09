@@ -2,7 +2,7 @@
 name: license-maintainer
 description: Maintain repository LICENSE, NOTICE, COPYRIGHT, SPDX and README license references from verified ownership and distribution evidence. Use for licensing files, not general README writing; never choose or change a license without explicit direction.
 metadata:
-  version: "0.4.14"
+  version: "0.4.15"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

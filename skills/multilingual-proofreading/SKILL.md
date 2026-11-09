@@ -3,7 +3,7 @@ name: multilingual-proofreading
 description: Proofread authored or rewritten documents in Traditional Chinese, English or Japanese for terminology, punctuation, spelling, grammar and natural wording, or maintain a requested terminology profile. Use for document-quality checks or requested proofreading, not automatic translation or a blanket check on every chat reply.
 metadata:
   short-description: Language-aware proofreading and terminology consistency
-  version: "0.4.25"
+  version: "0.4.26"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

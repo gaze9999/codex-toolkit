@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "1796667c314aab7fc84d8588615045621180be45d5f461316ae12839f2b3d564",
+      "sha256": "b6dfe22cfac0c95d736748cddff88a468ba6e4f793391685ffd215a9ffaec92d",
       "source": null
     },
     "LICENSE": {
@@ -9,11 +9,11 @@
       "source": "LICENSE"
     },
     "assets/codex-visual-development.png": {
-      "sha256": "e2bcc6715307ef93b6e82932a32810bf81362998fda1e3bd2830ed260776baf0",
+      "sha256": "cb61bb676872bacc2fc83c3ad542aaa9f0d68e7378fc05b22c4eac47feafb7ec",
       "source": "assets/branding/plugins/codex-visual-development.png"
     },
     "plugin.json": {
-      "sha256": "9200d324c6f5e13500fe020cd9e0dd986e56298d277bcf41b16e066907918a40",
+      "sha256": "9e1e1129663e225cf6e10aa808fe25c212d6f4ee3ba290738fdeaf7bf309eaf0",
       "source": "plugins/visual-development/plugin.json"
     },
     "resources/visual-runtime/README.md": {
@@ -45,12 +45,28 @@
       "source": "python-tools/packages/visual-runtime/src/codex_visual_runtime/server.py"
     },
     "skills/data-visualization/SKILL.md": {
-      "sha256": "7330a127163fa527b1e0426dacd6e36d9d91700cbf9e9443efcc927376bf8602",
+      "sha256": "0e740b515a16203e530bb9c5bf03b6011e89232b68a123a05bfd83d15bcbc26c",
       "source": "skills/data-visualization/SKILL.md"
     },
     "skills/data-visualization/agents/openai.yaml": {
-      "sha256": "2fa709665e1adbb708ed02b8da40cc6884edd2c0294e8196db13c65cd897f042",
+      "sha256": "586094fc85a8106a3c76bfd3b93584d427a62023e75b9c9b19093f260c570da1",
       "source": "skills/data-visualization/agents/openai.yaml"
+    },
+    "skills/data-visualization/assets/icon-small.png": {
+      "sha256": "991c2c86b6a3b6b11f45bbf6615c285344d65f4f8b1e442af4e85fc13de2140f",
+      "source": "skills/data-visualization/assets/icon-small.png"
+    },
+    "skills/data-visualization/assets/icon-small.svg": {
+      "sha256": "7d694bceb8f4832e614ae211a45f31d7c7db22f81e1e7ab2528e2a2502649ff3",
+      "source": "skills/data-visualization/assets/icon-small.svg"
+    },
+    "skills/data-visualization/assets/icon.png": {
+      "sha256": "cb61bb676872bacc2fc83c3ad542aaa9f0d68e7378fc05b22c4eac47feafb7ec",
+      "source": "skills/data-visualization/assets/icon.png"
+    },
+    "skills/data-visualization/assets/icon.svg": {
+      "sha256": "7d694bceb8f4832e614ae211a45f31d7c7db22f81e1e7ab2528e2a2502649ff3",
+      "source": "skills/data-visualization/assets/icon.svg"
     },
     "skills/data-visualization/references/chart-selection.md": {
       "sha256": "273ef2ea90a238058073b4ebb6706931c99547806ca32962cdaa70d168a91974",
@@ -61,16 +77,32 @@
       "source": "skills/data-visualization/references/delivery-and-verification.md"
     },
     "skills/visual-development/SKILL.md": {
-      "sha256": "ffe95122495ee05dcad9716dfb8822146d51e7d48ae15798f4378b74e7dba540",
+      "sha256": "93e0a3a5cf4d55995672802f4ae52d156148d4ebf7b42ce095bdea9a32b57b11",
       "source": "skills/visual-development/SKILL.md"
     },
     "skills/visual-development/agents/openai.yaml": {
-      "sha256": "0a9e212cea13a8df9f7d004dc39b6dc708b64b3b5a6406d31e1bb8aef0716b2e",
+      "sha256": "bc3a819900cbdf19aa88563c5cba0bff304ed9eab4d346cadfa608564dbb788b",
       "source": "skills/visual-development/agents/openai.yaml"
     },
     "skills/visual-development/assets/example.html": {
       "sha256": "5f4203a177116b330e8219f147a725709ceedf35df96e93038f2e8a85a5d6922",
       "source": "skills/visual-development/assets/example.html"
+    },
+    "skills/visual-development/assets/icon-small.png": {
+      "sha256": "bacef8674718856bde1c53d5963b79d58879eccbee285727019e5bdeaa4d614b",
+      "source": "skills/visual-development/assets/icon-small.png"
+    },
+    "skills/visual-development/assets/icon-small.svg": {
+      "sha256": "bbfac06bc5ebafb9b4da64ba260e88df815b37d82de2f712cf7e7b977dddd3b3",
+      "source": "skills/visual-development/assets/icon-small.svg"
+    },
+    "skills/visual-development/assets/icon.png": {
+      "sha256": "0e751d5901d3dd4e2a710500ab62a9d5c037e55b81a1ffc077ba86a9431e6d8b",
+      "source": "skills/visual-development/assets/icon.png"
+    },
+    "skills/visual-development/assets/icon.svg": {
+      "sha256": "bbfac06bc5ebafb9b4da64ba260e88df815b37d82de2f712cf7e7b977dddd3b3",
+      "source": "skills/visual-development/assets/icon.svg"
     },
     "skills/visual-development/assets/three-scene.mjs": {
       "sha256": "866f5e7a6797ad5a61064147b0a468d83b0aa44309ce30c6378d9a05edf8d263",
@@ -94,6 +126,6 @@
     "excalidraw"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.31.0",
-  "version": "0.4.2"
+  "toolkit_version": "0.32.0",
+  "version": "0.4.3"
 }

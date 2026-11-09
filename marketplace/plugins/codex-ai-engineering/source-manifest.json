@@ -1,39 +1,43 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "103dfaea9f021518bae2e127159322f97ea0275ce0864cc19a33d44b1e0d1a04",
+      "sha256": "1c6c7377b6bd40e277e7979acb93ac4bebf603016c57be143dd371fb28f9926b",
       "source": null
     },
     "LICENSE": {
       "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
       "source": "LICENSE"
     },
+    "assets/codex-ai-engineering.png": {
+      "sha256": "686218c06fb04aee47f09b23d4bbc23e44ec71adf1e831bbb66418c35093844e",
+      "source": "assets/branding/plugins/codex-ai-engineering.png"
+    },
     "plugin.json": {
-      "sha256": "0d7da7c42b77cf91ec1603988d6dd3902cf17fe3b6cc594024b867fc60ce8be9",
+      "sha256": "3d327b1a6170efd77f1702dfa5b0301c3b0a4a7a1ebbfba200beccd1bb4eda13",
       "source": "plugins/ai-engineering/plugin.json"
     },
     "skills/ai-application-engineering/SKILL.md": {
-      "sha256": "aeba280c4f510e099b4b661a8f8932e422ff4d98f08bb69bd0818755252e18f6",
+      "sha256": "a695cc10d9a990531198ff7308260fb8ed05cb62cd473410ea6b62225f604a7c",
       "source": "skills/ai-application-engineering/SKILL.md"
     },
     "skills/ai-application-engineering/agents/openai.yaml": {
-      "sha256": "4095987c2c2c2348123c5f27d950a1d6bf2f01ce4c53bcdf04f1f1c9e0e3f8ba",
+      "sha256": "a7061b3eb24a9bd96b99ad621a896017e4c03722ec27a332aefcebec5be3ca6d",
       "source": "skills/ai-application-engineering/agents/openai.yaml"
     },
     "skills/ai-application-engineering/assets/icon-small.png": {
-      "sha256": "acfe740e518be154ccac6c2f94365cf696d71e3e0c95dd0dcbad71ff16c68dcb",
+      "sha256": "f150ef7aedc920ef48ab7322e17569508395bba71d18f984937829cdaf39e815",
       "source": "skills/ai-application-engineering/assets/icon-small.png"
     },
     "skills/ai-application-engineering/assets/icon-small.svg": {
-      "sha256": "84e3728c3528f8bfbbfb276c624182d91f18fe4308aafa6047bc747a2b85b2c4",
+      "sha256": "3ad5aa9932d54ffaaf8dc3234e837b118fff30b6500a498c7c03c69b02bcd544",
       "source": "skills/ai-application-engineering/assets/icon-small.svg"
     },
     "skills/ai-application-engineering/assets/icon.png": {
-      "sha256": "39580f03830ada5ca13a3cc4efeefc8278f1887d7917248c445ece9636f65785",
+      "sha256": "686218c06fb04aee47f09b23d4bbc23e44ec71adf1e831bbb66418c35093844e",
       "source": "skills/ai-application-engineering/assets/icon.png"
     },
     "skills/ai-application-engineering/assets/icon.svg": {
-      "sha256": "845cbffb535d6c8c6565a77be783d79f709d4aa920f01e598c7f502622cc8047",
+      "sha256": "3ad5aa9932d54ffaaf8dc3234e837b118fff30b6500a498c7c03c69b02bcd544",
       "source": "skills/ai-application-engineering/assets/icon.svg"
     },
     "skills/ai-application-engineering/references/agent-tool-systems.md": {
@@ -61,6 +65,6 @@
     "openai-docs"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.31.0",
-  "version": "0.1.2"
+  "toolkit_version": "0.32.0",
+  "version": "0.1.3"
 }

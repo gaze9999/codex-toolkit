@@ -2,7 +2,7 @@
 name: system-design-analysis
 description: Turn a product or system question into an evidence-based design analysis of domain boundaries, data ownership, interfaces, quality requirements and architectural trade-offs. Use for system design, system analysis or an architecture decision, not ordinary implementation with a settled design.
 metadata:
-  version: "0.4.12"
+  version: "0.4.13"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

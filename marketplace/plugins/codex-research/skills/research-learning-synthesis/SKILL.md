@@ -2,7 +2,7 @@
 name: research-learning-synthesis
 description: Synthesize technical research, community practices or papers into evidence-qualified conclusions and a small learning path, including prerequisites and overlooked alternatives. Use for a research brief or knowledge-gap review, not a simple factual lookup or automatic scheduling.
 metadata:
-  version: "0.5.4"
+  version: "0.5.5"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

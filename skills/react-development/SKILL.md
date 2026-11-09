@@ -2,7 +2,7 @@
 name: react-development
 description: Implement, diagnose, refactor or review React components, hooks, state and routing using the detected React runtime. Load server/SSR guidance only for a framework or hydration boundary, not for generic JavaScript or non-React UI.
 metadata:
-  version: "0.4.16"
+  version: "0.4.17"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

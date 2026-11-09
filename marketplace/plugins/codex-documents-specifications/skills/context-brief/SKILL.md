@@ -3,7 +3,7 @@ name: context-brief
 description: Turn explicitly supplied implementation specifications into reusable Codex Markdown context briefs. Use for implementation context, not ordinary summaries, document conversion, task guides or current-progress handoffs.
 metadata:
   short-description: Create concise, traceable coding context briefs
-  version: "0.4.15"
+  version: "0.4.16"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
