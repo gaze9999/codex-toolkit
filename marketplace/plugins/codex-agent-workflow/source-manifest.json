@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "3387655746e03beabdd7e8c5d35024d6f3c22291a70e45dfb1b066b51ee31367",
+      "sha256": "71da8cb2b0718ff9200b7e12f49871be762b577716a4c81c8c6459979823a72b",
       "source": null
     },
     "LICENSE": {
@@ -13,15 +13,15 @@
       "source": "assets/branding/plugins/codex-agent-workflow.png"
     },
     "plugin.json": {
-      "sha256": "e8dca3c23336708c193905baf8c558206bd31d378a8a2c913c715762b3345eee",
+      "sha256": "fa5c97058d076024147c12ac0d2179610c78de1b19be9c17dd35a59451ab2d65",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
-      "sha256": "b5c921b55ddd1d44c6bdb133ebc65b38eeabdd2fbf262329e7b59abb5c722dd9",
+      "sha256": "ba52d532a83ff6d06785e9a923f866ed92ac13044787b5cde87bfa5f7a7c1d3a",
       "source": "skills/agent-governance/SKILL.md"
     },
     "skills/agent-governance/agents/openai.yaml": {
-      "sha256": "4a51595c841bf78bc58bcc174b32dadc75b71835da88aa8917b9c4da90155a3e",
+      "sha256": "c81ce3a932568e358f9d4e4acf2e18d6e8bd7ae664b582abdacccdad1e9418b4",
       "source": "skills/agent-governance/agents/openai.yaml"
     },
     "skills/agent-governance/assets/icon-small.png": {
@@ -117,7 +117,7 @@
       "source": "skills/agent-governance/references/delivery-lifecycle.md"
     },
     "skills/agent-governance/references/instruction-layering.md": {
-      "sha256": "b979e32bf982f0a7d5bf6acd54d55cb229acc2aa095880bafd018c7d717a6e39",
+      "sha256": "989578a7ab5affcba0d7726ec26793d50b770d1968c4a27348469b986cd35d47",
       "source": "skills/agent-governance/references/instruction-layering.md"
     },
     "skills/agent-governance/references/maintenance-acceptance.md": {
@@ -308,5 +308,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.33.0",
-  "version": "0.6.1"
+  "version": "0.6.2"
 }
