@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "9a97c0d4919e6d8f1eac263738c6ba8060e0250ad5dff6b07c11c12c6e1531a7",
+      "sha256": "e7731f80a736d45becff1f29f112629c0b186280a82e312ccdf794f65ff76c29",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-multilingual-proofreading.png"
     },
     "plugin.json": {
-      "sha256": "d75987c0a85b95cbd096889b6233d7b402d05612513dfc8ddbfacae70825b69b",
+      "sha256": "45f81d0284411246e63f476bab7cdc48305e4f02b79cecf8c9cfbd0a8f0df776",
       "source": "plugins/multilingual-proofreading/plugin.json"
     },
     "resources/proofreading/authored-style.cjs": {
@@ -53,7 +53,7 @@
       "source": "mcp/tools/proofreading/zh-tw/protected-copy.cjs"
     },
     "resources/proofreading/zh-tw/taiwan-style.cjs": {
-      "sha256": "99f38df4c83f8c4e61dcbdd9ef5766f728bdbcb45195352c4e4e7ffb77762c7d",
+      "sha256": "f23cfe206026b12535d7060e4aedd3530d0cc9b906d5039ce46c1c5dabea8f1e",
       "source": "mcp/tools/proofreading/zh-tw/taiwan-style.cjs"
     },
     "resources/proofreading/zh-tw/terms.yml": {
@@ -102,6 +102,6 @@
     "cspell"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.33.0",
-  "version": "0.2.4"
+  "toolkit_version": "0.33.1",
+  "version": "0.2.5"
 }

@@ -186,3 +186,34 @@ test('non-Chinese text and Japanese blocks keep their own punctuation', () => {
   assert.equal(checkBlock({ type: 'Paragraph', value: '設定 see the guide. 完成' }, ['see the guide.']).length, 0);
   assert.equal(check('。').length, 0);
 });
+
+function checkNode(source, start, end) {
+  const reports = [];
+  class RuleError extends Error {
+    constructor(message, options) { super(message); Object.assign(this, options); }
+  }
+  const context = {
+    Syntax: { Str: 'Str', BlockQuote: 'BlockQuote', Link: 'Link' },
+    RuleError,
+    getSource: node => node ? node.value : source,
+    report: (node, error) => reports.push(error),
+    fixer: { replaceTextRange: (range, replacement) => ({ range, replacement }) },
+  };
+  rule.linter(context).Str({ value: source.slice(start, end), range: [start, end] });
+  return reports;
+}
+test('a colon inside a bold label takes its space after the closing markers', () => {
+  assert.equal(checkNode('- **輸出時機:** 預設不輸出', 4, 9).length, 0);
+  assert.equal(checkNode('- **輸出時機:**', 4, 9).length, 0);
+  const missing = checkNode('- **輸出時機:**預設不輸出', 4, 9);
+  assert.equal(missing.length, 1);
+  assert.match(missing[0].message, /半形空格/u);
+  assert.equal(missing[0].fix, undefined);
+  assert.equal(checkNode('- **輸出時機:**  預設不輸出', 4, 9).length, 1);
+});
+test('a leading heading number is an ordinal, not a sentence period', () => {
+  assert.equal(check('1. 已完成但還沒交付').length, 0);
+  assert.equal(check('12. 第二段').length, 0);
+  assert.equal(check('完成同步. 下一步').length, 1);
+  assert.equal(check('共 3. 項').length, 1);
+});

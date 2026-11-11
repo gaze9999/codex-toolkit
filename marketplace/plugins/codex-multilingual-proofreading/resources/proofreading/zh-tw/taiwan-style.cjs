@@ -91,7 +91,9 @@ function rule(context) {
         const follows = index + 1 < text.length || !atLineEnd;
         const numeric = [',', ':', '，', '：'].includes(mark)
           && /[0-9]/u.test(text[index - 1] ?? '') && /[0-9]/u.test(text[index + 1] ?? '');
-        const sentenceDot = mark === '.' && text[index - 1] !== '.' && text[index + 1] !== '.'
+        // A leading number such as the 1 in a "1. title" heading is an ordinal, not a sentence end.
+        const ordinal = mark === '.' && /^\s*\d+$/u.test(text.slice(0, index));
+        const sentenceDot = mark === '.' && !ordinal && text[index - 1] !== '.' && text[index + 1] !== '.'
           && (index + 1 === text.length || /[\s)\]」』”\u3400-\u9fff]/u.test(text[index + 1]));
         if (mark === ';' || mark === '；') {
           report(node, new RuleError('不要用分號分段, 依語意改為逗號或換行', { index }));
@@ -108,6 +110,14 @@ function rule(context) {
             index, fix: fixer.replaceTextRange([index, index + 1], replacement),
           }));
         } else if (spaced.has(mark) && !numeric && follows && next && !/[)\]」』”]/u.test(next)) {
+          // A bold label closes its emphasis before the space; check the space after the closing markers.
+          const closers = index + 1 === text.length ? /^[*_~]+/u.exec(remainingLine)?.[0] : null;
+          if (closers) {
+            const rest = remainingLine.slice(closers.length);
+            if (!rest || /^ (?! )/u.test(rest)) continue;
+            report(node, new RuleError('半形逗號、冒號、問號及驚嘆號後有文字時加一個半形空格', { index }));
+            continue;
+          }
           const spaces = /^[^\S\r\n]*/u.exec(text.slice(index + 1))[0];
           const after = text[index + 1 + spaces.length] ?? remainingLine[0];
           const contentFollows = index + 1 + spaces.length < text.length || !atLineEnd;
