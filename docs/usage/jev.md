@@ -1,6 +1,6 @@
 # Jev MCP 操作教學
 
-Jev 用於已整理候選的語意排序與有限分類, 文件搜尋, 必讀規格保留, 最終判斷與驗證仍由 Main 負責, 先依 [安裝說明](../setup/cli.md) 註冊, 詳細 API 與 CLI 說明見 [既有 usage reference](../../skills/jev-evaluation/references/usage.md)
+Jev 用於已整理候選的語意排序與有限分類, 文件搜尋, 必讀規格保留, 最終判斷與驗證仍由 Main 負責, 先以安裝者自己的設定工具註冊, 詳細 API 與 CLI 說明見 [既有 usage reference](../../skills/jev-evaluation/references/usage.md)
 
 MCP 與 Skill 實作維持在 `codex-toolkit/skills/jev-evaluation/`, 各專案共用同一份使用者層級設定, 不在每個 repo 建立另一份 server
 
@@ -159,7 +159,7 @@ macOS/Linux 可使用已確認的 `python3`, CLI 參數與 MCP 工具參數不�
 
 ## Wheel 與選用本機監看
 
-新版 `codex-jev-mcp` wheel 與 Skill 使用同一份 Python client, 可從任意工作目錄以 `python -I -B -m codex_jev_mcp.mcp_server` 啟動, baseline bundle 安裝方式見 [統一安裝入口](../setup/cli.md), 原 Skill installer 仍可使用
+新版 `codex-jev-mcp` wheel 與 Skill 使用同一份 Python client, 可從任意工作目錄以 `python -I -B -m codex_jev_mcp.mcp_server` 啟動, 安裝與註冊由安裝者自己的設定工具處理
 
 永久紀錄預設關閉, 明確需要時, 安裝獨立的 `local-activity-monitor`, 使用 `--enable-jev --configure-only` 啟用, 再以 `--codex --open` 開啟本機頁面, 停用使用 `--disable-jev --configure-only`, 舊 MCP process 需重新載入新版 client
 

@@ -18,47 +18,47 @@
     },
     "resources/proofreading/authored-style.cjs": {
       "sha256": "42c12b7fa5e5d7fbabc8df5547bfc90bf744ca86a5683071b39d9d30334b8fa0",
-      "source": "mcp/tools/proofreading/authored-style.cjs"
+      "source": "plugins/multilingual-proofreading/resources/proofreading/authored-style.cjs"
     },
     "resources/proofreading/en/cspell.json": {
       "sha256": "6a878ba65c3b017b92a38ecb8514f1ea38f2d6c82841258f880b707d8967f7d6",
-      "source": "mcp/tools/proofreading/en/cspell.json"
+      "source": "plugins/multilingual-proofreading/resources/proofreading/en/cspell.json"
     },
     "resources/proofreading/en/english.textlintrc.cjs": {
       "sha256": "36c6a88f69b27953f8f5e7808cd7038bb469acdb3e243ad513a2e03b517019fa",
-      "source": "mcp/tools/proofreading/en/english.textlintrc.cjs"
+      "source": "plugins/multilingual-proofreading/resources/proofreading/en/english.textlintrc.cjs"
     },
     "resources/proofreading/ja/.textlintrc.json": {
       "sha256": "b7f00bd3b9eb01622c9839e0aabaf0566e2240179407c97687b65f5406a43cc5",
-      "source": "mcp/tools/proofreading/ja/.textlintrc.json"
+      "source": "plugins/multilingual-proofreading/resources/proofreading/ja/.textlintrc.json"
     },
     "resources/proofreading/ja/terms.yml": {
       "sha256": "8dd14d06ddf343937f1316a3656c7f80be40c19b98cde535b9457d68c8fee80d",
-      "source": "mcp/tools/proofreading/ja/terms.yml"
+      "source": "plugins/multilingual-proofreading/resources/proofreading/ja/terms.yml"
     },
     "resources/proofreading/textlint-mcp.cjs": {
       "sha256": "824f4e808d0463f9583e23c41ec23d7a1caa23d631a7b86477350c241e1980da",
-      "source": "mcp/tools/proofreading/textlint-mcp.cjs"
+      "source": "plugins/multilingual-proofreading/resources/proofreading/textlint-mcp.cjs"
     },
     "resources/proofreading/zh-tw/.textlintrc.cjs": {
       "sha256": "3bd65591c4abd8778ec5dcdda6948655dd772097bfd39dbff9f628b3051ca4e9",
-      "source": "mcp/tools/proofreading/zh-tw/.textlintrc.cjs"
+      "source": "plugins/multilingual-proofreading/resources/proofreading/zh-tw/.textlintrc.cjs"
     },
     "resources/proofreading/zh-tw/personal-overlay.textlintrc.cjs": {
       "sha256": "0b7ecbaf26f5891aa9e3573757040caa77d4d8565240251f7f070c7cb9cc5a41",
-      "source": "mcp/tools/proofreading/zh-tw/personal-overlay.textlintrc.cjs"
+      "source": "plugins/multilingual-proofreading/resources/proofreading/zh-tw/personal-overlay.textlintrc.cjs"
     },
     "resources/proofreading/zh-tw/protected-copy.cjs": {
       "sha256": "937d5ea0154024f7d8604a9dac677af81dfb001c1fcc0a9f4774978c5e6fc8a0",
-      "source": "mcp/tools/proofreading/zh-tw/protected-copy.cjs"
+      "source": "plugins/multilingual-proofreading/resources/proofreading/zh-tw/protected-copy.cjs"
     },
     "resources/proofreading/zh-tw/taiwan-style.cjs": {
       "sha256": "f23cfe206026b12535d7060e4aedd3530d0cc9b906d5039ce46c1c5dabea8f1e",
-      "source": "mcp/tools/proofreading/zh-tw/taiwan-style.cjs"
+      "source": "plugins/multilingual-proofreading/resources/proofreading/zh-tw/taiwan-style.cjs"
     },
     "resources/proofreading/zh-tw/terms.yml": {
       "sha256": "d27bcf87587527c60ae30b167deacbf986c0898f010a680c84171a40b55d966c",
-      "source": "mcp/tools/proofreading/zh-tw/terms.yml"
+      "source": "plugins/multilingual-proofreading/resources/proofreading/zh-tw/terms.yml"
     },
     "skills/multilingual-proofreading/SKILL.md": {
       "sha256": "4337889565c1efff7604c229fce511bfbbe9a807402b158ad982b77722e40963",
@@ -102,6 +102,6 @@
     "cspell"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.33.1",
+  "toolkit_version": "0.34.0",
   "version": "0.2.5"
 }

@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "bf8d7dc3631ede68d213fb4227ddf348e8ae2528cbc80f660003444e495e2c18",
+      "sha256": "e9a2f2159ee8b25dcacc12d47558c7b43aec32d628d5c2cb5f0c120eb39ca2f3",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-evaluation.png"
     },
     "plugin.json": {
-      "sha256": "b87c6716884932bdf8558cacf31564bafd796e18100cbd134d34fd0252426fec",
+      "sha256": "0ec32a6400b010ad44d28b00b6ec6162c4f9ebc8ff30210408c518672fa2aab0",
       "source": "plugins/evaluation/plugin.json"
     },
     "resources/decisions/README.md": {
@@ -77,15 +77,15 @@
       "source": "skills/jev-evaluation/LICENSE"
     },
     "skills/jev-evaluation/README.md": {
-      "sha256": "42bf1079be481a28ff302c7d7c05cc84302b92f9daa43b1255eb51d50ed613f5",
+      "sha256": "5bf419d726848eec93979f942c6b4be852a46b63daf2c777461d41d8820fac14",
       "source": "skills/jev-evaluation/README.md"
     },
     "skills/jev-evaluation/SKILL.md": {
-      "sha256": "e2c93b3ce7ff79faf07aa4fd04a4c40eca17bcd17a0cb59cffd3d58dad8f69f4",
+      "sha256": "956e43ec1528db7940f6303799ca41eeebbe721cdba849e372e6209c24fe6231",
       "source": "skills/jev-evaluation/SKILL.md"
     },
     "skills/jev-evaluation/agents/openai.yaml": {
-      "sha256": "fe88f4c40bb422e5870672d0bd72730089e7d5051b453a6c14b0d82cc1067241",
+      "sha256": "f5bf7aa53b81e54d99a0ff72183fb079d2de4a62aa02895233ce44e8228eda8f",
       "source": "skills/jev-evaluation/agents/openai.yaml"
     },
     "skills/jev-evaluation/assets/icon-small.png": {
@@ -149,6 +149,6 @@
     "jev"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.33.1",
-  "version": "0.1.1"
+  "toolkit_version": "0.34.0",
+  "version": "0.1.2"
 }

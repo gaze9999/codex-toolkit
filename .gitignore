@@ -2,8 +2,6 @@
 /.github/*
 !/.github/workflows/
 /.github/workflows/*
-!/.github/workflows/cli-release.yml
-!/.github/workflows/plugin-release.yml
 !/.github/workflows/python-tools-release.yml
 !/.github/workflows/check.yml
 /.codex/

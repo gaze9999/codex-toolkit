@@ -6,7 +6,7 @@ replacement for the project's Angular compiler, security review or behavior test
 
 ## Inspection tool selection
 
-Use the project-matched compiler/AST and relevant source review for this audit. Select ESLint, Stylelint or Serena only for a concrete rule, stylesheet or semantic-reference gap. Preserve project/CI-required checks and confirmed test conditions. When an optional tool is unavailable, continue independent checks and identify its unexecuted scope. Use the available test-strategy Skill for additional interface selection and development-tool-setup for authorized setup. Parser, formatter, lint and runtime evidence remain distinct.
+Use the project-matched compiler/AST and relevant source review for this audit. Select ESLint, Stylelint or Serena only for a concrete rule, stylesheet or semantic-reference gap. Preserve project/CI-required checks and confirmed test conditions. When an optional tool is unavailable, continue independent checks and identify its unexecuted scope. Use the available test-strategy Skill for additional interface selection and the installer's setup tool for authorized setup. Parser, formatter, lint and runtime evidence remain distinct.
 
 ## Inputs and execution
 

@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-evaluation",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "以 Jev 排序候選內容, 以 OpenAI Decisions 做有限範圍的語意判定",
   "author": {
     "name": "gaze9999"

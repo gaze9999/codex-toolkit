@@ -3,14 +3,14 @@ name: playwright-cli
 description: Reproduce and verify authorized browser UI flows with the installed Playwright CLI, including snapshots, interactions, console, requests and screenshots. Use when Playwright CLI is selected or requested, not for tool installation or an existing project's test runner alone.
 metadata:
   short-description: Verify browser UI flows with Playwright CLI
-  version: "0.4.13"
+  version: "0.4.14"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
 
 # Playwright CLI
 
-Use the authorized local/dev URL, relevant flow and expected result. Verify the selected executable with `playwright-cli --version` and `playwright-cli --help`; use its real help instead of assuming upstream HEAD or community examples match the installed version. Installation and missing browsers belong to the available development-tool-setup Skill.
+Use the authorized local/dev URL, relevant flow and expected result. Verify the selected executable with `playwright-cli --version` and `playwright-cli --help`; use its real help instead of assuming upstream HEAD or community examples match the installed version. Installation and missing browsers belong to the installer's setup tool.
 
 ## Select the existing execution path
 

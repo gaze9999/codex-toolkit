@@ -16,7 +16,6 @@
 | Agent 與 context | [Coding Prompt](../skills/coding-prompt/SKILL.md) | 僅在明確要求 prompt 或 handoff 時產生可執行的 coding prompt 與當下 model 建議 |
 | Agent 與 context | [Context Brief](../skills/context-brief/SKILL.md) | 將已指定規格, API, schema 或整合文件整理成可重用 implementation contract |
 | Agent 與 context | [Jev Evaluation](../skills/jev-evaluation/SKILL.md) | 按需排序候選 context 或進行有限語意分類, 提供 Windows / macOS 共用 MCP 與 CLI |
-| 開發工具 | [Development Tool Setup](../skills/development-tool-setup/SKILL.md) | 逐項檢查 Context7, Playwright, RTK 與工作台相依, 以 Python installer 完成已授權的單項安裝及診斷 |
 | 開發工具 | [Playwright CLI](../skills/playwright-cli/SKILL.md) | 以具名隔離 session 重現 UI, 核對 snapshot, Console, Requests 與 screenshot |
 | 開發工具 | [Packaging Acceptance](../skills/packaging-acceptance/SKILL.md) | 核對來源映射、版本、hash、搬移與退出清理, 依授權選最小或完整驗收, [Tag 策略](../skills/packaging-acceptance/references/version-tags.md) 按需載入 |
 | 開發工具 | [Local Activity Query](../skills/local-activity-query/SKILL.md) | 查詢指定 loopback monitor 的期間計數與健康摘要, 保留未知與部分回補狀態 |

@@ -37,25 +37,21 @@ Plugin 的 Skills 與資源由來源生成, runtime、帳戶與 MCP 註冊依用
 |---|---|
 | Windows / Mac Codex | 加入 Git 市集, 選擇需要的 Plugin |
 | 無 Codex 的 Python 使用者 | 使用 [獨立 CLI / 核心](../python-tools/README.md) |
-| 需要實際 MCP 工具 | 依 [安裝指引](setup/cli.md) 設定 runtime、權限與帳戶 |
+| 需要實際 MCP 工具 | 以自己的設定工具安裝 runtime, 設定權限與帳戶 |
 | iPhone / iPad ChatGPT | 依 ChatGPT 當前支援的 Plugin / 遠端 MCP 接入, 本機 stdio runtime 不會直接在手機執行 |
 
 ## Python 工具可獨立使用
 
 市集負責安裝工作流程, Python CLI / 核心可從同一公開來源獨立取得, 不需要 Codex 或 MCP. 完整目錄、相依、執行及 core wheel 的用法見 [獨立使用說明](../python-tools/docs/standalone.md)
 
-個人的治理檔、版本與選用項目可保存在私人 profile, 換機使用 [環境還原入口](restore.md)
-
 ## 來源與更新
 
-Canonical Skills 在 `skills/`, Plugin manifest / owner 在 `plugins/`. `marketplace/plugins/` 是有來源映射及 SHA-256 的自含散布副本, 不手改生成內容
+Canonical Skills 在 `skills/`, Plugin manifest / owner 在 `plugins/`
+`marketplace/plugins/` 是有來源映射及 SHA-256 的自含散布副本, 由維護者的產生器從來源產生
 
-```text
-python -B mcp/scripts/prepare_marketplace.py --check
-python -B mcp/scripts/prepare_marketplace.py --write
-```
-
-來源更新後生成並核對市集副本. GitHub 安裝來源在發布後使用原生市集 / Plugin 管理入口更新, 已註冊的本機市集使用限定快照同步, 操作見 [Plugin 更新](plugins.md#updating-installed-plugins). 重新載入 Codex 後確認啟用狀態與 Skill discovery
+來源更新後重新產生並核對市集副本
+GitHub 安裝來源在發布後使用原生市集 / Plugin 管理入口更新, 已註冊的本機市集使用限定快照同步, 操作見 [Plugin 更新](plugins.md#updating-installed-plugins)
+重新載入 Codex 後確認啟用狀態與 Skill discovery
 
 參考 [OpenAI Plugin 封裝與市集](https://developers.openai.com/plugins/build/plugins)
 
@@ -68,7 +64,7 @@ python -B mcp/scripts/prepare_marketplace.py --write
 | Plugin | `plugins/<id>/plugin.json` 的 `version` | Claude manifest 從同一來源產生, 與整包版本分開維護 |
 | Skill | `skills/<name>/SKILL.md` 的 `metadata.version` | 依 Skill 內容獨立更新 |
 
-顯示字串不另存一份版號, 修改 `VERSION` 後須執行上述 `--write` 與 `--check`
+顯示字串不另存一份版號, 修改 `VERSION` 後重新產生並核對市集副本
 共用圖案來源為 `assets/branding/toolkit.svg`, PNG 隨外掛封裝, Codex 使用 `logo` / `composerIcon`, Claude 的 `icon` 由同一圖案路徑產生
 Codex 市集層使用名稱內的 emoji, 目前原生市集介面未提供獨立圖片欄位
 

@@ -75,6 +75,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.33.1",
+  "toolkit_version": "0.34.0",
   "version": "0.1.1"
 }

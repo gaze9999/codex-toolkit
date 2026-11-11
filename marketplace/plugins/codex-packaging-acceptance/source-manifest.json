@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "98dc479f6f1a5f78fa10081cddc413d7c78cfbfe66ffb3ba1aae6e516151ea45",
+      "sha256": "df8a8fb705c53a48ef6a625b75ea8401e41cc1c8b134d58d03562b5371adc1f5",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-packaging-acceptance.png"
     },
     "plugin.json": {
-      "sha256": "6d40697b3216ef689095063ac2a68c265721830f99a7685647aa293b307e3eba",
+      "sha256": "00c9a6315e8843c0cc96ab57ec05e76b259254364107e5a01e93ffa47b3f12ea",
       "source": "plugins/packaging-acceptance/plugin.json"
     },
     "skills/packaging-acceptance/SKILL.md": {
@@ -47,34 +47,6 @@
     "skills/packaging-acceptance/references/version-tags.md": {
       "sha256": "1cc6b429367feae63e15e98474d929b7eb0e559fbe9f62207020fafcc0898e57",
       "source": "skills/packaging-acceptance/references/version-tags.md"
-    },
-    "skills/plugin-packaging/SKILL.md": {
-      "sha256": "fb991c3dc662cb3586ca9a79998476f5b40f0f8c014351ad18613622616703d3",
-      "source": "skills/plugin-packaging/SKILL.md"
-    },
-    "skills/plugin-packaging/agents/openai.yaml": {
-      "sha256": "530956a699d1dbf7b340424f9174912f809678afad97f3a5c3fd7d4cc7dd6ebf",
-      "source": "skills/plugin-packaging/agents/openai.yaml"
-    },
-    "skills/plugin-packaging/assets/icon-small.png": {
-      "sha256": "3e77887772f5792b7ebf4df3b8314ef6767c86cf4e7d61c1adae1f0b6c2bb503",
-      "source": "skills/plugin-packaging/assets/icon-small.png"
-    },
-    "skills/plugin-packaging/assets/icon-small.svg": {
-      "sha256": "b23dfcb477e2fcf85878f7d631710551f78e9544ec6acbef105e5a4532b3f33d",
-      "source": "skills/plugin-packaging/assets/icon-small.svg"
-    },
-    "skills/plugin-packaging/assets/icon.png": {
-      "sha256": "00e7e9397b88be73f698d4053d3c79a438cf3fd2072da6cad33557bd0a6d7a31",
-      "source": "skills/plugin-packaging/assets/icon.png"
-    },
-    "skills/plugin-packaging/assets/icon.svg": {
-      "sha256": "b23dfcb477e2fcf85878f7d631710551f78e9544ec6acbef105e5a4532b3f33d",
-      "source": "skills/plugin-packaging/assets/icon.svg"
-    },
-    "skills/plugin-packaging/references/assembly.md": {
-      "sha256": "95df90bee6acf179889abdc92ecc0d69cffadc383b355c4adc7c536422d0efe3",
-      "source": "skills/plugin-packaging/references/assembly.md"
     }
   },
   "license": "MIT",
@@ -83,6 +55,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.33.1",
-  "version": "0.3.1"
+  "toolkit_version": "0.34.0",
+  "version": "0.4.0"
 }

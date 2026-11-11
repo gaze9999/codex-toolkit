@@ -13,8 +13,6 @@ ROOT = Path(__file__).resolve().parents[2]
 PUBLISH_INPUT = "inputs.publish"
 GATE = "Check stable aggregate Release eligibility"
 WORKFLOWS = {
-    "cli-release.yml": ("tag", {"build": ["eligibility"], "attach": ["build"]}, "attach"),
-    "plugin-release.yml": ("tag", {"check": ["eligibility"], "publish": ["check"]}, "publish"),
     "python-tools-release.yml": ("tag", {"source": ["eligibility"], "cli": ["eligibility"], "publish": ["source", "cli"]}, "publish"),
 }
 
@@ -146,7 +144,6 @@ class ReleasePolicyTests(unittest.TestCase):
             self.assertIn("python-tools/dist/${{ steps.component.outputs.tag }}/" + asset, workflow_jobs["source"])
         self.assertIn("$componentTag = 'v' + (Get-Content VERSION -Raw).Trim()", workflow_jobs["cli"])
         self.assertIn('python launch-cli.py scripts.release cli "$componentTag"', workflow_jobs["cli"])
-        self.assertIn("CLI_TAG: ${{ inputs.tag }}", self.sources["cli-release.yml"])
 
 
 if __name__ == "__main__":

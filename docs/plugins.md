@@ -1,10 +1,10 @@
 # Plugins
 
-Plugins are assembled from `skills/` workflows, `plugins/catalog.json` source mappings and `plugins/<id>/plugin.json` metadata. `marketplace/plugins/` holds the generated self-contained packages; install them through the [marketplace](marketplace.md). Every canonical Skill has exactly one bundle owner. The personal toolbox distributes the same bundles with the MCP connectors their Skills call.
+Plugins are assembled from `skills/` workflows, `plugins/catalog.json` source mappings and `plugins/<id>/plugin.json` metadata. `marketplace/plugins/` holds the generated self-contained packages; install them through the [marketplace](marketplace.md). Every canonical Skill has exactly one bundle owner. Each installer registers the MCP connectors those Skills call with their own setup tool.
 
 ## Routing by task domain
 
-Read the project's `AGENTS.md` first; when it names plugins, use those. Otherwise pick the row whose domain matches the task, load one Skill at a time and its references only when that flow needs them. Enable the whole plugin: it carries the Skills and the connectors they call. Connectors still need device runtimes, data roots and login on the target client (each plugin's `SETUP.md` in the toolbox).
+Read the project's `AGENTS.md` first; when it names plugins, use those. Otherwise pick the row whose domain matches the task, load one Skill at a time and its references only when that flow needs them. Enable the whole plugin: it carries the Skills and the connectors they call. Connectors still need device runtimes, data roots and login on the target client.
 
 | Task domain | Plugin | Skills | Optional runtimes |
 |---|---|---|---|
@@ -13,8 +13,8 @@ Read the project's `AGENTS.md` first; when it names plugins, use those. Otherwis
 | Semantic ranking and bounded typed evaluation | `codex-evaluation` | `jev-evaluation`, `decisions-evaluation` | `jev`; standalone `codex-decisions` |
 | Local document extraction, specification and doc maintenance, PDF/DOCX/Markdown deliverables, README and license, token counts | `codex-documents-specifications` | `context-brief`, `doc-updater`, `local-document-processing`, `token-count`, `readme-maintainer`, `license-maintainer`, `document-production` | `local-documents`; token counting needs Python 3.10+ with `tiktoken` |
 | Proofreading zh-TW, English and Japanese prose | `codex-multilingual-proofreading` | `multilingual-proofreading` | `textlint`, `cspell` |
-| Test selection, environment comparison, recorded validation evidence, tool setup | `codex-environment-evidence` | `validation-evidence-review`, `test-strategy`, `development-tool-setup` | `workspace-inspection` |
-| Plugin and application packaging, release acceptance | `codex-packaging-acceptance` | `packaging-acceptance`, `plugin-packaging` | none |
+| Test selection, environment comparison, recorded validation evidence | `codex-environment-evidence` | `validation-evidence-review`, `test-strategy` | `workspace-inspection` |
+| Plugin and application packaging, release acceptance | `codex-packaging-acceptance` | `packaging-acceptance` | none |
 | Research synthesis with web search, page extraction, papers, communities and library docs | `codex-research` | `research-learning-synthesis` | `tavily`, `exa`, `firecrawl`, `arxiv`, `reddit`, `context7` |
 | System boundaries, data ownership, interfaces and architecture trade-offs | `codex-system-design` | `system-design-analysis` | none |
 | Angular, React and Vue interfaces with UI/UX, i18n, accessibility and browser checks | `codex-frontend-engineering` | `angular-development`, `angular-member-order`, `react-development`, `vue-development`, `ui-ux-design`, `internationalization-engineering`, `accessibility-engineering`, `playwright-cli` | `playwright`, `serena`, `edge-devtools`, `chrome-devtools`, `spartan` |
@@ -24,7 +24,7 @@ Read the project's `AGENTS.md` first; when it names plugins, use those. Otherwis
 | LLM, agent, tool-calling, RAG and embedding applications | `codex-ai-engineering` | `ai-application-engineering` | `openai-docs` |
 | AdGuard, uBlock, DNS and hosts filter rules | `codex-network-filters` | `network-filter-rules` | none |
 
-`runtime_profiles` name optional tools from the setup manifest; runtimes, MCP registration and accounts are configured per task. Document and workspace MCPs use the versioned core in `python-tools/`. Plugin websites point to the [GitHub source](https://github.com/gaze9999/codex-toolkit).
+`runtime_profiles` name optional tools the installer's setup manifest provides; runtimes, MCP registration and accounts are configured per task. Document and workspace MCPs use the versioned core in `python-tools/`. Plugin websites point to the [GitHub source](https://github.com/gaze9999/codex-toolkit).
 
 ## Skill boundaries
 
@@ -53,7 +53,7 @@ Platform or SDK Skills follow the project's actual stack and selected tools. Gen
 | `skills` | Canonical Skills in this bundle; may be empty for MCP/app-only bundles |
 | `resources` | `{source, target}` directory mappings into the package |
 | `components` | `{source, target}` single-file mappings |
-| `runtime_profiles` | Optional tool names that exist in the setup manifest |
+| `runtime_profiles` | Optional tool names the installer's setup manifest provides |
 
 Human-facing `description` and `extensions.com.openai.interface.displayName` are zh-TW: a four-character title and one sentence on what the bundle does. This index stays concise English. Optional components include a portable `mcp.json`, registered app mappings, hooks and assets; entry points come from `extensions.com.openai`.
 
@@ -61,18 +61,9 @@ The checker rejects path escapes, links, case collisions, credentials or private
 
 ## Checks and build
 
-Python 3.11+, from a complete checkout:
+The maintainer's generator validates mappings and references, then writes `marketplace/plugins/` with a `source-manifest.json` per bundle. Development snapshots mark `source_state: working-tree`; published content comes from clean, committed, tracked sources.
 
-```text
-python -B mcp/scripts/prepare_plugin_release.py --check
-python -B mcp/scripts/prepare_plugin_release.py --development --output dist/plugins-preview
-python -B mcp/scripts/prepare_marketplace.py --write
-python -B mcp/scripts/prepare_marketplace.py --check
-```
-
-`--check` validates mappings and references in memory; `--plugin ID` selects one bundle. Development builds use `--development` and mark `source_state: working-tree`; ZIP builds without it require clean, committed, tracked sources.
-
-A changed payload needs a new `plugin.json` version: `prepare_marketplace.py` stops when a bundle's files differ from the generated copy while its version is unchanged, because native marketplace updates compare versions only. The toolbox generator applies the same rule with `--previous <last published toolbox>`.
+A changed payload needs a new `plugin.json` version: native marketplace updates compare versions only, so the generator stops when a bundle's files differ from the generated copy while its version is unchanged.
 
 ## Updating installed plugins
 
@@ -86,15 +77,8 @@ codex plugin marketplace upgrade codex-toolkit --json
 codex plugin add codex-agent-workflow@codex-toolkit --json
 ```
 
-A registered local marketplace previews and applies a working-tree snapshot:
+A registered local marketplace takes a working-tree snapshot through the maintainer's setup tool. First installs use the [marketplace commands](marketplace.md). Keep backups and other plugin settings before updating, verify content and enabled state afterwards, then reload the client and confirm Skill discovery.
 
-```text
-python -B mcp/scripts/sync_local_plugins.py --plugin frontend-engineering
-python -B mcp/scripts/sync_local_plugins.py --plugin frontend-engineering --apply
-```
-
-`sync_local_plugins.py` updates registered local marketplaces only; `plugins --sync-installed` is the setup alias. First installs use the [marketplace commands](marketplace.md). Keep backups and other plugin settings before updating, verify content and enabled state afterwards, then reload the client and confirm Skill discovery.
-
-Retired bundles (`jev-evaluation`, `decisions-evaluation`, `local-activity`, `project-documentation`, and the former standalone `skill-*` packages) are removed by the restore profiles' `retired` lists; see [restore](restore.md).
+Retired bundles (`jev-evaluation`, `decisions-evaluation`, `local-activity`, `project-documentation`, and the former standalone `skill-*` packages) are removed through each client's native plugin management.
 
 The activity summary reads only a running HTTP loopback monitor; periods are `1h`, `24h`, `7d`, `all`, unknown values are null, responses are metadata only with size and connection limits ([activity Skill](../skills/local-activity-query/SKILL.md)).

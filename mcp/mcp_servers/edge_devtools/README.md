@@ -12,14 +12,7 @@ edge-devtools-mcp
 
 預設使用 headless Edge 與暫時隔離 profile, 關閉 usage statistics, CrUX 網址查詢與更新檢查. `--headed` 可顯示隔離視窗, `--executable-path` 可指定其他 Edge channel, `--node-path` 可指定 Node 執行檔
 
-從本 setup 安裝並註冊至 Codex:
-
-```text
-python mcp/scripts/install_development_tool.py --tool edge-devtools --interface mcp
-python mcp/scripts/install_development_tool.py --tool edge-devtools --interface mcp --wheel-dir <absolute-wheel-directory> --apply
-```
-
-重新載入 Codex 後使用 `edge_devtools` 的工具. 要除錯既有的登入狀態時, 先自行以獨立 profile 啟用 Edge 的 loopback remote debugging, 再明確設定 `--browser-url http://127.0.0.1:9222`. 此模式會讓 MCP 存取該 session 的頁面與登入資料
+以安裝者自己的設定工具安裝 wheel 並註冊至 Codex, 重新載入 Codex 後使用 `edge_devtools` 的工具. 要除錯既有的登入狀態時, 先自行以獨立 profile 啟用 Edge 的 loopback remote debugging, 再明確設定 `--browser-url http://127.0.0.1:9222`. 此模式會讓 MCP 存取該 session 的頁面與登入資料
 
 建置 wheel 時依 `upstream.json` 的官方來源與 SHA-256 下載 runtime, 可用 `CODEX_EDGE_MCP_ARCHIVE` 指定已下載的相同 `.tgz` 供離線建置, checksum 必須相符
 

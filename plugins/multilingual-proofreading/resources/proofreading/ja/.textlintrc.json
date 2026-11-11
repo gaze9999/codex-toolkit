@@ -1,0 +1,15 @@
+{
+  "rules": {
+    "preset-ja-technical-writing": {
+      "sentence-length": false,
+      "max-ten": false,
+      "no-exclamation-question-mark": false
+    },
+    "prh": {
+      "rulePaths": [
+        "terms.yml"
+      ],
+      "checkBlockQuote": false
+    }
+  }
+}

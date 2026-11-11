@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "3819fdaaceb7ebba7e380064012178aae37e89e4b5e10ea02a66e8c6ca22a205",
+      "sha256": "d3945dd239957e195127cf536573547e2eb4944bc7664b72813aaa8e6535a3a4",
       "source": null
     },
     "LICENSE": {
@@ -13,12 +13,12 @@
       "source": "assets/branding/plugins/codex-frontend-engineering.png"
     },
     "plugin.json": {
-      "sha256": "6778394b43340988a77020b0a93445abf2a3f8f209a3a05c073257ea7cdc5495",
+      "sha256": "4e4540911b0472f87f101b21b7e52915e01bd0743edf820b039882bdb06f7315",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "resources/references/angular-style.md": {
       "sha256": "5892e4814c575f0b8a3e05a36173d26f2a657cfa9c3f6da531987fbac451315d",
-      "source": "agents/references/angular-style.md"
+      "source": "plugins/frontend-engineering/resources/references/angular-style.md"
     },
     "skills/accessibility-engineering/SKILL.md": {
       "sha256": "f1c2ebc3d951335593a20801aaac30e08bc4e2b386a8672080fbc9164a290a14",
@@ -53,11 +53,11 @@
       "source": "skills/accessibility-engineering/references/validation.md"
     },
     "skills/angular-development/SKILL.md": {
-      "sha256": "f4230663a26bf3bfaa34251b6508c08f2bafdb197ab45a9de0c79e08757820ff",
+      "sha256": "f89cbc6bbd5df96cac942a26700a8d21f1e2cbd7b4b5a7ee041ee4ac56a120f3",
       "source": "skills/angular-development/SKILL.md"
     },
     "skills/angular-development/agents/openai.yaml": {
-      "sha256": "907aa5def14e7210c964caf78e3ff5692b3e83a9540c9337489a0841782af317",
+      "sha256": "65da596005d8ec727d687c3bc7091271f4394f186f878092eab055719fe56567",
       "source": "skills/angular-development/agents/openai.yaml"
     },
     "skills/angular-development/assets/icon-small.png": {
@@ -81,7 +81,7 @@
       "source": "skills/angular-development/references/angular-style.md"
     },
     "skills/angular-development/references/architecture.md": {
-      "sha256": "7005248be5bdc995471bd28e6b0bcdeff428e7c3ea74345ad5ec54d8b68fad29",
+      "sha256": "dc166ef2fa61879fd41764a9dcb898f41aade69a6fed578d927303de4fa4bd6b",
       "source": "skills/angular-development/references/architecture.md"
     },
     "skills/angular-development/references/code-maintainability.md": {
@@ -93,7 +93,7 @@
       "source": "skills/angular-development/references/component-behavior.md"
     },
     "skills/angular-development/references/maintainability-review.md": {
-      "sha256": "c4bd4343e1bf81ee4cf9e80a8a9ca8fe202f1afbd100d6b5f322cb6f6aa8ae09",
+      "sha256": "9489222a720c406b9ee94de878cdb55df7038419a535bd25798eca40a8ca0835",
       "source": "skills/angular-development/references/maintainability-review.md"
     },
     "skills/angular-development/references/typescript-formatting.md": {
@@ -185,11 +185,11 @@
       "source": "skills/internationalization-engineering/references/validation.md"
     },
     "skills/playwright-cli/SKILL.md": {
-      "sha256": "2796ed0afd64c81a835eec92c0143780b01021f73881ba7be113b95ed867c597",
+      "sha256": "c71ca06ea4cc0f588985b99e0e8e834b44fb75d9245996d606dd5dbdb9c70e3f",
       "source": "skills/playwright-cli/SKILL.md"
     },
     "skills/playwright-cli/agents/openai.yaml": {
-      "sha256": "ae609354579f229f7e7821c6663fd4df7c16a10665dd28bd69d4b9a6201d4a14",
+      "sha256": "ddf6c3bbc2882cb6dd50a7bc013281f4c028287930dcd2d01150d0a05c2c3640",
       "source": "skills/playwright-cli/agents/openai.yaml"
     },
     "skills/playwright-cli/assets/icon-small.png": {
@@ -329,6 +329,6 @@
     "spartan"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.33.1",
-  "version": "0.7.1"
+  "toolkit_version": "0.34.0",
+  "version": "0.7.2"
 }

@@ -10,7 +10,7 @@ Installing the Skill or Plugin alone does not install Python dependencies. Use t
 
 The `codex-jev-mcp` wheel shares this client. From any directory, start an installed server with `python -I -B -m codex_jev_mcp.mcp_server`; `jev-verify` checks the offline protocol without calling the paid API.
 
-The Toolkit baseline bundle provides default paths and runtime reuse through `launch-cli.cmd bootstrap --apply` or `sh launch-cli.sh bootstrap --apply`. The bundle must contain the preset's wheel; do not claim unpublished wheels are available in a latest release.
+Install and register the wheel with the installer's own setup tool. Report only wheels that a published release or the selected bundle actually contains.
 
 Local usage recording is off by default. Enable it through the separate `local-activity-monitor` only when requested; see [opt-in monitoring](references/usage.md#opt-in-local-monitoring).
 

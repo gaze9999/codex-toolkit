@@ -1,7 +1,7 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const path = require('node:path');
-const rule = require(path.join(__dirname, '../tools/proofreading/authored-style.cjs'));
+const rule = require(path.join(__dirname, '../../plugins/multilingual-proofreading/resources/proofreading/authored-style.cjs'));
 
 function check(text, { language = 'en', container } = {}) {
   const reports = [];

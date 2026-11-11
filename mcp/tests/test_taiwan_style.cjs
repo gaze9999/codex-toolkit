@@ -1,7 +1,7 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const path = require('node:path');
-const rule = require(path.join(__dirname, '../tools/proofreading/zh-tw/taiwan-style.cjs'));
+const rule = require(path.join(__dirname, '../../plugins/multilingual-proofreading/resources/proofreading/zh-tw/taiwan-style.cjs'));
 
 function check(text, container) {
   const reports = [];

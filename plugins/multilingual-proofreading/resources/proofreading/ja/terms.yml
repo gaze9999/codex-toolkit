@@ -1,0 +1,35 @@
+version: 1
+# Japanese technical-writing notation; advisory replacements for authored prose only.
+rules:
+  - expected: でき$1
+    pattern: /出来(る|ます|ない|ません)/
+    specs:
+      - from: 実行出来ます
+        to: 実行できます
+  - expected: ください
+    pattern: /(?<=て|で)下さい/
+    specs:
+      - from: 確認して下さい
+        to: 確認してください
+  - expected: すべて
+    pattern: 全て
+  - expected: あらかじめ
+    pattern: 予め
+  - expected: ほとんど
+    pattern: 殆ど
+  - expected: または
+    pattern: 又は
+  - expected: および
+    pattern: 及び
+  - expected: ただし
+    pattern: 但し
+  - expected: なぜ
+    pattern: 何故
+  - expected: さまざま
+    pattern: 様々
+  - expected: JavaScript
+    pattern: /\b[Jj]ava[Ss]cript\b/
+  - expected: TypeScript
+    pattern: /\b[Tt]ype[Ss]cript\b/
+  - expected: GitHub
+    pattern: /\b[Gg]it[Hh]ub\b/

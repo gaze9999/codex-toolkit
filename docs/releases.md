@@ -10,8 +10,6 @@
 
 | Workflow | 資產 |
 |---|---|
-| `.github/workflows/plugin-release.yml` | 來源映射與 hash 已驗證的 Plugin archives |
-| `.github/workflows/cli-release.yml` | Windows x64、macOS arm64 / x64 的 portable CLI 與 checksums |
 | `.github/workflows/python-tools-release.yml` | 獨立 Python 來源包、核心 wheel 與三平台 CLI, 使用 Tag 提交內的元件版本 |
 
 先通過必要建置與檢查, 再將資產附加至相同 Tag 的草稿 Release, workflow 不建立 Tag、不自動公開草稿, 拒絕已發布 Release 與重複資產名稱, 寫入同一草稿的 workflow 依序執行

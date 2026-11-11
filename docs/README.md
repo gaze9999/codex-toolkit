@@ -1,27 +1,16 @@
 # 文件索引
 
-根目錄 [README](../README.md) 提供 CLI 啟動與目錄用途, 此處依操作目的分類, 文件內容以同層章節展開
+根目錄 [README](../README.md) 提供使用方式與目錄用途, 此處依操作目的分類
 
 | 分類 | 文件 | 內容 |
 |---|---|---|
-| 整合 | [三類整合目錄](toolbox.md) | Skills、連接器、Codex / Claude 外掛與來源雜湊 |
-| 操作 | [打包與評估](operating-model.md) | 產品來源、建置選項、路由觀察與 metrics 欄位 |
-| 操作 | [打包與評估](operating-model.md) | 產品來源、建置選項、路由觀察與 metrics 欄位 |
-| 設定分類 | [Agents](agents.md) | Global、Desktop、Git、ChatGPT / Work 與跨電腦同步 |
-| 設定分類 | [Skills](skills.md) | 自訂 Skill 清單、安裝與使用位置 |
-| 設定分類 | [Plugins](plugins.md) | Codex 官方管理入口與設定檢視 |
-| 設定分類 | [MCP](mcp.md) | 原始碼、安裝工具、相依與封裝責任 |
-| 安裝與管理 | [CLI](setup/cli.md) | baseline、單項 MCP、獨立 runtime、註冊與解除安裝 |
-| 安裝與管理 | [安裝包](setup/packages.md) | MCP wheel、portable ZIP、Skills 封裝與發布 |
-| 安裝與管理 | [版本與發布](releases.md) | 整包 / 元件版本、來源 Tag、手動建置及草稿資產 |
-| 安裝與管理 | [安裝結果指引](setup/installer-guide.html) | 缺項、帳戶設定與實際操作驗證 |
-| 工具 | [來源清單](tools/catalog.md) | MCP、connector、API 與領域候選 |
+| 市集 | [市集](marketplace.md) | 加入市集、圖案與版本、原生更新 |
+| 市集 | [Plugins](plugins.md) | 依任務領域選用外掛、Catalog 欄位與檢查 |
+| 市集 | [Skills](skills.md) | 自訂 Skill 清單與使用位置 |
+| 市集 | [版本與發布](releases.md) | 整包 / 元件版本、來源 Tag 與 Python 工具資產 |
 | 工具 | [跨工作區產出物盤點](../tools/agent-artifact-audit/README.md) | 備份辨識、可刪規則、選取清單與中斷復原 |
-| 工具 | [開發工具](tools/development.md) | runtime、Context7、Playwright、RTK 與工作台 |
-| 工具 | [用途與更新](tools/workflows.md) | 電腦用途、單項更新、UI / UX、遊戲與模擬 |
-| 工具 | [文字校對](tools/proofreading.md) | 繁中、日文 textlint、英文 CSpell 與文案保護 |
-| 工具 | [CLI / MCP 選用](tools/selection.md) | 能力、授權、資料範圍與證據 |
 | 使用教學 | [Local Documents](usage/local-documents.md) | 擷取、OCR、Markdown 定位與安全寫入 |
 | 使用教學 | [Jev](usage/jev.md) | 候選 context 排序、有限評估與診斷 |
 
-操作與工作規範說明統一放在根目錄 `docs/`, Skill 內部指令、專案範本與套件 metadata 所需的 README 留在所屬來源. 第三方授權來源見[授權索引](third-party.md)
+操作說明放在根目錄 `docs/`, Skill 內部指令、專案範本與套件 metadata 所需的 README 留在所屬來源
+MCP runtime、帳戶與用戶端註冊由安裝者自己的設定工具處理, 第三方授權來源見[授權索引](third-party.md)

@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "05912a177d247df988adf1de48e13059362cf727d593ab53234ee8bf8000b31e",
+      "sha256": "7edc02de28ffce4fe366faab8e561327294c326a0d844a7da67eb0eaa633d99c",
       "source": null
     },
     "LICENSE": {
@@ -13,44 +13,8 @@
       "source": "assets/branding/plugins/codex-environment-evidence.png"
     },
     "plugin.json": {
-      "sha256": "93f48aa292587cd7973f019356fbf7bb3709402b898c3b205911bc0bf88047a5",
+      "sha256": "0d5d5b383ed55d3828eed014995b3f5d574e61ea7b7d9e65073c47a9ac42fb01",
       "source": "plugins/environment-evidence/plugin.json"
-    },
-    "skills/development-tool-setup/SKILL.md": {
-      "sha256": "8c73d77e0f7ca75771e7234a2b43b9cf65d7dceddbe48438449fa6e9405b5bbb",
-      "source": "skills/development-tool-setup/SKILL.md"
-    },
-    "skills/development-tool-setup/agents/openai.yaml": {
-      "sha256": "9c0358046eb2a942c55e8a46a38948c3905818423d66c99455b5feb426fda903",
-      "source": "skills/development-tool-setup/agents/openai.yaml"
-    },
-    "skills/development-tool-setup/assets/icon-small.png": {
-      "sha256": "f2212d95afb37e584a917ade297dadfb2bf157d5c8c99c346d61af1a8f14d75b",
-      "source": "skills/development-tool-setup/assets/icon-small.png"
-    },
-    "skills/development-tool-setup/assets/icon-small.svg": {
-      "sha256": "1f23e296f69664ed9cac7345ac126228dc6b571f8864d17b97dd0e7d3762bcab",
-      "source": "skills/development-tool-setup/assets/icon-small.svg"
-    },
-    "skills/development-tool-setup/assets/icon.png": {
-      "sha256": "baea7fab9df5172ac3dd79e83d6afd7d4362e69cc680fc676c28048f260a9905",
-      "source": "skills/development-tool-setup/assets/icon.png"
-    },
-    "skills/development-tool-setup/assets/icon.svg": {
-      "sha256": "1f23e296f69664ed9cac7345ac126228dc6b571f8864d17b97dd0e7d3762bcab",
-      "source": "skills/development-tool-setup/assets/icon.svg"
-    },
-    "skills/development-tool-setup/references/integration-verification.md": {
-      "sha256": "3d982e0f2f19aab7c06d29d49216b27b156d4b8e3b4b5cddba67cd9cc15c0160",
-      "source": "skills/development-tool-setup/references/integration-verification.md"
-    },
-    "skills/development-tool-setup/references/maintained-setup.md": {
-      "sha256": "19297054b5c3b278a5de0e63fb613ed6e734e7192d75174c51ed8c05c3fc1f71",
-      "source": "skills/development-tool-setup/references/maintained-setup.md"
-    },
-    "skills/development-tool-setup/references/serena-frontend.md": {
-      "sha256": "325a39c94cbdc6007e57027813be95902baa5fc4dac912c7d28106b830c6f456",
-      "source": "skills/development-tool-setup/references/serena-frontend.md"
     },
     "skills/test-strategy/SKILL.md": {
       "sha256": "8fa2ea0f7336eb5eccb279a9a4103879236ee079ca21398dc80d69ae5d724f8c",
@@ -149,6 +113,6 @@
     "workspace-inspection"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.33.1",
-  "version": "0.4.1"
+  "toolkit_version": "0.34.0",
+  "version": "0.5.0"
 }

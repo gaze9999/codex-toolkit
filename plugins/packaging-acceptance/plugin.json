@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-packaging-acceptance",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "組裝 Plugin 與應用程式套件, 驗收來源、版本與發布生命週期",
   "author": {
     "name": "gaze9999"

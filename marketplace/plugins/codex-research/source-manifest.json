@@ -58,6 +58,6 @@
     "context7"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.33.1",
+  "toolkit_version": "0.34.0",
   "version": "0.1.3"
 }

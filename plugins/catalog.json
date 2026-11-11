@@ -137,7 +137,7 @@
           "target": "assets"
         },
         {
-          "source": "mcp/tools/proofreading",
+          "source": "plugins/multilingual-proofreading/resources/proofreading",
           "target": "resources/proofreading"
         }
       ]
@@ -148,8 +148,7 @@
       "status": "ready",
       "skills": [
         "validation-evidence-review",
-        "test-strategy",
-        "development-tool-setup"
+        "test-strategy"
       ],
       "runtime_profiles": [
         "workspace-inspection"
@@ -166,8 +165,7 @@
       "batch": "0",
       "status": "ready",
       "skills": [
-        "packaging-acceptance",
-        "plugin-packaging"
+        "packaging-acceptance"
       ],
       "runtime_profiles": [],
       "resources": [
@@ -237,7 +235,7 @@
       ],
       "components": [
         {
-          "source": "agents/references/angular-style.md",
+          "source": "plugins/frontend-engineering/resources/references/angular-style.md",
           "target": "resources/references/angular-style.md"
         }
       ],

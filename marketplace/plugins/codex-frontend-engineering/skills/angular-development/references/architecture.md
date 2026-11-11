@@ -2,7 +2,7 @@
 
 Start from the affected feature and its callers. Resolve the actual Angular, TypeScript, RxJS and build-tool versions, application entrypoints, compilation targets, providers and relevant project instructions; a mixed-version workspace may contain separate runtimes.
 
-When local evidence leaves a library/API gap, choose an available documentation/search capability that can retrieve the authoritative source for the verified Angular/RxJS package version. Check the returned source and version, and use the project's matching CLI if that is the chosen integration. Submit only public API questions to external services. If a capability is unavailable, use a compatible existing route, or an available development-tool-setup Skill when setup is needed and authorized.
+When local evidence leaves a library/API gap, choose an available documentation/search capability that can retrieve the authoritative source for the verified Angular/RxJS package version. Check the returned source and version, and use the project's matching CLI if that is the chosen integration. Submit only public API questions to external services. If a capability is unavailable, use a compatible existing route, or the installer's setup tool when setup is needed and authorized.
 
 ## Trace the behavior before proposing a boundary
 

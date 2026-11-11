@@ -2,18 +2,12 @@
 * text=auto eol=lf
 skills/document-production/scripts/validate_markdown.py text eol=lf
 *.sh text eol=lf
-mcp/tools/playwright-latest/playwright-cli text eol=lf
 *.cmd text eol=crlf
-# Preserve upstream license bytes for pinned checksums on every platform
-third_party/licenses/*.txt -text
-
 # Canonical Plugin sources and payload hashes must survive Git checkouts
 skills/** text=auto eol=lf
 plugins/** text=auto eol=lf
 marketplace/** text=auto eol=lf
-agents/references/** text=auto eol=lf
 LICENSE text eol=lf
-mcp/tools/proofreading/** text=auto eol=lf
 
 # Keep branding source hashes stable across platforms
 assets/**/*.svg text eol=lf
@@ -40,15 +34,13 @@ python-tools/packages/visual-runtime/** text=auto eol=lf
 # Publication hooks run through a POSIX shell on every platform
 .githooks/* text eol=lf
 
-# Portable toolbox runtime sources retain stable bytes across checkouts
-tooling/toolbox*.py text eol=lf
+# Plugin MCP runtime sources retain stable bytes across checkouts
 mcp/pyproject.toml text eol=lf
 mcp/LICENSE text eol=lf
 mcp/mcp_servers/__init__.py text eol=lf
 mcp/mcp_servers/local_documents/** text=auto eol=lf
 mcp/mcp_servers/workspace_inspection/** text=auto eol=lf
 mcp/mcp_servers/edge_devtools/** text=auto eol=lf
-mcp/mcp_servers/development_tools/** text=auto eol=lf
 python-tools/pyproject.toml text eol=lf
 python-tools/LICENSE text eol=lf
 python-tools/docs/python-document-core.md text eol=lf
