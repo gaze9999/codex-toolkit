@@ -60,6 +60,12 @@ Editing, staging, committing, pushing, tagging and releasing are separate stages
 
 The index captures content when added; later edits do not automatically enter that staged snapshot. Recheck the staged diff before committing. See the official [git-add](https://git-scm.com/docs/git-add) and [git-diff](https://git-scm.com/docs/git-diff) documentation.
 
+## Isolated change delivery
+
+For authorized changes made in an isolated checkout, record the repository, base revision and relevant dirty inputs. Export a reviewable patch including new files, inspect its paths and content, and retain its hash with matching validation evidence. Keep test data, runtime state and outputs separate from the destination.
+
+After scoped acceptance passes, recheck destination drift and patch applicability. Apply within existing authority, preserve concurrent work, and verify applied content and affected behavior. Resolve conflicts before application; retain the candidate and failed evidence in the existing work record. Patch validation does not authorize installation, publication or unrelated changes. For artifact-only requests, deliver the patch and its application conditions.
+
 ## Verification scope
 
 Start with the smallest existing check that can support the changed behavior and acceptance criteria. When it fails or leaves evidence insufficient, expand gradually around the unresolved dependency, interface or integration risk. State the missing evidence and added scope; retain required CI/release gates. Passing sufficient checks is a stopping point unless relevant changes or new risk invalidate them.

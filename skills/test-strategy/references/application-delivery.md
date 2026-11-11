@@ -28,6 +28,8 @@ For a recurring failure, reuse the project's existing entry point with the same 
 
 For a scoped syntax/refactor comparison, parse with the project's compatible parser. State the reviewed normalizations and excluded imports/comments/regions; retain literal values and distinguish structural equality from full semantic equivalence. Pair this evidence with the affected type/interface and runtime checks. Fixture data, intercepted requests and a simulated host establish only those exercised boundaries, not formal API, persistence or host acceptance.
 
+When isolated verification produces an implementation change, export the reviewed patch, including new files, and tie the results to its base revision and exact content. Preserve failed runs and original fixtures. Before an authorized application, check destination drift and patch applicability; afterwards verify the applied content and relevant behavior. Keep unrelated work and runtime state intact. Evidence for a different patch does not establish acceptance of the delivered one.
+
 ## Loaded behavior and consumer boundaries
 
 Read for changed settings, service/API behavior or shared-component integration. Select the affected links in the chain rather than treating one successful check as evidence for all of them.

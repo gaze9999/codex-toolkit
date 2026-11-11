@@ -1,7 +1,7 @@
 interface:
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
-  display_name: "Test Strategy (v0.2.9)"
+  display_name: "Test Strategy (v0.2.10)"
   short_description: "Select scoped checks for development and delivery"
   default_prompt: "Use $test-strategy to select and complete authorized checks for the changed behavior and remaining acceptance risks."
 policy:

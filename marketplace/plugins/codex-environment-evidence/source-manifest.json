@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "7edc02de28ffce4fe366faab8e561327294c326a0d844a7da67eb0eaa633d99c",
+      "sha256": "8db5c7b3f66f075531f9b95668d5055d8cdd41ca0ea73c8d6e1e93c857c50083",
       "source": null
     },
     "LICENSE": {
@@ -13,15 +13,15 @@
       "source": "assets/branding/plugins/codex-environment-evidence.png"
     },
     "plugin.json": {
-      "sha256": "0d5d5b383ed55d3828eed014995b3f5d574e61ea7b7d9e65073c47a9ac42fb01",
+      "sha256": "a1fff4882cf0c39bdf516edff73522ced19548e5e67b58dbd97ed568809aa481",
       "source": "plugins/environment-evidence/plugin.json"
     },
     "skills/test-strategy/SKILL.md": {
-      "sha256": "8fa2ea0f7336eb5eccb279a9a4103879236ee079ca21398dc80d69ae5d724f8c",
+      "sha256": "5a9005cf292da8aa9077679fe5762cd4903317cd0aefab6f64730b4475b3a253",
       "source": "skills/test-strategy/SKILL.md"
     },
     "skills/test-strategy/agents/openai.yaml": {
-      "sha256": "5dfb671d36268be93a2de0d145e8c932eebdef86e8c30feaa5977895a86c837f",
+      "sha256": "6fd0f9e0d4f3b38e6ae25e9085198801f33177ac7b665c802a74d3f31a1517c9",
       "source": "skills/test-strategy/agents/openai.yaml"
     },
     "skills/test-strategy/assets/icon-small.png": {
@@ -45,7 +45,7 @@
       "source": "skills/test-strategy/references/ai-evaluation.md"
     },
     "skills/test-strategy/references/application-delivery.md": {
-      "sha256": "d34ef52a2a1121b6c551f79f641a5ce437ec36d4dcc7b530cd50ec1bb216a3dd",
+      "sha256": "e67852bf9fff5bb0b035af0eafc492b00f723d9ad16a5c44e5a9ccc41f3634b2",
       "source": "skills/test-strategy/references/application-delivery.md"
     },
     "skills/test-strategy/references/game-testing.md": {
@@ -114,5 +114,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.34.0",
-  "version": "0.5.0"
+  "version": "0.5.1"
 }
