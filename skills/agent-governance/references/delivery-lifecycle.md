@@ -87,7 +87,7 @@ First distinguish orchestration location, execution host, source/record storage 
 |---|---|---|
 | Same checkout, new conversation | Approved record plus actual current files and applicable instructions | Earlier chat completion is historical evidence, not new authorization |
 | Another computer or remote host | Repository identity and relative root, source revision, dirty/ignored artifact inventory, destination settings/permissions | Source transfer, dependency availability, client loading and a representative operation are separate |
-| Git worktree | Verified starting revision and required local-only material; independent mutable resources | Worktrees do not isolate shared services, accounts or databases |
+| Git worktree | Verified starting revision, required local-only material and any prerequisite result present and usable in the target checkout; independent mutable resources | A completed task or reviewed change in another worktree does not establish that its result is available here; worktrees do not isolate shared services, accounts or databases |
 | Cloud task | Existing configured environment, approved sources/data and persisted output destination | Local files, sessions and installed tools are not assumed present |
 | Dot or scheduled work | Existing responsibility/schedule, original host/task identity, destination and notification/stop conditions | Saved notes and execution completion do not replace requirement acceptance |
 

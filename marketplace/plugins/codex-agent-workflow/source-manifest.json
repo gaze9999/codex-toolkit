@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "12c58048cbaceeeea9e1983780858845344f73887456cb2257ead5e26f12c710",
+      "sha256": "a2bdbf5ebc7ef6d184fbcdb08470f76a76b8d9309e3d1612a8e19e6be9216c28",
       "source": null
     },
     "LICENSE": {
@@ -13,15 +13,15 @@
       "source": "assets/branding/plugins/codex-agent-workflow.png"
     },
     "plugin.json": {
-      "sha256": "3ce162d1c1a0618748d8c2bc8896d39b8686ad16f2a6c1d8419dada8eaa3e877",
+      "sha256": "eebd5a42c379d6fdf0d1f9c263ea02c547312e67b18271d8f88603fb1afc0889",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
-      "sha256": "6bae6035873641d525f396f293566f78fe721769f84c8fbd425e5be829bb338a",
+      "sha256": "b3ebbb64726628bacc254cc3b0aab39d2d5ed46015824579435a2fa2d82647f9",
       "source": "skills/agent-governance/SKILL.md"
     },
     "skills/agent-governance/agents/openai.yaml": {
-      "sha256": "69957b0b9bcda262416ab472f837196b91d4ad972040c42df2c65fa8f4d82513",
+      "sha256": "90d390c8cfb887352ccad7363eacf5ed0e5e24d7b87780c3a19c7355e5b0d187",
       "source": "skills/agent-governance/agents/openai.yaml"
     },
     "skills/agent-governance/assets/icon-small.png": {
@@ -109,11 +109,11 @@
       "source": "skills/agent-governance/references/context-continuity.md"
     },
     "skills/agent-governance/references/delegation-routing.md": {
-      "sha256": "6979597c7b022c744e08edcefcc685611f68d1c627961021579f9f7e798484e0",
+      "sha256": "e2db2ea93e29c3e315bc682df6f98153895dc7892d5f97038b855644a2ccede7",
       "source": "skills/agent-governance/references/delegation-routing.md"
     },
     "skills/agent-governance/references/delivery-lifecycle.md": {
-      "sha256": "b72bbb6a4da510b3e1ce0db8281da5860cefbc2d345649ff426c397e6d67efcb",
+      "sha256": "fe8985051ec36df03682cea305366f67bee86b4c2243560afb1e7031981bfa61",
       "source": "skills/agent-governance/references/delivery-lifecycle.md"
     },
     "skills/agent-governance/references/instruction-layering.md": {
@@ -308,5 +308,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.34.0",
-  "version": "0.6.3"
+  "version": "0.6.4"
 }

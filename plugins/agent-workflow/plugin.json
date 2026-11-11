@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-agent-workflow",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "維護 Agent 指示層級、提示詞、Markdown 目標與計畫, 以及審查與測試簡報",
   "author": {
     "name": "gaze9999"
