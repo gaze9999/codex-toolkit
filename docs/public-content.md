@@ -27,6 +27,6 @@ python tools/check-public-content.py --history
 
 ## 維護來源
 
-檢查器由 [Codex Toolkit](https://github.com/gaze9999/codex-toolkit/blob/main/tools/check-public-content.py) 維護, 各儲存庫保留相同的獨立副本, 不依賴其他 checkout 或網路下載, 更新時比對已提交的來源並在開發端執行私人測試
+檢查器是本儲存庫的獨立副本 [tools/check-public-content.py](../tools/check-public-content.py), 執行時只使用本儲存庫的內容, 更新時比對已提交的來源並在開發端執行私人測試
 
 目前版本的檢查器可用 `git show HEAD:tools/check-public-content.py` 讀回
