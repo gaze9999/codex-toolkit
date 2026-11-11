@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "e7731f80a736d45becff1f29f112629c0b186280a82e312ccdf794f65ff76c29",
+      "sha256": "38b5f83923688e59dc2d885ef4d163ccee74f8c2f4d1dd83ebbc5d463244a688",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-multilingual-proofreading.png"
     },
     "plugin.json": {
-      "sha256": "45f81d0284411246e63f476bab7cdc48305e4f02b79cecf8c9cfbd0a8f0df776",
+      "sha256": "dbb534725e159ce8482cff2b26790ba44762e6f4a68b0092c3be5ad01845251f",
       "source": "plugins/multilingual-proofreading/plugin.json"
     },
     "resources/proofreading/authored-style.cjs": {
@@ -24,6 +24,10 @@
       "sha256": "6a878ba65c3b017b92a38ecb8514f1ea38f2d6c82841258f880b707d8967f7d6",
       "source": "plugins/multilingual-proofreading/resources/proofreading/en/cspell.json"
     },
+    "resources/proofreading/en/dictionary-revision.json": {
+      "sha256": "e8a97b6b6153572541ca80507646f3d953b5c4c2a7df7c43422d7a1019f65337",
+      "source": "plugins/multilingual-proofreading/resources/proofreading/en/dictionary-revision.json"
+    },
     "resources/proofreading/en/english.textlintrc.cjs": {
       "sha256": "36c6a88f69b27953f8f5e7808cd7038bb469acdb3e243ad513a2e03b517019fa",
       "source": "plugins/multilingual-proofreading/resources/proofreading/en/english.textlintrc.cjs"
@@ -31,6 +35,10 @@
     "resources/proofreading/ja/.textlintrc.json": {
       "sha256": "b7f00bd3b9eb01622c9839e0aabaf0566e2240179407c97687b65f5406a43cc5",
       "source": "plugins/multilingual-proofreading/resources/proofreading/ja/.textlintrc.json"
+    },
+    "resources/proofreading/ja/dictionary-revision.json": {
+      "sha256": "bdf5c97e9b47a13af40ebbd0601f1b8de015392d6e14e981ba0391b3a92c99b6",
+      "source": "plugins/multilingual-proofreading/resources/proofreading/ja/dictionary-revision.json"
     },
     "resources/proofreading/ja/terms.yml": {
       "sha256": "8dd14d06ddf343937f1316a3656c7f80be40c19b98cde535b9457d68c8fee80d",
@@ -43,6 +51,10 @@
     "resources/proofreading/zh-tw/.textlintrc.cjs": {
       "sha256": "3bd65591c4abd8778ec5dcdda6948655dd772097bfd39dbff9f628b3051ca4e9",
       "source": "plugins/multilingual-proofreading/resources/proofreading/zh-tw/.textlintrc.cjs"
+    },
+    "resources/proofreading/zh-tw/dictionary-revision.json": {
+      "sha256": "4ab2cf98807b606ec4c67c4071d525a39149cc4a34611d31cad981d5a62b1fbc",
+      "source": "plugins/multilingual-proofreading/resources/proofreading/zh-tw/dictionary-revision.json"
     },
     "resources/proofreading/zh-tw/personal-overlay.textlintrc.cjs": {
       "sha256": "0b7ecbaf26f5891aa9e3573757040caa77d4d8565240251f7f070c7cb9cc5a41",
@@ -103,5 +115,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.34.0",
-  "version": "0.2.5"
+  "version": "0.2.6"
 }

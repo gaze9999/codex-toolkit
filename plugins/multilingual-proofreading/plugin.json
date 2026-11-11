@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-multilingual-proofreading",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "校對繁體中文、英文與日文文件的用語、標點、拼字與語法",
   "author": {
     "name": "gaze9999"
