@@ -35,7 +35,7 @@ This private forwarding method adds no behavior when the repository is already
 the request owner and all call sites are local:
 
 ```ts
-// Before: another layer around the same validated request
+/** Before: another layer around the same validated request */
 private loadTasks(query: string): Promise<readonly Task[]> {
   return this.repository.load(query);
 }
@@ -43,7 +43,7 @@ public search(query: string): Promise<readonly Task[]> {
   return this.loadTasks(query);
 }
 
-// After: preserve the public operation and its Promise
+/** After: preserve the public operation and its Promise */
 public search(query: string): Promise<readonly Task[]> {
   return this.repository.load(query);
 }
@@ -107,18 +107,18 @@ interface TaskRecord {
   readonly createdAt: string;
 }
 
-// A local view extends the same object meaning with an actual display property
+/** A local view extends the same object meaning with an actual display property */
 interface TaskRow extends TaskRecord {
   selected: boolean;
 }
 
-// Use a whitelist when only these fields may cross a write boundary
+/** Use a whitelist when only these fields may cross a write boundary */
 type TaskWrite = Pick<TaskRecord, 'title' | 'done'>;
 
-// Suitable when new non-server fields should intentionally enter the draft too
+/** Suitable when new non-server fields should intentionally enter the draft too */
 type TaskDraft = Omit<TaskRecord, 'id' | 'createdAt'>;
 
-// Compose existing compatible parts without repeating their field definitions
+/** Compose existing compatible parts without repeating their field definitions */
 type SelectedTask = Pick<TaskRecord, 'id' | 'title'> & { selected: boolean };
 
 function toTaskWrite(task: TaskRecord): TaskWrite {

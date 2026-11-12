@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-multilingual-proofreading.png"
     },
     "plugin.json": {
-      "sha256": "dbb534725e159ce8482cff2b26790ba44762e6f4a68b0092c3be5ad01845251f",
+      "sha256": "4313b8743a6c94620ac23484fc1a6f13c48691d2180958203c7a3253fe269306",
       "source": "plugins/multilingual-proofreading/plugin.json"
     },
     "resources/proofreading/authored-style.cjs": {
@@ -25,7 +25,7 @@
       "source": "plugins/multilingual-proofreading/resources/proofreading/en/cspell.json"
     },
     "resources/proofreading/en/dictionary-revision.json": {
-      "sha256": "e8a97b6b6153572541ca80507646f3d953b5c4c2a7df7c43422d7a1019f65337",
+      "sha256": "27e95fa475473fb38f14203ef00d698ee711a86bb2813caec58139fe92986a92",
       "source": "plugins/multilingual-proofreading/resources/proofreading/en/dictionary-revision.json"
     },
     "resources/proofreading/en/english.textlintrc.cjs": {
@@ -37,7 +37,7 @@
       "source": "plugins/multilingual-proofreading/resources/proofreading/ja/.textlintrc.json"
     },
     "resources/proofreading/ja/dictionary-revision.json": {
-      "sha256": "bdf5c97e9b47a13af40ebbd0601f1b8de015392d6e14e981ba0391b3a92c99b6",
+      "sha256": "3a38d6fc19cee96cba147bb5bd5f131566f90db548227d6abf3dd5a44af7e175",
       "source": "plugins/multilingual-proofreading/resources/proofreading/ja/dictionary-revision.json"
     },
     "resources/proofreading/ja/terms.yml": {
@@ -53,7 +53,7 @@
       "source": "plugins/multilingual-proofreading/resources/proofreading/zh-tw/.textlintrc.cjs"
     },
     "resources/proofreading/zh-tw/dictionary-revision.json": {
-      "sha256": "4ab2cf98807b606ec4c67c4071d525a39149cc4a34611d31cad981d5a62b1fbc",
+      "sha256": "2beb5943a4350be05ca4cf4713d4edd49df6a70e7d333bf15b87da00a4f6d2da",
       "source": "plugins/multilingual-proofreading/resources/proofreading/zh-tw/dictionary-revision.json"
     },
     "resources/proofreading/zh-tw/personal-overlay.textlintrc.cjs": {
@@ -114,6 +114,6 @@
     "cspell"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.34.0",
+  "toolkit_version": "0.34.1",
   "version": "0.2.6"
 }

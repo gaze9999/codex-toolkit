@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "d3945dd239957e195127cf536573547e2eb4944bc7664b72813aaa8e6535a3a4",
+      "sha256": "8bc759f72ea329635560258f9a1e3defe257b9a818eacd56f3bf73e2f71075b2",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-frontend-engineering.png"
     },
     "plugin.json": {
-      "sha256": "4e4540911b0472f87f101b21b7e52915e01bd0743edf820b039882bdb06f7315",
+      "sha256": "fab961cee8ab14e9ab285a54b84df2053da720d962fcb7c20745e5bffde8c89c",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "resources/references/angular-style.md": {
@@ -53,11 +53,11 @@
       "source": "skills/accessibility-engineering/references/validation.md"
     },
     "skills/angular-development/SKILL.md": {
-      "sha256": "f89cbc6bbd5df96cac942a26700a8d21f1e2cbd7b4b5a7ee041ee4ac56a120f3",
+      "sha256": "bba508242ca3a14ae8579cc02e127558a38918fe23e46696e671788b1582e902",
       "source": "skills/angular-development/SKILL.md"
     },
     "skills/angular-development/agents/openai.yaml": {
-      "sha256": "65da596005d8ec727d687c3bc7091271f4394f186f878092eab055719fe56567",
+      "sha256": "b0e15c657cc9c3175c18593ad327fb444de71d8ea123909007a874340574795c",
       "source": "skills/angular-development/agents/openai.yaml"
     },
     "skills/angular-development/assets/icon-small.png": {
@@ -77,7 +77,7 @@
       "source": "skills/angular-development/assets/icon.svg"
     },
     "skills/angular-development/references/angular-style.md": {
-      "sha256": "d9f51f7895e52e3909b22e512d1bb64d3c484764c4fb7214962c7a13bfe5491b",
+      "sha256": "eaea26ed124b7115471caf29a4947f4f166e67c5d5e5a27ff5a7c5b535aff4c2",
       "source": "skills/angular-development/references/angular-style.md"
     },
     "skills/angular-development/references/architecture.md": {
@@ -85,7 +85,7 @@
       "source": "skills/angular-development/references/architecture.md"
     },
     "skills/angular-development/references/code-maintainability.md": {
-      "sha256": "a16dc086e3fec1f772e92288a1ae2a8fda64deb6fe9269264903bb13426b1310",
+      "sha256": "e6498936e9bc439c9c700b786a0e4c1b28fb1657fb26a44d513b21a11b0c09e5",
       "source": "skills/angular-development/references/code-maintainability.md"
     },
     "skills/angular-development/references/component-behavior.md": {
@@ -329,6 +329,6 @@
     "spartan"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.34.0",
-  "version": "0.7.2"
+  "toolkit_version": "0.34.1",
+  "version": "0.7.3"
 }

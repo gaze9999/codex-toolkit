@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-frontend-engineering",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "實作 Angular、React 與 Vue 介面, 含 UI/UX、i18n、無障礙與瀏覽器診斷工具",
   "author": {
     "name": "gaze9999"

@@ -201,6 +201,15 @@ reference identity, order and error behavior; compilation alone does not prove
 browser support. Do not add a helper solely to wrap another call or move private
 view behavior into a Service to reduce line count.
 
+## Comments
+
+Comment only logic that names and structure cannot convey at a glance, such as
+hidden API contracts, null versus empty meaning or ordering constraints. Write one
+concise behavior clause in the project's comment language and omit sources such as
+specification pages, test IDs and decision dates. Use JSDoc `/** ... */` on the
+declaration or statement it explains; do not add `//` line comments except tool
+directives. Omit `@param`/`@returns` that repeat the signature.
+
 ## Single-statement guards and logical assignment
 
 Omit braces for a clear single-statement `if`, including an early `return` or
@@ -278,13 +287,13 @@ types and initialization order. Interfaces, type members and ordinary parameters
 do not accept class visibility modifiers.
 
 ```ts
-// Before, when the project requires explicit public visibility
+/** Before, when the project requires explicit public visibility */
 class LookupError extends Error {
   constructor(readonly operation: string, private readonly detail: unknown) {
     super(operation);
   }
 }
-// After, preserving effective visibility and runtime initialization
+/** After, preserving effective visibility and runtime initialization */
 class LookupError extends Error {
   public constructor(public readonly operation: string, private readonly detail: unknown) {
     super(operation);
