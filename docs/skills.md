@@ -19,6 +19,7 @@
 | 開發工具 | [Playwright CLI](../skills/playwright-cli/SKILL.md) | 以具名隔離 session 重現 UI, 核對 snapshot, Console, Requests 與 screenshot |
 | 開發工具 | [Packaging Acceptance](../skills/packaging-acceptance/SKILL.md) | 核對來源映射、版本、hash、搬移與退出清理, 依授權選最小或完整驗收, [Tag 策略](../skills/packaging-acceptance/references/version-tags.md) 按需載入 |
 | 開發工具 | [Local Activity Query](../skills/local-activity-query/SKILL.md) | 查詢指定 loopback monitor 的期間計數與健康摘要, 保留未知與部分回補狀態 |
+| 開發工具 | [Maintainability Review](../skills/maintainability-review/SKILL.md) | 查核孤兒檔案、未使用成員、重複片段與函式複雜度, 交付有依據的候選 diff |
 | AI 與媒體 | [AI Application Engineering](../skills/ai-application-engineering/SKILL.md) | 實作或診斷 LLM, Agent, Tool Calling, RAG, Embedding 與 model runtime |
 | AI 與媒體 | [ComfyUI Workflow](../skills/comfyui-workflow/SKILL.md) | 維護可重現的 Stable Diffusion / ComfyUI graph, model 與硬體設定 |
 | AI 與媒體 | [Editorial Illustration](../skills/editorial-illustration/SKILL.md) | 依固定 editorial illustration 視覺方向處理使用者提供的圖片 |

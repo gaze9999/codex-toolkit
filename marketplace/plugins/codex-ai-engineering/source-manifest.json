@@ -65,6 +65,6 @@
     "openai-docs"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.34.1",
+  "toolkit_version": "0.35.0",
   "version": "0.1.3"
 }

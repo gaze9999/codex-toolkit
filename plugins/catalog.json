@@ -148,7 +148,8 @@
       "status": "ready",
       "skills": [
         "validation-evidence-review",
-        "test-strategy"
+        "test-strategy",
+        "maintainability-review"
       ],
       "runtime_profiles": [
         "workspace-inspection"

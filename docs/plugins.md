@@ -13,7 +13,7 @@ Read the project's `AGENTS.md` first; when it names plugins, use those. Otherwis
 | Semantic ranking and bounded typed evaluation | `codex-evaluation` | `jev-evaluation`, `decisions-evaluation` | `jev`; standalone `codex-decisions` |
 | Local document extraction, specification and doc maintenance, PDF/DOCX/Markdown deliverables, README and license, token counts | `codex-documents-specifications` | `context-brief`, `doc-updater`, `local-document-processing`, `token-count`, `readme-maintainer`, `license-maintainer`, `document-production` | `local-documents`; token counting needs Python 3.10+ with `tiktoken` |
 | Proofreading zh-TW, English and Japanese prose | `codex-multilingual-proofreading` | `multilingual-proofreading` | `textlint`, `cspell` |
-| Test selection, environment comparison, recorded validation evidence | `codex-environment-evidence` | `validation-evidence-review`, `test-strategy` | `workspace-inspection` |
+| Test selection, environment comparison, recorded validation evidence, maintainability review, orphan or unused code, duplication and complexity | `codex-environment-evidence` | `validation-evidence-review`, `test-strategy`, `maintainability-review` | `workspace-inspection`; [code-health native CLI/MCP](../tools/code-health/README.md) |
 | Plugin and application packaging, release acceptance | `codex-packaging-acceptance` | `packaging-acceptance` | none |
 | Research synthesis with web search, page extraction, papers, communities and library docs | `codex-research` | `research-learning-synthesis` | `tavily`, `exa`, `firecrawl`, `arxiv`, `reddit`, `context7` |
 | System boundaries, data ownership, interfaces and architecture trade-offs | `codex-system-design` | `system-design-analysis` | none |

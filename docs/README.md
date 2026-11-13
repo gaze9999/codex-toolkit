@@ -9,6 +9,7 @@
 | 市集 | [Skills](skills.md) | 自訂 Skill 清單與使用位置 |
 | 市集 | [版本與發布](releases.md) | 整包 / 元件版本、來源 Tag 與 Python 工具資產 |
 | 工具 | [跨工作區產出物盤點](../tools/agent-artifact-audit/README.md) | 備份辨識、可刪規則、選取清單與中斷復原 |
+| 工具 | [程式碼健檢](../tools/code-health/README.md) | 模組圖、未使用候選、重複片段與函式統計, 共用 Rust、CLI 與 MCP 入口 |
 | 使用教學 | [Local Documents](usage/local-documents.md) | 擷取、OCR、Markdown 定位與安全寫入 |
 | 使用教學 | [Jev](usage/jev.md) | 候選 context 排序、有限評估與診斷 |
 

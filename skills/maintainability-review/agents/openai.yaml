@@ -1,0 +1,6 @@
+interface:
+  display_name: "程式碼可維護性審查 (v0.1.0)"
+  short_description: "審查未使用的檔案與成員、重複區段及函式的分支與長度, 產出可查證的候選變更"
+  default_prompt: "請用 $maintainability-review 審查選定的程式碼, 提供有依據的候選 diff"
+policy:
+  allow_implicit_invocation: true

@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-environment-evidence",
-  "version": "0.5.1",
-  "description": "選擇測試策略、比對環境與既有驗證證據, 安裝與診斷開發工具",
+  "version": "0.6.2",
+  "description": "審查程式碼可維護性、選擇測試策略、比對環境與驗證證據",
   "author": {
     "name": "gaze9999"
   },
@@ -11,7 +11,7 @@
     "com.openai": {
       "interface": {
         "displayName": "環境驗證",
-        "shortDescription": "選擇測試策略、比對環境與既有驗證證據, 安裝與診斷開發工具",
+        "shortDescription": "審查程式碼可維護性、選擇測試策略、比對環境與驗證證據",
         "logo": "./assets/codex-environment-evidence.png",
         "composerIcon": "./assets/codex-environment-evidence.png",
         "brandColor": "#EF8A3C",

@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "8db5c7b3f66f075531f9b95668d5055d8cdd41ca0ea73c8d6e1e93c857c50083",
+      "sha256": "9e54f9e6239216fda43b1591c123782fe5ec3eb1904d3aaaf63dd7c6c201397c",
       "source": null
     },
     "LICENSE": {
@@ -13,8 +13,24 @@
       "source": "assets/branding/plugins/codex-environment-evidence.png"
     },
     "plugin.json": {
-      "sha256": "a1fff4882cf0c39bdf516edff73522ced19548e5e67b58dbd97ed568809aa481",
+      "sha256": "a46e49f695c4a66675cb780efc2e91672c1ecbd1e8beb479f10c72eb161b9663",
       "source": "plugins/environment-evidence/plugin.json"
+    },
+    "skills/maintainability-review/SKILL.md": {
+      "sha256": "6a0d666ed38bcc5509aff9439ae195e04296fbb751090077115c53ab6e066f27",
+      "source": "skills/maintainability-review/SKILL.md"
+    },
+    "skills/maintainability-review/agents/openai.yaml": {
+      "sha256": "9f206c866032a6bfc154a0968abfa056c891e192211a30a0f7a380d45fcec5dc",
+      "source": "skills/maintainability-review/agents/openai.yaml"
+    },
+    "skills/maintainability-review/references/checks.md": {
+      "sha256": "d9a842fef30bc91fa0df10073e987ab2c424c18fb0d59543607f3c66274b3063",
+      "source": "skills/maintainability-review/references/checks.md"
+    },
+    "skills/maintainability-review/references/report.md": {
+      "sha256": "485c9b42d881e4b26f8cb5209206d571736bbb5ee6c0f6c76c91884fe1a7d0f1",
+      "source": "skills/maintainability-review/references/report.md"
     },
     "skills/test-strategy/SKILL.md": {
       "sha256": "5a9005cf292da8aa9077679fe5762cd4903317cd0aefab6f64730b4475b3a253",
@@ -113,6 +129,6 @@
     "workspace-inspection"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.34.1",
-  "version": "0.5.1"
+  "toolkit_version": "0.35.0",
+  "version": "0.6.2"
 }
