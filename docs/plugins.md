@@ -4,7 +4,7 @@ Plugins are assembled from `skills/` workflows, `plugins/catalog.json` source ma
 
 ## Routing by task domain
 
-Read the project's `AGENTS.md` first; when it names plugins, use those. Otherwise pick the row whose domain matches the task, load one Skill at a time and its references only when that flow needs them. Enable the whole plugin: it carries the Skills and the connectors they call. Connectors still need device runtimes, data roots and login on the target client.
+Read the project's `AGENTS.md` first; when it names plugins, use those. Otherwise pick the row whose domain matches the task, load one Skill at a time and its references only when that flow needs them. Use an already enabled plugin when it covers the task. Installation or enabling requires task authorization. These bundles contain Skills and resources; optional MCP connectors require separate device configuration, allowed roots and login.
 
 | Task domain | Plugin | Skills | Optional runtimes |
 |---|---|---|---|
