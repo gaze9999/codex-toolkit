@@ -4,6 +4,8 @@ Use this mode for user-visible changes and requests to find layout defects, inco
 
 ## Establish what must match
 
+For action feedback or animated state changes, apply [microinteraction acceptance](microinteractions.md#verify-the-interaction-not-just-the-css). Check the trigger, intermediate feedback, authoritative outcome and interruption behavior; a final screenshot alone does not prove the interaction.
+
 - Reconcile the original request, later corrections, governing specification and confirmed decisions. Keep still-valid earlier requirements, identify superseded choices and resolve missing decisions only for dependent work. Do not silently replace a requested detail with an easier design or a component default.
 - Track observable acceptance in task context: requirement/source, route or section, relevant state, expected behavior, observed evidence and result. Use `pass`, `fail`, `not tested` or `blocked` with a concrete reason. A source-only inference remains unverified in the rendered interface. Do not create a separate report file unless requested.
 - Determine the actual served revision, component/library version, locale, supported viewport/input modes and relevant data source. Preserve the project's theme, terminology, density and saved preferences. Historical examples guide what to inspect; their exact pixel sizes, row counts and refresh intervals are not universal defaults.

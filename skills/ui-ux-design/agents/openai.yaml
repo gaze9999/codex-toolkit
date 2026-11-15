@@ -1,6 +1,6 @@
 interface:
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
-  display_name: "UI UX Design (v0.7.6)"
-  short_description: "Check UI details and original requirements before delivery"
-  default_prompt: "Use $ui-ux-design to select relevant sources and component patterns, compare the interface with the original request, and inspect or fix UI/data/interaction discrepancies within scope."
+  display_name: "UI UX Design (v0.7.7)"
+  short_description: "Design UI feedback and verify real interaction states"
+  default_prompt: "Use $ui-ux-design to select sources and component patterns, define microinteraction triggers and real completion signals, and inspect or fix UI/data/interaction discrepancies against the original request within scope."

@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "8bc759f72ea329635560258f9a1e3defe257b9a818eacd56f3bf73e2f71075b2",
+      "sha256": "0a8e9740173ee7fb1c2452b53068f4d955d66231ab504ad8320a0d2681b9104f",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-frontend-engineering.png"
     },
     "plugin.json": {
-      "sha256": "fab961cee8ab14e9ab285a54b84df2053da720d962fcb7c20745e5bffde8c89c",
+      "sha256": "9453962d9e61c84c0b9e6579c615b5b807738a829200a99e3faa6e4310f04b6b",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "resources/references/angular-style.md": {
@@ -245,11 +245,11 @@
       "source": "skills/react-development/references/state-effects.md"
     },
     "skills/ui-ux-design/SKILL.md": {
-      "sha256": "8b2116216d3325bdad3e8dd7ab374d4469e2b532f904ccfe7d3873a19141b6f2",
+      "sha256": "0c0626d1689a30a7c9b4b0ecfe5c937139ac092e98a3834e350d51a09aef70a4",
       "source": "skills/ui-ux-design/SKILL.md"
     },
     "skills/ui-ux-design/agents/openai.yaml": {
-      "sha256": "46e2c39078134d151b5d38f7ede24644c035f6f3759a5fe44cdf2abe881680fb",
+      "sha256": "c9711b91c2df5408e49bf08764f267c68a2bd2a0aaebfb5f6f3bafd4e750adae",
       "source": "skills/ui-ux-design/agents/openai.yaml"
     },
     "skills/ui-ux-design/assets/icon-small.png": {
@@ -268,6 +268,10 @@
       "sha256": "95cb2a0831b7ff8f83a79e6f67d4285bb59b772d89533e3be16d810a708daf26",
       "source": "skills/ui-ux-design/assets/icon.svg"
     },
+    "skills/ui-ux-design/assets/microinteraction-brief.md": {
+      "sha256": "54f6149464dfc9a661654763b8426a1e0758b38007773c8a62994bbfb9b1c540",
+      "source": "skills/ui-ux-design/assets/microinteraction-brief.md"
+    },
     "skills/ui-ux-design/references/component-patterns.md": {
       "sha256": "65bdbf4bea0ff6bbff569cef4b37c17ba95d21086c2f77591130767eecfb50c3",
       "source": "skills/ui-ux-design/references/component-patterns.md"
@@ -281,8 +285,12 @@
       "source": "skills/ui-ux-design/references/design-sources.md"
     },
     "skills/ui-ux-design/references/detail-review.md": {
-      "sha256": "684bd034a39b9ace2546c98961a68cb178492483efc8a1bd2643ca3d13f32b00",
+      "sha256": "a97f06dc7e21db23d2b1c54489fe131e9ebfff37cd4efa61785ccbed9a68ea2e",
       "source": "skills/ui-ux-design/references/detail-review.md"
+    },
+    "skills/ui-ux-design/references/microinteractions.md": {
+      "sha256": "88e3ef00dbc862ee8793221bec0e2348518ddc9b267105ab08349ca5bfed88e2",
+      "source": "skills/ui-ux-design/references/microinteractions.md"
     },
     "skills/vue-development/SKILL.md": {
       "sha256": "147fa98be415eddf64a9b8a7671c889037f4b8efd513e004b13ad0cd1b5ded86",
@@ -330,5 +338,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.35.1",
-  "version": "0.7.3"
+  "version": "0.7.5"
 }

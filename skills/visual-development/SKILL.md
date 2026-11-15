@@ -3,7 +3,7 @@ name: visual-development
 description: Integrate data visualization, 2D motion or WebGL/WebGPU scenes (Three.js, PixiJS and similar renderers) into an existing web project, selecting rendering and lifecycle tools from its actual stack. Use for interactive feature development and owned previews, not automatic video production or framework migration.
 metadata:
   short-description: Project-native visualization and Three.js development
-  version: "0.2.0"
+  version: "0.2.1"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -19,5 +19,7 @@ Use the available data-visualization Skill for source mapping and figure design 
 For Three.js, adapt the [owned scene helper](assets/three-scene.mjs) only after checking the project's runtime support. The helper owns its renderer/listeners/loop; caller-owned resources must be explicitly registered. Keep framework destruction, DPR, resize, reduced motion, hidden tabs and failed WebGL in the acceptance path. Do not dispose shared textures/materials owned elsewhere.
 
 Keep deterministic data transformation separate from rendering. Verify values, nulls, units and labels, then interaction and rendering at relevant sizes. Product runtime must work without Codex/MCP/semantic API unless a separate feature explicitly requires them.
+
+For microinteraction implementation, use the available UI/UX skill to define intent and observable states, then follow [motion lifecycle](references/integration.md#microinteraction-motion). Preserve stable identity and real completion signals; separate ambient loops from action feedback.
 
 Delegate only authorized independent work with exact file/resource ownership. An optional bounded provider comparison may clarify eligible rendering choices; it cannot establish stack compatibility, source authority or dispatch permission. Retain actual engine format and add adapters only for demonstrated new-project needs.

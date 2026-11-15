@@ -1,8 +1,8 @@
 ---
 name: ui-ux-design
-description: Design or review UI/UX and check rendered interfaces against the original request before delivery. Use for layout defects, misleading displayed data, missing requirements and interaction changes, including UI work without user-provided screenshots.
+description: Design or review UI/UX, microinteractions, feedback and state transitions, and check rendered interfaces against the request. Use for layout defects, misleading displayed data, missing requirements and interaction changes, including UI work without screenshots.
 metadata:
-  version: "0.7.6"
+  version: "0.7.7"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -24,6 +24,8 @@ For a new design, prototype or unresolved visual/interaction decision, read [des
 For ambiguous component names, interaction design or component specifications/handoff, read [component patterns](references/component-patterns.md). Select semantics, modality, focus/dismissal and positioning separately, then adapt the relevant specification fields to the actual API and task. Existing project docs, galleries and prototypes remain the working entry points.
 
 ## Check the requested result before delivery
+
+For microinteractions, action feedback, loading/completion states or motion, read [microinteraction design and acceptance](references/microinteractions.md). Define the trigger, state owner, real completion signal, feedback, interruption and input alternatives before choosing an effect. The [interaction brief](assets/microinteraction-brief.md) is an optional task template, not a required saved report. Ambient animation is a separate visual concern; do not infer successful work from decorative movement.
 
 For a detailed review, reported layout/data discrepancy, or user-visible implementation, read [UI acceptance and detail review](references/detail-review.md). Reconcile the original request and still-valid follow-ups, compare each affected requirement with the served interface and its data, then fix and retest discrepancies within the existing authorization. Perform this acceptance pass without waiting for the user to supply screenshots or request a separate review.
 

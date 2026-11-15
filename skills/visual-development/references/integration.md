@@ -2,6 +2,16 @@
 
 Read only for the selected framework/engine integration. Framework and engine versions come from the project, not this reference. Import the owned scene helper from an adopted project-local module; it accepts the project's `THREE` namespace and does not download an engine.
 
+## Microinteraction motion
+
+Keep authoritative application state separate from visual interpolation. Reuse stable entity/component identities across data updates; do not reassign assets, reset animation clocks or remount a view just to show feedback. A timer or completed transition cannot confirm an API, clipboard or persistence result.
+
+Choose ignore, queue, replace or deduplicate behavior from action semantics. Reversal should continue from the current rendered state; late responses must not restore an obsolete target. Cancelling a visual effect does not roll back an external operation.
+
+Use existing framework/renderer lifecycle and motion tokens. Keep animation ownership explicit, remove timers/listeners/frame callbacks on disposal, and suspend decorative work for hidden views. Reduced motion retains meaningful feedback through a static or minimal-motion alternative. Do not add a renderer or animation dependency for a simple effect already supported by the selected stack.
+
+Verify repeated input, interrupted/reversed transitions, async failure/recovery, input alternatives and hidden/resumed/disposed views where applicable. Capture intermediate and final evidence in the actual runtime. The UI/UX skill owns the interaction brief and acceptance patterns; do not duplicate its complete checklist here.
+
 ## Angular
 
 Create browser-only renderers after the view is available using APIs supported by the actual Angular version. Keep SSR/prerender paths free of document/WebGL access. In zone-based applications, run the animation loop outside Angular and reenter only for meaningful application state. On component destruction call the scene handle's dispose exactly once. Do not move business data into the render loop or adopt Signals solely for this integration.
