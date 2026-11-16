@@ -541,11 +541,45 @@ pub fn scan(options: &Options) -> Result<Value, String> {
     cap(&mut kept, &mut report);
     report["retained"] = json!(kept);
     report["needs_review"] = json!(review);
+    #[cfg(windows)]
+    portable_report_paths(&mut report);
     evidence::assign_ids(&mut report);
     if let Some(evidence) = &options.evidence {
         evidence::merge(&mut report, evidence)?;
     }
     Ok(report)
+}
+
+#[cfg(windows)]
+fn portable_report_paths(value: &mut Value) {
+    match value {
+        Value::Object(fields) => {
+            for (key, value) in fields {
+                if key == "path" {
+                    if let Some(path) = value.as_str().filter(|path| Path::new(path).is_relative())
+                    {
+                        *value = json!(path.replace('\\', "/"));
+                    }
+                } else if key == "entry_points" {
+                    if let Some(paths) = value.as_array_mut() {
+                        for path in paths.iter_mut() {
+                            if let Some(text) = path.as_str() {
+                                *path = json!(text.replace('\\', "/"));
+                            }
+                        }
+                        paths.sort_by(|a, b| a.as_str().cmp(&b.as_str()));
+                    }
+                }
+                portable_report_paths(value);
+            }
+        }
+        Value::Array(values) => {
+            for value in values {
+                portable_report_paths(value);
+            }
+        }
+        _ => {}
+    }
 }
 
 fn cap(rows: &mut Vec<Value>, report: &mut Value) {
