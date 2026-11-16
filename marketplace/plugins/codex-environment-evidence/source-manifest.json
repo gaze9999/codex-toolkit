@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "9e54f9e6239216fda43b1591c123782fe5ec3eb1904d3aaaf63dd7c6c201397c",
+      "sha256": "ac7b91d884655c72d6a0a1e2bab058f1872a8fbb0b3ed37f65328fd06c6da932",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-environment-evidence.png"
     },
     "plugin.json": {
-      "sha256": "a46e49f695c4a66675cb780efc2e91672c1ecbd1e8beb479f10c72eb161b9663",
+      "sha256": "9d7952d159e42bc79ae7976ae8e5051ecd7471ab0b1ecb0781debc8062c894a0",
       "source": "plugins/environment-evidence/plugin.json"
     },
     "skills/maintainability-review/SKILL.md": {
@@ -81,11 +81,11 @@
       "source": "skills/test-strategy/references/tool-selection.md"
     },
     "skills/validation-evidence-review/SKILL.md": {
-      "sha256": "51f21599bd8fa5b8de67df060d4985bc2bdffcaaf50582c669310fc0a61282c5",
+      "sha256": "8c068f4ebef1a8e6fc47aa801cf0961c859841db9818cbc174688f73eb4017e7",
       "source": "skills/validation-evidence-review/SKILL.md"
     },
     "skills/validation-evidence-review/agents/openai.yaml": {
-      "sha256": "1e0c23c6f846da8825e2641d886fddfcbe355e27372f59a8cafd255e9cffd245",
+      "sha256": "1ed509a403d6aab0fda6e0c5950031615c893a739e4d52270ac1f8ed22a0e922",
       "source": "skills/validation-evidence-review/agents/openai.yaml"
     },
     "skills/validation-evidence-review/assets/icon-small.png": {
@@ -117,7 +117,7 @@
       "source": "skills/validation-evidence-review/references/testing-risk-cases.md"
     },
     "skills/validation-evidence-review/references/validity.md": {
-      "sha256": "b6e9257f0cbd8924a2da71996cd19733265c79804580feab3aac28c36f312e1c",
+      "sha256": "e14ed3f798c884edefe0cdbc937f4e0daed3683f62545c885310b42c3e527215",
       "source": "skills/validation-evidence-review/references/validity.md"
     }
   },
@@ -129,6 +129,6 @@
     "workspace-inspection"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.35.1",
-  "version": "0.6.2"
+  "toolkit_version": "0.37.0",
+  "version": "0.7.0"
 }

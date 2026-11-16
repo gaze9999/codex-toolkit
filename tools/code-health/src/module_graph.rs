@@ -285,19 +285,19 @@ pub fn parse<'a>(tokens: &[Token<'a>], pairs: &[Option<usize>]) -> Module<'a> {
                 "Export clause could not be resolved syntactically",
             ));
         }
-        if (token.text == "module" && at(tokens, i + 1) == "." && at(tokens, i + 2) == "exports")
-            || (token.text == "exports" && at(tokens, i + 1) == ".")
-        {
-            if !module
+        let commonjs =
+            (token.text == "module" && at(tokens, i + 1) == "." && at(tokens, i + 2) == "exports")
+                || (token.text == "exports" && at(tokens, i + 1) == ".");
+        if commonjs
+            && !module
                 .review
                 .iter()
                 .any(|(_, note)| *note == "CommonJS export shape requires manual confirmation")
-            {
-                module.review.push((
-                    token.line,
-                    "CommonJS export shape requires manual confirmation",
-                ));
-            }
+        {
+            module.review.push((
+                token.line,
+                "CommonJS export shape requires manual confirmation",
+            ));
         }
     }
     module

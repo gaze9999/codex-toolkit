@@ -15,13 +15,11 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 EXCLUDED_FOLDERS = {"gui", "distribution", "mcp_tools", "shared", "tests", "build", "dist", "packages", "src"}
 EXCLUDED_MODULES: set[str] = set()
 CATEGORY_NAMES = {
-    "angular": "Angular / Nx",
     "documents": "文件處理",
     "maintenance": "維護",
     "markdown": "Markdown",
     "scripts": "版本與發布",
     "text": "文字",
-    "validation": "驗證",
 }
 
 
@@ -54,38 +52,6 @@ class ToolSpec:
 
 
 _OVERRIDES = (
-    ToolSpec(
-        "component-inventory",
-        "angular.component_inventory",
-        "Angular / Nx",
-        "Component 盤點",
-        "盤點 Nx 工作區的 Angular 元件, selector, template, style 與 custom element",
-        '--root "C:\\path\\workspace" --json',
-    ),
-    ToolSpec(
-        "form-contract-check",
-        "angular.form_contract_check",
-        "Angular / Nx",
-        "Form 欄位規格檢查",
-        "依 JSON 欄位規格比對 TypeScript form control 與 HTML formControlName",
-        '--root "C:\\path\\workspace" --contract "C:\\path\\forms.json" --json',
-    ),
-    ToolSpec(
-        "generator-preflight",
-        "angular.generator_preflight",
-        "Angular / Nx",
-        "Generator Preflight",
-        "在產生檔案前搜尋既有 identifier 與 selector 衝突",
-        '--root "C:\\path\\project" --identifier FEATURE_ID --selector app-feature',
-    ),
-    ToolSpec(
-        "change-impact-report",
-        "angular.change_impact_report",
-        "Angular / Nx",
-        "Git 變更影響報告",
-        "彙整 staged, unstaged, untracked 檔案與公開介面候選標記",
-        '--root "C:\\path\\repository"',
-    ),
     ToolSpec(
         "document-to-markdown",
         "documents.convert_to_markdown",
@@ -169,14 +135,6 @@ _OVERRIDES = (
         "破壞性歷史改寫; 執行前會建立 bundle 並要求透過 stdin 輸入 REWRITE",
     ),
     ToolSpec(
-        "environment-consistency",
-        "maintenance.environment_consistency",
-        "維護",
-        "環境一致性檢查",
-        "唯讀比對兩個 Skills, runtime 或鏡像資料夾的路徑, 大小與 SHA-256",
-        '--source "C:\\path\\source" --target "C:\\path\\mirror"',
-    ),
-    ToolSpec(
         "context-budget",
         "text.context_budget",
         "文字",
@@ -205,14 +163,6 @@ _OVERRIDES = (
         '--text "要計算的文字" --json',
     ),
     ToolSpec(
-        "validation-index",
-        "validation.validation_evidence_index",
-        "驗證",
-        "驗證證據索引",
-        "索引 run-*/results.json, 不重跑 build, test 或瀏覽器測試",
-        '--root "C:\\path\\validation-runs" --limit 20',
-    ),
-    ToolSpec(
         "prepare-release",
         "scripts.prepare_release",
         "版本與發布",
@@ -236,27 +186,6 @@ _OVERRIDES = (
 _OVERRIDES_BY_MODULE = {tool.module: tool for tool in _OVERRIDES}
 
 _TOOL_DETAILS = {
-    "component-inventory": {
-        "purpose": "接手或重整 Angular/Nx 專案時, 快速掌握元件位置與公開識別資訊",
-        "inputs": "Nx 或 Angular workspace 根目錄",
-        "outputs": "元件, selector, template, style 與 custom element 清單; 可輸出 JSON",
-    },
-    "form-contract-check": {
-        "purpose": "修改表單前核對 TypeScript 與 HTML 是否符合已整理的欄位規格",
-        "inputs": "專案根目錄與 JSON 欄位規格檔",
-        "outputs": "缺少, 多餘或不一致的 form control 與 formControlName 報告",
-    },
-    "generator-preflight": {
-        "purpose": "執行 generator 前先避免 identifier, selector 或檔名撞名",
-        "inputs": "專案根目錄與預計使用的 identifier / selector",
-        "outputs": "衝突候選與來源位置; 不會建立或修改專案檔案",
-    },
-    "change-impact-report": {
-        "requirements": "需安裝 Git, 並選擇 Git repository",
-        "purpose": "Review 或提交前快速整理目前 Git 變更可能影響的公開介面",
-        "inputs": "Git repository 根目錄",
-        "outputs": "staged, unstaged, untracked 檔案與公開介面候選報告",
-    },
     "document-to-markdown": {
         "purpose": "把常用文件轉成可搜尋, 可比對且方便交給其他工具處理的 Markdown",
         "inputs": "一個或多個 PDF, XLSX, DOCX, PPTX, CSV 或 TXT 的來源路徑",
@@ -293,20 +222,10 @@ _TOOL_DETAILS = {
         "inputs": "Git repository 與 repository local 身分設定",
         "outputs": "備份 bundle 與重寫後的 refs; 執行時必須再次輸入 REWRITE",
     },
-    "environment-consistency": {
-        "purpose": "確認兩份 Skills, runtime 或鏡像資料夾是否一致, 不直接同步內容",
-        "inputs": "來源與目標資料夾",
-        "outputs": "路徑, 大小與 SHA-256 差異報告",
-    },
     "tokenizer": {
         "purpose": "估算 Prompt, 文件或 API payload 的 token 使用量",
         "inputs": "直接文字, 檔案或 stdin, 以及選用 encoding",
         "outputs": "字元數與 token 數; 套件不可用時清楚標示 fallback 估算",
-    },
-    "validation-index": {
-        "purpose": "彙整既有驗證結果, 方便查找哪些項目已通過或仍未驗證",
-        "inputs": "包含 run-*/results.json 的驗證資料夾",
-        "outputs": "命令, 結果, 來源基準與未驗證項目的索引摘要",
     },
     "prepare-release": {
         "requirements": "需完整 my-py-tools 原始碼, 開發用 Python, pip, setuptools 與 wheel",

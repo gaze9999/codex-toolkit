@@ -13,7 +13,6 @@ python -m unittest discover -s tests -t . -v
 - `launch-cli.cmd` / `launch-cli.ps1` 在任意工作目錄的參數轉送與 exit code
 - PowerShell 5.1 / 7 的 PS1 入口, 包含繁中、空白、引號與尾端反斜線參數
 - `.env` 無效行, 重複 key, 變數展開, process environment 覆寫與備援處理
-- Angular/Nx 元件盤點, 表單欄位規格, generator 衝突與 Git 變更影響測試資料
 - Markdown 結構差異與保護取代的 dry-run
 - tokenizer 精確計算失敗時的備援估算
 - 驗證證據索引與清理預覽
@@ -33,7 +32,7 @@ PDF 擷取器需用實際 PDF 做 `--dry-run`, 因為文字層與表格重建結
 python launch-cli.py documents.convert_to_markdown C:\path\spec.pdf --dry-run --extracted-at 2026-09-22T14:30:15
 ```
 
-測試通過只代表這些明確案例, 不表示未提供的文件版面, OCR, Angular 動態中繼資料或遠端 Git 操作已驗證
+測試通過只代表這些明確案例, 不表示未提供的文件版面, OCR 或遠端 Git 操作已驗證
 
 ## Windows 程序稽核 / 清理
 

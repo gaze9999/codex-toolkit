@@ -5,7 +5,6 @@ import sys
 root = Path(SPECPATH).parents[1]
 source = root / "src"
 sys.path.insert(0, str(source))
-sys.path.insert(0, str(root / "packages/workspace_core"))
 from shared.tool_catalog import TOOLS
 from PyInstaller.utils.hooks import collect_data_files, collect_submodules
 
@@ -19,12 +18,11 @@ data = [
 for package in ("docx", "pptx"):
     data += collect_data_files(package)
 hidden = [tool.module for tool in TOOLS] + [
-    "my_py_workspace_core", "pypdf", "pdfplumber", "openpyxl", "docx", "pptx", "tiktoken", "tiktoken_ext.openai_public",
+    "pypdf", "pdfplumber", "openpyxl", "docx", "pptx", "tiktoken", "tiktoken_ext.openai_public",
 ]
-hidden += collect_submodules("my_py_workspace_core")
 analysis = Analysis(
     [str(source / "distribution/cli_entry.py")],
-    pathex=[str(source), str(root / "packages/workspace_core")],
+    pathex=[str(source)],
     hookspath=[str(source / "distribution/hooks")],
     binaries=[], datas=data, hiddenimports=hidden,
     excludes=["webview", "tkinter", "PyQt5", "PyQt6", "PySide2", "PySide6"],

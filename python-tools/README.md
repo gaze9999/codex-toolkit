@@ -1,6 +1,6 @@
 # Python Tools
 
-目前獨立工具版本 `0.6.0`, 提供可獨立使用的 Python 工具, 涵蓋常用文件轉 Markdown、Markdown 安全更新、Angular/Nx 程式碼盤點、開發產物清理、Token 計數與 Context 預估及驗證證據整理
+目前獨立工具版本 `0.6.0`, 提供可獨立使用的 Python 工具, 涵蓋常用文件轉 Markdown、Markdown 安全更新、開發產物清理、Token 計數與 Context 預估
 
 根目錄的操作入口統一使用 `launch-xxx` 命名, 工具原始碼集中在 `src/`, 相依清單與選用設定集中在 `setup/`, README、版本、Python 套件與 Git 設定仍保留在根目錄
 
@@ -46,17 +46,18 @@ python launch-cli.py documents.convert_to_markdown spec.pdf api.xlsx --combine-o
 
 | 原始碼 | 用途 | 教學 |
 | --- | --- | --- |
-| `src/angular/` | 元件盤點、表單欄位規格檢查、generator 預檢與 Git 變更影響 | [Angular / Nx](docs/angular-tools.md) |
 | `src/documents/` | 文件轉 Markdown、欄位矩陣擷取與抽出版定位 | [文件處理](docs/document-tools.md) |
 | `src/markdown/` | 結構檢查、差異與 SHA-256 保護更新 | [Markdown](docs/markdown-tools.md) |
-| `src/maintenance/` | Windows 程序稽核、產物隔離清理、環境比對與 Git 歷史身分改寫 | [維護](docs/maintenance-tools.md) |
-| `src/text/`, `src/validation/` | token 計數與既有驗證證據索引 | [文字與驗證](docs/text-validation-tools.md) |
+| `src/maintenance/` | Windows 程序稽核、產物隔離清理與 Git 歷史身分改寫 | [維護](docs/maintenance-tools.md) |
+| `src/text/` | token 計數與 Context 預估 | [文字](docs/text-validation-tools.md) |
 | `src/shared/` | 選用變數、版本、工具清單與核心載入 | [設定](docs/configuration.md) |
 | `src/scripts/` | 來源 ZIP、核心 wheel 與明確確認的發布流程 | [發布](docs/releases.md) |
 | `src/distribution/` | 獨立 CLI 免安裝包的原生建置 | [發布](docs/releases.md) |
-| `src/my_py_document_core/`, `packages/workspace_core/` | 用途獨立的可重用 Python 核心 | [文件核心](docs/python-document-core.md), [工作區核心](docs/python-workspace-core.md) |
+| `src/my_py_document_core/` | 可重用的 Python 文件核心 | [文件核心](docs/python-document-core.md) |
 | `tests/` | 可重現的測試程式碼, 保留於 Git | [測試](docs/testing.md) |
 | `setup/` | CLI 與打包相依清單與 `.env.example` | [設定](docs/configuration.md) |
+
+Angular 與 Nx 的元件盤點、表單欄位規格檢查、generator 預檢與 Git 變更影響已改由 Rust 工具 [angular-checks](../tools/angular-checks/README.md) 提供, 環境比對與驗證證據索引已改由 [workspace-inspection](../tools/workspace-inspection/README.md) 提供
 
 新增工具放在 `src/<用途>/`, 模組名稱仍是 `<用途>.<工具>`, CLI 自動發現具有 `__main__` 入口的工具, 不再從根目錄使用舊的 `python -m <用途>.<工具>` 命令, 新增方式見 [CLI 擴充教學](docs/configuration.md#新增-cli-工具)
 

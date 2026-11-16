@@ -337,6 +337,6 @@
     "spartan"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.35.1",
+  "toolkit_version": "0.37.0",
   "version": "0.7.5"
 }

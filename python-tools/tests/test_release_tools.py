@@ -102,7 +102,7 @@ class ReleaseToolTests(unittest.TestCase):
         asset.update(size=source.stat().st_size, sha256=prepare_release.digest(source.read_bytes()))
         marker.write_text(json.dumps(manifest), encoding="utf-8")
         with patch.object(release, "REPO", root):
-            self.assertEqual(len(release.verify("v0.3.1")), 3)
+            self.assertEqual(len(release.verify("v0.3.1")), 2)
 
 
     def test_direct_entrypoint_ignores_external_scripts_namespace(self):
@@ -118,17 +118,14 @@ class ReleaseToolTests(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.repo = Path(self.temporary.name).resolve()
-        (self.repo / "packages/workspace_core").mkdir(parents=True)
         (self.repo / "documents").mkdir()
         (self.repo / "VERSION").write_text("0.2.0\n", encoding="utf-8")
         (self.repo / "pyproject.toml").write_text('[project]\nname = "my-py-document-core"\nversion = "0.2.0"\n', encoding="utf-8")
-        (self.repo / "packages/workspace_core/pyproject.toml").write_text('[project]\nname = "my-py-workspace-core"\nversion = "0.1.0"\n', encoding="utf-8")
         (self.repo / "documents/tool.py").write_text("print('ok')\n", encoding="utf-8")
         (self.repo / ".env").write_text("TOKEN=secret\n", encoding="utf-8")
         (self.repo / ".env.example").write_text("TOKEN=\n", encoding="utf-8")
         self.wheels = {
             "my_py_document_core-0.2.0-py3-none-any.whl": fake_wheel("my-py-document-core", "0.2.0"),
-            "my_py_workspace_core-0.1.0-py3-none-any.whl": fake_wheel("my-py-workspace-core", "0.1.0"),
         }
 
     def test_dry_run_builds_without_writing(self) -> None:
@@ -144,7 +141,7 @@ class ReleaseToolTests(unittest.TestCase):
         self.assertEqual((self.repo / "VERSION").read_text(encoding="utf-8"), "0.3.0\n")
         folder = Path(result["output"])
         manifest = json.loads((folder / prepare_release.MANIFEST).read_text(encoding="utf-8"))
-        self.assertEqual(manifest["packages"], {"my-py-document-core": "0.2.0", "my-py-workspace-core": "0.1.0"})
+        self.assertEqual(manifest["packages"], {"my-py-document-core": "0.2.0"})
         source = folder / "my-py-tools-v0.3.0.zip"
         with zipfile.ZipFile(source) as archive:
             names = set(archive.namelist())
@@ -153,7 +150,7 @@ class ReleaseToolTests(unittest.TestCase):
             self.assertEqual(archive.read("my-py-tools-v0.3.0/VERSION"), b"0.3.0\n")
         with patch.object(release, "REPO", self.repo):
             assets = release.verify("v0.3.0")
-        self.assertEqual(len(assets), 3)
+        self.assertEqual(len(assets), 2)
 
     def test_changed_managed_asset_is_rejected(self) -> None:
         with patch.object(prepare_release, "build_wheels", return_value=self.wheels):

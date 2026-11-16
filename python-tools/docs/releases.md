@@ -2,7 +2,7 @@
 
 獨立 Python tools 的版本記錄於 `python-tools/VERSION`, 使用 SemVer, 資產名稱及 manifest 使用這個元件版本, Git Tag 則由 Toolkit 根目錄的整包 `VERSION` 管理, 兩者不必相同
 
-`my-py-document-core` 與 `my-py-workspace-core` 是用途不同的 Python 套件, 各自以 `pyproject.toml` 管理套件版本, repository Tag 不強迫兩個 wheel 使用同一版本, release manifest 會記錄實際組合
+`my-py-document-core` 以 `pyproject.toml` 管理套件版本, repository Tag 不強迫 wheel 使用同一版本, release manifest 會記錄實際組合
 
 ## 準備發布
 
@@ -28,13 +28,12 @@ python launch-cli.py scripts.release prepare --version 0.3.0
 python launch-cli.py scripts.release prepare --asset-root C:\path\release-assets
 ```
 
-`prepare` 會執行 `unittest` 與不產生 bytecode 的 Python AST 語法檢查, 在隔離的暫存副本建置兩個 wheel, 驗證 wheel CRC 與 metadata, 再產生
+`prepare` 會執行 `unittest` 與不產生 bytecode 的 Python AST 語法檢查, 在隔離的暫存副本建置 wheel, 驗證 wheel CRC 與 metadata, 再產生
 
 ```text
 dist/v0.2.0/
 ├── my-py-tools-v0.2.0.zip
 ├── my_py_document_core-<package-version>-py3-none-any.whl
-├── my_py_workspace_core-<package-version>-py3-none-any.whl
 └── release-manifest.json
 ```
 

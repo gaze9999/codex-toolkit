@@ -1,12 +1,17 @@
 mod complexity;
 mod duplicates;
+mod evidence;
+mod html;
 mod lexer;
 mod module_graph;
 mod unused;
 
+pub use evidence::{SCHEMA as EVIDENCE_SCHEMA, STATUSES as EVIDENCE_STATUSES};
+pub use html::{html, report_data};
 use lexer::{pairs, tokenize, Language};
 use module_graph::{Graph, Settings};
 use regex::Regex;
+pub use report_html::{Style, REQUIRED_CLASSES};
 use serde_json::{json, Value};
 use std::collections::{BTreeMap, BTreeSet};
 use std::fs;
@@ -56,6 +61,8 @@ pub struct Options {
     pub retained_files: Vec<PathBuf>,
     pub retained_ranges: Vec<RetainedRange>,
     pub min_tokens: usize,
+    /// Semantic evidence (`code-health-evidence/1`) merged into matching candidates.
+    pub evidence: Option<Value>,
 }
 
 impl Options {
@@ -68,6 +75,7 @@ impl Options {
             retained_files: Vec::new(),
             retained_ranges: Vec::new(),
             min_tokens: 50,
+            evidence: None,
         }
     }
 }
@@ -292,18 +300,18 @@ fn retention(
     Ok((spans, rows))
 }
 
+/// Resolved configuration settings, entry sources and the configuration files that could not be read.
+type ResolvedSettings = (
+    BTreeMap<PathBuf, Settings>,
+    BTreeSet<SourceId>,
+    BTreeSet<PathBuf>,
+);
+
 fn settings(
     project: &Project,
     paths: &BTreeMap<PathBuf, SourceId>,
     explicit: &[PathBuf],
-) -> Result<
-    (
-        BTreeMap<PathBuf, Settings>,
-        BTreeSet<SourceId>,
-        BTreeSet<PathBuf>,
-    ),
-    String,
-> {
+) -> Result<ResolvedSettings, String> {
     let mut entries = BTreeSet::new();
     let mut configs = BTreeMap::new();
     let mut invalid = BTreeSet::new();
@@ -531,6 +539,10 @@ pub fn scan(options: &Options) -> Result<Value, String> {
     cap(&mut kept, &mut report);
     report["retained"] = json!(kept);
     report["needs_review"] = json!(review);
+    evidence::assign_ids(&mut report);
+    if let Some(evidence) = &options.evidence {
+        evidence::merge(&mut report, evidence)?;
+    }
     Ok(report)
 }
 
@@ -563,8 +575,14 @@ pub fn markdown(report: &Value) -> String {
         "# Code health\n\nScanned {} files. Partial: {}.\n",
         report["files_scanned"], report["partial"]
     );
+    if report.get("semantic").is_some() {
+        out.push_str("\nSemantic statuses are provider-reported; evidence freshness is unverified. Recheck against current sources before acting.\n");
+    }
     for (section, columns) in [
-        ("unused", &["kind", "path", "line", "name", "evidence"][..]),
+        (
+            "unused",
+            &["id", "kind", "path", "line", "name", "evidence", "semantic"][..],
+        ),
         (
             "complexity",
             &["path", "name", "start_line", "lines", "branches"][..],
@@ -573,12 +591,21 @@ pub fn markdown(report: &Value) -> String {
             "retained",
             &["path", "scope", "start_line", "end_line", "reason"][..],
         ),
-        ("needs_review", &["path", "line", "symbol", "reason"][..]),
+        (
+            "needs_review",
+            &["id", "path", "line", "symbol", "reason", "semantic"][..],
+        ),
         ("duplicates", &["left", "right", "regions"][..]),
     ] {
         let Some(rows) = report[section].as_array() else {
             continue;
         };
+        // The semantic column appears only when evidence was merged
+        let columns: Vec<&str> = columns
+            .iter()
+            .copied()
+            .filter(|key| *key != "semantic" || report.get("semantic").is_some())
+            .collect();
         out.push_str(&format!(
             "\n## {section}\n\n| {} |\n| {} |\n",
             columns.join(" | "),
@@ -605,7 +632,10 @@ pub fn markdown(report: &Value) -> String {
                     "| {} |\n",
                     columns
                         .iter()
-                        .map(|key| cell(&row[key]))
+                        .map(|key| match *key {
+                            "semantic" => cell(&row["semantic"]["status"]),
+                            key => cell(&row[key]),
+                        })
                         .collect::<Vec<_>>()
                         .join(" | ")
                 ));

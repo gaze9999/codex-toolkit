@@ -11,8 +11,8 @@ pub struct Function<'a> {
 
 pub fn angle_end(tokens: &[Token<'_>], start: usize) -> Option<usize> {
     let mut level = 0;
-    for i in start..tokens.len() {
-        match tokens[i].text {
+    for (i, token) in tokens.iter().enumerate().skip(start) {
+        match token.text {
             "<" => level += 1,
             ">" => {
                 level -= 1;

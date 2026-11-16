@@ -143,7 +143,7 @@ fn members<'a>(tokens: &[Token<'a>], pairs: &[Option<usize>]) -> Vec<Member<'a>>
     result
 }
 
-fn expression_words<'a>(expression: &'a str, names: &mut BTreeSet<String>) {
+fn expression_words(expression: &str, names: &mut BTreeSet<String>) {
     names.extend(
         tokenize(expression, Language::Script)
             .into_iter()

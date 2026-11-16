@@ -1,5 +1,6 @@
-use code_health::{markdown, scan, Check, Options, RetainedRange};
+use code_health::{html, markdown, scan, Check, Options, RetainedRange, Style};
 use serde_json::{json, Value};
+use sha2::{Digest, Sha256};
 use std::fs;
 use std::io::Write;
 use std::path::{Path, PathBuf};
@@ -284,4 +285,192 @@ fn cli_and_stdio_share_the_same_scan_and_reject_outside_roots() {
     invalid.checks = [Check::Unused].into();
     invalid.entries.push(Path::new("../outside.ts").into());
     assert!(scan(&invalid).is_err());
+}
+
+#[test]
+fn writes_report_formats_with_builtin_or_packaged_styles() {
+    let fixture = Fixture::new();
+    fixture.put("main.ts", "export const unused = '<b>&</b>';");
+    let outputs = Fixture::new();
+    let run = |args: &[&str], out: Option<&Path>| {
+        let mut command = Command::new(env!("CARGO_BIN_EXE_code-health"));
+        command.args(["scan", "--root"]).arg(&fixture.0).args(args);
+        if let Some(out) = out {
+            command.arg("--out").arg(out);
+        }
+        command.output().unwrap()
+    };
+    let result = |output: &std::process::Output| -> Value {
+        assert!(
+            output.status.success(),
+            "{}",
+            String::from_utf8_lossy(&output.stderr)
+        );
+        serde_json::from_slice(&output.stdout).unwrap()
+    };
+    // All formats land in one new folder; the page uses the built-in styles and escapes source text
+    let all = outputs.0.join("all");
+    let summary = result(&run(&["--format", "all"], Some(&all)));
+    assert_eq!(
+        summary["written"],
+        json!(["report.json", "report.md", "report.html"])
+    );
+    assert_eq!(summary["style"], "內建樣式");
+    let saved: Value = serde_json::from_slice(&fs::read(all.join("report.json")).unwrap()).unwrap();
+    assert_eq!(saved["schema_version"], 1);
+    assert!(fs::read_to_string(all.join("report.md"))
+        .unwrap()
+        .starts_with("# Code health"));
+    let page = fs::read_to_string(all.join("report.html")).unwrap();
+    assert!(page.contains("wb-workbench") && page.contains("<code>main.ts</code>"));
+    assert!(!page.contains("<b>&</b>"));
+    assert_eq!(run(&["--format", "all"], Some(&all)).status.code(), Some(2));
+    // An appearance package replaces the built-in styles
+    let package = outputs.0.join("package");
+    fs::create_dir(&package).unwrap();
+    let css = ".wb-card{--packaged:1}";
+    let digest: String = Sha256::digest(css.as_bytes())
+        .iter()
+        .map(|byte| format!("{byte:02x}"))
+        .collect();
+    fs::write(
+        package.join("manifest.json"),
+        json!({"format":"static","version":"9.9.9","classes":code_health::REQUIRED_CLASSES,
+            "entry":{"styles":"styles.css"},"assets":{"styles.css":{"sha256":digest}}})
+        .to_string(),
+    )
+    .unwrap();
+    fs::write(package.join("styles.css"), css).unwrap();
+    let styled = outputs.0.join("styled");
+    let package_arg = package.to_string_lossy().into_owned();
+    let summary = result(&run(
+        &["--format", "html", "--style-dir", &package_arg],
+        Some(&styled),
+    ));
+    assert!(summary["style"]
+        .as_str()
+        .unwrap()
+        .starts_with("外觀套件 9.9.9 (SHA-256 "));
+    let page = fs::read_to_string(styled.join("report.html")).unwrap();
+    assert!(page.contains("--packaged:1") && !page.contains("--wb-page-width:1180px"));
+    fs::write(package.join("styles.css"), "</style><script>").unwrap();
+    assert_eq!(
+        run(
+            &["--format", "html", "--style-dir", &package_arg],
+            Some(&outputs.0.join("unsafe"))
+        )
+        .status
+        .code(),
+        Some(2)
+    );
+    // Reports stay outside the scanned root; without --out they go to the system temporary directory
+    assert_eq!(
+        run(&["--format", "html"], Some(&fixture.0.join("inside")))
+            .status
+            .code(),
+        Some(2)
+    );
+    let summary = result(&run(&["--format", "json,html"], None));
+    let out = PathBuf::from(summary["out"].as_str().unwrap());
+    assert!(out.starts_with(fs::canonicalize(std::env::temp_dir()).unwrap()));
+    assert!(out.join("report.html").is_file() && out.join("report.json").is_file());
+    fs::remove_dir_all(out).unwrap();
+    // One text format without --out still prints the report
+    let printed = run(&["--format", "markdown"], None);
+    assert!(String::from_utf8_lossy(&printed.stdout).starts_with("# Code health"));
+}
+
+#[test]
+fn candidates_carry_stable_ids_and_merge_semantic_evidence() {
+    let fixture = Fixture::new();
+    fixture.put("main.ts", "import { used } from './lib';\nused();\n");
+    fixture.put(
+        "lib.ts",
+        "export const used = () => 1;\nexport const spare = () => 2;\nexport const spare2 = () => 3;\n",
+    );
+    fixture.put("orphan.ts", "export const lonely = 1;\n");
+    let mut options = fixture.options();
+    options.entries = vec!["main.ts".into()];
+    options.checks = [Check::Unused].into();
+    let report = scan(&options).unwrap();
+    let ids: Vec<&str> = rows(&report, "unused")
+        .iter()
+        .map(|row| row["id"].as_str().unwrap())
+        .collect();
+    for id in [
+        "export:lib.ts#spare",
+        "export:lib.ts#spare2",
+        "file:orphan.ts",
+        "export:orphan.ts#lonely",
+    ] {
+        assert!(ids.contains(&id), "{id} missing from {ids:?}");
+    }
+    assert!(rows(&report, "needs_review")
+        .iter()
+        .all(|row| row["id"].as_str().unwrap().starts_with("review:")));
+    // Editing above a symbol moves its line but keeps its id
+    fixture.put(
+        "lib.ts",
+        "// note\nexport const used = () => 1;\nexport const spare = () => 2;\nexport const spare2 = () => 3;\n",
+    );
+    let moved = scan(&options).unwrap();
+    let spare = |report: &Value| {
+        rows(report, "unused")
+            .iter()
+            .find(|row| row["id"] == "export:lib.ts#spare")
+            .cloned()
+            .unwrap()
+    };
+    assert_eq!(spare(&report)["line"], 2);
+    assert_eq!(spare(&moved)["line"], 3);
+
+    options.evidence = Some(
+        json!({"schema":"code-health-evidence/1","root":fixture.0,"items":[
+            {"id":"export:lib.ts#spare","status":"confirmed","provider":"typescript","references":0,"coverage":"project"},
+            {"id":"export:lib.ts#spare2","status":"refuted","provider":"typescript","references":2,
+                "locations":[{"path":"main.ts","line":1}],"note":"<dynamic import>"},
+            {"id":"export:gone.ts#old","status":"confirmed"}
+        ]}),
+    );
+    let merged = scan(&options).unwrap();
+    assert_eq!(spare(&merged)["semantic"]["status"], "confirmed");
+    let refuted = rows(&merged, "unused")
+        .iter()
+        .find(|row| row["id"] == "export:lib.ts#spare2")
+        .unwrap()
+        .clone();
+    assert_eq!(refuted["semantic"]["references"], 2);
+    assert_eq!(refuted["semantic"]["locations"][0]["path"], "main.ts");
+    let semantic = &merged["semantic"];
+    assert_eq!(semantic["counts"]["confirmed"], 1);
+    assert_eq!(semantic["counts"]["refuted"], 1);
+    assert_eq!(semantic["unmatched"], json!(["export:gone.ts#old"]));
+    let total: u64 = ["unused", "needs_review"]
+        .iter()
+        .map(|key| rows(&merged, key).len() as u64)
+        .sum();
+    let counted: u64 = semantic["counts"]
+        .as_object()
+        .unwrap()
+        .values()
+        .map(|v| v.as_u64().unwrap())
+        .sum();
+    assert_eq!(counted, total);
+    // Markdown and HTML show the result beside each candidate
+    assert!(markdown(&merged).contains("| semantic |"));
+    assert!(!markdown(&report).contains("semantic"));
+    let page = html(&merged, &Style::builtin()).unwrap();
+    assert!(page.contains("語意確認 2 / ") && page.contains("找到使用端 (2 處, typescript)"));
+    assert!(page.contains("&lt;dynamic import&gt;") && page.contains("1 筆佐證找不到對應候選"));
+
+    for bad in [
+        json!({"schema":"other/1","items":[]}),
+        json!({"schema":"code-health-evidence/1","items":[{"id":"x","status":"maybe"}]}),
+        json!({"schema":"code-health-evidence/1","items":[{"id":"x","status":"confirmed"},{"id":"x","status":"refuted"}]}),
+        json!({"schema":"code-health-evidence/1","root":std::env::temp_dir(),"items":[]}),
+        json!({"schema":"code-health-evidence/1","items":[{"id":"x","status":"confirmed","locations":[{"path":"a.ts","line":0}]}]}),
+    ] {
+        options.evidence = Some(bad.clone());
+        assert!(scan(&options).is_err(), "{bad} was accepted");
+    }
 }

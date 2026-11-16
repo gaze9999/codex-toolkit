@@ -60,16 +60,9 @@ Windows 不提供這些查詢與終止的原子操作, 持有 handle 可避免�
 
 結束代碼 `0` 表示稽核、預覽或所選程序已確認終止, `2` 表示安全檢查失敗、資料不足、I/O 錯誤或終止後尚未確認退出, 每個 PID 的結果獨立列出, 一項失敗不會擴大清理範圍
 
-## `maintenance/environment_consistency.py`
+## 環境一致性檢查
 
-唯讀比對兩個非巢狀資料夾的相對路徑, 檔案大小與 SHA-256, 適合檢查 Skills, runtime 或安裝鏡像是否漂移
-
-```powershell
-python launch-cli.py maintenance.environment_consistency --source C:\path\source --target C:\path\mirror
-python launch-cli.py maintenance.environment_consistency --source C:\path\source --target C:\path\mirror --include "*.py" --exclude "generated/**"
-```
-
-預設排除版本控制中繼資料, cache, `.env`, private key, credentials 與 secrets, 可重複提供 include / exclude pattern, 單側檔案上限預設 20000, 工具不執行複製, 刪除或同步
+兩個目錄的唯讀比對已改由 Rust 工具 [workspace-inspection](../../tools/workspace-inspection/README.md) 的 `compare` 指令提供
 
 ## `maintenance/cleanup_work_artifacts.py`
 

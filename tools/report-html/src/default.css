@@ -1,0 +1,43 @@
+/* report-html built-in styles. Class and token names follow the Workbench UI static markup so an appearance package can replace this file. */
+:root{color-scheme:light dark}
+.wb-workbench{--wb-bg:#f6f8fa;--wb-surface:#fff;--wb-text:#1c2430;--wb-muted:#5b6777;--wb-border:#d5dbe3;--wb-hover:#eef2f6;--wb-control:#fff;--wb-code-bg:#eef1f5;--wb-accent:#0b6e99;--wb-success:#1a7f4b;--wb-warning:#9a6200;--wb-error:#c0362c;--wb-radius:8px;--wb-space:16px;--wb-font-size:15px;--wb-page-width:1180px;
+  background:var(--wb-bg);color:var(--wb-text);font:var(--wb-font-size)/1.55 system-ui,-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;min-height:100vh;box-sizing:border-box}
+.wb-workbench *,.wb-workbench *::before,.wb-workbench *::after{box-sizing:inherit}
+@media (prefers-color-scheme:dark){.wb-workbench:not([data-wb-mode=light]){--wb-bg:#12161c;--wb-surface:#1a2029;--wb-text:#e3e8ef;--wb-muted:#96a2b2;--wb-border:#303947;--wb-hover:#232b37;--wb-control:#1f2630;--wb-code-bg:#232b37;--wb-accent:#5db7de;--wb-success:#5cc48b;--wb-warning:#e0a94a;--wb-error:#f0796f}}
+.wb-workbench[data-wb-mode=dark]{--wb-bg:#12161c;--wb-surface:#1a2029;--wb-text:#e3e8ef;--wb-muted:#96a2b2;--wb-border:#303947;--wb-hover:#232b37;--wb-control:#1f2630;--wb-code-bg:#232b37;--wb-accent:#5db7de;--wb-success:#5cc48b;--wb-warning:#e0a94a;--wb-error:#f0796f}
+.wb-page{padding:24px var(--wb-space)}
+.wb-page-content{max-width:var(--wb-page-width);margin:0 auto;display:grid;gap:var(--wb-space)}
+.wb-page-content>h1{font-size:1.5rem;font-weight:650;letter-spacing:-.01em}
+.wb-card{background:var(--wb-surface);border:1px solid var(--wb-border);border-radius:var(--wb-radius);min-width:0}
+.wb-card[data-tone]{border-inline-start:4px solid var(--wb-muted)}
+.wb-card[data-tone=success]{border-inline-start-color:var(--wb-success)}
+.wb-card[data-tone=warning]{border-inline-start-color:var(--wb-warning)}
+.wb-card[data-tone=error]{border-inline-start-color:var(--wb-error)}
+.wb-card-head{padding:12px var(--wb-space);margin:0;border-bottom:1px solid var(--wb-border)}
+.wb-card-head>h2{margin:0;font-weight:600}
+.wb-card-body{padding:var(--wb-space)}
+.wb-table-wrap,.wb-scroll{overflow-x:auto}
+.wb-table{width:100%;border-collapse:collapse;font-size:.92rem}
+.wb-table th,.wb-table td{padding:8px 10px;text-align:start;vertical-align:top;border-bottom:1px solid var(--wb-border)}
+.wb-table thead th{color:var(--wb-muted);font-weight:600;font-size:.82rem;white-space:nowrap;background:var(--wb-hover)}
+.wb-table tbody th{font-weight:600;white-space:nowrap;color:var(--wb-muted)}
+.wb-table tbody tr:last-child>*{border-bottom:0}
+.wb-table tbody tr:hover>td{background:var(--wb-hover)}
+.wb-tag{display:inline-flex;align-items:center;gap:6px;padding:2px 10px;border:1px solid var(--wb-border);border-radius:999px;font-size:.82rem;color:var(--wb-muted);background:var(--wb-surface)}
+.wb-tag[data-tone=category]{color:var(--wb-accent);border-color:currentColor}
+.wb-tag[data-tone=success]{color:var(--wb-success);border-color:currentColor}
+.wb-tag[data-tone=warning]{color:var(--wb-warning);border-color:currentColor}
+.wb-tag[data-tone=error]{color:var(--wb-error);border-color:currentColor}
+.wb-status-bar{display:flex;height:10px;border-radius:999px;overflow:hidden;background:var(--wb-hover)}
+.wb-status-bar>span{background:var(--wb-muted)}
+.wb-status-bar>span[data-tone=success],.wb-legend-dot[data-tone=success]{background:var(--wb-success)}
+.wb-status-bar>span[data-tone=warning],.wb-legend-dot[data-tone=warning]{background:var(--wb-warning)}
+.wb-status-bar>span[data-tone=error],.wb-legend-dot[data-tone=error]{background:var(--wb-error)}
+.wb-status-bar>span[data-tone=category],.wb-legend-dot[data-tone=category]{background:var(--wb-accent)}
+.wb-legend{display:flex;flex-wrap:wrap;gap:6px 16px;list-style:none;margin:10px 0 0;padding:0;font-size:.85rem;color:var(--wb-muted)}
+.wb-legend li{display:inline-flex;align-items:center;gap:6px}
+.wb-legend-dot{width:9px;height:9px;border-radius:50%;background:var(--wb-muted)}
+.wb-filter select,.wb-filter input{font:inherit;color:inherit;background:var(--wb-control);border:1px solid var(--wb-border);border-radius:6px;padding:4px 8px}
+.wb-filter input:focus-visible,.wb-workbench button:focus-visible{outline:2px solid var(--wb-accent);outline-offset:1px}
+.wb-muted{color:var(--wb-muted)}
+.wb-workbench code{background:var(--wb-code-bg);border-radius:4px;padding:1px 5px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}

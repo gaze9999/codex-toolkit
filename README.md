@@ -9,7 +9,8 @@
 | 需求 | 入口 |
 |---|---|
 | 不使用 Codex, 直接執行工具 | [Python CLI](python-tools/README.md) |
-| 在自己的 Python 程式使用核心 | [文件核心](python-tools/docs/python-document-core.md), [工作區核心](python-tools/docs/python-workspace-core.md) |
+| 掃描程式碼、Angular 或工作區, 產生離線報告 | [code-health](tools/code-health/README.md)、[angular-checks](tools/angular-checks/README.md)、[workspace-inspection](tools/workspace-inspection/README.md)、[report-html](tools/report-html/README.md) |
+| 在自己的 Python 程式使用核心 | [文件核心](python-tools/docs/python-document-core.md) |
 | 在 Codex 選用工作流程 | [Plugin 市集](docs/marketplace.md) 或 [獨立 Skills](docs/skills.md) |
 
 MCP runtime、帳戶與用戶端註冊由安裝者自己的設定工具處理

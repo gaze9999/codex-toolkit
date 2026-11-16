@@ -9,12 +9,20 @@ fn schema() -> Value {
     let path = json!({"type":"string","minLength":1});
     let paths = json!({"type":"array","items":path,"maxItems":500});
     let line = json!({"type":"integer","minimum":1});
-    json!({"name":"code_health","description":"Read-only syntax-level code maintainability scan of an approved local root. Returns candidates, retained scopes and areas requiring manual review.",
+    let location =
+        json!({"type":"object","required":["path","line"],"properties":{"path":path,"line":line}});
+    let item = json!({"type":"object","required":["id","status"],"properties":{"id":path,"status":{"enum":["confirmed","refuted","unsupported","timeout","error"]},
+        "provider":{"type":"string"},"provider_version":{"type":"string"},"coverage":{"type":"string"},"references":{"type":"integer","minimum":0},
+        "note":{"type":"string"},"locations":{"type":"array","maxItems":50,"items":location}}});
+    let evidence = json!({"type":"object","description":"Semantic evidence (schema code-health-evidence/1) merged into candidates by id",
+        "required":["schema","items"],"properties":{"schema":{"const":"code-health-evidence/1"},"root":path,"items":{"type":"array","maxItems":5000,"items":item}}});
+    json!({"name":"code_health","description":"Read-only syntax-level code maintainability scan of an approved local root. Returns candidates with stable ids, retained scopes and areas requiring manual review; optional evidence attaches semantic checks to candidates by id.",
         "annotations":{"readOnlyHint":true,"destructiveHint":false,"idempotentHint":true,"openWorldHint":false},
         "inputSchema":{"type":"object","additionalProperties":false,"required":["root"],"properties":{
             "root":path,"entries":paths,"retained_files":paths,"marker_patterns":paths,
             "checks":{"type":"array","items":{"enum":["unused","duplicates","complexity"]},"minItems":1,"maxItems":3},
             "min_tokens":{"type":"integer","minimum":8,"maximum":1000},
+            "evidence":evidence,
             "retained_ranges":{"type":"array","maxItems":500,"items":{"type":"object","additionalProperties":false,
                 "required":["path","start_line","end_line"],"properties":{"path":path,"start_line":line,"end_line":line}}}
         }}
@@ -62,6 +70,7 @@ fn execute(params: &Value, roots: &[PathBuf]) -> Result<Value, String> {
                 | "retained_files"
                 | "retained_ranges"
                 | "min_tokens"
+                | "evidence"
         )
     }) {
         return Err("Unknown argument".into());
@@ -93,6 +102,9 @@ fn execute(params: &Value, roots: &[PathBuf]) -> Result<Value, String> {
             .into_iter()
             .map(Check::parse)
             .collect::<Result<_, _>>()?;
+    }
+    if let Some(evidence) = args.get("evidence") {
+        options.evidence = Some(evidence.clone());
     }
     if args.get("min_tokens").is_some() {
         options.min_tokens = integer(args, "min_tokens")?;
@@ -138,10 +150,9 @@ fn reply(message: &str, roots: &[PathBuf]) -> Option<Value> {
     request.get("id")?;
     let params = &request["params"];
     let result = match method {
-        "initialize" => json!({"protocolVersion":match params["protocolVersion"].as_str() {
-            Some(value @ ("2025-11-25" | "2025-06-18" | "2025-03-26" | "2024-11-05")) => value,
-            _ => "2025-06-18",
-        },"serverInfo":{"name":"code-health","version":env!("CARGO_PKG_VERSION")},"capabilities":{"tools":{}}}),
+        "initialize" => json!({"protocolVersion":params["protocolVersion"].as_str()
+            .filter(|value| ["2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05"].contains(value))
+            .unwrap_or("2025-06-18"),"serverInfo":{"name":"code-health","version":env!("CARGO_PKG_VERSION")},"capabilities":{"tools":{}}}),
         "ping" => json!({}),
         "tools/list" => json!({"tools":[schema()]}),
         "tools/call" => match execute(params, roots) {

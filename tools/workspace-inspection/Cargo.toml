@@ -1,0 +1,14 @@
+[package]
+name = "workspace-inspection"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.89"
+license = "MIT"
+description = "Read-only directory tree comparison and validation evidence lookup, as a library, CLI and stdio MCP"
+
+[dependencies]
+regex = "1"
+report-html = { path = "../report-html" }
+# preserve_order keeps reasons and fields in the order the evidence files state them
+serde_json = { version = "1", features = ["preserve_order"] }
+sha2 = "0.10"

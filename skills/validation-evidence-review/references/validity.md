@@ -1,6 +1,6 @@
 # Evidence validity
 
-The installed my-py-workspace-core 0.2.0 exposes validation.assess_evidence(recorded, current). Its CLI index accepts --current-baseline with an explicit JSON file; Workspace Inspection validation_evidence accepts the same current object. No recorded command is executed and no source/artifact path is opened by the comparison.
+The workspace-inspection tool compares recorded and current provenance. Its `evidence` command accepts --current-baseline with an explicit JSON file; the Workspace Inspection validation_evidence tool accepts the same current object. No recorded command is executed and no source/artifact path is opened by the comparison.
 
 Provenance fields are source_revision, source_diff_sha256, source_files (relative input path to SHA-256), artifact_sha256 and covered_paths. Current input supplies the same actual observed identities plus affected_paths. Keep timestamps separately as observation time, not freshness proof. Include relevant untracked inputs in the supplied source digest/hash map; a tracked Git diff alone cannot describe them.
 

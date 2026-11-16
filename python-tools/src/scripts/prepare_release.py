@@ -28,7 +28,6 @@ PRODUCER = "my-py-tools.prepare_release.v1"
 MANIFEST = "release-manifest.json"
 PACKAGE_PROJECTS = (
     (Path("."), "my-py-document-core"),
-    (Path("packages/workspace_core"), "my-py-workspace-core"),
 )
 SKIP_DIRS = {
     ".git", ".gui", ".bundle", ".venv", "venv", "build", "dist", "__pycache__",
