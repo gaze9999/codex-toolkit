@@ -1,11 +1,11 @@
 mod mcp;
 
-use code_health::{html, markdown, scan, Check, Options, RetainedRange, Style};
-use serde_json::json;
+use code_health::{markdown, report_data, scan, summary, Check, Options, RetainedRange};
+use report_html::output::{emit, parse_formats, Emit, Rendered, DEFAULT_FORMATS};
 use std::fs;
 use std::path::PathBuf;
 
-const HELP: &str = "code-health scan --root DIR [--entry PATH] [--checks unused,duplicates,complexity]\n  [--marker-pattern REGEX] [--retain-file PATH] [--retain-range PATH:START:END]\n  [--min-tokens N] [--evidence FILE] [--format json,md,html|all] [--out DIR] [--style-dir DIR]\ncode-health mcp --allow-root DIR [--allow-root DIR]";
+const HELP: &str = "code-health scan --root DIR [--entry PATH] [--checks unused,duplicates,complexity]\n  [--marker-pattern REGEX] [--retain-file PATH] [--retain-range PATH:START:END]\n  [--min-tokens N] [--evidence FILE] [--format json,md,html|all] [--out DIR] [--style-dir DIR]\n  Prints a short summary and writes report.md (or the selected formats) into a new folder.\ncode-health mcp --allow-root DIR [--allow-root DIR]";
 
 fn cli(args: &[String]) -> Result<(), String> {
     let Some((command, args)) = args.split_first() else {
@@ -43,11 +43,20 @@ fn cli(args: &[String]) -> Result<(), String> {
         return mcp::serve(roots);
     }
     let mut options = Options::new("");
-    let mut formats = vec!["json"];
+    let mut formats = DEFAULT_FORMATS.to_vec();
     let mut out = None;
     let mut style_dir = None;
+    let mut seen = Vec::new();
     for pair in chunks {
         let value = pair[1].as_str();
+        let repeatable = matches!(
+            pair[0].as_str(),
+            "--entry" | "--marker-pattern" | "--retain-file" | "--retain-range"
+        );
+        if !repeatable && seen.contains(&pair[0].as_str()) {
+            return Err(format!("{} is given more than once", pair[0]));
+        }
+        seen.push(pair[0].as_str());
         match pair[0].as_str() {
             "--root" if options.root.as_os_str().is_empty() && !value.is_empty() => {
                 options.root = value.into()
@@ -90,41 +99,24 @@ fn cli(args: &[String]) -> Result<(), String> {
     if options.root.as_os_str().is_empty() {
         return Err("--root is required".into());
     }
-    let style = match &style_dir {
-        Some(dir) if formats.contains(&"html") => Style::load(dir)?,
-        Some(_) => return Err("--style-dir applies to the html format".into()),
-        None => Style::builtin(),
-    };
     let report = scan(&options)?;
-    let render = |format: &str| -> Result<String, String> {
-        Ok(match format {
-            "md" => markdown(&report),
-            "html" => html(&report, &style)?,
-            _ => serde_json::to_string_pretty(&report).map_err(|e| e.to_string())? + "\n",
-        })
+    let rendered = Rendered {
+        summary: summary(&report),
+        page: report_data(&report),
+        markdown: Some(markdown(&report)),
+        notes: Vec::new(),
+        json: report,
     };
-    // One text format without --out keeps printing the report itself
-    if out.is_none() && formats.len() == 1 && formats[0] != "html" {
-        print!("{}", render(formats[0])?);
-        return Ok(());
-    }
-    let contents = formats
-        .iter()
-        .map(|format| render(format))
-        .collect::<Result<Vec<_>, _>>()?;
-    let out = report_html::new_folder(out.as_deref(), &[&options.root], "code-health")?;
-    let mut written = Vec::new();
-    for (format, content) in formats.iter().zip(contents) {
-        let name = format!("report.{format}");
-        fs::write(out.join(&name), content).map_err(|e| e.to_string())?;
-        written.push(name);
-    }
-    println!(
-        "{}",
-        json!({"out":out,"written":written,"style":if formats.contains(&"html") {json!(style.label())} else {json!(null)},
-            "files_scanned":report["files_scanned"],"partial":report["partial"]})
-    );
-    Ok(())
+    emit(
+        "code-health",
+        &[&options.root],
+        &Emit {
+            formats,
+            out,
+            style_dir,
+        },
+        &rendered,
+    )
 }
 
 fn read_evidence(path: &str) -> Result<serde_json::Value, String> {
@@ -136,29 +128,6 @@ fn read_evidence(path: &str) -> Result<serde_json::Value, String> {
     }
     let text = fs::read_to_string(path).map_err(|e| format!("Cannot read {path}: {e}"))?;
     serde_json::from_str(&text).map_err(|e| format!("Invalid evidence JSON in {path}: {e}"))
-}
-
-fn parse_formats(value: &str) -> Result<Vec<&'static str>, String> {
-    if value == "all" {
-        return Ok(vec!["json", "md", "html"]);
-    }
-    let mut formats = Vec::new();
-    for name in value.split(',') {
-        let format = match name.trim() {
-            "json" => "json",
-            "md" | "markdown" => "md",
-            "html" => "html",
-            other => {
-                return Err(format!(
-                    "Unknown format {other:?}; use json, md, html or all"
-                ))
-            }
-        };
-        if !formats.contains(&format) {
-            formats.push(format);
-        }
-    }
-    Ok(formats)
 }
 
 fn main() {

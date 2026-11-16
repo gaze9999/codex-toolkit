@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "ac7b91d884655c72d6a0a1e2bab058f1872a8fbb0b3ed37f65328fd06c6da932",
+      "sha256": "6f7856fed3dee899c600e67062f12d1c4ccb1ad349dc64505a7216ee48c70fa4",
       "source": null
     },
     "LICENSE": {
@@ -13,24 +13,28 @@
       "source": "assets/branding/plugins/codex-environment-evidence.png"
     },
     "plugin.json": {
-      "sha256": "9d7952d159e42bc79ae7976ae8e5051ecd7471ab0b1ecb0781debc8062c894a0",
+      "sha256": "7a2c45ccfbc9fb677fd8ac9ffaa8d88b5b6c05701573e968e0f8f0c40533044f",
       "source": "plugins/environment-evidence/plugin.json"
     },
     "skills/maintainability-review/SKILL.md": {
-      "sha256": "6a0d666ed38bcc5509aff9439ae195e04296fbb751090077115c53ab6e066f27",
+      "sha256": "d1c72e67a0ef95ff8c9ec4b01ed557c974024bc0afe0eaab90aa1ea50bd0cf9a",
       "source": "skills/maintainability-review/SKILL.md"
     },
     "skills/maintainability-review/agents/openai.yaml": {
-      "sha256": "9f206c866032a6bfc154a0968abfa056c891e192211a30a0f7a380d45fcec5dc",
+      "sha256": "4dd14be9846d28978f8e7e97a613df7399419787026aecb9df573614b1e397e1",
       "source": "skills/maintainability-review/agents/openai.yaml"
     },
     "skills/maintainability-review/references/checks.md": {
-      "sha256": "d9a842fef30bc91fa0df10073e987ab2c424c18fb0d59543607f3c66274b3063",
+      "sha256": "a4eee26f150430e2a9bf84aa4e27d95bb4395be799d36b0e110d292a668269c5",
       "source": "skills/maintainability-review/references/checks.md"
     },
     "skills/maintainability-review/references/report.md": {
       "sha256": "485c9b42d881e4b26f8cb5209206d571736bbb5ee6c0f6c76c91884fe1a7d0f1",
       "source": "skills/maintainability-review/references/report.md"
+    },
+    "skills/maintainability-review/references/semantic-evidence.md": {
+      "sha256": "5b90790cd313480b9420b42c8b940bb238cc812acba32d64cdefc61a3f967289",
+      "source": "skills/maintainability-review/references/semantic-evidence.md"
     },
     "skills/test-strategy/SKILL.md": {
       "sha256": "5a9005cf292da8aa9077679fe5762cd4903317cd0aefab6f64730b4475b3a253",
@@ -81,11 +85,11 @@
       "source": "skills/test-strategy/references/tool-selection.md"
     },
     "skills/validation-evidence-review/SKILL.md": {
-      "sha256": "8c068f4ebef1a8e6fc47aa801cf0961c859841db9818cbc174688f73eb4017e7",
+      "sha256": "9cb55a18bdd0991b2346ecd7f8561dd8cde0b1c56c8ab549631dad85912dd20c",
       "source": "skills/validation-evidence-review/SKILL.md"
     },
     "skills/validation-evidence-review/agents/openai.yaml": {
-      "sha256": "1ed509a403d6aab0fda6e0c5950031615c893a739e4d52270ac1f8ed22a0e922",
+      "sha256": "4a4278116c62151ea0de52cca19d8f418a709646840254fd2d6d2327d504e8cd",
       "source": "skills/validation-evidence-review/agents/openai.yaml"
     },
     "skills/validation-evidence-review/assets/icon-small.png": {
@@ -117,7 +121,7 @@
       "source": "skills/validation-evidence-review/references/testing-risk-cases.md"
     },
     "skills/validation-evidence-review/references/validity.md": {
-      "sha256": "e14ed3f798c884edefe0cdbc937f4e0daed3683f62545c885310b42c3e527215",
+      "sha256": "23c574c8cf74881f24ce1ca231ed85aeb701f7512d04e4be3abd727f3eb1dc34",
       "source": "skills/validation-evidence-review/references/validity.md"
     }
   },
@@ -129,6 +133,6 @@
     "workspace-inspection"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.37.0",
-  "version": "0.7.0"
+  "toolkit_version": "0.38.0",
+  "version": "0.8.0"
 }

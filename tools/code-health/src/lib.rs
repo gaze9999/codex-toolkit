@@ -4,6 +4,7 @@ mod evidence;
 mod html;
 mod lexer;
 mod module_graph;
+mod summary;
 mod unused;
 
 pub use evidence::{SCHEMA as EVIDENCE_SCHEMA, STATUSES as EVIDENCE_STATUSES};
@@ -17,6 +18,7 @@ use std::collections::{BTreeMap, BTreeSet};
 use std::fs;
 use std::io::{self, Read};
 use std::path::{Path, PathBuf};
+pub use summary::summary;
 
 const FILE_LIMIT: u64 = 2 * 1024 * 1024;
 const TOTAL_LIMIT: usize = 48 * 1024 * 1024;

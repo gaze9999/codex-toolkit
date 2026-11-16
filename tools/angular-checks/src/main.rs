@@ -1,17 +1,17 @@
-use angular_checks::output::{emit, parse_formats, Emit, Rendered};
+use angular_checks::output::{emit, parse_formats, Emit, Rendered, DEFAULT_FORMATS};
 use angular_checks::{change_impact, components, form_contract, fsutil, preflight};
 use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
 
 const HELP: &str =
-    "angular-checks components [TERM ...] [--root DIR] [--project NAME] [--changed] [--limit N]
+    "angular-checks components [TERM ...] [-- TERM ...] [--root DIR] [--project NAME] [--changed] [--limit N]
 angular-checks form-contract --contract FILE [--root DIR]
 angular-checks generator-preflight --identifier ID [--selector NAME] [--allow-existing] [--root DIR]
 angular-checks change-impact [--root DIR]
 
-Every command accepts --format text,json,md,html|all, --json, --out DIR and --style-dir DIR.
---root defaults to the current directory. One text format without --out prints to standard output;
-html, several formats or --out write report files into a new folder outside the root.
+Every command accepts --format json,md,html|all, --json, --out DIR and --style-dir DIR.
+--root defaults to the current directory. Each run prints a short summary and writes report.md
+(or the selected formats) into a new folder outside the root; --out names that folder.
 Exit codes: 0 clear, 1 findings (components: no result), 2 invalid input or environment.";
 
 struct Args {
@@ -29,13 +29,18 @@ fn parse(args: &[String], value_flags: &[&str], bool_flags: &[&str]) -> Result<A
     let common = ["--root", "--format", "--out", "--style-dir"];
     let mut iter = args.iter();
     while let Some(arg) = iter.next() {
-        if !arg.starts_with("--") {
+        if arg == "--" {
+            // Everything after the separator is a term, even when it starts with dashes
+            parsed.positional.extend(iter.by_ref().cloned());
+        } else if !arg.starts_with("--") {
             parsed.positional.push(arg.clone());
         } else if arg == "--json" || bool_flags.contains(&arg.as_str()) {
             parsed.flags.push(arg.clone());
         } else if common.contains(&arg.as_str()) || value_flags.contains(&arg.as_str()) {
             let value = iter.next().ok_or(format!("{arg} needs a value"))?;
-            parsed.values.insert(arg.clone(), value.clone());
+            if parsed.values.insert(arg.clone(), value.clone()).is_some() {
+                return Err(format!("{arg} is given more than once"));
+            }
         } else {
             return Err(format!("Unknown option {arg}"));
         }
@@ -58,16 +63,11 @@ fn run(args: &[String]) -> Result<i32, String> {
         println!("angular-checks {}", env!("CARGO_PKG_VERSION"));
         return Ok(0);
     }
-    let (value_flags, bool_flags, default_format): (&[&str], &[&str], &str) = match command.as_str()
-    {
-        "components" => (&["--project", "--limit"], &["--changed"], "text"),
-        "form-contract" => (&["--contract"], &[], "text"),
-        "generator-preflight" => (
-            &["--identifier", "--selector"],
-            &["--allow-existing"],
-            "json",
-        ),
-        "change-impact" => (&[], &[], "json"),
+    let (value_flags, bool_flags): (&[&str], &[&str]) = match command.as_str() {
+        "components" => (&["--project", "--limit"], &["--changed"]),
+        "form-contract" => (&["--contract"], &[]),
+        "generator-preflight" => (&["--identifier", "--selector"], &["--allow-existing"]),
+        "change-impact" => (&[], &[]),
         other => return Err(format!("Unknown command {other:?}\n{HELP}")),
     };
     let parsed = parse(rest, value_flags, bool_flags)?;
@@ -80,7 +80,7 @@ fn run(args: &[String]) -> Result<i32, String> {
         (Some(_), true) => return Err("Use --format or --json, not both".into()),
         (Some(list), false) => parse_formats(list)?,
         (None, true) => vec!["json"],
-        (None, false) => vec![default_format],
+        (None, false) => DEFAULT_FORMATS.to_vec(),
     };
     let options = Emit {
         formats,

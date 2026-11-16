@@ -53,3 +53,26 @@ jobs:
           decisions-mcp --help
           visual-runtime --help
           visual-runtime-mcp --help
+
+  rust-tools:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [windows-2022, macos-15, ubuntu-latest]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 15
+    env:
+      CARGO_TARGET_DIR: ${{ runner.temp }}/toolkit-rust-target
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - name: Check native scanners and report output
+        shell: bash
+        run: |
+          for tool in code-health angular-checks workspace-inspection report-html; do
+            cargo test --locked --manifest-path tools/$tool/Cargo.toml
+            cargo clippy --locked --manifest-path tools/$tool/Cargo.toml --all-targets -- -D warnings
+            cargo fmt --manifest-path tools/$tool/Cargo.toml --check
+          done

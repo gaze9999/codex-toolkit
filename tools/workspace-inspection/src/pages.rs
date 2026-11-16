@@ -120,7 +120,6 @@ pub fn evidence(index: &Value, assessed: bool) -> Value {
 
 /// A tree comparison as a page: missing, extra and changed files.
 pub fn comparison(result: &Value) -> Value {
-    let matched = result["status"] == "match";
     let paths = |key: &str| -> Vec<Value> {
         list(&result[key])
             .iter()
@@ -146,7 +145,11 @@ pub fn comparison(result: &Value) -> Value {
     let stat = |label: &str, count: usize, tone: &str| json!({"label":label,"value":count,"tone":if count == 0 {"neutral"} else {tone},"bar":true});
     json!({
         "schema":report_html::SCHEMA,"title":"環境比對",
-        "tags":[if matched {json!({"label":"兩邊一致","tone":"success"})} else {json!({"label":"有差異","tone":"warning"})}],
+        "tags":[match result["status"].as_str() {
+            Some("match") => json!({"label":"兩邊一致","tone":"success"}),
+            Some("empty") => json!({"label":"沒有比對到任何檔案","tone":"warning"}),
+            _ => json!({"label":"有差異","tone":"warning"}),
+        }],
         "info":[
             ["來源", result["source"]],
             ["目標", result["target"]],
@@ -171,4 +174,113 @@ pub fn comparison(result: &Value) -> Value {
                 column("side","位置","text"),column("path","路徑","code"),column("error","錯誤","text")]}
         ]
     })
+}
+
+fn counted(counts: &BTreeMap<String, usize>) -> String {
+    counts
+        .iter()
+        .map(|(name, count)| {
+            format!(
+                "{} {count}",
+                if name.is_empty() { "(unlabeled)" } else { name }
+            )
+        })
+        .collect::<Vec<_>>()
+        .join(", ")
+}
+
+/// The few lines a caller needs from the evidence index.
+pub fn evidence_summary(index: &Value, assessed: bool) -> Vec<String> {
+    let runs = list(&index["runs"]);
+    let mut lines = vec![format!(
+        "validation evidence: {} runs read, {} unreadable",
+        runs.len(),
+        list(&index["errors"]).len()
+    )];
+    let statuses = |rows: &[Value]| {
+        let mut counts = BTreeMap::<String, usize>::new();
+        for row in rows {
+            *counts.entry(text(&row["status"])).or_default() += 1;
+        }
+        counts
+    };
+    let all: Vec<Value> = runs
+        .iter()
+        .flat_map(|run| list(&run["results"]).iter().cloned())
+        .collect();
+    if !all.is_empty() {
+        lines.push(format!("results: {}", counted(&statuses(&all))));
+    }
+    if let Some(latest) = runs.first() {
+        lines.push(format!(
+            "latest {}: {}{}",
+            text(&latest["run"]),
+            counted(&statuses(list(&latest["results"]))),
+            if assessed {
+                format!(", validity {}", text(&latest["validity"]["status"]))
+            } else {
+                String::new()
+            }
+        ));
+    }
+    if assessed {
+        let mut verdicts = BTreeMap::<String, usize>::new();
+        for row in &all {
+            *verdicts
+                .entry(text(&row["validity"]["status"]))
+                .or_default() += 1;
+        }
+        lines.push(format!("validity of results: {}", counted(&verdicts)));
+    } else {
+        lines.push("validity not assessed: no current baseline given".into());
+    }
+    lines
+}
+
+/// The few lines a caller needs from a tree comparison.
+pub fn comparison_summary(result: &Value) -> Vec<String> {
+    let errors = list(&result["errors"]["source"]).len() + list(&result["errors"]["target"]).len();
+    let mut lines = vec![
+        format!(
+            "environment compare: {}; source {} files, target {} files",
+            text(&result["status"]),
+            result["source_files"],
+            result["target_files"]
+        ),
+        format!(
+            "missing in target {}, extra in target {}, changed {}, read errors {errors}",
+            list(&result["missing_in_target"]).len(),
+            list(&result["extra_in_target"]).len(),
+            list(&result["changed"]).len()
+        ),
+    ];
+    // The folders holding the most differences show where to look first
+    let mut folders = BTreeMap::<String, usize>::new();
+    let paths = list(&result["missing_in_target"])
+        .iter()
+        .chain(list(&result["extra_in_target"]))
+        .map(text)
+        .chain(
+            list(&result["changed"])
+                .iter()
+                .map(|row| text(&row["path"])),
+        );
+    for path in paths {
+        let folder = path.rsplit_once('/').map_or(".", |(folder, _)| folder);
+        *folders.entry(folder.to_owned()).or_default() += 1;
+    }
+    let mut ranked: Vec<(String, usize)> = folders.into_iter().collect();
+    ranked.sort_by(|a, b| b.1.cmp(&a.1).then(a.0.cmp(&b.0)));
+    if !ranked.is_empty() {
+        lines.push(format!(
+            "most differences in {}",
+            ranked
+                .iter()
+                .take(3)
+                .map(|(folder, count)| format!("{folder} ({count})"))
+                .collect::<Vec<_>>()
+                .join(", ")
+        ));
+    }
+    lines
 }

@@ -1,6 +1,6 @@
 # Evidence validity
 
-The workspace-inspection tool compares recorded and current provenance. Its `evidence` command accepts --current-baseline with an explicit JSON file; the Workspace Inspection validation_evidence tool accepts the same current object. No recorded command is executed and no source/artifact path is opened by the comparison.
+The workspace-inspection tool compares recorded and current provenance. Its `evidence` command accepts --current-baseline with an explicit JSON file; the Workspace Inspection validation_evidence tool accepts the same current object. The tool returns a summary, one row per run and up to 40 results that did not pass or are no longer current; the complete index is the `report.json` it names. A comparison whose `status` is `empty` compared no file and confirms nothing. No recorded command is executed and no source/artifact path is opened by the comparison.
 
 Provenance fields are source_revision, source_diff_sha256, source_files (relative input path to SHA-256), artifact_sha256 and covered_paths. Current input supplies the same actual observed identities plus affected_paths. Keep timestamps separately as observation time, not freshness proof. Include relevant untracked inputs in the supplied source digest/hash map; a tracked Git diff alone cannot describe them.
 

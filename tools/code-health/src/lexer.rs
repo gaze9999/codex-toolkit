@@ -32,6 +32,8 @@ pub struct Token<'a> {
     pub text: &'a str,
     pub line: usize,
     pub end_line: usize,
+    /// 1-based position on `line`, counted in UTF-16 units as language servers do.
+    pub column: usize,
 }
 
 impl<'a> Token<'a> {
@@ -68,6 +70,40 @@ fn quoted_end(bytes: &[u8], start: usize) -> usize {
         index += 1;
     }
     bytes.len()
+}
+
+/// The `${...}` expression bodies of one template literal token, outermost level only.
+pub fn interpolations(template: &str) -> Vec<&str> {
+    let bytes = template.as_bytes();
+    let mut found = Vec::new();
+    let mut index = 1;
+    while index < bytes.len() {
+        match bytes[index] {
+            b'\\' => index += 2,
+            b'$' if bytes.get(index + 1) == Some(&b'{') => {
+                let start = index + 2;
+                let mut braces = 1usize;
+                index = start;
+                while index < bytes.len() && braces > 0 {
+                    match bytes[index] {
+                        b'\\' => index += 1,
+                        b'`' => index = template_end(bytes, index, 1) - 1,
+                        b'\'' | b'"' => index = quoted_end(bytes, index) - 1,
+                        b'{' => braces += 1,
+                        b'}' => braces -= 1,
+                        _ => {}
+                    }
+                    index += 1;
+                }
+                let end = if braces == 0 { index - 1 } else { bytes.len() };
+                if let Some(body) = template.get(start..end.min(bytes.len())) {
+                    found.push(body);
+                }
+            }
+            _ => index += 1,
+        }
+    }
+    found
 }
 
 fn template_end(bytes: &[u8], start: usize, depth: usize) -> usize {
@@ -127,6 +163,12 @@ pub fn tokenize(source: &str, language: Language) -> Vec<Token<'_>> {
     let mut tokens: Vec<Token> = Vec::new();
     let mut index = 0;
     let mut line = 1;
+    // UTF-16 units already consumed on the current line
+    let mut units = 0;
+    let advance = |units: &mut usize, text: &str| {
+        let tail = text.rfind('\n').map(|at| &text[at + 1..]);
+        *units = tail.map_or(*units, |_| 0) + tail.unwrap_or(text).encode_utf16().count();
+    };
     let mut tag = false;
     let bytes = source.as_bytes();
     while index < bytes.len() {
@@ -134,6 +176,7 @@ pub fn tokenize(source: &str, language: Language) -> Vec<Token<'_>> {
         let c = rest.chars().next().unwrap();
         if c.is_whitespace() || c == '\u{feff}' {
             line += usize::from(c == '\n');
+            advance(&mut units, &rest[..c.len_utf8()]);
             index += c.len_utf8();
             continue;
         }
@@ -153,6 +196,7 @@ pub fn tokenize(source: &str, language: Language) -> Vec<Token<'_>> {
                 .iter()
                 .filter(|&&b| b == b'\n')
                 .count();
+            advance(&mut units, &rest[..length]);
             index += length;
             continue;
         }
@@ -208,7 +252,9 @@ pub fn tokenize(source: &str, language: Language) -> Vec<Token<'_>> {
             text: content,
             line,
             end_line,
+            column: units + 1,
         });
+        advance(&mut units, content);
         line = end_line;
         index = end;
     }

@@ -1,9 +1,12 @@
-use code_health::{scan, Check, Options, RetainedRange};
+use code_health::{markdown, report_data, scan, summary, Check, Options, RetainedRange};
+use report_html::output::{write, Emit, Rendered};
 use serde_json::{json, Value};
 use std::io::{self, BufRead, Read, Write};
+use std::path::Path;
 use std::path::PathBuf;
 
-const MESSAGE_LIMIT: u64 = 256 * 1024;
+// Large enough for 5000 evidence items with their locations
+const MESSAGE_LIMIT: u64 = 8 * 1024 * 1024;
 
 fn schema() -> Value {
     let path = json!({"type":"string","minLength":1});
@@ -16,8 +19,8 @@ fn schema() -> Value {
         "note":{"type":"string"},"locations":{"type":"array","maxItems":50,"items":location}}});
     let evidence = json!({"type":"object","description":"Semantic evidence (schema code-health-evidence/1) merged into candidates by id",
         "required":["schema","items"],"properties":{"schema":{"const":"code-health-evidence/1"},"root":path,"items":{"type":"array","maxItems":5000,"items":item}}});
-    json!({"name":"code_health","description":"Read-only syntax-level code maintainability scan of an approved local root. Returns candidates with stable ids, retained scopes and areas requiring manual review; optional evidence attaches semantic checks to candidates by id.",
-        "annotations":{"readOnlyHint":true,"destructiveHint":false,"idempotentHint":true,"openWorldHint":false},
+    json!({"name":"code_health","description":"Syntax-level code maintainability scan of an approved local root; the project is only read. Returns a short summary, counts and the first 40 unused candidates with stable ids and positions, and writes the full report (report.md, report.json) to a new folder in the system temporary directory. Read the JSON report for remaining candidates; narrow checks or root only when appropriate for the project; optional evidence attaches semantic checks to candidates by id.",
+        "annotations":{"readOnlyHint":false,"destructiveHint":false,"idempotentHint":false,"openWorldHint":false},
         "inputSchema":{"type":"object","additionalProperties":false,"required":["root"],"properties":{
             "root":path,"entries":paths,"retained_files":paths,"marker_patterns":paths,
             "checks":{"type":"array","items":{"enum":["unused","duplicates","complexity"]},"minItems":1,"maxItems":3},
@@ -131,6 +134,76 @@ fn execute(params: &Value, roots: &[PathBuf]) -> Result<Value, String> {
     scan(&options)
 }
 
+/// Candidates returned inline; the complete lists are in the report files.
+const INLINE_CANDIDATES: usize = 40;
+
+/// Writes the full report to the system temporary directory and returns the short form: summary,
+/// report paths, counts and the first candidates with their IDs and positions.
+fn compact(report: Value) -> Result<(Value, String), String> {
+    let root = report["root"].as_str().unwrap_or("").to_owned();
+    let rendered = Rendered {
+        summary: summary(&report),
+        page: report_data(&report),
+        markdown: Some(markdown(&report)),
+        notes: Vec::new(),
+        json: report,
+    };
+    let written = write(
+        "code-health",
+        &[Path::new(&root)],
+        &Emit {
+            formats: vec!["md", "json"],
+            out: None,
+            style_dir: None,
+        },
+        &rendered,
+    )?;
+    let report = &rendered.json;
+    let count = |key: &str| report[key].as_array().map(Vec::len);
+    let unused = report["unused"].as_array().map_or(&[][..], Vec::as_slice);
+    let candidates: Vec<Value> = unused
+        .iter()
+        .take(INLINE_CANDIDATES)
+        .map(|row| {
+            json!({"id":row["id"],"kind":row["kind"],"path":row["path"],"line":row["line"],"column":row["column"],
+                "name":row["name"],"semantic":row.get("semantic")})
+        })
+        .collect();
+    // Review items that name a symbol can be settled by a reference query, so they come inline too
+    let review = report["needs_review"]
+        .as_array()
+        .map_or(&[][..], Vec::as_slice);
+    let positioned: Vec<&Value> = review
+        .iter()
+        .filter(|row| row.get("column").is_some())
+        .collect();
+    let review_inline: Vec<Value> = positioned
+        .iter()
+        .take(INLINE_CANDIDATES)
+        .map(|row| {
+            json!({"id":row["id"],"path":row["path"],"line":row["line"],"column":row["column"],
+                "symbol":row["symbol"],"reason":row["reason"],"semantic":row.get("semantic")})
+        })
+        .collect();
+    let mut text = rendered.summary.join("\n");
+    for file in &written.files {
+        text.push_str(&format!("\nreport: {}", file.display()));
+    }
+    let result = json!({
+        "summary":rendered.summary,
+        "reports":{"md":written.files[0],"json":written.files[1]},
+        "root":report["root"],"files_scanned":report["files_scanned"],"partial":report["partial"],
+        "counts":{"unused":count("unused"),"duplicates":count("duplicates"),"complexity":count("complexity"),
+            "needs_review":count("needs_review"),"retained":count("retained")},
+        "candidates":candidates,
+        "candidates_omitted":unused.len().saturating_sub(INLINE_CANDIDATES),
+        "review":review_inline,
+        "review_omitted":review.len().saturating_sub(review_inline.len()),
+        "semantic":report.get("semantic")
+    });
+    Ok((result, text))
+}
+
 fn error(id: &Value, code: i32, message: &str) -> Value {
     json!({"jsonrpc":"2.0","id":id,"error":{"code":code,"message":message}})
 }
@@ -156,9 +229,12 @@ fn reply(message: &str, roots: &[PathBuf]) -> Option<Value> {
         "ping" => json!({}),
         "tools/list" => json!({"tools":[schema()]}),
         "tools/call" => match execute(params, roots) {
-            Ok(report) => {
-                json!({"structuredContent":report,"content":[{"type":"text","text":report.to_string()}],"isError":false})
-            }
+            Ok(report) => match compact(report) {
+                Ok((result, text)) => {
+                    json!({"structuredContent":result,"content":[{"type":"text","text":text}],"isError":false})
+                }
+                Err(message) => json!({"content":[{"type":"text","text":message}],"isError":true}),
+            },
             Err(message) => json!({"content":[{"type":"text","text":message}],"isError":true}),
         },
         _ => return Some(error(id, -32601, "Method not found")),
@@ -194,10 +270,21 @@ pub fn serve(roots: Vec<PathBuf>) -> Result<(), String> {
         if size == 0 {
             return Ok(());
         }
-        if size as u64 > MESSAGE_LIMIT {
-            return Err("MCP message size limit exceeded".into());
-        }
-        if let Some(response) = reply(&message, &roots) {
+        let response = if size as u64 > MESSAGE_LIMIT {
+            // Drop the rest of the oversized line, answer and keep serving
+            if !message.ends_with('\n') {
+                let mut rest = Vec::new();
+                input
+                    .read_until(b'\n', &mut rest)
+                    .map_err(|e| e.to_string())?;
+            }
+            Some(error(&Value::Null, -32600, "Message exceeds 8 MiB"))
+        } else if message.trim().is_empty() {
+            None
+        } else {
+            reply(&message, &roots)
+        };
+        if let Some(response) = response {
             writeln!(output, "{response}")
                 .and_then(|_| output.flush())
                 .map_err(|e| e.to_string())?;

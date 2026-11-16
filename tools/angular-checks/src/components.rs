@@ -350,34 +350,24 @@ pub fn run(options: &Options) -> Result<(Rendered, i32), String> {
         results.retain(|item| changed(item, &names));
     }
     let total = results.len();
+    // Totals describe every match; the report lists only the rows within the limit
+    let all_projects: BTreeSet<String> = results
+        .iter()
+        .filter_map(|item| item["project"].as_str().map(str::to_owned))
+        .collect();
+    let all_standalone = results
+        .iter()
+        .filter(|item| item["standalone"] == true)
+        .count();
+    let all_custom = results
+        .iter()
+        .filter(|item| !strings(&item["custom_elements"]).is_empty())
+        .count();
     let shown: Vec<Value> = if options.limit == 0 {
         results
     } else {
         results.into_iter().take(options.limit).collect()
     };
-    let dash = |value: &str| {
-        if value.is_empty() {
-            "-".to_owned()
-        } else {
-            value.to_owned()
-        }
-    };
-    let mut text = String::new();
-    for item in &shown {
-        text.push_str(&format!(
-            "[{}] {}\n  selector: {}\n  custom-element: {}\n  source: {}\n  project-relative: {}\n  template: {}\n  styles: {}\n  standalone: {}\n  description: {}\n",
-            item["project"].as_str().unwrap_or(""),
-            item["class_name"].as_str().unwrap_or(""),
-            dash(item["selector"].as_str().unwrap_or("")),
-            dash(&strings(&item["custom_elements"]).join(", ")),
-            item["source"].as_str().unwrap_or(""),
-            item["project_relative"].as_str().unwrap_or(""),
-            dash(item["template"].as_str().unwrap_or("")),
-            dash(&strings(&item["styles"]).join(", ")),
-            if item["standalone"] == true { "yes" } else { "no" },
-            item["description"].as_str().unwrap_or(""),
-        ));
-    }
     let mut notes: Vec<String> = warnings
         .iter()
         .map(|warning| format!("warning: {warning}"))
@@ -438,10 +428,16 @@ pub fn run(options: &Options) -> Result<(Rendered, i32), String> {
     });
     Ok((
         Rendered {
+            summary: vec![format!(
+                "components: {total} found in {} projects, {} in the report; standalone {all_standalone}, custom elements {all_custom}, warnings {}",
+                all_projects.len(),
+                shown.len(),
+                warnings.len()
+            )],
             json: json!({"workspace":root.to_string_lossy(),"count":total,"components":shown,"warnings":warnings}),
-            text,
             notes,
             page,
+            markdown: None,
         },
         if total > 0 { 0 } else { 1 },
     ))

@@ -35,6 +35,18 @@ impl Drop for Fixture {
     }
 }
 
+/// Paths named on the `report:` lines a command prints after its summary.
+fn report_files(stdout: &[u8]) -> Vec<PathBuf> {
+    String::from_utf8_lossy(stdout)
+        .lines()
+        .filter_map(|line| line.strip_prefix("report: "))
+        .map(PathBuf::from)
+        .collect()
+}
+fn read_json(path: &Path) -> Value {
+    serde_json::from_slice(&fs::read(path).unwrap()).unwrap()
+}
+
 fn rows<'a>(report: &'a Value, section: &str) -> &'a Vec<Value> {
     report[section].as_array().unwrap()
 }
@@ -235,7 +247,7 @@ fn cli_and_stdio_share_the_same_scan_and_reject_outside_roots() {
     let cli = Command::new(executable)
         .args(["scan", "--root"])
         .arg(&fixture.0)
-        .args(["--checks", "complexity"])
+        .args(["--checks", "complexity", "--format", "json"])
         .output()
         .unwrap();
     assert!(
@@ -243,7 +255,13 @@ fn cli_and_stdio_share_the_same_scan_and_reject_outside_roots() {
         "{}",
         String::from_utf8_lossy(&cli.stderr)
     );
-    let cli: Value = serde_json::from_slice(&cli.stdout).unwrap();
+    // The command prints a short summary; the complete result is the report file
+    let printed = String::from_utf8_lossy(&cli.stdout).into_owned();
+    assert!(printed.starts_with("code-health: 1 files, coverage complete\n"));
+    assert!(printed.lines().count() <= 8);
+    let files = report_files(&cli.stdout);
+    let cli = read_json(&files[0]);
+    fs::remove_dir_all(files[0].parent().unwrap()).unwrap();
     let mut process = Command::new(executable)
         .args(["mcp", "--allow-root"])
         .arg(&fixture.0)
@@ -277,9 +295,24 @@ fn cli_and_stdio_share_the_same_scan_and_reject_outside_roots() {
         .collect();
     assert_eq!(
         responses[1]["result"]["tools"][0]["annotations"]["readOnlyHint"],
-        true
+        false
     );
-    assert_eq!(responses[2]["result"]["structuredContent"], cli);
+    // The tool answers with the same summary and writes the same full result to a report file
+    let short = &responses[2]["result"]["structuredContent"];
+    let text = responses[2]["result"]["content"][0]["text"]
+        .as_str()
+        .unwrap();
+    assert!(
+        text.starts_with("code-health: 1 files, coverage complete\n")
+            && text.contains("\nreport: ")
+    );
+    assert_eq!(short["counts"]["complexity"], 1);
+    assert_eq!(short["candidates"], json!([]));
+    let saved = PathBuf::from(short["reports"]["json"].as_str().unwrap());
+    assert_eq!(read_json(&saved), cli);
+    assert!(PathBuf::from(short["reports"]["md"].as_str().unwrap()).is_file());
+    assert!(!saved.starts_with(&fixture.0));
+    fs::remove_dir_all(saved.parent().unwrap()).unwrap();
     assert_eq!(responses[3]["result"]["isError"], true);
     let mut invalid = fixture.options();
     invalid.checks = [Check::Unused].into();
@@ -300,30 +333,30 @@ fn writes_report_formats_with_builtin_or_packaged_styles() {
         }
         command.output().unwrap()
     };
-    let result = |output: &std::process::Output| -> Value {
+    let names = |output: &std::process::Output| -> Vec<String> {
         assert!(
             output.status.success(),
             "{}",
             String::from_utf8_lossy(&output.stderr)
         );
-        serde_json::from_slice(&output.stdout).unwrap()
+        report_files(&output.stdout)
+            .iter()
+            .map(|file| file.file_name().unwrap().to_string_lossy().into_owned())
+            .collect()
     };
     // All formats land in one new folder; the page uses the built-in styles and escapes source text
     let all = outputs.0.join("all");
-    let summary = result(&run(&["--format", "all"], Some(&all)));
     assert_eq!(
-        summary["written"],
-        json!(["report.json", "report.md", "report.html"])
+        names(&run(&["--format", "all"], Some(&all))),
+        ["report.json", "report.md", "report.html"]
     );
-    assert_eq!(summary["style"], "內建樣式");
-    let saved: Value = serde_json::from_slice(&fs::read(all.join("report.json")).unwrap()).unwrap();
-    assert_eq!(saved["schema_version"], 1);
+    assert_eq!(read_json(&all.join("report.json"))["schema_version"], 1);
     assert!(fs::read_to_string(all.join("report.md"))
         .unwrap()
         .starts_with("# Code health"));
     let page = fs::read_to_string(all.join("report.html")).unwrap();
     assert!(page.contains("wb-workbench") && page.contains("<code>main.ts</code>"));
-    assert!(!page.contains("<b>&</b>"));
+    assert!(page.contains("內建樣式") && !page.contains("<b>&</b>"));
     assert_eq!(run(&["--format", "all"], Some(&all)).status.code(), Some(2));
     // An appearance package replaces the built-in styles
     let package = outputs.0.join("package");
@@ -343,15 +376,15 @@ fn writes_report_formats_with_builtin_or_packaged_styles() {
     fs::write(package.join("styles.css"), css).unwrap();
     let styled = outputs.0.join("styled");
     let package_arg = package.to_string_lossy().into_owned();
-    let summary = result(&run(
-        &["--format", "html", "--style-dir", &package_arg],
-        Some(&styled),
-    ));
-    assert!(summary["style"]
-        .as_str()
-        .unwrap()
-        .starts_with("外觀套件 9.9.9 (SHA-256 "));
+    assert_eq!(
+        names(&run(
+            &["--format", "html", "--style-dir", &package_arg],
+            Some(&styled)
+        )),
+        ["report.html"]
+    );
     let page = fs::read_to_string(styled.join("report.html")).unwrap();
+    assert!(page.contains("外觀套件 9.9.9 (SHA-256 "));
     assert!(page.contains("--packaged:1") && !page.contains("--wb-page-width:1180px"));
     fs::write(package.join("styles.css"), "</style><script>").unwrap();
     assert_eq!(
@@ -363,21 +396,26 @@ fn writes_report_formats_with_builtin_or_packaged_styles() {
         .code(),
         Some(2)
     );
-    // Reports stay outside the scanned root; without --out they go to the system temporary directory
+    // Reports stay outside the scanned root
     assert_eq!(
         run(&["--format", "html"], Some(&fixture.0.join("inside")))
             .status
             .code(),
         Some(2)
     );
-    let summary = result(&run(&["--format", "json,html"], None));
-    let out = PathBuf::from(summary["out"].as_str().unwrap());
-    assert!(out.starts_with(fs::canonicalize(std::env::temp_dir()).unwrap()));
-    assert!(out.join("report.html").is_file() && out.join("report.json").is_file());
-    fs::remove_dir_all(out).unwrap();
-    // One text format without --out still prints the report
-    let printed = run(&["--format", "markdown"], None);
-    assert!(String::from_utf8_lossy(&printed.stdout).starts_with("# Code health"));
+    // Without options the run prints a short summary and writes only report.md to a temporary folder
+    let default = run(&[], None);
+    assert_eq!(names(&default), ["report.md"]);
+    let printed = String::from_utf8_lossy(&default.stdout).into_owned();
+    assert!(printed.starts_with("code-health: 1 files, coverage "));
+    assert!(printed.contains("\nneeds_review ") && printed.lines().count() <= 8);
+    assert!(!printed.contains('{') && !printed.contains("| "));
+    let file = &report_files(&default.stdout)[0];
+    assert!(file.starts_with(fs::canonicalize(std::env::temp_dir()).unwrap()));
+    assert!(fs::read_to_string(file)
+        .unwrap()
+        .starts_with("# Code health"));
+    fs::remove_dir_all(file.parent().unwrap()).unwrap();
 }
 
 #[test]
@@ -473,4 +511,143 @@ fn candidates_carry_stable_ids_and_merge_semantic_evidence() {
         options.evidence = Some(bad.clone());
         assert!(scan(&options).is_err(), "{bad} was accepted");
     }
+}
+
+#[test]
+fn mcp_answers_an_oversized_message_and_keeps_serving() {
+    let fixture = Fixture::new();
+    fixture.put("main.ts", "export const count = () => 1;");
+    let run = |messages: &[String]| -> Vec<Value> {
+        let mut process = Command::new(env!("CARGO_BIN_EXE_code-health"))
+            .args(["mcp", "--allow-root"])
+            .arg(&fixture.0)
+            .stdin(Stdio::piped())
+            .stdout(Stdio::piped())
+            .spawn()
+            .unwrap();
+        let mut input = process.stdin.take().unwrap();
+        for message in messages {
+            writeln!(input, "{message}").unwrap();
+        }
+        drop(input);
+        let output = process.wait_with_output().unwrap();
+        assert!(output.status.success());
+        String::from_utf8(output.stdout)
+            .unwrap()
+            .lines()
+            .map(|line| serde_json::from_str(line).unwrap())
+            .collect()
+    };
+    // 5000 evidence items fit in one message
+    let items: Vec<Value> = (0..5000)
+        .map(|i| json!({"id":format!("export:src/file{i}.ts#name{i}"),"status":"confirmed","provider":"typescript-language-server"}))
+        .collect();
+    let call = request(
+        1,
+        "tools/call",
+        json!({"name":"code_health","arguments":{"root":fixture.0,"checks":["unused"],
+            "evidence":{"schema":"code-health-evidence/1","items":items}}}),
+    );
+    assert!(call.len() > 256 * 1024);
+    let replies = run(&[call, request(2, "ping", json!({}))]);
+    assert_eq!(replies.len(), 2);
+    assert_eq!(replies[0]["result"]["isError"], false);
+    assert_eq!(
+        replies[0]["result"]["structuredContent"]["semantic"]["unmatched"]
+            .as_array()
+            .unwrap()
+            .len(),
+        5000
+    );
+    // A message over the limit gets an error and the next request still works
+    let oversized = format!("{{\"padding\":\"{}\"}}", "x".repeat(9 * 1024 * 1024));
+    let replies = run(&[oversized, request(3, "ping", json!({}))]);
+    assert_eq!(replies.len(), 2);
+    assert_eq!(replies[0]["error"]["code"], -32600);
+    assert_eq!(replies[1]["id"], 3);
+}
+
+#[test]
+fn scan_wide_notes_and_repeated_options_are_explicit() {
+    let fixture = Fixture::new();
+    fixture.put("lonely.ts", "export const value = 1;");
+    let mut options = fixture.options();
+    options.checks = [Check::Unused].into();
+    let report = scan(&options).unwrap();
+    // Without a resolved entry point the note covers the whole scan
+    assert!(rows(&report, "needs_review")
+        .iter()
+        .any(|row| row["id"] == "review:scan"));
+    let cli = |args: &[&str]| {
+        Command::new(env!("CARGO_BIN_EXE_code-health"))
+            .args(["scan", "--root"])
+            .arg(&fixture.0)
+            .args(args)
+            .output()
+            .unwrap()
+    };
+    let twice = cli(&["--format", "json", "--format", "md"]);
+    assert_eq!(twice.status.code(), Some(2));
+    assert!(String::from_utf8_lossy(&twice.stderr).contains("more than once"));
+    assert!(cli(&[
+        "--checks",
+        "unused",
+        "--retain-file",
+        "lonely.ts",
+        "--retain-file",
+        "lonely.ts"
+    ])
+    .status
+    .success());
+}
+
+#[test]
+fn candidates_point_at_the_symbol_name_for_position_queries() {
+    let fixture = Fixture::new();
+    fixture.put("main.ts", "import { used } from './lib';\nused();\n");
+    fixture.put(
+        "lib.ts",
+        "export const used = () => 1;\n  export   function   spare測試(a: number) { return a; }\nconst inner = 2;\nexport { inner as renamed };\nexport class Svc {\n  private cache = 1;\n    helper() { return 1; }\n}\nnew Svc();\n/* 註解 */ export const after = 1;\n",
+    );
+    let mut options = fixture.options();
+    options.entries = vec!["main.ts".into()];
+    options.checks = [Check::Unused].into();
+    let report = scan(&options).unwrap();
+    let position = |id: &str| {
+        let row = rows(&report, "unused")
+            .iter()
+            .find(|row| row["id"] == id)
+            .unwrap_or_else(|| panic!("{id} missing"));
+        (
+            row["line"].as_u64().unwrap(),
+            row["column"].as_u64().unwrap(),
+        )
+    };
+    // 1-based line and column of the declared name, counted in UTF-16 units
+    assert_eq!(position("export:lib.ts#spare測試"), (2, 23));
+    assert_eq!(position("export:lib.ts#renamed"), (4, 10));
+    assert_eq!(position("export:lib.ts#Svc"), (5, 14));
+    assert_eq!(position("member:lib.ts#Svc.cache"), (6, 11));
+    assert_eq!(position("member:lib.ts#Svc.helper"), (7, 5));
+    assert_eq!(position("export:lib.ts#after"), (10, 23));
+}
+
+#[test]
+fn members_used_inside_template_literal_interpolations_are_not_candidates() {
+    let fixture = Fixture::new();
+    fixture.put(
+        "main.ts",
+        "export class Svc {\n  private static next = 0;\n  private readonly id = 1;\n  private spare = 2;\n  private escape(value: string) { return value; }\n  private nested = 3;\n  readonly name = `a-${Svc.next++}-${this.id}`;\n  find(key: string) { return `#${this.escape(key)} ${[1].map(n => `${n}${this.nested}`).join('}')}`; }\n  text = 'not ${this.spare}';\n}\nnew Svc().find('x');\n",
+    );
+    let mut options = fixture.options();
+    options.entries = vec!["main.ts".into()];
+    options.checks = [Check::Unused].into();
+    let report = scan(&options).unwrap();
+    let members: Vec<&str> = rows(&report, "unused")
+        .iter()
+        .filter(|row| row["kind"] == "member")
+        .map(|row| row["name"].as_str().unwrap())
+        .collect();
+    // `name` and `text` are public fields nothing reads; the interpolated members are in use
+    assert_eq!(members, ["spare", "name", "text"]);
 }

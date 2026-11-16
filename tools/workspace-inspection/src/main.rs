@@ -1,4 +1,4 @@
-use report_html::output::{emit, parse_formats, Emit, Rendered};
+use report_html::output::{emit, parse_formats, Emit, Rendered, DEFAULT_FORMATS};
 use serde_json::Value;
 use std::fs;
 use std::path::PathBuf;
@@ -13,9 +13,9 @@ workspace-inspection compare --source DIR --target DIR [--include GLOB] [--exclu
 workspace-inspection mcp --read-root DIR [--read-root DIR]
 
 evidence and compare accept --format json,md,html|all, --out DIR and --style-dir DIR.
-JSON prints to standard output; html, several formats or --out write report files into a new
-folder outside the inspected folders. --include and --exclude repeat.
-Exit codes: 0 clear, 1 unreadable runs (evidence) or differences (compare), 2 invalid input.";
+Each run prints a short summary and writes report.md (or the selected formats) into a new folder
+outside the inspected folders; --out names that folder. --include and --exclude repeat.
+Exit codes: 0 clear, 1 unreadable runs (evidence), differences or no compared file (compare), 2 invalid input.";
 
 fn run(args: &[String]) -> Result<i32, String> {
     let Some((command, rest)) = args.split_first() else {
@@ -59,6 +59,10 @@ fn run(args: &[String]) -> Result<i32, String> {
         if bool_flags.contains(&arg.as_str()) {
             flags.push(arg);
         } else if value_flags.contains(&arg.as_str()) || common.contains(&arg.as_str()) {
+            let repeatable = ["--include", "--exclude", "--read-root"].contains(&arg.as_str());
+            if !repeatable && values.iter().any(|(key, _)| key == arg) {
+                return Err(format!("{arg} is given more than once"));
+            }
             values.push((arg, iter.next().ok_or(format!("{arg} needs a value"))?));
         } else {
             return Err(format!("Unknown option or argument {arg}"));
@@ -86,18 +90,17 @@ fn run(args: &[String]) -> Result<i32, String> {
     let options = Emit {
         formats: match one("--format") {
             Some(list) => parse_formats(list)?,
-            None => vec!["json"],
+            None => DEFAULT_FORMATS.to_vec(),
         },
         out: one("--out").map(PathBuf::from),
         style_dir: one("--style-dir").map(PathBuf::from),
     };
-    let rendered = |json: Value, page: Value| -> Result<Rendered, String> {
-        Ok(Rendered {
-            text: serde_json::to_string_pretty(&json).map_err(|e| e.to_string())? + "\n",
-            json,
-            notes: Vec::new(),
-            page,
-        })
+    let rendered = |json: Value, page: Value, summary: Vec<String>| Rendered {
+        json,
+        summary,
+        notes: Vec::new(),
+        page,
+        markdown: None,
     };
     if command == "evidence" {
         let root = one("--root").map_or_else(|| PathBuf::from("."), PathBuf::from);
@@ -118,11 +121,12 @@ fn run(args: &[String]) -> Result<i32, String> {
             0
         };
         let page = pages::evidence(&index, current.is_some());
+        let summary = pages::evidence_summary(&index, current.is_some());
         emit(
             "validation-evidence",
             &[&root],
             &options,
-            &rendered(index, page)?,
+            &rendered(index, page, summary),
         )?;
         return Ok(code);
     }
@@ -143,11 +147,12 @@ fn run(args: &[String]) -> Result<i32, String> {
     )?;
     let code = if result["status"] == "match" { 0 } else { 1 };
     let page = pages::comparison(&result);
+    let summary = pages::comparison_summary(&result);
     emit(
         "environment-compare",
         &[&source, &target],
         &options,
-        &rendered(result, page)?,
+        &rendered(result, page, summary),
     )?;
     Ok(code)
 }

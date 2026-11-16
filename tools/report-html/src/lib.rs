@@ -285,17 +285,25 @@ pub fn render(report: &Value, style: &Style) -> Result<String, String> {
     ))
 }
 
-/// Creates a new report folder: the given path, or `<prefix>-<time>-<pid>` under the system
+/// Creates a new report folder: the given path, or `<prefix>-<time>-<pid>-<sequence>` under the system
 /// temporary directory. The folder must be new and outside every `scanned` root, so a read-only
 /// tool never writes into a tree it inspects. Returns the canonical path.
 pub fn new_folder(out: Option<&Path>, scanned: &[&Path], prefix: &str) -> Result<PathBuf, String> {
+    if prefix.is_empty() || prefix.contains(['/', '\\']) || matches!(prefix, "." | "..") {
+        return Err("Report prefix must be a filename component".into());
+    }
+    static NEXT_REPORT: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(0);
     let out = match out {
         Some(path) => std::path::absolute(path).map_err(|e| e.to_string())?,
         None => {
             let stamp = std::time::SystemTime::now()
                 .duration_since(std::time::UNIX_EPOCH)
-                .map_or(0, |d| d.as_secs());
-            std::env::temp_dir().join(format!("{prefix}-{stamp}-{}", std::process::id()))
+                .map_or(0, |d| d.as_nanos());
+            let sequence = NEXT_REPORT.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+            std::env::temp_dir().join(format!(
+                "{prefix}-{stamp}-{}-{sequence}",
+                std::process::id()
+            ))
         }
     };
     if out.exists() {

@@ -13,14 +13,26 @@ code-health scan --root /path/to/project --evidence /path/to/evidence.json --for
 code-health mcp --allow-root /path/to/project
 ```
 
-`scan` 預設將 JSON 印到標準輸出, `--format` 可用 `json`、`md` (或 `markdown`)、`html`, 以逗號分隔, `all` 代表三種
+`--entry`、`--marker-pattern`、`--retain-file`、`--retain-range` 可重複, 其餘選項重複指定時回報錯誤
 
-| 用法 | 輸出位置 |
+每次執行在標準輸出印出數行摘要, 最後是報告檔的路徑, 完整結果只寫入報告檔, 結果再多摘要長度也不變
+
+| 選項 | 內容 |
 | --- | --- |
-| 單一 `json` 或 `md`, 未指定 `--out` | 標準輸出 |
-| 包含 `html`、多種格式或指定 `--out` | 資料夾內的 `report.json`、`report.md`、`report.html`, 標準輸出改為摘要 JSON, `out` 欄位是實際路徑 |
+| 省略 `--format` | 只寫入 `report.md` |
+| `--format json,md,html` | 寫入指定的格式, 以逗號分隔, `md` 可寫成 `markdown`, `all` 代表三種 |
+| `--out DIR` | 報告資料夾, 必須尚未存在且位於受檢查的目錄之外, 省略時使用系統暫存目錄下的新資料夾 |
 
-`--out` 必須是尚未存在且位於掃描根目錄之外的資料夾, 省略時寫到系統暫存目錄下的 `code-health-<時間>-<PID>`
+```text
+code-health: 400 files, coverage partial
+unused 1500 (export 1100, member 400); most in src/feat/f0.ts (11), src/feat/f1.ts (11), src/feat/f2.ts (11)
+duplicates 1500 regions in 320 file pairs
+complexity: 1500 functions; most branches 14 in src/feat/f3.ts calc3_0 (9 lines)
+needs_review 2
+report: /tmp/code-health-1794822129-73967/report.md
+```
+
+需要逐筆資料時指定 `--format json` 後讀取 `report.json`, 並以 `--checks` 或較小的 `--root` 縮小範圍
 
 `report.html` 是單檔離線頁面, 由共用的 [report-html](../report-html/README.md) 產生, 含結果筆數、分頁明細與關鍵字搜尋, 跟隨系統深淺色, 預設使用內建樣式
 `--style-dir` 指向外觀套件資料夾時改用套件的樣式: 資料夾需有 `manifest.json` (`format` 為 `static`, `entry.styles` 為同資料夾內的樣式檔名) 與該樣式檔, 頁面標記採用 Workbench UI 靜態版的 class 與 `--wb-*` 變數名稱, 可直接套用其靜態樣式包
@@ -48,7 +60,9 @@ code-health mcp --allow-root /path/to/project
 | 檔案 | `file:<路徑>` | `file:src/orphan.ts` |
 | 匯出 | `export:<路徑>#<名稱>` | `export:src/lib.ts#spare` |
 | 類別成員 | `member:<路徑>#<類別>.<名稱>` | `member:src/a.component.ts#AComponent.save` |
-| 需人工確認 | `review:<路徑>#<符號>`, 沒有符號時為 `review:<路徑>@<行>` | `review:src/b.ts#handler` |
+| 需人工確認 | `review:<路徑>#<符號>`, 沒有符號時為 `review:<路徑>@<行>`, 針對整次掃描的說明為 `review:scan` | `review:src/b.ts#handler` |
+
+匯出與類別成員的候選另有 `line` 與 `column`, 指向宣告名稱的位置, 行與欄都從 1 開始, 欄以 UTF-16 單位計算, 可直接作為語言伺服器查詢參照的位置
 
 掃描本身維持語法層級, 語言伺服器或審查者依 `id` 核對後, 可用佐證檔把結果合併回報告:
 
@@ -75,10 +89,25 @@ code-health mcp --allow-root /path/to/project
 合併後每筆候選多一個 `semantic` 物件, 報告多一個 `semantic` 摘要: 各狀態筆數、沒有佐證的 `unchecked` 筆數, 以及找不到對應候選的 `unmatched` ID (通常代表佐證來自另一次掃描或程式碼已變更)
 佐證只附加在候選旁, 候選清單與其他檢查結果維持原樣, Markdown 與 HTML 在有佐證時多一欄語意確認
 語意狀態是提供者回報, `semantic.freshness` 固定為 `unverified`, 候選 ID 相同不代表程式碼未變, 採取動作前需重新確認佐證對應目前來源
-CLI 使用 `--evidence FILE`, 上限 16 MiB 與 5000 筆
+CLI 使用 `--evidence FILE`, 上限 16 MiB 與 5000 筆, MCP 單一訊息上限 8 MiB, 足以容納 5000 筆佐證, 超過時回傳錯誤並繼續服務
 
 ## Stdio MCP
 
 登錄已建置的執行檔, 參數使用 `mcp --allow-root /path/to/project`, 每個 `--allow-root` 對應一個已授權的本機根目錄
 
-唯一的唯讀工具 `code_health` 接受允許範圍內的絕對 `root`, 以及選用的 `entries`、`checks`、`marker_patterns`、`retained_files`、`retained_ranges` (`path`、`start_line`、`end_line`)、`min_tokens` (8 至 1000, 預設 50) 與 `evidence` (內嵌的佐證物件, 格式同上), 結果與 CLI 的 JSON 相同, 參數或根目錄錯誤會回傳 MCP 工具錯誤, CLI 則以狀態碼 2 結束
+工具 `code_health` 只讀取專案, 接受允許範圍內的絕對 `root`, 以及選用的 `entries`、`checks`、`marker_patterns`、`retained_files`、`retained_ranges` (`path`、`start_line`、`end_line`)、`min_tokens` (8 至 1000, 預設 50) 與 `evidence` (內嵌的佐證物件, 格式同上)
+
+回傳內容是精簡的, 完整結果寫入系統暫存目錄的新資料夾:
+
+| 欄位 | 內容 |
+| --- | --- |
+| 文字內容 | 與 CLI 相同的摘要與報告路徑 |
+| `summary`、`reports` | 摘要各行, 以及 `report.md` 與 `report.json` 的路徑 |
+| `counts`、`files_scanned`、`partial` | 各類筆數與涵蓋狀態 |
+| `candidates`、`candidates_omitted` | 前 40 筆未使用候選 (`id`、`kind`、`path`、`line`、`column`、`name`、`semantic`) 與未列出的筆數 |
+| `review`、`review_omitted` | 前 40 筆帶有符號位置的待確認項目與其餘筆數 |
+| `semantic` | 有佐證時的彙總 |
+
+要看其他候選時以 `checks` 或較小的 `root` 縮小範圍, 參數或根目錄錯誤會回傳 MCP 工具錯誤, CLI 則以狀態碼 2 結束
+
+MCP 保持受檢查的專案目錄唯讀, 產生報告的工具會在暫存目錄寫入新檔案, 因此標示 `readOnlyHint: false`、`destructiveHint: false` 與 `idempotentHint: false`

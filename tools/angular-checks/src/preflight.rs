@@ -127,13 +127,29 @@ pub fn run(
                 "columns":[column("text","內容","text")]}
         ]
     });
-    let text = serde_json::to_string_pretty(&result).map_err(|e| e.to_string())? + "\n";
     Ok((
         Rendered {
+            summary: vec![
+                format!(
+                    "generator preflight: {}",
+                    if clear {
+                        "no collision"
+                    } else {
+                        "names already exist"
+                    }
+                ),
+                format!("identifier {identifier:?} in {} files", count("Identifier")),
+                match selector {
+                    Some(selector) => {
+                        format!("selector {selector:?} in {} files", count("Selector"))
+                    }
+                    None => "selector not checked".into(),
+                },
+            ],
             json: result,
-            text,
             notes: Vec::new(),
             page,
+            markdown: None,
         },
         if clear || allow_existing { 0 } else { 1 },
     ))

@@ -15,6 +15,7 @@
 
 - Reconcile the graph with real entry points, test/bootstrap registration, barrel re-exports and external package consumers. Distinguish a same-file reference from an importing consumer.
 - Inspect reads, writes, bindings, inheritance, overrides, callbacks, registration, serialization, computed names and reflective access. Public interfaces can have callers outside the scan root. A write or a spelling match alone is weak evidence.
+- With a language-server entry available, settle import and member use through [semantic evidence](semantic-evidence.md) before reading callers by hand.
 - Apply retained scopes before producing findings. Record dynamic imports, unresolved aliases, decorator registration, reflection and partial coverage as needs-decision cases. Check bindings against the actual component template.
 
 ## Duplicate regions and complexity

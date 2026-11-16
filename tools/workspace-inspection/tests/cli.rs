@@ -35,6 +35,27 @@ impl Drop for Fixture {
     }
 }
 
+/// The full result from the `report.json` a run names; removes that run's folder when it is temporary.
+fn report_json(output: &Output) -> Value {
+    let text = String::from_utf8_lossy(&output.stdout).into_owned();
+    let path = text
+        .lines()
+        .filter_map(|line| line.strip_prefix("report: "))
+        .find(|path| path.ends_with("report.json"))
+        .unwrap_or_else(|| {
+            panic!(
+                "no report.json in {text} {}",
+                String::from_utf8_lossy(&output.stderr)
+            )
+        });
+    let value = serde_json::from_slice(&fs::read(path).unwrap()).unwrap();
+    let folder = std::path::Path::new(path).parent().unwrap();
+    if folder.starts_with(fs::canonicalize(std::env::temp_dir()).unwrap()) {
+        let _ = fs::remove_dir_all(folder);
+    }
+    value
+}
+
 fn cli(args: &[&str]) -> Output {
     Command::new(env!("CARGO_BIN_EXE_workspace-inspection"))
         .args(args)
@@ -238,9 +259,12 @@ fn tree_comparison_reports_differences_and_honors_patterns() {
 #[test]
 fn cli_prints_json_and_writes_reports_outside_the_inspected_folders() {
     let fixture = evidence_fixture();
-    let printed = cli(&["evidence", "--root", &fixture.path("")]);
+    let printed = cli(&["evidence", "--root", &fixture.path(""), "--format", "json"]);
     assert_eq!(printed.status.code(), Some(1));
-    let index: Value = serde_json::from_slice(&printed.stdout).unwrap();
+    // A short summary on standard output, the complete index in the report file
+    let text = String::from_utf8_lossy(&printed.stdout).into_owned();
+    assert!(text.starts_with("validation evidence: 2 runs read, 1 unreadable\nresults: FAIL 1, PASS 1\nlatest run-0002: FAIL 1, PASS 1\nvalidity not assessed: no current baseline given\nreport: "));
+    let index = report_json(&printed);
     assert_eq!(index["runs"].as_array().unwrap().len(), 2);
     let outputs = Fixture::new();
     let report = cli(&[
@@ -280,6 +304,8 @@ fn cli_prints_json_and_writes_reports_outside_the_inspected_folders() {
     let (source, target) = trees();
     let compared = cli(&[
         "compare",
+        "--format",
+        "json",
         "--source",
         &source.path(""),
         "--target",
@@ -288,7 +314,9 @@ fn cli_prints_json_and_writes_reports_outside_the_inspected_folders() {
         "*.ts",
     ]);
     assert_eq!(compared.status.code(), Some(1));
-    let result: Value = serde_json::from_slice(&compared.stdout).unwrap();
+    let text = String::from_utf8_lossy(&compared.stdout).into_owned();
+    assert!(text.starts_with("environment compare: different; source 2 files, target 2 files\nmissing in target 0, extra in target 0, changed 1, read errors 0\nmost differences in . (1)\nreport: "), "{text}");
+    let result = report_json(&compared);
     assert_eq!(result["missing_in_target"], json!([]));
     let matched = cli(&[
         "compare",
@@ -418,7 +446,7 @@ fn mcp_serves_three_read_only_tools_within_read_roots() {
         .as_array()
         .unwrap()
         .iter()
-        .all(|tool| tool["annotations"]["readOnlyHint"] == true));
+        .all(|tool| tool["annotations"]["readOnlyHint"] == (tool["name"] == "workspace_status")));
     assert_eq!(reply(3)["structuredContent"]["read_only"], true);
     assert_eq!(
         reply(3)["structuredContent"]["read_roots"]
@@ -432,6 +460,34 @@ fn mcp_serves_three_read_only_tools_within_read_roots() {
         "run-0003"
     );
     assert_eq!(reply(5)["structuredContent"]["source_files"], 6);
+    // Both tools answer with a summary and write the complete result to report files
+    for id in [4, 5] {
+        let short = &reply(id)["structuredContent"];
+        let text = reply(id)["content"][0]["text"].as_str().unwrap();
+        assert!(
+            text.contains("\nreport: ") && text.lines().count() <= 8,
+            "{text}"
+        );
+        assert_eq!(short["summary"][0], text.lines().next().unwrap());
+        let saved = PathBuf::from(short["reports"]["json"].as_str().unwrap());
+        assert!(
+            saved.is_file() && PathBuf::from(short["reports"]["md"].as_str().unwrap()).is_file()
+        );
+        let full: Value = serde_json::from_slice(&fs::read(&saved).unwrap()).unwrap();
+        if id == 4 {
+            assert_eq!(short["run_count"], full["runs"].as_array().unwrap().len());
+            // limit 1 selects the newest folder, which is the unreadable run
+            assert_eq!(short["runs"], json!([]));
+            assert_eq!(short["errors"][0]["run"], "run-0003");
+        } else {
+            assert_eq!(
+                short["counts"]["changed"],
+                full["changed"].as_array().unwrap().len()
+            );
+            assert_eq!(short["status"], full["status"]);
+        }
+        fs::remove_dir_all(saved.parent().unwrap()).unwrap();
+    }
     assert_eq!(reply(5)["isError"], false);
     for (id, text) in [
         (6, "outside the configured read roots"),
@@ -452,6 +508,62 @@ fn mcp_serves_three_read_only_tools_within_read_roots() {
     assert_eq!(cli(&["mcp"]).status.code(), Some(2));
     assert_eq!(
         cli(&["mcp", "--read-root", "relative"]).status.code(),
+        Some(2)
+    );
+}
+
+#[test]
+fn a_comparison_without_files_is_not_a_match() {
+    let (source, target) = trees();
+    let defaults: Vec<&str> = DEFAULT_EXCLUDES.to_vec();
+    let nothing = compare_trees(&source.0, &target.0, &["*.nomatch"], &defaults, 20_000).unwrap();
+    assert_eq!(nothing["status"], "empty");
+    assert_eq!(
+        (&nothing["source_files"], &nothing["target_files"]),
+        (&json!(0), &json!(0))
+    );
+    let output = cli(&[
+        "compare",
+        "--source",
+        &source.path(""),
+        "--target",
+        &target.path(""),
+        "--include",
+        "*.nomatch",
+    ]);
+    assert_eq!(output.status.code(), Some(1));
+    let outputs = Fixture::new();
+    cli(&[
+        "compare",
+        "--source",
+        &source.path(""),
+        "--target",
+        &target.path(""),
+        "--include",
+        "*.nomatch",
+        "--format",
+        "html",
+        "--out",
+        &outputs.path("r"),
+    ]);
+    assert!(fs::read_to_string(outputs.0.join("r/report.html"))
+        .unwrap()
+        .contains("沒有比對到任何檔案"));
+    let twice = cli(&[
+        "compare",
+        "--source",
+        &source.path(""),
+        "--source",
+        &target.path(""),
+        "--target",
+        &target.path(""),
+    ]);
+    assert_eq!(twice.status.code(), Some(2));
+    assert!(String::from_utf8_lossy(&twice.stderr).contains("--source is given more than once"));
+    assert_eq!(
+        cli(&["evidence", "--limit", "5", "--limit", "6"])
+            .status
+            .code(),
         Some(2)
     );
 }

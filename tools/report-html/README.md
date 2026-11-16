@@ -8,7 +8,7 @@
 ```sh
 cargo build --locked --release --manifest-path tools/report-html/Cargo.toml
 report-html render --input report-data.json --out /path/to/report.html
-some-tool --json | report-html render --input - > report.html
+cat report-data.json | report-html render --input - > report.html
 report-html render --input report-data.json --style-dir /path/to/appearance-package
 ```
 
@@ -98,6 +98,6 @@ let page = report_html::render(&data, &report_html::Style::builtin())?;
 | `Style::builtin()`、`Style::load(dir)` | 內建樣式 (或建置時內嵌的套件) 與執行時載入的外觀套件 |
 | `new_folder(out, scanned, prefix)` | 建立新的報告資料夾, 省略路徑時放在系統暫存目錄, 並確保位於受掃描的根目錄之外 |
 | `escape(text)` | 與頁面相同的跳脫規則 |
-| `output::emit(...)`、`output::parse_formats(...)` | CLI 共用的輸出層: 單一文字格式印到標準輸出, 其餘寫入新資料夾的 `report.*` 並印出摘要 |
+| `output::emit(...)`、`output::write(...)`、`output::parse_formats(...)` | 工具共用的輸出層: 把選定格式寫入新資料夾的 `report.*`, `emit` 另外在標準輸出印出摘要與報告路徑, 省略格式時只寫 `report.md` |
 
 使用範例見 [code-health 的轉換](../code-health/src/html.rs) 、[angular-checks](../angular-checks/src/main.rs) 與 [workspace-inspection](../workspace-inspection/src/main.rs)

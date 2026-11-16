@@ -7,19 +7,21 @@
 ```sh
 cargo build --locked --release --manifest-path tools/angular-checks/Cargo.toml
 angular-checks components customer --root /path/to/workspace --project customer-ui
-angular-checks form-contract --root /path/to/workspace --contract forms.json --json
+angular-checks form-contract --root /path/to/workspace --contract forms.json --format json
 angular-checks generator-preflight --root /path/to/project --identifier TXN001 --selector app-txn001
 angular-checks change-impact --root /path/to/repository --format all --out /path/outside/report
 ```
 
-| 指令 | 用途 | 預設輸出 | 結束碼 1 |
-| --- | --- | --- | --- |
-| `components [關鍵字 ...]` | 盤點 Nx 工作區的元件: 專案、類別、selector、custom element、原始檔、範本、樣式、standalone、說明 | 文字 | 沒有符合的元件 |
-| `form-contract --contract FILE` | 依欄位規格比對 TypeScript 的 form control 與範本的 `formControlName` | 文字, 全部符合時為 `OK` | 有不符項目 |
-| `generator-preflight --identifier ID` | 產生檔案前找出既有的 identifier 與 selector | JSON | 已有相同名稱, 加上 `--allow-existing` 時為 0 |
-| `change-impact` | 列出已暫存、未暫存與未追蹤的檔案, 以及檔案內出現的公開介面標記 | JSON | 不使用 |
+| 指令 | 用途 | 結束碼 1 |
+| --- | --- | --- |
+| `components [關鍵字 ...]` | 盤點 Nx 工作區的元件: 專案、類別、selector、custom element、原始檔、範本、樣式、standalone、說明 | 沒有符合的元件 |
+| `form-contract --contract FILE` | 依欄位規格比對 TypeScript 的 form control 與範本的 `formControlName` | 有不符項目 |
+| `generator-preflight --identifier ID` | 產生檔案前找出既有的 identifier 與 selector | 已有相同名稱, 加上 `--allow-existing` 時為 0 |
+| `change-impact` | 列出已暫存、未暫存與未追蹤的檔案, 以及檔案內出現的公開介面標記 | 不使用 |
 
 輸入錯誤或環境問題的結束碼為 2, 訊息以 `error:` 開頭寫到標準錯誤, `--root` 省略時使用目前資料夾
+同一個選項重複指定時回報錯誤, `components` 的關鍵字以 `--` 開頭時放在 `--` 分隔符之後, 例如 `components --root DIR -- --wide`
+`--changed` 與 `change-impact` 需要 `--root` 位於 Git 儲存庫內
 
 ## 選項
 
@@ -27,18 +29,19 @@ angular-checks change-impact --root /path/to/repository --format all --out /path
 | --- | --- | --- |
 | `--project NAME` | `components` | 只列出該 Nx 專案, 不分大小寫 |
 | `--changed` | `components` | 只列出原始檔、範本、樣式有變更的元件, `component-mapping.ts` 變更時包含已註冊為 custom element 的元件 |
-| `--limit N` | `components` | 最多筆數, 預設 50, 0 為全部 |
+| `--limit N` | `components` | 報告內最多列出的筆數, 預設 50, 0 為全部, 摘要的總數不受影響 |
 | `--selector NAME`、`--allow-existing` | `generator-preflight` | 另外檢查 selector, 有既有項目時仍以 0 結束 |
 | `--format`、`--json`、`--out`、`--style-dir` | 全部 | 見下方 |
 
-`--format` 可用 `text`、`json`、`md` (或 `markdown`)、`html`, 以逗號分隔, `all` 代表 `json`、`md`、`html`, `--json` 等同 `--format json`
+每次執行在標準輸出印出數行摘要, 最後是報告檔的路徑, 完整結果只寫入報告檔, 結果再多摘要長度也不變
 
-| 用法 | 輸出位置 |
+| 選項 | 內容 |
 | --- | --- |
-| 單一 `text`、`json` 或 `md`, 未指定 `--out` | 標準輸出 |
-| 包含 `html`、多種格式或指定 `--out` | 資料夾內的 `report.txt`、`report.json`、`report.md`、`report.html`, 標準輸出改為摘要 JSON, `out` 欄位是實際路徑 |
+| 省略 `--format` | 只寫入 `report.md` |
+| `--format json,md,html` | 寫入指定的格式, 以逗號分隔, `md` 可寫成 `markdown`, `all` 代表三種 |
+| `--out DIR` | 報告資料夾, 必須尚未存在且位於受檢查的目錄之外, 省略時使用系統暫存目錄下的新資料夾 |
 
-`--out` 必須是尚未存在且位於 `--root` 之外的資料夾, 省略時寫到系統暫存目錄, 寫入檔案時結束碼仍反映檢查結果
+`--json` 等同 `--format json`, 寫入檔案時結束碼仍反映檢查結果
 HTML 與 Markdown 由共用的 [report-html](../report-html/README.md) 產生, `--style-dir` 可套用外觀套件
 
 ## 判讀範圍

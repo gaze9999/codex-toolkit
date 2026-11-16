@@ -92,21 +92,6 @@ pub fn run(root: &Path, contract_path: &Path) -> Result<(Rendered, i32), String>
         }
     }
     let field = |item: &Value, key: &str| item[key].as_str().unwrap_or("").to_owned();
-    let text = if findings.is_empty() {
-        "OK\n".to_owned()
-    } else {
-        findings
-            .iter()
-            .map(|item| {
-                format!(
-                    "{}: {} {}\n",
-                    field(item, "kind"),
-                    field(item, "component"),
-                    field(item, "control")
-                )
-            })
-            .collect()
-    };
     const KINDS: [(&str, &str); 5] = [
         ("missing-source", "找不到原始檔"),
         ("missing-template", "找不到範本"),
@@ -142,10 +127,36 @@ pub fn run(root: &Path, contract_path: &Path) -> Result<(Rendered, i32), String>
     let code = if findings.is_empty() { 0 } else { 1 };
     Ok((
         Rendered {
+            summary: {
+                let mut lines = vec![if findings.is_empty() {
+                    format!("form contract: OK, {} components checked", components.len())
+                } else {
+                    format!(
+                        "form contract: {} findings in {} components",
+                        findings.len(),
+                        components.len()
+                    )
+                }];
+                for (kind, _) in KINDS {
+                    let rows: Vec<&Value> = findings
+                        .iter()
+                        .filter(|item| item["kind"] == kind)
+                        .collect();
+                    if let Some(first) = rows.first() {
+                        lines.push(format!(
+                            "{kind} {}; first {} {}",
+                            rows.len(),
+                            field(first, "component"),
+                            field(first, "control")
+                        ));
+                    }
+                }
+                lines
+            },
             json: json!({"contract":contract_path.to_string_lossy(),"checked_components":components.len(),"findings":findings}),
-            text,
             notes: Vec::new(),
             page,
+            markdown: None,
         },
         code,
     ))

@@ -244,10 +244,15 @@ pub fn compare_trees<S: AsRef<str>>(
     let mut result = Map::new();
     result.insert("source".into(), json!(source.to_string_lossy()));
     result.insert("target".into(), json!(target.to_string_lossy()));
-    result.insert(
-        "status".into(),
-        json!(if matched { "match" } else { "different" }),
-    );
+    // Nothing on either side means the patterns selected no file; that is not a confirmed match
+    let status = if left.files.is_empty() && right.files.is_empty() && matched {
+        "empty"
+    } else if matched {
+        "match"
+    } else {
+        "different"
+    };
+    result.insert("status".into(), json!(status));
     result.insert("source_files".into(), json!(left.files.len()));
     result.insert("target_files".into(), json!(right.files.len()));
     result.insert("missing_in_target".into(), json!(missing));

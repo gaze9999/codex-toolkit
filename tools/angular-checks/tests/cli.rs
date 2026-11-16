@@ -30,17 +30,46 @@ impl Fixture {
             .output()
             .unwrap()
     }
+    /// Runs with `--format json` into a new folder and returns the full result with the exit code.
     fn json(&self, args: &[&str]) -> (Value, i32) {
-        let output = self.run(args);
-        let value = serde_json::from_slice(&output.stdout).unwrap_or_else(|_| {
-            panic!(
-                "no JSON: {} {}",
-                String::from_utf8_lossy(&output.stdout),
-                String::from_utf8_lossy(&output.stderr)
-            )
-        });
+        let out = std::env::temp_dir().join(format!(
+            "angular-checks-out-{}-{}",
+            std::process::id(),
+            NEXT.fetch_add(1, Ordering::Relaxed)
+        ));
+        let mut command = Command::new(env!("CARGO_BIN_EXE_angular-checks"));
+        command.args(args);
+        if !args.contains(&"--json") {
+            command.arg("--json");
+        }
+        let output = command
+            .arg("--root")
+            .arg(&self.0)
+            .arg("--out")
+            .arg(&out)
+            .output()
+            .unwrap();
+        let value = serde_json::from_slice(&fs::read(out.join("report.json")).unwrap_or_default())
+            .unwrap_or_else(|_| {
+                panic!(
+                    "no report: {} {}",
+                    String::from_utf8_lossy(&output.stdout),
+                    String::from_utf8_lossy(&output.stderr)
+                )
+            });
+        let _ = fs::remove_dir_all(out);
         (value, output.status.code().unwrap())
     }
+}
+/// Removes the folder a default run created and returns what it printed.
+fn printed(output: &Output) -> String {
+    let text = String::from_utf8_lossy(&output.stdout).into_owned();
+    for line in text.lines() {
+        if let Some(path) = line.strip_prefix("report: ") {
+            let _ = fs::remove_dir_all(Path::new(path).parent().unwrap());
+        }
+    }
+    text
 }
 impl Drop for Fixture {
     fn drop(&mut self) {
@@ -129,9 +158,10 @@ fn inventory_maps_components_to_companions_projects_and_custom_elements() {
     let (filtered, _) = fixture.json(&["components", "app-", "--project", "WIDGETS", "--json"]);
     assert_eq!(filtered["count"], 2);
     let limited = fixture.run(&["components", "--limit", "1"]);
-    let text = String::from_utf8_lossy(&limited.stdout);
-    assert!(text.starts_with("[demo] DemoComponent\n  selector: app-demo\n"));
-    assert!(text.contains("  custom-element: -\n") && text.contains("  standalone: yes\n"));
+    let text = printed(&limited);
+    // One summary line and the report path, whatever the number of components
+    assert!(text.starts_with("components: 3 found in 2 projects, 1 in the report; standalone 1, custom elements 2, warnings 1\nreport: "));
+    assert_eq!(text.lines().count(), 2);
     assert!(String::from_utf8_lossy(&limited.stderr).contains("2 more result(s)"));
     assert_eq!(
         fixture
@@ -276,7 +306,18 @@ fn form_contract_reports_each_mismatch() {
         fixture.0.join("ok.json").to_str().unwrap(),
     ]);
     assert_eq!(ok.status.code(), Some(0));
-    assert_eq!(String::from_utf8_lossy(&ok.stdout), "OK\n");
+    assert!(printed(&ok).starts_with("form contract: OK, 1 components checked\nreport: "));
+    let failing = fixture.run(&[
+        "form-contract",
+        "--contract",
+        fixture.0.join("contract.json").to_str().unwrap(),
+    ]);
+    assert_eq!(failing.status.code(), Some(1));
+    let text = printed(&failing);
+    assert!(text.starts_with("form contract: 7 findings in 3 components\n"));
+    assert!(
+        text.contains("missing-template-control 3; first apps/demo/src/demo.component.ts note\n")
+    );
     fixture.put("bad.json", r#"{"components":[{"controls":[]}]}"#);
     let bad = fixture.run(&[
         "form-contract",
@@ -317,6 +358,9 @@ fn generator_preflight_finds_existing_names() {
         "--allow-existing",
     ]);
     assert_eq!(allowed.status.code(), Some(0));
+    assert!(printed(&allowed).starts_with(
+        "generator preflight: names already exist\nidentifier \"OneComponent\" in 2 files\nselector not checked\nreport: "
+    ));
     let (clear, code) = fixture.json(&["generator-preflight", "--identifier", "ZZZ9"]);
     assert_eq!((code, &clear["collisions"]), (0, &json!({})));
     assert_eq!(clear["proposed"]["selector"], Value::Null);
@@ -345,11 +389,13 @@ fn report_formats_go_to_a_new_folder_outside_the_root() {
         out.to_str().unwrap(),
     ]);
     assert_eq!(output.status.code(), Some(0));
-    let summary: Value = serde_json::from_slice(&output.stdout).unwrap();
-    assert_eq!(
-        summary["written"],
-        json!(["report.json", "report.md", "report.html"])
-    );
+    let text = String::from_utf8_lossy(&output.stdout).into_owned();
+    let files: Vec<&str> = text
+        .lines()
+        .filter_map(|line| line.strip_prefix("report: "))
+        .map(|path| path.rsplit('/').next().unwrap())
+        .collect();
+    assert_eq!(files, ["report.json", "report.md", "report.html"]);
     let saved: Value = serde_json::from_slice(&fs::read(out.join("report.json")).unwrap()).unwrap();
     assert_eq!(saved["count"], 3);
     let markdown = fs::read_to_string(out.join("report.md")).unwrap();
@@ -408,4 +454,41 @@ fn report_formats_go_to_a_new_folder_outside_the_root() {
         fixture.run(&["components", "--unknown"]).status.code(),
         Some(2)
     );
+}
+
+#[test]
+fn separator_repeated_options_and_missing_repository_are_reported() {
+    let fixture = workspace();
+    fixture.put(
+        "apps/demo/src/dash.component.ts",
+        "/** Shows --wide layout */\n@Component({selector: 'app-dash'})\nexport class DashComponent {}\n",
+    );
+    // After the separator a term may start with dashes
+    let found = fixture.0.join("separator-out");
+    let output = Command::new(env!("CARGO_BIN_EXE_angular-checks"))
+        .args(["components", "--json", "--root"])
+        .arg(&fixture.0)
+        .arg("--out")
+        .arg(std::env::temp_dir().join(format!("angular-checks-sep-{}", std::process::id())))
+        .args(["--", "--wide"])
+        .output()
+        .unwrap();
+    let _ = found;
+    let folder = std::env::temp_dir().join(format!("angular-checks-sep-{}", std::process::id()));
+    let payload: Value =
+        serde_json::from_slice(&fs::read(folder.join("report.json")).unwrap()).unwrap();
+    fs::remove_dir_all(folder).unwrap();
+    assert_eq!(
+        (output.status.code(), &payload["count"]),
+        (Some(0), &json!(1))
+    );
+    assert_eq!(payload["components"][0]["class_name"], "DashComponent");
+    let twice = fixture.run(&["components", "--project", "demo", "--project", "widgets"]);
+    assert_eq!(twice.status.code(), Some(2));
+    assert!(String::from_utf8_lossy(&twice.stderr).contains("--project is given more than once"));
+    for args in [&["components", "--changed"][..], &["change-impact"][..]] {
+        let output = fixture.run(args);
+        assert_eq!(output.status.code(), Some(2));
+        assert!(String::from_utf8_lossy(&output.stderr).contains("Not a Git repository"));
+    }
 }

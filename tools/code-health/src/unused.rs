@@ -1,10 +1,20 @@
 use crate::complexity::{angle_end, method_body};
-use crate::lexer::{at, tokenize, Kind, Language, Token};
+use crate::lexer::{at, interpolations, tokenize, Kind, Language, Token};
 use crate::module_graph::{self, Graph};
 use crate::{Source, SourceId, Span};
 use serde_json::{json, Value};
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Path, PathBuf};
+
+/// Column of the `name` token at or after `index` on `line`, where a language server expects the
+/// cursor; falls back to the token at `index`.
+fn name_column(tokens: &[Token<'_>], index: usize, line: usize, name: &str) -> usize {
+    tokens[index..]
+        .iter()
+        .take_while(|token| token.line <= line)
+        .find(|token| token.line == line && token.text == name)
+        .map_or(tokens[index].column, |token| token.column)
+}
 
 struct Member<'a> {
     class: &'a str,
@@ -240,8 +250,24 @@ fn property_names<'a>(
     tokens: &[Token<'a>],
     mut visit: impl FnMut(&'a str, Option<&'a str>),
 ) -> bool {
+    visit_property_names(tokens, &mut visit, 0)
+}
+
+fn visit_property_names<'a>(
+    tokens: &[Token<'a>],
+    visit: &mut dyn FnMut(&'a str, Option<&'a str>),
+    depth: usize,
+) -> bool {
     let mut computed = false;
     for (i, token) in tokens.iter().enumerate() {
+        // `${this.name}` inside a template literal uses the member like any other expression
+        if token.kind == Kind::Template && depth < 8 {
+            for expression in interpolations(token.text) {
+                let inner = tokenize(expression, Language::Script);
+                computed |= visit_property_names(&inner, visit, depth + 1);
+            }
+            continue;
+        }
         let receiver = i
             .checked_sub(1)
             .and_then(|index| tokens.get(index))
@@ -313,11 +339,17 @@ pub fn find(
         }
         for export in &module.exports {
             let line = tokens[id][export.index].line;
+            let symbol = if export.local.is_empty() {
+                export.name
+            } else {
+                export.local
+            };
+            let column = name_column(&tokens[id], export.index, line, symbol);
             if covered(line) || export.name == "*" || graph.used(id, export.name) {
                 continue;
             }
             if !file_known {
-                review.push(json!({"path":path,"line":line,"symbol":export.name,"reason":"Export use is unconfirmed under the selected graph or registration model"}));
+                review.push(json!({"path":path,"line":line,"column":column,"symbol":export.name,"reason":"Export use is unconfirmed under the selected graph or registration model"}));
                 continue;
             }
             let local_uses = !export.local.is_empty()
@@ -343,7 +375,7 @@ pub fn find(
                             )
                         )
                 });
-            candidates.push(json!({"kind":"export","path":path,"line":line,"name":export.name,"local_use":local_uses,
+            candidates.push(json!({"kind":"export","path":path,"line":line,"column":column,"name":export.name,"local_use":local_uses,
                 "evidence":if local_uses {"Local occurrence found, no importing consumer in scope"} else {"No importing consumer in scope"}}));
         }
         let members = members(&tokens[id], &delimiters[id]);
@@ -358,6 +390,7 @@ pub fn find(
         let mut checked = BTreeSet::new();
         for member in members {
             let line = tokens[id][member.index].line;
+            let column = name_column(&tokens[id], member.index, line, member.name);
             if !checked.insert((member.class, member.name))
                 || covered(line)
                 || local.contains(member.name)
@@ -378,9 +411,9 @@ pub fn find(
                 || (module.decorated && !member.private)
                 || (!member.private && incomplete)
             {
-                review.push(json!({"path":path,"line":line,"symbol":member.name,"reason":"Template, decorator, reflection or out-of-scope callers require manual confirmation"}));
+                review.push(json!({"path":path,"line":line,"column":column,"symbol":member.name,"reason":"Template, decorator, reflection or out-of-scope callers require manual confirmation"}));
             } else {
-                candidates.push(json!({"kind":"member","path":path,"line":line,"name":member.name,"class":member.class,
+                candidates.push(json!({"kind":"member","path":path,"line":line,"column":column,"name":member.name,"class":member.class,
                     "visibility":if member.private {"private"} else {"non-private"},"evidence":"No literal property or paired-template reference in scope"}));
             }
         }

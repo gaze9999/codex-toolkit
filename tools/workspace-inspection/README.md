@@ -56,12 +56,26 @@ workspace-inspection mcp --read-root /path/to/workspace
 | `--max-files N` | 每一邊的檔案上限, 1 至 200000, 預設 20000 |
 
 預設排除版本控制資料、虛擬環境、`__pycache__`、`.pyc`、`.env*`、`*.key`、`*.pem`、`credentials*`、`secrets*`, 符號連結一律略過, 略過的數量記在 `excluded`
-結果含 `missing_in_target`、`extra_in_target`、`changed` 與每一邊的讀取錯誤, 完全一致時 `status` 為 `match` 且結束碼為 0, 有差異時為 1
+結果含 `missing_in_target`、`extra_in_target`、`changed` 與每一邊的讀取錯誤
+
+| `status` | 條件 | 結束碼 |
+| --- | --- | --- |
+| `match` | 至少比對到一個檔案且完全一致 | 0 |
+| `different` | 有缺少、多出、內容不同或讀取錯誤 | 1 |
+| `empty` | 兩邊都沒有檔案被比對, 通常是 `--include` 沒有符合的項目 | 1 |
+
+`--include`、`--exclude` 與 `--read-root` 可重複, 其餘選項重複指定時回報錯誤
 
 ## 輸出
 
-`evidence` 與 `compare` 預設將 JSON 印到標準輸出, `--format` 可用 `json`、`md`、`html`, 以逗號分隔, `all` 代表三種
-包含 `html`、多種格式或指定 `--out` 時寫入新資料夾的 `report.json`、`report.md`、`report.html`, 資料夾必須位於受檢查的目錄之外, 省略 `--out` 時放在系統暫存目錄
+每次執行在標準輸出印出數行摘要, 最後是報告檔的路徑, 完整結果只寫入報告檔, 結果再多摘要長度也不變
+
+| 選項 | 內容 |
+| --- | --- |
+| 省略 `--format` | 只寫入 `report.md` |
+| `--format json,md,html` | 寫入指定的格式, 以逗號分隔, `md` 可寫成 `markdown`, `all` 代表三種 |
+| `--out DIR` | 報告資料夾, 必須尚未存在且位於受檢查的目錄之外, 省略時使用系統暫存目錄下的新資料夾 |
+
 HTML 與 Markdown 由共用的 [report-html](../report-html/README.md) 產生, `--style-dir` 可套用外觀套件, 輸入錯誤的結束碼為 2
 
 ## Stdio MCP
@@ -75,7 +89,11 @@ workspace-inspection mcp --read-root /path/to/workspace --read-root /path/to/ano
 | 工具 | 參數 | 結果 |
 | --- | --- | --- |
 | `workspace_status` | 無 | 伺服器版本、讀取根目錄與 `read_only` |
-| `validation_evidence` | `root`, 選用 `limit`、`current` | 與 `evidence` 的 JSON 相同 |
-| `compare_environment` | `source`、`target`, 選用 `includes`、`excludes`、`use_default_excludes`、`max_files` | 與 `compare` 的 JSON 相同 |
+| `validation_evidence` | `root`, 選用 `limit`、`current` | 摘要、每次執行一列 (`run`、`started`、結果筆數、`validity`)、最多 40 筆未通過或已失效的結果 (`attention`)、無法讀取的執行 |
+| `compare_environment` | `source`、`target`, 選用 `includes`、`excludes`、`use_default_excludes`、`max_files` | 摘要、`status`、各類筆數, 以及每個清單的前 40 筆 |
 
-工具名稱、參數與結果欄位沿用 Python 版, `workspace_status.versions` 改為回報本工具的版本
+兩個查詢工具的文字內容是摘要與報告路徑, `reports` 欄位指向寫入系統暫存目錄的 `report.md` 與 `report.json`, 完整結果在 `report.json`, 格式與 `--format json` 相同
+
+工具名稱與參數沿用 Python 版, 查詢結果改為上述的精簡形式, `workspace_status.versions` 回報本工具的版本
+
+MCP 保持受檢查的專案目錄唯讀, 產生報告的工具會在暫存目錄寫入新檔案, 因此標示 `readOnlyHint: false`、`destructiveHint: false` 與 `idempotentHint: false`

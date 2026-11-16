@@ -24,7 +24,7 @@ Read the project's `AGENTS.md` first; when it names plugins, use those. Otherwis
 | LLM, agent, tool-calling, RAG and embedding applications | `codex-ai-engineering` | `ai-application-engineering` | `openai-docs` |
 | AdGuard, uBlock, DNS and hosts filter rules | `codex-network-filters` | `network-filter-rules` | none |
 
-`runtime_profiles` name optional tools the installer's setup manifest provides; runtimes, MCP registration and accounts are configured per task. Document and workspace MCPs use the versioned core in `python-tools/`. Plugin websites point to the [GitHub source](https://github.com/gaze9999/codex-toolkit).
+`runtime_profiles` name optional tools the installer's setup manifest provides; runtimes, MCP registration and accounts are configured per task. The document MCP uses the versioned core in `python-tools/`; workspace inspection uses the Rust core and stdio adapter in [`tools/workspace-inspection/`](../tools/workspace-inspection/README.md). Plugin websites point to the [GitHub source](https://github.com/gaze9999/codex-toolkit).
 
 ## Skill boundaries
 

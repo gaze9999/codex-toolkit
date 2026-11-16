@@ -70,13 +70,16 @@ pub fn run(root: &Path) -> Result<(Rendered, i32), String> {
             column("path","路徑","code"),column("exists","狀態","text"),column("markers","公開介面標記","code")]}]
     });
     let result = json!({"root":root.to_string_lossy(),"changed_files":rows});
-    let text = serde_json::to_string_pretty(&result).map_err(|e| e.to_string())? + "\n";
     Ok((
         Rendered {
+            summary: vec![format!(
+                "change impact: {} changed files, {marked} with public-contract markers, {removed} removed",
+                table.len()
+            )],
             json: result,
-            text,
             notes: Vec::new(),
             page,
+            markdown: None,
         },
         0,
     ))

@@ -68,6 +68,15 @@ pub fn walk(root: &Path, skip: &[&str]) -> Vec<PathBuf> {
 /// Staged, unstaged and untracked paths. With `relative`, diff paths are relative to `root`
 /// rather than the repository top level.
 pub fn git_changed(root: &Path, relative: bool) -> Result<BTreeSet<String>, String> {
+    let inside = Command::new("git")
+        .arg("-C")
+        .arg(root)
+        .args(["rev-parse", "--is-inside-work-tree"])
+        .output()
+        .map_err(|e| format!("Unable to run Git: {e}"))?;
+    if !inside.status.success() {
+        return Err(format!("Not a Git repository: {}", root.display()));
+    }
     let mut names = BTreeSet::new();
     for base in [
         vec!["diff", "--name-only"],

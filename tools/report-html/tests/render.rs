@@ -218,11 +218,83 @@ fn invalid_page_does_not_leave_partial_reports() {
     };
     let data = Rendered {
         json: json!({}),
-        text: String::new(),
+        summary: vec![],
         notes: vec![],
         page: json!({}),
+        markdown: None,
     };
     assert!(emit("test", &[], &options, &data).is_err());
     assert!(!out.exists());
     fs::remove_dir_all(dir).unwrap();
+}
+
+#[test]
+fn write_puts_every_format_in_one_new_folder_and_reports_the_files() {
+    use report_html::output::{parse_formats, write, Emit, Rendered, DEFAULT_FORMATS};
+    let dir = temp("write-output");
+    let rendered = |markdown: Option<String>| Rendered {
+        json: json!({"count":2}),
+        summary: vec!["two items".into()],
+        notes: vec![],
+        page: sample(),
+        markdown,
+    };
+    let options = |formats: Vec<&'static str>, name: &str| Emit {
+        formats,
+        out: Some(dir.join(name)),
+        style_dir: None,
+    };
+    // Markdown alone is the default
+    assert_eq!(DEFAULT_FORMATS.to_vec(), vec!["md"]);
+    let only = write(
+        "test",
+        &[],
+        &options(DEFAULT_FORMATS.to_vec(), "default"),
+        &rendered(None),
+    )
+    .unwrap();
+    assert_eq!(only.files, vec![only.out.join("report.md")]);
+    assert_eq!(only.style, None);
+    assert!(fs::read_to_string(&only.files[0])
+        .unwrap()
+        .starts_with("# Sample <report>"));
+    let all = write(
+        "test",
+        &[],
+        &options(parse_formats("all").unwrap(), "all"),
+        &rendered(Some("# own\n".into())),
+    )
+    .unwrap();
+    let names: Vec<String> = all
+        .files
+        .iter()
+        .map(|file| file.file_name().unwrap().to_string_lossy().into_owned())
+        .collect();
+    assert_eq!(names, ["report.json", "report.md", "report.html"]);
+    assert_eq!(all.style.as_deref(), Some("內建樣式"));
+    // A tool's own Markdown replaces the generated one
+    assert_eq!(
+        fs::read_to_string(all.out.join("report.md")).unwrap(),
+        "# own\n"
+    );
+    assert_eq!(
+        fs::read_to_string(all.out.join("report.json")).unwrap(),
+        "{\n  \"count\": 2\n}\n"
+    );
+    assert!(parse_formats("text").is_err());
+    assert_eq!(
+        parse_formats("markdown,md,json").unwrap(),
+        vec!["md", "json"]
+    );
+    fs::remove_dir_all(dir).unwrap();
+}
+
+#[test]
+fn repeated_reports_get_distinct_folders() {
+    let first = new_folder(None, &[], "report-html-repeat").unwrap();
+    let second = new_folder(None, &[], "report-html-repeat").unwrap();
+    assert_ne!(first, second);
+    assert!(new_folder(None, &[], "../escape").is_err());
+    fs::remove_dir_all(first).unwrap();
+    fs::remove_dir_all(second).unwrap();
 }

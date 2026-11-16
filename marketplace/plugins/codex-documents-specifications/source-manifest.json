@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "642df2279e93e0384654c9c7a7b02b2991143d07fb94a8017ee5aff550ecf775",
+      "sha256": "d95166e76a791cd6551dbe02ffe38ede7eec56b46c06f50c4c99e6614b4cbf76",
       "source": null
     },
     "LICENSE": {
@@ -13,11 +13,11 @@
       "source": "assets/branding/plugins/codex-documents-specifications.png"
     },
     "plugin.json": {
-      "sha256": "e2586bf00b8b5ddd1625aea61a97c952a6e7cd1ea9ae0621702203674d14668e",
+      "sha256": "c2154147c0187ce2fa2c592b0e1666cae98ed1fb97fa9046b53e16db4b543433",
       "source": "plugins/documents-specifications/plugin.json"
     },
     "resources/token-count/VERSION": {
-      "sha256": "97a5d6e540a6120d09c39ddb667e0e8e2bac7fcc2ffef813b82e08fd60365bce",
+      "sha256": "967d9afb101346667166f2e76e81910bc190488d7d41d50ca0072e9d92f00e32",
       "source": "python-tools/VERSION"
     },
     "resources/token-count/requirements.txt": {
@@ -325,6 +325,6 @@
     "local-documents"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.37.0",
-  "version": "0.7.2"
+  "toolkit_version": "0.38.0",
+  "version": "0.7.3"
 }

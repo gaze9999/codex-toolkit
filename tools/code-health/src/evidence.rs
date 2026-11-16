@@ -53,6 +53,9 @@ pub fn assign_ids(report: &mut Value) {
                 format!("review:{path}#{symbol}")
             } else if let Some(line) = row["line"].as_u64() {
                 format!("review:{path}@{line}")
+            } else if path.is_empty() {
+                // A note about the whole scan, such as unresolved entry points
+                "review:scan".to_owned()
             } else {
                 format!("review:{path}")
             };
