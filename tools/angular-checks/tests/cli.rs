@@ -393,7 +393,13 @@ fn report_formats_go_to_a_new_folder_outside_the_root() {
     let files: Vec<&str> = text
         .lines()
         .filter_map(|line| line.strip_prefix("report: "))
-        .map(|path| path.rsplit('/').next().unwrap())
+        .map(|path| {
+            std::path::Path::new(path)
+                .file_name()
+                .unwrap()
+                .to_str()
+                .unwrap()
+        })
         .collect();
     assert_eq!(files, ["report.json", "report.md", "report.html"]);
     let saved: Value = serde_json::from_slice(&fs::read(out.join("report.json")).unwrap()).unwrap();
