@@ -5,6 +5,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+defaults:
+  run:
+    shell: bash
 jobs:
   source:
     runs-on: ubuntu-latest
@@ -71,8 +74,11 @@ jobs:
           CARGO_TARGET_DIR: ${{ runner.temp }}/toolkit-rust-target
         shell: bash
         run: |
+          failed=()
+          check() { "$@" || failed+=("$*"); }
           for tool in code-health angular-checks workspace-inspection report-html; do
-            cargo test --locked --manifest-path tools/$tool/Cargo.toml
-            cargo clippy --locked --manifest-path tools/$tool/Cargo.toml --all-targets -- -D warnings
-            cargo fmt --manifest-path tools/$tool/Cargo.toml --check
+            check cargo test --locked --no-fail-fast --manifest-path tools/$tool/Cargo.toml
+            check cargo clippy --locked --manifest-path tools/$tool/Cargo.toml --all-targets -- -D warnings
+            check cargo fmt --manifest-path tools/$tool/Cargo.toml --check
           done
+          ((${#failed[@]} == 0)) || { printf '::error::Failed: %s\n' "${failed[@]}"; exit 1; }
