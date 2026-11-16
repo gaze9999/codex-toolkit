@@ -61,14 +61,14 @@ jobs:
         runner: [windows-2022, macos-15, ubuntu-latest]
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 15
-    env:
-      CARGO_TARGET_DIR: ${{ runner.temp }}/toolkit-rust-target
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt, clippy
       - name: Check native scanners and report output
+        env:
+          CARGO_TARGET_DIR: ${{ runner.temp }}/toolkit-rust-target
         shell: bash
         run: |
           for tool in code-health angular-checks workspace-inspection report-html; do
