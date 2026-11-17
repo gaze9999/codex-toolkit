@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "0a8e9740173ee7fb1c2452b53068f4d955d66231ab504ad8320a0d2681b9104f",
+      "sha256": "7e16f27359b9ddac301851d029b5a6501d9cdd2e2b31d0115bea193d138cbd00",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-frontend-engineering.png"
     },
     "plugin.json": {
-      "sha256": "9453962d9e61c84c0b9e6579c615b5b807738a829200a99e3faa6e4310f04b6b",
+      "sha256": "bbdd7d5c3a3f63fa1d124b248f09c529dd13fc1fe47ef779b61eee530ee3fa2b",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "resources/references/angular-style.md": {
@@ -51,6 +51,62 @@
     "skills/accessibility-engineering/references/validation.md": {
       "sha256": "fa662068dff048637291cd8ef27ce33e0aecc6e251043ebc58392d1a25bb2bea",
       "source": "skills/accessibility-engineering/references/validation.md"
+    },
+    "skills/angular-component-test/SKILL.md": {
+      "sha256": "ec8de36003835d25a74a9034c627dc2348ded095e49a96a4c933c1e24b65bfda",
+      "source": "skills/angular-component-test/SKILL.md"
+    },
+    "skills/angular-component-test/agents/openai.yaml": {
+      "sha256": "582212e09be0433455b8dc8941168598e680bd3ddf9dd484930a91141e051f6e",
+      "source": "skills/angular-component-test/agents/openai.yaml"
+    },
+    "skills/angular-component-test/assets/icon-small.png": {
+      "sha256": "1a1d3934282c6e685e625ad06c1cbcddb27c166d4bcc7febf53768c0a122610e",
+      "source": "skills/angular-component-test/assets/icon-small.png"
+    },
+    "skills/angular-component-test/assets/icon-small.svg": {
+      "sha256": "74e4b5e8bde34583b642caf8c57f316d618b37e827cdeff46de4870705de6994",
+      "source": "skills/angular-component-test/assets/icon-small.svg"
+    },
+    "skills/angular-component-test/assets/icon.png": {
+      "sha256": "a6025b84ff33b96b6fa030724f11ee1ec2886cc7bf0a1d9002106b5d8cc53128",
+      "source": "skills/angular-component-test/assets/icon.png"
+    },
+    "skills/angular-component-test/assets/icon.svg": {
+      "sha256": "74e4b5e8bde34583b642caf8c57f316d618b37e827cdeff46de4870705de6994",
+      "source": "skills/angular-component-test/assets/icon.svg"
+    },
+    "skills/angular-component-test/assets/suite.template.ts": {
+      "sha256": "4a79d9606b737170055aac5dec6f23024af9b8d56b15730a6cd9013d3a363910",
+      "source": "skills/angular-component-test/assets/suite.template.ts"
+    },
+    "skills/angular-component-test/references/suite-api.md": {
+      "sha256": "f3e4231bdef525b7e8696747f154c24ac8ddf6b15ea5d288bcf96877b01adb7a",
+      "source": "skills/angular-component-test/references/suite-api.md"
+    },
+    "skills/angular-component-test/scripts/harness/index.ts": {
+      "sha256": "22568d7b5e194827bb1e190f44ac74bc237934a2c7c0fe614ab110f406ed69c5",
+      "source": "skills/angular-component-test/scripts/harness/index.ts"
+    },
+    "skills/angular-component-test/scripts/lib/build.mjs": {
+      "sha256": "750cb692d82ab8bc24cb9abd4546523fd76dd99116e52bf7c9cf05e53e6383ed",
+      "source": "skills/angular-component-test/scripts/lib/build.mjs"
+    },
+    "skills/angular-component-test/scripts/lib/chrome.mjs": {
+      "sha256": "e557d0d44598c313d4ef68cc37a7714fdf4dede716cdd5b136b8fdf15c973a7e",
+      "source": "skills/angular-component-test/scripts/lib/chrome.mjs"
+    },
+    "skills/angular-component-test/scripts/lib/html.mjs": {
+      "sha256": "d74831265494b181f52948ddc4e7466307a21d657d4b9f676d421370e7693074",
+      "source": "skills/angular-component-test/scripts/lib/html.mjs"
+    },
+    "skills/angular-component-test/scripts/lib/report.mjs": {
+      "sha256": "27db897bd18551fe2c64d59e3b3168b333a55f1a8118cd7b2ec4efa7f7ebd977",
+      "source": "skills/angular-component-test/scripts/lib/report.mjs"
+    },
+    "skills/angular-component-test/scripts/run.mjs": {
+      "sha256": "0c1e4eb17c3ee2eef759e3a3a875ea736ca8ebee5038b5cae355be46fea789d9",
+      "source": "skills/angular-component-test/scripts/run.mjs"
     },
     "skills/angular-development/SKILL.md": {
       "sha256": "bba508242ca3a14ae8579cc02e127558a38918fe23e46696e671788b1582e902",
@@ -338,5 +394,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.38.0",
-  "version": "0.7.5"
+  "version": "0.8.0"
 }

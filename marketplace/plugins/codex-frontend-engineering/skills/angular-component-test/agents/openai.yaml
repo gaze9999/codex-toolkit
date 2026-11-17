@@ -1,0 +1,6 @@
+interface:
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon.png"
+  display_name: "Angular Component Test (v0.1.0)"
+  short_description: "Run AOT-compiled Angular component tests in a browser"
+  default_prompt: "Use $angular-component-test to write a suite from the specified behavior, run it against the installed Angular project in headless Chrome and report each failed case with its evidence limits."

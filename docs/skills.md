@@ -28,6 +28,7 @@
 | Frontend 與遊戲 | [Internationalization Engineering](../skills/internationalization-engineering/SKILL.md) | 處理翻譯資源、語系切換、複數規則與在地格式, 保留 API 資料格式 |
 | Frontend 與遊戲 | [Accessibility Engineering](../skills/accessibility-engineering/SKILL.md) | 實作與驗證語意、鍵盤、焦點、錯誤提示及輔助科技行為 |
 | Frontend 與遊戲 | [Angular Member Order](../skills/angular-member-order/SKILL.md) | 安全整理 Angular Component class member 與可選的 Signal I/O 改寫 |
+| Frontend 與遊戲 | [Angular Component Test](../skills/angular-component-test/SKILL.md) | 以專案自己的 ngc 做 AOT 編譯, 在無頭 Chrome 或 Edge 掛載真實元件執行測試套件, 輸出 HTML、Markdown、JSON 報告 |
 | Frontend 與遊戲 | [Unity Development](../skills/unity-development/SKILL.md) | 依實際 Unity version, package, serialized asset 與 build target 開發及驗證 |
 | Frontend 與遊戲 | [Game Balance Simulation](../skills/game-balance-simulation/SKILL.md) | 共用遊戲規則跑模擬, 比較策略與分布, 重播數值及狀態錯誤 |
 | Frontend 與遊戲 | [Vue Development](../skills/vue-development/SKILL.md) | 依實際 Vue, Nuxt 或 Vite stack 開發並保留 component, state, SSR 與 build contracts |
