@@ -42,7 +42,7 @@ report-html render --input report-data.json --style-dir /path/to/appearance-pack
 
 | 欄位 | 必要 | 內容 |
 | --- | --- | --- |
-| `schema` | 是 | `report-html/v1`, 讀取時也接受舊名稱 `report-html/1` |
+| `schema` | 是 | 固定為 `report-html/v1` |
 | `title` | 是 | 頁面標題 |
 | `lang` | | 頁面語言, 預設 `zh-Hant-TW` |
 | `tags` | | 基本資訊上方的標籤, `tone` 可用 `neutral`、`category`、`success`、`warning`、`error` |

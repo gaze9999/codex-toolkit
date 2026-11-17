@@ -332,15 +332,14 @@ fn rich() -> Value {
 }
 
 #[test]
-fn v1_and_legacy_schema_names_are_both_read() {
+fn only_the_v1_schema_name_is_read() {
     assert_eq!(SCHEMA, "report-html/v1");
     let style = Style::builtin();
-    let mut legacy = sample();
-    legacy["schema"] = json!("report-html/1");
-    assert!(render(&legacy, &style).is_ok() && markdown(&legacy).is_ok());
-    let mut other = sample();
-    other["schema"] = json!("report-html/2");
-    assert!(render(&other, &style).is_err() && markdown(&other).is_err());
+    for name in ["report-html/1", "report-html/v2"] {
+        let mut other = sample();
+        other["schema"] = json!(name);
+        assert!(render(&other, &style).is_err() && markdown(&other).is_err());
+    }
 }
 
 #[test]

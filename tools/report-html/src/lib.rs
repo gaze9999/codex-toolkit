@@ -1,4 +1,4 @@
-//! Self-contained HTML reports from neutral report data (`report-html/v1`; `report-html/1` is still read).
+//! Self-contained HTML reports from neutral report data (`report-html/v1`).
 //! Markup follows the Workbench UI static class names, so the built-in styles and an appearance
 //! package (a folder with `manifest.json` and a style file) are interchangeable.
 use serde_json::Value;
@@ -6,8 +6,6 @@ use std::fs;
 use std::path::{Path, PathBuf};
 
 pub const SCHEMA: &str = "report-html/v1";
-/// Earlier names of the same data format, still accepted when reading.
-pub const LEGACY_SCHEMAS: [&str; 1] = ["report-html/1"];
 pub mod code;
 pub mod output;
 mod package;
@@ -430,9 +428,10 @@ fn block(
 }
 
 fn check_schema(report: &Value) -> Result<(), String> {
-    match report["schema"].as_str() {
-        Some(name) if name == SCHEMA || LEGACY_SCHEMAS.contains(&name) => Ok(()),
-        _ => Err(format!("Report data needs \"schema\": \"{SCHEMA}\"")),
+    if report["schema"] == SCHEMA {
+        Ok(())
+    } else {
+        Err(format!("Report data needs \"schema\": \"{SCHEMA}\""))
     }
 }
 

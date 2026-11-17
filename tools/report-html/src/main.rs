@@ -3,7 +3,7 @@ use std::fs;
 use std::io::{Read, Write};
 use std::path::PathBuf;
 
-const HELP: &str = "report-html render --input FILE|- [--style-dir DIR] [--out FILE]\n  Reads report-html/v1 (or report-html/1) JSON and prints one offline HTML page, or writes it to a new file with --out";
+const HELP: &str = "report-html render --input FILE|- [--style-dir DIR] [--out FILE]\n  Reads report-html/v1 JSON and prints one offline HTML page, or writes it to a new file with --out";
 const INPUT_LIMIT: u64 = 64 * 1024 * 1024;
 
 fn cli(args: &[String]) -> Result<(), String> {
