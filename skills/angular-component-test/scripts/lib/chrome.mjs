@@ -116,12 +116,16 @@ export async function runPage({ browser, profile, page, timezone, timeoutMs, cas
     const loaded = session.once('Page.loadEventFired');
     await session.send('Page.navigate', { url: pathToFileURL(page).href });
     await withTimeout(loaded, 60000, '測試頁沒有在 60 秒內載入');
+    /** Read from the loaded test page, so the report shows the agent and time zone the cases ran under rather than the requested values. */
+    const observed = (await session.send('Runtime.evaluate', {
+      expression: '({ userAgent: navigator.userAgent, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone })', returnByValue: true,
+    })).result?.value ?? {};
     const evaluated = await withTimeout(session.send('Runtime.evaluate', {
       expression: `globalThis.__componentTest ? globalThis.__componentTest.start({ caseTimeoutMs: ${Number(caseTimeoutMs)} }) : Promise.reject(new Error('測試頁沒有載入 @component-test/harness'))`,
       awaitPromise: true, returnByValue: true,
     }), timeoutMs, `測試沒有在 ${timeoutMs / 1000} 秒內完成`);
     if (evaluated.exceptionDetails) throw new Error(evaluated.exceptionDetails.exception?.description ?? evaluated.exceptionDetails.text);
-    return { version, results: evaluated.result.value, consoleErrors };
+    return { version, userAgent: observed.userAgent ?? null, timezone: observed.timezone ?? null, results: evaluated.result.value, consoleErrors };
   } finally {
     session?.close();
     child.kill();

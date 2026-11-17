@@ -69,7 +69,7 @@ export async function main(argv) {
   const { project, tsconfig, suite, out, entry } = options;
   const model = {
     schemaVersion: REPORT_SCHEMA, tool: { name: TOOL_NAME, version: TOOL_VERSION }, title: options.title, startedAt,
-    runtime: { node: process.version, browser: null, timezone: options.timezone },
+    runtime: { node: process.version, browser: null, userAgent: null, timezone: null },
     sources: { project: { root: project, ...projectRevision(project) }, tsconfig, suite: { root: suite, entry, files: [] } },
     results: [], consoleErrors: [], limits: LIMITS, summary: summarize([]),
   };
@@ -117,6 +117,8 @@ export async function main(argv) {
     try {
       const run = await runPage({ browser, profile: path.join(work, 'profile'), page, timezone: options.timezone, timeoutMs: options.timeoutMs, caseTimeoutMs: options.caseTimeoutMs });
       model.runtime.browser = run.version;
+      model.runtime.userAgent = run.userAgent;
+      model.runtime.timezone = run.timezone;
       model.results = run.results;
       model.consoleErrors = run.consoleErrors;
     } catch (error) {

@@ -1,6 +1,6 @@
 // Report model, exit code and Markdown rendering for component test results; html.mjs renders the same model.
 export const TOOL_NAME = 'angular-component-test';
-export const TOOL_VERSION = '0.1.0';
+export const TOOL_VERSION = '0.1.1';
 export const REPORT_SCHEMA = `${TOOL_NAME}-report/1`;
 export const FORMATS = ['html', 'md', 'json'];
 
@@ -38,7 +38,8 @@ export function versionRows(model) {
     ['執行時間', model.startedAt],
     ['Node', runtime.node],
     ['瀏覽器', runtime.browser ?? '未啟動'],
-    ['時區', runtime.timezone],
+    ['User Agent', runtime.userAgent ?? '未取得'],
+    ['時區', runtime.timezone ?? '未取得'],
     ['Angular 專案', sources.project.root],
     ['專案版本', `${sources.project.revision ?? '無法取得'}, 未提交檔案 ${sources.project.dirty.length} 個`],
     ['tsconfig', sources.tsconfig],

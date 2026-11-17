@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "7e16f27359b9ddac301851d029b5a6501d9cdd2e2b31d0115bea193d138cbd00",
+      "sha256": "cd6dc9fb06eed1624e0a988fff9f11ac1666450a6d781ac318e915d3ef64fa09",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-frontend-engineering.png"
     },
     "plugin.json": {
-      "sha256": "bbdd7d5c3a3f63fa1d124b248f09c529dd13fc1fe47ef779b61eee530ee3fa2b",
+      "sha256": "14546678624bd9c63b76a19dff3f5910718fef5c8bae0989ecf2d36ce7452eb9",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "resources/references/angular-style.md": {
@@ -53,7 +53,7 @@
       "source": "skills/accessibility-engineering/references/validation.md"
     },
     "skills/angular-component-test/SKILL.md": {
-      "sha256": "ec8de36003835d25a74a9034c627dc2348ded095e49a96a4c933c1e24b65bfda",
+      "sha256": "5a09860f57dbe6aa68ecff6c5d6ad26726fc97eb1c570280307bf5410e1757d3",
       "source": "skills/angular-component-test/SKILL.md"
     },
     "skills/angular-component-test/agents/openai.yaml": {
@@ -93,7 +93,7 @@
       "source": "skills/angular-component-test/scripts/lib/build.mjs"
     },
     "skills/angular-component-test/scripts/lib/chrome.mjs": {
-      "sha256": "e557d0d44598c313d4ef68cc37a7714fdf4dede716cdd5b136b8fdf15c973a7e",
+      "sha256": "85dee8f6536341ab5d9cca57afbe6de798b691da2513865e02d869da352f7a5d",
       "source": "skills/angular-component-test/scripts/lib/chrome.mjs"
     },
     "skills/angular-component-test/scripts/lib/html.mjs": {
@@ -101,11 +101,11 @@
       "source": "skills/angular-component-test/scripts/lib/html.mjs"
     },
     "skills/angular-component-test/scripts/lib/report.mjs": {
-      "sha256": "27db897bd18551fe2c64d59e3b3168b333a55f1a8118cd7b2ec4efa7f7ebd977",
+      "sha256": "40789e245b96cfb04862a20b8856a720376ead07434781cdaf7a247fc3faa5cc",
       "source": "skills/angular-component-test/scripts/lib/report.mjs"
     },
     "skills/angular-component-test/scripts/run.mjs": {
-      "sha256": "0c1e4eb17c3ee2eef759e3a3a875ea736ca8ebee5038b5cae355be46fea789d9",
+      "sha256": "b22876dd3c0d8ffc4b1ced821549f31024cb057102bc8349715b6804ce8ffbf2",
       "source": "skills/angular-component-test/scripts/run.mjs"
     },
     "skills/angular-development/SKILL.md": {
@@ -394,5 +394,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.38.0",
-  "version": "0.8.0"
+  "version": "0.8.1"
 }

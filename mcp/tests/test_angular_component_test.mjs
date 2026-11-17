@@ -204,6 +204,10 @@ test('a mixed suite reports passed, failed, error and observation cases in order
   assert.match(report.results.find(result => result.id === 'F3').message, /fixture error/);
   assert.equal(report.sources.suite.files.length, 2);
   assert.match(report.runtime.browser, /Chrome|Edg/);
+  assert.match(report.runtime.userAgent, /^Mozilla\/5\.0 .*(Chrome|Edg)\//);
+  assert.match(markdown, /\| User Agent \| Mozilla\/5\.0 /);
+  assert.match(html, /User Agent/);
+  assert.equal(report.runtime.timezone, 'Asia/Taipei');
   assert.equal(report.schemaVersion, 'angular-component-test-report/1');
   assert.match(markdown, /❌ 錯誤/);
   assert.match(html, /F2/);
@@ -228,6 +232,8 @@ test('a type error stops before the browser with exit 3', e2e, async t => {
   assert.equal(code, 3);
   assert.match(report.error, /ngc/);
   assert.equal(report.runtime.browser, null);
+  assert.equal(report.runtime.userAgent, null);
+  assert.equal(report.runtime.timezone, null);
 });
 
 test('the suite template compiles and runs as written', e2e, async t => {
