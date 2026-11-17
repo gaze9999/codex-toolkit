@@ -7,7 +7,7 @@ use std::fs;
 use std::path::Path;
 
 /// Every Workbench UI static class the rendered page uses; a package must provide each one.
-pub const REQUIRED_CLASSES: [&str; 14] = [
+pub const REQUIRED_CLASSES: [&str; 31] = [
     "wb-workbench",
     "wb-page",
     "wb-page-content",
@@ -16,12 +16,29 @@ pub const REQUIRED_CLASSES: [&str; 14] = [
     "wb-card-body",
     "wb-table-wrap",
     "wb-table",
+    "wb-table-striped",
     "wb-tag",
+    "wb-tag-link",
     "wb-status-bar",
     "wb-legend",
     "wb-legend-dot",
     "wb-filter",
     "wb-muted",
+    "wb-code-keyword",
+    "wb-code-string",
+    "wb-code-number",
+    "wb-code-boolean",
+    "wb-code-comment",
+    "wb-code-key",
+    "wb-scroll",
+    "wb-flow",
+    "wb-flow-head",
+    "wb-flow-edge",
+    "wb-flow-node",
+    "wb-flow-arrow",
+    "wb-count-matrix",
+    "wb-count",
+    "wb-detail",
 ];
 const STYLE_LIMIT: u64 = 2 * 1024 * 1024;
 

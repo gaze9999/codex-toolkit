@@ -1,4 +1,4 @@
-//! The scan report as `report-html/1` data; the shared report-html crate renders the page.
+//! The scan report as `report-html/v1` data; the shared report-html crate renders the page.
 use report_html::Style;
 use serde_json::{json, Value};
 
@@ -161,7 +161,7 @@ fn rows(report: &Value, key: &str) -> Option<Vec<Value>> {
     )
 }
 
-/// Converts a scan report to `report-html/1` data.
+/// Converts a scan report to `report-html/v1` data.
 pub fn report_data(report: &Value) -> Value {
     let partial = report["partial"] == true;
     let list = |key: &str| {
@@ -180,7 +180,7 @@ pub fn report_data(report: &Value) -> Value {
         let Some(rows) = rows(report, key) else {
             continue;
         };
-        stats.push(json!({"label":label,"value":rows.len(),"tone":if rows.is_empty() {"neutral"} else {tone},"bar":true}));
+        stats.push(json!({"label":label,"value":rows.len(),"tone":if rows.is_empty() {"neutral"} else {tone},"bar":true,"section":sections.len()}));
         let mut columns: Vec<Value> = columns
             .iter()
             .map(|(key, label, kind)| json!({"key":key,"label":label,"kind":kind}))

@@ -9,7 +9,7 @@ use std::path::{Path, PathBuf};
 pub const DEFAULT_FORMATS: [&str; 1] = ["md"];
 
 /// A finished check. `summary` is the few lines printed for the caller, `json` the complete
-/// machine-readable result, `page` the `report-html/1` data for Markdown and HTML, `markdown`
+/// machine-readable result, `page` the `report-html/v1` data for Markdown and HTML, `markdown`
 /// replaces the Markdown generated from `page`, and `notes` go to standard error.
 pub struct Rendered {
     pub json: Value,

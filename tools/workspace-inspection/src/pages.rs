@@ -1,4 +1,4 @@
-//! Results as `report-html/1` page data for Markdown and HTML.
+//! Results as `report-html/v1` page data for Markdown and HTML.
 use report_html::output::column;
 use serde_json::{json, Value};
 use std::collections::BTreeMap;
