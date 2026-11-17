@@ -4,6 +4,7 @@ use std::io::Write;
 use std::path::PathBuf;
 use std::process::{Command, Output, Stdio};
 use std::sync::atomic::{AtomicUsize, Ordering};
+use workspace_inspection::baseline::capture_baseline;
 use workspace_inspection::environment::{compare_trees, DEFAULT_EXCLUDES};
 use workspace_inspection::validation::{assess_evidence, index_evidence};
 
@@ -64,6 +65,115 @@ fn cli(args: &[&str]) -> Output {
 }
 fn sha(ch: char) -> String {
     ch.to_string().repeat(64)
+}
+
+#[test]
+fn baseline_capture_is_bounded_partial_and_root_confined() {
+    let root = Fixture::new();
+    root.put("src/a.rs", "first");
+    let baseline = capture_baseline(
+        &root.0,
+        &["src/a.rs".into()],
+        &["src/a.rs".into(), "src/missing.rs".into()],
+        None,
+    )
+    .unwrap();
+    assert_eq!(baseline["status"], "partial");
+    assert_eq!(
+        baseline["validity"],
+        "unverified_until_assessed_against_recorded_evidence"
+    );
+    assert_eq!(baseline["covered_paths"], json!(["src/a.rs"]));
+    assert_eq!(baseline["uncovered_paths"], json!(["src/missing.rs"]));
+    assert!(
+        capture_baseline(&root.0, &["../outside".into()], &[], None).unwrap()["diagnostics"][0]
+            ["error"]
+            .as_str()
+            .unwrap()
+            .contains("relative path")
+    );
+    let outside = Fixture::new();
+    outside.put("secret", "private");
+    #[cfg(unix)]
+    let linked = std::os::unix::fs::symlink(outside.0.join("secret"), root.0.join("link")).is_ok();
+    #[cfg(windows)]
+    let linked =
+        std::os::windows::fs::symlink_file(outside.0.join("secret"), root.0.join("link")).is_ok();
+    if linked {
+        assert!(
+            capture_baseline(&root.0, &["link".into()], &[], None).unwrap()["diagnostics"][0]
+                ["error"]
+                .as_str()
+                .unwrap()
+                .contains("symlink")
+        );
+    }
+    root.put("src/b.rs", "second");
+    let capture_args = [
+        "baseline",
+        "--root",
+        &root.path(""),
+        "--source",
+        "src/a.rs",
+        "--source",
+        "src/b.rs",
+        "--affected",
+        "src/a.rs",
+        "--affected",
+        "src/b.rs",
+    ];
+    let captured = cli(&capture_args);
+    assert_eq!(
+        captured.status.code(),
+        Some(0),
+        "{}",
+        String::from_utf8_lossy(&captured.stderr)
+    );
+    let value: Value = serde_json::from_slice(&captured.stdout).unwrap();
+    assert_eq!(value["covered_paths"], json!(["src/a.rs", "src/b.rs"]));
+    assert_eq!(value["status"], "captured");
+    assert!(value.get("artifact_sha256").is_none());
+    let recorded =
+        json!({"source_files":value["source_files"],"covered_paths":["src/a.rs","src/b.rs"]});
+    assert_eq!(
+        assess_evidence(&recorded, &value).unwrap()["status"],
+        "current"
+    );
+    let output = root.path("baseline.json");
+    let mut with_output = capture_args.to_vec();
+    with_output.extend(["--out", &output]);
+    assert!(cli(&with_output).status.success());
+    let first_output = fs::read(&output).unwrap();
+    assert_eq!(cli(&with_output).status.code(), Some(2));
+    assert_eq!(fs::read(&output).unwrap(), first_output);
+
+    let failed_artifact = capture_baseline(
+        &root.0,
+        &["src/a.rs".into()],
+        &["src/a.rs".into()],
+        Some("missing.bin"),
+    )
+    .unwrap();
+    assert_eq!(failed_artifact["status"], "partial");
+    assert!(failed_artifact.get("artifact_sha256").is_none());
+    let recorded = json!({"source_files":{"src/a.rs":value["source_files"]["src/a.rs"].clone()},"covered_paths":["src/a.rs"],"artifact_sha256":sha('a')});
+    let verdict = assess_evidence(&recorded, &failed_artifact).unwrap();
+    assert_ne!(verdict["status"], "current");
+    assert!(verdict["reasons"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .any(|r| r == "artifact_hash_missing"));
+    let older_record_without_artifact = json!({"source_files":{"src/a.rs":value["source_files"]["src/a.rs"].clone()},"covered_paths":["src/a.rs"]});
+    assert_eq!(
+        assess_evidence(&older_record_without_artifact, &failed_artifact).unwrap()["status"],
+        "partial"
+    );
+    let changed = json!({"capture_kind":"workspace_inspection_baseline_v1","status":"partial","source_files":{"src/a.rs":sha('f')},"affected_paths":["src/a.rs"]});
+    assert_eq!(
+        assess_evidence(&older_record_without_artifact, &changed).unwrap()["status"],
+        "outdated"
+    );
 }
 
 #[test]

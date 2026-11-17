@@ -7,10 +7,27 @@
 ```sh
 cargo build --locked --release --manifest-path tools/workspace-inspection/Cargo.toml
 workspace-inspection evidence --root /path/to/validation-runs --current-baseline baseline.json
+workspace-inspection baseline --root /path/to/project --source src/main.rs --affected src/main.rs --out baseline.json
 workspace-inspection compare --source /path/a --target /path/b --exclude "*.log"
 workspace-inspection compare --source /path/a --target /path/b --format all --out /path/outside/report
 workspace-inspection mcp --read-root /path/to/workspace
 ```
+
+## 選定來源基準擷取 `baseline`
+
+`baseline` 對明確列出的 root 相對檔案計算 SHA-256, 不掃描整個專案, 不讀取 Git 狀態, 也不宣稱代表完整或即時工作樹
+
+```sh
+workspace-inspection baseline --root /path/to/project --source src/main.rs --source Cargo.toml --affected src/main.rs --artifact target/app.bin --out baseline.json
+```
+
+`--root` 必填, `--source` 可選 1 至 500 個檔案, `--affected` 最多 5,000 個路徑
+單檔最多 64 MiB, 總讀取量最多 512 MiB, 選用的 `--artifact` 也計入總量
+選取根目錄內的一般檔案, 不接受連結或含 `.`、`..` 的相對路徑, `--out` 只建立新 JSON 檔案
+
+缺檔、越界及擷取中變動等問題列於 `diagnostics`, 未成功雜湊的受影響路徑列於 `uncovered_paths`
+`partial` 回傳結束碼 1, 可將輸出傳給既有 `evidence --current-baseline`, 比對相符時仍保留擷取的部分狀態
+`captured` 表示選定檔案已讀取, 驗證結果仍須對照既有證據
 
 ## 驗證證據 `evidence`
 

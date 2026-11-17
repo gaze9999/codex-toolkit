@@ -50,6 +50,8 @@ jobs:
         run: |
           python -B -m unittest discover -s python-tools/packages/decisions/tests -v
           python -B -m unittest discover -s python-tools/packages/visual-runtime/tests -v
+      - name: Check local Markdown references
+        run: python -B -m unittest discover -s python-tools/tests -p test_markdown_references.py
       - name: Check installed entry points
         run: |
           decisions --help

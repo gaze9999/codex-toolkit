@@ -224,7 +224,12 @@ pub fn report_data(report: &Value) -> Value {
             ["進入點", if entries.is_empty() {"未解析到進入點".to_owned()} else {entries}],
             ["工具版本", format!("code-health {}", env!("CARGO_PKG_VERSION"))]
         ],
-        "note":if semantic.is_some() {"以下都是靜態分析的候選, 語意狀態來自提供者回報, 尚未驗證佐證是否對應目前程式碼, 提出移除或重構前需重新核對實際使用端"} else {"以下都是靜態分析的候選, 提出移除或重構前需核對實際使用端"},
+        "note":match semantic.map(|value| value["freshness"].as_str()) {
+            Some(Some("matched_scan_sources")) => "佐證與本次掃描讀取的來源相符, 提出移除或重構前仍須核對實際使用端",
+            Some(Some("partial")) => "佐證涉及不完整的掃描或未配對的候選, 提出移除或重構前須核對涵蓋範圍",
+            Some(_) => "尚未驗證佐證是否對應目前程式碼, 提出移除或重構前須核對實際使用端",
+            None => "以下都是靜態分析的候選, 提出移除或重構前需核對實際使用端"
+        },
         "stats":stats,"sections":sections
     })
 }

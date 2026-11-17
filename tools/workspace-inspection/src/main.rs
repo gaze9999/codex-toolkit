@@ -1,13 +1,16 @@
 use report_html::output::{emit, parse_formats, Emit, Rendered, DEFAULT_FORMATS};
 use serde_json::Value;
 use std::fs;
+use std::io::Write;
 use std::path::PathBuf;
+use workspace_inspection::baseline::capture_baseline;
 use workspace_inspection::environment::{compare_trees, DEFAULT_EXCLUDES};
 use workspace_inspection::validation::index_evidence;
 use workspace_inspection::{mcp, pages};
 
 const HELP: &str =
-    "workspace-inspection evidence [--root DIR] [--limit N] [--current-baseline FILE]
+    "workspace-inspection baseline --root DIR --source PATH [--source PATH] [--affected PATH] [--artifact PATH] [--out FILE]
+workspace-inspection evidence [--root DIR] [--limit N] [--current-baseline FILE]
 workspace-inspection compare --source DIR --target DIR [--include GLOB] [--exclude GLOB]
   [--no-default-excludes] [--max-files N]
 workspace-inspection mcp --read-root DIR [--read-root DIR]
@@ -33,6 +36,10 @@ fn run(args: &[String]) -> Result<i32, String> {
         return Ok(0);
     }
     let (value_flags, bool_flags): (&[&str], &[&str]) = match command.as_str() {
+        "baseline" => (
+            &["--root", "--source", "--affected", "--artifact", "--out"],
+            &[],
+        ),
         "evidence" => (&["--root", "--limit", "--current-baseline"], &[]),
         "compare" => (
             &[
@@ -59,7 +66,15 @@ fn run(args: &[String]) -> Result<i32, String> {
         if bool_flags.contains(&arg.as_str()) {
             flags.push(arg);
         } else if value_flags.contains(&arg.as_str()) || common.contains(&arg.as_str()) {
-            let repeatable = ["--include", "--exclude", "--read-root"].contains(&arg.as_str());
+            let repeatable = [
+                "--include",
+                "--exclude",
+                "--read-root",
+                "--source",
+                "--affected",
+            ]
+            .contains(&arg.as_str())
+                && (arg != "--source" || command == "baseline");
             if !repeatable && values.iter().any(|(key, _)| key == arg) {
                 return Err(format!("{arg} is given more than once"));
             }
@@ -76,6 +91,26 @@ fn run(args: &[String]) -> Result<i32, String> {
             .collect()
     };
     let one = |name: &str| all(name).last().copied();
+    if command == "baseline" {
+        let root = PathBuf::from(one("--root").ok_or("--root is required")?);
+        let sources: Vec<String> = all("--source").into_iter().map(str::to_owned).collect();
+        if sources.is_empty() {
+            return Err("at least one --source is required".into());
+        }
+        let affected: Vec<String> = all("--affected").into_iter().map(str::to_owned).collect();
+        let result = capture_baseline(&root, &sources, &affected, one("--artifact"))?;
+        let text = serde_json::to_string_pretty(&result).map_err(|e| e.to_string())?;
+        if let Some(path) = one("--out") {
+            fs::OpenOptions::new()
+                .write(true)
+                .create_new(true)
+                .open(path)
+                .and_then(|mut file| writeln!(file, "{text}"))
+                .map_err(|e| format!("{path}: {e}"))?;
+        }
+        println!("{text}");
+        return Ok(if result["status"] == "partial" { 1 } else { 0 });
+    }
     let number = |name: &str, default: i64| match one(name) {
         None => Ok(default),
         Some(text) => text

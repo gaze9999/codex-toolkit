@@ -10,6 +10,8 @@ Use this after the scan returns `unused` or `needs_review` candidates and a lang
 
 ## Query
 
+If a local semantic adapter can consume the code-health JSON report and emit `code-health-evidence/2`, pass the matching workspace and selected candidate IDs. Use the report's `source_files` with the evidence and regenerate it when the merge rejects a changed source. Keep zero-reference results unconfirmed until the relevant graph and entry points have been checked.
+
 Send the candidates in one call where the entry offers a batch tool: `lsp_find_references_batch` on `code_intelligence` takes up to 50 `queries`, each with the absolute `file_path`, `line`, `column` and the candidate ID as `id`, plus `include_declaration: false`. Otherwise call `lsp_find_references` once per candidate. Each result holds `context` (`workspace`, `adapter`, `version`, `provider`, `coverage`), `references` and `total_count`. Send again any position whose error reports the batch time budget; a path outside the configured workspaces returns an error.
 
 A language server answers for the projects it has loaded. In a multi-project workspace (Nx applications and libraries with separate tsconfig files, project references, micro-frontends), consumers in another project can be missing. `code_intelligence` opens the files that mention the symbol before it queries and reports the outcome in `context.coverage.expansion`; `complete: true` means the bounded text search opened every matching file it selected. It does not prove that aliases, re-exports, framework discovery, reflection or external consumers were covered. Verify the maintained entry points and project graph before treating a zero-reference result as confirmation.

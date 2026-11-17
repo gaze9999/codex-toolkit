@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "d95166e76a791cd6551dbe02ffe38ede7eec56b46c06f50c4c99e6614b4cbf76",
+      "sha256": "ef7947a9d433612ad1b4e9e80c810fcf842d49fbecca731188b16ba49abef99f",
       "source": null
     },
     "LICENSE": {
@@ -13,11 +13,11 @@
       "source": "assets/branding/plugins/codex-documents-specifications.png"
     },
     "plugin.json": {
-      "sha256": "c2154147c0187ce2fa2c592b0e1666cae98ed1fb97fa9046b53e16db4b543433",
+      "sha256": "133aa5b4c9ec43cfcc52790b83bf31527ff2e7f409c305762f788f71307d8998",
       "source": "plugins/documents-specifications/plugin.json"
     },
     "resources/token-count/VERSION": {
-      "sha256": "967d9afb101346667166f2e76e81910bc190488d7d41d50ca0072e9d92f00e32",
+      "sha256": "a66780da23103beaf12432b418508966b31a2a3a787f9468a5b6cdaa8667c1ef",
       "source": "python-tools/VERSION"
     },
     "resources/token-count/requirements.txt": {
@@ -93,7 +93,7 @@
       "source": "skills/context-brief/scripts/validate_context_brief.py"
     },
     "skills/doc-updater/SKILL.md": {
-      "sha256": "87b5a9ef58c9f053ace9338a9e3a56c18f00981f6c094aac3a19bb172cf0a676",
+      "sha256": "d9c2f521b0b120290b57fdf8489cd7d6e13c509d24c754348be4b6e7098be03f",
       "source": "skills/doc-updater/SKILL.md"
     },
     "skills/doc-updater/agents/openai.yaml": {
@@ -325,6 +325,6 @@
     "local-documents"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.39.0",
-  "version": "0.7.3"
+  "toolkit_version": "0.40.0",
+  "version": "0.8.2"
 }

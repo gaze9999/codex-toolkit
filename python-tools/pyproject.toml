@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 license = {file = "LICENSE"}
 name = "my-py-document-core"
-version = "0.2.2"
+version = "0.3.0"
 description = "Reusable local document extraction and guarded Markdown APIs"
 readme = "docs/python-document-core.md"
 requires-python = ">=3.10"

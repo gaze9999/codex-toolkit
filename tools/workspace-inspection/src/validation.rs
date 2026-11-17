@@ -165,6 +165,11 @@ pub fn assess_evidence(recorded: &Value, current: &Value) -> Result<Value, Strin
     }
     let status = if changed {
         "outdated"
+    } else if current.get("capture_kind").and_then(Value::as_str)
+        == Some("workspace_inspection_baseline_v1")
+        && current.get("status").and_then(Value::as_str) == Some("partial")
+    {
+        "partial"
     } else if !matched {
         "unverified"
     } else if missing || !coverage_known || !uncovered.is_empty() {

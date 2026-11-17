@@ -113,6 +113,7 @@ struct Source {
 struct Project {
     sources: Vec<Source>,
     configs: BTreeMap<PathBuf, Value>,
+    config_hashes: BTreeMap<String, String>,
     issues: Vec<Value>,
     partial: bool,
 }
@@ -219,6 +220,10 @@ impl Project {
                             language,
                         });
                     } else if let Ok(value) = module_graph::jsonc(&text) {
+                        project.config_hashes.insert(
+                            evidence::source_path(&relative),
+                            evidence::sha256(text.as_bytes()),
+                        );
                         project.configs.insert(relative, value);
                     } else {
                         project.issue(&relative, "Project configuration could not be parsed");
@@ -544,6 +549,16 @@ pub fn scan(options: &Options) -> Result<Value, String> {
     #[cfg(windows)]
     portable_report_paths(&mut report);
     evidence::assign_ids(&mut report);
+    if graph_enabled {
+        let mut files = project.config_hashes;
+        files.extend(project.sources.iter().map(|source| {
+            (
+                evidence::source_path(&source.path),
+                evidence::sha256(source.text.as_bytes()),
+            )
+        }));
+        report["source_files"] = json!(files);
+    }
     if let Some(evidence) = &options.evidence {
         evidence::merge(&mut report, evidence)?;
     }
@@ -612,7 +627,10 @@ pub fn markdown(report: &Value) -> String {
         report["files_scanned"], report["partial"]
     );
     if report.get("semantic").is_some() {
-        out.push_str("\nSemantic statuses are provider-reported; evidence freshness is unverified. Recheck against current sources before acting.\n");
+        out.push_str(&format!(
+            "\nSemantic statuses are provider-reported. Source evidence: {}. Check actual consumers before acting.\n",
+            cell(&report["semantic"]["freshness"])
+        ));
     }
     for (section, columns) in [
         (

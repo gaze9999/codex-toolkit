@@ -8,7 +8,7 @@
 
 ```text
 python -m pip wheel --no-deps --no-build-isolation --wheel-dir /absolute/wheels .
-python -m pip install /absolute/wheels/my_py_document_core-0.2.2-py3-none-any.whl
+python -m pip install /absolute/wheels/my_py_document_core-0.3.0-py3-none-any.whl
 ```
 
 不是 editable install, 安裝後修改, 改名或搬移原 repo 都不會改變既有 runtime 的程式, 核心更新時重新建置 wheel, 檢查 SHA-256 與相容性後再安裝到需要更新的環境
@@ -40,6 +40,22 @@ print(result.content)
 | `updates.read_target`, `headings`, `section` | 讀取 Markdown, 定位章節 |
 | `updates.prepare`, `sha`, `write_guarded` | 準備內容, 比對 hash, 執行原子寫入與 readback |
 | `validation.analyze(text)` | 唯讀檢查有限的 Markdown ATX 標題與 fence, 回傳 checks, failures, warnings, 不宣稱完整 Markdown parser |
+| `references.analyze_references(root, documents, affected_paths=None)` | 讀取明確選定的本機文件, 回傳連結位置、錨點判定與反向引用 |
+
+引用分析支援單行行內連結與圖片、ATX 標題及重複標題的序號錨點, 略過程式碼區塊與行內程式碼
+其餘語法見輸出的 `unsupported`, 外部網址略過, 根目錄外或無效的目標回報 `outside-or-invalid-path`
+只對選定且可讀的 Markdown 檔案檢查錨點, 未讀取的目標回報 `anchor-not-inspected`
+
+從 `python-tools` 執行:
+
+```sh
+python src/documents/analyze_markdown_references.py --root /abs/docs --document index.md --document guide.md --affected old.md
+```
+
+可重複選定文件及受影響路徑, `--affected` 可帶入重新命名或刪除前的路徑
+最多讀取 500 份文件, 每份 1 MiB、合計 16 MiB, 回傳最多 10,000 筆引用
+結束碼 1 表示輸出部分資料及診斷, 2 表示輸入無效, 命令不查詢外部網址或寫入檔案
+已安裝文件核心時也可用 `python -m my_py_document_core.documents.analyze_markdown_references`
 
 原生 PDF, Office 擷取需要相關選用套件, OCR 由 Local Documents MCP 另外提供, API 不自行掃描 repo, 啟動 MCP, 取得 credentials 或授權寫入
 

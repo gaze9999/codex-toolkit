@@ -497,6 +497,29 @@ fn candidates_carry_stable_ids_and_merge_semantic_evidence() {
     // Markdown and HTML show the result beside each candidate
     assert!(markdown(&merged).contains("| semantic |"));
     assert!(!markdown(&report).contains("semantic"));
+    let mut bound = options.evidence.clone().unwrap();
+    bound["schema"] = json!("code-health-evidence/2");
+    bound["source_files"] = moved["source_files"].clone();
+    for item in bound["items"].as_array_mut().unwrap() {
+        if let Some(row) = rows(&moved, "unused")
+            .iter()
+            .find(|row| row["id"] == item["id"])
+        {
+            item["position"] =
+                json!({"path":row["path"],"line":row["line"],"column":row["column"]});
+        } else {
+            item["status"] = json!("unsupported");
+        }
+    }
+    options.evidence = Some(bound);
+    assert_eq!(scan(&options).unwrap()["semantic"]["freshness"], "partial");
+    let source = options.root.join("main.ts");
+    let mut bytes = fs::read(&source).unwrap();
+    bytes.extend_from_slice(b"\n// Changed after the evidence was captured\n");
+    fs::write(source, bytes).unwrap();
+    assert!(scan(&options)
+        .unwrap_err()
+        .contains("Evidence sources differ"));
     let page = html(&merged, &Style::builtin()).unwrap();
     assert!(page.contains("語意確認 2 / ") && page.contains("找到使用端 (2 處, typescript)"));
     assert!(page.contains("&lt;dynamic import&gt;") && page.contains("1 筆佐證找不到對應候選"));

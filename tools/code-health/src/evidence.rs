@@ -2,10 +2,25 @@
 //! A language server or reviewer checks candidates by ID; the scan stays syntax-level and
 //! records each result beside the candidate without changing the candidate lists.
 use serde_json::{json, Map, Value};
+use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::Path;
 
 pub const SCHEMA: &str = "code-health-evidence/1";
+pub const SOURCE_SCHEMA: &str = "code-health-evidence/2";
+
+pub fn source_path(path: &Path) -> String {
+    let name = path.to_string_lossy();
+    if cfg!(windows) {
+        name.replace('\\', "/")
+    } else {
+        name.into_owned()
+    }
+}
+
+pub fn sha256(bytes: &[u8]) -> String {
+    format!("{:x}", Sha256::digest(bytes))
+}
 /// Evidence states: the candidate holds (no consumer found), is refuted (a consumer exists),
 /// or the provider could not answer.
 pub const STATUSES: [&str; 5] = ["confirmed", "refuted", "unsupported", "timeout", "error"];
@@ -129,8 +144,21 @@ fn clean(item: &Value) -> Result<(String, Value), String> {
 
 /// Attaches evidence to candidates with matching IDs and summarizes the result under `semantic`.
 pub fn merge(report: &mut Value, evidence: &Value) -> Result<(), String> {
-    if evidence["schema"] != SCHEMA {
-        return Err(format!("Evidence needs \"schema\": \"{SCHEMA}\""));
+    let schema = text(&evidence["schema"]);
+    if ![SCHEMA, SOURCE_SCHEMA].contains(&schema) {
+        return Err(format!(
+            "Expected evidence schema {SCHEMA} or {SOURCE_SCHEMA}"
+        ));
+    }
+    let source_bound = schema == SOURCE_SCHEMA;
+    if source_bound
+        && (!evidence["root"].is_string()
+            || !evidence["source_files"].is_object()
+            || evidence["source_files"] != report["source_files"])
+    {
+        return Err(
+            "Evidence sources differ from the current scan; regenerate the evidence".into(),
+        );
     }
     if let Some(root) = evidence["root"].as_str() {
         let same = Path::new(root)
@@ -146,7 +174,16 @@ pub fn merge(report: &mut Value, evidence: &Value) -> Result<(), String> {
         .ok_or_else(|| format!("Evidence items must be a list of at most {ITEM_LIMIT}"))?;
     let mut by_id = BTreeMap::new();
     for item in items {
-        let (id, kept) = clean(item)?;
+        let (id, mut kept) = clean(item)?;
+        if source_bound
+            && matches!(text(&kept["status"]), "confirmed" | "refuted")
+            && !item["position"].is_object()
+        {
+            return Err(format!("Evidence {id} is missing its source position"));
+        }
+        if source_bound && item.get("position").is_some() {
+            kept["position"] = item["position"].clone();
+        }
         if by_id.insert(id.clone(), kept).is_some() {
             return Err(format!("Evidence {id} appears more than once"));
         }
@@ -159,6 +196,15 @@ pub fn merge(report: &mut Value, evidence: &Value) -> Result<(), String> {
             let id = text(&row["id"]).to_owned();
             match by_id.get(&id) {
                 Some(found) => {
+                    if let Some(position) = found.get("position") {
+                        if position
+                            != &json!({"path":row["path"],"line":row["line"],"column":row["column"]})
+                        {
+                            return Err(format!(
+                                "Evidence {id} refers to a different source position"
+                            ));
+                        }
+                    }
                     *counts.get_mut(text(&found["status"])).unwrap() += 1;
                     row["semantic"] = found.clone();
                     matched.insert(id);
@@ -169,7 +215,9 @@ pub fn merge(report: &mut Value, evidence: &Value) -> Result<(), String> {
     }
     // Unmatched IDs usually mean the evidence came from another scan or the code changed since
     let unmatched: Vec<&String> = by_id.keys().filter(|id| !matched.contains(*id)).collect();
-    report["semantic"] =
-        json!({"schema":SCHEMA,"counts":counts,"unmatched":unmatched,"freshness":"unverified"});
+    report["semantic"] = json!({"schema":schema,"counts":counts,"unmatched":unmatched,"freshness":
+            if !source_bound { "unverified" }
+            else if report["partial"] == true || !unmatched.is_empty() { "partial" }
+            else { "matched_scan_sources" }});
     Ok(())
 }
