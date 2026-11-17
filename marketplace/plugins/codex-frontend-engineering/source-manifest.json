@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "cd6dc9fb06eed1624e0a988fff9f11ac1666450a6d781ac318e915d3ef64fa09",
+      "sha256": "7f060eb06438da0eed33510bc90dd248713c9aaf6b103eb18801dc999f20c24b",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-frontend-engineering.png"
     },
     "plugin.json": {
-      "sha256": "14546678624bd9c63b76a19dff3f5910718fef5c8bae0989ecf2d36ce7452eb9",
+      "sha256": "1c351d620f25ff99fa02ad49f419e762c310f372a34837748cd37d27e40d5885",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "resources/references/angular-style.md": {
@@ -53,7 +53,7 @@
       "source": "skills/accessibility-engineering/references/validation.md"
     },
     "skills/angular-component-test/SKILL.md": {
-      "sha256": "5a09860f57dbe6aa68ecff6c5d6ad26726fc97eb1c570280307bf5410e1757d3",
+      "sha256": "d2ca3c78f41b2a37192caf740faa2bdc8640f4885a20ce1324622eab12f827f0",
       "source": "skills/angular-component-test/SKILL.md"
     },
     "skills/angular-component-test/agents/openai.yaml": {
@@ -101,11 +101,11 @@
       "source": "skills/angular-component-test/scripts/lib/html.mjs"
     },
     "skills/angular-component-test/scripts/lib/report.mjs": {
-      "sha256": "40789e245b96cfb04862a20b8856a720376ead07434781cdaf7a247fc3faa5cc",
+      "sha256": "9dd68f9150092e8009f13325be97a471bd6586d6f6c9b84c08a72c4a1bf658b6",
       "source": "skills/angular-component-test/scripts/lib/report.mjs"
     },
     "skills/angular-component-test/scripts/run.mjs": {
-      "sha256": "b22876dd3c0d8ffc4b1ced821549f31024cb057102bc8349715b6804ce8ffbf2",
+      "sha256": "5fd9e95eeef63cf79f8ca67b15ba2d907046b82fda920cf45bb44f568c7be1bb",
       "source": "skills/angular-component-test/scripts/run.mjs"
     },
     "skills/angular-development/SKILL.md": {
@@ -393,6 +393,6 @@
     "spartan"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.38.0",
-  "version": "0.8.1"
+  "toolkit_version": "0.39.0",
+  "version": "0.8.2"
 }

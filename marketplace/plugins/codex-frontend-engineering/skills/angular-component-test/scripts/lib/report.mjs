@@ -1,6 +1,6 @@
 // Report model, exit code and Markdown rendering for component test results; html.mjs renders the same model.
 export const TOOL_NAME = 'angular-component-test';
-export const TOOL_VERSION = '0.1.1';
+export const TOOL_VERSION = '0.1.2';
 export const REPORT_SCHEMA = `${TOOL_NAME}-report/1`;
 export const FORMATS = ['html', 'md', 'json'];
 
@@ -30,18 +30,36 @@ export function exitCode(summary) {
   return summary.passed ? 0 : 2;
 }
 
+/** 執行時間以測試頁時區顯示, 頁面未執行時改用指定時區, 時區無效時保留 ISO 時間 */
+export function startedAtText(model) {
+  const timezone = model.runtime.timezone ?? model.requestedTimezone;
+  const date = new Date(model.startedAt);
+  if (!timezone || Number.isNaN(date.getTime())) return String(model.startedAt);
+  try {
+    const parts = Object.fromEntries(new Intl.DateTimeFormat('en-CA', {
+      timeZone: timezone, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit',
+    }).formatToParts(date).map(part => [part.type, part.value]));
+    return `${parts.year}-${parts.month}-${parts.day} ${parts.hour}:${parts.minute}:${parts.second} (${timezone})`;
+  } catch {
+    return String(model.startedAt);
+  }
+}
+
 export function versionRows(model) {
   const { sources, runtime } = model;
+  const project = sources.project;
+  const revision = [project.revision ?? '無法取得', project.branch && `分支 ${project.branch}`, `未提交檔案 ${project.dirty.length} 個`].filter(Boolean).join(', ');
   return [
     ['工具', `${model.tool.name} ${model.tool.version}`],
     ['結果', model.statusText],
-    ['執行時間', model.startedAt],
+    ['執行時間', startedAtText(model)],
     ['Node', runtime.node],
     ['瀏覽器', runtime.browser ?? '未啟動'],
     ['User Agent', runtime.userAgent ?? '未取得'],
-    ['時區', runtime.timezone ?? '未取得'],
-    ['Angular 專案', sources.project.root],
-    ['專案版本', `${sources.project.revision ?? '無法取得'}, 未提交檔案 ${sources.project.dirty.length} 個`],
+    ['Angular 專案', project.root],
+    ['專案版本', revision],
+    ...(project.packages?.length ? [['相依套件版本', project.packages.map(item => `${item.name} ${item.version}`).join(', ')]] : []),
+    ...(model.environment ?? []),
     ['tsconfig', sources.tsconfig],
     ['測試套件', `${sources.suite.root}, 進入點 ${sources.suite.entry}`],
     ...sources.suite.files.map(file => ['套件檔案', `${file.name} ${file.sha256.slice(0, 12)}`]),

@@ -14,8 +14,8 @@ const fixtures = path.join(here, 'fixtures/angular-component-test');
 const { aliasTargets, emitted, loadEsbuild } = await import(path.join(skill, 'scripts/lib/build.mjs'));
 const { findBrowser } = await import(path.join(skill, 'scripts/lib/chrome.mjs'));
 const { atLeast, findRenderer, renderHtml, reportData } = await import(path.join(skill, 'scripts/lib/html.mjs'));
-const { exitCode, LIMITS, parseFormats, renderMarkdown, REPORT_SCHEMA, summarize } = await import(path.join(skill, 'scripts/lib/report.mjs'));
-const { main, parseArgs, WORK_PREFIX } = await import(path.join(skill, 'scripts/run.mjs'));
+const { exitCode, LIMITS, parseFormats, renderMarkdown, REPORT_SCHEMA, startedAtText, summarize, versionRows } = await import(path.join(skill, 'scripts/lib/report.mjs'));
+const { main, packageVersions, parseArgs, readMeta, WORK_PREFIX } = await import(path.join(skill, 'scripts/run.mjs'));
 
 const project = process.env.ANGULAR_PROJECT ? path.resolve(process.env.ANGULAR_PROJECT) : null;
 const baseConfig = project && (process.env.ANGULAR_TSCONFIG ? path.resolve(process.env.ANGULAR_TSCONFIG)
@@ -97,6 +97,41 @@ test('markdown escapes table cells', () => {
   assert.match(text, /❌ 不通過/);
   assert.match(text, /## 證據範圍/);
   assert.match(text, /HTML 產生器 \| report-html 0\.1\.0/);
+});
+
+test('start time shows in the page time zone and the time zone row is gone', () => {
+  const model = { ...sample(), startedAt: '2026-11-17T09:08:46.214Z', runtime: { node: 'v', browser: 'b', timezone: 'Asia/Taipei' } };
+  assert.equal(startedAtText(model), '2026-11-17 17:08:46 (Asia/Taipei)');
+  assert.equal(startedAtText({ ...model, runtime: { ...model.runtime, timezone: null }, requestedTimezone: 'UTC' }), '2026-11-17 09:08:46 (UTC)');
+  assert.equal(startedAtText({ ...model, runtime: { ...model.runtime, timezone: 'Not/AZone' } }), '2026-11-17T09:08:46.214Z');
+  const keys = versionRows(model).map(([key]) => key);
+  assert.ok(!keys.includes('時區'));
+  assert.ok(keys.includes('執行時間'));
+});
+
+test('branch, package versions and supplied environment rows appear only when present', t => {
+  const model = sample();
+  model.sources.project = { root: '/p', revision: 'r', branch: 'feature/x', dirty: [], packages: [{ name: '@angular/core', version: '19.2.0' }] };
+  model.environment = [['資料庫', 'PostgreSQL 16'], ['後端版本', '1.2.3']];
+  const rows = Object.fromEntries(versionRows(model));
+  assert.equal(rows['專案版本'], 'r, 分支 feature/x, 未提交檔案 0 個');
+  assert.equal(rows['相依套件版本'], '@angular/core 19.2.0');
+  assert.equal(rows['資料庫'], 'PostgreSQL 16');
+  const bare = Object.fromEntries(versionRows(sample()));
+  assert.equal(bare['專案版本'], 'r, 未提交檔案 0 個');
+  assert.ok(!('相依套件版本' in bare));
+  const temp = mkdtempSync(path.join(os.tmpdir(), 'component-test-meta-'));
+  t.after(() => rmSync(temp, { recursive: true, force: true }));
+  const file = path.join(temp, 'meta.json');
+  writeFileSync(file, JSON.stringify({ 資料庫: 'PostgreSQL 16', 筆數: 3 }));
+  assert.deepEqual(readMeta(file), [['資料庫', 'PostgreSQL 16'], ['筆數', '3']]);
+  writeFileSync(file, JSON.stringify(['x']));
+  assert.throws(() => readMeta(file), /物件/);
+  writeFileSync(file, JSON.stringify({ 巢狀: { a: 1 } }));
+  assert.throws(() => readMeta(file), /巢狀/);
+  mkdirSync(path.join(temp, 'node_modules', 'rxjs'), { recursive: true });
+  writeFileSync(path.join(temp, 'node_modules', 'rxjs', 'package.json'), JSON.stringify({ version: '7.8.1' }));
+  assert.deepEqual(packageVersions(temp), [{ name: 'rxjs', version: '7.8.1' }]);
 });
 
 test('the report schema is a named version string', () => {
@@ -208,6 +243,9 @@ test('a mixed suite reports passed, failed, error and observation cases in order
   assert.match(markdown, /\| User Agent \| Mozilla\/5\.0 /);
   assert.match(html, /User Agent/);
   assert.equal(report.runtime.timezone, 'Asia/Taipei');
+  assert.match(markdown, /\| 執行時間 \| \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} \(Asia\/Taipei\) \|/);
+  assert.doesNotMatch(markdown, /\| 時區 \|/);
+  assert.ok(report.sources.project.packages.some(item => item.name === '@angular/core'));
   assert.equal(report.schemaVersion, 'angular-component-test-report/1');
   assert.match(markdown, /❌ 錯誤/);
   assert.match(html, /F2/);

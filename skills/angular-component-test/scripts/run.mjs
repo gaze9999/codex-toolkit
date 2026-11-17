@@ -1,7 +1,7 @@
 // Angular component tests: AOT-compile a suite against the real components, run it in headless Chrome or Edge and write report.html, report.md and report.json.
 // Usage:
 //   node run.mjs --project <Angular project root> --tsconfig <tsconfig.json> --suite <suite folder> --out <output folder>
-//                [--entry suite.ts] [--format html,md,json] [--title <text>] [--chrome <browser>] [--report-html <cli>] [--timezone UTC] [--timeout 300] [--case-timeout 15] [--keep-work]
+//                [--entry suite.ts] [--format html,md,json] [--title <text>] [--chrome <browser>] [--report-html <cli>] [--meta-file <json>] [--timezone UTC] [--timeout 300] [--case-timeout 15] [--keep-work]
 // HTML is rendered by the shared report-html CLI from report-html/v1 data; Markdown and JSON need no extra tool.
 // The suite imports @component-test/harness for test(), mount() and DOM helpers, and @project/<path> for project sources.
 // Exit codes: 0 every judged case passed, 1 a case failed or errored, 2 nothing was judged, 3 configuration or compile error.
@@ -20,7 +20,7 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const hash = data => createHash('sha256').update(data).digest('hex');
 export const WORK_PREFIX = `${TOOL_NAME}-`;
 const HELP = `用法: node run.mjs --project <Angular 專案> --tsconfig <tsconfig.json> --suite <套件資料夾> --out <報告資料夾>
-選用: --entry suite.ts --format html,md,json --title <標題> --chrome <瀏覽器> --report-html <CLI> --timezone UTC --timeout 300 --case-timeout 15 --keep-work
+選用: --entry suite.ts --format html,md,json --title <標題> --chrome <瀏覽器> --report-html <CLI> --meta-file <環境資訊 JSON> --timezone UTC --timeout 300 --case-timeout 15 --keep-work
 結束碼: 0 全部通過, 1 有案例不通過或錯誤, 2 沒有可判定的案例, 3 設定或編譯錯誤`;
 
 export function parseArgs(argv) {
@@ -29,7 +29,7 @@ export function parseArgs(argv) {
     return pairs;
   }, []));
   for (const key of ['project', 'tsconfig', 'suite', 'out']) if (!args[key] || args[key] === true) throw new Error(`需要 --${key}`);
-  for (const key of ['project', 'tsconfig', 'suite', 'out', 'chrome', 'report-html']) if (typeof args[key] === 'string') args[key] = path.resolve(args[key]);
+  for (const key of ['project', 'tsconfig', 'suite', 'out', 'chrome', 'report-html', 'meta-file']) if (typeof args[key] === 'string') args[key] = path.resolve(args[key]);
   const seconds = (key, fallback, max) => {
     const value = args[key] === undefined ? fallback : Number(args[key]);
     if (!Number.isFinite(value) || value <= 0 || value > max) throw new Error(`--${key} 需為 1 到 ${max} 秒`);
@@ -40,7 +40,7 @@ export function parseArgs(argv) {
   const out = args.out, suite = args.suite;
   if (out === suite || out.startsWith(suite + path.sep)) throw new Error('--out 不能位於 --suite 內');
   return {
-    project: args.project, tsconfig: args.tsconfig, suite, out, entry, chrome: args.chrome, reportHtml: args['report-html'], formats: parseFormats(args.format),
+    project: args.project, tsconfig: args.tsconfig, suite, out, entry, chrome: args.chrome, reportHtml: args['report-html'], metaFile: args['meta-file'], formats: parseFormats(args.format),
     title: typeof args.title === 'string' ? args.title : '元件測試報告',
     timezone: typeof args.timezone === 'string' ? args.timezone : 'UTC',
     timeoutMs: seconds('timeout', 300, 1800), caseTimeoutMs: seconds('case-timeout', 15, 600), keepWork: args['keep-work'] === true,
@@ -53,12 +53,36 @@ export function projectRevision(project) {
   const head = git(['rev-parse', 'HEAD']);
   if (head.status !== 0) return { revision: null, dirty: [] };
   const top = git(['rev-parse', '--show-toplevel']).stdout.trim();
+  const branch = git(['rev-parse', '--abbrev-ref', 'HEAD']).stdout.trim();
   const status = git(['status', '--porcelain=v1', '-z', '--untracked-files=no', '--', '.']).stdout;
   const dirty = status.split('\0').filter(Boolean).filter(entry => !/^R/.test(entry)).map(entry => {
     const file = entry.slice(3), full = path.join(top, file);
     return { path: file, sha256: existsSync(full) && statSync(full).isFile() ? hash(readFileSync(full)) : null };
   });
-  return { revision: head.stdout.trim(), dirty };
+  return { revision: head.stdout.trim(), branch: branch && branch !== 'HEAD' ? branch : null, dirty };
+}
+
+/** 受測程式實際載入的框架版本, 讀取專案 node_modules, 找不到的套件不列出 */
+const PACKAGES = ['@angular/core', 'typescript', 'rxjs', 'zone.js'];
+export function packageVersions(project) {
+  return PACKAGES.flatMap(name => {
+    try {
+      const { version } = JSON.parse(readFileSync(path.join(project, 'node_modules', name, 'package.json'), 'utf8'));
+      return typeof version === 'string' ? [{ name, version }] : [];
+    } catch {
+      return [];
+    }
+  });
+}
+
+/** 報告附帶的環境資訊, 例如資料庫連線版本或後端版本, 由呼叫端提供 { 項目: 內容 } 物件 */
+export function readMeta(file) {
+  const data = JSON.parse(readFileSync(file, 'utf8'));
+  if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error('需為 { "項目": "內容" } 物件');
+  return Object.entries(data).map(([key, value]) => {
+    if (typeof value !== 'string' && typeof value !== 'number') throw new Error(`${key} 需為字串或數字`);
+    return [key, String(value)];
+  });
 }
 
 export async function main(argv) {
@@ -68,9 +92,9 @@ export async function main(argv) {
   try { options = parseArgs(argv); } catch (error) { console.error(`設定錯誤: ${error.message}\n${HELP}`); return 3; }
   const { project, tsconfig, suite, out, entry } = options;
   const model = {
-    schemaVersion: REPORT_SCHEMA, tool: { name: TOOL_NAME, version: TOOL_VERSION }, title: options.title, startedAt,
+    schemaVersion: REPORT_SCHEMA, tool: { name: TOOL_NAME, version: TOOL_VERSION }, title: options.title, startedAt, requestedTimezone: options.timezone,
     runtime: { node: process.version, browser: null, userAgent: null, timezone: null },
-    sources: { project: { root: project, ...projectRevision(project) }, tsconfig, suite: { root: suite, entry, files: [] } },
+    sources: { project: { root: project, ...projectRevision(project), packages: packageVersions(project) }, tsconfig, suite: { root: suite, entry, files: [] } },
     results: [], consoleErrors: [], limits: LIMITS, summary: summarize([]),
   };
   let renderer = null;
@@ -96,6 +120,7 @@ export async function main(argv) {
     return model.exitCode;
   };
   if (Number(process.versions.node.split('.')[0]) < 22) return finish(3, '需要 Node.js 22 以上 (使用內建 WebSocket)');
+  if (options.metaFile) try { model.environment = readMeta(options.metaFile); } catch (error) { return finish(3, `--meta-file 無法使用: ${error.message}`); }
   if (options.formats.includes('html')) {
     try { renderer = findRenderer(options.reportHtml); } catch (error) { return finish(3, error.message); }
     model.renderer = { name: 'report-html', version: renderer.version, schema: HTML_SCHEMA };
