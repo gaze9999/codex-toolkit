@@ -9,7 +9,7 @@
 | 需求 | 入口 |
 |---|---|
 | 不使用 Codex, 直接執行工具 | [Python CLI](python-tools/README.md) |
-| 掃描程式碼、Angular 或工作區, 產生離線報告 | [code-health](tools/code-health/README.md)、[angular-checks](tools/angular-checks/README.md)、[workspace-inspection](tools/workspace-inspection/README.md)、[report-html](tools/report-html/README.md) |
+| 掃描程式碼、Angular 或工作區, 產生離線報告 | [code-health](tools/code-health/README.md)、[angular-checks](tools/angular-checks/README.md)、[workspace-inspection](tools/workspace-inspection/README.md)、[report-html](tools/report-html/README.md)、[work-artifact-cleanup](tools/work-artifact-cleanup/README.md)、[markdown-checks](tools/markdown-checks/README.md) |
 | 在自己的 Python 程式使用核心 | [文件核心](python-tools/docs/python-document-core.md) |
 | 在 Codex 選用工作流程 | [Plugin 市集](docs/marketplace.md) 或 [獨立 Skills](docs/skills.md) |
 

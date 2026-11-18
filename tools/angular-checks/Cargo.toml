@@ -1,12 +1,16 @@
 [package]
 name = "angular-checks"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2021"
 rust-version = "1.89"
 license = "MIT"
-description = "Read-only Angular and Nx checks: component inventory, form contracts, generator preflight and change impact"
+description = "Read-only Angular and Nx checks: component inventory, form contracts, generator preflight, change impact and bounded maintenance review"
 
 [dependencies]
 regex = "1"
 report-html = { path = "../report-html" }
-serde_json = "1"
+serde_json = { version = "1", features = ["preserve_order"] }
+sha2 = "0.10"
+
+[dev-dependencies]
+tempfile = "3"

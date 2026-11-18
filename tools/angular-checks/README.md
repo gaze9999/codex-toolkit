@@ -1,6 +1,6 @@
 # Angular Checks 唯讀檢查
 
-四項 Angular 與 Nx 的唯讀檢查, 共用同一個執行檔與輸出層, 結果可輸出文字、JSON、Markdown 與離線 HTML
+四項 Angular 與 Nx 的唯讀檢查共用同一個執行檔與輸出層, 結果可輸出文字、JSON、Markdown 與離線 HTML, 另有 `maintainability` 範圍限定的維護審查, 輸出自己的 JSON 報告
 
 使用 Rust 1.89 以上的 stable 版本建置, 建置時需要同一份儲存庫內的 `tools/report-html`, 執行時只有 `--changed` 與 `change-impact` 需要 Git
 
@@ -10,6 +10,7 @@ angular-checks components customer --root /path/to/workspace --project customer-
 angular-checks form-contract --root /path/to/workspace --contract forms.json --format json
 angular-checks generator-preflight --root /path/to/project --identifier TXN001 --selector app-txn001
 angular-checks change-impact --root /path/to/repository --format all --out /path/outside/report
+angular-checks maintainability --root /path/to/project --scope src/feature --mode module --typescript /approved/typescript/lib/typescript.js --report /path/outside/review.json
 ```
 
 | 指令 | 用途 | 結束碼 1 |
@@ -18,9 +19,11 @@ angular-checks change-impact --root /path/to/repository --format all --out /path
 | `form-contract --contract FILE` | 依欄位規格比對 TypeScript 的 form control 與範本的 `formControlName` | 有不符項目 |
 | `generator-preflight --identifier ID` | 產生檔案前找出既有的 identifier 與 selector | 已有相同名稱, 加上 `--allow-existing` 時為 0 |
 | `change-impact` | 列出已暫存、未暫存與未追蹤的檔案, 以及檔案內出現的公開介面標記 | 不使用 |
+| `maintainability` | 依明確範圍挑選檔案並記錄雜湊, 用已核准安裝的 TypeScript 與選用的 Angular compiler 執行 AST 規則, 寫出一份新的 JSON 報告, 規則與結果欄位見 [維護審查](../../skills/angular-development/references/maintainability-review.md) | 有機械性 FAIL |
 
 輸入錯誤或環境問題的結束碼為 2, 訊息以 `error:` 開頭寫到標準錯誤, `--root` 省略時使用目前資料夾
 同一個選項重複指定時回報錯誤, `components` 的關鍵字以 `--` 開頭時放在 `--` 分隔符之後, 例如 `components --root DIR -- --wide`
+`maintainability` 必須指定 `--root`, 只有 `--file` 與 `--dependency` 可以重複, 不使用 `--format`、`--out` 等共用輸出選項
 `--changed` 與 `change-impact` 需要 `--root` 位於 Git 儲存庫內
 
 ## 選項

@@ -2,7 +2,7 @@
 name: angular-component-test
 description: Run behavior tests against real Angular components by AOT-compiling a TypeScript suite with the project's own compiler and executing it in headless Chrome or Edge, producing HTML, Markdown and JSON reports. Use when a behavior needs mounted components, real FormControls, service state or outgoing requests and the project has no suitable test runner, not for interactive UI reproduction or visual layout checks.
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -37,6 +37,10 @@ Exit codes: 0 every judged case passed, 1 a case failed or errored, 2 nothing wa
 ## Write a suite
 
 Start from [assets/suite.template.ts](assets/suite.template.ts) and read [references/suite-api.md](references/suite-api.md) for the harness API, stand-in services and pitfalls. Import project code through `@project/<path from --project>`; the project's own aliases keep working. Import test helpers from `@component-test/harness`.
+
+`@component-test/harness` and `@project/*` exist only inside this Skill's runner: `scripts/lib/build.mjs` (`HARNESS_MODULE`, `PROJECT_ALIAS`) maps them to `scripts/harness/index.ts` and `--project`. A project-owned runner derived from this one may define its own harness specifier and project alias; such a suite keeps that runner's imports and compiles only there. To move a suite to this Skill, change both imports, not the code under test.
+
+The harness exports `group`, `test`, `observe`, `mount`, `typeBlur`, `click`, `query`, `input` and `wait`. Render suite-assigned state with `mounted.ref.tick()` (synchronous) or `await mounted.settle()` (deferred timer or promise updates). The reference lists `check` assertions, observations and the persisted case and report shape.
 
 ## Report
 

@@ -1,5 +1,7 @@
 use angular_checks::output::{emit, parse_formats, Emit, Rendered, DEFAULT_FORMATS};
-use angular_checks::{change_impact, components, form_contract, fsutil, preflight};
+use angular_checks::{
+    change_impact, components, form_contract, fsutil, maintainability, preflight,
+};
 use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
 
@@ -8,6 +10,7 @@ const HELP: &str =
 angular-checks form-contract --contract FILE [--root DIR]
 angular-checks generator-preflight --identifier ID [--selector NAME] [--allow-existing] [--root DIR]
 angular-checks change-impact [--root DIR]
+angular-checks maintainability --root DIR --scope PATH --mode files|diff|module --typescript FILE --report FILE.json
 
 Every command accepts --format json,md,html|all, --json, --out DIR and --style-dir DIR.
 --root defaults to the current directory. Each run prints a short summary and writes report.md
@@ -56,12 +59,24 @@ fn run(args: &[String]) -> Result<i32, String> {
     if matches!(command.as_str(), "--help" | "-h")
         || rest.iter().any(|a| a == "--help" || a == "-h")
     {
-        println!("{HELP}");
+        println!(
+            "{}",
+            if command == "maintainability" {
+                maintainability::HELP
+            } else {
+                HELP
+            }
+        );
         return Ok(0);
     }
     if command == "--version" {
         println!("angular-checks {}", env!("CARGO_PKG_VERSION"));
         return Ok(0);
+    }
+    if command == "maintainability" {
+        let options = maintainability::parse(rest)
+            .map_err(|error| format!("{error}\n{}", maintainability::HELP))?;
+        return maintainability::run(&options);
     }
     let (value_flags, bool_flags): (&[&str], &[&str]) = match command.as_str() {
         "components" => (&["--project", "--limit"], &["--changed"]),

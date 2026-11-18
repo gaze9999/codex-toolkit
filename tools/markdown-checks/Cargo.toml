@@ -1,0 +1,17 @@
+[package]
+name = "markdown-checks"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.89"
+license = "MIT"
+description = "Read-only Markdown structure checks, change classification and hash-guarded sync target writes"
+
+[dependencies]
+regex = "1"
+# preserve_order keeps report fields in the documented order
+serde_json = { version = "1", features = ["preserve_order"] }
+sha2 = "0.10"
+unicode-casefold = "0.2"
+
+[dev-dependencies]
+tempfile = "3"

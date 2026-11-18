@@ -64,33 +64,9 @@ Windows 不提供這些查詢與終止的原子操作, 持有 handle 可避免�
 
 兩個目錄的唯讀比對已改由 Rust 工具 [workspace-inspection](../../tools/workspace-inspection/README.md) 的 `compare` 指令提供
 
-## `maintenance/cleanup_work_artifacts.py`
+## 開發產物清理
 
-掃描可丟棄的開發快取與中間產物, 預設只產生預覽清單, `--apply` 才移至可復原的隔離區
-
-```powershell
-python launch-cli.py maintenance.cleanup_work_artifacts
-python launch-cli.py maintenance.cleanup_work_artifacts --root C:\path\project --root C:\path\another
-python launch-cli.py maintenance.cleanup_work_artifacts --root C:\path\project --include-build --include-work-dirs --apply
-python launch-cli.py maintenance.cleanup_work_artifacts --output-dir C:\safe\cleanup --purge-quarantine --older-than-days 7
-```
-
-預設候選包含 `__pycache__`, pytest/mypy/ruff/tox/nox 快取, coverage 與常見暫存檔, `build`, `dist`, `*.egg-info`, `work`, `tmp`, `temp` 需明確用選項納入
-
-安全檢查
-
-- 拒絕檔案系統根目錄與不存在的根目錄
-- 不進入 Git/Mercurial/Subversion 中繼資料, `.codex`, log, 備份或隔離區
-- 不跟隨 symlink 資料夾
-- 跳過包含巢狀 repository 或 Git 已追蹤內容的候選, Git worktree 使用的 `.git` 檔案也會辨識
-- 預設只納入至少 1 天未修改的候選, 資料夾以內部最新檔案時間判斷, `--min-age-days` 可調整
-- `--apply` 將項目移到隔離區, 不直接刪除
-- `--apply` 搬移前會重新檢查巢狀 repository 與 Git 已追蹤內容, 降低掃描後狀態改變的風險
-- `--purge-quarantine` 只永久刪除含本工具 ownership marker 且超過保存天數的批次, 不處理使用者自行放入的資料夾
-
-清單, JSONL 事件紀錄與隔離區預設放在 `~/.work-artifact-cleaner`, 可用 `--output-dir` 變更, 天數選項必須是 0 到 365000 的有限數
-
-結束代碼 `0` 表示預覽, 隔離或永久清除完成, `2` 表示安全檢查, I/O 或 Git 查詢錯誤
+開發快取與中間產物的預覽、隔離和清除已改由 Toolkit 的 Rust 工具 `tools/work-artifact-cleanup` 提供, 參數、輸出位置和安全檢查見[工具說明](../../tools/work-artifact-cleanup/README.md)
 
 ## `maintenance/rewrite_git_history.py`
 

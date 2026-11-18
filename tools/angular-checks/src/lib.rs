@@ -3,5 +3,6 @@ pub mod change_impact;
 pub mod components;
 pub mod form_contract;
 pub mod fsutil;
+pub mod maintainability;
 pub mod output;
 pub mod preflight;

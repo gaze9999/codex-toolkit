@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "7f060eb06438da0eed33510bc90dd248713c9aaf6b103eb18801dc999f20c24b",
+      "sha256": "4f954d4a885ddbddc73ab77044e335165f3d9b529274b9940f268734b261b5f2",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-frontend-engineering.png"
     },
     "plugin.json": {
-      "sha256": "1c351d620f25ff99fa02ad49f419e762c310f372a34837748cd37d27e40d5885",
+      "sha256": "e4404a59ab6b22e7c004393dfa45751fc6c374c775ea0e3f14a8c501c0ca602d",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "resources/references/angular-style.md": {
@@ -53,11 +53,11 @@
       "source": "skills/accessibility-engineering/references/validation.md"
     },
     "skills/angular-component-test/SKILL.md": {
-      "sha256": "d2ca3c78f41b2a37192caf740faa2bdc8640f4885a20ce1324622eab12f827f0",
+      "sha256": "8249e12884df20d6674be0c4927bfde10fb79063e118237af657488901650b86",
       "source": "skills/angular-component-test/SKILL.md"
     },
     "skills/angular-component-test/agents/openai.yaml": {
-      "sha256": "582212e09be0433455b8dc8941168598e680bd3ddf9dd484930a91141e051f6e",
+      "sha256": "914ea3cd6068aedefd4cb0d6978028865214ce4fab4c8ef85e47acb51d8da2cb",
       "source": "skills/angular-component-test/agents/openai.yaml"
     },
     "skills/angular-component-test/assets/icon-small.png": {
@@ -81,7 +81,7 @@
       "source": "skills/angular-component-test/assets/suite.template.ts"
     },
     "skills/angular-component-test/references/suite-api.md": {
-      "sha256": "f3e4231bdef525b7e8696747f154c24ac8ddf6b15ea5d288bcf96877b01adb7a",
+      "sha256": "0fe9adf4788cd176bdc0f3852d13b3b072b86df1767e2f810e2bcf0e1592ddaf",
       "source": "skills/angular-component-test/references/suite-api.md"
     },
     "skills/angular-component-test/scripts/harness/index.ts": {
@@ -109,11 +109,11 @@
       "source": "skills/angular-component-test/scripts/run.mjs"
     },
     "skills/angular-development/SKILL.md": {
-      "sha256": "bba508242ca3a14ae8579cc02e127558a38918fe23e46696e671788b1582e902",
+      "sha256": "27b9939d513638cf37d0e764dc93735f76787e398b7505c2d222515ebad9e889",
       "source": "skills/angular-development/SKILL.md"
     },
     "skills/angular-development/agents/openai.yaml": {
-      "sha256": "b0e15c657cc9c3175c18593ad327fb444de71d8ea123909007a874340574795c",
+      "sha256": "2b40f67248942cd11c2229cd19661e3e15573da0786a273d04a150e735fabd8b",
       "source": "skills/angular-development/agents/openai.yaml"
     },
     "skills/angular-development/assets/icon-small.png": {
@@ -149,7 +149,7 @@
       "source": "skills/angular-development/references/component-behavior.md"
     },
     "skills/angular-development/references/maintainability-review.md": {
-      "sha256": "9489222a720c406b9ee94de878cdb55df7038419a535bd25798eca40a8ca0835",
+      "sha256": "9450c68713f66275e73e0f1d40873d68bd451e0aec72cfc756b780266e9b91be",
       "source": "skills/angular-development/references/maintainability-review.md"
     },
     "skills/angular-development/references/typescript-formatting.md": {
@@ -167,10 +167,6 @@
     "skills/angular-development/scripts/check_conventions.cjs": {
       "sha256": "c6eb665753ba393910f2d6d15b682d41a8c441dc8039f2c746a630e89a808419",
       "source": "skills/angular-development/scripts/check_conventions.cjs"
-    },
-    "skills/angular-development/scripts/check_maintainability.py": {
-      "sha256": "5cffd1b602b6bdb235d29d4a5797c465b22335b44d4a38aa0a09b5632f3a2ec8",
-      "source": "skills/angular-development/scripts/check_maintainability.py"
     },
     "skills/angular-development/scripts/maintainability_ast.cjs": {
       "sha256": "1871e35982a711f67d557801ce0baf86c0a7b734078821ddf3c20d1e06d92b50",
@@ -393,6 +389,6 @@
     "spartan"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.40.0",
-  "version": "0.8.2"
+  "toolkit_version": "0.41.0",
+  "version": "0.9.0"
 }

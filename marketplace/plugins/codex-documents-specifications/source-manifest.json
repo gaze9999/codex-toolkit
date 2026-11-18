@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "ef7947a9d433612ad1b4e9e80c810fcf842d49fbecca731188b16ba49abef99f",
+      "sha256": "18a0d0be7b88d329b171272ce8c0f7f31bcafbc0b15f4dcb89e203a6dd6375d7",
       "source": null
     },
     "LICENSE": {
@@ -13,11 +13,11 @@
       "source": "assets/branding/plugins/codex-documents-specifications.png"
     },
     "plugin.json": {
-      "sha256": "133aa5b4c9ec43cfcc52790b83bf31527ff2e7f409c305762f788f71307d8998",
+      "sha256": "3b189e2e7ed3a0cd34336048d1b7ea999c569198badee0104492c24a7eeba3be",
       "source": "plugins/documents-specifications/plugin.json"
     },
     "resources/token-count/VERSION": {
-      "sha256": "a66780da23103beaf12432b418508966b31a2a3a787f9468a5b6cdaa8667c1ef",
+      "sha256": "9d8c94f1ad3ea96b1e2ac4914fda4cb93c76b4a3e0d8cc6dd8976d6c0b227d15",
       "source": "python-tools/VERSION"
     },
     "resources/token-count/requirements.txt": {
@@ -53,11 +53,11 @@
       "source": "python-tools/src/text/token_html.py"
     },
     "skills/context-brief/SKILL.md": {
-      "sha256": "9ad9295abdbad7f6b58b0fa28fa900f28eb4e7154e5ef987cda2175cd307acd6",
+      "sha256": "2880b312078ded461978fe4a4883e90b28f0fb78eda1d8c7f80205674f53b83a",
       "source": "skills/context-brief/SKILL.md"
     },
     "skills/context-brief/agents/openai.yaml": {
-      "sha256": "4a7eacb55cf849bcfc503ed2be0a3fa41dfafec6b1f8186cae021dcbc84ccf6d",
+      "sha256": "0785c55ad6ed54d36c1e152b0ca4aee1759af8389b370ba93d643e7037b5a5dc",
       "source": "skills/context-brief/agents/openai.yaml"
     },
     "skills/context-brief/assets/icon-small.png": {
@@ -88,16 +88,12 @@
       "sha256": "cfcca0ab932160071219a3b8025cfbcd8ccf3ddf1a71548c43dd36362a939674",
       "source": "skills/context-brief/scripts/ocr_fallback.py"
     },
-    "skills/context-brief/scripts/validate_context_brief.py": {
-      "sha256": "5ad26def4afb187587f67ea3354f80c3931a76067933d92df5ed11ceaa9c15fa",
-      "source": "skills/context-brief/scripts/validate_context_brief.py"
-    },
     "skills/doc-updater/SKILL.md": {
-      "sha256": "d9c2f521b0b120290b57fdf8489cd7d6e13c509d24c754348be4b6e7098be03f",
+      "sha256": "4354c63a9dcb9c99892496128cd4b1d0676ce9a1854a972b40d56c380fe17e3c",
       "source": "skills/doc-updater/SKILL.md"
     },
     "skills/doc-updater/agents/openai.yaml": {
-      "sha256": "6c417dfebe3622ae66348a4ac6f63580abcaa6ddd9d6c1c67e18fa8172ac42ce",
+      "sha256": "59e2aff770c6c2b7ef491ebd9dfedca304a7c47e7007562b5c3d4957c1f904dd",
       "source": "skills/doc-updater/agents/openai.yaml"
     },
     "skills/doc-updater/assets/icon-small.png": {
@@ -121,7 +117,7 @@
       "source": "skills/doc-updater/references/doc-update-rules.md"
     },
     "skills/doc-updater/references/notion-sync-reader-writer-contract.md": {
-      "sha256": "99dc6db983fe68b4d131b96186face6addb8bcb0fc13bc49ec3c3e4e2eac8c9a",
+      "sha256": "858583e52e1f962210f6b265c2ad4db0547183b1e51f4303c03f086dafa8b66a",
       "source": "skills/doc-updater/references/notion-sync-reader-writer-contract.md"
     },
     "skills/doc-updater/references/presentation.md": {
@@ -132,21 +128,9 @@
       "sha256": "7312e482813ed0a97155e79135f9c1ad63ba6cff4ea112095969ad9da444d504",
       "source": "skills/doc-updater/references/source-and-history.md"
     },
-    "skills/doc-updater/scripts/inspect_markdown_sync_target.py": {
-      "sha256": "9f7530322f289745df5c2588a790d883e1c226ff4cd6b6a8f57ff7048f672b66",
-      "source": "skills/doc-updater/scripts/inspect_markdown_sync_target.py"
-    },
     "skills/doc-updater/scripts/inspect_notion_sync_target.py": {
       "sha256": "b047b0e0503c56621ef77c7514588536f6d3537c8624cb3f8666342b65d1c5bb",
       "source": "skills/doc-updater/scripts/inspect_notion_sync_target.py"
-    },
-    "skills/doc-updater/scripts/scan_changed_files.py": {
-      "sha256": "7a01542ee416ffcaeccccfa35aa80bfc9846815703434be43f08ee60ed7cfc32",
-      "source": "skills/doc-updater/scripts/scan_changed_files.py"
-    },
-    "skills/doc-updater/scripts/write_markdown_sync_target.py": {
-      "sha256": "a6b3d387db47029e3a01598306038013adc96a1c427dee274daba898fecef9dd",
-      "source": "skills/doc-updater/scripts/write_markdown_sync_target.py"
     },
     "skills/document-production/SKILL.md": {
       "sha256": "b7b4456ac07c2ab94e993081395a4a7a387a2d5912e41f9a7b68b50843f1eac4",
@@ -325,6 +309,6 @@
     "local-documents"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.40.0",
-  "version": "0.8.2"
+  "toolkit_version": "0.41.0",
+  "version": "0.9.0"
 }

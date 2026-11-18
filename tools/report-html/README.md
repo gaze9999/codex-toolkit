@@ -55,7 +55,7 @@ report-html render --input report-data.json --style-dir /path/to/appearance-pack
 
 | 區塊 `kind` | 欄位 | 呈現 |
 | --- | --- | --- |
-| `table` | `columns` (`key`、`label`、`kind` 為 `text`/`number`/`code`/`source`、`lang`)、`rows`、`filters: [{ key, label }]` | 可搜尋的條紋表格, `filters` 依該欄的不重複值產生下拉篩選並與搜尋同時作用, 分頁數字為列數 |
+| `table` | `columns` (`key`、`label`、`kind` 為 `text`/`number`/`code`/`source`、`lang`)、`rows`、`filters: [{ key, label }]` | 可搜尋的條紋表格, 長文字可展開閱讀全文, `filters` 依該欄的不重複值產生下拉篩選並與搜尋同時作用, 分頁數字為列數 |
 | `cards` | `items: [{ value, label, note, tone, title }]` | 卡片格, `title` 是滑鼠提示, 分頁數字為卡片數 |
 | `flow` | `columns` (欄名)、`nodes: [{ id, column, label, detail, tone }]`、`edges: [{ from, to }]` | 由左到右的流程圖, 滑鼠移入或以 Tab 聚焦節點時顯示 `detail`, 指向不存在節點的連線略過 |
 | `matrix` | `corner`、`columns`、`rows: [{ label, cells: [{ value, tone, label, detail } 或 null] }]`、`hint` | 計數矩陣, 點選格子在下方顯示 `detail`, `hint` 是尚未點選時的提示, 分頁數字為列數 |

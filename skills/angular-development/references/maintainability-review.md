@@ -10,18 +10,20 @@ Use the project-matched compiler/AST and relevant source review for this audit. 
 
 ## Inputs and execution
 
-Use Python 3.11+, Node and an approved installed TypeScript 4.x-6.x JavaScript API.
+Use `angular-checks` 0.3.0 or newer (Setup installs it from Toolkit `tools/angular-checks`),
+Node and an approved installed TypeScript 4.x-6.x JavaScript API.
 The TypeScript 7 native API is not assumed compatible. Supply an installed Angular
 compiler ESM entry only when template parsing is needed. Dependency loading executes
 those trusted library packages, never the target application; do not supply an
 unreviewed repository script as a compiler. No packages are downloaded or installed.
 
 ```text
-python scripts/check_maintainability.py --root /approved/project --scope src/feature --mode files --file src/feature/view.ts --file src/feature/view.html --depth static --typescript /approved/typescript/lib/typescript.js --angular-compiler /approved/angular/compiler/fesm2022/compiler.mjs --report /approved/reports/review-new.json
-python scripts/check_maintainability.py --root /approved/project --scope src/feature --mode diff --staged --unstaged --untracked --depth semantic --dependency src/shared/types.ts --typescript /approved/typescript/lib/typescript.js --profile /approved/profile.json --report /approved/reports/semantic-new.json
+angular-checks maintainability --root /approved/project --scope src/feature --mode files --file src/feature/view.ts --file src/feature/view.html --depth static --typescript /approved/typescript/lib/typescript.js --angular-compiler /approved/angular/compiler/fesm2022/compiler.mjs --report /approved/reports/review-new.json
+angular-checks maintainability --root /approved/project --scope src/feature --mode diff --staged --unstaged --untracked --depth semantic --dependency src/shared/types.ts --typescript /approved/typescript/lib/typescript.js --profile /approved/profile.json --report /approved/reports/semantic-new.json
 ```
 
-Run from this Skill directory or use the absolute script path. Reports contain
+The binary carries this Skill's AST worker (`scripts/maintainability_ast.cjs` with
+`scripts/check_conventions.cjs`), so it runs from any directory. Reports contain
 relative paths, line locations, hashes and bounded facts, not source excerpts,
 literal values, diagnostic messages, credentials or raw process errors. Keep
 company reports in their approved local environment. This is data minimization,

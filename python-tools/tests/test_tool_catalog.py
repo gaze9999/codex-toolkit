@@ -11,7 +11,7 @@ from shared.version import repository_version
 
 class ToolCatalogTests(unittest.TestCase):
     def test_catalog_has_unique_importable_modules(self) -> None:
-        self.assertGreaterEqual(len(TOOLS), 15)
+        self.assertGreaterEqual(len(TOOLS), 13)
         self.assertFalse(any(tool.module.startswith("mcp_tools.") for tool in TOOLS))
         self.assertEqual(len(TOOLS_BY_ID), len(TOOLS))
         self.assertTrue(EXCLUDED_MODULES.isdisjoint(tool.module for tool in TOOLS))

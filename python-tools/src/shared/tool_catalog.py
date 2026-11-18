@@ -87,23 +87,6 @@ _OVERRIDES = (
         "只有明確加上 --write 才會更新目標檔; --in-place 是會先建立備份的備援模式",
     ),
     ToolSpec(
-        "markdown-diff",
-        "markdown.markdown_semantic_diff",
-        "Markdown",
-        "Markdown 結構差異",
-        "比較兩份 Markdown 的標題, 清單項目, 表格列與 SHA-256",
-        '--left "C:\\path\\before.md" --right "C:\\path\\after.md"',
-    ),
-    ToolSpec(
-        "cleanup-artifacts",
-        "maintenance.cleanup_work_artifacts",
-        "維護",
-        "開發產物清理",
-        "預覽或隔離快取, build 與工作目錄, 並管理隔離區",
-        '--root "C:\\path\\project"',
-        "預設只預覽; --apply 會移動檔案, --purge-quarantine 會永久刪除舊隔離區",
-    ),
-    ToolSpec(
         "windows-process-audit",
         "maintenance.windows_process_audit",
         "維護",
@@ -205,16 +188,6 @@ _TOOL_DETAILS = {
         "purpose": "只更新指定 Markdown 範圍, 並避免來源在處理期間被其他程序改動",
         "inputs": "目標 Markdown, 操作名稱, 內容與選用的預期 SHA-256",
         "outputs": "預覽或受保護的更新結果; 寫入後會讀回驗證",
-    },
-    "markdown-diff": {
-        "purpose": "比較兩份 Markdown 的結構差異, 不被單純空白或版面差異干擾",
-        "inputs": "修改前與修改後的 Markdown",
-        "outputs": "標題, 清單, 表格列與 SHA-256 差異",
-    },
-    "cleanup-artifacts": {
-        "purpose": "清理測試快取與中途產物前先預覽, 降低誤刪風險",
-        "inputs": "要檢查的專案根目錄與選用範圍",
-        "outputs": "預覽清單, 隔離結果或隔離區清理結果",
     },
     "rewrite-git-history": {
         "requirements": "需安裝 Git, 並在目標 repository 設定 local user.name 與 user.email",

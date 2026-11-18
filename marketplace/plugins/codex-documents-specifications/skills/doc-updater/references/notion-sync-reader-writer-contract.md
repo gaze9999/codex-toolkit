@@ -14,7 +14,7 @@ Load and use this contract when the current request explicitly mentions Notion o
 ## Reader procedure
 
 1. Read the exact target before planning an update. For an uploaded snapshot, use the Skill-relative `scripts/inspect_notion_sync_target.py` when a compatible Python runtime is available, or an equivalent local JSON inspection, with that one file and, when known, its page ID.
-   For local Markdown metadata, `scripts/inspect_markdown_sync_target.py --include-notion-metadata <file>` is available only inside this explicitly authorized Notion workflow.
+   For local Markdown metadata, `markdown-checks sync-inspect --include-notion-metadata <file>` is available only inside this explicitly authorized Notion workflow.
 2. Record page ID or URL, title, relevant content blocks, child-page or database-item boundary, and any source / last-synced metadata.
 3. Compare implementation-relevant content with the canonical Markdown: text and identifiers, each table cell and its row/column association, link labels and destinations, inline code/fences and literal operators/escapes, plus child-page/database identities and hierarchy. Formatting equivalence must preserve these semantics; plain text equality is insufficient. Do not strip all HTML/tags or punctuation to make comparisons pass.
 4. If the uploaded snapshot is incomplete, a connector truncates content, returns unknown blocks, or cannot read the exact target, stop and report that the Notion side is unverified.

@@ -1,16 +1,8 @@
 # Markdown 工具
 
-## `markdown/markdown_semantic_diff.py`
+## Markdown 結構差異
 
-比較兩份 Markdown 的 ATX 標題, 清單項目與表格列, 同時輸出兩個檔案的 SHA-256, fenced code block 內的內容不會被當成文件結構
-
-```powershell
-python launch-cli.py markdown.markdown_semantic_diff --left before.md --right after.md
-```
-
-輸出 JSON 的每種結構都有 `only_left`, `only_right` 與 `order_changed`, 重複項目會保留數量差異, 內容相同但順序改變時會標示 `order_changed`, 即使有差異仍回傳結束代碼 `0`, 因為這是報告工具, 不作為通過或失敗的判斷關卡, 輸入不存在或無法讀取時回傳 `2`
-
-限制: 不比較一般段落語意, code block 內部語法或遠端文件狀態
+兩份 Markdown 的標題、清單項目與表格列比較已改由 Toolkit 的 Rust 工具 `markdown-checks diff` 提供, 見[工具說明](../../tools/markdown-checks/README.md)
 
 ## `markdown/guarded_markdown_update.py`
 

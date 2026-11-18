@@ -54,6 +54,21 @@ fn renders_cards_tables_and_escapes_every_value() {
 }
 
 #[test]
+fn compact_cells_keep_the_full_escaped_text_and_short_identifiers() {
+    let mut data = sample();
+    let detail = "<record>".repeat(20);
+    data["sections"][0]["rows"][0] = json!({"path":"RULE-123","why":detail});
+    let page = render(&data, &Style::builtin()).unwrap();
+    assert!(page.contains("<code class=\"rh-id\">RULE-123</code>"));
+    assert!(page.contains("<details class=\"rh-long\"><summary>"));
+    assert!(page.contains(&format!(
+        "</summary>{}</details>",
+        "&lt;record&gt;".repeat(20)
+    )));
+    assert!(!page.contains("<record>"));
+}
+
+#[test]
 fn rejects_data_that_does_not_match_the_schema() {
     let style = Style::builtin();
     let broken = |change: fn(&mut Value)| {

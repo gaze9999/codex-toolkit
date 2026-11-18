@@ -3,7 +3,7 @@ name: doc-updater
 description: Update, align or synchronize identified existing documentation when explicitly requested and supported by verifiable implementation-change evidence. Use for maintaining current docs, not source extraction, new reports or substantial README redesign.
 metadata:
   short-description: Minimize documentation updates from implementation evidence
-  version: "0.4.22"
+  version: "0.4.23"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -27,7 +27,7 @@ Governing specifications and confirmed decisions retain authority. Preserve unre
 Write the supported action or conclusion directly. Include a limitation only when it changes the reader's decision or operation, with its concrete impact and handling beside that step. Keep pending acceptance in the existing work record and relevant handoff; omit repeated disclaimers from reusable instructions and finished prose. Preserve authoritative quotations and required legal notices.
 
 - Read relevant implementation evidence and target sections, then make the smallest supported update. Recheck the destination when concurrent edits are possible, preserve unrelated changes, authoritative wording, legal notices and material limits, and keep secrets/private implementation details out of public guarantees.
-- If impact or target selection is unclear, read [documentation impact rules](references/doc-update-rules.md). The optional `scripts/scan_changed_files.py --repo <repo-root>` aids discovery with a compatible Python runtime; equivalent repository inspection needs no new tool installation.
+- If impact or target selection is unclear, read [documentation impact rules](references/doc-update-rules.md). The optional `markdown-checks scan-changes --repo <repo-root>` CLI aids discovery when installed; equivalent repository inspection needs no new tool installation.
 - The changed-file helper classifies paths. With no `--base`, it compares staged and unstaged tracked changes, falls back to `HEAD~1..HEAD` when those are empty, then adds untracked paths. Use an explicit base when the fallback would give the wrong scope.
 - For local link and reverse-reference candidates, use `my_py_document_core.references.analyze_references` or `python -m my_py_document_core.documents.analyze_markdown_references` with the installed document core. Supply an explicit root, selected documents and affected paths. The output lists unsupported Markdown syntax, and the workflow still needs source evidence before editing.
 - For Markdown replacement, use available inspection/dry-run/SHA-256 helpers or an equivalent optimistic-concurrency guard. A preview does not authorize additional writes.

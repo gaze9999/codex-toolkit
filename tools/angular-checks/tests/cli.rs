@@ -411,7 +411,8 @@ fn report_formats_go_to_a_new_folder_outside_the_root() {
     );
     let page = fs::read_to_string(out.join("report.html")).unwrap();
     assert!(
-        page.contains("wb-workbench") && page.contains("<code>HTTPStatus2PanelComponent</code>")
+        page.contains("wb-workbench")
+            && page.contains("<code class=\"rh-id\">HTTPStatus2PanelComponent</code>")
     );
     // The exit code still reports the check result when files are written
     let contract = fixture.0.join("contract.json");

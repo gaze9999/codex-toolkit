@@ -3,7 +3,7 @@ name: context-brief
 description: Turn explicitly supplied implementation specifications into reusable Codex Markdown context briefs. Use for implementation context, not ordinary summaries, document conversion, task guides or current-progress handoffs.
 metadata:
   short-description: Create concise, traceable coding context briefs
-  version: "0.4.16"
+  version: "0.4.17"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -50,7 +50,7 @@ Use the appropriate workflow instead for generic document conversion, ordinary s
 - Use OCR only when native extraction cannot recover scanned content or essential images. If no safe extraction path is available, mark only the affected coverage as unverified rather than blocking independent sections.
 - Mark coverage as `partial` or `unverified` when OCR, tables, or extraction are insufficient, and retain source locations.
 - Original specifications and confirmed decisions retain authority. Identify evidence read only through an extraction; structural validation does not mean the original was inspected. Do not silently re-extract sources or expand a requested brief refresh into source maintenance.
-- When a compatible Python runtime is available, run the Skill-relative `scripts/validate_context_brief.py <brief.md>` after creating the brief; use `--json` when machine-readable output is needed. Otherwise perform equivalent structural checks and report the bundled validator as not run.
+- When the `markdown-checks` CLI is available, run `markdown-checks context-brief <brief.md>` after creating the brief; use `--json` when machine-readable output is needed. Otherwise perform equivalent structural checks and report the bundled validator as not run.
 
 ## Output contract
 

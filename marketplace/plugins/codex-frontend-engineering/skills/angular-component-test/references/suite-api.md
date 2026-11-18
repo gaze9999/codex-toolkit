@@ -41,6 +41,22 @@ Cases run one at a time in definition order. A thrown error or a case timeout (`
 | `wait(ms)` | Timer delay |
 
 - Without zone.js in the project, `mount` adds the zoneless change-detection provider that the Angular version exports. Call `settle()` after state changes that the test drives directly.
+- Synchronous change detection: suite code runs outside Angular's zone, so a value assigned on `host` renders only after `mounted.ref.tick()`.
+- Deferred change detection: `await mounted.settle()` renders a `setTimeout(0)` or promise update scheduled before the call. For longer delays, `await wait(ms)` first.
+- Scope DOM reads to `mounted.element` when one case mounts several times; when a later case mounts the same selector, call `destroy()` and remove `mounted.element`.
+
+## Result shape
+
+Each case in `report.json` `results[]` is `{ id, group, name, status, assertions: [{ label, pass, actual, expected? }], observed?, message?, elapsedMs }`.
+
+| `status` | When |
+| --- | --- |
+| `passed` | A `test` with at least one judgment, all passing |
+| `failed` | Any judgment did not pass |
+| `error` | Thrown error, case timeout or a `test` with no judgment; `message` holds the stack and earlier judgments are kept |
+| `info` | An `observe` case; never judged |
+
+`check.observe(value)` works in both `test` and `observe` cases; the last call is kept in `observed`. The report also holds `summary { total, passed, failed, error, info }`, `exitCode`, `statusText`, `runtime`, `sources`, `consoleErrors` and `limits`; `report.md` and `report.html` render the same model.
 - Destroy each mounted application at the end of its case so later cases start from a clean document.
 - Gate a form behind `@if (show)` in the host when service state must be prepared before the form is created; toggle `show` and `settle()` to simulate reopening.
 
