@@ -1,6 +1,6 @@
 interface:
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
-  display_name: "Local Document Processing (v0.2.3)"
-  short_description: "Find source extracts and apply guarded document processing"
+  display_name: "本機文件處理"
+  short_description: "從本機文件擷取可追溯的內容, 或核對並套用指定的 Markdown 修改"
   default_prompt: "Use $local-document-processing to match existing source extracts or process these selected local documents within the authorized write scope."

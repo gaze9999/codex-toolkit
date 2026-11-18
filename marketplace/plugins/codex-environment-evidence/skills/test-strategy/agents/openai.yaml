@@ -1,8 +1,8 @@
 interface:
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
-  display_name: "Test Strategy (v0.2.10)"
-  short_description: "Select scoped checks for development and delivery"
+  display_name: "測試策略"
+  short_description: "依行為變更與交付條件規劃測試, 執行必要檢查並找出驗證缺口"
   default_prompt: "Use $test-strategy to select and complete authorized checks for the changed behavior and remaining acceptance risks."
 policy:
   allow_implicit_invocation: true

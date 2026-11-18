@@ -1,6 +1,6 @@
 interface:
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
-  display_name: "Research and Learning Synthesis (v0.5.5)"
-  short_description: "Connect research evidence with focused learning goals"
+  display_name: "研究整理與學習規劃"
+  short_description: "比較研究來源與實務經驗, 整理結論、先備知識與學習順序"
   default_prompt: "Use $research-learning-synthesis to compare original evidence, identify useful knowledge gaps and suggest a small prerequisite path."

@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-agent-operations",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "查詢本機 Agent 活動統計, 盤點與清理 Codex 和 Claude 的本機產物, 並提供 RTK 工具",
   "author": {
     "name": "gaze9999"

@@ -105,10 +105,12 @@ def update_config(original: str, python: Path, server: Path) -> str:
     matches = list(pattern.finditer(original))
     if owned and len(matches) != 1:
         raise ValueError("invalid_managed_config_block")
-    if "jev" in parsed.get("mcp_servers", {}) and not owned:
+    servers = parsed.get("mcp_servers", {})
+    managed = tomllib.loads(matches[0].group()).get("mcp_servers", {}) if owned else {}
+    if ({"jev", "butaslayer_jev"} & servers.keys()) - managed.keys():
         raise ValueError("existing_jev_server_not_managed")
     block = "\n".join([
-        BEGIN, "[mcp_servers.jev]", "command = " + json.dumps(str(python), ensure_ascii=False),
+        BEGIN, "[mcp_servers.butaslayer_jev]", "command = " + json.dumps(str(python), ensure_ascii=False),
         "args = " + json.dumps(["-B", str(server)], ensure_ascii=False),
         'env_vars = ["TYPESAFE_API_KEY", "TYPESAFE_MODEL", "CODEX_HOME"]',
         'enabled_tools = ["jev_rank", "jev_evaluate", "jev_status"]',

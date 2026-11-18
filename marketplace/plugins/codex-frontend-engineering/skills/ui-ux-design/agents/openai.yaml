@@ -1,6 +1,6 @@
 interface:
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
-  display_name: "UI UX Design (v0.7.7)"
-  short_description: "Design UI feedback and verify real interaction states"
+  display_name: "介面與互動設計"
+  short_description: "設計操作回饋與狀態轉換, 核對實際介面的配置與互動行為"
   default_prompt: "Use $ui-ux-design to select sources and component patterns, define microinteraction triggers and real completion signals, and inspect or fix UI/data/interaction discrepancies against the original request within scope."

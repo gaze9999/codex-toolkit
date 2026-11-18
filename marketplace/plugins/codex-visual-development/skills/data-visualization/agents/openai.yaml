@@ -1,8 +1,8 @@
 interface:
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
-  display_name: "Data Visualization (v0.1.1)"
-  short_description: "Build source-backed charts and visual explanations"
+  display_name: "資料視覺化"
+  short_description: "依據資料來源製作圖表與互動說明, 並核對圖表與原始資料"
   default_prompt: "Use $data-visualization to choose, produce and verify a chart or diagram that answers the reader's question from the available sources."
 
 policy:

@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "17be74849a291e10e60aa9c9e86a6e49d5e41e6544cec93b3eee3d1effc76a44",
+      "sha256": "01b52cdd3150485bc5cd6989e4deea52f6faab12689c75bfa2503d9dc5efd730",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-creative-imaging.png"
     },
     "plugin.json": {
-      "sha256": "dc996b8556747a5a3a0e8e6f45c8ed65c7d121f3551b6eaca5467b89fe516162",
+      "sha256": "5b8a09f5a5483b8aeab4fc2210a2e2ccfd07304ec4d8eb93cee09c961fddacac",
       "source": "plugins/creative-imaging/plugin.json"
     },
     "skills/comfyui-workflow/SKILL.md": {
@@ -21,7 +21,7 @@
       "source": "skills/comfyui-workflow/SKILL.md"
     },
     "skills/comfyui-workflow/agents/openai.yaml": {
-      "sha256": "ab89db9b14f0173f5b49e407fbe3bf0a3bb90213d508a2ed9d8f191ab9e0a493",
+      "sha256": "c6a8daa676d9763f54c22f4cb7cb6b3c60e51bb87bb173c1c65c579813ecd8e7",
       "source": "skills/comfyui-workflow/agents/openai.yaml"
     },
     "skills/comfyui-workflow/assets/icon-small.png": {
@@ -45,7 +45,7 @@
       "source": "skills/editorial-illustration/SKILL.md"
     },
     "skills/editorial-illustration/agents/openai.yaml": {
-      "sha256": "4147684f9b9aa3a2241145739979d9b1c075a3c18a57b5dcfb99f3ae73e68c95",
+      "sha256": "37ab179d787bf16a73625344b296937026a79fe5f13464e9e722bc751c2c8160",
       "source": "skills/editorial-illustration/agents/openai.yaml"
     },
     "skills/editorial-illustration/assets/icon-small.png": {
@@ -76,5 +76,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.41.0",
-  "version": "0.1.1"
+  "version": "0.1.2"
 }

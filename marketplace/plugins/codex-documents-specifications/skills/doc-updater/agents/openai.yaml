@@ -1,6 +1,6 @@
 interface:
-  display_name: "Doc Updater (v0.4.23)"
-  short_description: "Align existing docs from verified implementation changes"
+  display_name: "文件更新"
+  short_description: "依據已查證的實作變更更新既有文件, 核對說明與實際行為"
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
   default_prompt: "Use $doc-updater to minimally update identified existing documentation from concrete implementation evidence. Access or report on Notion only when the request explicitly names Notion or a Notion target."

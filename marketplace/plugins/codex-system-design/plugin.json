@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-system-design",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "分析系統邊界、資料擁有權、介面、品質需求與架構取捨",
   "author": {
     "name": "gaze9999"

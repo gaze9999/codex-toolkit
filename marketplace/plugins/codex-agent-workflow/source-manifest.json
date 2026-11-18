@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "05ec7756d5d0bb20d36adf7df0bd770a45e64b1db8216ce63aa055c8265a36fa",
+      "sha256": "2bbed726cf03fd56bd657a86a93ed59fc77fe98744bbc1104b49853c14d66663",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-agent-workflow.png"
     },
     "plugin.json": {
-      "sha256": "5de72f850afa56650642b2cae23af140ac1e6c71fd613886d5bf70301e8ba397",
+      "sha256": "0d52003917c74f0b99c06d39c0b2866d088c8c134783308d220aef21981ad38e",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
@@ -21,7 +21,7 @@
       "source": "skills/agent-governance/SKILL.md"
     },
     "skills/agent-governance/agents/openai.yaml": {
-      "sha256": "3b319337ab9b266abbc27993cefda89325d7e3e0b5deb6f588840ad456addcd2",
+      "sha256": "b87374290c5f629b03707adbac573ead845f21255028fe8177a69539b1b52b88",
       "source": "skills/agent-governance/agents/openai.yaml"
     },
     "skills/agent-governance/assets/icon-small.png": {
@@ -161,7 +161,7 @@
       "source": "skills/coding-prompt/SKILL.md"
     },
     "skills/coding-prompt/agents/openai.yaml": {
-      "sha256": "6a3df61f9d511be318ce9a2f50cead3dda85d6470d5fe4812ca4d3d7f27286fc",
+      "sha256": "b3bed195907d25d4cc4837f4395fed19c7513f3602c8e634c587e4e2df9fc23d",
       "source": "skills/coding-prompt/agents/openai.yaml"
     },
     "skills/coding-prompt/assets/icon-small.png": {
@@ -197,7 +197,7 @@
       "source": "skills/task-guide/SKILL.md"
     },
     "skills/task-guide/agents/openai.yaml": {
-      "sha256": "874d21a43abe293addc1b0c3dfc91c99e1c431209d7b0195fd2e0bd31fc2c38d",
+      "sha256": "12424ee60ec616bc0d0a076ce5046e4a238769b5f4e1843b82afedee585316fc",
       "source": "skills/task-guide/agents/openai.yaml"
     },
     "skills/task-guide/assets/goal.md": {
@@ -277,7 +277,7 @@
       "source": "skills/task-routing/SKILL.md"
     },
     "skills/task-routing/agents/openai.yaml": {
-      "sha256": "7b81226040e62a9eae7a7cd96ccd53c36e3ff424e9da6a3f7083bcb12bd56cf0",
+      "sha256": "c324fc469d513899b599f1d7e7889302d7ec419de30f4a0ff1e5b3f02667c310",
       "source": "skills/task-routing/agents/openai.yaml"
     },
     "skills/task-routing/assets/icon-small.png": {
@@ -308,5 +308,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.41.0",
-  "version": "0.6.5"
+  "version": "0.6.6"
 }

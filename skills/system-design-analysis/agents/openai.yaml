@@ -1,6 +1,6 @@
 interface:
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
-  display_name: "System Design and Analysis (v0.4.13)"
-  short_description: "Analyze system boundaries and design trade-offs"
+  display_name: "系統設計分析"
+  short_description: "釐清系統邊界、資料歸屬與介面, 比較架構選擇及其影響"
   default_prompt: "Use $system-design-analysis to map the requirements, data owners and failure paths, then compare viable design options with explicit assumptions."

@@ -1,6 +1,6 @@
 interface:
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
-  display_name: "Validation Evidence Review (v0.6.1)"
-  short_description: "Review recorded checks and scoped environment differences"
+  display_name: "驗證記錄審查"
+  short_description: "核對既有測試記錄、基準與環境差異, 標示尚待驗證的條件"
   default_prompt: "Use $validation-evidence-review to assess the recorded checks or compare these selected environment mirrors without reruns or synchronization."

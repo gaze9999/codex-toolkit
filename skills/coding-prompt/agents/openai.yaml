@@ -1,6 +1,6 @@
 interface:
-  display_name: "Coding Prompt (v0.4.17)"
-  short_description: "Create concise cross-project coding prompts"
+  display_name: "程式開發提示詞"
+  short_description: "依據開發需求撰寫可交接給程式代理的提示詞, 並建議合適的模型"
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
   default_prompt: "Use $coding-prompt to create a minimal reusable coding-agent prompt only when explicitly requested. Put the complete prompt alone in one mobile-copyable text code block, keep task-specific positive gates, and recommend one supported model and reasoning combination outside the block without executing the prompt."

@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "c4888e3eb5161ecbbe5003411754f9c46a16cacb1994475f7f4ea45534874c65",
+      "sha256": "8056c0ec79bad410f01374fbf4428cddbf34a31e6bace48d5efd90d37ce1dac6",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-system-design.png"
     },
     "plugin.json": {
-      "sha256": "371fee33a0471f270dd77314c73a396f9bcde9e928e245ac1669b003ed4bddd7",
+      "sha256": "86c880df95f5c7bb354729b6901c7df8c876569703a03f00f3401168dbcc366f",
       "source": "plugins/system-design/plugin.json"
     },
     "skills/system-design-analysis/SKILL.md": {
@@ -21,7 +21,7 @@
       "source": "skills/system-design-analysis/SKILL.md"
     },
     "skills/system-design-analysis/agents/openai.yaml": {
-      "sha256": "9061d094454694eebcfa38cc67c148ff43f7ffe89df9756a9528b7f67873134b",
+      "sha256": "00105e03624997782d874826b334aa06e99e59e8af680d412d6780be46a746b8",
       "source": "skills/system-design-analysis/agents/openai.yaml"
     },
     "skills/system-design-analysis/assets/icon-small.png": {
@@ -48,5 +48,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.41.0",
-  "version": "0.1.1"
+  "version": "0.1.2"
 }

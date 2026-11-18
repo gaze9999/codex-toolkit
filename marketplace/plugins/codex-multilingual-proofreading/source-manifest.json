@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "38b5f83923688e59dc2d885ef4d163ccee74f8c2f4d1dd83ebbc5d463244a688",
+      "sha256": "0ca7a7571aae1f49df19a89bf61752c649e09212631736e2c5595688febecadb",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-multilingual-proofreading.png"
     },
     "plugin.json": {
-      "sha256": "4313b8743a6c94620ac23484fc1a6f13c48691d2180958203c7a3253fe269306",
+      "sha256": "999beb8eb3acb9cc023d4735b6e9bda6abdecbe009c030afe96b926ca559adf6",
       "source": "plugins/multilingual-proofreading/plugin.json"
     },
     "resources/proofreading/authored-style.cjs": {
@@ -77,7 +77,7 @@
       "source": "skills/multilingual-proofreading/SKILL.md"
     },
     "skills/multilingual-proofreading/agents/openai.yaml": {
-      "sha256": "adc101bff4bf8c56d964406bb9cf5616fd52856fd72ba666f1b67b527ad7262b",
+      "sha256": "afdd2a99acf7d73c093cc4241fa6dd50bbae0676490f007ddb9d1ddf2fdcf937",
       "source": "skills/multilingual-proofreading/agents/openai.yaml"
     },
     "skills/multilingual-proofreading/assets/icon-small.png": {
@@ -115,5 +115,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.41.0",
-  "version": "0.2.6"
+  "version": "0.2.7"
 }

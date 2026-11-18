@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "df8a8fb705c53a48ef6a625b75ea8401e41cc1c8b134d58d03562b5371adc1f5",
+      "sha256": "eada7af72652329d183e53f56f0cc678bd3323d278e21ca889ccbe9a3b04be52",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-packaging-acceptance.png"
     },
     "plugin.json": {
-      "sha256": "00c9a6315e8843c0cc96ab57ec05e76b259254364107e5a01e93ffa47b3f12ea",
+      "sha256": "48470517a6b85d156a905a2147c86a33235313c7b71449db8765609d07d512bf",
       "source": "plugins/packaging-acceptance/plugin.json"
     },
     "skills/packaging-acceptance/SKILL.md": {
@@ -21,7 +21,7 @@
       "source": "skills/packaging-acceptance/SKILL.md"
     },
     "skills/packaging-acceptance/agents/openai.yaml": {
-      "sha256": "dd90adf72666fb81f860164eb9f937d661be771a1f2728ef0f2113f79d2a2935",
+      "sha256": "29432fbd8f24cc71c5e4911e403e92460dd012f9c91b9e623006eb3f360474e0",
       "source": "skills/packaging-acceptance/agents/openai.yaml"
     },
     "skills/packaging-acceptance/assets/icon-small.png": {
@@ -56,5 +56,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.41.0",
-  "version": "0.4.0"
+  "version": "0.4.1"
 }

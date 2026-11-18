@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "e6ce799f7983379b2cc21015c8376b52afe9c0ac781cb73b5833ae25ee6c9dad",
+      "sha256": "7c9fdd7ab1c43ed46efa964348a4dcdb96812f913e9f7a20162ada487242e333",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-visual-development.png"
     },
     "plugin.json": {
-      "sha256": "e518a1c9ccf5f0d7c62fb029f270d166e4f7f53b3fb72a069fdc6d6cd301aee2",
+      "sha256": "9963e7a25ec54b62879333a47de9599afbe58be17e0ec9d60e109264d256dbde",
       "source": "plugins/visual-development/plugin.json"
     },
     "resources/visual-runtime/README.md": {
@@ -49,7 +49,7 @@
       "source": "skills/data-visualization/SKILL.md"
     },
     "skills/data-visualization/agents/openai.yaml": {
-      "sha256": "586094fc85a8106a3c76bfd3b93584d427a62023e75b9c9b19093f260c570da1",
+      "sha256": "d0c58b014bc7b557097ae8bb2bfd2ab7aef6cd7a51d752e46ca6a177ddab17a8",
       "source": "skills/data-visualization/agents/openai.yaml"
     },
     "skills/data-visualization/assets/icon-small.png": {
@@ -81,7 +81,7 @@
       "source": "skills/visual-development/SKILL.md"
     },
     "skills/visual-development/agents/openai.yaml": {
-      "sha256": "f1d5f359bd42c31de7c73178d706ea846b8a5d7572e5f80091a0adb999f488ab",
+      "sha256": "c5eaf99ee2b64f8bcd5c10e69b5abf6b77e6b4e4ff88d0401cf5599552fa0965",
       "source": "skills/visual-development/agents/openai.yaml"
     },
     "skills/visual-development/assets/example.html": {
@@ -131,5 +131,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.41.0",
-  "version": "0.5.2"
+  "version": "0.5.3"
 }

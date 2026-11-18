@@ -1,6 +1,6 @@
 interface:
-  display_name: "Unity Development (v0.4.15)"
-  short_description: "Implement and verify Unity project changes safely"
+  display_name: "Unity 開發"
+  short_description: "在既有 Unity 版本與套件設定下開發功能, 驗證場景與建置目標"
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
   default_prompt: "Use $unity-development to inspect this project's Unity version, packages, serialized assets, pipelines, and build targets, then implement and verify the requested Unity change without breaking asset or GUID contracts."

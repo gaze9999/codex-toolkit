@@ -1,8 +1,8 @@
 interface:
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
-  display_name: "Accessibility Engineering (v0.1.2)"
-  short_description: "Verify semantics, keyboard and assistive behavior"
+  display_name: "無障礙開發"
+  short_description: "檢查介面語意、鍵盤操作、焦點移動與輔助科技的操作結果"
   default_prompt: "Use $accessibility-engineering to inspect the affected UI and platform requirements, implement the authorized accessibility change, and verify semantics, keyboard, focus and relevant assistive behavior."
 
 policy:

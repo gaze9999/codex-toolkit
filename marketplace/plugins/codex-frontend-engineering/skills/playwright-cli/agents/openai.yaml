@@ -1,6 +1,6 @@
 interface:
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
-  display_name: "Playwright CLI (v0.4.14)"
-  short_description: "Verify browser UI flows with Playwright CLI"
+  display_name: "Playwright 瀏覽器驗證"
+  short_description: "使用 Playwright CLI 重現瀏覽器操作, 檢查介面與網路請求"
   default_prompt: "Use $playwright-cli to reproduce the authorized UI flow in a unique isolated session and verify DOM, console, requests and screenshots against the expected outcome."

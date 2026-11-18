@@ -1,6 +1,6 @@
 interface:
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
-  display_name: "Decisions Evaluation (v0.1.3)"
-  short_description: "Bounded development evaluation with Decisions"
+  display_name: "Decisions 評估"
+  short_description: "使用 OpenAI Decisions 依指定選項或評分標準評估開發證據"
   default_prompt: "Use $decisions-evaluation for a bounded approved comparison when its result can change the next development step; keep Main responsible for authority and acceptance."

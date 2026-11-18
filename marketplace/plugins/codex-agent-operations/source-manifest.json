@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "270d20e0c81ddb1bbcdf9a048b8d0f060ea6867359a39b5a100436cad3442287",
+      "sha256": "d27af5819634cea6c4ef19619aecf5ea6816d4bc4f09e23bc3173ea45906f8b1",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-agent-operations.png"
     },
     "plugin.json": {
-      "sha256": "a588f4eca6b070258c2654fef9504cf32759b5a02f72bd85a481968cba64728c",
+      "sha256": "a62a4d3cea4d4e38a083f773b5c93a4ede75b748a3d5705714cc4c676a563b23",
       "source": "plugins/agent-operations/plugin.json"
     },
     "skills/agent-artifact-audit/SKILL.md": {
@@ -21,7 +21,7 @@
       "source": "skills/agent-artifact-audit/SKILL.md"
     },
     "skills/agent-artifact-audit/agents/openai.yaml": {
-      "sha256": "a3d56395c71cdf4b902ede1e54f52d7823873528f2628b5a9a9b1cb19a8f4c84",
+      "sha256": "573c94e2a199008dd2916b889af90322ce8124a4248c2bd16fdedccc0c57e480",
       "source": "skills/agent-artifact-audit/agents/openai.yaml"
     },
     "skills/agent-artifact-audit/assets/icon-small.png": {
@@ -45,7 +45,7 @@
       "source": "skills/local-activity-query/SKILL.md"
     },
     "skills/local-activity-query/agents/openai.yaml": {
-      "sha256": "f207b42845cdf9c929e727395347fb214b6113a628c873c8b7dbeb8b32e3f9aa",
+      "sha256": "1083873ad8ce0c87654230c443b27458dc7ab064a4ca96bf7d7c366ec702c236",
       "source": "skills/local-activity-query/agents/openai.yaml"
     },
     "skills/local-activity-query/assets/icon-small.png": {
@@ -78,5 +78,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.41.0",
-  "version": "0.1.1"
+  "version": "0.1.2"
 }

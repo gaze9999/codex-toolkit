@@ -1,6 +1,6 @@
 interface:
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
-  display_name: "Game Balance Simulation (v0.4.14)"
-  short_description: "Simulate game progression and reproduce balance failures"
+  display_name: "遊戲平衡模擬"
+  short_description: "依遊戲規則模擬資源與進度變化, 重現並分析平衡問題"
   default_prompt: "Use $game-balance-simulation to evaluate the requested game loop against its real core, compare a baseline and relevant strategies, and report reproducible results and the next useful playtest."

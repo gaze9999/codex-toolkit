@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-network-filters",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "維護 AdGuard、uBlock、DNS 與 hosts 的封鎖與改寫規則",
   "author": {
     "name": "gaze9999"

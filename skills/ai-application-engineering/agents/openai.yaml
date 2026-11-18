@@ -1,6 +1,6 @@
 interface:
-  display_name: "AI Application Engineering (v0.4.15)"
-  short_description: "Engineer LLM, agent, tool, and RAG applications"
+  display_name: "人工智慧應用開發"
+  short_description: "開發與診斷使用語言模型、代理、工具呼叫或檢索增強生成的應用程式"
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
   default_prompt: "Use $ai-application-engineering to inspect the current AI stack, preserve its provider and permission boundaries, implement the requested LLM, agent, tool-calling, RAG, embedding, or runtime change, and verify the affected behavior."

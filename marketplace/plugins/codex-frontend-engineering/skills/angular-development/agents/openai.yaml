@@ -1,6 +1,6 @@
 interface:
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
-  display_name: "Angular Development (v0.5.8)"
-  short_description: "Implement Angular features and inspect ownership"
+  display_name: "Angular 開發"
+  short_description: "開發 Angular 元件、表單與路由, 檢查資料和狀態由誰管理"
   default_prompt: "Use $angular-development to inspect the actual Angular versions and affected component, form or architecture, then complete and verify the scoped change."

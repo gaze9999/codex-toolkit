@@ -1,6 +1,6 @@
 interface:
-  display_name: "README Maintainer (v0.4.18)"
-  short_description: "Create accurate repository README documentation"
+  display_name: "README 維護"
+  short_description: "依儲存庫的實際功能與操作方式, 撰寫或重新整理 README"
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
   default_prompt: "Use $readme-maintainer to inspect the repository's actual source, configuration, scripts, tests, deployment, and existing docs, then create or substantially improve an accurate and scannable README."

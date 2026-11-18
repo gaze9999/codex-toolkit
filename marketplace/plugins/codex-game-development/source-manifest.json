@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "79b2d238aeeff7aa48474a9d87a056898f3c3f8e58c0deb83edd7f5c408c25c4",
+      "sha256": "637430ab9a56af3f617373efafe3e6d39552ac4a9fec83b7ecf6ab27911d4657",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-game-development.png"
     },
     "plugin.json": {
-      "sha256": "e3c8fd44f86981e6212301045b97135076c017b9838b6f1bfb9fbe7b784d8699",
+      "sha256": "41ab3ab64e23ddc2dc066fe6ecc2ebabdb03093fa4496cbc391614fa5434ef52",
       "source": "plugins/game-development/plugin.json"
     },
     "skills/game-balance-simulation/SKILL.md": {
@@ -21,7 +21,7 @@
       "source": "skills/game-balance-simulation/SKILL.md"
     },
     "skills/game-balance-simulation/agents/openai.yaml": {
-      "sha256": "9a7435220b73fdd539eab8288a9d4d75e54a5d99f7cda7b61dedaf3648c25464",
+      "sha256": "7c828a02d28a4717044891ed689f46959487a8be81ba01167e8aa1fa063cbbeb",
       "source": "skills/game-balance-simulation/agents/openai.yaml"
     },
     "skills/game-balance-simulation/assets/icon-small.png": {
@@ -45,7 +45,7 @@
       "source": "skills/unity-development/SKILL.md"
     },
     "skills/unity-development/agents/openai.yaml": {
-      "sha256": "96d345abfc035c7038deddfeb6101658c94fc0c424a979e043b33b25a03ceff7",
+      "sha256": "3f95a028a367b3509dc143d92b8b8ac42c0141d655a81459f94343d75d8bd2ce",
       "source": "skills/unity-development/agents/openai.yaml"
     },
     "skills/unity-development/assets/icon-small.png": {
@@ -72,5 +72,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.41.0",
-  "version": "0.1.1"
+  "version": "0.1.2"
 }

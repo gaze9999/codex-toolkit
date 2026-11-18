@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "09d7349e2f0a71d56adb96835b33b427a0a6fd13707a0eabe40c5741cded3744",
+      "sha256": "7545e0492abeafe0f4c37cf655a79b97e08fea889bbdcd4c2c482759805d383d",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-network-filters.png"
     },
     "plugin.json": {
-      "sha256": "f7f0deac37d0ce4318a70da1cd8c9f91e8a56707915c720c017757455aa43051",
+      "sha256": "47b8f4d81bd68f27bfa12945048b2d81be210f85d4d35f157fd4046521303eb5",
       "source": "plugins/network-filters/plugin.json"
     },
     "skills/network-filter-rules/SKILL.md": {
@@ -21,7 +21,7 @@
       "source": "skills/network-filter-rules/SKILL.md"
     },
     "skills/network-filter-rules/agents/openai.yaml": {
-      "sha256": "8ed60c61f62433131dce7eb728a70479180ef665e776e93f73205c94f983a8e8",
+      "sha256": "dc47b5c225d5f7cce1d20a4670529f520e473daa269ad4b0467e8beaa5ab0107",
       "source": "skills/network-filter-rules/agents/openai.yaml"
     },
     "skills/network-filter-rules/assets/icon-small.png": {
@@ -48,5 +48,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.41.0",
-  "version": "0.1.1"
+  "version": "0.1.2"
 }

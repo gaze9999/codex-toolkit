@@ -38,12 +38,14 @@ def main() -> None:
     for kind, roots in (("--read-root", service.read_roots), ("--write-root", service.write_roots)):
         for root in roots:
             arguments.extend((kind, str(root)))
-    section = "[mcp_servers.local_documents]\n" + "command = " + json.dumps(str(executable), ensure_ascii=False) + "\n"
-    section += "args = " + json.dumps(arguments, ensure_ascii=False) + "\n"
-    section += 'enabled = true\nstartup_timeout_sec = 120\ntool_timeout_sec = 300\nenabled_tools = ["document_status", "extract_document", "inspect_markdown", "locate_markdown_extracts", "update_markdown"]\n'
     before = config.read_bytes()
     text = before.decode("utf-8-sig")
-    match = re.search(r"(?m)^\[mcp_servers\.local_documents\][ \t]*\r?$", text)
+    servers = tomllib.loads(text).get("mcp_servers", {})
+    name = "local_documents" if "local_documents" in servers else "butaslayer_local_documents"
+    section = f"[mcp_servers.{name}]\n" + "command = " + json.dumps(str(executable), ensure_ascii=False) + "\n"
+    section += "args = " + json.dumps(arguments, ensure_ascii=False) + "\n"
+    section += 'enabled = true\nstartup_timeout_sec = 120\ntool_timeout_sec = 300\nenabled_tools = ["document_status", "extract_document", "inspect_markdown", "locate_markdown_extracts", "update_markdown"]\n'
+    match = re.search(rf"(?m)^\[mcp_servers\.{name}\][ \t]*\r?$", text)
     if match:
         following = re.search(r"(?m)^\[", text[match.end():])
         end = match.end() + following.start() if following else len(text)
@@ -56,9 +58,9 @@ def main() -> None:
         print(json.dumps({"status": "unchanged", "config": str(config)}, ensure_ascii=False))
         return
     old_servers = original.get("mcp_servers", {}).copy()
-    old_servers.pop("local_documents", None)
+    old_servers.pop(name, None)
     other_servers = parsed.get("mcp_servers", {}).copy()
-    other_servers.pop("local_documents", None)
+    other_servers.pop(name, None)
     if other_servers != old_servers or {k: v for k, v in parsed.items() if k != "mcp_servers"} != {k: v for k, v in original.items() if k != "mcp_servers"}:
         raise ValueError("Unrelated settings changed")
     if args.apply:
@@ -84,7 +86,7 @@ def main() -> None:
                 temporary.unlink(missing_ok=True)
         print(json.dumps({"status": "installed", "config": str(config), "backup": str(backup)}, ensure_ascii=False))
     else:
-        print(json.dumps({"status": "preview", "server": parsed["mcp_servers"]["local_documents"]}, ensure_ascii=False))
+        print(json.dumps({"status": "preview", "server": parsed["mcp_servers"][name]}, ensure_ascii=False))
 
 
 if __name__ == "__main__":

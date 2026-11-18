@@ -1,6 +1,6 @@
 interface:
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
-  display_name: "Local Activity Query (v0.1.1)"
-  short_description: "Read bounded local counters and source health summaries"
+  display_name: "本機活動查詢"
+  short_description: "依指定時段查詢本機活動統計, 檢查監測來源與資料狀態"
   default_prompt: "Use $local-activity-query to summarize the requested window from this authorized local monitor."

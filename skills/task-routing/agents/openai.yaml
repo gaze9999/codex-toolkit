@@ -1,6 +1,6 @@
 interface:
-  display_name: "Task Routing (v0.4.16)"
-  short_description: "Choose a task owner and prepare a compact handoff"
+  display_name: "任務分派與交接"
+  short_description: "依任務範圍選擇繼續、分派或建立新對話, 並整理交接所需資訊"
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
   default_prompt: "Use $task-routing to choose whether this work should stay here, use a separate task or fork, or use a subagent. Carry out a route only when my request authorizes it, and give the next owner a compact handoff."

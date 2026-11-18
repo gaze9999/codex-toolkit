@@ -1,6 +1,6 @@
 interface:
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
-  display_name: "Agent Artifact Audit (v0.1.1)"
-  short_description: "Review local artifacts and recover cleanup reports"
+  display_name: "本機產物盤點"
+  short_description: "盤點 Codex 與 Claude 的本機產物, 檢視清理報告與復原記錄"
   default_prompt: "Use $agent-artifact-audit to inventory my selected workspaces and report the batch, gaps and offline report paths."

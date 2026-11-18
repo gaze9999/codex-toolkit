@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "2d966dd9bae0d3d919b219925662a90144143d226ecbdce697e542a2bdb93041",
+      "sha256": "88d55067c081bd7ef32b414218bb44395fd89091e6b12499584737ccb24f1ea8",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-environment-evidence.png"
     },
     "plugin.json": {
-      "sha256": "7d4a1c1bdbf3ba75d2be3a272a5ceeb35d282da256a6b8639898241fe678a98e",
+      "sha256": "bd0096bca63b775354629eb30ab5529898be9baee61aef82852d6aa72ee221b3",
       "source": "plugins/environment-evidence/plugin.json"
     },
     "skills/maintainability-review/SKILL.md": {
@@ -21,7 +21,7 @@
       "source": "skills/maintainability-review/SKILL.md"
     },
     "skills/maintainability-review/agents/openai.yaml": {
-      "sha256": "4dd14be9846d28978f8e7e97a613df7399419787026aecb9df573614b1e397e1",
+      "sha256": "659809b4f34ec6dcfa875ff124fa5af68d00f6ecffdc619b5524e021955c2213",
       "source": "skills/maintainability-review/agents/openai.yaml"
     },
     "skills/maintainability-review/references/checks.md": {
@@ -41,7 +41,7 @@
       "source": "skills/test-strategy/SKILL.md"
     },
     "skills/test-strategy/agents/openai.yaml": {
-      "sha256": "6fd0f9e0d4f3b38e6ae25e9085198801f33177ac7b665c802a74d3f31a1517c9",
+      "sha256": "fce5aba3d6326ca654b4f0045ddf86ca7d69a33a7aa9815b153480c26d7fee86",
       "source": "skills/test-strategy/agents/openai.yaml"
     },
     "skills/test-strategy/assets/icon-small.png": {
@@ -89,7 +89,7 @@
       "source": "skills/validation-evidence-review/SKILL.md"
     },
     "skills/validation-evidence-review/agents/openai.yaml": {
-      "sha256": "4a4278116c62151ea0de52cca19d8f418a709646840254fd2d6d2327d504e8cd",
+      "sha256": "b64e72ea87f90c45f5845c7cdd1539a3bcc751bc05484a10e748977bdab3d81d",
       "source": "skills/validation-evidence-review/agents/openai.yaml"
     },
     "skills/validation-evidence-review/assets/icon-small.png": {
@@ -134,5 +134,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.41.0",
-  "version": "0.9.0"
+  "version": "0.9.1"
 }

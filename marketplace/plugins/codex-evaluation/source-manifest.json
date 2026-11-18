@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "e9a2f2159ee8b25dcacc12d47558c7b43aec32d628d5c2cb5f0c120eb39ca2f3",
+      "sha256": "5e9c28544ee883d9d79ceae84818497a73974eee54055c46106439eae767f77f",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-evaluation.png"
     },
     "plugin.json": {
-      "sha256": "0ec32a6400b010ad44d28b00b6ec6162c4f9ebc8ff30210408c518672fa2aab0",
+      "sha256": "a9864f389160e57eb1a0392e811a8e442ef837ecc3ce45fc04793ba804df2ec2",
       "source": "plugins/evaluation/plugin.json"
     },
     "resources/decisions/README.md": {
@@ -49,7 +49,7 @@
       "source": "skills/decisions-evaluation/SKILL.md"
     },
     "skills/decisions-evaluation/agents/openai.yaml": {
-      "sha256": "6713473d6268c1e21de3a0b498ef9c354461027028acdc9562571e03e6a7f7ef",
+      "sha256": "f6c239213abef08891db349601915d722bbf9cd031859ad083240ddd919f5a1b",
       "source": "skills/decisions-evaluation/agents/openai.yaml"
     },
     "skills/decisions-evaluation/assets/icon-small.png": {
@@ -85,7 +85,7 @@
       "source": "skills/jev-evaluation/SKILL.md"
     },
     "skills/jev-evaluation/agents/openai.yaml": {
-      "sha256": "f5bf7aa53b81e54d99a0ff72183fb079d2de4a62aa02895233ce44e8228eda8f",
+      "sha256": "388855fd1116fbaa5c027b763117ddfe62a516b9e47874eb32c6387c7094ddfe",
       "source": "skills/jev-evaluation/agents/openai.yaml"
     },
     "skills/jev-evaluation/assets/icon-small.png": {
@@ -109,7 +109,7 @@
       "source": "skills/jev-evaluation/pyproject.toml"
     },
     "skills/jev-evaluation/references/usage.md": {
-      "sha256": "a3800d08110a55460bb6e713c61587e1f6647db6b70c2a6859b32e2fba294962",
+      "sha256": "06ff557f3f80b2a7ba7eb91d60b12e39c274e0e294b097e41ee20c6ed9959950",
       "source": "skills/jev-evaluation/references/usage.md"
     },
     "skills/jev-evaluation/requirements.txt": {
@@ -121,7 +121,7 @@
       "source": "skills/jev-evaluation/scripts/__init__.py"
     },
     "skills/jev-evaluation/scripts/install_mcp.py": {
-      "sha256": "ca54c446a226e735c96c1136d28d25ce7b79298b5d8efe82e0e7a5e58bb00cdf",
+      "sha256": "d2b483038f41a0939f3354680c80ebfbd19046299b706651335fffa24406e74c",
       "source": "skills/jev-evaluation/scripts/install_mcp.py"
     },
     "skills/jev-evaluation/scripts/jev.py": {
@@ -150,5 +150,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.41.0",
-  "version": "0.1.2"
+  "version": "0.1.4"
 }

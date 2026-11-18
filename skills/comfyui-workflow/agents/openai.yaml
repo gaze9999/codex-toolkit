@@ -1,6 +1,6 @@
 interface:
-  display_name: "ComfyUI Workflow (v0.4.13)"
-  short_description: "Engineer reproducible Stable Diffusion workflows"
+  display_name: "ComfyUI 工作流程"
+  short_description: "建立可重現的 Stable Diffusion 工作流程, 檢查模型與節點設定"
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
   default_prompt: "Use $comfyui-workflow to inspect the current ComfyUI graph, model and custom-node versions, and hardware limits, then make and verify the smallest reproducible workflow change requested."

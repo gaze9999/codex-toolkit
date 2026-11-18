@@ -1,6 +1,6 @@
 interface:
-  display_name: "Document Production (v0.4.20)"
-  short_description: "Create finished PDF, DOCX, or Markdown artifacts"
+  display_name: "文件製作"
+  short_description: "依提供的內容製作可交付的 PDF、DOCX 或 Markdown 文件"
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
   default_prompt: "Use $document-production only when the user explicitly wants a finished downloadable document artifact such as PDF, DOCX, Markdown, or multi-format output. Do not use it for brief chat answers, ordinary summaries, translation, proofreading, document planning, reusable Codex context briefs, post-implementation doc updates, Notion organization, spreadsheets-only work, image generation, direct coding, or coding task prompts."

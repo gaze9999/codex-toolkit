@@ -1,8 +1,8 @@
 interface:
   icon_small: "./assets/icon-small.png"
   icon_large: "./assets/icon.png"
-  display_name: "React Development (v0.4.17)"
-  short_description: "Build React features with focused lifecycle guidance"
+  display_name: "React 開發"
+  short_description: "開發 React 元件與 Hooks, 檢查狀態、路由與元件生命週期"
   default_prompt: "Use $react-development to inspect the actual React runtime and affected component/state contracts, then complete and verify the scoped change."
 
 policy:
