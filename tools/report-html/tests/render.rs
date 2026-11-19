@@ -54,6 +54,22 @@ fn renders_cards_tables_and_escapes_every_value() {
 }
 
 #[test]
+fn long_info_values_fold_and_short_ones_stay_inline() {
+    let mut data = sample();
+    let long = "src/<a>.ts, ".repeat(12);
+    data["info"] = json!([["路徑", long], ["範圍", "short"]]);
+    let page = render(&data, &Style::builtin()).unwrap();
+    let preview: String = long.chars().take(52).collect();
+    assert!(page.contains(&format!(
+        "<td><details class=\"rh-long rh-info\"><summary>{}…</summary>{}</details></td>",
+        preview.replace('<', "&lt;").replace('>', "&gt;"),
+        long.replace('<', "&lt;").replace('>', "&gt;")
+    )));
+    assert!(page.contains("<td><span class=\"rh-text\">short</span></td>"));
+    assert!(page.contains(".rh-info{width:auto}"));
+}
+
+#[test]
 fn compact_cells_keep_the_full_escaped_text_and_short_identifiers() {
     let mut data = sample();
     let detail = "<record>".repeat(20);
