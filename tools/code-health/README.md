@@ -68,7 +68,7 @@ report: /tmp/code-health-1794822129-73967/report.md
 
 ```json
 {
-  "schema": "code-health-evidence/1",
+  "schema": "code-health-evidence/v1",
   "root": "/path/to/project",
   "items": [
     { "id": "export:src/lib.ts#spare", "status": "confirmed", "provider": "typescript-language-server",
@@ -89,7 +89,8 @@ report: /tmp/code-health-1794822129-73967/report.md
 合併後每筆候選多一個 `semantic` 物件, 報告多一個 `semantic` 摘要: 各狀態筆數、沒有佐證的 `unchecked` 筆數, 以及找不到對應候選的 `unmatched` ID (通常代表佐證來自另一次掃描或程式碼已變更)
 佐證只附加在候選旁, 候選清單與其他檢查結果維持原樣, Markdown 與 HTML 在有佐證時多一欄語意確認
 未使用檢查的完整 JSON 報告包含 `source_files`, 記錄實際讀取的來源與已解析專案設定檔的 SHA-256
-`code-health-evidence/2` 須提供 `root` 與該份 `source_files`, 已確認或反駁的項目也需提供 `position` 的 `path`、`line` 與 `column`
+`code-health-evidence/v2` 須提供 `root` 與該份 `source_files`, 已確認或反駁的項目也需提供 `position` 的 `path`、`line` 與 `column`
+舊名稱 `code-health-evidence/1` 與 `code-health-evidence/2` 仍可讀取, 規則分別與 `/v1`、`/v2` 相同
 重新掃描發現來源或候選位置不同時拒絕合併
 `semantic.freshness` 的 `matched_scan_sources` 表示同批掃描來源相符, 部分掃描或未配對候選回報 `partial`, 舊版佐證維持 `unverified`
 來源相符後仍須核對語言伺服器的涵蓋範圍、動態引用與外部使用端

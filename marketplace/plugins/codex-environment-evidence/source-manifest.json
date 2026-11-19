@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "88d55067c081bd7ef32b414218bb44395fd89091e6b12499584737ccb24f1ea8",
+      "sha256": "de529397018bdf35e3880a27474041a26a53d911e5257bcedb946a949aa71863",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-environment-evidence.png"
     },
     "plugin.json": {
-      "sha256": "bd0096bca63b775354629eb30ab5529898be9baee61aef82852d6aa72ee221b3",
+      "sha256": "ce5bb7baf2dcaf5b1c47bff306c24af37c28d42c79de1f35a460524b4d4a601a",
       "source": "plugins/environment-evidence/plugin.json"
     },
     "skills/maintainability-review/SKILL.md": {
@@ -33,7 +33,7 @@
       "source": "skills/maintainability-review/references/report.md"
     },
     "skills/maintainability-review/references/semantic-evidence.md": {
-      "sha256": "370dee1b7383ec3e763a2a58f52161e566717a68516f60d78c60ec195b3210c2",
+      "sha256": "366c2944ccc1204b11dc4ce4b38b8532ceb40c2de0637be25ca2c7742548d3f0",
       "source": "skills/maintainability-review/references/semantic-evidence.md"
     },
     "skills/test-strategy/SKILL.md": {
@@ -134,5 +134,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.41.0",
-  "version": "0.9.1"
+  "version": "0.9.2"
 }

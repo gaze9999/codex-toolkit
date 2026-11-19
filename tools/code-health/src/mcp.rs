@@ -17,8 +17,8 @@ fn schema() -> Value {
     let item = json!({"type":"object","required":["id","status"],"properties":{"id":path,"status":{"enum":["confirmed","refuted","unsupported","timeout","error"]},
         "provider":{"type":"string"},"provider_version":{"type":"string"},"coverage":{"type":"string"},"references":{"type":"integer","minimum":0},
         "note":{"type":"string"},"locations":{"type":"array","maxItems":50,"items":location}}});
-    let evidence = json!({"type":"object","description":"Semantic evidence (schema code-health-evidence/1) merged into candidates by id",
-        "required":["schema","items"],"properties":{"schema":{"const":"code-health-evidence/1"},"root":path,"items":{"type":"array","maxItems":5000,"items":item}}});
+    let evidence = json!({"type":"object","description":"Semantic evidence (schema code-health-evidence/v1; the earlier name code-health-evidence/1 is still read) merged into candidates by id",
+        "required":["schema","items"],"properties":{"schema":{"enum":["code-health-evidence/v1","code-health-evidence/1"]},"root":path,"items":{"type":"array","maxItems":5000,"items":item}}});
     json!({"name":"code_health","description":"Syntax-level code maintainability scan of an approved local root; the project is only read. Returns a short summary, counts and the first 40 unused candidates with stable ids and positions, and writes the full report (report.md, report.json) to a new folder in the system temporary directory. Read the JSON report for remaining candidates; narrow checks or root only when appropriate for the project; optional evidence attaches semantic checks to candidates by id.",
         "annotations":{"readOnlyHint":false,"destructiveHint":false,"idempotentHint":false,"openWorldHint":false},
         "inputSchema":{"type":"object","additionalProperties":false,"required":["root"],"properties":{

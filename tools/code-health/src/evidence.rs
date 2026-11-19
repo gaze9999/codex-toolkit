@@ -1,4 +1,4 @@
-//! Stable candidate IDs and the merge of semantic evidence (`code-health-evidence/1`).
+//! Stable candidate IDs and the merge of semantic evidence (`code-health-evidence/v1`).
 //! A language server or reviewer checks candidates by ID; the scan stays syntax-level and
 //! records each result beside the candidate without changing the candidate lists.
 use serde_json::{json, Map, Value};
@@ -6,8 +6,11 @@ use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::Path;
 
-pub const SCHEMA: &str = "code-health-evidence/1";
-pub const SOURCE_SCHEMA: &str = "code-health-evidence/2";
+pub const SCHEMA: &str = "code-health-evidence/v1";
+pub const SOURCE_SCHEMA: &str = "code-health-evidence/v2";
+/// Earlier names of the two schemas, still read so saved evidence keeps working.
+const LEGACY_SCHEMA: &str = "code-health-evidence/1";
+const LEGACY_SOURCE_SCHEMA: &str = "code-health-evidence/2";
 
 pub fn source_path(path: &Path) -> String {
     let name = path.to_string_lossy();
@@ -145,12 +148,12 @@ fn clean(item: &Value) -> Result<(String, Value), String> {
 /// Attaches evidence to candidates with matching IDs and summarizes the result under `semantic`.
 pub fn merge(report: &mut Value, evidence: &Value) -> Result<(), String> {
     let schema = text(&evidence["schema"]);
-    if ![SCHEMA, SOURCE_SCHEMA].contains(&schema) {
+    if ![SCHEMA, SOURCE_SCHEMA, LEGACY_SCHEMA, LEGACY_SOURCE_SCHEMA].contains(&schema) {
         return Err(format!(
             "Expected evidence schema {SCHEMA} or {SOURCE_SCHEMA}"
         ));
     }
-    let source_bound = schema == SOURCE_SCHEMA;
+    let source_bound = [SOURCE_SCHEMA, LEGACY_SOURCE_SCHEMA].contains(&schema);
     if source_bound
         && (!evidence["root"].is_string()
             || !evidence["source_files"].is_object()

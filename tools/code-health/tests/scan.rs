@@ -463,7 +463,7 @@ fn candidates_carry_stable_ids_and_merge_semantic_evidence() {
     assert_eq!(spare(&moved)["line"], 3);
 
     options.evidence = Some(
-        json!({"schema":"code-health-evidence/1","root":fixture.0,"items":[
+        json!({"schema":"code-health-evidence/v1","root":fixture.0,"items":[
             {"id":"export:lib.ts#spare","status":"confirmed","provider":"typescript","references":0,"coverage":"project"},
             {"id":"export:lib.ts#spare2","status":"refuted","provider":"typescript","references":2,
                 "locations":[{"path":"main.ts","line":1}],"note":"<dynamic import>"},
@@ -498,7 +498,7 @@ fn candidates_carry_stable_ids_and_merge_semantic_evidence() {
     assert!(markdown(&merged).contains("| semantic |"));
     assert!(!markdown(&report).contains("semantic"));
     let mut bound = options.evidence.clone().unwrap();
-    bound["schema"] = json!("code-health-evidence/2");
+    bound["schema"] = json!("code-health-evidence/v2");
     bound["source_files"] = moved["source_files"].clone();
     for item in bound["items"].as_array_mut().unwrap() {
         if let Some(row) = rows(&moved, "unused")
@@ -511,6 +511,10 @@ fn candidates_carry_stable_ids_and_merge_semantic_evidence() {
             item["status"] = json!("unsupported");
         }
     }
+    options.evidence = Some(bound.clone());
+    assert_eq!(scan(&options).unwrap()["semantic"]["freshness"], "partial");
+    // The earlier schema name code-health-evidence/2 is still read with the same source binding
+    bound["schema"] = json!("code-health-evidence/2");
     options.evidence = Some(bound);
     assert_eq!(scan(&options).unwrap()["semantic"]["freshness"], "partial");
     let source = options.root.join("main.ts");
@@ -526,10 +530,10 @@ fn candidates_carry_stable_ids_and_merge_semantic_evidence() {
 
     for bad in [
         json!({"schema":"other/1","items":[]}),
-        json!({"schema":"code-health-evidence/1","items":[{"id":"x","status":"maybe"}]}),
-        json!({"schema":"code-health-evidence/1","items":[{"id":"x","status":"confirmed"},{"id":"x","status":"refuted"}]}),
-        json!({"schema":"code-health-evidence/1","root":std::env::temp_dir(),"items":[]}),
-        json!({"schema":"code-health-evidence/1","items":[{"id":"x","status":"confirmed","locations":[{"path":"a.ts","line":0}]}]}),
+        json!({"schema":"code-health-evidence/v1","items":[{"id":"x","status":"maybe"}]}),
+        json!({"schema":"code-health-evidence/v1","items":[{"id":"x","status":"confirmed"},{"id":"x","status":"refuted"}]}),
+        json!({"schema":"code-health-evidence/v1","root":std::env::temp_dir(),"items":[]}),
+        json!({"schema":"code-health-evidence/v1","items":[{"id":"x","status":"confirmed","locations":[{"path":"a.ts","line":0}]}]}),
     ] {
         options.evidence = Some(bad.clone());
         assert!(scan(&options).is_err(), "{bad} was accepted");

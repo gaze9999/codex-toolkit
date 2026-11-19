@@ -63,7 +63,7 @@ pub struct Options {
     pub retained_files: Vec<PathBuf>,
     pub retained_ranges: Vec<RetainedRange>,
     pub min_tokens: usize,
-    /// Semantic evidence (`code-health-evidence/1`) merged into matching candidates.
+    /// Semantic evidence (`code-health-evidence/v1`) merged into matching candidates.
     pub evidence: Option<Value>,
 }
 
