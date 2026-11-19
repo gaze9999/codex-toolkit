@@ -466,9 +466,9 @@ pub fn render(report: &Value, style: &Style) -> Result<String, String> {
     for row in items(&report["info"], "info")? {
         let pair = row.as_array().filter(|pair| pair.len() == 2);
         let pair = pair.ok_or("Each info row is a [label, value] pair")?;
-        // Long values such as path or pending lists fold like long table cells
+        // Lists of many lines such as paths or pending items fold like long table cells; a sentence stays readable
         let raw = plain(&pair[1]);
-        let value = if raw.chars().count() > 100 {
+        let value = if raw.lines().count() > 5 || raw.chars().count() > 300 {
             let preview: String = raw.chars().take(52).collect();
             format!(
                 "<details class=\"rh-long rh-info\"><summary>{}…</summary>{}</details>",
