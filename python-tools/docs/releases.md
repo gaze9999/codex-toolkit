@@ -8,7 +8,7 @@
 
 正式發布先更新 `VERSION`, 檢查 diff, 本機只需執行與修改相關的單元測試、設定及文件檢查, 不需要建置 EXE、app、ZIP 或 wheel, `prepare --dry-run` 仍會建置暫存 wheel, 不屬於最小測試
 
-提交並推送確認過的來源後, 依授權建立完整 annotated 整包 Tag, 手動執行 `.github/workflows/python-tools-release.yml` 並指定既有 Tag, `publish=false` 只產生 Actions artifacts, `publish=true` 在雲端來源與平台檢查通過後準備草稿 Release, 不自動公開. CI 的 `source` 工作安裝 `setup/requirements-release.txt`, 執行 `scripts.release prepare`, 產生並驗證來源 ZIP、兩個核心 wheel 與來源資訊清單
+提交並推送確認過的來源後, 依授權建立完整 annotated 整包 Tag, 手動執行 `.github/workflows/python-tools-release.yml` 並指定既有 Tag, `publish=false` 只產生 Actions artifacts, `publish=true` 在雲端來源與平台檢查通過後準備草稿 Release, 不自動公開, CI 的 `source` 工作安裝 `setup/requirements-release.txt`, 執行 `scripts.release prepare`, 產生並驗證來源 ZIP、兩個核心 wheel 與來源資訊清單
 
 來源與 CLI 工作全部通過後才上傳正式附件, 建立 Release 不代表產物已就緒, 請確認 Actions 結果與附件清單, 已發布 Tag 與附件不重寫
 

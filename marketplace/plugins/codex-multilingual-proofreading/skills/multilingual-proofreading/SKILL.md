@@ -3,7 +3,7 @@ name: multilingual-proofreading
 description: Proofread authored or rewritten documents in Traditional Chinese, English or Japanese for terminology, punctuation, spelling, grammar and natural wording, or maintain a requested terminology profile. Use for document-quality checks or requested proofreading, not automatic translation or a blanket check on every chat reply.
 metadata:
   short-description: Language-aware proofreading and terminology consistency
-  version: "0.4.26"
+  version: "0.4.27"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -13,6 +13,10 @@ metadata:
 Classify authored output by audience: AI-facing material uses concise English; human-facing Chinese uses concise Taiwan Traditional Chinese and the Chinese punctuation rules below, even without Global. Preserve originals, literal specifications and requested languages rather than translating them merely because AI reads them.
 
 Preserve the author's meaning, factual claims, register and terminology. Infer the target language and audience from the material, use the user's explicit style choices, and ask only when an ambiguity changes the correction.
+
+## Local text routing
+
+For a requested review of mixed-language material, a configured local router can return the authored spans and their UTF-8 byte offsets. If the local language-lint CLI supports `--segments`, pass Markdown on stdin. Treat the language as a script-based routing hint. Preserve protected and quoted ranges and leave ambiguous spans for contextual review. Run the applicable existing English or Japanese checks for their spans and use the Chinese checker for authored Chinese. Automatic desktop display checks operate independently of this Skill.
 
 ## Choose the applicable profile
 

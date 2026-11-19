@@ -50,7 +50,7 @@ report-html render --input report-data.json --style-dir /path/to/appearance-pack
 | `note` | | 統計卡片上方的說明文字 |
 | `stats` | | 統計卡片, `value` 可為數字或文字, `bar` 為 `true` 且 `value` 是正整數時計入分布條, `section` 填分頁位置 (從 0 起算) 時標籤改為錨點 Tag, 點選後切到該分頁 |
 | `panels` | | 獨立卡片, 依序放在統計卡片與分頁之間, 每個項目的寫法與 `sections` 相同, `label` 是卡片標題 |
-| `sections` | | 每個項目是一個分頁, `kind` 決定內容, 預設 `table`, 各類型見下表; `empty` 是沒有資料時的文字, `note` 顯示在內容上方, `tags` 是內容上方的標籤, `count` 覆寫分頁上的數字 |
+| `sections` | | 每個項目是一個分頁, `kind` 決定內容, 預設 `table`, 各類型見下表, `empty` 是沒有資料時的文字, `note` 顯示在內容上方, `tags` 是內容上方的標籤, `count` 覆寫分頁上的數字 |
 | `headings` | | 覆寫固定文字: `info`、`stats`、`sections`、`search`、`placeholder`、`style`、`distribution` |
 
 | 區塊 `kind` | 欄位 | 呈現 |

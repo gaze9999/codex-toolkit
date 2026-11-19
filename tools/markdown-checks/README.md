@@ -18,9 +18,9 @@ markdown-checks sync-write notes.md --content-file new.md --expected-sha256 <syn
 
 | 指令 | 用途 | 結束碼 |
 | --- | --- | --- |
-| `diff --left FILE --right FILE` | 比較兩份 Markdown 在 fenced code 以外的 ATX 標題、清單項目與表格列, 輸出各自 SHA-256 與 `only_left`、`only_right`、`order_changed` | 0 完成, 2 輸入不存在或無法讀取; 有差異仍是 0 |
+| `diff --left FILE --right FILE` | 比較兩份 Markdown 在 fenced code 以外的 ATX 標題、清單項目與表格列, 輸出各自 SHA-256 與 `only_left`、`only_right`、`order_changed` | 0 完成, 2 輸入不存在或無法讀取, 有差異仍是 0 |
 | `context-brief FILE` | context brief 的語言中立結構檢查: 標題階層、code fence 是否關閉、必要標題、來源位置標記與常見憑證樣式 | 1 有檢查不通過, `--strict` 把警告視為不通過 |
-| `scan-changes` | 依路徑把已暫存、未暫存與未追蹤的變更分類為文件影響 `yes`、`maybe`、`no`; 沒有工作樹變更時改看最後一個 commit | 0 完成, 2 Git 或輸入錯誤 |
+| `scan-changes` | 依路徑把已暫存、未暫存與未追蹤的變更分類為文件影響 `yes`、`maybe`、`no`, 沒有工作樹變更時改看最後一個 commit | 0 完成, 2 Git 或輸入錯誤 |
 | `sync-inspect FILE` | 讀取一個 Markdown 同步目標的路徑、SHA-256、位元組數與標題, 不寫入 | 0 完成, 2 不是 Markdown 或不存在 |
 | `sync-write FILE` | 目標的 SHA-256 仍等於 `--expected-sha256` 時, 以 UTF-8 內容整檔取代, 保留目標原本的檔案權限 | 3 目標已被改動, 2 輸入錯誤 |
 

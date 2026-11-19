@@ -6,17 +6,17 @@ MCP 與 Skill 實作維持在 `codex-toolkit/skills/jev-evaluation/`, 各專案�
 
 ## 何時值得使用
 
-先完成本地搜尋與來源版本, 狀態及相依篩選, 仍有多份可能相關的段落需排閱讀順序, 或候選摘要需依明確分類/評分標準比較時, 才考慮 Jev. 候選少, 順序已定或現有規則足以決定時直接由 Main 處理, 不把 Jev 當成每輪前置檢查
+先完成本地搜尋與來源版本, 狀態及相依篩選, 仍有多份可能相關的段落需排閱讀順序, 或候選摘要需依明確分類/評分標準比較時, 才考慮 Jev, 候選少, 順序已定或現有規則足以決定時直接由 Main 處理, 不把 Jev 當成每輪前置檢查
 
-跨文件/歷史證據排序, 工作項目分類與共用工具候選比較的邊界見 [Skill 使用情境](../../skills/jev-evaluation/references/usage.md#when-to-use-jev). Jev 不決定項目已完成, 可開工或規格衝突採哪一方, 也不替代程式等價, 權限, hash 與 Test 驗證, 全面檢查仍須涵蓋全部要求
+跨文件/歷史證據排序, 工作項目分類與共用工具候選比較的邊界見 [Skill 使用情境](../../skills/jev-evaluation/references/usage.md#when-to-use-jev), Jev 不決定項目已完成, 可開工或規格衝突採哪一方, 也不替代程式等價, 權限, hash 與 Test 驗證, 全面檢查仍須涵蓋全部要求
 
-query, rubric 與候選摘要都需符合外傳授權, 摘要與去識別資料仍須取得外傳授權. 排序後先讀相關 Markdown 抽出版, 需要畫面證據, 缺漏/疑義/版本衝突或明確原始來源核對時才回查原檔
+query, rubric 與候選摘要都需符合外傳授權, 摘要與去識別資料仍須取得外傳授權, 排序後先讀相關 Markdown 抽出版, 需要畫面證據, 缺漏/疑義/版本衝突或明確原始來源核對時才回查原檔
 
 ## 呼叫原則
 
-一次問一個可明確判斷的語意條件, 選項與 criteria 保持一致, 缺少資訊時保留 unknown, 計數, 日期先後, 版本與 ID 比較交給程式. 同一批必要 state 的獨立問題才合併, 不為 batch 塞入無關全文, rank helper 已合併 optional candidates, 不需要再逐筆呼叫
+一次問一個可明確判斷的語意條件, 選項與 criteria 保持一致, 缺少資訊時保留 unknown, 計數, 日期先後, 版本與 ID 比較交給程式, 同一批必要 state 的獨立問題才合併, 不為 batch 塞入無關全文, rank helper 已合併 optional candidates, 不需要再逐筆呼叫
 
-新的 rubric, model 或繁體中文情境先以可外傳且有預期答案的代表案例檢查, confidence 表示模型信心, 事實正確性由來源核對. 相同輸入與規則的結果可在當次工作重用, 來源改變則重查, 不新增例行輪詢或每輪評分. 完整設計邊界見 [question design](../../skills/jev-evaluation/references/usage.md#question-design-and-call-cost), 可分享的說明另見 [Codex Playbook](https://github.com/gaze9999/codex-playbook)
+新的 rubric, model 或繁體中文情境先以可外傳且有預期答案的代表案例檢查, confidence 表示模型信心, 事實正確性由來源核對, 相同輸入與規則的結果可在當次工作重用, 來源改變則重查, 不新增例行輪詢或每輪評分, 完整設計邊界見 [question design](../../skills/jev-evaluation/references/usage.md#question-design-and-call-cost), 可分享的說明另見 [Codex Playbook](https://github.com/gaze9999/codex-playbook)
 
 ## 如何辨識實際使用
 
@@ -27,15 +27,15 @@ query, rubric 與候選摘要都需符合外傳授權, 摘要與去識別資料�
 | `jev_rank` / `jev_evaluate` 回傳 `status=ok` | 該次語意比較完成, Main 依證據決定採用方式, 程式另行驗證 |
 | `status=fallback` / `skipped` / `dry-run` | 未完成遠端語意比較, 依實際狀態繼續原流程 |
 
-實際使用後簡短說明用途, tool/status 與 Main 採用方式或 fallback, 回應有 model 才記錄實際 model. 不預設新增永久 log, 不貼輸入內容或 Key, 未使用的原因僅在使用者詢問或與本次評估相關時說明
+實際使用後簡短說明用途, tool/status 與 Main 採用方式或 fallback, 回應有 model 才記錄實際 model, 不預設新增永久 log, 不貼輸入內容或 Key, 未使用的原因僅在使用者詢問或與本次評估相關時說明
 
 ## 需要診斷時檢查本機狀態
 
 安裝 Skill 或 Plugin 不會自動安裝 Python 相依套件, 每台電腦使用 Toolkit baseline 或 [Jev 安裝程式](../../skills/jev-evaluation/README.md) 建立自己的隔離環境
 
-安裝程式會檢查固定版本 SDK 及必要匯入, 快取標記相同也要檢查, 修復後才寫入設定. 使用回傳的 `python` 路徑執行已安裝 Skill 的 [verify_mcp.py](../../skills/jev-evaluation/scripts/verify_mcp.py), 不以其他 Python 的檢查結果判定該環境
+安裝程式會檢查固定版本 SDK 及必要匯入, 快取標記相同也要檢查, 修復後才寫入設定, 使用回傳的 `python` 路徑執行已安裝 Skill 的 [verify_mcp.py](../../skills/jev-evaluation/scripts/verify_mcp.py), 不以其他 Python 的檢查結果判定該環境
 
-`mcp_sdk_missing` 表示所用 Python 缺少 SDK, `mcp_dependency_missing` 表示缺少相依, 兩者與 Key 或 API 連線問題分開. `--help` 可在沒有 SDK 的環境查看, 離線 MCP 驗證則需要 SDK
+`mcp_sdk_missing` 表示所用 Python 缺少 SDK, `mcp_dependency_missing` 表示缺少相依, 兩者與 Key 或 API 連線問題分開, `--help` 可在沒有 SDK 的環境查看, 離線 MCP 驗證則需要 SDK
 
 可以對 Codex 說:
 

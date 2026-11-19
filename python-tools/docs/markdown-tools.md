@@ -47,8 +47,8 @@ python launch-cli.py markdown.guarded_markdown_update --target-file history.md a
 python launch-cli.py markdown.validate_structure document.md
 ```
 
-唯讀檢查 ATX 標題跳號, fenced code block, 行尾空白與選用版本, 兩空白 hard break 合法, 缺少版本僅 INFO, 無標題與行尾空白僅 WARN. 這是有限結構檢查, 不是完整 Markdown parser, 不強加風格, CLI 使用 English / ASCII, 來源非 ASCII 字元以 escape 顯示
+唯讀檢查 ATX 標題跳號, fenced code block, 行尾空白與選用版本, 兩空白 hard break 合法, 缺少版本僅 INFO, 無標題與行尾空白僅 WARN, 這是有限結構檢查, 不是完整 Markdown parser, 不強加風格, CLI 使用 English / ASCII, 來源非 ASCII 字元以 escape 顯示
 
-結束代碼 0 為無結構錯誤 (可含 WARN), 1 為層級或 fence 錯誤, 2 為參數或 UTF-8 檔案無法讀取. API `my_py_document_core.validation.analyze(text)` 回傳 checks, failures, warnings
+結束代碼 0 為無結構錯誤 (可含 WARN), 1 為層級或 fence 錯誤, 2 為參數或 UTF-8 檔案無法讀取, API `my_py_document_core.validation.analyze(text)` 回傳 checks, failures, warnings
 
-此 module 為 standalone Skill validator 單一維護來源, 不手改 generated snapshot. 使用 `python launch-cli.py scripts.export_markdown_validator --output <snapshot-file>` 產生含套件版本及 source SHA-256 的 snapshot, `--check` 僅比對. Snapshot 只用標準函式庫, 無 repo 或 core 安裝相依
+此 module 為 standalone Skill validator 單一維護來源, 不手改 generated snapshot, 使用 `python launch-cli.py scripts.export_markdown_validator --output <snapshot-file>` 產生含套件版本及 source SHA-256 的 snapshot, `--check` 僅比對, Snapshot 只用標準函式庫, 無 repo 或 core 安裝相依

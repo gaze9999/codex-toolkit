@@ -27,11 +27,11 @@ Windows 若出現 `Filename too long`, Git for Windows 可啟用長路徑, 這�
 git config --global core.longpaths true
 ```
 
-也可從較短的來源路徑加入本機市集. 支援細節見 [Git for Windows 設定](https://github.com/git-for-windows/git/blob/main/Documentation/config/core.adoc)
+也可從較短的來源路徑加入本機市集, 支援細節見 [Git for Windows 設定](https://github.com/git-for-windows/git/blob/main/Documentation/config/core.adoc)
 
-市集加入後可選擇治理、文件、前端、證據、Jev、校對、活動摘要及 README / 授權等外掛. 這是個人可加入的市集, 官方公開目錄上架另有提交流程
+市集加入後可選擇治理、文件、前端、證據、Jev、校對、活動摘要及 README / 授權等外掛, 這是個人可加入的市集, 官方公開目錄上架另有提交流程
 
-Plugin 的 Skills 與資源由來源生成, runtime、帳戶與 MCP 註冊依用途安裝. 既有同名 Skill 若已直接安裝或來自另一個市集, 先選定單一啟用來源, 避免同時使用兩份. 不複製另一台電腦的 venv、client cache 或憑證
+Plugin 的 Skills 與資源由來源生成, runtime、帳戶與 MCP 註冊依用途安裝, 既有同名 Skill 若已直接安裝或來自另一個市集, 先選定單一啟用來源, 避免同時使用兩份, 不複製另一台電腦的 venv、client cache 或憑證
 
 | 使用情境 | 操作 |
 |---|---|
@@ -42,7 +42,7 @@ Plugin 的 Skills 與資源由來源生成, runtime、帳戶與 MCP 註冊依用
 
 ## Python 工具可獨立使用
 
-市集負責安裝工作流程, Python CLI / 核心可從同一公開來源獨立取得, 不需要 Codex 或 MCP. 完整目錄、相依、執行及 core wheel 的用法見 [獨立使用說明](../python-tools/docs/standalone.md)
+市集負責安裝工作流程, Python CLI / 核心可從同一公開來源獨立取得, 不需要 Codex 或 MCP, 完整目錄、相依、執行及 core wheel 的用法見 [獨立使用說明](../python-tools/docs/standalone.md)
 
 ## 來源與更新
 

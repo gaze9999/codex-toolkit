@@ -91,7 +91,7 @@ Tool: `extract_document`
 }
 ```
 
-output 必須位於 write root, 父資料夾已存在, 副檔名為 `.md`, 新 output 不要提供 `expected_output_sha256`; `written=true` 才表示完成寫入, 回傳文字即使被截斷, output 仍保存完整產生內容
+output 必須位於 write root, 父資料夾已存在, 副檔名為 `.md`, 新 output 不要提供 `expected_output_sha256`, `written=true` 才表示完成寫入, 回傳文字即使被截斷, output 仍保存完整產生內容
 
 要取代既有 output 時, 先使用 `inspect_markdown` 讀取該檔目前的 `sha256`, 再將它放進 `extract_document.expected_output_sha256`, 不使用來源 hash 或上次預覽新產生的 hash, 內容已改變時會拒絕覆寫, 必須重新檢視再決定
 
@@ -143,7 +143,7 @@ Tool: `update_markdown`
 
 範例中的 `<inspect_markdown 回傳的 sha256>` 必須換成工具回傳的 64 位十六進位 hash, 不可照貼, content 必須以相同標題開頭, 不能插入同層或更高層章節, 篇幅上限 200000 字元
 
-預覽的 `next_sha256` 是候選內容 hash, 尚未寫入時, 正式套用仍使用原本的 `expected_sha256`; `status=written` 表示已寫入並讀回核對, `unchanged` 表示不需寫入, 工具保留既有 UTF-8 BOM, 換行格式與無關章節
+預覽的 `next_sha256` 是候選內容 hash, 尚未寫入時, 正式套用仍使用原本的 `expected_sha256`, `status=written` 表示已寫入並讀回核對, `unchanged` 表示不需寫入, 工具保留既有 UTF-8 BOM, 換行格式與無關章節
 
 ## 追加唯一紀錄
 
@@ -174,6 +174,6 @@ Tool: `update_markdown`
 | 核心套件缺少或 API 不相容 | 在同一 runtime 安裝相容的核心 wheel, 檢查套件版本後重新啟動 |
 | 雲端 placeholder 無法原子取代 | 先確認本機檔案狀態, 確有需要時, 明確使用 `in_place=true` 備援, 會建立備份 |
 
-Markdown 預覽與寫入的目標都須位於 write root, 存取範圍由啟動設定指定. Notion 同步、Git 操作與程式編譯使用各自入口
+Markdown 預覽與寫入的目標都須位於 write root, 存取範圍由啟動設定指定, Notion 同步、Git 操作與程式編譯使用各自入口
 
 文件與 Markdown CLI、versioned core 及 MCP 的安裝與驗證入口見 [文件工具](../../python-tools/README.md)
