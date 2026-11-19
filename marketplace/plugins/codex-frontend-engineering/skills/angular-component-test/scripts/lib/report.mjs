@@ -1,7 +1,7 @@
 // Report model, exit code and Markdown rendering for component test results; html.mjs renders the same model.
 export const TOOL_NAME = 'angular-component-test';
-export const TOOL_VERSION = '0.1.2';
-export const REPORT_SCHEMA = `${TOOL_NAME}-report/1`;
+export const TOOL_VERSION = '0.1.3';
+export const REPORT_SCHEMA = `${TOOL_NAME}-report/v1`;
 export const FORMATS = ['html', 'md', 'json'];
 
 export const STATUS_LABELS = { passed: '✅ 通過', failed: '❌ 不通過', error: '❌ 錯誤', info: 'ℹ️ 觀察' };

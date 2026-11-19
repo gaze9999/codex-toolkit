@@ -3,6 +3,7 @@
 // Without them those cases are skipped, which is not a pass. Suites are synthetic fixtures; the project is never modified.
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { chmodSync, cpSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -38,6 +39,20 @@ test('arguments require the four paths, a contained .ts entry and a report folde
 test('a configuration error exits 3 and help exits 0', async () => {
   assert.equal(await main(['--project', '/p']), 3);
   assert.equal(await main(['--help']), 0);
+});
+
+test('Codex Seatbelt stops the runner before launching a browser', { skip: process.platform !== 'darwin' }, t => {
+  const work = mkdtempSync(path.join(os.tmpdir(), 'component-test-seatbelt-'));
+  t.after(() => rmSync(work, { recursive: true, force: true }));
+  const out = path.join(work, 'report');
+  const { status, stderr } = spawnSync(process.execPath, [
+    path.join(skill, 'scripts/run.mjs'), ...required.slice(0, -1), out, '--format', 'json',
+  ], { env: { ...process.env, CODEX_SANDBOX: 'seatbelt' }, encoding: 'utf8' });
+  assert.equal(status, 3, stderr);
+  const report = JSON.parse(readFileSync(path.join(out, 'report.json'), 'utf8'));
+  assert.match(report.error, /macOS 沙盒.*單次命令核准/);
+  assert.equal(report.runtime.browser, null);
+  assert.equal(report.results.length, 0);
 });
 
 test('aliases resolve exact and wildcard keys in order', () => {
@@ -135,7 +150,7 @@ test('branch, package versions and supplied environment rows appear only when pr
 });
 
 test('the report schema is a named version string', () => {
-  assert.equal(REPORT_SCHEMA, 'angular-component-test-report/1');
+  assert.equal(REPORT_SCHEMA, 'angular-component-test-report/v1');
 });
 
 test('report-html/v1 data maps status, counts, group cards, filters and every case', () => {
@@ -246,7 +261,7 @@ test('a mixed suite reports passed, failed, error and observation cases in order
   assert.match(markdown, /\| 執行時間 \| \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} \(Asia\/Taipei\) \|/);
   assert.doesNotMatch(markdown, /\| 時區 \|/);
   assert.ok(report.sources.project.packages.some(item => item.name === '@angular/core'));
-  assert.equal(report.schemaVersion, 'angular-component-test-report/1');
+  assert.equal(report.schemaVersion, 'angular-component-test-report/v1');
   assert.match(markdown, /❌ 錯誤/);
   assert.match(html, /F2/);
 });

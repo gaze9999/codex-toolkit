@@ -2,7 +2,7 @@
 name: angular-component-test
 description: Run behavior tests against real Angular components by AOT-compiling a TypeScript suite with the project's own compiler and executing it in headless Chrome or Edge, producing HTML, Markdown and JSON reports. Use when a behavior needs mounted components, real FormControls, service state or outgoing requests and the project has no suitable test runner, not for interactive UI reproduction or visual layout checks.
 metadata:
-  version: "0.1.1"
+  version: "0.1.2"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -27,6 +27,8 @@ metadata:
 
 ## Run
 
+In Codex on macOS, request approval for the specific Node runner command before the first test run. For `exec_command`, use `sandbox_permissions: "require_escalated"` with a justification for launching the test browser. Terminal runs outside the Codex sandbox use the same command normally. The runner detects `CODEX_SANDBOX=seatbelt` before launching a browser and exits 3 with the recovery step. If approval is unavailable, report the blocked run. Chrome and Edge both hit the same sandbox restriction.
+
 ```bash
 node <skill>/scripts/run.mjs --project <root> --tsconfig <app tsconfig.json> --suite <suite folder> --out <report folder> \
   [--entry suite.ts] [--format html,md,json] [--title <text>] [--chrome <path>] [--report-html <cli>] [--meta-file <json>] [--timezone UTC] [--timeout 300] [--case-timeout 15] [--keep-work]
@@ -44,7 +46,7 @@ The harness exports `group`, `test`, `observe`, `mount`, `typeBlur`, `click`, `q
 
 ## Report
 
-Read the console summary, then `report.md` or `report.json` (`schemaVersion: angular-component-test-report/1`). HTML comes from the shared `report-html` CLI, found through `--report-html`, `REPORT_HTML` or `PATH`; the runner maps its results to `report-html/v1` data (group cards, status and group filters, list sections) and keeps no page layout of its own. When HTML is selected and the CLI is missing, older than 0.2.0 or fails, the run exits 3 and still writes the selected JSON and Markdown; use `--format md,json` where the CLI is not installed. Report the exit code, each failed/errored case with its assertion values, browser errors that bear on the verdict, the project revision and dirty-file hashes the report records, and the evidence limits listed in the report. A report covers the mounted components and stand-ins only: no host integration, login, real API or persistence.
+Read the console summary, then `report.md` or `report.json` (`schemaVersion: angular-component-test-report/v1`). HTML comes from the shared `report-html` CLI, found through `--report-html`, `REPORT_HTML` or `PATH`; the runner maps its results to `report-html/v1` data (group cards, status and group filters, list sections) and keeps no page layout of its own. When HTML is selected and the CLI is missing, older than 0.2.0 or fails, the run exits 3 and still writes the selected JSON and Markdown; use `--format md,json` where the CLI is not installed. Report the exit code, each failed/errored case with its assertion values, browser errors that bear on the verdict, the project revision and dirty-file hashes the report records, and the evidence limits listed in the report. A report covers the mounted components and stand-ins only: no host integration, login, real API or persistence.
 
 Runtime rows come from the run itself: Node from the runner process, browser version from the launched browser, and User Agent and time zone from the loaded test page. They read `null` when no page ran. The start time is shown in the page time zone, or the requested one when no page ran; JSON keeps the ISO `startedAt`. Project rows add the Git branch and the installed `@angular/core`, `typescript`, `rxjs` and `zone.js` versions found in the project.
 

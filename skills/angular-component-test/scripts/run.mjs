@@ -120,6 +120,8 @@ export async function main(argv) {
     return model.exitCode;
   };
   if (Number(process.versions.node.split('.')[0]) < 22) return finish(3, '需要 Node.js 22 以上 (使用內建 WebSocket)');
+  if (process.platform === 'darwin' && process.env.CODEX_SANDBOX === 'seatbelt')
+    return finish(3, 'Codex 的 macOS 沙盒會阻擋瀏覽器啟動, 請透過 Codex 的單次命令核准流程執行本測試');
   if (options.metaFile) try { model.environment = readMeta(options.metaFile); } catch (error) { return finish(3, `--meta-file 無法使用: ${error.message}`); }
   if (options.formats.includes('html')) {
     try { renderer = findRenderer(options.reportHtml); } catch (error) { return finish(3, error.message); }
