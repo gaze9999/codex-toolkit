@@ -67,6 +67,9 @@ fn long_info_values_fold_and_short_ones_stay_inline() {
         long.replace('<', "&lt;").replace('>', "&gt;")
     )));
     assert!(page.contains("<td><span class=\"rh-text\">short</span></td>"));
+    // Table text breaks at word boundaries and cells keep a minimum width, so a crowded table scrolls instead of shrinking a column to one character
+    assert!(page
+        .contains(".wb-table-wrap .rh-text{overflow-wrap:break-word}.wb-table td{min-width:5em}.wb-table td>.rh-wide{display:block;min-width:min(14em,60vw)}"));
     assert!(page.contains(&format!(
         "<td><span class=\"rh-text\">{sentence}</span></td>"
     )));
@@ -443,8 +446,8 @@ fn markdown_covers_panels_and_every_kind() {
         "## Features",
         "overall",
         "| Form <a> | 3 / 4 | 1 failed |",
-        "- Screen: Exception form",
-        "- Exception form → applyException",
+        "```mermaid\nflowchart LR\n  n_a[\"Exception form\"]\n  n_b[\"applyException\"]\n  n_a --> n_b\n",
+        "classDef warning stroke:#ef6c00,stroke-width:2px\n  class n_a warning",
         "| C2 | failed |",
         "| Rule \\ Source | spec | SIT |",
         "| R-1 | 2 |  |",
@@ -453,4 +456,65 @@ fn markdown_covers_panels_and_every_kind() {
     ] {
         assert!(text.contains(part), "missing {part:?} in\n{text}");
     }
+}
+
+#[test]
+fn table_sentences_keep_a_readable_width() {
+    let data = json!({
+        "schema": "report-html/v1",
+        "title": "t",
+        "sections": [{
+            "label": "s",
+            "columns": [{ "key": "a", "label": "A" }, { "key": "b", "label": "B" }, { "key": "c", "label": "C" }],
+            "rows": [{ "c": "sacrm190-individual-form / MSG-24 / p17 錯誤文字", "a": "短文字", "b": "後端未保證非 null, 值為 null 時前端轉換拋錯, 整筆回應視為失敗" }]
+        }]
+    });
+    let page = render(&data, &Style::builtin()).unwrap();
+    assert!(page.contains("<td><span class=\"rh-text rh-nowrap\">短文字</span></td>"));
+    // A label under 48 display columns stays a plain text cell
+    assert!(page.contains(
+        "<td><span class=\"rh-text\">sacrm190-individual-form / MSG-24 / p17 錯誤文字</span></td>"
+    ));
+    assert!(page.contains("<td><span class=\"rh-text rh-wide\">後端未保證非 null, 值為 null 時前端轉換拋錯, 整筆回應視為失敗</span></td>"));
+}
+
+#[test]
+fn folded_panels_toggle_in_html_and_markdown() {
+    let mut data = rich();
+    data["panels"][1]["fold"] = json!("closed");
+    let page = render(&data, &Style::builtin()).unwrap();
+    assert!(page.contains("<section class=\"wb-card\"><details class=\"rh-fold\"><summary class=\"wb-card-head\"><h2>"));
+    data["panels"][1]["fold"] = json!("open");
+    assert!(render(&data, &Style::builtin())
+        .unwrap()
+        .contains("<details class=\"rh-fold\" open>"));
+    let text = markdown(&data).unwrap();
+    assert!(text.contains("<details open>\n<summary>"));
+    assert!(text.contains("\n\n```mermaid\n"));
+    data["panels"][1]["fold"] = json!("sometimes");
+    assert!(render(&data, &Style::builtin()).is_err());
+}
+
+#[test]
+fn cli_prints_markdown_with_format_md() {
+    let dir = temp("cli-md");
+    let input = dir.join("report.json");
+    fs::write(&input, rich().to_string()).unwrap();
+    let executable = env!("CARGO_BIN_EXE_report-html");
+    let printed = Command::new(executable)
+        .args(["render", "--format", "md", "--input"])
+        .arg(&input)
+        .output()
+        .unwrap();
+    assert!(printed.status.success());
+    assert_eq!(
+        String::from_utf8(printed.stdout).unwrap(),
+        markdown(&rich()).unwrap()
+    );
+    let wrong = Command::new(executable)
+        .args(["render", "--format", "pdf", "--input"])
+        .arg(&input)
+        .output()
+        .unwrap();
+    assert_eq!(wrong.status.code(), Some(2));
 }

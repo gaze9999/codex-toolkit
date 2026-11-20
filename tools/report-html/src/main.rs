@@ -1,9 +1,9 @@
-use report_html::{render, Style};
+use report_html::{markdown, render, Style};
 use std::fs;
 use std::io::{Read, Write};
 use std::path::PathBuf;
 
-const HELP: &str = "report-html render --input FILE|- [--style-dir DIR] [--out FILE]\n  Reads report-html/v1 JSON and prints one offline HTML page, or writes it to a new file with --out";
+const HELP: &str = "report-html render --input FILE|- [--format html|md] [--style-dir DIR] [--out FILE]\n  Reads report-html/v1 JSON and prints one offline HTML page (or Markdown with --format md), or writes it to a new file with --out";
 const INPUT_LIMIT: u64 = 64 * 1024 * 1024;
 
 fn cli(args: &[String]) -> Result<(), String> {
@@ -27,13 +27,14 @@ fn cli(args: &[String]) -> Result<(), String> {
     if !rest.is_empty() {
         return Err(format!("Each option needs a value\n{HELP}"));
     }
-    let (mut input, mut style_dir, mut out) = (None, None, None);
+    let (mut input, mut style_dir, mut out, mut format) = (None, None, None, "html");
     for pair in pairs {
         let value = pair[1].as_str();
         match pair[0].as_str() {
             "--input" if !value.is_empty() => input = Some(value),
             "--style-dir" if !value.is_empty() => style_dir = Some(PathBuf::from(value)),
             "--out" if !value.is_empty() => out = Some(PathBuf::from(value)),
+            "--format" if value == "html" || value == "md" => format = value,
             flag => return Err(format!("Invalid option or value for {flag:?}\n{HELP}")),
         }
     }
@@ -55,11 +56,15 @@ fn cli(args: &[String]) -> Result<(), String> {
         }
     }
     let report = serde_json::from_str(&data).map_err(|e| format!("Invalid report JSON: {e}"))?;
-    let style = match style_dir {
-        Some(dir) => Style::load(&dir)?,
-        None => Style::builtin(),
+    let page = if format == "md" {
+        markdown(&report)?
+    } else {
+        let style = match style_dir {
+            Some(dir) => Style::load(&dir)?,
+            None => Style::builtin(),
+        };
+        render(&report, &style)?
     };
-    let page = render(&report, &style)?;
     match out {
         // create_new keeps an existing file untouched
         Some(path) => fs::OpenOptions::new()

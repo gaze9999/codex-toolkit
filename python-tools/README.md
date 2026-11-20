@@ -1,6 +1,6 @@
 # Python Tools
 
-目前獨立工具版本 `0.6.0`, 提供可獨立使用的 Python 工具, 涵蓋常用文件轉 Markdown、Markdown 安全更新、開發產物清理、Token 計數與 Context 預估
+目前獨立工具版本 `0.9.0`, 提供可獨立使用的 Python 工具, 涵蓋常用文件轉 Markdown、Markdown 安全更新、開發產物清理、Token 計數與 Context 預估
 
 根目錄的操作入口統一使用 `launch-xxx` 命名, 工具原始碼集中在 `src/`, 相依清單與選用設定集中在 `setup/`, README、版本、Python 套件與 Git 設定仍保留在根目錄
 

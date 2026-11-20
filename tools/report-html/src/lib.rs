@@ -17,8 +17,14 @@ const BUILTIN: &str = include_str!(concat!(env!("OUT_DIR"), "/style.css"));
 const BUILTIN_LABEL: &str = include_str!(concat!(env!("OUT_DIR"), "/style-label.txt"));
 const TONES: [&str; 5] = ["neutral", "category", "success", "warning", "error"];
 /// Report layout on top of either style source.
-const PAGE: &str = "body{margin:0}.wb-card-head>h2{font-size:1.1rem}.rh-meta{color:var(--wb-muted);font-size:.85rem;margin:0 0 .6em;word-break:break-word}.rh-tags{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 .8em}.rh-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}.rh-stat{display:flex;flex-direction:column;gap:6px;margin:0;padding:14px 16px;background:var(--wb-bg)}.rh-stat b{font-size:1.6rem;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}.rh-stat b[data-tone=warning]{color:var(--wb-warning)}.rh-stat b[data-tone=success]{color:var(--wb-success)}.rh-stat b[data-tone=error]{color:var(--wb-error)}.rh-stat b[data-tone=category]{color:var(--wb-accent)}.rh-stat .wb-tag{align-self:flex-start}.rh-bar{margin-top:16px}.rh-tabs{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 12px;border-bottom:1px solid var(--wb-border)}.rh-tabs [role=tab]{border:0;border-bottom:2px solid transparent;background:none;padding:6px 10px;font:inherit;color:inherit;cursor:pointer}.rh-tabs [role=tab][aria-selected=true]{border-bottom-color:var(--wb-accent);font-weight:600}.rh-count{margin-inline-start:6px;color:var(--wb-muted);font-size:.85em}.rh-num{text-align:end;font-variant-numeric:tabular-nums;white-space:nowrap}.rh-text{white-space:pre-line;overflow-wrap:break-word}.rh-nowrap{white-space:nowrap}.wb-table thead th{white-space:nowrap}.wb-filter{margin:0 0 8px}.wb-filter label{display:inline-flex;align-items:center;gap:6px}code{font-size:.85em;overflow-wrap:anywhere}.rh-code{margin:0;padding:6px 8px;border-radius:6px;background:var(--wb-code-bg,var(--wb-bg));white-space:pre-wrap;overflow-wrap:anywhere;tab-size:4;font-size:.85rem}.rh-code code{display:block;padding:0;background:none;font-size:inherit}.wb-table-striped tbody tr:nth-child(even) .rh-code{background:var(--wb-surface)}.rh-stat small{color:var(--wb-muted);font-size:.8rem}.rh-list{margin:0;padding-left:1.1em}.rh-list li{overflow-wrap:anywhere}.rh-tip{position:fixed;z-index:1000;max-width:min(480px,calc(100vw - 16px));padding:8px 10px;border:1px solid var(--wb-border);border-radius:6px;background:var(--wb-surface);color:var(--wb-text);box-shadow:0 4px 14px rgb(0 0 0 / .18);white-space:pre-line;overflow-wrap:anywhere;font-size:.85rem;line-height:1.5;pointer-events:none}.rh-tip[hidden]{display:none}.wb-detail{white-space:pre-line}.wb-table tbody tr[hidden]{display:none}.wb-table-striped td{vertical-align:top}.wb-table td>code{font-size:1em}.rh-id{white-space:nowrap}.wb-table td>code:not(.rh-id){display:inline-block;min-inline-size:min(18ch,100vw);max-inline-size:36ch;overflow-wrap:anywhere}.rh-long{width:clamp(13rem,23vw,23rem);max-width:100%;white-space:pre-line;overflow-wrap:anywhere}.rh-long summary{cursor:pointer;white-space:normal}.rh-info{width:auto}.rh-long[open] summary{margin-bottom:.35em}.wb-table-wrap .rh-text{overflow-wrap:anywhere}.wb-filter{display:flex;flex-wrap:wrap;gap:.5em 1em}";
+const PAGE: &str = "body{margin:0}.wb-card-head>h2{font-size:1.1rem}.rh-meta{color:var(--wb-muted);font-size:.85rem;margin:0 0 .6em;word-break:break-word}.rh-tags{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 .8em}.rh-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}.rh-stat{display:flex;flex-direction:column;gap:6px;margin:0;padding:14px 16px;background:var(--wb-bg)}.rh-stat b{font-size:1.6rem;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}.rh-stat b[data-tone=warning]{color:var(--wb-warning)}.rh-stat b[data-tone=success]{color:var(--wb-success)}.rh-stat b[data-tone=error]{color:var(--wb-error)}.rh-stat b[data-tone=category]{color:var(--wb-accent)}.rh-stat .wb-tag{align-self:flex-start}.rh-bar{margin-top:16px}.rh-tabs{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 12px;border-bottom:1px solid var(--wb-border)}.rh-tabs [role=tab]{border:0;border-bottom:2px solid transparent;background:none;padding:6px 10px;font:inherit;color:inherit;cursor:pointer}.rh-tabs [role=tab][aria-selected=true]{border-bottom-color:var(--wb-accent);font-weight:600}.rh-count{margin-inline-start:6px;color:var(--wb-muted);font-size:.85em}.rh-num{text-align:end;font-variant-numeric:tabular-nums;white-space:nowrap}.rh-text{white-space:pre-line;overflow-wrap:break-word}.rh-nowrap{white-space:nowrap}.wb-table thead th{white-space:nowrap}.wb-filter{margin:0 0 8px}.wb-filter label{display:inline-flex;align-items:center;gap:6px}code{font-size:.85em;overflow-wrap:anywhere}.rh-code{margin:0;padding:6px 8px;border-radius:6px;background:var(--wb-code-bg,var(--wb-bg));white-space:pre-wrap;overflow-wrap:anywhere;tab-size:4;font-size:.85rem}.rh-code code{display:block;padding:0;background:none;font-size:inherit}.wb-table-striped tbody tr:nth-child(even) .rh-code{background:var(--wb-surface)}.rh-stat small{color:var(--wb-muted);font-size:.8rem}.rh-list{margin:0;padding-left:1.1em}.rh-list li{overflow-wrap:anywhere}.rh-tip{position:fixed;z-index:1000;max-width:min(480px,calc(100vw - 16px));padding:8px 10px;border:1px solid var(--wb-border);border-radius:6px;background:var(--wb-surface);color:var(--wb-text);box-shadow:0 4px 14px rgb(0 0 0 / .18);white-space:pre-line;overflow-wrap:anywhere;font-size:.85rem;line-height:1.5;pointer-events:none}.rh-tip[hidden]{display:none}.wb-detail{white-space:pre-line}.wb-table tbody tr[hidden]{display:none}.wb-table-striped td{vertical-align:top}.wb-table td>code{font-size:1em}.rh-id{white-space:nowrap}.wb-table td>code:not(.rh-id){display:inline-block;min-inline-size:min(18ch,100vw);max-inline-size:36ch;overflow-wrap:anywhere}.rh-long{width:clamp(13rem,23vw,23rem);max-width:100%;white-space:pre-line;overflow-wrap:anywhere}.rh-long summary{cursor:pointer;white-space:normal}.rh-info{width:auto}.rh-long[open] summary{margin-bottom:.35em}.wb-table-wrap .rh-text{overflow-wrap:break-word}.wb-table td{min-width:5em}.wb-table td>.rh-wide{display:block;min-width:min(14em,60vw)}.wb-filter{display:flex;flex-wrap:wrap;gap:.5em 1em}.rh-fold>summary{cursor:pointer}.rh-fold>summary>h2{display:inline}.rh-fold[open]>summary{margin-bottom:12px}";
 const SCRIPT: &str = "const panels={};document.querySelectorAll('.rh-tabs').forEach(nav=>{const tabs=[...nav.querySelectorAll('[role=tab]')];const select=i=>tabs.forEach((t,j)=>{t.setAttribute('aria-selected',String(i===j));t.tabIndex=i===j?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=i!==j;});tabs.forEach((t,i)=>{panels[t.getAttribute('aria-controls')]=()=>select(i);t.addEventListener('click',()=>select(i));t.addEventListener('keydown',e=>{const d={ArrowRight:1,ArrowLeft:-1}[e.key];if(d){const n=(i+d+tabs.length)%tabs.length;select(n);tabs[n].focus();}});});});const open=()=>{const f=panels[decodeURIComponent(location.hash.slice(1))];if(f)f();};document.querySelectorAll('a.wb-tag-link').forEach(a=>a.addEventListener('click',()=>{const f=panels[a.getAttribute('href').slice(1)];if(f)f();}));addEventListener('hashchange',open);open();document.querySelectorAll('.wb-filter[data-for]').forEach(box=>{const table=document.getElementById(box.dataset.for),input=box.querySelector('input'),selects=[...box.querySelectorAll('select')];const apply=()=>{const t=input.value.trim().toLowerCase();table.querySelectorAll('tbody tr').forEach(r=>{r.hidden=(!!t&&!r.textContent.toLowerCase().includes(t))||selects.some(s=>s.value&&r.dataset['f'+s.dataset.filter]!==s.value);});};input.addEventListener('input',apply);selects.forEach(s=>s.addEventListener('input',apply));});document.querySelectorAll('.wb-count-matrix .wb-count').forEach(b=>b.addEventListener('click',()=>{const box=b.closest('.rh-matrix').querySelector('.wb-detail');box.textContent=b.dataset.detail;}));const tip=document.createElement('div');tip.className='rh-tip';tip.setAttribute('role','tooltip');tip.hidden=true;document.querySelector('.wb-workbench').append(tip);const hide=()=>{tip.hidden=true;};const show=n=>{tip.textContent=n.dataset.detail;tip.hidden=false;const r=n.getBoundingClientRect(),t=tip.getBoundingClientRect(),gap=8;let top=r.bottom+gap;if(top+t.height>innerHeight)top=Math.max(gap,r.top-t.height-gap);tip.style.top=top+'px';tip.style.left=Math.max(gap,Math.min(r.left,innerWidth-t.width-gap))+'px';};document.querySelectorAll('.wb-flow-node[data-detail]').forEach(n=>{n.addEventListener('mouseenter',()=>show(n));n.addEventListener('focus',()=>show(n));n.addEventListener('mouseleave',hide);n.addEventListener('blur',hide);});document.addEventListener('keydown',e=>{if(e.key==='Escape')hide();});addEventListener('scroll',hide,{passive:true});";
+/// Display columns of a text: CJK and other wide characters count two, so a sentence threshold means the same on screen in any script
+fn display_width(text: &str) -> usize {
+    text.chars()
+        .map(|c| if c > '\u{2E7F}' { 2 } else { 1 })
+        .sum()
+}
 
 /// Styles embedded in the page and the label that names their source.
 pub struct Style {
@@ -94,6 +100,21 @@ fn tone(value: &Value) -> Result<String, String> {
 }
 fn heading<'a>(report: &'a Value, key: &str, default: &'a str) -> String {
     escape(report["headings"][key].as_str().unwrap_or(default))
+}
+/// A panel's `fold`: "open" or "closed" makes the card collapsible with its title as the toggle; absent keeps it fixed
+fn fold(panel: &Value) -> Result<Option<bool>, String> {
+    match panel["fold"].as_str() {
+        None if panel["fold"].is_null() => Ok(None),
+        Some("open") => Ok(Some(true)),
+        Some("closed") => Ok(Some(false)),
+        _ => Err("Panel fold must be \"open\" or \"closed\"".into()),
+    }
+}
+fn folded_card(title: &str, body: &str, open: bool) -> String {
+    format!(
+        "<section class=\"wb-card\"><details class=\"rh-fold\"{}><summary class=\"wb-card-head\"><h2>{title}</h2></summary><div class=\"wb-card-body\">{body}</div></details></section>\n",
+        if open { " open" } else { "" }
+    )
 }
 fn card(title: &str, body: &str) -> String {
     format!("<section class=\"wb-card\"><div class=\"wb-card-head\"><h2>{title}</h2></div><div class=\"wb-card-body\">{body}</div></section>\n")
@@ -189,6 +210,10 @@ fn table(id: &str, section: &Value, search: &str, placeholder: &str) -> Result<S
                         // Short single-line values such as status labels stay on one line
                         _ if value.chars().count() <= 12 && !value.contains('\n') => {
                             format!("<td><span class=\"rh-text rh-nowrap\">{value}</span></td>")
+                        }
+                        // Sentences (over 48 display columns) keep a readable width: CJK text may break between any two characters, so without it the table squeezes them first
+                        _ if display_width(&raw) > 48 => {
+                            format!("<td><span class=\"rh-text rh-wide\">{value}</span></td>")
                         }
                         _ => format!("<td><span class=\"rh-text\">{value}</span></td>"),
                     }
@@ -562,7 +587,10 @@ pub fn render(report: &Value, style: &Style) -> Result<String, String> {
     // Panels are standalone cards between the stats and the tabbed sections
     for (i, panel) in items(&report["panels"], "panels")?.iter().enumerate() {
         let (body, _) = block(&format!("p{i}"), panel, &search, &placeholder)?;
-        parts.push_str(&card(&text(&panel["label"]), &body));
+        parts.push_str(&match fold(panel)? {
+            Some(open) => folded_card(&text(&panel["label"]), &body, open),
+            None => card(&text(&panel["label"]), &body),
+        });
     }
 
     let sections = items(&report["sections"], "sections")?;
@@ -708,7 +736,16 @@ pub fn markdown(report: &Value) -> Result<String, String> {
         .chain(items(&report["sections"], "sections")?)
     {
         out.push_str(&format!("\n## {}\n\n", markdown_cell(&section["label"])));
-        out.push_str(&markdown_block(section)?);
+        // A folded panel keeps its content in <details>; the blank lines let Markdown viewers render tables and charts inside
+        match fold(section)? {
+            Some(open) => out.push_str(&format!(
+                "<details{}>\n<summary>{}</summary>\n\n{}\n</details>\n",
+                if open { " open" } else { "" },
+                markdown_cell(&section["label"]),
+                markdown_block(section)?
+            )),
+            None => out.push_str(&markdown_block(section)?),
+        }
     }
     Ok(out)
 }
@@ -801,27 +838,54 @@ fn markdown_block(section: &Value) -> Result<String, String> {
             let nodes = items(&section["nodes"], "flow nodes")?;
             if nodes.is_empty() {
                 out.push_str(&format!("{empty}\n"));
+                return Ok(out);
             }
-            let label = |id: &Value| {
-                nodes
-                    .iter()
-                    .find(|node| node["id"] == *id)
-                    .map_or_else(|| plain(id), |node| plain(&node["label"]))
+            // A Mermaid chart: node ids become safe identifiers, tones become classes, edges to unknown nodes are skipped as in HTML
+            let id = |value: &Value| {
+                format!(
+                    "n_{}",
+                    plain(value)
+                        .chars()
+                        .map(|c| if c.is_ascii_alphanumeric() { c } else { '_' })
+                        .collect::<String>()
+                )
             };
+            let known: Vec<String> = nodes.iter().map(|node| plain(&node["id"])).collect();
+            out.push_str("```mermaid\nflowchart LR\n");
             for node in nodes {
                 out.push_str(&format!(
-                    "- {}: {}\n",
-                    markdown_cell(&node["column"]),
-                    markdown_cell(&node["label"])
+                    "  {}[\"{}\"]\n",
+                    id(&node["id"]),
+                    plain(&node["label"]).replace('"', "'")
                 ));
             }
             for edge in items(&section["edges"], "flow edges")? {
-                out.push_str(&format!(
-                    "- {} → {}\n",
-                    label(&edge["from"]),
-                    label(&edge["to"])
-                ));
+                if known.contains(&plain(&edge["from"])) && known.contains(&plain(&edge["to"])) {
+                    out.push_str(&format!(
+                        "  {} --> {}\n",
+                        id(&edge["from"]),
+                        id(&edge["to"])
+                    ));
+                }
             }
+            for (tone, color) in [
+                ("error", "#c62828"),
+                ("warning", "#ef6c00"),
+                ("success", "#2e7d32"),
+            ] {
+                let marked: Vec<String> = nodes
+                    .iter()
+                    .filter(|node| node["tone"].as_str() == Some(tone))
+                    .map(|node| id(&node["id"]))
+                    .collect();
+                if !marked.is_empty() {
+                    out.push_str(&format!(
+                        "  classDef {tone} stroke:{color},stroke-width:2px\n  class {} {tone}\n",
+                        marked.join(",")
+                    ));
+                }
+            }
+            out.push_str("```\n");
         }
         "matrix" => {
             let rows = items(&section["rows"], "matrix rows")?;

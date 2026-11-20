@@ -1,6 +1,0 @@
-interface:
-  icon_small: "./assets/icon-small.png"
-  icon_large: "./assets/icon.png"
-  display_name: "Angular 元件測試"
-  short_description: "以專案的 Angular 編譯器建置測試, 在瀏覽器驗證元件行為"
-  default_prompt: "Use $angular-component-test to write a suite from the specified behavior, run it against the installed Angular project in headless Chrome and report each failed case with its evidence limits."

@@ -10,9 +10,10 @@ cargo build --locked --release --manifest-path tools/report-html/Cargo.toml
 report-html render --input report-data.json --out /path/to/report.html
 cat report-data.json | report-html render --input - > report.html
 report-html render --input report-data.json --style-dir /path/to/appearance-package
+report-html render --input report-data.json --format md --out /path/to/report.md
 ```
 
-`--input -` 從標準輸入讀取, 省略 `--out` 時頁面印到標準輸出, `--out` 指定的檔案已存在時回報錯誤並保留原檔, 參數或資料錯誤以狀態碼 2 結束
+`--format md` 改輸出 Markdown (預設 `html`), `--input -` 從標準輸入讀取, 省略 `--out` 時頁面印到標準輸出, `--out` 指定的檔案已存在時回報錯誤並保留原檔, 參數或資料錯誤以狀態碼 2 結束
 
 ## 報告資料
 
@@ -49,15 +50,15 @@ report-html render --input report-data.json --style-dir /path/to/appearance-pack
 | `info` | | `[名稱, 值]` 的列表, 樣式來源會自動附在最後一列 |
 | `note` | | 統計卡片上方的說明文字 |
 | `stats` | | 統計卡片, `value` 可為數字或文字, `bar` 為 `true` 且 `value` 是正整數時計入分布條, `section` 填分頁位置 (從 0 起算) 時標籤改為錨點 Tag, 點選後切到該分頁 |
-| `panels` | | 獨立卡片, 依序放在統計卡片與分頁之間, 每個項目的寫法與 `sections` 相同, `label` 是卡片標題 |
+| `panels` | | 獨立卡片, 依序放在統計卡片與分頁之間, 每個項目的寫法與 `sections` 相同, `label` 是卡片標題, `fold` 為 `open` 或 `closed` 時卡片可折疊 (預設展開或收合), Markdown 以 `<details>` 包住內容 |
 | `sections` | | 每個項目是一個分頁, `kind` 決定內容, 預設 `table`, 各類型見下表, `empty` 是沒有資料時的文字, `note` 顯示在內容上方, `tags` 是內容上方的標籤, `count` 覆寫分頁上的數字 |
 | `headings` | | 覆寫固定文字: `info`、`stats`、`sections`、`search`、`placeholder`、`style`、`distribution` |
 
 | 區塊 `kind` | 欄位 | 呈現 |
 | --- | --- | --- |
-| `table` | `columns` (`key`、`label`、`kind` 為 `text`/`number`/`code`/`source`、`lang`)、`rows`、`filters: [{ key, label }]` | 可搜尋的條紋表格, 長文字可展開閱讀全文, `filters` 依該欄的不重複值產生下拉篩選並與搜尋同時作用, 分頁數字為列數 |
+| `table` | `columns` (`key`、`label`、`kind` 為 `text`/`number`/`code`/`source`、`lang`)、`rows`、`filters: [{ key, label }]` | 可搜尋的條紋表格, 欄位太多時表格橫向捲動, 文字在詞的邊界換行, 每格至少 5em 寬, 超過 48 個顯示寬度 (中日韓文字算 2) 的句子至少 14em 寬, 長文字可展開閱讀全文, `filters` 依該欄的不重複值產生下拉篩選並與搜尋同時作用, 分頁數字為列數 |
 | `cards` | `items: [{ value, label, note, tone, title }]` | 卡片格, `title` 是滑鼠提示, 分頁數字為卡片數 |
-| `flow` | `columns` (欄名)、`nodes: [{ id, column, label, detail, tone }]`、`edges: [{ from, to }]` | 由左到右的流程圖, 滑鼠移入或以 Tab 聚焦節點時顯示 `detail`, 指向不存在節點的連線略過 |
+| `flow` | `columns` (欄名)、`nodes: [{ id, column, label, detail, tone }]`、`edges: [{ from, to }]` | 由左到右的流程圖, 滑鼠移入或以 Tab 聚焦節點時顯示 `detail`, 指向不存在節點的連線略過, Markdown 輸出為 Mermaid 流程圖, `tone` 成為節點外框顏色 |
 | `matrix` | `corner`、`columns`、`rows: [{ label, cells: [{ value, tone, label, detail } 或 null] }]`、`hint` | 計數矩陣, 點選格子在下方顯示 `detail`, `hint` 是尚未點選時的提示, 分頁數字為列數 |
 | `list` | `items` (文字) | 項目清單 |
 | `text` | `text` | 保留換行的段落, 分頁不顯示數字 |
