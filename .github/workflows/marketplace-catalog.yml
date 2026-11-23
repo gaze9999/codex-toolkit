@@ -9,9 +9,9 @@ permissions: {}
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 2
+    timeout-minutes: 5
     steps:
       - name: Request catalog rebuild
         env:
           DEPLOY_HOOK: ${{ secrets.MARKETPLACE_DEPLOY_HOOK }}
-        run: curl --fail --silent --show-error --max-time 30 --request POST --output /dev/null "$DEPLOY_HOOK"
+        run: curl --fail --silent --show-error --max-time 240 --request POST --output /dev/null "$DEPLOY_HOOK"
