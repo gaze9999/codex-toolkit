@@ -204,6 +204,95 @@ fn scan_changes_reads_staged_unstaged_and_untracked_git_changes() {
 }
 
 #[test]
+fn scan_changes_stat_reports_stage_and_line_counts() {
+    let dir = tempfile::tempdir().unwrap();
+    let git = |args: &[&str]| {
+        assert!(Command::new("git")
+            .args(args)
+            .current_dir(dir.path())
+            .output()
+            .unwrap()
+            .status
+            .success())
+    };
+    let commit = |message: &str| {
+        git(&[
+            "-c",
+            "user.name=t",
+            "-c",
+            "user.email=t@example.com",
+            "commit",
+            "-qm",
+            message,
+        ])
+    };
+    git(&["init", "-q"]);
+    fs::write(dir.path().join("both.md"), "1\n2\n3\n").unwrap();
+    fs::write(dir.path().join("staged.rs"), "a\n").unwrap();
+    fs::write(dir.path().join("old name.txt"), "keep\nthese\nlines\n").unwrap();
+    git(&["add", "."]);
+    commit("init");
+    fs::write(dir.path().join("both.md"), "1\n2\n3\n4\n").unwrap();
+    fs::write(dir.path().join("staged.rs"), "b\nc\n").unwrap();
+    git(&["mv", "old name.txt", "new|name.txt"]);
+    git(&["add", "."]);
+    fs::write(dir.path().join("both.md"), "1\n3\n4\n5\n").unwrap();
+    fs::write(dir.path().join("fresh.txt"), "x\ny").unwrap();
+    fs::write(dir.path().join("blob.bin"), [0u8, 1, 2]).unwrap();
+
+    let (code, out, _) = run(dir.path(), &["scan-changes", "--stat", "--json"]);
+    assert_eq!(code, 0);
+    let report = json(&out);
+    let fact = |path: &str| {
+        let file = report["files"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|file| file["path"] == path)
+            .unwrap_or_else(|| panic!("{path} missing"));
+        (
+            file["stage"].as_str().unwrap().to_string(),
+            file["added"].clone(),
+            file["deleted"].clone(),
+        )
+    };
+    let n = |value: u64| serde_json::json!(value);
+    assert_eq!(fact("both.md"), ("staged+unstaged".into(), n(2), n(1)));
+    assert_eq!(fact("staged.rs"), ("staged".into(), n(2), n(1)));
+    assert_eq!(fact("new|name.txt"), ("staged".into(), n(0), n(0)));
+    assert_eq!(fact("fresh.txt"), ("untracked".into(), n(2), n(0)));
+    assert_eq!(fact("blob.bin"), ("untracked".into(), Value::Null, n(0)));
+
+    let (code, out, _) = run(dir.path(), &["scan-changes", "--table"]);
+    assert_eq!(code, 0);
+    assert!(out.contains("| File | Stage | Change | Added | Deleted | Category | Doc impact |"));
+    assert!(out.contains("| `both.md` | staged+unstaged | M | 2 | 1 | documentation | yes |"));
+    assert!(out.contains("| `new\\|name.txt` | staged | R100 | 0 | 0 |"));
+    assert!(out.contains("| `blob.bin` | untracked | ?? | - | 0 |"));
+
+    let (code, out, _) = run(dir.path(), &["scan-changes", "--json"]);
+    assert_eq!(code, 0);
+    assert!(json(&out)["files"][0].get("stage").is_none());
+
+    git(&["add", "."]);
+    commit("second");
+    let (_, out, _) = run(dir.path(), &["scan-changes", "--stat", "--json"]);
+    let report = json(&out);
+    let staged = report["files"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|file| file["path"] == "staged.rs")
+        .unwrap();
+    assert_eq!(staged["stage"], "commit");
+    assert_eq!((&staged["added"], &staged["deleted"]), (&n(2), &n(1)));
+
+    let (code, _, err) = run(dir.path(), &["scan-changes", "--table", "--json"]);
+    assert_eq!(code, 2);
+    assert!(err.contains("--table cannot be combined with --json"));
+}
+
+#[test]
 fn sync_inspect_reads_metadata_only_when_requested() {
     let dir = tempfile::tempdir().unwrap();
     let text = "---\nnotion_page_id: 0123456789abcdef0123456789abcdef\nsync_mode: push\n---\n# Title ##\nhttps://www.notion.so/Page-1\n";

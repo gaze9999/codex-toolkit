@@ -12,6 +12,7 @@ Markdown 的唯讀結構檢查、變更檔案的文件影響分類, 以及以 SH
 markdown-checks diff --left before.md --right after.md
 markdown-checks context-brief brief.md --required-heading Scope --json
 markdown-checks scan-changes --repo /path/repository --json
+markdown-checks scan-changes --repo /path/repository --table --max-files 0
 markdown-checks sync-inspect notes.md --json
 markdown-checks sync-write notes.md --content-file new.md --expected-sha256 <sync-inspect 的 sha256>
 ```
@@ -34,8 +35,25 @@ markdown-checks sync-write notes.md --content-file new.md --expected-sha256 <syn
 | `--base REF` | `scan-changes` | 改為比較此 ref 與目前工作樹 |
 | `--diff-file FILE` | `scan-changes` | 改為讀取 unified diff, 不呼叫 Git |
 | `--max-files N` | `scan-changes` | 明細最多列出的檔案數, 預設 80, 0 為全部 |
+| `--stat` | `scan-changes` | 每個檔案加上 `stage`、`added`、`deleted`, 可搭配 `--json` |
+| `--table` | `scan-changes` | 輸出含階段與增減行數的 Markdown 表格, 欄位為 File、Stage、Change、Added、Deleted、Category、Doc impact, 與 `--json` 擇一使用 |
 | `--include-notion-metadata` | `sync-inspect` | 只在明確授權的 Notion 同步流程使用, 另列 Notion 網址、頁面 ID 與 `sync_mode` |
 | `--content-file FILE`、`--expected-sha256 HASH`、`--dry-run` | `sync-write` | 取代內容、讀取時的雜湊與只驗證不寫入 |
+
+## 階段與增減行數
+
+`--stat` 與 `--table` 的數字取自 `git diff --numstat`, 由工具直接讀取, 可直接貼進變更報告作為檔案清單
+
+| `stage` | 來源 |
+| --- | --- |
+| `staged`、`unstaged`、`staged+unstaged` | 已暫存、未暫存, 或兩者都有, 兩者都有時增減行數為兩段相加 |
+| `untracked` | 未追蹤且未忽略的檔案, `added` 為檔案行數, `deleted` 為 0 |
+| `commit` | 沒有工作樹變更時的最後一個 commit |
+| `base` | 指定 `--base` 時與該 ref 的差異 |
+| `diff` | 指定 `--diff-file` 時, 行數欄為空值 |
+
+二進位檔的 `added` 與 `deleted` 在 JSON 為 `null`, 表格顯示 `-`, 未追蹤檔案在 4 MiB 以內才計算行數, 重新命名的檔案以新路徑列出
+這些欄位描述檔案層級的事實, 變更的原因、影響與驗收由報告撰寫者補充
 
 `diff`、`sync-inspect` 與 `scan-changes` 不修改任何檔案, `sync-write` 先在目標旁建立暫存檔再以重新命名取代, 失敗時移除暫存檔
 

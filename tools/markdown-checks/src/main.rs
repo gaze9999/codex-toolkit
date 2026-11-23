@@ -3,13 +3,13 @@ use std::path::{Path, PathBuf};
 
 const HELP: &str = "markdown-checks diff --left FILE --right FILE
 markdown-checks context-brief FILE [--required-heading TEXT ...] [--json] [--strict]
-markdown-checks scan-changes [--repo DIR] [--base REF] [--diff-file FILE] [--max-files N] [--json]
+markdown-checks scan-changes [--repo DIR] [--base REF] [--diff-file FILE] [--max-files N] [--stat] [--table] [--json]
 markdown-checks sync-inspect FILE [--include-notion-metadata] [--json]
 markdown-checks sync-write FILE --content-file FILE --expected-sha256 HASH [--dry-run]
 
 diff           Compare headings, list items and table rows outside fenced code
 context-brief  Structural checks on a context brief; exit 1 when a check fails
-scan-changes   Classify changed files by likely documentation impact
+scan-changes   Classify changed files by likely documentation impact; --stat adds stage and line counts, --table prints them as a Markdown table
 sync-inspect   Read one Markdown sync target: path, SHA-256, headings, optional Notion metadata
 sync-write     Replace that target only when its SHA-256 still matches; exit 3 when it changed
 
@@ -128,7 +128,7 @@ fn run(args: &[String]) -> Result<(i32, String, String), String> {
             let parsed = parse(
                 rest,
                 &["--repo", "--base", "--diff-file", "--max-files"],
-                &["--json"],
+                &["--json", "--stat", "--table"],
             )?;
             if let Some(extra) = parsed.positional.first() {
                 return Err(format!("Unexpected argument {extra:?}"));
@@ -153,7 +153,12 @@ fn run(args: &[String]) -> Result<(i32, String, String), String> {
                 diff_file: parsed.value("--diff-file").map(str::to_string),
                 max_files,
                 json: parsed.flag("--json"),
+                stat: parsed.flag("--stat"),
+                table: parsed.flag("--table"),
             };
+            if options.json && options.table {
+                return Err("--table cannot be combined with --json".into());
+            }
             let (text, code) = scan_changes::run(&options);
             Ok((code, text, String::new()))
         }
