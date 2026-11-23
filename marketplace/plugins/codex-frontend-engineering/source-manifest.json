@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "a2b938a914397400d3541d483780493507e65d35ca94933b9589340b7c8e7cec",
+      "sha256": "9f15acf2cf20257e0b064a3c5f6a7302574d21a2523afb8405b906a6031b61d1",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-frontend-engineering.png"
     },
     "plugin.json": {
-      "sha256": "f3f03cee8a2696663744204b69eb5efa168f3dc78822d0ba872fd87793528e23",
+      "sha256": "611250811b951f251cb3d22267e1d6bc5317c1d66bd3cd36a74a395de9d24f6e",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "resources/references/angular-style.md": {
@@ -241,7 +241,7 @@
       "source": "skills/react-development/references/state-effects.md"
     },
     "skills/ui-ux-design/SKILL.md": {
-      "sha256": "8b65ab678924ce91ff209bd4ba33eed8575db46c64a0f5ab0bd70d7b727bc539",
+      "sha256": "01034ff4282f5268b82654b21717c629cc26ff38894b4b0c6779dfae989e8d99",
       "source": "skills/ui-ux-design/SKILL.md"
     },
     "skills/ui-ux-design/agents/openai.yaml": {
@@ -334,5 +334,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.43.0",
-  "version": "0.10.1"
+  "version": "0.10.3"
 }

@@ -2,7 +2,7 @@
 name: ui-ux-design
 description: Design or review UI/UX, microinteractions, feedback and state transitions, and check rendered interfaces against the request. Use for layout defects, misleading displayed data, missing requirements and interaction changes, including UI work without screenshots.
 metadata:
-  version: "0.7.8"
+  version: "0.7.9"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -15,7 +15,7 @@ Start with the user's task, existing interface, project constraints and the requ
 
 For specification-driven work, preserve specified copy, validation and failure/recovery behavior. Do not invent messages, business defaults or error handling to fill gaps. Preserve existing compatible safeguards and identify missing decisions; an explicit owner-authorized design exception must remain scoped. Use existing shared capabilities first when they satisfy the specification; adapt only the documented gap instead of changing the requirement to fit a component.
 
-For company/client work, require a specification location or explicit scoped decision for each new/changed prompt's wording and display trigger, including inline errors, alerts/toasts, loading, empty, success and recovery states. Inventory changed static and dynamic messages before delivery and inspect initial, edited, action-attempted and corrected states. A validation rule or backend field does not authorize explanatory copy. Preserve existing compatible data-protection blocks and their visible causes; unspecified copy never authorizes silent failure, truncation or bypassing invalid/overlength checks. Record unresolved wording without inventing replacements. Owner-authorized personal-project design remains outside this restriction.
+For company/client UI, compare rendered messages and their triggers with the project specification or approved decision in initial, edited, attempted and corrected states. Verify visible protection for invalid or overlength input. Record missing copy decisions with the affected state. Preserve the existing block and its visible cause. Personal-project design choices follow the owner's scope.
 
 For design-system selection, accessibility targets or conflicting guidance, read [design sources](references/design-sources.md). Classify the relevant passage and its platform/version before adopting it; preserve confirmed product decisions and resolve affected conflicts explicitly.
 
@@ -31,7 +31,7 @@ For a detailed review, reported layout/data discrepancy, or user-visible impleme
 
 Use the available browser capability to operate and visually inspect the affected states, capture and inspect your own screenshots when useful, and supplement them with DOM, console, request and data evidence. A successful build, screenshot creation or plausible mockup does not establish requirement compliance. If the target cannot run or be reached, complete independent checks and identify the unverified requirements and missing runtime evidence.
 
-When a deterministic design-lint tool is available, run it on the changed sources and the served page before delivery and include its findings, unchecked paths and undecided checks in the evidence; its rules never override specification copy or the selected design system, and its absence does not block UI acceptance.
+Use an available design checker when it can answer an outstanding UI question. Choose source checks for changed markup or styles, and rendered checks for an authorized page when runtime evidence is needed. Follow the project specification, selected design system and agreed acceptance gates. In the delivery brief, distinguish confirmed findings, fixes and rechecks from relevant unchecked paths or undecided states.
 
 Jev is optional for semantic ordering of retrieved material or a finite comparison of approved summaries when rules cannot decide it. It does not validate pixels, data bindings or interactions. Keep governing requirements in Main's context and follow the available jev-evaluation Skill's data boundary when evaluation is useful; its absence does not block UI acceptance.
 
