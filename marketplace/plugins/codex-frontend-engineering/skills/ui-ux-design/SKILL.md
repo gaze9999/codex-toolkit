@@ -2,7 +2,7 @@
 name: ui-ux-design
 description: Design or review UI/UX, microinteractions, feedback and state transitions, and check rendered interfaces against the request. Use for layout defects, misleading displayed data, missing requirements and interaction changes, including UI work without screenshots.
 metadata:
-  version: "0.7.7"
+  version: "0.7.8"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -30,6 +30,8 @@ For microinteractions, action feedback, loading/completion states or motion, rea
 For a detailed review, reported layout/data discrepancy, or user-visible implementation, read [UI acceptance and detail review](references/detail-review.md). Reconcile the original request and still-valid follow-ups, compare each affected requirement with the served interface and its data, then fix and retest discrepancies within the existing authorization. Perform this acceptance pass without waiting for the user to supply screenshots or request a separate review.
 
 Use the available browser capability to operate and visually inspect the affected states, capture and inspect your own screenshots when useful, and supplement them with DOM, console, request and data evidence. A successful build, screenshot creation or plausible mockup does not establish requirement compliance. If the target cannot run or be reached, complete independent checks and identify the unverified requirements and missing runtime evidence.
+
+When a deterministic design-lint tool is available, run it on the changed sources and the served page before delivery and include its findings, unchecked paths and undecided checks in the evidence; its rules never override specification copy or the selected design system, and its absence does not block UI acceptance.
 
 Jev is optional for semantic ordering of retrieved material or a finite comparison of approved summaries when rules cannot decide it. It does not validate pixels, data bindings or interactions. Keep governing requirements in Main's context and follow the available jev-evaluation Skill's data boundary when evaluation is useful; its absence does not block UI acceptance.
 
