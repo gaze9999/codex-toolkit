@@ -4,6 +4,7 @@
 /.github/workflows/*
 !/.github/workflows/python-tools-release.yml
 !/.github/workflows/check.yml
+!/.github/workflows/marketplace-catalog.yml
 /.codex/
 
 # Environment and secrets
