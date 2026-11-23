@@ -43,7 +43,7 @@ fn renders_cards_tables_and_escapes_every_value() {
     assert!(page.contains("<b data-tone=\"warning\">2</b><a class=\"wb-tag wb-tag-link\" data-tone=\"warning\" data-outlined=\"false\" href=\"#panel0\">Unused</a>"));
     assert!(page.contains("<b>A</b><span>Score</span>") && page.contains("id=\"panel0\""));
     assert!(page.contains("<table class=\"wb-table wb-table-striped\" id=\"t0\">"));
-    // Source cells are colored with the WBUI token classes and stay escaped
+    // Source cells are colored with the Workbench UI token classes and stay escaped
     assert!(page.contains("<td><pre class=\"rh-code\"><code data-lang=\"typescript\"><span class=\"wb-code-keyword\">const</span> a = <span class=\"wb-code-string\">&quot;&lt;b&gt;&quot;</span>; <span class=\"wb-code-comment\">// note</span></code></pre></td>"));
     assert!(page.contains("<tr><td></td></tr>"));
     assert!(page.contains("style=\"flex:2\"") && !page.contains("style=\"flex:0\""));
@@ -320,7 +320,12 @@ fn write_puts_every_format_in_one_new_folder_and_reports_the_files() {
         .map(|file| file.file_name().unwrap().to_string_lossy().into_owned())
         .collect();
     assert_eq!(names, ["report.json", "report.md", "report.html"]);
-    assert_eq!(all.style.as_deref(), Some("內建樣式"));
+    let style = all.style.as_deref().unwrap();
+    let revision = style
+        .strip_prefix("內建樣式 (SHA-256 ")
+        .and_then(|rest| rest.strip_suffix(')'))
+        .expect("built-in style label carries its revision");
+    assert!(revision.len() == 12 && revision.chars().all(|c| c.is_ascii_hexdigit()));
     // A tool's own Markdown replaces the generated one
     assert_eq!(
         fs::read_to_string(all.out.join("report.md")).unwrap(),

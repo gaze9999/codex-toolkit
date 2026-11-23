@@ -88,6 +88,7 @@ token 以 `wb-code-keyword`、`wb-code-string`、`wb-code-number`、`wb-code-boo
 ## 樣式
 
 預設使用內建樣式 [default.css](src/default.css), `--style-dir` 指向外觀套件資料夾時改用套件的樣式
+內建樣式以 `default.css` 內容的 SHA-256 前 12 碼作為 revision, 報告的樣式列顯示為 `內建樣式 (SHA-256 <12 碼>)`, 樣式內容一改 revision 就跟著改
 頁面標記採用 Workbench UI 靜態版的 class 與 `--wb-*` 變數名稱, 可直接套用其靜態樣式包, 版面補充樣式使用 `rh-` 前綴
 
 外觀套件是一個資料夾, 內含 `manifest.json` 與它指定的樣式檔, 載入時逐項核對:

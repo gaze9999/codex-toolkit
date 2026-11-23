@@ -26,10 +26,12 @@ fn main() {
                 ),
             )
         }
-        None => (
-            fs::read_to_string("src/default.css").expect("src/default.css"),
-            "內建樣式".to_owned(),
-        ),
+        None => {
+            // The built-in styles carry their own revision: the first 12 hex digits of the file's SHA-256.
+            let css = fs::read_to_string("src/default.css").expect("src/default.css");
+            let label = format!("內建樣式 (SHA-256 {})", &package::sha256(&css)[..12]);
+            (css, label)
+        }
     };
     fs::write(out.join("style.css"), css).expect("write style.css");
     fs::write(out.join("style-label.txt"), label).expect("write style-label.txt");
