@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "4154910486fffbf9e6b9dac1284e6e061b2cb2fcbfe95929e262691bb6e17b13",
+      "sha256": "4d8da1ae9807802c2cdc7deb1e440c9cb99bcff2be45526ccc3541a31c90904a",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-multilingual-proofreading.png"
     },
     "plugin.json": {
-      "sha256": "ceb221d39634680b7edca8a05a071c1c3ef05eb94dae15508c7a87c44ff689f7",
+      "sha256": "531005995144f41d94e9abbb989ab4376d6ad28a8f8c61d474b732bc6544bd6c",
       "source": "plugins/multilingual-proofreading/plugin.json"
     },
     "resources/proofreading/authored-style.cjs": {
@@ -73,7 +73,7 @@
       "source": "plugins/multilingual-proofreading/resources/proofreading/zh-tw/terms.yml"
     },
     "skills/multilingual-proofreading/SKILL.md": {
-      "sha256": "d1e1dcb665d4c5aa75756efce2bd253571110c67b1b93b3ea1c8df37e0e6cbdf",
+      "sha256": "41f0a4eb8b4099eb7b77bab6f6e8209ac23f4b9bd91da7c5660ea1a60ae33bf1",
       "source": "skills/multilingual-proofreading/SKILL.md"
     },
     "skills/multilingual-proofreading/agents/openai.yaml": {
@@ -115,5 +115,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.43.0",
-  "version": "0.2.8"
+  "version": "0.2.10"
 }

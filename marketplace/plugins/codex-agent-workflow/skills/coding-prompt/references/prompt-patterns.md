@@ -2,7 +2,7 @@
 
 Read this reference when creating reusable prompt templates or choosing an unfamiliar handoff shape. These are compact shapes, not required headings or repository rules. Replace bracketed fields with confirmed task content and omit irrelevant lines before delivery; keep the complete finished prompt in one `text` fenced block as specified by `SKILL.md`.
 
-Execution and reporting expectations follow [Task intake, execution and reporting](../../agent-governance/references/task-execution-and-reporting.md). Consult that maintained source when revising these expectations and it is available; the compact patterns remain usable at a destination without this repository. Keep routine inherited guidance out of the prompt. Implementation/refactor and Git-delivery illustrations use the detailed change table from that reporting source; small tasks need only a few complete rows.
+Use the destination's project and user requirements for delivery and reporting. When maintaining a shared reporting policy, consult [task execution and reporting](../../agent-governance/references/task-execution-and-reporting.md) if available. These standalone illustrations do not set the destination's report format.
 
 Separate the prompt, expected deliverable and report illustration with Markdown headings. Illustrations use placeholders, not observed results. Omit empty report sections, include useful recommendations when relevant, and retain the requested authority and scope. Necessary expansion needs a reason, affected slice, evidence and acceptance; proposals requiring a decision stay outside completed work.
 

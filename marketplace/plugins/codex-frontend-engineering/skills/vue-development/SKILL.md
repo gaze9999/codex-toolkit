@@ -2,12 +2,14 @@
 name: vue-development
 description: Implement, diagnose, refactor or review Vue components, composables, stores and routes using the detected Vue ecosystem. Load Nuxt/SSR guidance only for server rendering, hydration, deployment or Nuxt integration.
 metadata:
-  version: "0.4.17"
+  version: "0.4.18"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
 
 # Vue Development
+
+When targeting Apple platforms, apply the project design system and the relevant [Apple HIG platform guidance](https://developer.apple.com/design/human-interface-guidelines/). Verify the primary flow with the target window size and input mode. Use the UI/UX design Skill for platform-specific review when available.
 
 Inspect manifests/lockfiles, compiler/router/store/build settings and relevant components. Detect Vue version, Options/Composition API, script setup, auto-imports, TypeScript, UI library and CSS conventions, do not assume Nuxt/Vite/Pinia/SSR.
 

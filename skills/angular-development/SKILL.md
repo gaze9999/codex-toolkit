@@ -2,12 +2,14 @@
 name: angular-development
 description: Implement, diagnose, refactor or review Angular components, forms, templates, feature models/helpers and application integration using the detected Angular/TypeScript/RxJS versions. Use architecture guidance only when ownership, DI, routing or cross-runtime boundaries are affected.
 metadata:
-  version: "0.5.8"
+  version: "0.5.11"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
 
 # Angular Development
+
+When targeting Apple platforms, apply the project design system and the relevant [Apple HIG platform guidance](https://developer.apple.com/design/human-interface-guidelines/). Verify the primary flow with the target window size and input mode. Use the UI/UX design Skill for platform-specific review when available.
 
 Inspect the affected feature, actual Angular/TypeScript/RxJS versions, compiler/build targets and applicable instructions. Use the project's existing patterns, do not assume standalone components, Signals, zoneless rendering or a recent API.
 
@@ -21,6 +23,7 @@ Inspect the affected feature, actual Angular/TypeScript/RxJS versions, compiler/
 - DI/state/routing/render ownership or Host/custom elements: [architecture](references/architecture.md)
 - New/replaced generic UI, dialogs or a shared-library reuse review: [UI reuse](references/ui-reuse.md)
 - Forms, templates, async rendering or hydration: [component behavior](references/component-behavior.md)
+- For TypeScript formatting without an editor, use the [standalone method](references/typescript-formatting.md). For VS Code provider diagnosis or an explicit editor comparison, use the [editor adapter](references/vscode-formatting-adapter.md).
 - Generation or review of class visibility, template formatting, layout, member groups, compact syntax or numeric display: [Angular style example](references/angular-style.md)
 - Feature maintenance items, read/write ownership, actual option sources, pass-through calls, duplicate projections or Model/type definitions: [code maintainability](references/code-maintainability.md)
 - Bounded maintenance audits with independent scope/depth, optional inspection tools, candidate evidence and performance/security routing: [maintenance review](references/maintainability-review.md), using the optional read-only `angular-checks maintainability` command and its bundled [AST adapter](scripts/maintainability_ast.cjs)

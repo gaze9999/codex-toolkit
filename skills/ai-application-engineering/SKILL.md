@@ -2,7 +2,7 @@
 name: ai-application-engineering
 description: Build, refactor, diagnose, or review production LLM, agent, tool-calling, RAG, embedding, and model-runtime integrations across providers. Use for AI application code and workflow behavior, not ordinary prompt writing or generic image generation.
 metadata:
-  version: "0.4.15"
+  version: "0.4.16"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -22,7 +22,7 @@ Engineer AI features from the repository's actual provider, model, runtime, data
 
 - For agents, assistants, tools, approvals, or multi-step state, read [agent-tool-systems.md](references/agent-tool-systems.md).
 - For ingestion, chunking, embeddings, vector search, retrieval, reranking, grounding, or citations, read [rag-systems.md](references/rag-systems.md).
-- Read both only when the feature actually crosses both boundaries.
+- Read both only when the feature actually crosses both boundaries. For OpenAI API history replay, compaction, early stopping or deferred tool discovery, see [OpenAI state and tools](references/openai-state-and-tools.md).
 
 ## Implement the smallest complete change
 

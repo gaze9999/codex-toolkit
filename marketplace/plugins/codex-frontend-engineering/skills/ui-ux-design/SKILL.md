@@ -2,7 +2,7 @@
 name: ui-ux-design
 description: Design or review UI/UX, microinteractions, feedback and state transitions, and check rendered interfaces against the request. Use for layout defects, misleading displayed data, missing requirements and interaction changes, including UI work without screenshots.
 metadata:
-  version: "0.7.9"
+  version: "0.7.11"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

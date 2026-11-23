@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "2bbed726cf03fd56bd657a86a93ed59fc77fe98744bbc1104b49853c14d66663",
+      "sha256": "cfa4a740ff7ff28dbc79e6d54c233c9b1fe36a764266f9f2c0fc559ccf0697dd",
       "source": null
     },
     "LICENSE": {
@@ -13,11 +13,11 @@
       "source": "assets/branding/plugins/codex-agent-workflow.png"
     },
     "plugin.json": {
-      "sha256": "0d52003917c74f0b99c06d39c0b2866d088c8c134783308d220aef21981ad38e",
+      "sha256": "a505216418ce325c7fbfb2303693790c283f0cb7f3112df928f9ca288c47b71a",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
-      "sha256": "a3215b0c95ac218c38053ba83b9dfc7953d92d8240615026e02a667d883072ec",
+      "sha256": "e2da75c5534da65ec19938435b93afe7ad96b89b8f92b6e8f8ac9228fe8c04b4",
       "source": "skills/agent-governance/SKILL.md"
     },
     "skills/agent-governance/agents/openai.yaml": {
@@ -101,11 +101,11 @@
       "source": "skills/agent-governance/references/agent-terminology.md"
     },
     "skills/agent-governance/references/component-authoring.md": {
-      "sha256": "c4bb24e04efcf702d069192204c09c232e586c1f87775f3df7645570391cdbfb",
+      "sha256": "561f41b011baa7ef72a5242b2ebe407874a0062565af6f56f1912727f8282d0f",
       "source": "skills/agent-governance/references/component-authoring.md"
     },
     "skills/agent-governance/references/context-continuity.md": {
-      "sha256": "ae947e1e1c7a5273143925e0c13d6204f0ebccf0c96e77d05bf1dd971ad36f7a",
+      "sha256": "5231c70b0221d6352995e80ccb85f9fb7a8a0567523428252525e685fb920137",
       "source": "skills/agent-governance/references/context-continuity.md"
     },
     "skills/agent-governance/references/delegation-routing.md": {
@@ -153,11 +153,11 @@
       "source": "skills/agent-governance/references/shared-workflow.md"
     },
     "skills/agent-governance/references/task-execution-and-reporting.md": {
-      "sha256": "5f2a0db4a745636e0256e21c95f454ebe96dfed9cf47c051287dea789874e723",
+      "sha256": "a2b5e871df1c239282abecd4d1ba74f243ef077b8872f8f0b1f91eccaeafcfa2",
       "source": "skills/agent-governance/references/task-execution-and-reporting.md"
     },
     "skills/coding-prompt/SKILL.md": {
-      "sha256": "80cbe0d0b18f8085bdacd0e54c665b2099f9be07be33bdc902cee144069856cb",
+      "sha256": "385d266011f3a72401cc3018a3d481388da7a2816f2ae2b72e82e335c165ca95",
       "source": "skills/coding-prompt/SKILL.md"
     },
     "skills/coding-prompt/agents/openai.yaml": {
@@ -181,11 +181,11 @@
       "source": "skills/coding-prompt/assets/icon.svg"
     },
     "skills/coding-prompt/references/prompt-patterns.md": {
-      "sha256": "ff01a3548058c38b26dca7f503f9181230ff88d799ea9885d7b25079d37bec5c",
+      "sha256": "5841d297f1dad2be47726f68dde3ab4de962ba97a6e25801c7298da02bee6b23",
       "source": "skills/coding-prompt/references/prompt-patterns.md"
     },
     "skills/coding-prompt/references/workflow.md": {
-      "sha256": "5162ede18105b6c6fcfd86ebe5fb9a284b0f191402bc28c045b8105ebc3cbd57",
+      "sha256": "50f0b6967101aa23bf78cf1ac5eac6300f58e14078b27be60b59848a6aedefa1",
       "source": "skills/coding-prompt/references/workflow.md"
     },
     "skills/task-guide/README.md": {
@@ -193,7 +193,7 @@
       "source": "skills/task-guide/README.md"
     },
     "skills/task-guide/SKILL.md": {
-      "sha256": "0fd28089a23ef072b2113b45106cfb429a7f60da6c8c5fa40137d24f3ca7bced",
+      "sha256": "4d6a43fcee83b8c89cb615a0e1cd05961791d2ce27d5cc358cbf6a76d175e384",
       "source": "skills/task-guide/SKILL.md"
     },
     "skills/task-guide/agents/openai.yaml": {
@@ -249,7 +249,7 @@
       "source": "skills/task-guide/references/decision-records.md"
     },
     "skills/task-guide/references/documentation-views.md": {
-      "sha256": "57b3f2b2aaf3301824f142a9e2d9a080feb52239d97efec8e5c162713cb9fcd5",
+      "sha256": "8a8c03a11dde3f80cfe103fd42d70f862d8ccaf409a3996cf0534829dce62be2",
       "source": "skills/task-guide/references/documentation-views.md"
     },
     "skills/task-guide/references/planning-and-acceptance.md": {
@@ -261,7 +261,7 @@
       "source": "skills/task-guide/references/task-guide.md"
     },
     "skills/task-guide/references/workflow.md": {
-      "sha256": "5bb07c23657e567aab76bf21157bf492903d69a815fe6c766db52d15f2631fa5",
+      "sha256": "de2b60b0cf3b3a811970a8e475a8c09a3546da0f99d2074d259979d7dfeda838",
       "source": "skills/task-guide/references/workflow.md"
     },
     "skills/task-guide/scripts/create_task_guide.py": {
@@ -308,5 +308,5 @@
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.43.0",
-  "version": "0.6.6"
+  "version": "0.6.8"
 }

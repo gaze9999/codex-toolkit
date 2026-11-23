@@ -2,12 +2,14 @@
 name: accessibility-engineering
 description: Implement, diagnose or review accessibility (a11y), UI semantics, accessible names, keyboard operation, focus, errors and assistive-technology behavior. Use for programming changes or accessibility checks in the detected web/native stack, not generic visual redesign or a conformance claim based only on an automatic scan.
 metadata:
-  version: "0.1.2"
+  version: "0.1.3"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
 
 # Accessibility Engineering
+
+When targeting Apple platforms, apply the project design system and the relevant [Apple HIG platform guidance](https://developer.apple.com/design/human-interface-guidelines/). Verify the primary flow with the target window size and input mode. Use the UI/UX design Skill for platform-specific review when available.
 
 Inspect the affected flow, framework/runtime, component library, rendered semantics and actual acceptance requirement. Use the project's applicable standard and target platform; for web work, consult the relevant WCAG criteria and WAI-ARIA Authoring Practices. Preserve source-defined copy, shared-component ownership and useful existing interactions.
 

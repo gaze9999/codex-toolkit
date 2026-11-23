@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "a5a751ea7c95a3c7894f7b5e51da9460bc5ca7d068a4e8463d35aac035b27b25",
+      "sha256": "3cceac02ed3245af01090e71c372f461eed89a0dac10098f1c54b04943723ff6",
       "source": null
     },
     "LICENSE": {
@@ -13,11 +13,11 @@
       "source": "assets/branding/plugins/codex-ai-engineering.png"
     },
     "plugin.json": {
-      "sha256": "bf87e42cc3ef48ba7fa722437aa1ac2319fa2b49d8dd98081ebb1b3cefb43ca0",
+      "sha256": "929977a34d0e853f71cb85ff4c4a7daa29fa8fba81166ccff6aae2ca10b83fcf",
       "source": "plugins/ai-engineering/plugin.json"
     },
     "skills/ai-application-engineering/SKILL.md": {
-      "sha256": "a695cc10d9a990531198ff7308260fb8ed05cb62cd473410ea6b62225f604a7c",
+      "sha256": "7d06b35889c3618a5bf5390b958f3d17fb4c098af2cef227818bd435eadab28e",
       "source": "skills/ai-application-engineering/SKILL.md"
     },
     "skills/ai-application-engineering/agents/openai.yaml": {
@@ -66,5 +66,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.43.0",
-  "version": "0.1.4"
+  "version": "0.1.5"
 }

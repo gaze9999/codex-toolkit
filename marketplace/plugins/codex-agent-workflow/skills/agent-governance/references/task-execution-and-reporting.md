@@ -121,7 +121,7 @@ Lead with the actual deliverable. Keep requirements and later decisions tied to 
 
 When several kinds of information are present, use Markdown headings to separate results, verification, unresolved work and recommendations. Omit empty sections and choose the depth that makes the actual task clear. Keep recommendations actionable, with evidence, applicability and the next decision or action; distinguish them from required unfinished work and already-adopted scope changes.
 
-A task-specific prompt can carry the needed deliverable, acceptance and reporting expectation in one or two sentences. Add a report illustration only when requested or when authoring teaching/examples. Place it outside the complete `text` prompt block, label it as an illustration and use placeholders for outcomes, locations, counts, IDs and checks that have not been observed. See [coding prompt patterns](../../coding-prompt/references/prompt-patterns.md) for paired prompts and expected delivery.
+A task-specific prompt can carry the needed deliverable, acceptance and reporting expectation in one or two sentences. Add a report illustration only when requested or when authoring teaching/examples. Place it outside the complete `text` prompt block, label it as an illustration and use placeholders for outcomes, locations, counts, IDs and checks that have not been observed.
 
 ## Shared tool boundaries
 

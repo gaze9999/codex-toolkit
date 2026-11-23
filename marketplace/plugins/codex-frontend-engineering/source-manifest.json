@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "9f15acf2cf20257e0b064a3c5f6a7302574d21a2523afb8405b906a6031b61d1",
+      "sha256": "9f7b7a39ae7d18541a989413e3883e770d65efc5eac74318a9ae13298598e51b",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-frontend-engineering.png"
     },
     "plugin.json": {
-      "sha256": "611250811b951f251cb3d22267e1d6bc5317c1d66bd3cd36a74a395de9d24f6e",
+      "sha256": "32350b6785eb295ccdd140714aa6b57eea4c9c4cfe7902d063dd47af2d68c14a",
       "source": "plugins/frontend-engineering/plugin.json"
     },
     "resources/references/angular-style.md": {
@@ -21,7 +21,7 @@
       "source": "plugins/frontend-engineering/resources/references/angular-style.md"
     },
     "skills/accessibility-engineering/SKILL.md": {
-      "sha256": "f1c2ebc3d951335593a20801aaac30e08bc4e2b386a8672080fbc9164a290a14",
+      "sha256": "cfd1c6545c2621e06d6af888e97562cfb71b0faf1604eb71b200bbf1ea48cc43",
       "source": "skills/accessibility-engineering/SKILL.md"
     },
     "skills/accessibility-engineering/agents/openai.yaml": {
@@ -53,7 +53,7 @@
       "source": "skills/accessibility-engineering/references/validation.md"
     },
     "skills/angular-development/SKILL.md": {
-      "sha256": "27b9939d513638cf37d0e764dc93735f76787e398b7505c2d222515ebad9e889",
+      "sha256": "d53bce30a58ee2ae8b0b590fc4fe8ff644be74824cf8f00b140f29109b789f8c",
       "source": "skills/angular-development/SKILL.md"
     },
     "skills/angular-development/agents/openai.yaml": {
@@ -89,7 +89,7 @@
       "source": "skills/angular-development/references/code-maintainability.md"
     },
     "skills/angular-development/references/component-behavior.md": {
-      "sha256": "eb61f072bd35622d251ef059320804af5a28503e9fc03437c99f1226549e4442",
+      "sha256": "7648df25599cad3b975e3438ef026dcc15e50910b36861d1f881b22fc11fe51c",
       "source": "skills/angular-development/references/component-behavior.md"
     },
     "skills/angular-development/references/maintainability-review.md": {
@@ -209,7 +209,7 @@
       "source": "skills/playwright-cli/references/commands.md"
     },
     "skills/react-development/SKILL.md": {
-      "sha256": "f45cd4e151222f0850cec4901f2714c28f4b1037674299a81a483fa45cff943f",
+      "sha256": "f99ca4eafdff64486a66a42c755bcf3028f61844b8b0384f23c8f838c3daa98d",
       "source": "skills/react-development/SKILL.md"
     },
     "skills/react-development/agents/openai.yaml": {
@@ -241,7 +241,7 @@
       "source": "skills/react-development/references/state-effects.md"
     },
     "skills/ui-ux-design/SKILL.md": {
-      "sha256": "01034ff4282f5268b82654b21717c629cc26ff38894b4b0c6779dfae989e8d99",
+      "sha256": "2bf6698b43c86fb2ced7d1894438613b3dd34a197153a46d487e7a02642173e7",
       "source": "skills/ui-ux-design/SKILL.md"
     },
     "skills/ui-ux-design/agents/openai.yaml": {
@@ -273,7 +273,7 @@
       "source": "skills/ui-ux-design/references/component-patterns.md"
     },
     "skills/ui-ux-design/references/design-foundations.md": {
-      "sha256": "48d7ac1ac18d741a0f1ae81d4cdb8569f55ebdb8d0995ecd1ec327ab3270920d",
+      "sha256": "22fc244cdf47b3d7cafcb3d44b338eda429aeb0cdf17a0e611f4d5bafe4a8b40",
       "source": "skills/ui-ux-design/references/design-foundations.md"
     },
     "skills/ui-ux-design/references/design-sources.md": {
@@ -289,7 +289,7 @@
       "source": "skills/ui-ux-design/references/microinteractions.md"
     },
     "skills/vue-development/SKILL.md": {
-      "sha256": "147fa98be415eddf64a9b8a7671c889037f4b8efd513e004b13ad0cd1b5ded86",
+      "sha256": "0386a1386bc8ecb1d7ded26e1c4189d9e3bbdfea0cdaedfb3eef142e9d81cb99",
       "source": "skills/vue-development/SKILL.md"
     },
     "skills/vue-development/agents/openai.yaml": {
@@ -334,5 +334,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.43.0",
-  "version": "0.10.3"
+  "version": "0.10.6"
 }

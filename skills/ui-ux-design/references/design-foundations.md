@@ -8,6 +8,8 @@ When no project design system or platform requirement selects the source, start 
 
 Select a representative task, user/input mode, platform and viewport before borrowing a pattern. Compare its purpose and constraints with the target. Native pt, Android dp/sp and web CSS px are different units; use the applicable platform guidance and web criteria instead of a universal size rule. Identify the source and reason when recommendations conflict.
 
+When a web project requests a 4/8 spacing grid, prefer existing tokens or rem: 0.5rem increments for general layout and 0.25rem increments for fine spacing. With a 16px root these correspond to 8px and 4px. Preserve user text scaling, fluid layout and intentional hairlines. The [Android baseline grid](https://developer.android.com/design/ui/mobile/guides/layout-and-content/grids-and-units) uses dp; these rem steps are a web adaptation.
+
 ## Primary: Apple
 
 Start with [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines), then the affected topic:
@@ -15,6 +17,10 @@ Start with [Human Interface Guidelines](https://developer.apple.com/design/human
 - [Layout](https://developer.apple.com/design/human-interface-guidelines/layout): adapt to available window space, retain familiar functionality and keep content/actions clear of obstructing UI. Apply consistent alignment and readable content width to the target platform.
 - [Typography](https://developer.apple.com/design/human-interface-guidelines/typography): create a legible hierarchy and test supported text sizes, long labels and localized content. Do not shrink important information simply to fit a layout.
 - [Accessibility](https://developer.apple.com/design/human-interface-guidelines/accessibility): provide consistent, perceivable and adaptable interaction; preserve relevant assistive and personalization support.
+
+For [Mac](https://developer.apple.com/design/human-interface-guidelines/designing-for-macos), test resizing, keyboard commands, focus return and pointer input. For [iPhone](https://developer.apple.com/design/human-interface-guidelines/designing-for-ios), prioritize the primary task, reachable controls, orientation and text-size changes. For [iPad](https://developer.apple.com/design/human-interface-guidelines/designing-for-ipados), verify narrow and wide windows, retained selection and mixed touch/keyboard/trackpad use. In a native Mac app, check its actual window and accessibility tree. For a browser UI, record the browser, viewport and input mode; verify platform-specific behavior separately.
+
+Prefer semantic colors and text styles. Check light/dark appearances and verify that status is recognizable without color alone. Test text enlargement and preserve meaningful feedback under Reduce Motion. Review safe areas after rotation and resize. Use the project’s semantic tokens and supported platform APIs. [Color](https://developer.apple.com/design/human-interface-guidelines/color) and [Motion](https://developer.apple.com/design/human-interface-guidelines/motion)
 
 Choose platform-specific behavior when building for Apple devices. On the web, translate these principles into supported components and browser behavior. Native blur, translucent surfaces, animation, fonts and symbols need a concrete purpose, adequate readability, platform support and permission before adoption.
 

@@ -3,7 +3,7 @@ name: agent-governance
 description: Create, audit, or simplify project AGENTS.md layers, Codex subagent roles and durable goal recovery across conversations. Use for instruction-governance work, not ordinary implementation or general code review.
 metadata:
   short-description: Agent governance, role boundaries, and instruction minimization
-  version: "0.6.19"
+  version: "0.6.21"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -14,7 +14,7 @@ Create or simplify instruction layers and durable role boundaries. Keep rules th
 
 ## Scope
 
-- Write AI-facing guides, briefs, indexes and handoffs in concise English. Human-facing authored Chinese uses concise Taiwan Traditional Chinese and Taiwan wording, never Simplified characters. Keep all authored English concise and direct. Use halfwidth punctuation, one space after commas/colons/question/exclamation marks when text follows, allow 、 for enumeration, and omit Chinese sentence periods and semicolons. Preserve requested languages, source quotations, contractual copy, code, URLs and versions. These defaults apply even when Global is unavailable.
+- Write AI-facing guides, briefs, indexes and handoffs in concise English. Human-facing authored Chinese uses concise Taiwan Traditional Chinese and Taiwan wording, never Simplified characters. Keep all authored English concise and direct. Use the selected punctuation profile, otherwise preserve the document's style or use normal conventions for new prose. Preserve requested languages, source quotations, contractual copy, code, URLs and versions. These defaults apply even when Global is unavailable.
 - Read relevant sections/symbols first and retain checked source/version pointers. Expand only when confidence is insufficient or the specification is unclear/conflicting; do not require whole-file/document reads by default.
 - At each work round, recover relevant current progress, effective decisions and coding conventions. Apply formatting and member ordering to the actual generated/changed code, preserving initializer/decorator timing and unrelated work; reading a rule is not compliance. Reuse checked pointers and refresh only affected evidence.
 

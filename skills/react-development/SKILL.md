@@ -2,12 +2,14 @@
 name: react-development
 description: Implement, diagnose, refactor or review React components, hooks, state and routing using the detected React runtime. Load server/SSR guidance only for a framework or hydration boundary, not for generic JavaScript or non-React UI.
 metadata:
-  version: "0.4.17"
+  version: "0.4.18"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
 
 # React Development
+
+When targeting Apple platforms, apply the project design system and the relevant [Apple HIG platform guidance](https://developer.apple.com/design/human-interface-guidelines/). Verify the primary flow with the target window size and input mode. Use the UI/UX design Skill for platform-specific review when available.
 
 Inspect actual React/compiler/build versions, entry points, router/store, tests, styling and deployment. Do not assume Next.js, React Server Components, React Compiler, Vite, TypeScript or a new Hook API.
 

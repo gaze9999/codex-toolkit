@@ -4,7 +4,7 @@ Read when organizing reusable requirements, AI navigation, human reports or hist
 
 ## One authority, several reading views
 
-Write AI-facing guides, briefs, indexes and handoffs in concise English. Human-facing authored Chinese uses concise Taiwan Traditional Chinese and Taiwan wording, never Simplified characters. Use halfwidth punctuation, one space after commas/colons/question/exclamation marks when text follows, allow 、 for enumeration, and omit Chinese sentence periods and semicolons. Preserve requested languages, source quotations, contractual copy, code, URLs and versions. These defaults apply even when Global is unavailable.
+Write AI-facing guides, briefs, indexes and handoffs in concise English. Human-facing authored Chinese uses concise Taiwan Traditional Chinese and Taiwan wording, never Simplified characters. Use the selected punctuation profile, otherwise preserve the document's style or use normal conventions for new prose. Preserve requested languages, source quotations, contractual copy, code, URLs and versions. These defaults apply even when Global is unavailable.
 
 Read relevant sections/symbols first and retain checked source/version pointers. Expand only when confidence is insufficient or the specification is unclear/conflicting; do not require whole-file/document reads by default.
 
