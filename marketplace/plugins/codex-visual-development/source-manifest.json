@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "7c9fdd7ab1c43ed46efa964348a4dcdb96812f913e9f7a20162ada487242e333",
+      "sha256": "03e37614c984f2bc79ee6be1cac81afebda09cfea6982de402d0a443c92b66b1",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-visual-development.png"
     },
     "plugin.json": {
-      "sha256": "9963e7a25ec54b62879333a47de9599afbe58be17e0ec9d60e109264d256dbde",
+      "sha256": "ddf19be02ff77dbda44b80981cd117885c39c4c5c3486506885898620a6212ac",
       "source": "plugins/visual-development/plugin.json"
     },
     "resources/visual-runtime/README.md": {
@@ -21,11 +21,11 @@
       "source": "python-tools/packages/visual-runtime/README.md"
     },
     "resources/visual-runtime/pyproject.toml": {
-      "sha256": "cdcd8b054592138be8fa6ddeee1e04edb0f98ee5e0fa03c02903aea09d4e090e",
+      "sha256": "da72137423ba52b5c6bc3feaa4cc2d3aa4601ca7cf2513504f2c9919716c1ccb",
       "source": "python-tools/packages/visual-runtime/pyproject.toml"
     },
     "resources/visual-runtime/src/codex_visual_runtime/__init__.py": {
-      "sha256": "018787948e2258aca3cfccd975441d93c2cbaa288662104a667e9fa5481ad870",
+      "sha256": "2ded7a0ee9aa6d866966ec919f571036bd60de3e2634aa352fd8ea93098cfb6e",
       "source": "python-tools/packages/visual-runtime/src/codex_visual_runtime/__init__.py"
     },
     "resources/visual-runtime/src/codex_visual_runtime/__main__.py": {
@@ -41,7 +41,7 @@
       "source": "python-tools/packages/visual-runtime/src/codex_visual_runtime/core.py"
     },
     "resources/visual-runtime/src/codex_visual_runtime/server.py": {
-      "sha256": "b67413e23b2b0007375b6d39901decfbae648a6d4f3c959c34fc01c8ebb28019",
+      "sha256": "f492a9a2ca2cfb2a64ac9783cb15cc1db79e7ddcb74b26fdb29439c47d8c7e13",
       "source": "python-tools/packages/visual-runtime/src/codex_visual_runtime/server.py"
     },
     "skills/data-visualization/SKILL.md": {
@@ -131,5 +131,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.43.0",
-  "version": "0.5.3"
+  "version": "0.5.4"
 }

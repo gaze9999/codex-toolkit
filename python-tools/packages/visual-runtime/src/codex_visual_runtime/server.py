@@ -1,5 +1,6 @@
 """Thin MCP adapter around process-owned previews and scoped inspection."""
 import argparse
+from . import __version__
 from typing import Any
 from .core import Workspace, Previews, Problem
 
@@ -8,7 +9,7 @@ def build_server():
     from mcp.server import MCPServer
     from mcp_types import ToolAnnotations
     previews = Previews()
-    server = MCPServer("Visual Runtime", instructions="Provide an authorized project root for each inspection, artifact or preview-start call. Preview jobs keep their own file snapshots and are controlled by job_id. No shell execution, framework migration or engine installation. Preview HTML runs in the browser; approve its source and network behavior. Main selects the project toolchain.")
+    server = MCPServer("Visual Runtime", version=__version__, instructions="Provide an authorized project root for each inspection, artifact or preview-start call. Preview jobs keep their own file snapshots and are controlled by job_id. No shell execution, framework migration or engine installation. Preview HTML runs in the browser; approve its source and network behavior. Main selects the project toolchain.")
     read = ToolAnnotations(readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False)
     write = ToolAnnotations(readOnlyHint=False, destructiveHint=False, idempotentHint=False, openWorldHint=False)
 

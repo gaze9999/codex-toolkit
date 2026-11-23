@@ -1,5 +1,6 @@
 """Optional stdio MCP adapter; core stays independent of MCP."""
 import argparse
+from . import __version__
 from typing import Any
 from . import core
 
@@ -8,7 +9,7 @@ def build_server(config):
     from mcp.server import MCPServer
     from mcp_types import ToolAnnotations
     from pydantic import StrictBool
-    server = MCPServer("Decisions", instructions="Optional bounded evaluation of authorized evidence. Main chooses tools and delegation; answers never authorize actions. No ChatGPT credential reuse or provider fallback.")
+    server = MCPServer("Decisions", version=__version__, instructions="Optional bounded evaluation of authorized evidence. Main chooses tools and delegation; answers never authorize actions. No ChatGPT credential reuse or provider fallback.")
     local = ToolAnnotations(readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False)
     remote = ToolAnnotations(readOnlyHint=True, destructiveHint=False, idempotentHint=False, openWorldHint=True)
 

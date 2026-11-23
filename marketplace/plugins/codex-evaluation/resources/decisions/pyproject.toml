@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "codex-decisions"
-version = "0.1.0"
+version = "0.1.1"
 description = "Bounded Decisions client with offline validation and optional MCP"
 requires-python = ">=3.11"
 readme = "README.md"

@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "5e9c28544ee883d9d79ceae84818497a73974eee54055c46106439eae767f77f",
+      "sha256": "db9b5d9d69d5aa029bc650195eb733e93b3d4e0639af91ba39bfa9794a5b9c0a",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-evaluation.png"
     },
     "plugin.json": {
-      "sha256": "a9864f389160e57eb1a0392e811a8e442ef837ecc3ce45fc04793ba804df2ec2",
+      "sha256": "25091920ee0b6b01da988261ad0dd5cf450fc71d716333ed51e27cf6ca419a3b",
       "source": "plugins/evaluation/plugin.json"
     },
     "resources/decisions/README.md": {
@@ -21,11 +21,11 @@
       "source": "python-tools/packages/decisions/README.md"
     },
     "resources/decisions/pyproject.toml": {
-      "sha256": "405ad22d303f35993ddb621a93e79e52290aa2cf00d57e9cdec6d34fa7875b94",
+      "sha256": "5d4aae267a2b0d53a528b50e040969c0aaf0d127eb6079b974808e5da51a4a96",
       "source": "python-tools/packages/decisions/pyproject.toml"
     },
     "resources/decisions/src/codex_decisions/__init__.py": {
-      "sha256": "8471623e3558d82ab68cbef9f57acda5dc0cef3cf9727cbd7615172cd59e6d89",
+      "sha256": "a87876bd5461df8850f65650d1398340d8d4038ddbd44ee2a1d9fe22b619a48c",
       "source": "python-tools/packages/decisions/src/codex_decisions/__init__.py"
     },
     "resources/decisions/src/codex_decisions/__main__.py": {
@@ -37,11 +37,11 @@
       "source": "python-tools/packages/decisions/src/codex_decisions/cli.py"
     },
     "resources/decisions/src/codex_decisions/core.py": {
-      "sha256": "3a6aa26c6b145679f77274d6c3bfafe7a2b099464ff2ea3172c18cdb45492cd2",
+      "sha256": "fcd6304957a570a950aaa275797ec90030f677b692f5c1679154bfc9bc8adf9a",
       "source": "python-tools/packages/decisions/src/codex_decisions/core.py"
     },
     "resources/decisions/src/codex_decisions/server.py": {
-      "sha256": "665cdc3c40698a3932e8366b68fe610b9ba78f760daf90f8249e5f03f7ed828e",
+      "sha256": "a7a7783ab7808bc0249b5253eb89fc701ed52e8e42bf5e8e56e8816bf529a139",
       "source": "python-tools/packages/decisions/src/codex_decisions/server.py"
     },
     "skills/decisions-evaluation/SKILL.md": {
@@ -150,5 +150,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.43.0",
-  "version": "0.1.4"
+  "version": "0.1.5"
 }

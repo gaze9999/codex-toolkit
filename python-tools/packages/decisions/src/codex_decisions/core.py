@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import base64
 import hashlib
+from . import __version__
 import json
 import math
 import os
@@ -69,7 +70,7 @@ def config_from(path=None):
 def status(config):
     return {"status": "configured" if os.environ.get(config["credential_env"], "").strip() else "needs_credentials",
             "credential_env": config["credential_env"], "endpoint": ENDPOINT, "model": config["model"],
-            "credential_checked": "presence_only", "online": False, "version": "0.1.0"}
+            "credential_checked": "presence_only", "online": False, "version": __version__}
 
 
 def json_data(value):
