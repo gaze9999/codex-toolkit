@@ -1,4 +1,6 @@
 [package]
+authors = ["gaze9999"]
+repository = "https://github.com/gaze9999/codex-toolkit"
 name = "markdown-checks"
 version = "0.1.0"
 edition = "2021"

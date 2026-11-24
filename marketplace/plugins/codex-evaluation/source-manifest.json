@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "db9b5d9d69d5aa029bc650195eb733e93b3d4e0639af91ba39bfa9794a5b9c0a",
+      "sha256": "41c2287d7f52ca8caffee7791fa0ce4aedcb4cea6aa306911c6b144f710e25ce",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-evaluation.png"
     },
     "plugin.json": {
-      "sha256": "25091920ee0b6b01da988261ad0dd5cf450fc71d716333ed51e27cf6ca419a3b",
+      "sha256": "b92475945d5c77b58f26491db7f854a9edf4c300947c38e6a89063bda17f3eba",
       "source": "plugins/evaluation/plugin.json"
     },
     "resources/decisions/README.md": {
@@ -21,7 +21,7 @@
       "source": "python-tools/packages/decisions/README.md"
     },
     "resources/decisions/pyproject.toml": {
-      "sha256": "5d4aae267a2b0d53a528b50e040969c0aaf0d127eb6079b974808e5da51a4a96",
+      "sha256": "391afcdef0b1f3951433b30502e788a9ed62962208f1bd585e2295afa2f890d7",
       "source": "python-tools/packages/decisions/pyproject.toml"
     },
     "resources/decisions/src/codex_decisions/__init__.py": {
@@ -105,7 +105,7 @@
       "source": "skills/jev-evaluation/assets/icon.svg"
     },
     "skills/jev-evaluation/pyproject.toml": {
-      "sha256": "1d27c0b995553ccbb338c0b9b7e208d8885b0301ede6080bda797427819745b3",
+      "sha256": "4669428487f7e0817a5a8db57dbecb897dc6b6eaec2f71f0d55d752980b570f8",
       "source": "skills/jev-evaluation/pyproject.toml"
     },
     "skills/jev-evaluation/references/usage.md": {
@@ -149,6 +149,6 @@
     "jev"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.44.0",
-  "version": "0.1.5"
+  "toolkit_version": "0.44.1",
+  "version": "0.1.6"
 }

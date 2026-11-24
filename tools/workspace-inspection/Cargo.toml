@@ -1,4 +1,6 @@
 [package]
+authors = ["gaze9999"]
+repository = "https://github.com/gaze9999/codex-toolkit"
 name = "workspace-inspection"
 version = "0.3.0"
 edition = "2021"

@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "03e37614c984f2bc79ee6be1cac81afebda09cfea6982de402d0a443c92b66b1",
+      "sha256": "99de9caa52833c5fb58432f33ded16840396f614165abb43a595b63c0580f65d",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-visual-development.png"
     },
     "plugin.json": {
-      "sha256": "ddf19be02ff77dbda44b80981cd117885c39c4c5c3486506885898620a6212ac",
+      "sha256": "b67d9821f7eb138458e61de1dd757c7b26ca7c9960a7a132f69d1a255b851b32",
       "source": "plugins/visual-development/plugin.json"
     },
     "resources/visual-runtime/README.md": {
@@ -21,7 +21,7 @@
       "source": "python-tools/packages/visual-runtime/README.md"
     },
     "resources/visual-runtime/pyproject.toml": {
-      "sha256": "da72137423ba52b5c6bc3feaa4cc2d3aa4601ca7cf2513504f2c9919716c1ccb",
+      "sha256": "0a91f91c0f259cf5b5e7e7b7c0b29f088387bc824a4f88b86e439eee38412e7e",
       "source": "python-tools/packages/visual-runtime/pyproject.toml"
     },
     "resources/visual-runtime/src/codex_visual_runtime/__init__.py": {
@@ -130,6 +130,6 @@
     "excalidraw"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.44.0",
-  "version": "0.5.4"
+  "toolkit_version": "0.44.1",
+  "version": "0.5.5"
 }

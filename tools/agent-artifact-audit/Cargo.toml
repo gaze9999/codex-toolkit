@@ -1,4 +1,7 @@
 [package]
+description = "Inventory local agent artifacts across workspaces and worktrees."
+authors = ["gaze9999"]
+repository = "https://github.com/gaze9999/codex-toolkit"
 name = "agent-artifact-audit"
 version = "0.1.0"
 edition = "2021"
