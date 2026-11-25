@@ -27,11 +27,17 @@ def main() -> None:
     parser.add_argument("--config", type=Path, default=Path(os.environ.get("CODEX_HOME", Path.home() / ".codex")) / "config.toml")
     parser.add_argument("--read-root", type=Path, action="append", required=True)
     parser.add_argument("--write-root", type=Path, action="append", default=[])
+    parser.add_argument("--markdown-checks", type=Path, help="markdown-checks executable; defaults to LOCAL_DOCUMENTS_MARKDOWN_CHECKS or PATH")
     parser.add_argument("--apply", action="store_true")
     args = parser.parse_args()
     executable = args.python.expanduser().resolve(strict=True)
     config = args.config.expanduser().resolve(strict=True)
+    from mcp_servers.local_documents import markdown_cli
     from mcp_servers.local_documents.document_service import DocumentService
+    if args.markdown_checks is not None:
+        os.environ[markdown_cli.BINARY_ENV] = str(args.markdown_checks.expanduser().resolve(strict=True))
+    markdown_binary = str(Path(markdown_cli.binary()).resolve(strict=True))
+    subprocess.run([markdown_binary, "--version"], check=True, capture_output=True)
     service = DocumentService(args.read_root, args.write_root)
     subprocess.run([str(executable), "-I", "-B", "-c", "import mcp,rapidocr,onnxruntime,pypdfium2,pypdf,pdfplumber,openpyxl,docx,pptx; from mcp_servers.local_documents.core import load_core; load_core(); from mcp_servers.local_documents.document_server import load_mcp_dependencies; load_mcp_dependencies()"], check=True)
     arguments = ["-I", "-B", "-m", "mcp_servers.local_documents.document_server"]
@@ -44,6 +50,7 @@ def main() -> None:
     name = "local_documents" if "local_documents" in servers else "butaslayer_local_documents"
     section = f"[mcp_servers.{name}]\n" + "command = " + json.dumps(str(executable), ensure_ascii=False) + "\n"
     section += "args = " + json.dumps(arguments, ensure_ascii=False) + "\n"
+    section += "env = { " + markdown_cli.BINARY_ENV + " = " + json.dumps(markdown_binary, ensure_ascii=False) + " }\n"
     section += 'enabled = true\nstartup_timeout_sec = 120\ntool_timeout_sec = 300\nenabled_tools = ["document_status", "extract_document", "inspect_markdown", "locate_markdown_extracts", "update_markdown"]\n'
     match = re.search(rf"(?m)^\[mcp_servers\.{name}\][ \t]*\r?$", text)
     if match:

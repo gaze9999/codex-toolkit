@@ -81,4 +81,4 @@ Create one canonical content source. PDF, DOCX and Markdown retain the same sect
 
 Report checks as passed, failed, not run or unverified according to actual execution and evidence. File creation alone does not establish successful layout QA.
 
-`validate_markdown.py` is a standalone snapshot generated from my-py-tools canonical `markdown/validate_structure.py`; do not hand-edit its algorithm. Preserve the package version and source SHA-256 in its header. Maintainers check it with that repository's `scripts/export_markdown_validator.py --output <snapshot-file> --check`; normal Skill use needs neither that checkout nor a core installation.
+Markdown structure checks come from the Toolkit `markdown-checks validate` CLI: exit 0 means no structural failure (warnings allowed), 1 a heading-level or fence failure, 2 an unreadable or non-Markdown file. Add `--json` for machine-readable checks.

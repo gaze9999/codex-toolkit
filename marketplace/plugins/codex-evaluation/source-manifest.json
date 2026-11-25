@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "41c2287d7f52ca8caffee7791fa0ce4aedcb4cea6aa306911c6b144f710e25ce",
+      "sha256": "61832457c62abd7032571414e68f550131081810e8a42be4ad4a4a230d459ca8",
       "source": null
     },
     "LICENSE": {
@@ -13,39 +13,11 @@
       "source": "assets/branding/plugins/codex-evaluation.png"
     },
     "plugin.json": {
-      "sha256": "b92475945d5c77b58f26491db7f854a9edf4c300947c38e6a89063bda17f3eba",
+      "sha256": "54213e1849252a089410ee090bdc5e2ec0d47ac651f63ab30b48206c52065991",
       "source": "plugins/evaluation/plugin.json"
     },
-    "resources/decisions/README.md": {
-      "sha256": "4148af861afd8f3b2858422519ce11e88169aa34664cb4974fa870064644db0e",
-      "source": "python-tools/packages/decisions/README.md"
-    },
-    "resources/decisions/pyproject.toml": {
-      "sha256": "391afcdef0b1f3951433b30502e788a9ed62962208f1bd585e2295afa2f890d7",
-      "source": "python-tools/packages/decisions/pyproject.toml"
-    },
-    "resources/decisions/src/codex_decisions/__init__.py": {
-      "sha256": "a87876bd5461df8850f65650d1398340d8d4038ddbd44ee2a1d9fe22b619a48c",
-      "source": "python-tools/packages/decisions/src/codex_decisions/__init__.py"
-    },
-    "resources/decisions/src/codex_decisions/__main__.py": {
-      "sha256": "79ee6f134c5c5193377cf9b189cbdcc3e2095e49ba9cec310114441c15a917c4",
-      "source": "python-tools/packages/decisions/src/codex_decisions/__main__.py"
-    },
-    "resources/decisions/src/codex_decisions/cli.py": {
-      "sha256": "f64c365ca5968076566a6006d4245a467cdb623fae947d8e38ec3d17712ea341",
-      "source": "python-tools/packages/decisions/src/codex_decisions/cli.py"
-    },
-    "resources/decisions/src/codex_decisions/core.py": {
-      "sha256": "fcd6304957a570a950aaa275797ec90030f677b692f5c1679154bfc9bc8adf9a",
-      "source": "python-tools/packages/decisions/src/codex_decisions/core.py"
-    },
-    "resources/decisions/src/codex_decisions/server.py": {
-      "sha256": "a7a7783ab7808bc0249b5253eb89fc701ed52e8e42bf5e8e56e8816bf529a139",
-      "source": "python-tools/packages/decisions/src/codex_decisions/server.py"
-    },
     "skills/decisions-evaluation/SKILL.md": {
-      "sha256": "ca36e07b1f0af5bbea0308336d60684cbde24493de7c9ca315b8776ce720334a",
+      "sha256": "c9e15ae01aab24e810318f56ce09494fee811aac0dffbc8f4e49a71c4529261b",
       "source": "skills/decisions-evaluation/SKILL.md"
     },
     "skills/decisions-evaluation/agents/openai.yaml": {
@@ -69,7 +41,7 @@
       "source": "skills/decisions-evaluation/assets/icon.svg"
     },
     "skills/decisions-evaluation/references/usage.md": {
-      "sha256": "fa9d49743b7b1b543b78d7367d9f9e197b640e6e84defdb15b57e4d4a283ab20",
+      "sha256": "ee324a3eaf7ccd7056b8174a5ab74d2a0a03477dfde9ad026012f24b6393f5e7",
       "source": "skills/decisions-evaluation/references/usage.md"
     },
     "skills/jev-evaluation/LICENSE": {
@@ -149,6 +121,6 @@
     "jev"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.45.0",
-  "version": "0.1.6"
+  "toolkit_version": "0.46.0",
+  "version": "0.2.0"
 }

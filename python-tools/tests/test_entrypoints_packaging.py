@@ -20,14 +20,15 @@ ROOT = Path(__file__).resolve().parents[1]
 class EntryPointTests(unittest.TestCase):
     @unittest.skipUnless(sys.platform == "win32", "Windows PowerShell launchers")
     def test_ps1_launchers_preserve_arguments_cwd_and_exit_codes(self):
-        text = '中文 with "quotes" & symbols; trailing\\'
+        text = '中文 with spaces & symbols; (copy)'
         with tempfile.TemporaryDirectory(prefix="PS launch ") as temporary:
+            (Path(temporary) / (text + ".txt")).write_text("launcher", encoding="utf-8")
             for shell in ("powershell.exe", "pwsh.exe"):
                 executable = shutil.which(shell)
                 if not executable:
                     continue
                 for name, values, expected in (
-                    ("launch-cli.ps1", ["text.tokenizer", "--text", text, "--json"], 0),
+                    ("launch-cli.ps1", ["documents.convert_to_markdown", text + ".txt"], 0),
                     ("launch-cli.ps1", ["documents.convert_to_markdown", "missing file.txt"], 2),
                 ):
                     with self.subTest(shell=shell, launcher=name):
@@ -37,14 +38,16 @@ class EntryPointTests(unittest.TestCase):
                         result = subprocess.run([executable, "-NoProfile", "-ExecutionPolicy", "Bypass", "-EncodedCommand", encoded], cwd=temporary, capture_output=True, encoding="utf-8", errors="replace", timeout=30)
                         self.assertEqual(result.returncode, expected, result.stderr)
                         if expected == 0:
-                            self.assertEqual(json.loads(result.stdout)["chars"], len(text))
+                            self.assertTrue((Path(temporary) / (text + ".md")).is_file())
+                            (Path(temporary) / (text + ".md")).unlink()
 
     @unittest.skipUnless(sys.platform == "win32", "Windows CMD launchers")
     def test_separate_cmd_launchers_preserve_arguments_and_errors(self):
         with tempfile.TemporaryDirectory() as temporary:
-            result = subprocess.run(["cmd.exe", "/d", "/c", str(ROOT / "launch-cli.cmd"), "text.tokenizer", "--text", "hello", "--json"], cwd=temporary, capture_output=True, text=True, encoding="utf-8")
+            (Path(temporary) / "hello.txt").write_text("hello", encoding="utf-8")
+            result = subprocess.run(["cmd.exe", "/d", "/c", str(ROOT / "launch-cli.cmd"), "documents.convert_to_markdown", "hello.txt"], cwd=temporary, capture_output=True, text=True, encoding="utf-8")
             self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertIn('"chars": 5', result.stdout)
+            self.assertTrue((Path(temporary) / "hello.md").is_file())
             result = subprocess.run(["cmd.exe", "/d", "/c", str(ROOT / "launch-cli.cmd"), "os"], cwd=temporary, capture_output=True, text=True, encoding="utf-8")
             self.assertEqual(result.returncode, 2)
             self.assertIn("Unknown tool", result.stderr)
@@ -58,9 +61,10 @@ class EntryPointTests(unittest.TestCase):
     def test_cli_runs_from_unrelated_directory_and_preserves_exit_code(self):
         with tempfile.TemporaryDirectory() as temporary:
             command = [sys.executable, str(ROOT / "launch-cli.py")]
-            result = subprocess.run([*command, "text.tokenizer", "--text", "hello", "--json"], cwd=temporary, capture_output=True, text=True)
+            (Path(temporary) / "hello.txt").write_text("hello", encoding="utf-8")
+            result = subprocess.run([*command, "documents.convert_to_markdown", "hello.txt"], cwd=temporary, capture_output=True, text=True)
             self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertIn('"chars": 5', result.stdout)
+            self.assertTrue((Path(temporary) / "hello.md").is_file())
             result = subprocess.run([*command, "documents.convert_to_markdown", "missing.txt"], cwd=temporary, capture_output=True, text=True)
             self.assertNotEqual(result.returncode, 0)
 

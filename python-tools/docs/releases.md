@@ -6,9 +6,9 @@
 
 ## 準備發布
 
-正式發布先更新 `VERSION`, 檢查 diff, 本機只需執行與修改相關的單元測試、設定及文件檢查, 不需要建置 EXE、app、ZIP 或 wheel, `prepare --dry-run` 仍會建置暫存 wheel, 不屬於最小測試
+正式發布先更新 `VERSION`, 檢查 diff, 本機只需執行與修改相關的單元測試, 設定及文件檢查, 不需要建置 EXE, app, ZIP 或 wheel, `prepare --dry-run` 仍會建置暫存 wheel, 不屬於最小測試
 
-提交並推送確認過的來源後, 依授權建立完整 annotated 整包 Tag, 手動執行 `.github/workflows/python-tools-release.yml` 並指定既有 Tag, `publish=false` 只產生 Actions artifacts, `publish=true` 在雲端來源與平台檢查通過後準備草稿 Release, 不自動公開, CI 的 `source` 工作安裝 `setup/requirements-release.txt`, 執行 `scripts.release prepare`, 產生並驗證來源 ZIP、兩個核心 wheel 與來源資訊清單
+提交並推送確認過的來源後, 依授權建立完整 annotated 整包 Tag, 手動執行 `.github/workflows/python-tools-release.yml` 並指定既有 Tag, `publish=false` 只產生 Actions artifacts, `publish=true` 在雲端來源與平台檢查通過後準備草稿 Release, 不自動公開, CI 的 `source` 工作安裝 `setup/requirements-release.txt`, 執行 `scripts.release prepare`, 產生並驗證來源 ZIP, 兩個核心 wheel 與來源資訊清單
 
 來源與 CLI 工作全部通過後才上傳正式附件, 建立 Release 不代表產物已就緒, 請確認 Actions 結果與附件清單, 已發布 Tag 與附件不重寫
 
@@ -45,9 +45,9 @@ dist/v0.2.0/
 
 ## 發布入口
 
-本機 `scripts.release publish` 保留命令入口並回傳遷移指引, 不再直接推送分支、建立 Tag 或 Release, 下載交付統一使用 Toolkit 的 `python-tools-release.yml`
+本機 `scripts.release publish` 保留命令入口並回傳遷移指引, 不再直接推送分支, 建立 Tag 或 Release, 下載交付統一使用 Toolkit 的 `python-tools-release.yml`
 
-手動 workflow 使用已審查的整包 Tag, 從該提交讀取 `python-tools/VERSION` 與各 package 版本, 先完成必要來源及三平台建置, 再將通過檢查的十份附件加入相同 Tag 的草稿, 拒絕已發布 Release 與重複資產名稱, 核對所有附件、版本、來源與 SHA-256 後依當次授權公開草稿
+手動 workflow 使用已審查的整包 Tag, 從該提交讀取 `python-tools/VERSION` 與各 package 版本, 先完成必要來源及三平台建置, 再將通過檢查的十份附件加入相同 Tag 的草稿, 拒絕已發布 Release 與重複資產名稱, 核對所有附件, 版本, 來源與 SHA-256 後依當次授權公開草稿
 
 0.x 與 1.x 使用相同發布程序, 完整流程見 [Toolkit 版本與發布](../../docs/releases.md), 本機來源封裝仍可供驗證, 不取代正式平台產物
 
@@ -61,13 +61,13 @@ dist/v0.2.0/
 | macOS Apple Silicon | `my-py-tools-<version>-cli-macos-arm64.zip` |
 | macOS Intel | `my-py-tools-<version>-cli-macos-x64.zip` |
 
-每份 CLI ZIP 內含 Python、文件處理套件及離線 tokenizer 編碼, 必須保留整個 `MyPyToolsCLI/` 資料夾與 `_internal/`, 沒有桌面、瀏覽器或 WebView2, Git 類工具仍需要系統 Git
+每份 CLI ZIP 內含 Python 與文件處理套件, 必須保留整個 `MyPyToolsCLI/` 資料夾與 `_internal/`, 沒有桌面, 瀏覽器或 WebView2, Git 類工具仍需要系統 Git
 
-`cli-manifest-<os>-<architecture>.json` 記錄版本、Python、相依套件、工具、來源限定工具、終端機模式、入口、大小及 SHA-256, helper 核對 ZIP CRC、路徑、工具清單位置與 macOS 執行權限, 拒絕混入舊 GUI / Web 入口
+`cli-manifest-<os>-<architecture>.json` 記錄版本, Python, 相依套件, 工具, 來源限定工具, 終端機模式, 入口, 大小及 SHA-256, helper 核對 ZIP CRC, 路徑, 工具清單位置與 macOS 執行權限, 拒絕混入舊 GUI / Web 入口
 
-CI 在移除 Python 環境變數並縮減 PATH 的環境驗證清單、離線 tokenizer、TXT 轉 Markdown、來源限定工具阻擋與已移除的 `--web` 選項, Windows 另外驗證 CMD / PS1 入口
+CI 在移除 Python 環境變數並縮減 PATH 的環境驗證清單, TXT 轉 Markdown, 來源限定工具阻擋與已移除的 `--web` 選項, Windows 另外驗證 CMD / PS1 入口
 
-發布工作只上傳十個附件: 來源 ZIP、兩個核心 wheel、來源資訊清單、三個 CLI ZIP 與三個平台資訊清單, 不覆寫既有附件, 上傳後核對 GitHub 回傳的大小與 SHA-256
+發布工作只上傳十個附件: 來源 ZIP, 兩個核心 wheel, 來源資訊清單, 三個 CLI ZIP 與三個平台資訊清單, 不覆寫既有附件, 上傳後核對 GitHub 回傳的大小與 SHA-256
 
 ### 使用方式
 
@@ -85,15 +85,15 @@ macOS 依 CPU 選 arm64 或 x64
 ./MyPyToolsCLI/launch-cli documents.convert_to_markdown /path/spec.docx
 ```
 
-Windows PS1 在原始碼目錄呼叫 Python, 在免安裝包呼叫相鄰的 `launch-cli.exe`, 保留目前工作目錄、參數與結束代碼, 執行政策不允許腳本時可改用 CMD, 不自動調整系統執行政策
+Windows PS1 在原始碼目錄呼叫 Python, 在免安裝包呼叫相鄰的 `launch-cli.exe`, 保留目前工作目錄, 參數與結束代碼, 執行政策不允許腳本時可改用 CMD, 不自動調整系統執行政策
 
-CLI 輸出使用 UTF-8, 發布工具需要完整儲存庫、開發用 Python 與 GitHub CLI, 免安裝版可查看其 `--help`, 執行時會提示改用原始碼入口
+CLI 輸出使用 UTF-8, 發布工具需要完整儲存庫, 開發用 Python 與 GitHub CLI, 免安裝版可查看其 `--help`, 執行時會提示改用原始碼入口
 
 ### CI 設定與本機檢查
 
-工作流程只接受手動指定既有完整整包 Tag, Tag 必須與 Toolkit 根目錄 `VERSION` 一致, 元件資產使用該提交內的 `python-tools/VERSION`, 不會自行變更版本、commit、建立或重寫 Tag
+工作流程只接受手動指定既有完整整包 Tag, Tag 必須與 Toolkit 根目錄 `VERSION` 一致, 元件資產使用該提交內的 `python-tools/VERSION`, 不會自行變更版本, commit, 建立或重寫 Tag
 
-不再需要 Workbench UI 讀取 token、Node.js 或 WebView2 URL / hash 設定, 舊遠端 Secret / Variable 不會由程式自行刪除
+不再需要 Workbench UI 讀取 token, Node.js 或 WebView2 URL / hash 設定, 舊遠端 Secret / Variable 不會由程式自行刪除
 
 CI 安裝 `setup/requirements-cli-build.txt`, 使用 Python 3.14 在目標平台建置, helper 可供維護者在明確需要時手動使用
 

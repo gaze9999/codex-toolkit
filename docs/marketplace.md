@@ -17,9 +17,9 @@ claude plugin install codex-agent-workflow@codex-toolkit --scope user
 claude plugin list --json
 ```
 
-公開市集提供共用 Skills、工具來源與設定指引, 本機 MCP 依各工具的正式安裝入口另行設定
+公開市集提供共用 Skills, 工具來源與設定指引, 本機 MCP 依各工具的正式安裝入口另行設定
 私人選擇與已準備的 MCP 組合由私人整合包維護, 安裝公開與私人市集時選定單一啟用來源
-來源: [Claude 市集格式](https://code.claude.com/docs/en/plugins/marketplace-reference)、[Claude 外掛格式](https://code.claude.com/docs/en/plugins-reference)
+來源: [Claude 市集格式](https://code.claude.com/docs/en/plugins/marketplace-reference), [Claude 外掛格式](https://code.claude.com/docs/en/plugins-reference)
 
 Windows 若出現 `Filename too long`, Git for Windows 可啟用長路徑, 這項設定影響該使用者的 Git:
 
@@ -29,9 +29,9 @@ git config --global core.longpaths true
 
 也可從較短的來源路徑加入本機市集, 支援細節見 [Git for Windows 設定](https://github.com/git-for-windows/git/blob/main/Documentation/config/core.adoc)
 
-市集加入後可選擇治理、文件、前端、證據、Jev、校對、活動摘要及 README / 授權等外掛, 這是個人可加入的市集, 官方公開目錄上架另有提交流程
+市集加入後可選擇治理, 文件, 前端, 證據, Jev, 校對, 活動摘要及 README / 授權等外掛, 這是個人可加入的市集, 官方公開目錄上架另有提交流程
 
-Plugin 的 Skills 與資源由來源生成, runtime、帳戶與 MCP 註冊依用途安裝, 既有同名 Skill 若已直接安裝或來自另一個市集, 先選定單一啟用來源, 避免同時使用兩份, 不複製另一台電腦的 venv、client cache 或憑證
+Plugin 的 Skills 與資源由來源生成, runtime, 帳戶與 MCP 註冊依用途安裝, 既有同名 Skill 若已直接安裝或來自另一個市集, 先選定單一啟用來源, 避免同時使用兩份, 不複製另一台電腦的 venv, client cache 或憑證
 
 | 使用情境 | 操作 |
 |---|---|
@@ -42,7 +42,7 @@ Plugin 的 Skills 與資源由來源生成, runtime、帳戶與 MCP 註冊依用
 
 ## Python 工具可獨立使用
 
-市集負責安裝工作流程, Python CLI / 核心可從同一公開來源獨立取得, 不需要 Codex 或 MCP, 完整目錄、相依、執行及 core wheel 的用法見 [獨立使用說明](../python-tools/docs/standalone.md)
+市集負責安裝工作流程, Python CLI / 核心可從同一公開來源獨立取得, 不需要 Codex 或 MCP, 完整目錄, 相依, 執行及 core wheel 的用法見 [獨立使用說明](../python-tools/docs/standalone.md)
 
 ## 來源與更新
 
@@ -59,7 +59,7 @@ GitHub 安裝來源在發布後使用原生市集 / Plugin 管理入口更新, �
 
 | 顯示位置 | 正式版本來源 | 更新方式 |
 | --- | --- | --- |
-| Codex 市集名稱 | 根目錄 `VERSION` | 產生器組合圖案、名稱與版本, `--check` 檢查產生結果是否過期 |
+| Codex 市集名稱 | 根目錄 `VERSION` | 產生器組合圖案, 名稱與版本, `--check` 檢查產生結果是否過期 |
 | Claude 市集 | `.claude-plugin/marketplace.json` 的 `version`, 由 `VERSION` 產生 | 原生市集更新後讀取新 metadata |
 | Plugin | `plugins/<id>/plugin.json` 的 `version` | Claude manifest 從同一來源產生, 與整包版本分開維護 |
 | Skill | `skills/<name>/SKILL.md` 的 `metadata.version` | 依 Skill 內容獨立更新 |

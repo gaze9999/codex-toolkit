@@ -163,4 +163,4 @@ macOS/Linux 可使用已確認的 `python3`, CLI 參數與 MCP 工具參數不�
 
 永久紀錄預設關閉, 明確需要時, 安裝獨立的 `local-activity-monitor`, 使用 `--enable-jev --configure-only` 啟用, 再以 `--codex --open` 開啟本機頁面, 停用使用 `--disable-jev --configure-only`, 舊 MCP process 需重新載入新版 client
 
-只保存時間, operation/source, model, known tokens, latency, HTTP attempts 與 body bytes/status, 不保存 query, rubric, candidates, state, answers, Key, header 或 raw error, telemetry 失敗不改變 Jev 結果, 未知 token 保留為 null, 畫面顯示本機已觀察的統計, 帳戶總用量、額度及費用由服務帳戶查詢, 同一操作與 HTTP 重試分開計數
+只保存時間, operation/source, model, known tokens, latency, HTTP attempts 與 body bytes/status, 不保存 query, rubric, candidates, state, answers, Key, header 或 raw error, telemetry 失敗不改變 Jev 結果, 未知 token 保留為 null, 畫面顯示本機已觀察的統計, 帳戶總用量, 額度及費用由服務帳戶查詢, 同一操作與 HTTP 重試分開計數

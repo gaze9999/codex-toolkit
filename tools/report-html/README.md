@@ -2,7 +2,7 @@
 
 把一份 JSON 報告資料轉成單檔離線 HTML, 供本儲存庫的掃描與檢查工具共用, Rust 函式庫與 CLI 使用同一份產生器
 
-頁面含基本資訊、統計卡片、筆數分布條、分頁表格、關鍵字搜尋與程式碼上色, 跟隨系統深淺色, 樣式與指令稿都內嵌在檔案內, 開啟時無需網路
+頁面含基本資訊, 統計卡片, 筆數分布條, 分頁表格, 關鍵字搜尋與程式碼上色, 跟隨系統深淺色, 樣式與指令稿都內嵌在檔案內, 開啟時無需網路
 使用 Rust 1.89 以上的 stable 版本建置, 相依套件為 `serde_json` 與 `sha2`
 
 ```sh
@@ -46,19 +46,19 @@ report-html render --input report-data.json --format md --out /path/to/report.md
 | `schema` | 是 | 固定為 `report-html/v1` |
 | `title` | 是 | 頁面標題 |
 | `lang` | | 頁面語言, 預設 `zh-Hant-TW` |
-| `tags` | | 基本資訊上方的標籤, `tone` 可用 `neutral`、`category`、`success`、`warning`、`error` |
+| `tags` | | 基本資訊上方的標籤, `tone` 可用 `neutral`, `category`, `success`, `warning`, `error` |
 | `info` | | `[名稱, 值]` 的列表, 樣式來源會自動附在最後一列 |
 | `note` | | 統計卡片上方的說明文字 |
 | `stats` | | 統計卡片, `value` 可為數字或文字, `bar` 為 `true` 且 `value` 是正整數時計入分布條, `section` 填分頁位置 (從 0 起算) 時標籤改為錨點 Tag, 點選後切到該分頁 |
 | `panels` | | 獨立卡片, 依序放在統計卡片與分頁之間, 每個項目的寫法與 `sections` 相同, `label` 是卡片標題, `fold` 為 `open` 或 `closed` 時卡片可折疊 (預設展開或收合), Markdown 以 `<details>` 包住內容 |
 | `sections` | | 每個項目是一個分頁, `kind` 決定內容, 預設 `table`, 各類型見下表, `empty` 是沒有資料時的文字, `note` 顯示在內容上方, `tags` 是內容上方的標籤, `count` 覆寫分頁上的數字 |
-| `headings` | | 覆寫固定文字: `info`、`stats`、`sections`、`search`、`placeholder`、`style`、`distribution` |
+| `headings` | | 覆寫固定文字: `info`, `stats`, `sections`, `search`, `placeholder`, `style`, `distribution` |
 
 | 區塊 `kind` | 欄位 | 呈現 |
 | --- | --- | --- |
-| `table` | `columns` (`key`、`label`、`kind` 為 `text`/`number`/`code`/`source`、`lang`)、`rows`、`filters: [{ key, label }]` | 可搜尋的條紋表格, 欄位太多時表格橫向捲動, 文字在詞的邊界換行, 每格至少 5em 寬, 超過 48 個顯示寬度 (中日韓文字算 2) 的句子至少 14em 寬, 長文字可展開閱讀全文, `filters` 依該欄的不重複值產生下拉篩選並與搜尋同時作用, 分頁數字為列數 |
+| `table` | `columns` (`key`, `label`, `kind` 為 `text`/`number`/`code`/`source`, `lang`), `rows`, `filters: [{ key, label }]` | 可搜尋的條紋表格, 欄位太多時表格橫向捲動, 文字在詞的邊界換行, 每格至少 5em 寬, 超過 48 個顯示寬度 (中日韓文字算 2) 的句子至少 14em 寬, 長文字可展開閱讀全文, `filters` 依該欄的不重複值產生下拉篩選並與搜尋同時作用, 分頁數字為列數 |
 | `cards` | `items: [{ value, label, note, tone, title }]` | 卡片格, `title` 是滑鼠提示, 分頁數字為卡片數 |
-| `flow` | `columns` (欄名)、`nodes: [{ id, column, label, detail, tone }]`、`edges: [{ from, to }]` | 由左到右的流程圖, 滑鼠移入或以 Tab 聚焦節點時顯示 `detail`, 指向不存在節點的連線略過, Markdown 輸出為 Mermaid 流程圖, `tone` 成為節點外框顏色 |
+| `flow` | `columns` (欄名), `nodes: [{ id, column, label, detail, tone }]`, `edges: [{ from, to }]` | 由左到右的流程圖, 滑鼠移入或以 Tab 聚焦節點時顯示 `detail`, 指向不存在節點的連線略過, Markdown 輸出為 Mermaid 流程圖, `tone` 成為節點外框顏色 |
 | `matrix` | `corner`、`columns`、`rows: [{ label, cells: [{ value, tone, label, detail } 或 null] }]`、`hint` | 計數矩陣, 點選格子在下方顯示 `detail`, `hint` 是尚未點選時的提示, 分頁數字為列數 |
 | `list` | `items` (文字) | 項目清單 |
 | `text` | `text` | 保留換行的段落, 分頁不顯示數字 |
@@ -73,17 +73,17 @@ report-html render --input report-data.json --format md --out /path/to/report.md
 
 | `lang` | 別名 | 上色範圍 |
 | --- | --- | --- |
-| `typescript` | `ts`、`tsx`、`javascript`、`js`、`jsx`、`mjs`、`cjs` | `//` 與 `/* */` 註解、單雙引號與反引號字串、關鍵字、`true` / `false` / `null` / `undefined`、數值 |
-| `rust` | `rs` | 可巢狀的區塊註解、字元與字串、lifetime 不視為字元 |
-| `python` | `py` | `#` 註解、三引號字串、`True` / `False` / `None` |
-| `sql` | | 不分大小寫的關鍵字、`--` 與可巢狀的區塊註解、`''` 跳脫, `"id"`、`` `id` ``、`[id]` 識別字標為 key |
-| `shell` | `sh`、`bash`、`zsh` | 空白或行首後的 `#` 註解、字串、流程關鍵字 |
-| `json`、`yaml` (`yml`)、`toml` | | 字串、數值、布林值, `:` 或 `=` 前的名稱標為 key, YAML 與 TOML 只認行首的名稱 |
-| `css` | | 區塊註解、字串與數值 |
+| `typescript` | `ts`、`tsx`、`javascript`、`js`、`jsx`、`mjs`、`cjs` | `//` 與 `/* */` 註解, 單雙引號與反引號字串, 關鍵字, `true` / `false` / `null` / `undefined`, 數值 |
+| `rust` | `rs` | 可巢狀的區塊註解, 字元與字串, lifetime 不視為字元 |
+| `python` | `py` | `#` 註解, 三引號字串, `True` / `False` / `None` |
+| `sql` | | 不分大小寫的關鍵字, `--` 與可巢狀的區塊註解, `''` 跳脫, `"id"`, `` `id` ``, `[id]` 識別字標為 key |
+| `shell` | `sh`、`bash`、`zsh` | 空白或行首後的 `#` 註解, 字串, 流程關鍵字 |
+| `json`、`yaml` (`yml`)、`toml` | | 字串, 數值, 布林值, `:` 或 `=` 前的名稱標為 key, YAML 與 TOML 只認行首的名稱 |
+| `css` | | 區塊註解, 字串與數值 |
 | `text` | `plain` | 不上色 |
 
 斷詞只判斷 token 類型, 不產生語法樹, 也不檢查程式碼是否正確, 未閉合的字串或註解會延續到儲存格結尾, 超過 100,000 bytes 的儲存格不上色
-token 以 `wb-code-keyword`、`wb-code-string`、`wb-code-number`、`wb-code-boolean`、`wb-code-comment`、`wb-code-key` 標示, 未知的 `lang` 以狀態碼 2 回報可用名稱
+token 以 `wb-code-keyword`, `wb-code-string`, `wb-code-number`, `wb-code-boolean`, `wb-code-comment`, `wb-code-key` 標示, 未知的 `lang` 以狀態碼 2 回報可用名稱
 
 ## 樣式
 
@@ -103,7 +103,7 @@ token 以 `wb-code-keyword`、`wb-code-string`、`wb-code-number`、`wb-code-boo
 
 ### 建置時內嵌
 
-建置時設定 `REPORT_HTML_STYLE_DIR` 指向外觀套件, 該套件會通過相同的核對後編進執行檔, 成為預設樣式, 報告的樣式列顯示版本、"建置時內嵌" 與 SHA-256 前 12 碼, `--style-dir` 仍可在執行時覆寫
+建置時設定 `REPORT_HTML_STYLE_DIR` 指向外觀套件, 該套件會通過相同的核對後編進執行檔, 成為預設樣式, 報告的樣式列顯示版本, "建置時內嵌" 與 SHA-256 前 12 碼, `--style-dir` 仍可在執行時覆寫
 
 ```sh
 REPORT_HTML_STYLE_DIR=/path/to/appearance-package CARGO_TARGET_DIR=/path/outside/this/checkout \
@@ -127,11 +127,11 @@ let page = report_html::render(&data, &report_html::Style::builtin())?;
 | 函式 | 用途 |
 | --- | --- |
 | `render(&data, &style)` | 產生 HTML 頁面 |
-| `markdown(&data)` | 由同一份報告資料產生 Markdown: 標題、基本資訊、統計與各分頁的表格 |
+| `markdown(&data)` | 由同一份報告資料產生 Markdown: 標題, 基本資訊, 統計與各分頁的表格 |
 | `Style::builtin()`、`Style::load(dir)` | 內建樣式 (或建置時內嵌的套件) 與執行時載入的外觀套件 |
 | `new_folder(out, scanned, prefix)` | 建立新的報告資料夾, 省略路徑時放在系統暫存目錄, 並確保位於受掃描的根目錄之外 |
 | `escape(text)` | 與頁面相同的跳脫規則 |
 | `code::find(lang)`、`code::highlight(text, lang)` | 查詢語言規則, 並產生與 `source` 欄位相同的上色 HTML |
 | `output::emit(...)`、`output::write(...)`、`output::parse_formats(...)` | 工具共用的輸出層: 把選定格式寫入新資料夾的 `report.*`, `emit` 另外在標準輸出印出摘要與報告路徑, 省略格式時只寫 `report.md` |
 
-使用範例見 [code-health 的轉換](../code-health/src/html.rs) 、[angular-checks](../angular-checks/src/main.rs) 與 [workspace-inspection](../workspace-inspection/src/main.rs)
+使用範例見 [code-health 的轉換](../code-health/src/html.rs) , [angular-checks](../angular-checks/src/main.rs) 與 [workspace-inspection](../workspace-inspection/src/main.rs)

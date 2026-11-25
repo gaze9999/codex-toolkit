@@ -6,8 +6,7 @@ use serde_json::{json, Map, Value};
 use std::collections::HashSet;
 use std::path::{Path, PathBuf};
 
-pub const DEFAULT_PROFILE: &str =
-    include_str!("../../../python-tools/src/text/context_estimates.json");
+pub const DEFAULT_PROFILE: &str = include_str!("../data/context_estimates.json");
 
 #[derive(Debug, Clone)]
 pub struct Options {

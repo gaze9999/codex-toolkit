@@ -1,7 +1,11 @@
-"""Versioned document APIs for MCP servers and other local Python applications."""
+"""Versioned document extraction API for MCP servers and other local Python applications.
 
-API_VERSION = 1
+Markdown validation, guarded updates, reference analysis and extract lookup moved to the
+native markdown-checks CLI (Toolkit tools/markdown-checks).
+"""
 
-from . import extraction, matching, references, updates, validation
+API_VERSION = 2
 
-__all__ = ["API_VERSION", "extraction", "matching", "references", "updates", "validation"]
+from . import extraction
+
+__all__ = ["API_VERSION", "extraction"]

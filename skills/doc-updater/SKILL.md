@@ -3,7 +3,7 @@ name: doc-updater
 description: Update, align or synchronize identified existing documentation when explicitly requested and supported by verifiable implementation-change evidence. Use for maintaining current docs, not source extraction, new reports or substantial README redesign.
 metadata:
   short-description: Minimize documentation updates from implementation evidence
-  version: "0.4.25"
+  version: "0.4.26"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -29,8 +29,8 @@ Write the supported action or conclusion directly. Include a limitation only whe
 - Read relevant implementation evidence and target sections, then make the smallest supported update. Recheck the destination when concurrent edits are possible, preserve unrelated changes, authoritative wording, legal notices and material limits, and keep secrets/private implementation details out of public guarantees.
 - If impact or target selection is unclear, read [documentation impact rules](references/doc-update-rules.md). The optional `markdown-checks scan-changes --repo <repo-root>` CLI aids discovery when installed; equivalent repository inspection needs no new tool installation.
 - The changed-file helper classifies paths. With no `--base`, it compares staged and unstaged tracked changes, falls back to `HEAD~1..HEAD` when those are empty, then adds untracked paths. Use an explicit base when the fallback would give the wrong scope.
-- For local link and reverse-reference candidates, use `my_py_document_core.references.analyze_references` or `python -m my_py_document_core.documents.analyze_markdown_references` with the installed document core. Supply an explicit root, selected documents and affected paths. The output lists unsupported Markdown syntax, and the workflow still needs source evidence before editing.
-- For Markdown replacement, use available inspection/dry-run/SHA-256 helpers or an equivalent optimistic-concurrency guard. A preview does not authorize additional writes.
+- For local link and reverse-reference candidates, run `markdown-checks references --root <root> --document <file> [--document ...] [--affected <path> ...]` when the CLI is installed. Supply an explicit root, selected documents and affected paths. The output lists unsupported Markdown syntax, and the workflow still needs source evidence before editing.
+- For Markdown replacement, use `markdown-checks guarded` (inspect, dry-run, `--expect` SHA-256, then `--write`) or an equivalent optimistic-concurrency guard. A preview does not authorize additional writes.
 - Local documentation is the default. Notion discovery, access, comparison, validation, writes and remote status reporting require the current request to explicitly name Notion or a Notion target. Links, IDs, snapshots, prior arrangements and sync metadata do not grant that access. For an authorized Notion target, read the [reader/writer contract](references/notion-sync-reader-writer-contract.md); explicit named dual-target synchronization needs no duplicate confirmation.
 - Complete independently authorized local changes. Preserve in-scope metadata without inferring remote state or advancing unverified sync timestamps.
 - For teaching order, examples/images or presentation changes, read [document presentation](references/presentation.md). Preserve an effective structure during ordinary maintenance; broader restructuring or moves need their own scope.

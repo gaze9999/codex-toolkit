@@ -3,7 +3,7 @@ name: visual-development
 description: Integrate data visualization, 2D motion or WebGL/WebGPU scenes (Three.js, PixiJS and similar renderers) into an existing web project, selecting rendering and lifecycle tools from its actual stack. Use for interactive feature development and owned previews, not automatic video production or framework migration.
 metadata:
   short-description: Project-native visualization and Three.js development
-  version: "0.2.1"
+  version: "0.3.0"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---

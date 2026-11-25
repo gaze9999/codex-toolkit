@@ -25,21 +25,21 @@ work-artifact-cleanup --output-dir /safe/cleanup --purge-quarantine --older-than
 | --- | --- |
 | `--root [PATH]` | 掃描的資料夾, 可重複, 不給值時使用目前資料夾, 完全不指定時也使用目前資料夾 |
 | `--apply` | 把候選移到隔離區, 沒有這個參數時只預覽 |
-| `--include-build` | 納入未追蹤的 `build`、`dist` 與 `*.egg-info` |
-| `--include-work-dirs` | 納入未追蹤的 `work`、`.work`、`tmp` 與 `temp` |
+| `--include-build` | 納入未追蹤的 `build`, `dist` 與 `*.egg-info` |
+| `--include-work-dirs` | 納入未追蹤的 `work`, `.work`, `tmp` 與 `temp` |
 | `--min-age-days DAYS` | 候選至少多久未修改, 預設 1 天 |
-| `--output-dir PATH` | 清單、事件紀錄與隔離區的上層資料夾, 預設 `~/.work-artifact-cleaner` |
+| `--output-dir PATH` | 清單, 事件紀錄與隔離區的上層資料夾, 預設 `~/.work-artifact-cleaner` |
 | `--purge-quarantine` | 永久刪除本工具建立的舊隔離批次 |
 | `--older-than-days DAYS` | 隔離批次保存天數, 預設 7 天 |
 
 天數必須是 0 到 365000 的有限數
 
-預設候選包含 `__pycache__`, pytest、mypy、ruff、tox、nox 快取, `htmlcov`, coverage 與常見暫存檔
+預設候選包含 `__pycache__`, pytest, mypy, ruff, tox, nox 快取, `htmlcov`, coverage 與常見暫存檔
 
 ## 安全檢查
 
 - 拒絕檔案系統根目錄與不存在的根目錄
-- 不進入 Git、Mercurial、Subversion 中繼資料, `.codex`、`logs`、`backups` 或 `quarantine`
+- 不進入 Git, Mercurial, Subversion 中繼資料, `.codex`, `logs`, `backups` 或 `quarantine`
 - 不跟隨 symlink 資料夾
 - 跳過包含巢狀 repository 或 Git 已追蹤內容的候選, Git worktree 使用的 `.git` 檔案也會辨識
 - 資料夾以內部最新檔案時間判斷是否達到最低天數
@@ -52,7 +52,7 @@ work-artifact-cleanup --output-dir /safe/cleanup --purge-quarantine --older-than
 
 | 結束碼 | 意義 |
 | --- | --- |
-| `0` | 預覽、隔離或永久清除完成 |
+| `0` | 預覽, 隔離或永久清除完成 |
 | `2` | 參數錯誤, 安全檢查, I/O 或 Git 查詢失敗 |
 
 ## 驗證

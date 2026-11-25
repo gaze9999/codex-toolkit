@@ -1,8 +1,8 @@
 # Workspace Inspection 工作區檢查
 
-唯讀的目錄比對與驗證證據查詢, Rust 函式庫、CLI 與 stdio MCP 共用同一份核心, 取代原本的 Python 版 workspace core 與 MCP 伺服器
+唯讀的目錄比對與驗證證據查詢, Rust 函式庫, CLI 與 stdio MCP 共用同一份核心, 取代原本的 Python 版 workspace core 與 MCP 伺服器
 
-使用 Rust 1.89 以上的 stable 版本建置, 建置時需要同一份儲存庫內的 `tools/report-html`, 執行時無需 Python、Node 套件或網路
+使用 Rust 1.89 以上的 stable 版本建置, 建置時需要同一份儲存庫內的 `tools/report-html`, 執行時無需 Python, Node 套件或網路
 
 ```sh
 cargo build --locked --release --manifest-path tools/workspace-inspection/Cargo.toml
@@ -23,9 +23,9 @@ workspace-inspection baseline --root /path/to/project --source src/main.rs --sou
 
 `--root` 必填, `--source` 可選 1 至 500 個檔案, `--affected` 最多 5,000 個路徑
 單檔最多 64 MiB, 總讀取量最多 512 MiB, 選用的 `--artifact` 也計入總量
-選取根目錄內的一般檔案, 不接受連結或含 `.`、`..` 的相對路徑, `--out` 只建立新 JSON 檔案
+選取根目錄內的一般檔案, 不接受連結或含 `.`, `..` 的相對路徑, `--out` 只建立新 JSON 檔案
 
-缺檔、越界及擷取中變動等問題列於 `diagnostics`, 未成功雜湊的受影響路徑列於 `uncovered_paths`
+缺檔, 越界及擷取中變動等問題列於 `diagnostics`, 未成功雜湊的受影響路徑列於 `uncovered_paths`
 `partial` 回傳結束碼 1, 可將輸出傳給既有 `evidence --current-baseline`, 比對相符時仍保留擷取的部分狀態
 `captured` 表示選定檔案已讀取, 驗證結果仍須對照既有證據
 
@@ -39,7 +39,7 @@ workspace-inspection baseline --root /path/to/project --source src/main.rs --sou
 | `--limit N` | 最多讀取的執行數, 1 至 1000, 預設 20 |
 | `--current-baseline FILE` | 目前來源與產物的出處 JSON, 提供時每次執行與每筆結果多一個 `validity` 判定 |
 
-`results.json` 需要是物件, `results` 為物件陣列, 每筆保留 `name`、`status`、`reason`、`command`、`log`、`source`、`baseline`, 無法讀取的執行列在 `errors`, 此時結束碼為 1
+`results.json` 需要是物件, `results` 為物件陣列, 每筆保留 `name`, `status`, `reason`, `command`, `log`, `source`, `baseline`, 無法讀取的執行列在 `errors`, 此時結束碼為 1
 
 出處 JSON 與已記錄的 `baseline` 使用相同欄位, 全部選填:
 
@@ -48,40 +48,40 @@ workspace-inspection baseline --root /path/to/project --source src/main.rs --sou
 | `source_revision` | 7 至 64 個十六進位字元 |
 | `source_diff_sha256`、`artifact_sha256` | 64 個十六進位字元 |
 | `source_files` | 路徑對應 SHA-256 的物件 |
-| `affected_paths` (目前)、`covered_paths` (已記錄) | 路徑字串陣列 |
+| `affected_paths` (目前), `covered_paths` (已記錄) | 路徑字串陣列 |
 
 `validity.status` 的判定只依據提供的出處, 不讀取來源檔案:
 
 | 狀態 | 條件 |
 | --- | --- |
-| `outdated` | 檔案雜湊、產物雜湊不同, 或沒有檔案雜湊可比時 revision 或 diff 雜湊不同 |
-| `unverified` | 沒有任何一致的來源識別, 或已記錄的 baseline 缺少、格式錯誤 |
-| `partial` | 來源一致, 但缺少雜湊、涵蓋範圍未知, 或受影響路徑有未涵蓋的項目 |
+| `outdated` | 檔案雜湊, 產物雜湊不同, 或沒有檔案雜湊可比時 revision 或 diff 雜湊不同 |
+| `unverified` | 沒有任何一致的來源識別, 或已記錄的 baseline 缺少, 格式錯誤 |
+| `partial` | 來源一致, 但缺少雜湊, 涵蓋範圍未知, 或受影響路徑有未涵蓋的項目 |
 | `current` | 來源一致且受影響路徑都在已記錄的涵蓋範圍內 |
 
 `reasons` 列出每項判定依據, `uncovered_paths` 列出未涵蓋的路徑
 
 ## 環境比對 `compare`
 
-以相對路徑、大小與 SHA-256 比對兩個彼此獨立、互不包含的目錄, 兩邊都只讀取
+以相對路徑, 大小與 SHA-256 比對兩個彼此獨立, 互不包含的目錄, 兩邊都只讀取
 
 | 選項 | 內容 |
 | --- | --- |
 | `--source DIR`、`--target DIR` | 必要 |
-| `--include GLOB`、`--exclude GLOB` | 可重複, 比對完整相對路徑或檔名, `*` 可跨越 `/`, 支援 `?` 與 `[...]`、`[!...]` |
+| `--include GLOB`、`--exclude GLOB` | 可重複, 比對完整相對路徑或檔名, `*` 可跨越 `/`, 支援 `?` 與 `[...]`, `[!...]` |
 | `--no-default-excludes` | 停用預設排除 |
 | `--max-files N` | 每一邊的檔案上限, 1 至 200000, 預設 20000 |
 
-預設排除版本控制資料、虛擬環境、`__pycache__`、`.pyc`、`.env*`、`*.key`、`*.pem`、`credentials*`、`secrets*`, 符號連結一律略過, 略過的數量記在 `excluded`
-結果含 `missing_in_target`、`extra_in_target`、`changed` 與每一邊的讀取錯誤
+預設排除版本控制資料, 虛擬環境, `__pycache__`, `.pyc`, `.env*`, `*.key`, `*.pem`, `credentials*`, `secrets*`, 符號連結一律略過, 略過的數量記在 `excluded`
+結果含 `missing_in_target`, `extra_in_target`, `changed` 與每一邊的讀取錯誤
 
 | `status` | 條件 | 結束碼 |
 | --- | --- | --- |
 | `match` | 至少比對到一個檔案且完全一致 | 0 |
-| `different` | 有缺少、多出、內容不同或讀取錯誤 | 1 |
+| `different` | 有缺少, 多出, 內容不同或讀取錯誤 | 1 |
 | `empty` | 兩邊都沒有檔案被比對, 通常是 `--include` 沒有符合的項目 | 1 |
 
-`--include`、`--exclude` 與 `--read-root` 可重複, 其餘選項重複指定時回報錯誤
+`--include`, `--exclude` 與 `--read-root` 可重複, 其餘選項重複指定時回報錯誤
 
 ## 輸出
 
@@ -105,12 +105,12 @@ workspace-inspection mcp --read-root /path/to/workspace --read-root /path/to/ano
 
 | 工具 | 參數 | 結果 |
 | --- | --- | --- |
-| `workspace_status` | 無 | 伺服器版本、讀取根目錄與 `read_only` |
-| `validation_evidence` | `root`, 選用 `limit`、`current` | 摘要、每次執行一列 (`run`、`started`、結果筆數、`validity`)、最多 40 筆未通過或已失效的結果 (`attention`)、無法讀取的執行 |
-| `compare_environment` | `source`、`target`, 選用 `includes`、`excludes`、`use_default_excludes`、`max_files` | 摘要、`status`、各類筆數, 以及每個清單的前 40 筆 |
+| `workspace_status` | 無 | 伺服器版本, 讀取根目錄與 `read_only` |
+| `validation_evidence` | `root`, 選用 `limit`, `current` | 摘要, 每次執行一列 (`run`, `started`, 結果筆數, `validity`), 最多 40 筆未通過或已失效的結果 (`attention`), 無法讀取的執行 |
+| `compare_environment` | `source`, `target`, 選用 `includes`, `excludes`, `use_default_excludes`, `max_files` | 摘要, `status`, 各類筆數, 以及每個清單的前 40 筆 |
 
 兩個查詢工具的文字內容是摘要與報告路徑, `reports` 欄位指向寫入系統暫存目錄的 `report.md` 與 `report.json`, 完整結果在 `report.json`, 格式與 `--format json` 相同
 
 工具名稱與參數沿用 Python 版, 查詢結果改為上述的精簡形式, `workspace_status.versions` 回報本工具的版本
 
-MCP 保持受檢查的專案目錄唯讀, 產生報告的工具會在暫存目錄寫入新檔案, 因此標示 `readOnlyHint: false`、`destructiveHint: false` 與 `idempotentHint: false`
+MCP 保持受檢查的專案目錄唯讀, 產生報告的工具會在暫存目錄寫入新檔案, 因此標示 `readOnlyHint: false`, `destructiveHint: false` 與 `idempotentHint: false`

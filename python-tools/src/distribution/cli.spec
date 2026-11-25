@@ -12,18 +12,15 @@ resources = root / ".build-inputs/cli"
 data = [
     (str(root / "VERSION"), "."),
     (str(resources / "catalog.json"), "shared/resources"),
-    (str(resources / "tiktoken"), "tiktoken-cache"),
-    (str(source / "text/context_estimates.json"), "text"),
 ]
 for package in ("docx", "pptx"):
     data += collect_data_files(package)
 hidden = [tool.module for tool in TOOLS] + [
-    "pypdf", "pdfplumber", "openpyxl", "docx", "pptx", "tiktoken", "tiktoken_ext.openai_public",
+    "pypdf", "pdfplumber", "openpyxl", "docx", "pptx",
 ]
 analysis = Analysis(
     [str(source / "distribution/cli_entry.py")],
     pathex=[str(source)],
-    hookspath=[str(source / "distribution/hooks")],
     binaries=[], datas=data, hiddenimports=hidden,
     excludes=["webview", "tkinter", "PyQt5", "PyQt6", "PySide2", "PySide6"],
     noarchive=False,

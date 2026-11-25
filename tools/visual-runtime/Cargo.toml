@@ -1,0 +1,19 @@
+[package]
+authors = ["gaze9999"]
+repository = "https://github.com/gaze9999/codex-toolkit"
+name = "visual-runtime"
+version = "0.3.0"
+edition = "2021"
+rust-version = "1.89"
+license = "MIT"
+description = "Root-scoped project inspection, artifact hashes and owned loopback static previews, as a CLI and stdio MCP server"
+
+[dependencies]
+base64 = "0.22"
+getrandom = "0.3"
+# preserve_order keeps package.json declarations and report fields in source order
+serde_json = { version = "1", features = ["preserve_order"] }
+sha2 = "0.10"
+
+[dev-dependencies]
+tempfile = "3"

@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "4d8da1ae9807802c2cdc7deb1e440c9cb99bcff2be45526ccc3541a31c90904a",
+      "sha256": "36f470a1e8f7d91aadd9a1a9f62b650b7de46486a7105f2fb1fe6e486e621e9a",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-multilingual-proofreading.png"
     },
     "plugin.json": {
-      "sha256": "531005995144f41d94e9abbb989ab4376d6ad28a8f8c61d474b732bc6544bd6c",
+      "sha256": "185084440b6028628ed5332e1283e341f03c3348da0a1b1d7f8b9495e129dee4",
       "source": "plugins/multilingual-proofreading/plugin.json"
     },
     "resources/proofreading/authored-style.cjs": {
@@ -73,7 +73,7 @@
       "source": "plugins/multilingual-proofreading/resources/proofreading/zh-tw/terms.yml"
     },
     "skills/multilingual-proofreading/SKILL.md": {
-      "sha256": "41f0a4eb8b4099eb7b77bab6f6e8209ac23f4b9bd91da7c5660ea1a60ae33bf1",
+      "sha256": "132741c9970fbcb2248bccba2ced0a54d85c1d7eceaed2f06376e706fb892798",
       "source": "skills/multilingual-proofreading/SKILL.md"
     },
     "skills/multilingual-proofreading/agents/openai.yaml": {
@@ -101,7 +101,7 @@
       "source": "skills/multilingual-proofreading/references/output-style.md"
     },
     "skills/multilingual-proofreading/references/taiwan-terminology.md": {
-      "sha256": "7f7adabe8d6c7832389b824d19b576e621284bdf390929946828dee820b535f9",
+      "sha256": "ef2f488e52f0db866785a4d5f00840572415fee888d115ad96b45942edac45a4",
       "source": "skills/multilingual-proofreading/references/taiwan-terminology.md"
     }
   },
@@ -114,6 +114,6 @@
     "cspell"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.45.0",
-  "version": "0.2.10"
+  "toolkit_version": "0.46.0",
+  "version": "0.2.11"
 }

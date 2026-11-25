@@ -90,13 +90,4 @@ python launch-cli.py documents.extract_field_matrix .\spec.md --output .\matrix.
 
 結束代碼 `0` 表示抽取完成, 即使沒有相符欄位也會輸出 0 筆統計, `2` 表示來源, 編碼或輸出路徑錯誤
 
-## `documents/locate_markdown_extracts.py`
-
-依來源絕對路徑與 SHA-256, 在一個或多個根目錄中尋找由文件轉換工具產生的 Markdown, 並區分 `current`, `stale` 與一般候選
-
-```powershell
-python launch-cli.py documents.locate_markdown_extracts --source C:\path\spec.pdf --root C:\path\markdown
-python launch-cli.py documents.locate_markdown_extracts --source-sha256 <64位SHA-256> --root C:\path\one --root C:\path\two
-```
-
-工具只讀取 Markdown 前段的 `Source`, `Source SHA-256` 與 `Extracted on` metadata, 不修改檔案, 掃描預設最多 10000 份 Markdown, 結果預設最多 50 筆, 會跳過 Git 與常見快取資料夾
+抽出版定位已改由 [markdown-checks](../../tools/markdown-checks/README.md) 的 `locate-extracts` 指令提供

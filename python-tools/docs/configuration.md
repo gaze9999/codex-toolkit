@@ -16,17 +16,13 @@ Copy-Item .\setup\.env.example .\setup\.env
 
 | 變數 | 使用工具 | 預設值 | 無效時行為 |
 | --- | --- | --- | --- |
-| `TOOL_HISTORY_NAMESPACE` | `markdown.guarded_markdown_update` | `project-task` | 顯示警告後改用 `project-task` |
 | `TOOL_FIELD_MATRIX_TITLE` | `documents.extract_field_matrix` | 依來源檔名產生 | 空值時使用來源檔名 |
-| `TOOL_TOKENIZER_ENCODING` | `text.tokenizer` | `cl100k_base` | tiktoken 無法使用時改採字元比率估算 |
-| `TOOL_TOKENIZER_ASCII_CHARS_PER_TOKEN` | `text.tokenizer` | `4` | 非有限值或小於等於 0 時顯示警告並改用 `4` |
-| `TOOL_TOKENIZER_NONASCII_CHARS_PER_TOKEN` | `text.tokenizer` | `2` | 非有限值或小於等於 0 時顯示警告並改用 `2` |
 
 不需要 `.env` 時可直接刪除或忽略, CLI-only 操作仍可執行
 
 ## 優先序
 
-1. CLI 選項, 例如 `--title`, `--encoding`, `--namespace`
+1. CLI 選項, 例如 `--title`
 2. process environment 中的 `TOOL_*` 變數
 3. `--env-file` 指定檔案或 `setup/.env`
 4. 工具內建安全預設值
@@ -48,9 +44,7 @@ Copy-Item .\setup\.env.example .\setup\.env
 支援設定變數的工具可用 `--env-file`
 
 ```powershell
-python launch-cli.py text.tokenizer --env-file .\profile.env --text "example"
 python launch-cli.py documents.extract_field_matrix converted.md --env-file .\profile.env
-python launch-cli.py markdown.guarded_markdown_update --env-file .\profile.env --target-file history.md inspect history
 ```
 
 `.env` 支援 UTF-8 BOM, 空白行, `#` 開頭註解, 以單引號或雙引號包住的完整值, 以及 `${TOOL_OTHER_KEY}` 變數引用, 不支援 shell command substitution 或行尾註解
@@ -71,6 +65,6 @@ if __name__ == "__main__":
 
 例如 `src/reports/summarize.py` 可使用 `python launch-cli.py reports.summarize`, 自動代號為 `reports-summarize`, 分類依第一層用途資料夾
 
-需要固定別名、中文名稱或用途說明時, 在 `src/shared/tool_catalog.py` 的 `_OVERRIDES` 加入 `ToolSpec`, 同一份清單用於原始碼及免安裝 CLI, 新工具加入後需重新發布才會進入已封裝成品
+需要固定別名, 中文名稱或用途說明時, 在 `src/shared/tool_catalog.py` 的 `_OVERRIDES` 加入 `ToolSpec`, 同一份清單用於原始碼及免安裝 CLI, 新工具加入後需重新發布才會進入已封裝成品
 
-工具應自行解析參數、檢查相依套件並提供 `--help`, 新增相關測試與用途文件, 不自動安裝相依套件或啟動背景服務
+工具應自行解析參數, 檢查相依套件並提供 `--help`, 新增相關測試與用途文件, 不自動安裝相依套件或啟動背景服務

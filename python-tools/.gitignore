@@ -1,7 +1,6 @@
 # Common Python, dependency and build rules are inherited from ../.gitignore
 # Python tool-specific caches
 *$py.class
-/tiktoken-cache/
 
 # Local runtimes and build inputs, including retained GUI build files
 /src/gui/

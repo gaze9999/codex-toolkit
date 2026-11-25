@@ -2,19 +2,20 @@
 
 <img src="assets/branding/toolkit.png" alt="Codex Toolkit 工具箱圖案" width="88" />
 
-可獨立使用的 Python 工具、Codex Skills、Plugins 與 MCP 串接, 支援文件處理、Markdown 安全更新、程式碼盤點、工作規範與驗證證據整理
+可獨立使用的 Python 工具, Codex Skills, Plugins 與 MCP 串接, 支援文件處理, Markdown 安全更新, 程式碼盤點, 工作規範與驗證證據整理
 
 ## 選擇使用方式
 
 | 需求 | 入口 |
 |---|---|
 | 不使用 Codex, 直接執行工具 | [Python CLI](python-tools/README.md) |
-| 掃描程式碼、Angular 或工作區, 產生離線報告 | [code-health](tools/code-health/README.md)、[angular-checks](tools/angular-checks/README.md)、[workspace-inspection](tools/workspace-inspection/README.md)、[report-html](tools/report-html/README.md)、[work-artifact-cleanup](tools/work-artifact-cleanup/README.md)、[markdown-checks](tools/markdown-checks/README.md) |
+| 掃描程式碼, Angular 或工作區, 產生離線報告 | [code-health](tools/code-health/README.md)、[angular-checks](tools/angular-checks/README.md)、[workspace-inspection](tools/workspace-inspection/README.md)、[report-html](tools/report-html/README.md)、[work-artifact-cleanup](tools/work-artifact-cleanup/README.md)、[markdown-checks](tools/markdown-checks/README.md) |
 | 本機計算 Token 或預估 Codex Context | [token-count](tools/token-count/README.md) |
+| 以 Decisions API 評估開發判斷, 或預覽靜態網頁資產 | [decisions](tools/decisions/README.md)、[visual-runtime](tools/visual-runtime/README.md) |
 | 在自己的 Python 程式使用核心 | [文件核心](python-tools/docs/python-document-core.md) |
 | 在 Codex 選用工作流程 | [Plugin 市集](docs/marketplace.md) 或 [獨立 Skills](docs/skills.md) |
 
-MCP runtime、帳戶與用戶端註冊由安裝者自己的設定工具處理
+MCP runtime, 帳戶與用戶端註冊由安裝者自己的設定工具處理
 
 [操作文件](docs/README.md) · [公開內容檢查](docs/public-content.md)
 

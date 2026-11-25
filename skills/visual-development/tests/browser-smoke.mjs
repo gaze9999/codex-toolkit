@@ -5,16 +5,16 @@ import { mkdir, copyFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-const [python, playwrightPath, threePath, output, browserPath] = process.argv.slice(2);
-if (!browserPath) throw new Error('Provide python, playwright module, three root, new output directory and browser executable');
+const [runtime, playwrightPath, threePath, output, browserPath] = process.argv.slice(2);
+if (!browserPath) throw new Error('Provide the visual-runtime executable, playwright module, three root, new output directory and browser executable');
 await mkdir(output, { recursive: false });
 await mkdir(path.join(output, 'vendor'));
 const assets = fileURLToPath(new URL('../assets/', import.meta.url));
 for (const file of ['example.html', 'three-scene.mjs']) await copyFile(path.join(assets, file), path.join(output, file));
 for (const file of ['three.module.js', 'three.core.js']) await copyFile(path.join(threePath, 'build', file), path.join(output, 'vendor', file));
 const { chromium } = await import(pathToFileURL(playwrightPath).href);
-const source = 'import json,sys\nfrom codex_visual_runtime.core import Workspace,Previews\np=Previews(Workspace(sys.argv[1]))\ntry:\n print(json.dumps(p.start("example.html",["example.html","three-scene.mjs","vendor/three.module.js","vendor/three.core.js"])),flush=True)\n sys.stdin.readline()\nfinally:\n p.close()';
-const server = spawn(python, ['-c', source, path.resolve(output)], { stdio: ['pipe', 'pipe', 'pipe'], windowsHide: true });
+const files = ['example.html', 'three-scene.mjs', 'vendor/three.module.js', 'vendor/three.core.js'];
+const server = spawn(runtime, ['--root', path.resolve(output), 'preview', '--entry', 'example.html', '--files', ...files], { stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true });
 const exited = once(server, 'exit');
 let browser;
 let errors = [];
@@ -67,6 +67,6 @@ try {
   console.log(JSON.stringify(summary));
 } finally {
   if (browser) await browser.close();
-  server.stdin.end('\n');
+  server.kill();
   await exited;
 }

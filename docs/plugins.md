@@ -10,7 +10,7 @@ Read the project's `AGENTS.md` first; when it names plugins, use those. Otherwis
 |---|---|---|---|
 | Agent instructions, prompts, Markdown goals/plans, review and test briefs | `codex-agent-workflow` | `agent-governance`, `coding-prompt`, `task-routing`, `task-guide` | none |
 | Local agent activity counts, artifact inventory and cleanup, RTK | `codex-agent-operations` | `local-activity-query`, `agent-artifact-audit` | `rtk`; `agent-artifact-audit` native MCP |
-| Semantic ranking and bounded typed evaluation | `codex-evaluation` | `jev-evaluation`, `decisions-evaluation` | `jev`; standalone `codex-decisions` |
+| Semantic ranking and bounded typed evaluation | `codex-evaluation` | `jev-evaluation`, `decisions-evaluation` | `jev`; standalone `decisions` CLI/MCP |
 | Local document extraction, specification and doc maintenance, PDF/DOCX/Markdown deliverables, README and license, token counts | `codex-documents-specifications` | `context-brief`, `doc-updater`, `local-document-processing`, `token-count`, `readme-maintainer`, `license-maintainer`, `document-production` | `local-documents`; token counting needs Python 3.10+ with `tiktoken` |
 | Proofreading zh-TW, English and Japanese prose | `codex-multilingual-proofreading` | `multilingual-proofreading` | `textlint`, `cspell` |
 | Test selection, environment comparison, recorded validation evidence, maintainability review, orphan or unused code, duplication and complexity | `codex-environment-evidence` | `validation-evidence-review`, `test-strategy`, `maintainability-review` | `workspace-inspection`; [code-health native CLI/MCP](../tools/code-health/README.md) |
@@ -18,7 +18,7 @@ Read the project's `AGENTS.md` first; when it names plugins, use those. Otherwis
 | Research synthesis with web search, page extraction, papers, communities and library docs | `codex-research` | `research-learning-synthesis` | `tavily`, `exa`, `firecrawl`, `arxiv`, `reddit`, `context7` |
 | System boundaries, data ownership, interfaces and architecture trade-offs | `codex-system-design` | `system-design-analysis` | none |
 | Angular, React and Vue interfaces with UI/UX, i18n, accessibility and browser checks | `codex-frontend-engineering` | `angular-development`, `angular-member-order`, `react-development`, `vue-development`, `ui-ux-design`, `internationalization-engineering`, `accessibility-engineering`, `playwright-cli` | `playwright`, `serena`, `edge-devtools`, `chrome-devtools`, `spartan` |
-| Data visualization, 2D motion and Three.js inside a web project | `codex-visual-development` | `data-visualization`, `visual-development` | `echarts`, `excalidraw`; standalone `codex-visual-runtime` |
+| Data visualization, 2D motion and Three.js inside a web project | `codex-visual-development` | `data-visualization`, `visual-development` | `echarts`, `excalidraw`; standalone `visual-runtime` CLI/MCP |
 | Editorial illustration, Stable Diffusion and ComfyUI workflows | `codex-creative-imaging` | `editorial-illustration`, `comfyui-workflow` | none |
 | Unity projects and game economy balance | `codex-game-development` | `unity-development`, `game-balance-simulation` | none |
 | LLM, agent, tool-calling, RAG and embedding applications | `codex-ai-engineering` | `ai-application-engineering` | `openai-docs` |

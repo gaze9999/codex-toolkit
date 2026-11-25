@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "e500472dcdde2880ba39f348afaf52b2b4ac8e8d822dae788afc2a818226a927",
+      "sha256": "6cf69c801e7f06984023ba6a952563fd847b9b8ce07fd3fb97dc661422b64491",
       "source": null
     },
     "LICENSE": {
@@ -13,44 +13,8 @@
       "source": "assets/branding/plugins/codex-documents-specifications.png"
     },
     "plugin.json": {
-      "sha256": "d2760ed8f4781df2a678ad545c725e49d4e7653d4f338411900355b6cf8164d0",
+      "sha256": "ebd9ef398b48c4f2cb97d9a07cc615e7c56f99b16a2a5047e3fdd15094b5b7b7",
       "source": "plugins/documents-specifications/plugin.json"
-    },
-    "resources/token-count/VERSION": {
-      "sha256": "9d8c94f1ad3ea96b1e2ac4914fda4cb93c76b4a3e0d8cc6dd8976d6c0b227d15",
-      "source": "python-tools/VERSION"
-    },
-    "resources/token-count/requirements.txt": {
-      "sha256": "2d1c6a76bf99c162bdef04b79ef6f746f0a57924430ebe5e4dcd669c4f111bf9",
-      "source": "python-tools/setup/requirements-token-count.txt"
-    },
-    "resources/token-count/src/shared/__init__.py": {
-      "sha256": "c7df46332b5a713dd4ea48dda5b38c6a7ea2a3c81cf19c15cc24bdfc5aae0c90",
-      "source": "python-tools/src/shared/__init__.py"
-    },
-    "resources/token-count/src/shared/runtime.py": {
-      "sha256": "a51a1266657c28199d763cd4bbfcd5c2a539f697316ef288d1a388b5e1ae9f08",
-      "source": "python-tools/src/shared/runtime.py"
-    },
-    "resources/token-count/src/text/__init__.py": {
-      "sha256": "be46dc7835ebaa1c4cee1296ecec2dd5b8a31583891a7084288accbc1a97ae82",
-      "source": "python-tools/src/text/__init__.py"
-    },
-    "resources/token-count/src/text/context_budget.py": {
-      "sha256": "d439b211d86eabe142fc030b2aec7bcc76fb7683742d0f46a724c3200cd3d63e",
-      "source": "python-tools/src/text/context_budget.py"
-    },
-    "resources/token-count/src/text/context_estimates.json": {
-      "sha256": "108d48cf8df916755bfba8e0c7d37fc1df87062cd8db1835892c4ff418cb01e0",
-      "source": "python-tools/src/text/context_estimates.json"
-    },
-    "resources/token-count/src/text/token_count.py": {
-      "sha256": "df6617a3e6c76b06dcbd0ad0294daf594462b56fcc800df46a1e27574f150239",
-      "source": "python-tools/src/text/token_count.py"
-    },
-    "resources/token-count/src/text/token_html.py": {
-      "sha256": "26ae230193c3f031b2f02cb5a156b18baec1dad5bf8ce0750f35cd229e64ebbb",
-      "source": "python-tools/src/text/token_html.py"
     },
     "skills/context-brief/SKILL.md": {
       "sha256": "0f5a3dc0b55d7125b64c07f6cff5727aca3afe8161ccf5ac1a9ec218a3fa5e8c",
@@ -89,7 +53,7 @@
       "source": "skills/context-brief/scripts/ocr_fallback.py"
     },
     "skills/doc-updater/SKILL.md": {
-      "sha256": "739182963e5a957738badb45db37f823339cb4eeb8809a9da08927511e2b741e",
+      "sha256": "c76b2eed8aa39e5a8c74ae46c288ae68a29b47d710cbde73e7896a7fa900dc13",
       "source": "skills/doc-updater/SKILL.md"
     },
     "skills/doc-updater/agents/openai.yaml": {
@@ -133,7 +97,7 @@
       "source": "skills/doc-updater/scripts/inspect_notion_sync_target.py"
     },
     "skills/document-production/SKILL.md": {
-      "sha256": "8720a0ef9234fe32daa8c7bd8f30a9236eaae0b129146b23f347f6419aaf8257",
+      "sha256": "02ee392533f1c75748cd20c703a60fe98bd1abc59860f6aa5e00681eefa9fd1f",
       "source": "skills/document-production/SKILL.md"
     },
     "skills/document-production/agents/openai.yaml": {
@@ -157,7 +121,7 @@
       "source": "skills/document-production/assets/icon.svg"
     },
     "skills/document-production/references/document-production-guidelines.md": {
-      "sha256": "5ce43c233d825b1eb81215d26a90f7e68f96b0593aec66e91c707fd133c7bb48",
+      "sha256": "d6d7f59a6deeedb31ff9e5d95a0d2567d8bbb2451134d10d681837fdd06151b6",
       "source": "skills/document-production/references/document-production-guidelines.md"
     },
     "skills/document-production/references/presentation.md": {
@@ -175,10 +139,6 @@
     "skills/document-production/scripts/validate_docx.py": {
       "sha256": "fdd8beed8ba86435e2101f6b47e928a1eef011ac51412ab44541e33e2ac59047",
       "source": "skills/document-production/scripts/validate_docx.py"
-    },
-    "skills/document-production/scripts/validate_markdown.py": {
-      "sha256": "8195a3b0fc77f0a7a122bb54112dfbb4d65bfa07bf37a31e09b68fde3b1766e4",
-      "source": "skills/document-production/scripts/validate_markdown.py"
     },
     "skills/document-production/scripts/validate_pdf.py": {
       "sha256": "78854d0408f9f0c7ba98648a82c8b40ae45273a6165d7e526786726a19f51439",
@@ -269,7 +229,7 @@
       "source": "skills/readme-maintainer/references/release-readiness.md"
     },
     "skills/token-count/SKILL.md": {
-      "sha256": "ce8a8962b630dc1f78e0e5ab792be3c334ab89f8e09cc69be2b7cc45cba1e5a9",
+      "sha256": "6c12b27545560fcf1d6991c98116df301abd65014c1a2ab480967ba509b48b86",
       "source": "skills/token-count/SKILL.md"
     },
     "skills/token-count/agents/openai.yaml": {
@@ -293,12 +253,8 @@
       "source": "skills/token-count/assets/icon.svg"
     },
     "skills/token-count/references/context-budget.md": {
-      "sha256": "291ce887e1722390f47a56e0552fb6c3f79bad7dc06b21061f88c7f0cc07d00a",
+      "sha256": "1246842f13701ed6f4fcffd7074a200455f8dc8edcd363a79780fe120469dbe5",
       "source": "skills/token-count/references/context-budget.md"
-    },
-    "skills/token-count/scripts/count_tokens.py": {
-      "sha256": "d02a254fd1ac1c0b574695b1e1b927c6a710317cce12abaeea6e1ccd9c8edfc9",
-      "source": "skills/token-count/scripts/count_tokens.py"
     }
   },
   "license": "MIT",
@@ -309,6 +265,6 @@
     "local-documents"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.45.0",
-  "version": "0.10.0"
+  "toolkit_version": "0.46.0",
+  "version": "0.11.0"
 }

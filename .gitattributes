@@ -1,6 +1,5 @@
 # Check out text as LF so Windows builds hash the committed bytes; later rules override
 * text=auto eol=lf
-skills/document-production/scripts/validate_markdown.py text eol=lf
 *.sh text eol=lf
 *.cmd text eol=crlf
 # Canonical Plugin sources and payload hashes must survive Git checkouts
@@ -15,21 +14,6 @@ assets/**/*.png -text
 VERSION text eol=lf
 .agents/plugins/marketplace.json text eol=lf
 .claude-plugin/marketplace.json text eol=lf
-
-# Preserve canonical Token Count resource hashes across platforms
-python-tools/VERSION text eol=lf
-python-tools/setup/requirements-token-count.txt text eol=lf
-python-tools/src/shared/__init__.py text eol=lf
-python-tools/src/shared/runtime.py text eol=lf
-python-tools/src/text/__init__.py text eol=lf
-python-tools/src/text/context_budget.py text eol=lf
-python-tools/src/text/context_estimates.json text eol=lf
-python-tools/src/text/token_count.py text eol=lf
-python-tools/src/text/token_html.py text eol=lf
-
-# Keep bundled development-core resource hashes stable across platforms
-python-tools/packages/decisions/** text=auto eol=lf
-python-tools/packages/visual-runtime/** text=auto eol=lf
 
 # Publication hooks run through a POSIX shell on every platform
 .githooks/* text eol=lf

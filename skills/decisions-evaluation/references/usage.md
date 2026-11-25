@@ -1,8 +1,8 @@
 # Decisions operation
 
-Read for a real invocation or authorized setup. Runtime package: `codex-decisions`, source `python-tools/packages/decisions`, or Plugin `resources/decisions`. Install the selected package with the `mcp` extra only when needed and authorized. The packaged README owns complete CLI/setup details.
+Read for a real invocation or authorized setup. Runtime: the native `decisions` CLI from Toolkit `tools/decisions`; its README owns complete CLI/setup details. When the command is missing, install it only when needed and authorized with `cargo install --locked --path <Toolkit>/tools/decisions`.
 
-`decisions status` is local credential-presence inspection. `decisions validate --input request.json` returns hash/size without network. `decisions evaluate --input request.json --approved` makes at most one POST to `https://api.openai.com/v1/decisions`. `decisions-mcp --config settings.json` exposes status, validate and evaluate with the same core. No retries, provider fallback or endpoint override.
+`decisions status` is local credential-presence inspection. `decisions validate --input request.json` returns hash/size without network. `decisions evaluate --input request.json --approved` makes at most one POST to `https://api.openai.com/v1/decisions`. `decisions --config settings.json mcp` exposes status, validate and evaluate with the same core. No retries, provider fallback or endpoint override.
 
 The optional JSON config accepts only `credential_env`, `model`, `timeout_seconds`. Default credential source is `OPENAI_API_KEY`; never put its value in config. A deliberately selected `OPENAI_ACCESS_TOKEN` may carry an externally managed Platform workload-identity token; this package neither provisions nor refreshes it. No documented personal ChatGPT account-binding flow is used. Missing credentials remain a setup action for the user when they choose manual setup.
 

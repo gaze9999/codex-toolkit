@@ -46,30 +46,14 @@ class DistributionTests(unittest.TestCase):
                 tools = tool_catalog.load_bundled_catalog()
             self.assertEqual(tools[0].module, tool_catalog.TOOLS[0].module)
 
-    def test_cli_resources_seed_encodings_and_restore_environment(self):
-        for fail in (False, True):
-            with self.subTest(fail=fail), tempfile.TemporaryDirectory() as temporary:
-                root = Path(temporary)
-                calls = []
-
-                def encoding(name):
-                    calls.append((name, os.environ["TIKTOKEN_CACHE_DIR"]))
-                    if fail:
-                        raise RuntimeError("encoding unavailable")
-
-                module = types.SimpleNamespace(get_encoding=encoding)
-                with patch.object(build_cli, "ROOT", root), patch.dict(sys.modules, tiktoken=module), patch.dict(os.environ, TIKTOKEN_CACHE_DIR="original"):
-                    if fail:
-                        with self.assertRaisesRegex(RuntimeError, "encoding unavailable"):
-                            build_cli.prepare_resources()
-                    else:
-                        resources = build_cli.prepare_resources()
-                        self.assertEqual(resources, root / ".build-inputs/cli")
-                        payload = json.loads((resources / "catalog.json").read_text(encoding="utf-8"))
-                        self.assertEqual(len(payload), len(tool_catalog.TOOLS))
-                        self.assertEqual([name for name, _cache in calls], ["o200k_base", "cl100k_base"])
-                    self.assertEqual(os.environ["TIKTOKEN_CACHE_DIR"], "original")
-                    self.assertTrue(all(cache == str(root / ".build-inputs/cli/tiktoken") for _name, cache in calls))
+    def test_cli_resources_write_the_tool_catalog(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            with patch.object(build_cli, "ROOT", root):
+                resources = build_cli.prepare_resources()
+            self.assertEqual(resources, root / ".build-inputs/cli")
+            payload = json.loads((resources / "catalog.json").read_text(encoding="utf-8"))
+            self.assertEqual(len(payload), len(tool_catalog.TOOLS))
 
     def test_archive_preserves_application_folder(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -126,13 +110,10 @@ class DistributionTests(unittest.TestCase):
             self.assertEqual(options["timeout"], 45)
             self.assertNotIn("PYTHONPATH", options["env"])
             self.assertNotIn("PYTHONHOME", options["env"])
-            self.assertNotIn("TIKTOKEN_CACHE_DIR", options["env"])
             operation = command[1]
             output, code = "", 0
             if operation == "--list":
                 output = "documents.convert_to_markdown"
-            elif operation == "text.tokenizer":
-                output = json.dumps({"chars": 5, "method": "tiktoken"})
             elif operation == "documents.convert_to_markdown":
                 Path(command[2]).with_suffix(".md").write_text("Portable CLI conversion", encoding="utf-8")
             else:
@@ -142,7 +123,7 @@ class DistributionTests(unittest.TestCase):
         with patch.object(smoke_cli.subprocess, "run", side_effect=execute):
             result = smoke_cli.verify(Path("launch-cli.exe"))
         self.assertTrue(result["passed"])
-        self.assertEqual(len(commands), 5)
+        self.assertEqual(len(commands), 4)
 
     def test_smoke_rejects_failures_fallback_and_timeout(self):
         results = [

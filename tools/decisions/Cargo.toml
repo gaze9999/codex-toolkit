@@ -1,0 +1,16 @@
+[package]
+authors = ["gaze9999"]
+repository = "https://github.com/gaze9999/codex-toolkit"
+name = "decisions"
+version = "0.2.0"
+edition = "2021"
+rust-version = "1.89"
+license = "MIT"
+description = "Bounded OpenAI Decisions client with offline validation and a stdio MCP server"
+
+[dependencies]
+base64 = "0.22"
+# preserve_order keeps request and response fields in the order they were supplied
+serde_json = { version = "1", features = ["preserve_order"] }
+sha2 = "0.10"
+ureq = { version = "3", default-features = false, features = ["rustls"] }

@@ -9,6 +9,10 @@ const BREAKS: [char; 10] = [
     '\n', '\r', '\u{0b}', '\u{0c}', '\u{1c}', '\u{1d}', '\u{1e}', '\u{85}', '\u{2028}', '\u{2029}',
 ];
 
+pub fn is_break(ch: char) -> bool {
+    BREAKS.contains(&ch)
+}
+
 pub fn split_lines(text: &str) -> Vec<&str> {
     let mut lines = Vec::new();
     let mut start = 0;
@@ -70,4 +74,16 @@ pub fn suffix(name: &str) -> String {
         Some(index) if index + 1 == base.len() => String::new(),
         Some(index) => base[index..].to_lowercase(),
     }
+}
+
+/// Error text in the form Python's UTF-8 decoder uses.
+pub fn utf8_error(bytes: &[u8], error: std::str::Utf8Error) -> String {
+    let position = error.valid_up_to();
+    let byte = bytes[position];
+    let reason = match error.error_len() {
+        None => "unexpected end of data",
+        Some(_) if (0x80..0xc2).contains(&byte) || byte > 0xf4 => "invalid start byte",
+        Some(_) => "invalid continuation byte",
+    };
+    format!("'utf-8' codec can't decode byte 0x{byte:02x} in position {position}: {reason}")
 }

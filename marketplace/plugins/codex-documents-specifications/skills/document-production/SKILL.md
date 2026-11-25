@@ -3,7 +3,7 @@ name: document-production
 description: Create requested downloadable PDF, DOCX or Markdown artifacts from supplied content and sources. Use for finished document delivery, not chat-only drafts, source extraction or repository README/license maintenance.
 metadata:
   short-description: Default-PDF document production pipeline with DOCX and Markdown support
-  version: "0.4.22"
+  version: "0.4.23"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
@@ -39,6 +39,6 @@ For teaching order, purpose-specific outline references, examples/images and exp
 
 ## On-demand verification
 
-When a compatible Python runtime is available, resolve and run the matching validator relative to this Skill: `scripts/validate_pdf.py`, `scripts/validate_docx.py`, `scripts/validate_markdown.py`, or `scripts/validate_apa7.py`. Otherwise use equivalent available inspection and report the bundled validator as not run. Install optional tooling only with user authorization. When rendering or another check cannot be completed, mark it unverified with the reason rather than claiming success.
+When a compatible Python runtime is available, resolve and run the matching validator relative to this Skill: `scripts/validate_pdf.py`, `scripts/validate_docx.py` or `scripts/validate_apa7.py`. For Markdown, run `markdown-checks validate <file>` when that CLI is installed. Otherwise use equivalent available inspection and report the bundled validator as not run. Install optional tooling only with user authorization. When rendering or another check cannot be completed, mark it unverified with the reason rather than claiming success.
 
 In the final response, list only deliverable links, formats, completed checks, and unverified items.

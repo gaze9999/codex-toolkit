@@ -13,7 +13,7 @@ import tempfile
 
 def verify(executable: Path, *, launcher: list[str] | None = None) -> dict[str, object]:
     environment = dict(os.environ)
-    for name in ("PYTHONHOME", "PYTHONPATH", "TIKTOKEN_CACHE_DIR"):
+    for name in ("PYTHONHOME", "PYTHONPATH"):
         environment.pop(name, None)
     environment["PATH"] = str(Path(environment.get("SystemRoot", "C:/Windows")) / "System32") if sys.platform == "win32" else "/usr/bin:/bin"
     with tempfile.TemporaryDirectory(prefix="portable-cli-") as temporary:
@@ -32,9 +32,6 @@ def verify(executable: Path, *, launcher: list[str] | None = None) -> dict[str, 
         catalog = call(["--list"])
         if "documents.convert_to_markdown" not in catalog:
             raise RuntimeError("Portable CLI did not load the bundled tool catalog")
-        tokens = json.loads(call(["text.tokenizer", "--text", "hello", "--json"]))
-        if tokens.get("chars") != 5 or tokens.get("method") != "tiktoken":
-            raise RuntimeError("Portable CLI tokenizer did not use its bundled offline encoding")
         source = Path(temporary) / "中文 source.txt"
         source.write_text("本機文件測試\nPortable CLI conversion\n", encoding="utf-8")
         call(["documents.convert_to_markdown", str(source)])
@@ -45,7 +42,7 @@ def verify(executable: Path, *, launcher: list[str] | None = None) -> dict[str, 
         call(["--web"], expected=2)
         return {
             "passed": True, "terminal": True, "document_conversion": True,
-            "offline_tokenizer": True, "source_only_guard": True, "web_removed": True,
+            "source_only_guard": True, "web_removed": True,
         }
 
 

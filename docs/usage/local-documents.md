@@ -174,6 +174,6 @@ Tool: `update_markdown`
 | 核心套件缺少或 API 不相容 | 在同一 runtime 安裝相容的核心 wheel, 檢查套件版本後重新啟動 |
 | 雲端 placeholder 無法原子取代 | 先確認本機檔案狀態, 確有需要時, 明確使用 `in_place=true` 備援, 會建立備份 |
 
-Markdown 預覽與寫入的目標都須位於 write root, 存取範圍由啟動設定指定, Notion 同步、Git 操作與程式編譯使用各自入口
+Markdown 預覽與寫入的目標都須位於 write root, 存取範圍由啟動設定指定, Notion 同步, Git 操作與程式編譯使用各自入口
 
-文件與 Markdown CLI、versioned core 及 MCP 的安裝與驗證入口見 [文件工具](../../python-tools/README.md)
+文件與 Markdown CLI, versioned core 及 MCP 的安裝與驗證入口見 [文件工具](../../python-tools/README.md)

@@ -27,24 +27,12 @@ def run(command: list[str], cwd: Path = ROOT) -> None:
 
 
 def prepare_resources() -> Path:
-    import tiktoken
-
     resources = ROOT / ".build-inputs/cli"
     resources.mkdir(parents=True, exist_ok=True)
     (resources / "catalog.json").write_text(
         json.dumps([tool.payload() for tool in TOOLS], ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
-    previous = os.environ.get("TIKTOKEN_CACHE_DIR")
-    os.environ["TIKTOKEN_CACHE_DIR"] = str(resources / "tiktoken")
-    try:
-        for encoding in ("o200k_base", "cl100k_base"):
-            tiktoken.get_encoding(encoding)
-    finally:
-        if previous is None:
-            os.environ.pop("TIKTOKEN_CACHE_DIR", None)
-        else:
-            os.environ["TIKTOKEN_CACHE_DIR"] = previous
     return resources
 
 
@@ -91,7 +79,7 @@ def main(argv: list[str] | None = None) -> int:
     manifest = {
         "product": "cli", "version": version, "os": system, "architecture": architecture,
         "python": platform.python_version(), "signed": False,
-        "dependencies": {name: importlib.metadata.version(name) for name in ("pyinstaller", "pypdf", "pdfplumber", "openpyxl", "python-docx", "python-pptx", "tiktoken")},
+        "dependencies": {name: importlib.metadata.version(name) for name in ("pyinstaller", "pypdf", "pdfplumber", "openpyxl", "python-docx", "python-pptx")},
         "tools": [tool.module for tool in TOOLS], "source_only_tools": [tool.module for tool in TOOLS if tool.payload()["source_only"]],
         "entrypoints": {"cli": "MyPyToolsCLI/launch-cli" + (".exe" if system == "windows" else "")},
         "modes": ["terminal"],

@@ -1,4 +1,7 @@
-"""Document extraction and guarded Markdown operations, without remote APIs."""
+"""Document extraction and guarded Markdown operations, without remote APIs.
+
+Markdown inspection, guarded updates and extract lookup run through the native markdown-checks CLI.
+"""
 from __future__ import annotations
 
 import datetime as dt
@@ -14,6 +17,7 @@ import tempfile
 from typing import Literal
 import zipfile
 
+from mcp_servers.local_documents import markdown_cli
 from mcp_servers.local_documents.core import load_core
 
 IMAGE_TYPES = {".png", ".jpg", ".jpeg", ".tif", ".tiff", ".bmp", ".webp"}
@@ -23,7 +27,7 @@ MAX_FILE_BYTES = 128 * 1024 * 1024
 
 class DocumentService:
     def __init__(self, read_roots: list[Path], write_roots: list[Path]):
-        self.extraction, self.matching, self.markdown = load_core()
+        self.extraction = load_core()
         self.read_roots = tuple(self._root(path) for path in read_roots)
         self.write_roots = tuple(self._root(path) for path in write_roots)
         if not self.read_roots:
@@ -77,6 +81,10 @@ class DocumentService:
                 versions[name] = importlib.metadata.version(name)
             except importlib.metadata.PackageNotFoundError:
                 versions[name] = None
+        try:
+            versions["markdown-checks"] = markdown_cli.run("--version")[1].strip().removeprefix("markdown-checks ") or None
+        except (RuntimeError, OSError, ValueError):
+            versions["markdown-checks"] = None
         try:
             models = [{"role": role, "file": path.name, "sha256": self.extraction.sha256(path)} for role, path in self.models().items()]
         except (RuntimeError, OSError):
@@ -191,7 +199,7 @@ class DocumentService:
                 raise ValueError("Output must not overwrite the source")
             source_hash = self.extraction.sha256(path)
             before = destination.read_bytes() if destination and destination.exists() else None
-            if before is not None and write_output and self.markdown.sha(before) != (expected_output_sha256 or "").lower():
+            if before is not None and write_output and markdown_cli.sha(before) != (expected_output_sha256 or "").lower():
                 raise ValueError("Existing output requires its current SHA-256")
             if before is None and expected_output_sha256 is not None:
                 raise ValueError("Expected output hash was supplied for a missing file")
@@ -230,12 +238,12 @@ class DocumentService:
                     if destination.read_bytes() != data:
                         raise ValueError("Output readback mismatch; inspect before retry")
                 else:
-                    self.markdown.write_guarded(destination, before, data)
+                    markdown_cli.write_guarded(destination, before, data)
                 written = True
             response = {"status": "partial" if details["status"] == "partial" else "extracted",
                         "source": str(path), "source_sha256": source_hash, "summary": summary,
                         "output": str(destination) if destination else None, "written": written,
-                        "output_sha256": self.markdown.sha(data), "ocr": details, "source_authority": "original",
+                        "output_sha256": markdown_cli.sha(data), "ocr": details, "source_authority": "original",
                         **self.clipped(content, max_chars)}
             # 限制回傳本文時也限制 OCR 明細, 完整內容仍保留在明確指定的輸出檔
             remaining = max_chars
@@ -258,7 +266,7 @@ class DocumentService:
         with self.lock:
             source_path = self.path(source) if source is not None else None
             roots = [self.directory(value) for value in search_roots] if search_roots else list(self.read_roots)
-            return self.matching.locate_extracts(
+            return markdown_cli.locate_extracts(
                 roots,
                 source=source_path,
                 source_sha256=source_sha256,
@@ -272,12 +280,13 @@ class DocumentService:
             path = self.path(target)
             if path.suffix.lower() != ".md":
                 raise ValueError("Target must be a .md file")
-            raw, text, _ = self.markdown.read_target(path)
-            result = {"target": str(path), "sha256": self.markdown.sha(raw),
-                      "headings": ["#" * level + " " + title for level, title, _ in self.markdown.headings(text)]}
+            listed = markdown_cli.inspect(path)
+            result = {"target": str(path), "sha256": listed["sha256"], "headings": listed["headings"]}
             if heading is not None:
-                start, end = self.markdown.section(text, heading)
-                result.update(self.clipped(text[start:end], max_chars))
+                selected = markdown_cli.inspect(path, heading)
+                if selected["sha256"] != listed["sha256"]:
+                    raise ValueError("Target changed during inspection; retry")
+                result.update(self.clipped(selected["content"], max_chars))
             return result
 
     def update_markdown(self, target: str, content: str, expected_sha256: str,
@@ -291,12 +300,12 @@ class DocumentService:
             raise ValueError("content must contain 1-200000 characters")
         with self.lock:
             path = self.path(target, write=True)
-            raw, text, bom = self.markdown.read_target(path)
-            if self.markdown.sha(raw) != expected_sha256.lower():
+            current = markdown_cli.sha(path.read_bytes())
+            if current != expected_sha256.lower():
                 raise ValueError("Stale SHA-256; inspect and merge before writing")
-            after = self.markdown.prepare(raw, text, bom, content, heading, entry_id, "project-task")
-            if write and after != raw:
-                self.markdown.write_guarded(path, raw, after, in_place)
-            return {"status": "written" if write and after != raw else ("unchanged" if after == raw else "preview"),
-                    "target": str(path), "sha256": self.markdown.sha(raw), "next_sha256": self.markdown.sha(after),
-                    "byte_delta": len(after) - len(raw), "remote_sync": "not_performed"}
+            result = markdown_cli.update(path, content, current, heading=heading, entry_id=entry_id,
+                                         namespace="project-task", write=write, in_place=in_place)
+            status = {"dry-run": "preview"}.get(result["status"], result["status"])
+            return {"status": status, "target": str(path), "sha256": result["sha256"],
+                    "next_sha256": result["next_sha256"], "byte_delta": result["byte_delta"],
+                    "remote_sync": "not_performed"}

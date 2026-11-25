@@ -3,20 +3,17 @@
 from __future__ import annotations
 
 import argparse
-import os
 import runpy
 import sys
 
 from shared.tool_catalog import TOOLS
-from shared.runtime import is_bundled, resource_root
+from shared.runtime import is_bundled
 
 
 def main(argv: list[str] | None = None) -> int:
     for stream in (sys.stdout, sys.stderr):
         if stream is not None and hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8", errors="replace", line_buffering=True)
-    if is_bundled():
-        os.environ.setdefault("TIKTOKEN_CACHE_DIR", str(resource_root() / "tiktoken-cache"))
     arguments = list(sys.argv[1:] if argv is None else argv)
     parser = argparse.ArgumentParser(description=__doc__, usage="%(prog)s [--list] <module-or-id> [arguments ...]")
     parser.add_argument("--list", action="store_true", help="List tools by purpose")
