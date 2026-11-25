@@ -206,14 +206,22 @@ fn scan_changes_reads_staged_unstaged_and_untracked_git_changes() {
 #[test]
 fn scan_changes_stat_reports_stage_and_line_counts() {
     let dir = tempfile::tempdir().unwrap();
+    let renamed = if cfg!(windows) {
+        "new name.txt"
+    } else {
+        "new|name.txt"
+    };
     let git = |args: &[&str]| {
-        assert!(Command::new("git")
+        let output = Command::new("git")
             .args(args)
             .current_dir(dir.path())
             .output()
-            .unwrap()
-            .status
-            .success())
+            .unwrap();
+        assert!(
+            output.status.success(),
+            "git {args:?}: {}",
+            String::from_utf8_lossy(&output.stderr)
+        );
     };
     let commit = |message: &str| {
         git(&[
@@ -234,7 +242,7 @@ fn scan_changes_stat_reports_stage_and_line_counts() {
     commit("init");
     fs::write(dir.path().join("both.md"), "1\n2\n3\n4\n").unwrap();
     fs::write(dir.path().join("staged.rs"), "b\nc\n").unwrap();
-    git(&["mv", "old name.txt", "new|name.txt"]);
+    git(&["mv", "old name.txt", renamed]);
     git(&["add", "."]);
     fs::write(dir.path().join("both.md"), "1\n3\n4\n5\n").unwrap();
     fs::write(dir.path().join("fresh.txt"), "x\ny").unwrap();
@@ -259,7 +267,7 @@ fn scan_changes_stat_reports_stage_and_line_counts() {
     let n = |value: u64| serde_json::json!(value);
     assert_eq!(fact("both.md"), ("staged+unstaged".into(), n(2), n(1)));
     assert_eq!(fact("staged.rs"), ("staged".into(), n(2), n(1)));
-    assert_eq!(fact("new|name.txt"), ("staged".into(), n(0), n(0)));
+    assert_eq!(fact(renamed), ("staged".into(), n(0), n(0)));
     assert_eq!(fact("fresh.txt"), ("untracked".into(), n(2), n(0)));
     assert_eq!(fact("blob.bin"), ("untracked".into(), Value::Null, n(0)));
 
@@ -267,7 +275,8 @@ fn scan_changes_stat_reports_stage_and_line_counts() {
     assert_eq!(code, 0);
     assert!(out.contains("| File | Stage | Change | Added | Deleted | Category | Doc impact |"));
     assert!(out.contains("| `both.md` | staged+unstaged | M | 2 | 1 | documentation | yes |"));
-    assert!(out.contains("| `new\\|name.txt` | staged | R100 | 0 | 0 |"));
+    let table_name = renamed.replace('|', "\\|");
+    assert!(out.contains(&format!("| `{table_name}` | staged | R100 | 0 | 0 |")));
     assert!(out.contains("| `blob.bin` | untracked | ?? | - | 0 |"));
 
     let (code, out, _) = run(dir.path(), &["scan-changes", "--json"]);

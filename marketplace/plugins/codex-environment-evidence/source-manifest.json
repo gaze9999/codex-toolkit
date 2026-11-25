@@ -133,6 +133,6 @@
     "workspace-inspection"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.46.0",
+  "toolkit_version": "0.46.1",
   "version": "0.9.2"
 }

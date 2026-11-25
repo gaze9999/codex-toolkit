@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 authors = [{name = "gaze9999"}]
 license = {file = "LICENSE"}
 name = "codex-local-documents-mcp"
-version = "0.2.1"
+version = "0.2.2"
 description = "Portable local document extraction, OCR and guarded Markdown MCP"
 readme = "mcp_servers/local_documents/README.md"
 requires-python = ">=3.11"

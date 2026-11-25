@@ -1,4 +1,4 @@
-my-py-document-core==0.2.2
+my-py-document-core==0.4.0
 mcp==2.2.0
 rapidocr==3.9.2
 onnxruntime==1.30.0
