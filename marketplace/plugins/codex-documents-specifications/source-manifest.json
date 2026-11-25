@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "0efe0bef4cc9ea08822043006b340bd1cfba7dc8160c020c0a9a39dd304440f2",
+      "sha256": "e500472dcdde2880ba39f348afaf52b2b4ac8e8d822dae788afc2a818226a927",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-documents-specifications.png"
     },
     "plugin.json": {
-      "sha256": "eec1530e3bb28690095b335860328023c8b139ed5e3e001804ba0bbe19017bbe",
+      "sha256": "d2760ed8f4781df2a678ad545c725e49d4e7653d4f338411900355b6cf8164d0",
       "source": "plugins/documents-specifications/plugin.json"
     },
     "resources/token-count/VERSION": {
@@ -269,7 +269,7 @@
       "source": "skills/readme-maintainer/references/release-readiness.md"
     },
     "skills/token-count/SKILL.md": {
-      "sha256": "5b066c8e842b9ef77a63545f48219cf9b2a1b20dd045f99a597f929f3f3db934",
+      "sha256": "ce8a8962b630dc1f78e0e5ab792be3c334ab89f8e09cc69be2b7cc45cba1e5a9",
       "source": "skills/token-count/SKILL.md"
     },
     "skills/token-count/agents/openai.yaml": {
@@ -293,7 +293,7 @@
       "source": "skills/token-count/assets/icon.svg"
     },
     "skills/token-count/references/context-budget.md": {
-      "sha256": "f8618a721985bb11d439926a84da5068e7da8b09877f2efbbf523c216a788bbd",
+      "sha256": "291ce887e1722390f47a56e0552fb6c3f79bad7dc06b21061f88c7f0cc07d00a",
       "source": "skills/token-count/references/context-budget.md"
     },
     "skills/token-count/scripts/count_tokens.py": {
@@ -309,6 +309,6 @@
     "local-documents"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.44.1",
-  "version": "0.9.3"
+  "toolkit_version": "0.45.0",
+  "version": "0.10.0"
 }

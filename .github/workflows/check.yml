@@ -78,7 +78,7 @@ jobs:
         run: |
           failed=()
           check() { "$@" || failed+=("$*"); }
-          for tool in code-health angular-checks workspace-inspection report-html; do
+          for tool in code-health angular-checks workspace-inspection report-html token-count; do
             check cargo test --locked --no-fail-fast --manifest-path tools/$tool/Cargo.toml
             check cargo clippy --locked --manifest-path tools/$tool/Cargo.toml --all-targets -- -D warnings
             check cargo fmt --manifest-path tools/$tool/Cargo.toml --check

@@ -1,0 +1,20 @@
+[package]
+authors = ["gaze9999"]
+repository = "https://github.com/gaze9999/codex-toolkit"
+name = "token-count"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.89"
+license = "MIT"
+description = "Offline exact BPE token counts, colored token HTML and Codex context estimates"
+
+[dependencies]
+regex = "1"
+# preserve_order keeps report fields and TOML/JSON tables in document order
+serde_json = { version = "1", features = ["preserve_order"] }
+tiktoken-rs = "0.12"
+toml = { version = "1", features = ["preserve_order"] }
+unicode-segmentation = "1"
+
+[dev-dependencies]
+tempfile = "3"

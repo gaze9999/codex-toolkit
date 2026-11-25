@@ -2,14 +2,16 @@
 name: token-count
 description: Count and color exact text tokens, compare encodings or estimate Codex context from Global/Project Agent instructions, Skills, tools and dated community profiles. Use for token budgets and reports, not API credentials, account usage or pricing.
 metadata:
-  version: "0.2.1"
+  version: "0.3.0"
   author: "gaze9999"
   repository: "https://github.com/gaze9999/codex-toolkit"
 ---
 
 # Token Count
 
-Use the bundled [counting helper](scripts/count_tokens.py) and the maintained Python Tools core, with `o200k_base` by default. Select exact text counting, colored tokens or environment estimation when the request needs a token budget or report.
+Use `o200k_base` by default. Select exact text counting, colored tokens or environment estimation when the request needs a token budget or report.
+
+When the native `token-count` CLI from the Toolkit `tools/token-count` is on PATH, run it with the same arguments shown below, replacing `python <skill-directory>/scripts/count_tokens.py`. It embeds the encoding dictionaries, needs no Python or download, and produces the same output. Otherwise use the bundled [counting helper](scripts/count_tokens.py) with the maintained Python Tools core.
 
 ## Context estimates and colored tokens
 
@@ -20,7 +22,7 @@ Use the bundled [counting helper](scripts/count_tokens.py) and the maintained Py
 ## Inputs and execution
 
 - Identify the exact supplied text or authorized local files and honor an explicit encoding. If the request names only a model, establish its actual supported tokenizer mapping before claiming model-specific accuracy; a named encoding measures that encoding only.
-- Use an existing Python 3.10+ runtime with `tiktoken` and `regex` for colored output; context discovery requires Python 3.11+. The Plugin bundles the core and its focused requirements, not a Python runtime or installed dependencies. Missing prerequisites require a setup step within the user's authorization; do not silently install them or replace exact counts with estimates.
+- The Python helper needs an existing Python 3.10+ runtime with `tiktoken` and `regex` for colored output; context discovery requires Python 3.11+. The Plugin bundles the core and its focused requirements, not a Python runtime or installed dependencies. Missing prerequisites require a setup step within the user's authorization; do not silently install them or replace exact counts with estimates.
 - Resolve this Skill's actual directory and run `python <skill-directory>/scripts/count_tokens.py --input <file> [<file> ...] --json`. For short supplied text use `--text`; omitted input reads UTF-8 stdin. Preserve the original text and whitespace; shell pipes/here-documents may add a trailing newline or change encoding.
 - Files must be UTF-8 text with optional BOM. UTF-8 BOM is excluded; CRLF, spaces and trailing newlines are preserved. Special-token-looking strings are counted literally. For PDF/Office, count an identified text extraction and label that scope; do not treat binary bytes as document text or silently alter the source.
 - To compare encodings, run the same input once per selected `--encoding` and report each encoding separately. Multiple files are counted independently; `total_tokens` sums those counts and is not the token count of concatenated text.

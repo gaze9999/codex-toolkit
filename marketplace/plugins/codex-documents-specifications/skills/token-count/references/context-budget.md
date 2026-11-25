@@ -1,6 +1,6 @@
 # Context budget mode
 
-Use for an environment/instruction budget. Python 3.11+ and tiktoken are required. The helper dispatches `context` to the same versioned Python Tools core distributed in the Plugin.
+Use for an environment/instruction budget. Prefer `token-count context <options>` when the native CLI is on PATH; it bundles the same profile and needs no Python. Otherwise Python 3.11+ and tiktoken are required, and the helper dispatches `context` to the same versioned Python Tools core distributed in the Plugin.
 
 ```text
 python <skill-directory>/scripts/count_tokens.py context --project <directory>
