@@ -112,7 +112,7 @@ pub fn run(
     let page = json!({
         "schema":report_html::SCHEMA,"title":"Generator 產生前檢查",
         "tags":[if clear {json!({"label":"沒有衝突","tone":"success"})} else {json!({"label":"已有相同名稱","tone":"error"})}],
-        "info":[["根目錄", root.to_string_lossy()],["Identifier", identifier],["Selector", selector.unwrap_or("—")],
+        "meta":crate::output::page_meta(root, None, &[]),"info":[["Identifier", identifier],["Selector", selector.unwrap_or("—")],
             ["允許既有項目", if allow_existing {"是"} else {"否"}]],
         "headings":{"stats":"出現位置"},
         "stats":[

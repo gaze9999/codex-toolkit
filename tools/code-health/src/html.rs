@@ -216,13 +216,18 @@ pub fn report_data(report: &Value) -> Value {
     json!({
         "schema":report_html::SCHEMA,"title":"Code health 報告","lang":"zh-Hant-TW",
         "tags":tags,
+        "meta":report_html::meta::collect(&report_html::meta::Facts {
+            tool: "code-health",
+            version: env!("CARGO_PKG_VERSION"),
+            format: report_html::SCHEMA,
+            target: report["root"].as_str().map(std::path::Path::new),
+            ..Default::default()
+        })["meta"],
         "info":[
-            ["掃描根目錄", text(&report["root"])],
             ["檢查項目", list("checks")],
             ["掃描檔案數", text(&report["files_scanned"])],
             ["涵蓋範圍", if partial {"部分 (達到大小、讀取或結果上限, 可縮小根目錄或檢查範圍)"} else {"完整"}],
-            ["進入點", if entries.is_empty() {"未解析到進入點".to_owned()} else {entries}],
-            ["工具版本", format!("code-health {}", env!("CARGO_PKG_VERSION"))]
+            ["進入點", if entries.is_empty() {"未解析到進入點".to_owned()} else {entries}]
         ],
         "note":match semantic.map(|value| value["freshness"].as_str()) {
             Some(Some("matched_scan_sources")) => "佐證與本次掃描讀取的來源相符, 提出移除或重構前仍須核對實際使用端",

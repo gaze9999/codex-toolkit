@@ -116,10 +116,11 @@ pub fn run(root: &Path, contract_path: &Path) -> Result<(Rendered, i32), String>
             json!({"label":label,"value":value,"tone":if value == 0 {"neutral"} else {"error"},"bar":true})
         })
         .collect();
+    let inputs = [contract_path.to_path_buf()];
     let page = json!({
         "schema":report_html::SCHEMA,"title":"Angular 表單欄位規格檢查",
         "tags":[if findings.is_empty() {json!({"label":"符合規格","tone":"success"})} else {json!({"label":format!("{} 筆不符", findings.len()),"tone":"error"})}],
-        "info":[["根目錄", root.to_string_lossy()],["欄位規格", contract_path.to_string_lossy()],["檢查元件數", components.len()]],
+        "meta":crate::output::page_meta(root, None, &inputs),"info":[["檢查元件數", components.len()]],
         "headings":{"stats":"不符項目"},"stats":stats,
         "sections":[{"label":"不符項目","empty":"原始檔與範本都符合欄位規格","rows":rows,"columns":[
             column("label","種類","text"),column("kind","代碼","code"),column("component","元件","code"),column("control","控制項","code")]}]

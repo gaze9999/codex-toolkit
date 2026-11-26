@@ -11,6 +11,9 @@ report-html render --input report-data.json --out /path/to/report.html
 cat report-data.json | report-html render --input - > report.html
 report-html render --input report-data.json --style-dir /path/to/appearance-package
 report-html render --input report-data.json --format md --out /path/to/report.md
+report-html meta --tool code-health --tool-version 1.2.0 --format code-health-report/v1 --target /path/to/project --input rules.json
+report-html meta --tool component-test --format component-test-report/v1 --runtime "Node v24.22.3" --at 2026-11-26T09:00:00Z
+report-html meta --rows meta.json
 ```
 
 `--format md` 改輸出 Markdown (預設 `html`), `--input -` 從標準輸入讀取, 省略 `--out` 時頁面印到標準輸出, `--out` 指定的檔案已存在時回報錯誤並保留原檔, 參數或資料錯誤以狀態碼 2 結束
@@ -47,7 +50,8 @@ report-html render --input report-data.json --format md --out /path/to/report.md
 | `title` | 是 | 頁面標題 |
 | `lang` | | 頁面語言, 預設 `zh-Hant-TW` |
 | `tags` | | 基本資訊上方的標籤, `tone` 可用 `neutral`, `category`, `success`, `warning`, `error` |
-| `info` | | `[名稱, 值]` 的列表, 樣式來源會自動附在最後一列 |
+| `meta` | | 共同欄位, 依固定順序排在基本資訊最前面, 見 [共同欄位](#共同欄位) |
+| `info` | | 工具專屬的 `[名稱, 值]` 列表, 接在共同欄位之後, 樣式來源會自動附在最後一列 |
 | `note` | | 統計卡片上方的說明文字 |
 | `stats` | | 統計卡片, `value` 可為數字或文字, `bar` 為 `true` 且 `value` 是正整數時計入分布條, `section` 填分頁位置 (從 0 起算) 時標籤改為錨點 Tag, 點選後切到該分頁 |
 | `panels` | | 獨立卡片, 依序放在統計卡片與分頁之間, 每個項目的寫法與 `sections` 相同, `label` 是卡片標題, `fold` 為 `open` 或 `closed` 時卡片可折疊 (預設展開或收合), Markdown 以 `<details>` 包住內容 |
@@ -62,6 +66,24 @@ report-html render --input report-data.json --format md --out /path/to/report.md
 | `matrix` | `corner`、`columns`、`rows: [{ label, cells: [{ value, tone, label, detail } 或 null] }]`、`hint` | 計數矩陣, 點選格子在下方顯示 `detail`, `hint` 是尚未點選時的提示, 分頁數字為列數 |
 | `list` | `items` (文字) | 項目清單 |
 | `text` | `text` | 保留換行的段落, 分頁不顯示數字 |
+
+### 共同欄位
+
+每份報告用相同的欄位與順序描述來源, `meta` 有提供時, 未填的欄位顯示為 "未提供", `render` 指令會在標準錯誤列出這些欄位
+
+| 欄位 | 顯示名稱 | 內容 |
+| --- | --- | --- |
+| `tool` | 工具 | 工具名稱與版本 |
+| `format` | 報告格式 | 報告資料格式, 例如 `code-health-report/v1` |
+| `target` | 檢查對象 | 檢查的資料夾或檔案, 以及範圍 |
+| `revision` | 來源修訂 | Git commit 與該路徑下未提交的檔案數 |
+| `generated` | 產生時間 | 24 小時制並附 UTC 位移, 例如 `2026-11-26 17:00:00 UTC+08:00` |
+| `environment` | 執行環境 | 作業系統, 架構與執行環境版本 |
+| `inputs` | 輸入檔案 | 每個輸入檔一列, 檔名與 SHA-256 前 12 碼 |
+
+值可以是文字, 數字或文字列表 (每項一行), 能由工具取得的欄位以機械方式帶入: Rust 工具呼叫 `meta::collect`, 其他工具執行 `report-html meta`, 兩者輸出 `{"meta": {...}, "missing": [...]}`, `missing` 是收集不到的欄位
+`--at` 把工具記錄的執行時間 (RFC 3339) 轉成產生時間的格式, 省略時使用目前時間, `--rows FILE|-` 讀取 meta 物件或含 `meta` 的報告資料, 依顯示順序輸出 `[顯示名稱, 值]`, 給不經過 report-html 產生 Markdown 的工具使用, 讓欄位, 時間格式與環境名稱只由 report-html 定義
+工具或 AI 只補 `missing` 列出的欄位, AI 補上的值寫成 `{"value": "...", "by": "ai"}`, 頁面在值後面加上 "(AI 補充)", 其他欄位名稱與未標記的物件會回報錯誤
 
 版本名稱採 `<名稱>/v<主版號>`: 讀取端必須跟著修改的變更才升主版號, 只新增選填欄位時維持 `v1`
 
@@ -87,8 +109,7 @@ token 以 `wb-code-keyword`, `wb-code-string`, `wb-code-number`, `wb-code-boolea
 
 ## 樣式
 
-預設使用內建樣式 [default.css](src/default.css), `--style-dir` 指向外觀套件資料夾時改用套件的樣式
-內建樣式以 `default.css` 內容的 SHA-256 前 12 碼作為 revision, 報告的樣式列顯示為 `內建樣式 (SHA-256 <12 碼>)`, 樣式內容一改 revision 就跟著改
+預設使用內建樣式 [src/style](src/style/manifest.json), 它是 Workbench UI `--static --min` 產生的精簡靜態樣式包, 沒有註解, 產品名稱或來源路徑, 報告的樣式列顯示為 `內建樣式 <版本> (SHA-256 <12 碼>)`, 更新時以新的精簡包整份取代 `src/style`, `--style-dir` 指向外觀套件資料夾時改用套件的樣式
 頁面標記採用 Workbench UI 靜態版的 class 與 `--wb-*` 變數名稱, 可直接套用其靜態樣式包, 版面補充樣式使用 `rh-` 前綴
 
 外觀套件是一個資料夾, 內含 `manifest.json` 與它指定的樣式檔, 載入時逐項核對:
@@ -112,7 +133,7 @@ REPORT_HTML_STYLE_DIR=/path/to/appearance-package CARGO_TARGET_DIR=/path/outside
 
 以 path 相依套件使用本函式庫的工具 (例如 code-health) 在同樣的環境變數下建置, 也會內嵌同一份樣式
 內嵌後的執行檔與建置輸出含有套件的樣式內容, 依該套件的授權決定能否散布, 建置輸出請用 `CARGO_TARGET_DIR` 放在本儲存庫之外
-未設定環境變數時, 執行檔只含本儲存庫的內建樣式
+未設定環境變數時, 執行檔只含 `src/style` 的內建樣式
 
 ## 函式庫
 
@@ -131,6 +152,7 @@ let page = report_html::render(&data, &report_html::Style::builtin())?;
 | `Style::builtin()`、`Style::load(dir)` | 內建樣式 (或建置時內嵌的套件) 與執行時載入的外觀套件 |
 | `new_folder(out, scanned, prefix)` | 建立新的報告資料夾, 省略路徑時放在系統暫存目錄, 並確保位於受掃描的根目錄之外 |
 | `escape(text)` | 與頁面相同的跳脫規則 |
+| `meta::collect(&facts)`、`meta::missing(&data)`、`meta::rows(&data)`、`meta::parse_time(text)` | 收集共同欄位 (`Facts.at` 指定執行時間), 列出未填的欄位, 依固定順序取得顯示列, 以及解析 RFC 3339 時間 |
 | `code::find(lang)`、`code::highlight(text, lang)` | 查詢語言規則, 並產生與 `source` 欄位相同的上色 HTML |
 | `output::emit(...)`、`output::write(...)`、`output::parse_formats(...)` | 工具共用的輸出層: 把選定格式寫入新資料夾的 `report.*`, `emit` 另外在標準輸出印出摘要與報告路徑, 省略格式時只寫 `report.md` |
 

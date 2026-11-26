@@ -7,17 +7,18 @@ use std::path::{Path, PathBuf};
 
 pub const SCHEMA: &str = "report-html/v1";
 pub mod code;
+pub mod meta;
 pub mod output;
 mod package;
 
 pub use package::REQUIRED_CLASSES;
 
-/// The built-in styles chosen at build time (src/default.css or REPORT_HTML_STYLE_DIR) and their label.
+/// The built-in styles chosen at build time (the static package in src/style or REPORT_HTML_STYLE_DIR) and their label.
 const BUILTIN: &str = include_str!(concat!(env!("OUT_DIR"), "/style.css"));
 const BUILTIN_LABEL: &str = include_str!(concat!(env!("OUT_DIR"), "/style-label.txt"));
 const TONES: [&str; 5] = ["neutral", "category", "success", "warning", "error"];
 /// Report layout on top of either style source.
-const PAGE: &str = "body{margin:0}.wb-card-head>h2{font-size:1.1rem}.rh-meta{color:var(--wb-muted);font-size:.85rem;margin:0 0 .6em;word-break:break-word}.rh-tags{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 .8em}.rh-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}.rh-stat{display:flex;flex-direction:column;gap:6px;margin:0;padding:14px 16px;background:var(--wb-bg)}.rh-stat b{font-size:1.6rem;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}.rh-stat b[data-tone=warning]{color:var(--wb-warning)}.rh-stat b[data-tone=success]{color:var(--wb-success)}.rh-stat b[data-tone=error]{color:var(--wb-error)}.rh-stat b[data-tone=category]{color:var(--wb-accent)}.rh-stat .wb-tag{align-self:flex-start}.rh-bar{margin-top:16px}.rh-tabs{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 12px;border-bottom:1px solid var(--wb-border)}.rh-tabs [role=tab]{border:0;border-bottom:2px solid transparent;background:none;padding:6px 10px;font:inherit;color:inherit;cursor:pointer}.rh-tabs [role=tab][aria-selected=true]{border-bottom-color:var(--wb-accent);font-weight:600}.rh-count{margin-inline-start:6px;color:var(--wb-muted);font-size:.85em}.rh-num{text-align:end;font-variant-numeric:tabular-nums;white-space:nowrap}.rh-text{white-space:pre-line;overflow-wrap:break-word}.rh-nowrap{white-space:nowrap}.wb-table thead th{white-space:nowrap}.wb-filter{margin:0 0 8px}.wb-filter label{display:inline-flex;align-items:center;gap:6px}code{font-size:.85em;overflow-wrap:anywhere}.rh-code{margin:0;padding:6px 8px;border-radius:6px;background:var(--wb-code-bg,var(--wb-bg));white-space:pre-wrap;overflow-wrap:anywhere;tab-size:4;font-size:.85rem}.rh-code code{display:block;padding:0;background:none;font-size:inherit}.wb-table-striped tbody tr:nth-child(even) .rh-code{background:var(--wb-surface)}.rh-stat small{color:var(--wb-muted);font-size:.8rem}.rh-list{margin:0;padding-left:1.1em}.rh-list li{overflow-wrap:anywhere}.rh-tip{position:fixed;z-index:1000;max-width:min(480px,calc(100vw - 16px));padding:8px 10px;border:1px solid var(--wb-border);border-radius:6px;background:var(--wb-surface);color:var(--wb-text);box-shadow:0 4px 14px rgb(0 0 0 / .18);white-space:pre-line;overflow-wrap:anywhere;font-size:.85rem;line-height:1.5;pointer-events:none}.rh-tip[hidden]{display:none}.wb-detail{white-space:pre-line}.wb-table tbody tr[hidden]{display:none}.wb-table-striped td{vertical-align:top}.wb-table td>code{font-size:1em}.rh-id{white-space:nowrap}.wb-table td>code:not(.rh-id){display:inline-block;min-inline-size:min(18ch,100vw);max-inline-size:36ch;overflow-wrap:anywhere}.rh-long{width:clamp(13rem,23vw,23rem);max-width:100%;white-space:pre-line;overflow-wrap:anywhere}.rh-long summary{cursor:pointer;white-space:normal}.rh-info{width:auto}.rh-long[open] summary{margin-bottom:.35em}.wb-table-wrap .rh-text{overflow-wrap:break-word}.wb-table td{min-width:5em}.wb-table td>.rh-wide{display:block;min-width:min(14em,60vw)}.wb-filter{display:flex;flex-wrap:wrap;gap:.5em 1em}.rh-fold>summary{cursor:pointer}.rh-fold>summary>h2{display:inline}.rh-fold[open]>summary{margin-bottom:12px}";
+const PAGE: &str = "body{margin:0}.wb-card-head>h2{font-size:1.1rem}.rh-meta{color:var(--wb-muted);font-size:.85rem;margin:0 0 .6em;word-break:break-word}.rh-tags{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 .8em}.rh-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}.rh-stat{display:flex;flex-direction:column;gap:6px;margin:0;padding:14px 16px;background:var(--wb-bg)}.rh-stat b{font-size:1.6rem;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}.rh-stat b[data-tone=warning]{color:var(--wb-warning)}.rh-stat b[data-tone=success]{color:var(--wb-success)}.rh-stat b[data-tone=error]{color:var(--wb-error)}.rh-stat b[data-tone=category]{color:var(--wb-accent)}.rh-stat .wb-tag{align-self:flex-start}.rh-bar{margin-top:16px}.rh-tabs{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 12px;border-bottom:1px solid var(--wb-border)}.rh-tabs [role=tab]{border:0;border-bottom:2px solid transparent;background:none;padding:6px 10px;font:inherit;color:inherit;cursor:pointer}.rh-tabs [role=tab][aria-selected=true]{border-bottom-color:var(--wb-accent);font-weight:600}.rh-count{margin-inline-start:6px;color:var(--wb-muted);font-size:.85em}.rh-num{text-align:end;font-variant-numeric:tabular-nums;white-space:nowrap}.rh-text{white-space:pre-line;overflow-wrap:break-word}.rh-nowrap{white-space:nowrap}.wb-table thead th{white-space:nowrap}.wb-filter{margin:0 0 8px}.wb-filter label{display:inline-flex;align-items:center;gap:6px}code{font-size:.85em;overflow-wrap:anywhere}.rh-code{margin:0;padding:6px 8px;border-radius:6px;background:var(--wb-code-bg,var(--wb-bg));white-space:pre-wrap;overflow-wrap:anywhere;tab-size:4;font-size:.85rem}.rh-code code{display:block;padding:0;background:none;font-size:inherit}.wb-table-striped tbody tr:nth-child(even) .rh-code{background:var(--wb-surface)}.rh-stat small{color:var(--wb-muted);font-size:.8rem}.rh-list{margin:0;padding-left:1.1em}.rh-list li{overflow-wrap:anywhere}.rh-tip{position:fixed;z-index:1000;max-width:min(480px,calc(100vw - 16px));padding:8px 10px;border:1px solid var(--wb-border);border-radius:6px;background:var(--wb-surface);color:var(--wb-text);box-shadow:0 4px 14px rgb(0 0 0 / .18);white-space:pre-line;overflow-wrap:anywhere;font-size:.85rem;line-height:1.5;pointer-events:none}.rh-tip[hidden]{display:none}.wb-detail{white-space:pre-line}.wb-table tbody tr[hidden]{display:none}.wb-table-striped td{vertical-align:top}.wb-table td>code{font-size:1em}.rh-id{white-space:nowrap}.wb-table td>code:not(.rh-id){display:inline-block;min-inline-size:min(18ch,100vw);max-inline-size:36ch;overflow-wrap:anywhere}.rh-long{width:clamp(13rem,23vw,23rem);max-width:100%;white-space:pre-line;overflow-wrap:anywhere}.rh-long summary{cursor:pointer;white-space:normal}.rh-info{width:auto}.rh-long[open] summary{margin-bottom:.35em}.wb-table-wrap .rh-text{overflow-wrap:break-word}.wb-table td{min-width:5em}.wb-table td>.rh-wide{display:block;min-width:min(14em,60vw)}.wb-filter{display:flex;flex-wrap:wrap;gap:.5em 1em}.rh-fold>summary{cursor:pointer}.rh-fold>summary>h2{display:inline}.rh-fold[open]>summary{margin-bottom:12px}.rh-missing{color:var(--wb-muted)}";
 const SCRIPT: &str = "const panels={};document.querySelectorAll('.rh-tabs').forEach(nav=>{const tabs=[...nav.querySelectorAll('[role=tab]')];const select=i=>tabs.forEach((t,j)=>{t.setAttribute('aria-selected',String(i===j));t.tabIndex=i===j?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=i!==j;});tabs.forEach((t,i)=>{panels[t.getAttribute('aria-controls')]=()=>select(i);t.addEventListener('click',()=>select(i));t.addEventListener('keydown',e=>{const d={ArrowRight:1,ArrowLeft:-1}[e.key];if(d){const n=(i+d+tabs.length)%tabs.length;select(n);tabs[n].focus();}});});});const open=()=>{const f=panels[decodeURIComponent(location.hash.slice(1))];if(f)f();};document.querySelectorAll('a.wb-tag-link').forEach(a=>a.addEventListener('click',()=>{const f=panels[a.getAttribute('href').slice(1)];if(f)f();}));addEventListener('hashchange',open);open();document.querySelectorAll('.wb-filter[data-for]').forEach(box=>{const table=document.getElementById(box.dataset.for),input=box.querySelector('input'),selects=[...box.querySelectorAll('select')];const apply=()=>{const t=input.value.trim().toLowerCase();table.querySelectorAll('tbody tr').forEach(r=>{r.hidden=(!!t&&!r.textContent.toLowerCase().includes(t))||selects.some(s=>s.value&&r.dataset['f'+s.dataset.filter]!==s.value);});};input.addEventListener('input',apply);selects.forEach(s=>s.addEventListener('input',apply));});document.querySelectorAll('.wb-count-matrix .wb-count').forEach(b=>b.addEventListener('click',()=>{const box=b.closest('.rh-matrix').querySelector('.wb-detail');box.textContent=b.dataset.detail;}));const tip=document.createElement('div');tip.className='rh-tip';tip.setAttribute('role','tooltip');tip.hidden=true;document.querySelector('.wb-workbench').append(tip);const hide=()=>{tip.hidden=true;};const show=n=>{tip.textContent=n.dataset.detail;tip.hidden=false;const r=n.getBoundingClientRect(),t=tip.getBoundingClientRect(),gap=8;let top=r.bottom+gap;if(top+t.height>innerHeight)top=Math.max(gap,r.top-t.height-gap);tip.style.top=top+'px';tip.style.left=Math.max(gap,Math.min(r.left,innerWidth-t.width-gap))+'px';};document.querySelectorAll('.wb-flow-node[data-detail]').forEach(n=>{n.addEventListener('mouseenter',()=>show(n));n.addEventListener('focus',()=>show(n));n.addEventListener('mouseleave',hide);n.addEventListener('blur',hide);});document.addEventListener('keydown',e=>{if(e.key==='Escape')hide();});addEventListener('scroll',hide,{passive:true});";
 /// Display columns of a text: CJK and other wide characters count two, so a sentence threshold means the same on screen in any script
 fn display_width(text: &str) -> usize {
@@ -488,25 +489,33 @@ pub fn render(report: &Value, style: &Style) -> Result<String, String> {
         ));
     }
     let mut info = String::new();
-    for row in items(&report["info"], "info")? {
-        let pair = row.as_array().filter(|pair| pair.len() == 2);
-        let pair = pair.ok_or("Each info row is a [label, value] pair")?;
-        // Lists of many lines such as paths or pending items fold like long table cells; a sentence stays readable
-        let raw = plain(&pair[1]);
+    // Lists of many lines such as paths or pending items fold like long table cells; a sentence stays readable
+    let info_row = |label: &str, raw: &str, missing: bool| {
         let value = if raw.lines().count() > 5 || raw.chars().count() > 300 {
             let preview: String = raw.chars().take(52).collect();
             format!(
                 "<details class=\"rh-long rh-info\"><summary>{}…</summary>{}</details>",
                 escape(&preview),
-                escape(&raw)
+                escape(raw)
             )
+        } else if missing {
+            format!("<span class=\"rh-text rh-missing\">{}</span>", escape(raw))
         } else {
-            format!("<span class=\"rh-text\">{}</span>", text(&pair[1]))
+            format!("<span class=\"rh-text\">{}</span>", escape(raw))
         };
-        info.push_str(&format!(
+        format!(
             "<tr><th scope=\"row\">{}</th><td>{value}</td></tr>",
-            text(&pair[0])
-        ));
+            escape(label)
+        )
+    };
+    // Common fields come first in a fixed order, then the tool's own rows
+    for row in meta::rows(report)? {
+        info.push_str(&info_row(row.label, &row.text, row.missing));
+    }
+    for row in items(&report["info"], "info")? {
+        let pair = row.as_array().filter(|pair| pair.len() == 2);
+        let pair = pair.ok_or("Each info row is a [label, value] pair")?;
+        info.push_str(&info_row(&plain(&pair[0]), &plain(&pair[1]), false));
     }
     info.push_str(&format!(
         "<tr><th scope=\"row\">{}</th><td>report-html {} ({SCHEMA})</td></tr>",
@@ -698,11 +707,19 @@ pub fn markdown(report: &Value) -> Result<String, String> {
         out.push_str(&format!("\n{}\n", tags.join(" · ")));
     }
     let info = items(&report["info"], "info")?;
-    if !info.is_empty() {
+    let common = meta::rows(report)?;
+    if !info.is_empty() || !common.is_empty() {
         out.push_str(&format!(
             "\n## {}\n\n| | |\n| --- | --- |\n",
             report["headings"]["info"].as_str().unwrap_or("基本資訊")
         ));
+        for row in common {
+            out.push_str(&format!(
+                "| {} | {} |\n",
+                markdown_cell(&Value::from(row.label)),
+                markdown_cell(&Value::from(row.text))
+            ));
+        }
         for row in info {
             let pair = row.as_array().filter(|pair| pair.len() == 2);
             let pair = pair.ok_or("Each info row is a [label, value] pair")?;

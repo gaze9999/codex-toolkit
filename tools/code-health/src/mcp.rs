@@ -1,4 +1,4 @@
-use code_health::{markdown, report_data, scan, summary, Check, Options, RetainedRange};
+use code_health::{report_data, scan, summary, Check, Options, RetainedRange};
 use report_html::output::{write, Emit, Rendered};
 use serde_json::{json, Value};
 use std::io::{self, BufRead, Read, Write};
@@ -144,7 +144,7 @@ fn compact(report: Value) -> Result<(Value, String), String> {
     let rendered = Rendered {
         summary: summary(&report),
         page: report_data(&report),
-        markdown: Some(markdown(&report)),
+        markdown: None,
         notes: Vec::new(),
         json: report,
     };

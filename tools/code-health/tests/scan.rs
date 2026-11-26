@@ -1,4 +1,9 @@
-use code_health::{html, markdown, scan, Check, Options, RetainedRange, Style};
+use code_health::{html, report_data, scan, Check, Options, RetainedRange, Style};
+
+/// The Markdown report the CLI and MCP write: report-html's rendering of the page data.
+fn page_markdown(report: &Value) -> String {
+    report_html::markdown(&report_data(report)).unwrap()
+}
 use serde_json::{json, Value};
 use sha2::{Digest, Sha256};
 use std::fs;
@@ -215,7 +220,7 @@ fn finds_renamed_duplicates_and_counts_functions_outside_retained_scopes() {
     assert!(!rows(&report, "unused").iter().any(
         |row| row["path"] == "third.ts" || (row["path"] == "spans.ts" && row["kind"] == "file")
     ));
-    assert!(markdown(&report).contains("first.ts:1-7"));
+    assert!(page_markdown(&report).contains("first.ts:1-7"));
 }
 
 #[test]
@@ -495,8 +500,8 @@ fn candidates_carry_stable_ids_and_merge_semantic_evidence() {
         .sum();
     assert_eq!(counted, total);
     // Markdown and HTML show the result beside each candidate
-    assert!(markdown(&merged).contains("| semantic |"));
-    assert!(!markdown(&report).contains("semantic"));
+    assert!(page_markdown(&merged).contains("語意確認"));
+    assert!(!page_markdown(&report).contains("語意確認"));
     let mut bound = options.evidence.clone().unwrap();
     bound["schema"] = json!("code-health-evidence/v2");
     bound["source_files"] = moved["source_files"].clone();

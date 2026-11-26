@@ -58,7 +58,7 @@ pub fn run(root: &Path) -> Result<(Rendered, i32), String> {
     let page = json!({
         "schema":report_html::SCHEMA,"title":"Git 變更影響報告",
         "tags":[{"label":format!("{} 個變更檔案", rows.len()),"tone":"category"}],
-        "info":[["儲存庫根目錄", root.to_string_lossy()],["範圍", "已暫存、未暫存與未追蹤的檔案"]],
+        "meta":crate::output::page_meta(root, Some("已暫存、未暫存與未追蹤的檔案"), &[]),
         "note":"標記是文字比對的候選, 代表檔案內出現公開介面相關的寫法, 需要核對實際變更內容",
         "headings":{"stats":"變更檔案"},
         "stats":[

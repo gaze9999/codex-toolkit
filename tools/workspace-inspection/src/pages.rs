@@ -34,6 +34,19 @@ fn validity(value: &Value) -> String {
 }
 
 /// The evidence index as a page: runs, their results and unreadable runs.
+/// The common report-html fields, collected from the inspected root and the system.
+fn page_meta(root: Option<&str>, scope: Option<&str>) -> Value {
+    report_html::meta::collect(&report_html::meta::Facts {
+        tool: "workspace-inspection",
+        version: env!("CARGO_PKG_VERSION"),
+        format: report_html::SCHEMA,
+        target: root.map(std::path::Path::new),
+        scope,
+        ..Default::default()
+    })["meta"]
+        .clone()
+}
+
 pub fn evidence(index: &Value, assessed: bool) -> Value {
     let runs = list(&index["runs"]);
     let mut statuses = BTreeMap::<String, usize>::new();
@@ -101,8 +114,8 @@ pub fn evidence(index: &Value, assessed: bool) -> Value {
             {"label":format!("{} 次執行", runs.len()),"tone":"category"},
             if errors.is_empty() {json!({"label":"全部可讀取","tone":"success"})} else {json!({"label":format!("{} 次執行無法讀取", errors.len()),"tone":"error"})}
         ],
+        "meta":page_meta(index["root"].as_str(), None),
         "info":[
-            ["證據根目錄", index["root"]],
             ["結果筆數", result_rows.len()],
             ["目前基準", if assessed {"已提供, 每筆結果附上有效性判定"} else {"未提供, 只彙總已記錄的結果"}]
         ],
@@ -150,8 +163,8 @@ pub fn comparison(result: &Value) -> Value {
             Some("empty") => json!({"label":"沒有比對到任何檔案","tone":"warning"}),
             _ => json!({"label":"有差異","tone":"warning"}),
         }],
+        "meta":page_meta(result["source"].as_str(), Some(&format!("比對目標: {}", result["target"].as_str().unwrap_or("")))),
         "info":[
-            ["來源", result["source"]],
             ["目標", result["target"]],
             ["檔案數", format!("來源 {} / 目標 {}", result["source_files"], result["target_files"])],
             ["排除項目", format!("來源 {} / 目標 {}", result["excluded"]["source"], result["excluded"]["target"])]

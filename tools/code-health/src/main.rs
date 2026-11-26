@@ -1,6 +1,6 @@
 mod mcp;
 
-use code_health::{markdown, report_data, scan, summary, Check, Options, RetainedRange};
+use code_health::{report_data, scan, summary, Check, Options, RetainedRange};
 use report_html::output::{emit, parse_formats, Emit, Rendered, DEFAULT_FORMATS};
 use std::fs;
 use std::path::PathBuf;
@@ -103,7 +103,7 @@ fn cli(args: &[String]) -> Result<(), String> {
     let rendered = Rendered {
         summary: summary(&report),
         page: report_data(&report),
-        markdown: Some(markdown(&report)),
+        markdown: None,
         notes: Vec::new(),
         json: report,
     };

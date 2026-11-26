@@ -402,8 +402,8 @@ pub fn run(options: &Options) -> Result<(Rendered, i32), String> {
     let page = json!({
         "schema":report_html::SCHEMA,"title":"Angular 元件盤點",
         "tags":[{"label":format!("{total} 個元件"),"tone":"category"}],
+        "meta":crate::output::page_meta(root, None, &[]),
         "info":[
-            ["工作區", root.to_string_lossy()],
             ["篩選條件", if options.query.is_empty() {"—".to_owned()} else {options.query.join(" ")}],
             ["專案", options.project.clone().unwrap_or_else(|| "全部".into())],
             ["範圍", if options.changed {"只含有變更的元件"} else {"全部元件"}],

@@ -23,6 +23,8 @@ code-health mcp --allow-root /path/to/project
 | `--format json,md,html` | 寫入指定的格式, 以逗號分隔, `md` 可寫成 `markdown`, `all` 代表三種 |
 | `--out DIR` | 報告資料夾, 必須尚未存在且位於受檢查的目錄之外, 省略時使用系統暫存目錄下的新資料夾 |
 
+Markdown 與 HTML 由同一份 report-html 資料產生, 基本資訊以 report-html 的共同欄位開頭
+
 ```text
 code-health: 400 files, coverage partial
 unused 1500 (export 1100, member 400); most in src/feat/f0.ts (11), src/feat/f1.ts (11), src/feat/f2.ts (11)

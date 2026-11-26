@@ -50,7 +50,10 @@ fn renders_cards_tables_and_escapes_every_value() {
     assert!(page.contains("Unused<span class=\"rh-count\">2</span>"));
     assert!(page.contains("<td><code>src/a.ts</code></td><td class=\"rh-num\">4</td>"));
     assert!(page.contains("<th scope=\"col\">why</th>") && page.contains("Nothing kept"));
-    assert!(page.contains("內建樣式") && page.contains("--wb-page-width:1180px"));
+    // The built-in styles are the bundled static package: no product name or comment, page width from its tokens
+    assert!(page.contains("內建樣式 ") && page.contains("var(--wb-page-width,1180px)"));
+    let css = &page[page.find("<style>").unwrap()..page.find("</style>").unwrap()];
+    assert!(!css.contains("/*") && !css.contains("Workbench UI"));
 }
 
 #[test]
@@ -157,7 +160,7 @@ fn appearance_package_replaces_builtin_styles() {
     let style = Style::load(&dir).unwrap();
     assert!(style.label().starts_with("外觀套件 1.2.3 (SHA-256 "));
     let page = render(&sample(), &style).unwrap();
-    assert!(page.contains("--packaged:1") && !page.contains("--wb-page-width:1180px"));
+    assert!(page.contains("--packaged:1") && !page.contains("var(--wb-page-width,1180px)"));
     // Prefix entries such as wb-card- cover wb-card-head and wb-card-body
     let mut prefixed: Vec<&str> = REQUIRED_CLASSES
         .iter()
@@ -322,9 +325,10 @@ fn write_puts_every_format_in_one_new_folder_and_reports_the_files() {
     assert_eq!(names, ["report.json", "report.md", "report.html"]);
     let style = all.style.as_deref().unwrap();
     let revision = style
-        .strip_prefix("內建樣式 (SHA-256 ")
-        .and_then(|rest| rest.strip_suffix(')'))
-        .expect("built-in style label carries its revision");
+        .strip_prefix("內建樣式 ")
+        .and_then(|rest| rest.split_once(" (SHA-256 "))
+        .and_then(|(_, rest)| rest.strip_suffix(')'))
+        .expect("built-in style label carries its version and revision");
     assert!(revision.len() == 12 && revision.chars().all(|c| c.is_ascii_hexdigit()));
     // A tool's own Markdown replaces the generated one
     assert_eq!(
