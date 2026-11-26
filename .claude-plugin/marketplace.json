@@ -31,7 +31,7 @@
       "source": "./marketplace/plugins/codex-documents-specifications"
     },
     {
-      "description": "審查程式碼可維護性、選擇測試策略、比對環境與驗證證據",
+      "description": "審查可維護性、測試策略與環境證據, 驗證套件來源、版本及搬移後的啟動行為",
       "name": "codex-environment-evidence",
       "source": "./marketplace/plugins/codex-environment-evidence"
     },
@@ -64,11 +64,6 @@
       "description": "維護 AdGuard、uBlock、DNS 與 hosts 的封鎖與改寫規則",
       "name": "codex-network-filters",
       "source": "./marketplace/plugins/codex-network-filters"
-    },
-    {
-      "description": "組裝 Plugin 與應用程式套件, 驗收來源、版本與發布生命週期",
-      "name": "codex-packaging-acceptance",
-      "source": "./marketplace/plugins/codex-packaging-acceptance"
     },
     {
       "description": "綜合研究資料與學習路徑, 搭配網頁搜尋、網頁擷取、arXiv、Reddit 與函式庫文件查詢",

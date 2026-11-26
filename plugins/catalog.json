@@ -107,7 +107,8 @@
       "skills": [
         "validation-evidence-review",
         "test-strategy",
-        "maintainability-review"
+        "maintainability-review",
+        "packaging-acceptance"
       ],
       "runtime_profiles": [
         "workspace-inspection"
@@ -115,21 +116,6 @@
       "resources": [
         {
           "source": "assets/branding/plugins/codex-environment-evidence.png",
-          "target": "assets"
-        }
-      ]
-    },
-    {
-      "id": "packaging-acceptance",
-      "batch": "0",
-      "status": "ready",
-      "skills": [
-        "packaging-acceptance"
-      ],
-      "runtime_profiles": [],
-      "resources": [
-        {
-          "source": "assets/branding/plugins/codex-packaging-acceptance.png",
           "target": "assets"
         }
       ]

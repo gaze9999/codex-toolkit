@@ -78,18 +78,6 @@
     },
     {
       "category": "Productivity",
-      "name": "codex-packaging-acceptance",
-      "policy": {
-        "authentication": "ON_USE",
-        "installation": "AVAILABLE"
-      },
-      "source": {
-        "path": "./marketplace/plugins/codex-packaging-acceptance",
-        "source": "local"
-      }
-    },
-    {
-      "category": "Productivity",
       "name": "codex-research",
       "policy": {
         "authentication": "ON_USE",

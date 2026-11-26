@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "57116ceadc9cbe5194e22a8a5217911cf2ececfa9a1a7c341adda4e35edc5f34",
+      "sha256": "dedfe056c759486a10a956021548fc924202e5fc0de3f5865d9392c442a159bc",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-environment-evidence.png"
     },
     "plugin.json": {
-      "sha256": "8c4906b2f8974df23536a94086a3d65083a1c9e80dfef1835dfb83afdadf04be",
+      "sha256": "6e8492e7b7ae685f1b8460382c39a2583a81b6c0fc672a96123c5619bfd60a0b",
       "source": "plugins/environment-evidence/plugin.json"
     },
     "skills/maintainability-review/SKILL.md": {
@@ -35,6 +35,38 @@
     "skills/maintainability-review/references/semantic-evidence.md": {
       "sha256": "366c2944ccc1204b11dc4ce4b38b8532ceb40c2de0637be25ca2c7742548d3f0",
       "source": "skills/maintainability-review/references/semantic-evidence.md"
+    },
+    "skills/packaging-acceptance/SKILL.md": {
+      "sha256": "398831d53fd2678790968666050b156a01d5a7cbcd00c4397c7d11b02838cfbb",
+      "source": "skills/packaging-acceptance/SKILL.md"
+    },
+    "skills/packaging-acceptance/agents/openai.yaml": {
+      "sha256": "29432fbd8f24cc71c5e4911e403e92460dd012f9c91b9e623006eb3f360474e0",
+      "source": "skills/packaging-acceptance/agents/openai.yaml"
+    },
+    "skills/packaging-acceptance/assets/icon-small.png": {
+      "sha256": "23a04adbcd616543eb3b1e47935180e6135e00990ecd859cf33bf79b00d25cc3",
+      "source": "skills/packaging-acceptance/assets/icon-small.png"
+    },
+    "skills/packaging-acceptance/assets/icon-small.svg": {
+      "sha256": "34a10d6deeaa60aea278eb401932fd9a6be283bc30bd82ebf50ae310d582b8a9",
+      "source": "skills/packaging-acceptance/assets/icon-small.svg"
+    },
+    "skills/packaging-acceptance/assets/icon.png": {
+      "sha256": "80874ba35590f2981ebefedd35c99f45fa62e6043c5d1131e785cc48b494cb6e",
+      "source": "skills/packaging-acceptance/assets/icon.png"
+    },
+    "skills/packaging-acceptance/assets/icon.svg": {
+      "sha256": "34a10d6deeaa60aea278eb401932fd9a6be283bc30bd82ebf50ae310d582b8a9",
+      "source": "skills/packaging-acceptance/assets/icon.svg"
+    },
+    "skills/packaging-acceptance/references/acceptance.md": {
+      "sha256": "4d64b57b0f876dbe111a01ddce4a85cfc648127ea0e67c19d042e4c87149a638",
+      "source": "skills/packaging-acceptance/references/acceptance.md"
+    },
+    "skills/packaging-acceptance/references/version-tags.md": {
+      "sha256": "1cc6b429367feae63e15e98474d929b7eb0e559fbe9f62207020fafcc0898e57",
+      "source": "skills/packaging-acceptance/references/version-tags.md"
     },
     "skills/test-strategy/SKILL.md": {
       "sha256": "5a9005cf292da8aa9077679fe5762cd4903317cd0aefab6f64730b4475b3a253",
@@ -134,5 +166,5 @@
   ],
   "source_state": "canonical-file-hashes",
   "toolkit_version": "0.47.0",
-  "version": "0.9.3"
+  "version": "0.10.0"
 }

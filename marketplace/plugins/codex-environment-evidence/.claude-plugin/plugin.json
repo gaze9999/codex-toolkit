@@ -2,12 +2,12 @@
   "author": {
     "name": "gaze9999"
   },
-  "description": "審查程式碼可維護性、選擇測試策略、比對環境與驗證證據",
-  "displayName": "環境驗證",
+  "description": "審查可維護性、測試策略與環境證據, 驗證套件來源、版本及搬移後的啟動行為",
+  "displayName": "環境與套件驗證",
   "homepage": "https://github.com/gaze9999/codex-toolkit",
   "icon": "./assets/codex-environment-evidence.png",
   "license": "MIT",
   "name": "codex-environment-evidence",
   "repository": "https://github.com/gaze9999/codex-toolkit",
-  "version": "0.9.3"
+  "version": "0.10.0"
 }
