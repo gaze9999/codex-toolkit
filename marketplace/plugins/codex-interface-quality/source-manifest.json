@@ -1,0 +1,172 @@
+{
+  "files": {
+    ".claude-plugin/plugin.json": {
+      "sha256": "37fdd57068928644560ef098025c20ed72fee44742b167fadfe0f3a980f3c6d4",
+      "source": null
+    },
+    "LICENSE": {
+      "sha256": "36ab10d16367d6b2785377b28f7aaf7958e276e52e0725e24b93b14ea9acc82a",
+      "source": "LICENSE"
+    },
+    "assets/icon.png": {
+      "sha256": "21e3ef8c035f472f961aff89c366776af99ec400214a79366aec65ed261c86e0",
+      "source": "skills/ui-ux-design/assets/icon.png"
+    },
+    "plugin.json": {
+      "sha256": "ddba3dadcc4c707ab6e06e690b443377e4d80a53c426f0419ee366f37e3992cc",
+      "source": "plugins/interface-quality/plugin.json"
+    },
+    "skills/accessibility-engineering/SKILL.md": {
+      "sha256": "cfd1c6545c2621e06d6af888e97562cfb71b0faf1604eb71b200bbf1ea48cc43",
+      "source": "skills/accessibility-engineering/SKILL.md"
+    },
+    "skills/accessibility-engineering/agents/openai.yaml": {
+      "sha256": "8fa1b94e285adfa37971b5b397b5ff5d434366d859e5589fd61dd26ea3177a51",
+      "source": "skills/accessibility-engineering/agents/openai.yaml"
+    },
+    "skills/accessibility-engineering/assets/icon-small.png": {
+      "sha256": "c3a35c4c74ec0ba17667645092fe43da1e35b85c39b2f3b154b833d7d082c031",
+      "source": "skills/accessibility-engineering/assets/icon-small.png"
+    },
+    "skills/accessibility-engineering/assets/icon-small.svg": {
+      "sha256": "e4a1761ae47cb03bc544b52149961117e964c8f2a2eecdf97b151bc73b25be45",
+      "source": "skills/accessibility-engineering/assets/icon-small.svg"
+    },
+    "skills/accessibility-engineering/assets/icon.png": {
+      "sha256": "0d7c9f37a524eeb1651e06d3d17185a44bd6875ab278e01ebd3aee73d4f7ae38",
+      "source": "skills/accessibility-engineering/assets/icon.png"
+    },
+    "skills/accessibility-engineering/assets/icon.svg": {
+      "sha256": "e4a1761ae47cb03bc544b52149961117e964c8f2a2eecdf97b151bc73b25be45",
+      "source": "skills/accessibility-engineering/assets/icon.svg"
+    },
+    "skills/accessibility-engineering/references/platform-integration.md": {
+      "sha256": "40cb1be16d1b05143e15952af258bb8fd31a9f136014d58cad70836b269047d6",
+      "source": "skills/accessibility-engineering/references/platform-integration.md"
+    },
+    "skills/accessibility-engineering/references/validation.md": {
+      "sha256": "fa662068dff048637291cd8ef27ce33e0aecc6e251043ebc58392d1a25bb2bea",
+      "source": "skills/accessibility-engineering/references/validation.md"
+    },
+    "skills/internationalization-engineering/SKILL.md": {
+      "sha256": "7a4d92414878a99dfa171a9b56bf6f945d54ced9d5e2ee2a6cf0ab45c315306a",
+      "source": "skills/internationalization-engineering/SKILL.md"
+    },
+    "skills/internationalization-engineering/agents/openai.yaml": {
+      "sha256": "1f2898dc648f48b10d7f32dbfcf64c3fcb0fee54f1678f5baeb921062fc8c511",
+      "source": "skills/internationalization-engineering/agents/openai.yaml"
+    },
+    "skills/internationalization-engineering/assets/icon-small.png": {
+      "sha256": "cb5f981f5e0558efdc3a0ad4dd2c34e2bbab65e8bb0c1c6a14ea0b5821e7afb1",
+      "source": "skills/internationalization-engineering/assets/icon-small.png"
+    },
+    "skills/internationalization-engineering/assets/icon-small.svg": {
+      "sha256": "2eae601ebc1de17c6b62f86a2a27ff5e52750a432d0b2d24048e07f8640b0152",
+      "source": "skills/internationalization-engineering/assets/icon-small.svg"
+    },
+    "skills/internationalization-engineering/assets/icon.png": {
+      "sha256": "514a496c7af9219b44ea7aedfda39332e878046f30ff3900484d0d2e57087771",
+      "source": "skills/internationalization-engineering/assets/icon.png"
+    },
+    "skills/internationalization-engineering/assets/icon.svg": {
+      "sha256": "2eae601ebc1de17c6b62f86a2a27ff5e52750a432d0b2d24048e07f8640b0152",
+      "source": "skills/internationalization-engineering/assets/icon.svg"
+    },
+    "skills/internationalization-engineering/references/platform-integration.md": {
+      "sha256": "7f91014e57b143130fbdf51d1c9b697c7ef5a1209a1c63951f1d6ce73dc2401f",
+      "source": "skills/internationalization-engineering/references/platform-integration.md"
+    },
+    "skills/internationalization-engineering/references/validation.md": {
+      "sha256": "3d87899cb8cf82927b003d55ecebc5af403082afc2cea6486dd1d3178bd5a708",
+      "source": "skills/internationalization-engineering/references/validation.md"
+    },
+    "skills/playwright-cli/SKILL.md": {
+      "sha256": "c71ca06ea4cc0f588985b99e0e8e834b44fb75d9245996d606dd5dbdb9c70e3f",
+      "source": "skills/playwright-cli/SKILL.md"
+    },
+    "skills/playwright-cli/agents/openai.yaml": {
+      "sha256": "d87a7aacbdf323ce246b95a3e711129ffeb5f39bf051bf80e634d9c81ae1a859",
+      "source": "skills/playwright-cli/agents/openai.yaml"
+    },
+    "skills/playwright-cli/assets/icon-small.png": {
+      "sha256": "fd99b6a988cb8948eb921509e0e398023633fed7e0af8912ce831bac6f659496",
+      "source": "skills/playwright-cli/assets/icon-small.png"
+    },
+    "skills/playwright-cli/assets/icon-small.svg": {
+      "sha256": "3cd25aee252039190604e3592c57242dcf13404fd5065c0853913c482b764900",
+      "source": "skills/playwright-cli/assets/icon-small.svg"
+    },
+    "skills/playwright-cli/assets/icon.png": {
+      "sha256": "f2ab4d53481746670bf3e84637cc6de7f00f6971a1ffbd1a5e47a15b52d92fa8",
+      "source": "skills/playwright-cli/assets/icon.png"
+    },
+    "skills/playwright-cli/assets/icon.svg": {
+      "sha256": "3cd25aee252039190604e3592c57242dcf13404fd5065c0853913c482b764900",
+      "source": "skills/playwright-cli/assets/icon.svg"
+    },
+    "skills/playwright-cli/references/commands.md": {
+      "sha256": "6b30d3e339fd9053b59bb11a5a66f6d7ce75a1aa2e6066a0fe5598a3a4d7399d",
+      "source": "skills/playwright-cli/references/commands.md"
+    },
+    "skills/ui-ux-design/SKILL.md": {
+      "sha256": "2bf6698b43c86fb2ced7d1894438613b3dd34a197153a46d487e7a02642173e7",
+      "source": "skills/ui-ux-design/SKILL.md"
+    },
+    "skills/ui-ux-design/agents/openai.yaml": {
+      "sha256": "1f9a5af78f53eba982437a11a37033b80286f612e94c1b29d4d4c8be8f63a0c5",
+      "source": "skills/ui-ux-design/agents/openai.yaml"
+    },
+    "skills/ui-ux-design/assets/icon-small.png": {
+      "sha256": "7a3dd9e707c1e204e197aca34bfe47c230890713b52664617efe27ef9adc2c39",
+      "source": "skills/ui-ux-design/assets/icon-small.png"
+    },
+    "skills/ui-ux-design/assets/icon-small.svg": {
+      "sha256": "95cb2a0831b7ff8f83a79e6f67d4285bb59b772d89533e3be16d810a708daf26",
+      "source": "skills/ui-ux-design/assets/icon-small.svg"
+    },
+    "skills/ui-ux-design/assets/icon.png": {
+      "sha256": "21e3ef8c035f472f961aff89c366776af99ec400214a79366aec65ed261c86e0",
+      "source": "skills/ui-ux-design/assets/icon.png"
+    },
+    "skills/ui-ux-design/assets/icon.svg": {
+      "sha256": "95cb2a0831b7ff8f83a79e6f67d4285bb59b772d89533e3be16d810a708daf26",
+      "source": "skills/ui-ux-design/assets/icon.svg"
+    },
+    "skills/ui-ux-design/assets/microinteraction-brief.md": {
+      "sha256": "54f6149464dfc9a661654763b8426a1e0758b38007773c8a62994bbfb9b1c540",
+      "source": "skills/ui-ux-design/assets/microinteraction-brief.md"
+    },
+    "skills/ui-ux-design/references/component-patterns.md": {
+      "sha256": "65bdbf4bea0ff6bbff569cef4b37c17ba95d21086c2f77591130767eecfb50c3",
+      "source": "skills/ui-ux-design/references/component-patterns.md"
+    },
+    "skills/ui-ux-design/references/design-foundations.md": {
+      "sha256": "22fc244cdf47b3d7cafcb3d44b338eda429aeb0cdf17a0e611f4d5bafe4a8b40",
+      "source": "skills/ui-ux-design/references/design-foundations.md"
+    },
+    "skills/ui-ux-design/references/design-sources.md": {
+      "sha256": "6ee25a97bbf72061ea61dd174eae894ba5c9881c6ecb3c3d5fa5009cebc419fe",
+      "source": "skills/ui-ux-design/references/design-sources.md"
+    },
+    "skills/ui-ux-design/references/detail-review.md": {
+      "sha256": "a97f06dc7e21db23d2b1c54489fe131e9ebfff37cd4efa61785ccbed9a68ea2e",
+      "source": "skills/ui-ux-design/references/detail-review.md"
+    },
+    "skills/ui-ux-design/references/microinteractions.md": {
+      "sha256": "88e3ef00dbc862ee8793221bec0e2348518ddc9b267105ab08349ca5bfed88e2",
+      "source": "skills/ui-ux-design/references/microinteractions.md"
+    }
+  },
+  "license": "MIT",
+  "plugin": "codex-interface-quality",
+  "producer": "codex-toolkit.marketplace.v1",
+  "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
+  "runtime_profiles": [
+    "playwright",
+    "edge-devtools",
+    "chrome-devtools"
+  ],
+  "source_state": "canonical-file-hashes",
+  "toolkit_version": "0.47.0",
+  "version": "0.1.0"
+}

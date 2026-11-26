@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "01b52cdd3150485bc5cd6989e4deea52f6faab12689c75bfa2503d9dc5efd730",
+      "sha256": "f7b2815b89f3f8322958eae3dacff68622168001a136c753d8582215f45f3524",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-creative-imaging.png"
     },
     "plugin.json": {
-      "sha256": "5b8a09f5a5483b8aeab4fc2210a2e2ccfd07304ec4d8eb93cee09c961fddacac",
+      "sha256": "54037e6619f3437507ffb8ae8275770403ab4faa1609821bdcd7e6219dad9017",
       "source": "plugins/creative-imaging/plugin.json"
     },
     "skills/comfyui-workflow/SKILL.md": {
@@ -75,6 +75,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.46.1",
-  "version": "0.1.2"
+  "toolkit_version": "0.47.0",
+  "version": "0.1.3"
 }

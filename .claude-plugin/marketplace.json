@@ -11,7 +11,7 @@
       "source": "./marketplace/plugins/codex-agent-operations"
     },
     {
-      "description": "維護 Agent 指示層級、提示詞、Markdown 目標與計畫, 以及審查與測試簡報",
+      "description": "維護 Agent 指示層級、提示詞、Markdown 目標與計畫, 審查與測試簡報, 並計算 Token 與估算上下文用量",
       "name": "codex-agent-workflow",
       "source": "./marketplace/plugins/codex-agent-workflow"
     },
@@ -26,7 +26,7 @@
       "source": "./marketplace/plugins/codex-creative-imaging"
     },
     {
-      "description": "擷取本機文件、維護規格與既有文件、產出 PDF/DOCX/Markdown 交付物、維護 README 與授權檔, 並計算 Token",
+      "description": "擷取本機文件、維護規格與既有文件、產出 PDF/DOCX/Markdown 交付物、維護 README 與授權檔",
       "name": "codex-documents-specifications",
       "source": "./marketplace/plugins/codex-documents-specifications"
     },
@@ -41,7 +41,7 @@
       "source": "./marketplace/plugins/codex-evaluation"
     },
     {
-      "description": "實作 Angular、React 與 Vue 介面, 含 UI/UX、i18n、無障礙與瀏覽器診斷工具",
+      "description": "實作 Angular, React 與 Vue 元件, 整理 Angular 成員順序",
       "name": "codex-frontend-engineering",
       "source": "./marketplace/plugins/codex-frontend-engineering"
     },
@@ -49,6 +49,11 @@
       "description": "實作 Unity 專案, 模擬與調整遊戲經濟與進度平衡",
       "name": "codex-game-development",
       "source": "./marketplace/plugins/codex-game-development"
+    },
+    {
+      "description": "設計介面互動, 實作無障礙與多語支援, 並以瀏覽器驗證操作流程",
+      "name": "codex-interface-quality",
+      "source": "./marketplace/plugins/codex-interface-quality"
     },
     {
       "description": "校對繁體中文、英文與日文文件的用語、標點、拼字與語法",
@@ -81,5 +86,5 @@
       "source": "./marketplace/plugins/codex-visual-development"
     }
   ],
-  "version": "0.46.1"
+  "version": "0.47.0"
 }

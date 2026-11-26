@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-frontend-engineering",
-  "version": "0.10.6",
-  "description": "實作 Angular、React 與 Vue 介面, 含 UI/UX、i18n、無障礙與瀏覽器診斷工具",
+  "version": "0.11.0",
+  "description": "實作 Angular, React 與 Vue 元件, 整理 Angular 成員順序",
   "author": {
     "name": "gaze9999"
   },
@@ -11,7 +11,7 @@
     "com.openai": {
       "interface": {
         "displayName": "前端工程",
-        "shortDescription": "實作 Angular、React 與 Vue 介面, 含 UI/UX、i18n、無障礙與瀏覽器診斷工具",
+        "shortDescription": "實作 Angular, React 與 Vue 元件, 整理 Angular 成員順序",
         "logo": "./assets/codex-frontend-engineering.png",
         "composerIcon": "./assets/codex-frontend-engineering.png",
         "brandColor": "#EF8A3C",

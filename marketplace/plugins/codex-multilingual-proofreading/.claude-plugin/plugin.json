@@ -5,8 +5,9 @@
   "description": "校對繁體中文、英文與日文文件的用語、標點、拼字與語法",
   "displayName": "多語校對",
   "homepage": "https://github.com/gaze9999/codex-toolkit",
+  "icon": "./assets/codex-multilingual-proofreading.png",
   "license": "MIT",
   "name": "codex-multilingual-proofreading",
   "repository": "https://github.com/gaze9999/codex-toolkit",
-  "version": "0.2.11"
+  "version": "0.2.12"
 }

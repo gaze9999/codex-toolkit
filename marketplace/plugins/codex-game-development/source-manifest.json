@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "637430ab9a56af3f617373efafe3e6d39552ac4a9fec83b7ecf6ab27911d4657",
+      "sha256": "1393ab13f4583f9fa2307df35458ee773c034b9af0edd63e1ea9189d1210e311",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-game-development.png"
     },
     "plugin.json": {
-      "sha256": "41ab3ab64e23ddc2dc066fe6ecc2ebabdb03093fa4496cbc391614fa5434ef52",
+      "sha256": "0a8bbb6d5e0493331284788f013090d70a6bf8f1eb62f33705d469d9b162f974",
       "source": "plugins/game-development/plugin.json"
     },
     "skills/game-balance-simulation/SKILL.md": {
@@ -71,6 +71,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.46.1",
-  "version": "0.1.2"
+  "toolkit_version": "0.47.0",
+  "version": "0.1.3"
 }

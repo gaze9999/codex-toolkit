@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "bff13ef5a7b7c1869f92a4cab8a7a09a7a61940eba9caf364f63c30a8b7bd155",
+      "sha256": "18deda2bef9875c7624ac04a598d4e7bf87b26d96d57c73e478209610e8d1005",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-research.png"
     },
     "plugin.json": {
-      "sha256": "0157cbee140542b90548b1d9e6611bf377080b3e110a18f0eaf4b9505b4e66e6",
+      "sha256": "d1100253c710e4880b9d8d15720df645a5c111a3cb614eef7f39219f0d878486",
       "source": "plugins/research/plugin.json"
     },
     "skills/research-learning-synthesis/SKILL.md": {
@@ -58,6 +58,6 @@
     "context7"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.46.1",
-  "version": "0.1.4"
+  "toolkit_version": "0.47.0",
+  "version": "0.1.5"
 }

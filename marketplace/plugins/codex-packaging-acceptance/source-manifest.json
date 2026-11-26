@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "eada7af72652329d183e53f56f0cc678bd3323d278e21ca889ccbe9a3b04be52",
+      "sha256": "f7846c90f0afe7d3a9ccdd7497ae220d84ed0e780250d8ebeb164bbf3abd1eca",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-packaging-acceptance.png"
     },
     "plugin.json": {
-      "sha256": "48470517a6b85d156a905a2147c86a33235313c7b71449db8765609d07d512bf",
+      "sha256": "21d2454f3ef43c8ab2127790e801a0d5b1ba2d9524cf798bd49085d3f5032c89",
       "source": "plugins/packaging-acceptance/plugin.json"
     },
     "skills/packaging-acceptance/SKILL.md": {
@@ -55,6 +55,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.46.1",
-  "version": "0.4.1"
+  "toolkit_version": "0.47.0",
+  "version": "0.4.2"
 }

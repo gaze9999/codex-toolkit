@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "de529397018bdf35e3880a27474041a26a53d911e5257bcedb946a949aa71863",
+      "sha256": "57116ceadc9cbe5194e22a8a5217911cf2ececfa9a1a7c341adda4e35edc5f34",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-environment-evidence.png"
     },
     "plugin.json": {
-      "sha256": "ce5bb7baf2dcaf5b1c47bff306c24af37c28d42c79de1f35a460524b4d4a601a",
+      "sha256": "8c4906b2f8974df23536a94086a3d65083a1c9e80dfef1835dfb83afdadf04be",
       "source": "plugins/environment-evidence/plugin.json"
     },
     "skills/maintainability-review/SKILL.md": {
@@ -133,6 +133,6 @@
     "workspace-inspection"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.46.1",
-  "version": "0.9.2"
+  "toolkit_version": "0.47.0",
+  "version": "0.9.3"
 }

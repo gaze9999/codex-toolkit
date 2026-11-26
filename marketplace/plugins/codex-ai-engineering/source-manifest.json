@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "3cceac02ed3245af01090e71c372f461eed89a0dac10098f1c54b04943723ff6",
+      "sha256": "3c185b0c363805e95afb2165653da427ef11a3d9d2ee8ec6e6338960d1d825d7",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-ai-engineering.png"
     },
     "plugin.json": {
-      "sha256": "929977a34d0e853f71cb85ff4c4a7daa29fa8fba81166ccff6aae2ca10b83fcf",
+      "sha256": "c26df0e67ef0d2de0a13a1ce3525fa11a35edb9419b0efc8a3bb51811c913dfa",
       "source": "plugins/ai-engineering/plugin.json"
     },
     "skills/ai-application-engineering/SKILL.md": {
@@ -65,6 +65,6 @@
     "openai-docs"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.46.1",
-  "version": "0.1.5"
+  "toolkit_version": "0.47.0",
+  "version": "0.1.6"
 }

@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "cfa4a740ff7ff28dbc79e6d54c233c9b1fe36a764266f9f2c0fc559ccf0697dd",
+      "sha256": "6b38d63d0410c8401ab65ac655929cb134ac51c6e67a38e4001d078079c67857",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-agent-workflow.png"
     },
     "plugin.json": {
-      "sha256": "a505216418ce325c7fbfb2303693790c283f0cb7f3112df928f9ca288c47b71a",
+      "sha256": "2b854ce62bde3960ceed9dbc2afe45eeeb2562cbab6d512be7e71da2497d9801",
       "source": "plugins/agent-workflow/plugin.json"
     },
     "skills/agent-governance/SKILL.md": {
@@ -299,6 +299,34 @@
     "skills/task-routing/references/workflow.md": {
       "sha256": "ab62bfaec50057cbfcab7f8b9af664a2426ccd5aa1a670521de373a66ac08643",
       "source": "skills/task-routing/references/workflow.md"
+    },
+    "skills/token-count/SKILL.md": {
+      "sha256": "6c12b27545560fcf1d6991c98116df301abd65014c1a2ab480967ba509b48b86",
+      "source": "skills/token-count/SKILL.md"
+    },
+    "skills/token-count/agents/openai.yaml": {
+      "sha256": "622baac6bb0340394e8bc5d6f1d676a496a210e05d882f90070adf84551bf1aa",
+      "source": "skills/token-count/agents/openai.yaml"
+    },
+    "skills/token-count/assets/icon-small.png": {
+      "sha256": "f935483f1cb54cfae56023cb9beb3ca42162c7d39b219ae9306383a2a1168559",
+      "source": "skills/token-count/assets/icon-small.png"
+    },
+    "skills/token-count/assets/icon-small.svg": {
+      "sha256": "b00d2aec380d22e73a5b8ae4a86ac6cf639f32c168733baae66d2e466a066583",
+      "source": "skills/token-count/assets/icon-small.svg"
+    },
+    "skills/token-count/assets/icon.png": {
+      "sha256": "b3116d583ebba3465d822d91afa6aaedc23b61f79a460418bb893b7871b9097b",
+      "source": "skills/token-count/assets/icon.png"
+    },
+    "skills/token-count/assets/icon.svg": {
+      "sha256": "b00d2aec380d22e73a5b8ae4a86ac6cf639f32c168733baae66d2e466a066583",
+      "source": "skills/token-count/assets/icon.svg"
+    },
+    "skills/token-count/references/context-budget.md": {
+      "sha256": "1246842f13701ed6f4fcffd7074a200455f8dc8edcd363a79780fe120469dbe5",
+      "source": "skills/token-count/references/context-budget.md"
     }
   },
   "license": "MIT",
@@ -307,6 +335,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.46.1",
-  "version": "0.6.8"
+  "toolkit_version": "0.47.0",
+  "version": "0.6.9"
 }

@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "61832457c62abd7032571414e68f550131081810e8a42be4ad4a4a230d459ca8",
+      "sha256": "9a103f33c771d3c950b8bc82d8d19e2a48a2671c91a63a83d23bed93fb697f3b",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-evaluation.png"
     },
     "plugin.json": {
-      "sha256": "54213e1849252a089410ee090bdc5e2ec0d47ac651f63ab30b48206c52065991",
+      "sha256": "df44388b3e956d70234675544bcca1711f4589d50692e58bcc1eb983f314d717",
       "source": "plugins/evaluation/plugin.json"
     },
     "skills/decisions-evaluation/SKILL.md": {
@@ -121,6 +121,6 @@
     "jev"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.46.1",
-  "version": "0.2.0"
+  "toolkit_version": "0.47.0",
+  "version": "0.2.1"
 }

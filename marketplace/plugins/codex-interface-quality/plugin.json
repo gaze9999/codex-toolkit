@@ -1,0 +1,23 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "codex-interface-quality",
+  "version": "0.1.0",
+  "description": "設計介面互動, 實作無障礙與多語支援, 並以瀏覽器驗證操作流程",
+  "author": {
+    "name": "gaze9999"
+  },
+  "repository": "https://github.com/gaze9999/codex-toolkit",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "介面品質",
+        "shortDescription": "設計介面互動, 實作無障礙與多語支援, 並以瀏覽器驗證操作流程",
+        "logo": "./assets/icon.png",
+        "composerIcon": "./assets/icon.png",
+        "brandColor": "#EF8A3C",
+        "websiteURL": "https://github.com/gaze9999/codex-toolkit"
+      }
+    }
+  },
+  "homepage": "https://github.com/gaze9999/codex-toolkit"
+}

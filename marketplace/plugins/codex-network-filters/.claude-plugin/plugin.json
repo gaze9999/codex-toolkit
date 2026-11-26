@@ -5,8 +5,9 @@
   "description": "維護 AdGuard、uBlock、DNS 與 hosts 的封鎖與改寫規則",
   "displayName": "過濾規則",
   "homepage": "https://github.com/gaze9999/codex-toolkit",
+  "icon": "./assets/codex-network-filters.png",
   "license": "MIT",
   "name": "codex-network-filters",
   "repository": "https://github.com/gaze9999/codex-toolkit",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

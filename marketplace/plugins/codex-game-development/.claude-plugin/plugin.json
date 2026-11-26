@@ -5,8 +5,9 @@
   "description": "實作 Unity 專案, 模擬與調整遊戲經濟與進度平衡",
   "displayName": "遊戲開發",
   "homepage": "https://github.com/gaze9999/codex-toolkit",
+  "icon": "./assets/codex-game-development.png",
   "license": "MIT",
   "name": "codex-game-development",
   "repository": "https://github.com/gaze9999/codex-toolkit",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

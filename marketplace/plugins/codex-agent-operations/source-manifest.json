@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "d27af5819634cea6c4ef19619aecf5ea6816d4bc4f09e23bc3173ea45906f8b1",
+      "sha256": "01b978384b3383c51572b83de6053d2a7ee0c8002f173b56e3b552310cf97356",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-agent-operations.png"
     },
     "plugin.json": {
-      "sha256": "a62a4d3cea4d4e38a083f773b5c93a4ede75b748a3d5705714cc4c676a563b23",
+      "sha256": "3edd9f009aff5d798c58658214e6c22d3116163d99b411e7d6f81db41b03a73d",
       "source": "plugins/agent-operations/plugin.json"
     },
     "skills/agent-artifact-audit/SKILL.md": {
@@ -77,6 +77,6 @@
     "rtk"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.46.1",
-  "version": "0.1.2"
+  "toolkit_version": "0.47.0",
+  "version": "0.1.3"
 }

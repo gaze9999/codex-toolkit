@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "6cf69c801e7f06984023ba6a952563fd847b9b8ce07fd3fb97dc661422b64491",
+      "sha256": "205e516162ed69d6b5317c3a53dbbbeae5664dddbd7bfa715d46ae1dc711c6b6",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-documents-specifications.png"
     },
     "plugin.json": {
-      "sha256": "ebd9ef398b48c4f2cb97d9a07cc615e7c56f99b16a2a5047e3fdd15094b5b7b7",
+      "sha256": "a66f4638b7f21679883b9aa0c94e6f5c3196b3643709a7a2e0a8041f593880e1",
       "source": "plugins/documents-specifications/plugin.json"
     },
     "skills/context-brief/SKILL.md": {
@@ -227,34 +227,6 @@
     "skills/readme-maintainer/references/release-readiness.md": {
       "sha256": "4b1aacdba35e0f375c8c7497a35ee41fd362ea3e4ae7837286e41b91ae0bdd12",
       "source": "skills/readme-maintainer/references/release-readiness.md"
-    },
-    "skills/token-count/SKILL.md": {
-      "sha256": "6c12b27545560fcf1d6991c98116df301abd65014c1a2ab480967ba509b48b86",
-      "source": "skills/token-count/SKILL.md"
-    },
-    "skills/token-count/agents/openai.yaml": {
-      "sha256": "622baac6bb0340394e8bc5d6f1d676a496a210e05d882f90070adf84551bf1aa",
-      "source": "skills/token-count/agents/openai.yaml"
-    },
-    "skills/token-count/assets/icon-small.png": {
-      "sha256": "f935483f1cb54cfae56023cb9beb3ca42162c7d39b219ae9306383a2a1168559",
-      "source": "skills/token-count/assets/icon-small.png"
-    },
-    "skills/token-count/assets/icon-small.svg": {
-      "sha256": "b00d2aec380d22e73a5b8ae4a86ac6cf639f32c168733baae66d2e466a066583",
-      "source": "skills/token-count/assets/icon-small.svg"
-    },
-    "skills/token-count/assets/icon.png": {
-      "sha256": "b3116d583ebba3465d822d91afa6aaedc23b61f79a460418bb893b7871b9097b",
-      "source": "skills/token-count/assets/icon.png"
-    },
-    "skills/token-count/assets/icon.svg": {
-      "sha256": "b00d2aec380d22e73a5b8ae4a86ac6cf639f32c168733baae66d2e466a066583",
-      "source": "skills/token-count/assets/icon.svg"
-    },
-    "skills/token-count/references/context-budget.md": {
-      "sha256": "1246842f13701ed6f4fcffd7074a200455f8dc8edcd363a79780fe120469dbe5",
-      "source": "skills/token-count/references/context-budget.md"
     }
   },
   "license": "MIT",
@@ -265,6 +237,6 @@
     "local-documents"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.46.1",
-  "version": "0.11.0"
+  "toolkit_version": "0.47.0",
+  "version": "0.11.1"
 }

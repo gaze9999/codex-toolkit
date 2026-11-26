@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "2e138cb148b87ef237c5df541112844908094aba192caa3bbd64d0cb3ce12ba8",
+      "sha256": "72625d8cd2ae946bac54595e84aa1880a0a5009e9a2fd5935c194cf84816be1e",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-visual-development.png"
     },
     "plugin.json": {
-      "sha256": "b26bdc12276feeb257b4ff1982487b6d42fe3c33ac674447a0eda0fa4eae2994",
+      "sha256": "600e9c6484cef2acbf3c6fd8e34af56c5bb45edbcf87017a0a0d105ec63eff9c",
       "source": "plugins/visual-development/plugin.json"
     },
     "skills/data-visualization/SKILL.md": {
@@ -102,6 +102,6 @@
     "excalidraw"
   ],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.46.1",
-  "version": "0.6.0"
+  "toolkit_version": "0.47.0",
+  "version": "0.6.1"
 }

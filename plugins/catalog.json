@@ -9,7 +9,8 @@
         "agent-governance",
         "coding-prompt",
         "task-routing",
-        "task-guide"
+        "task-guide",
+        "token-count"
       ],
       "runtime_profiles": [],
       "resources": [
@@ -63,7 +64,6 @@
         "context-brief",
         "doc-updater",
         "local-document-processing",
-        "token-count",
         "readme-maintainer",
         "license-maintainer",
         "document-production"
@@ -179,17 +179,10 @@
         "angular-development",
         "angular-member-order",
         "react-development",
-        "vue-development",
-        "ui-ux-design",
-        "internationalization-engineering",
-        "accessibility-engineering",
-        "playwright-cli"
+        "vue-development"
       ],
       "runtime_profiles": [
-        "playwright",
         "serena",
-        "edge-devtools",
-        "chrome-devtools",
         "spartan"
       ],
       "components": [
@@ -201,6 +194,28 @@
       "resources": [
         {
           "source": "assets/branding/plugins/codex-frontend-engineering.png",
+          "target": "assets"
+        }
+      ]
+    },
+    {
+      "id": "interface-quality",
+      "batch": "1C",
+      "status": "ready",
+      "skills": [
+        "ui-ux-design",
+        "internationalization-engineering",
+        "accessibility-engineering",
+        "playwright-cli"
+      ],
+      "runtime_profiles": [
+        "playwright",
+        "edge-devtools",
+        "chrome-devtools"
+      ],
+      "resources": [
+        {
+          "source": "skills/ui-ux-design/assets/icon.png",
           "target": "assets"
         }
       ]

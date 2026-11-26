@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-documents-specifications",
-  "version": "0.11.0",
-  "description": "擷取本機文件、維護規格與既有文件、產出 PDF/DOCX/Markdown 交付物、維護 README 與授權檔, 並計算 Token",
+  "version": "0.11.1",
+  "description": "擷取本機文件、維護規格與既有文件、產出 PDF/DOCX/Markdown 交付物、維護 README 與授權檔",
   "author": {
     "name": "gaze9999"
   },
@@ -11,7 +11,7 @@
     "com.openai": {
       "interface": {
         "displayName": "文件規格",
-        "shortDescription": "擷取本機文件、維護規格與既有文件、產出 PDF/DOCX/Markdown 交付物、維護 README 與授權檔, 並計算 Token",
+        "shortDescription": "擷取本機文件、維護規格與既有文件、產出 PDF/DOCX/Markdown 交付物、維護 README 與授權檔",
         "logo": "./assets/codex-documents-specifications.png",
         "composerIcon": "./assets/codex-documents-specifications.png",
         "brandColor": "#EF8A3C",

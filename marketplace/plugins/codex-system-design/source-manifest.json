@@ -1,7 +1,7 @@
 {
   "files": {
     ".claude-plugin/plugin.json": {
-      "sha256": "8056c0ec79bad410f01374fbf4428cddbf34a31e6bace48d5efd90d37ce1dac6",
+      "sha256": "63b0b250f48102854422369e88fcd350b9e09e7c9eb5b6c00e23c86d7ced49db",
       "source": null
     },
     "LICENSE": {
@@ -13,7 +13,7 @@
       "source": "assets/branding/plugins/codex-system-design.png"
     },
     "plugin.json": {
-      "sha256": "86c880df95f5c7bb354729b6901c7df8c876569703a03f00f3401168dbcc366f",
+      "sha256": "bda4a438005400d154aea297f3de9dce851284dcca9c428be579108d146ab8c3",
       "source": "plugins/system-design/plugin.json"
     },
     "skills/system-design-analysis/SKILL.md": {
@@ -47,6 +47,6 @@
   "runtime_policy": "existing setup; no automatic installation or duplicate MCP registration",
   "runtime_profiles": [],
   "source_state": "canonical-file-hashes",
-  "toolkit_version": "0.46.1",
-  "version": "0.1.2"
+  "toolkit_version": "0.47.0",
+  "version": "0.1.3"
 }

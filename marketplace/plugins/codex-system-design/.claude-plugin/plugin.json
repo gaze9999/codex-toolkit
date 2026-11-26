@@ -5,8 +5,9 @@
   "description": "分析系統邊界、資料擁有權、介面、品質需求與架構取捨",
   "displayName": "系統設計",
   "homepage": "https://github.com/gaze9999/codex-toolkit",
+  "icon": "./assets/codex-system-design.png",
   "license": "MIT",
   "name": "codex-system-design",
   "repository": "https://github.com/gaze9999/codex-toolkit",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

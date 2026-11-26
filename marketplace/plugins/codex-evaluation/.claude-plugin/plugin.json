@@ -5,8 +5,9 @@
   "description": "以 Jev 排序候選內容, 以 OpenAI Decisions 做有限範圍的語意判定",
   "displayName": "語意評估",
   "homepage": "https://github.com/gaze9999/codex-toolkit",
+  "icon": "./assets/codex-evaluation.png",
   "license": "MIT",
   "name": "codex-evaluation",
   "repository": "https://github.com/gaze9999/codex-toolkit",
-  "version": "0.2.0"
+  "version": "0.2.1"
 }
