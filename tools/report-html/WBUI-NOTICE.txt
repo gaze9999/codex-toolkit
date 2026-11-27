@@ -1,0 +1,14 @@
+Workbench UI
+Copyright (c) 2026 gaze9999
+
+Private-use software. No open-source license is granted.
+Repository access and a read token do not grant general redistribution rights.
+Use or distribution outside an explicitly authorized application requires the
+copyright holder's permission. Workbench UI assets embedded in an application
+retain this status and are not relicensed by that application's license.
+
+The JavaScript, CSS, SVG and parser implementations are maintained locally.
+External component libraries and design documentation are behavioral references,
+not runtime dependencies or copied source distributions.
+
+The copyright holder authorizes distribution of the 0.30.0 static styles.css and manifest.json in report-html. Those assets retain the terms above.

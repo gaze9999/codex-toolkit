@@ -109,6 +109,8 @@ token 以 `wb-code-keyword`, `wb-code-string`, `wb-code-number`, `wb-code-boolea
 
 ## 樣式
 
+內建樣式的授權聲明見 [WBUI-NOTICE.txt](WBUI-NOTICE.txt)
+
 預設使用內建樣式 [src/style](src/style/manifest.json), 它是 Workbench UI `--static --min` 產生的精簡靜態樣式包, 沒有註解, 產品名稱或來源路徑, 報告的樣式列顯示為 `內建樣式 <版本> (SHA-256 <12 碼>)`, 更新時以新的精簡包整份取代 `src/style`, `--style-dir` 指向外觀套件資料夾時改用套件的樣式
 頁面標記採用 Workbench UI 靜態版的 class 與 `--wb-*` 變數名稱, 可直接套用其靜態樣式包, 版面補充樣式使用 `rh-` 前綴
 

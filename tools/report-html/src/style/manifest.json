@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "format": "static",
-  "version": "0.28.0",
+  "version": "0.30.0",
   "classes": [
     "wb-workbench",
     "wb-page",
@@ -59,8 +59,8 @@
   },
   "assets": {
     "styles.css": {
-      "bytes": 27811,
-      "sha256": "cf178ffd0943c88b8eaa5e1c9ca47e86ab195d0b299256a661fe38ff6ec2db12"
+      "bytes": 28959,
+      "sha256": "705a88edd0c8817a944d23ef4062d49d019d4810dd3192d159d7c71f972a1e6b"
     }
   }
 }
